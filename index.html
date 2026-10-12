@@ -1,0 +1,186 @@
+<!DOCTYPE html>
+<html lang="ja" data-theme="light">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>PG_mathbook | 高校生のための古典数学入門ライブラリ</title>
+  <meta name="description" content="Project Gutenberg の数学古典から高校生向けの本格的な確率・統計・論理入門書を編纂・製本するプロジェクト。原著リンク付き目録。" />
+  <link rel="stylesheet" href="style.css" />
+</head>
+<body>
+  <header class="site-header">
+    <div class="header-inner">
+      <div class="site-badge">PROJECT GUTENBERG CLASSIC MATH SERIES</div>
+      <h1 class="site-title">高校生のための古典数学入門ライブラリ</h1>
+      <p class="site-subtitle">
+        Project Gutenberg（Bookshelf 672）収載の歴史的名著をもとに、高校生に向けて執筆・製本された数学入門書コレクション。<br>
+        すべての書籍の「原著名」をクリックすると、<strong>Project Gutenbergの原著ページ</strong>を直接閲覧・検証できます。
+      </p>
+      <div class="meta-strip">
+        <span class="strip-pill">編著者：<strong>教育情報分析研究会</strong></span>
+        <span class="strip-pill">収録作品：<strong>3</strong> 冊</span>
+        <span class="strip-pill">組版：<strong>LuaLaTeX (LuaHBTeX / TeX Live 2026)</strong></span>
+        <span class="strip-pill">重複管理：<strong>catalog.json 連携済み</strong></span>
+      </div>
+    </div>
+  </header>
+
+  <main class="container">
+    <section class="toolbar">
+      <div class="search-box">
+        <svg class="search-icon" viewBox="0 0 24 24" width="18" height="18" fill="none" stroke="currentColor" stroke-width="2"><circle cx="11" cy="11" r="8"></circle><line x1="21" y1="21" x2="16.65" y2="16.65"></line></svg>
+        <input type="search" id="searchInput" placeholder="タイトル・原著名・著者・キーワードで検索..." oninput="filterBooks()" />
+      </div>
+      <div class="toolbar-actions">
+        <span id="matchCount" class="match-badge">全 3 件表示中</span>
+        <button class="theme-toggle-btn" onclick="toggleTheme()" id="themeBtn" aria-label="テーマ切替">🌙 ダーク表示</button>
+      </div>
+    </section>
+
+    <section class="books-grid" id="booksGrid">
+
+      <div class="book-card" data-search="高校生のためのラプラス確率・統計入門 —— 歴史的名著『確率の哲学的試論』で解き明かす数学の神髄 A Philosophical Essay on Probabilities Pierre-Simon Laplace 教育情報分析研究会 58881 Project Gutenberg Bookshelf 672収載のラプラス『確率の哲学的試論』を底本に、高校生向け（数A・数B・数C）に平易かつ本質的に解説した確率・統計入門書。TikZ図版、例題、探究コラムを多数収録。">
+        <div class="card-header">
+          <span class="badge badge-id">Gutenberg #58881</span>
+          <span class="badge badge-pages">6章 / 23頁</span>
+          <span class="badge badge-author">教育情報分析研究会</span>
+        </div>
+        <h2 class="book-title">高校生のためのラプラス確率・統計入門 —— 歴史的名著『確率の哲学的試論』で解き明かす数学の神髄</h2>
+        <div class="original-meta">
+          <span class="label">原著：</span>
+          <a href="https://www.gutenberg.org/ebooks/58881" target="_blank" rel="noopener noreferrer" class="orig-link" title="Project Gutenbergで原著を見る">
+            <strong>A Philosophical Essay on Probabilities</strong> <span>(Pierre-Simon Laplace)</span>
+            <svg class="icon-ext" viewBox="0 0 24 24" width="14" height="14" fill="none" stroke="currentColor" stroke-width="2"><path d="M18 13v6a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V8a2 2 0 0 1 2-2h6"></path><polyline points="15 3 21 3 21 9"></polyline><line x1="10" y1="14" x2="21" y2="3"></line></svg>
+          </a>
+        </div>
+        <p class="book-desc">Project Gutenberg Bookshelf 672収載のラプラス『確率の哲学的試論』を底本に、高校生向け（数A・数B・数C）に平易かつ本質的に解説した確率・統計入門書。TikZ図版、例題、探究コラムを多数収録。</p>
+        <div class="engine-info">
+          <span class="engine-tag">⚡ 生成エンジン: google/gemma-3-4b (LM Studio @ http://192.168.128.16:1234/)</span>
+        </div>
+        <div class="card-actions">
+          <a href="books/58881_laplace_probability/laplace_probability_intro.pdf" class="btn btn-pdf" target="_blank">
+            <svg viewBox="0 0 24 24" width="16" height="16" fill="none" stroke="currentColor" stroke-width="2"><path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"></path><polyline points="14 2 14 8 20 8"></polyline><line x1="16" y1="13" x2="8" y2="13"></line><line x1="16" y1="17" x2="8" y2="17"></line><polyline points="10 9 9 9 8 9"></polyline></svg>
+            PDF製本版を読む (23P)
+          </a>
+          <a href="books/58881_laplace_probability/laplace_probability_intro.tex" class="btn btn-tex" target="_blank">
+            <svg viewBox="0 0 24 24" width="16" height="16" fill="none" stroke="currentColor" stroke-width="2"><polyline points="16 18 22 12 16 6"></polyline><polyline points="8 6 2 12 8 18"></polyline></svg>
+            TeX原稿ソース
+          </a>
+        </div>
+      </div>
+
+      <div class="book-card" data-search="高校生のためのヴェン確率論入門 —— 『偶然の論理』とヴェン図でひもとく客観的データと統計の科学 The Logic of Chance, 3rd edition John Venn 教育情報分析研究会 57359 Project Gutenberg Bookshelf 672収載のジョン・ヴェン『偶然の論理』を底本に、ヴェン図の創案者が打ち立てた頻度主義確率論・客観的データに基づく統計的推測を高校生向けに解説した本格入門書。">
+        <div class="card-header">
+          <span class="badge badge-id">Gutenberg #57359</span>
+          <span class="badge badge-pages">6章 / 19頁</span>
+          <span class="badge badge-author">教育情報分析研究会</span>
+        </div>
+        <h2 class="book-title">高校生のためのヴェン確率論入門 —— 『偶然の論理』とヴェン図でひもとく客観的データと統計の科学</h2>
+        <div class="original-meta">
+          <span class="label">原著：</span>
+          <a href="https://www.gutenberg.org/ebooks/57359" target="_blank" rel="noopener noreferrer" class="orig-link" title="Project Gutenbergで原著を見る">
+            <strong>The Logic of Chance, 3rd edition</strong> <span>(John Venn)</span>
+            <svg class="icon-ext" viewBox="0 0 24 24" width="14" height="14" fill="none" stroke="currentColor" stroke-width="2"><path d="M18 13v6a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V8a2 2 0 0 1 2-2h6"></path><polyline points="15 3 21 3 21 9"></polyline><line x1="10" y1="14" x2="21" y2="3"></line></svg>
+          </a>
+        </div>
+        <p class="book-desc">Project Gutenberg Bookshelf 672収載のジョン・ヴェン『偶然の論理』を底本に、ヴェン図の創案者が打ち立てた頻度主義確率論・客観的データに基づく統計的推測を高校生向けに解説した本格入門書。</p>
+        <div class="engine-info">
+          <span class="engine-tag">⚡ 生成エンジン: google/gemma-3-4b (LM Studio @ http://192.168.128.16:1234/)</span>
+        </div>
+        <div class="card-actions">
+          <a href="books/57359_venn_logic_of_chance/venn_logic_of_chance_intro.pdf" class="btn btn-pdf" target="_blank">
+            <svg viewBox="0 0 24 24" width="16" height="16" fill="none" stroke="currentColor" stroke-width="2"><path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"></path><polyline points="14 2 14 8 20 8"></polyline><line x1="16" y1="13" x2="8" y2="13"></line><line x1="16" y1="17" x2="8" y2="17"></line><polyline points="10 9 9 9 8 9"></polyline></svg>
+            PDF製本版を読む (19P)
+          </a>
+          <a href="books/57359_venn_logic_of_chance/venn_logic_of_chance_intro.tex" class="btn btn-tex" target="_blank">
+            <svg viewBox="0 0 24 24" width="16" height="16" fill="none" stroke="currentColor" stroke-width="2"><polyline points="16 18 22 12 16 6"></polyline><polyline points="8 6 2 12 8 18"></polyline></svg>
+            TeX原稿ソース
+          </a>
+        </div>
+      </div>
+
+      <div class="book-card" data-search="高校生のためのブール代数と確率論入門 —— 『思考の法則』で学ぶ論理・確率・コンピュータの数学 An Investigation of the Laws of Thought George Boole 教育情報分析研究会 15114 Project Gutenberg Bookshelf 672収載のジョージ・ブール『思考の法則』を底本に、記号論理・真理値・ブール代数の公理系から、確率の代数方程式体系、ブール不等式、ベイズ逆確率、論理ゲート回路、現代AIまでを完全網羅した33ページの本格教科書。">
+        <div class="card-header">
+          <span class="badge badge-id">Gutenberg #15114</span>
+          <span class="badge badge-pages">8章 / 33頁</span>
+          <span class="badge badge-author">教育情報分析研究会</span>
+        </div>
+        <h2 class="book-title">高校生のためのブール代数と確率論入門 —— 『思考の法則』で学ぶ論理・確率・コンピュータの数学</h2>
+        <div class="original-meta">
+          <span class="label">原著：</span>
+          <a href="https://www.gutenberg.org/ebooks/15114" target="_blank" rel="noopener noreferrer" class="orig-link" title="Project Gutenbergで原著を見る">
+            <strong>An Investigation of the Laws of Thought</strong> <span>(George Boole)</span>
+            <svg class="icon-ext" viewBox="0 0 24 24" width="14" height="14" fill="none" stroke="currentColor" stroke-width="2"><path d="M18 13v6a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V8a2 2 0 0 1 2-2h6"></path><polyline points="15 3 21 3 21 9"></polyline><line x1="10" y1="14" x2="21" y2="3"></line></svg>
+          </a>
+        </div>
+        <p class="book-desc">Project Gutenberg Bookshelf 672収載のジョージ・ブール『思考の法則』を底本に、記号論理・真理値・ブール代数の公理系から、確率の代数方程式体系、ブール不等式、ベイズ逆確率、論理ゲート回路、現代AIまでを完全網羅した33ページの本格教科書。</p>
+        <div class="engine-info">
+          <span class="engine-tag">⚡ 生成エンジン: gemma4:12b (Ollama @ http://192.168.128.62:11434/)</span>
+        </div>
+        <div class="card-actions">
+          <a href="books/15114_boole_laws_of_thought/boole_laws_of_thought_intro.pdf" class="btn btn-pdf" target="_blank">
+            <svg viewBox="0 0 24 24" width="16" height="16" fill="none" stroke="currentColor" stroke-width="2"><path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"></path><polyline points="14 2 14 8 20 8"></polyline><line x1="16" y1="13" x2="8" y2="13"></line><line x1="16" y1="17" x2="8" y2="17"></line><polyline points="10 9 9 9 8 9"></polyline></svg>
+            PDF製本版を読む (33P)
+          </a>
+          <a href="books/15114_boole_laws_of_thought/boole_laws_of_thought_intro.tex" class="btn btn-tex" target="_blank">
+            <svg viewBox="0 0 24 24" width="16" height="16" fill="none" stroke="currentColor" stroke-width="2"><polyline points="16 18 22 12 16 6"></polyline><polyline points="8 6 2 12 8 18"></polyline></svg>
+            TeX原稿ソース
+          </a>
+        </div>
+      </div>
+
+    </section>
+
+    <section class="info-section">
+      <h2>📚 プロジェクトの理念と重複管理について</h2>
+      <p>
+        本ライブラリは、18〜19世紀の偉大な数学者たち（ラプラス、ジョン・ヴェン、ジョージ・ブール）が著したパブリックドメインの原典を底本とし、現代の高校生が「論理・確率・統計」の本質を直感と数式の両面から深く学べるよう、教育情報分析研究会が編纂・組版したものです。
+      </p>
+      <p>
+        書籍の追加・更新は <code>catalog.json</code> を通じて厳格に重複判定され、同一 Gutenberg ID の二重登録を防止しています。また、すべての原著名には原著（Project Gutenberg EBook）への直リンクを配備し、いつでも一次資料へと立ち返ることができるオープンな数学教育環境を提供しています。
+      </p>
+    </section>
+  </main>
+
+  <footer class="site-footer">
+    <div class="footer-inner">
+      <p>&copy; 2026 <strong>教育情報分析研究会</strong> (Educational Information Analysis Study Group)</p>
+      <p>Source Repository: <a href="https://github.com/k518-2026/PG_mathbook" target="_blank" rel="noopener noreferrer">https://github.com/k518-2026/PG_mathbook</a></p>
+    </div>
+  </footer>
+
+  <script>
+    function filterBooks() {
+      const query = document.getElementById('searchInput').value.toLowerCase().trim();
+      const cards = document.querySelectorAll('.book-card');
+      let count = 0;
+      cards.forEach(card => {
+        const searchData = card.getAttribute('data-search').toLowerCase();
+        if (!query || searchData.includes(query)) {
+          card.style.display = '';
+          count++;
+        } else {
+          card.style.display = 'none';
+        }
+      });
+      document.getElementById('matchCount').textContent = `全 ${cards.length} 件中 ${count} 件表示中`;
+    }
+
+    function toggleTheme() {
+      const html = document.documentElement;
+      const current = html.getAttribute('data-theme');
+      const next = current === 'dark' ? 'light' : 'dark';
+      html.setAttribute('data-theme', next);
+      const btn = document.getElementById('themeBtn');
+      btn.textContent = next === 'dark' ? '☀️ ライト表示' : '🌙 ダーク表示';
+      localStorage.setItem('theme', next);
+    }
+
+    const savedTheme = localStorage.getItem('theme');
+    if (savedTheme) {
+      document.documentElement.setAttribute('data-theme', savedTheme);
+      document.getElementById('themeBtn').textContent = savedTheme === 'dark' ? '☀️ ライト表示' : '🌙 ダーク表示';
+    }
+  </script>
+</body>
+</html>

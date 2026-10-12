@@ -62,7 +62,8 @@ Project Gutenberg のパブリックドメイン数学古典（Bookshelf 672 等
 """
     for b in catalog.get("books", []):
         b_id = b.get("gutenberg_id", "")
-        orig = f"**{b.get('original_title', '')}**<br>({b.get('original_author', '')})"
+        g_url = b.get("gutenberg_url", f"https://www.gutenberg.org/ebooks/{b_id}")
+        orig = f"[**{b.get('original_title', '')}**]({g_url})<br>({b.get('original_author', '')})"
         title = f"**{b.get('japanese_title', '')}**"
         author = f"**{b.get('author', '教育情報分析研究会')}**"
         chapters = b.get("chapters_count", "-")
