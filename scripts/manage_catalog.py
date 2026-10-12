@@ -92,7 +92,9 @@ PG_mathbook/
 - Japanese typesetting: `luatexja`, `ltjsbook`
 - Figures: `tikz`, `pgfplots`
 - Box & Layout: `tcolorbox`, `amsmath`, `amssymb`
-- LLM Assistance: `google/gemma-3-4b` (LM Studio)
+- LLM Assistance:
+  - `google/gemma-3-4b` (LM Studio @ `http://192.168.128.16:1234/`)
+  - `gemma4:12b` (Ollama @ `http://192.168.128.62:11434/`)
 """
     with open(README_PATH, 'w', encoding='utf-8') as f:
         f.write(md_content)
