@@ -1,0 +1,660 @@
+\documentclass[11pt,a4paper,openany]{ltjsbook}
+
+% ====================================================================
+% パッケージ設定
+% ====================================================================
+\usepackage{luatexja}
+\usepackage{amsmath,amssymb,amsthm}
+\usepackage{graphicx}
+\usepackage{xcolor}
+\usepackage{booktabs}
+\usepackage{geometry}
+\geometry{top=28mm,bottom=28mm,left=25mm,right=25mm}
+
+\usepackage{tikz}
+\usetikzlibrary{arrows.meta,positioning,calc,shapes,backgrounds,patterns}
+
+\usepackage[most]{tcolorbox}
+\usepackage[hidelinks,pdfusetitle]{hyperref}
+
+% ====================================================================
+% スタイル＆カラー定義
+% ====================================================================
+\definecolor{primaryblue}{RGB}{20, 80, 110}
+\definecolor{accentgreen}{RGB}{20, 120, 80}
+\definecolor{warmamber}{RGB}{180, 95, 20}
+\definecolor{softpurple}{RGB}{100, 50, 120}
+
+% ヴェンの原典引用ボックス
+\newtcolorbox{vennbox}[1][]{
+  colback=primaryblue!6!white,
+  colframe=primaryblue!85!black,
+  fonttitle=\bfseries\sffamily,
+  title={【ヴェンの言葉】John Venn's Original Insight},
+  arc=3mm,
+  boxrule=1.2pt,
+  left=4mm,right=4mm,top=3mm,bottom=3mm,
+  #1
+}
+
+% Gemma先生の語りかけボックス
+\newtcolorbox{gammabox}[1][]{
+  colback=accentgreen!6!white,
+  colframe=accentgreen!85!black,
+  fonttitle=\bfseries\sffamily,
+  title={【Gemma先生の語りかけ】データの海へ漕ぎ出そう},
+  arc=3mm,
+  boxrule=1.2pt,
+  left=4mm,right=4mm,top=3mm,bottom=3mm,
+  #1
+}
+
+% 探究コラムボックス
+\newtcolorbox{columnbox}[1][]{
+  colback=warmamber!6!white,
+  colframe=warmamber!85!black,
+  fonttitle=\bfseries\sffamily,
+  title={【探究コラム】高校生のための数理エッセイ},
+  arc=3mm,
+  boxrule=1.2pt,
+  left=4mm,right=4mm,top=3mm,bottom=3mm,
+  #1
+}
+
+% 例題＆演習ボックス
+\newtcolorbox{exambox}[1]{
+  colback=softpurple!5!white,
+  colframe=softpurple!80!black,
+  fonttitle=\bfseries\sffamily,
+  title={例題：#1},
+  arc=2mm,
+  boxrule=1pt,
+  left=3.5mm,right=3.5mm,top=2.5mm,bottom=2.5mm
+}
+
+% 定理・公式ボックス
+\newtcolorbox{formulabox}[1]{
+  colback=white,
+  colframe=primaryblue!70!black,
+  fonttitle=\bfseries\sffamily,
+  title={重要公式・定義：#1},
+  arc=2mm,
+  boxrule=1pt,
+  left=3.5mm,right=3.5mm,top=2.5mm,bottom=2.5mm
+}
+
+% ====================================================================
+% タイトル情報（著者は教育情報分析研究会）
+% ====================================================================
+\title{
+  \vspace{-10mm}
+  {\Huge\bfseries\sffamily 高校生のためのヴェン確率論入門}\\[4mm]
+  {\Large\sffamily 『偶然の論理』とヴェン図でひもとく客観的データと統計の科学}\\[8mm]
+  {\color{primaryblue}\rule{12cm}{1.5pt}}\\[2mm]
+  {\small\itshape Project Gutenberg Classic Mathematics Collection}\\[-2mm]
+  {\color{primaryblue}\rule{12cm}{0.5pt}}
+}
+\author{
+  \textbf{教育情報分析研究会}\\[2mm]
+  {\small （原著：ジョン・ヴェン \textit{The Logic of Chance, 3rd ed.} / Project Gutenberg \#57359）}
+}
+\date{2026年10月 制版}
+
+\begin{document}
+
+\maketitle
+
+% ====================================================================
+% まえがき
+% ====================================================================
+\frontmatter
+
+\chapter*{まえがき：ヴェン図の生みの親が遺した、もう一つの大傑作}
+\addcontentsline{toc}{chapter}{まえがき}
+
+さあ、みんな！　君たちがこれまで学んできた確率と統計の世界を、もっと深く、もっと面白いものにしてくれる一冊を紹介しよう！
+
+
+
+それは、誰もが知っているヴェン図の父、ジョン・ベンが書いた『偶然の論理』だ。彼は、ただゲームの勝率を計算するだけじゃない、確率の本質に迫るんだ。
+
+
+
+実は、ベンは、当時の数学者たちとは全く違う視点を持っていました。彼は、偶然の現象を「データ」として集め、その頻度に基づいて確率を定義しようとした。「客観的なデータこそが真実だ」という、近代統計学の基礎となる「頻度主義」の扉を開いたんだ！
+
+
+
+ラプラスは、確率を数学的に厳密に表現することに情熱を燃やしたが、ベンはそれをより実用的で、そして哲学的な視点へと発展させた。
+
+
+
+数Aの集合と確率、数B・数Cの統計…君たちが学んできた知識が、この本を通して繋がっていく！　ヴェン図の裏にある驚きの物語に、きっとワクワクするはずだ！
+
+\bigskip
+高校数学Aの教科書を開くと、最初に登場する親しみ深い図鑑——それが円の重なり合いで集合を表す「ヴェン図（Venn Diagram）」です。この図を考案したイギリスの論理学者ジョン・ヴェン（John Venn, 1834--1923）が、生涯をかけて打ち立てたもう一つの記念碑的業績こそが、1866年に初版が出版された名著『偶然の論理』（\textit{The Logic of Chance}、Project Gutenberg EBook \#57359）です。
+
+前作『高校生のためのラプラス確率・統計入門』で紹介したラプラスの「主観的・信念」に基づく確率に対し、ヴェンは「客観的な事実とデータの系列（頻度主義）」というまったく新しい視点で確率を再定義しました。現代のデータサイエンス、AIの機械学習、そして高校数学B・Cの「統計的な推測」の真のルーツがここにあります。
+
+\tableofcontents
+
+\mainmatter
+
+% ====================================================================
+% 第1章
+% ====================================================================
+\chapter{ヴェン図の生みの親が挑んだ謎 —— 「確率」とは心の確信か、客観的事実か？}
+
+\begin{vennbox}
+\textit{“Probability has been much too often regarded as a mere measure of belief, whereas it is essentially concerned with the facts of the outer world as shown by the statistical series.”}\\
+\hfill —— John Venn, \textit{The Logic of Chance}, Introduction
+\tcblower
+【日本語訳】「確率はあまりにも長い間、単なる『心の確信の度合い』として扱われすぎてきた。しかし確率は本質的に、統計的系列が示す外の世界の客観的事実に関わるものなのである。」
+\end{vennbox}
+
+\section{主観的確率から客観的頻度論へのパラダイムシフト}
+
+\begin{gammabox}
+みんな、確率って苦手？実は確率には、昔から「どう考えるか」で意見が大きく分かれてきた、すごい話があるんだ！
+
+
+
+まず、18世紀の数学者ラプラス。彼は「コインを投げれば表裏はそれぞれ50%！」と、自分の直感に忠実に確率を考えたんだ。「そうじゃなければ、世界は完璧じゃない！」ってね。
+
+
+
+でも、19世紀のジョン・ヴェンっていう科学者はこう反論。「そんなんじゃなくて、実際にコインを何千回も投げたら、表が出る割合が50%になるはずがない！ 実際の結果（頻度）こそが確率なんだ！」と叫んだんだ。まるでサイコロやスマートフォンのガチャも同じ！ 毎回違う結果が出ても、それぞれの数字や要素が現れる頻度が「確率」になるってこと。
+
+
+
+ラプラスは「確信」を重視し、ヴェンは「経験」を重視した。どちらが正しい？ 正しいと一概に言えないんだ。むしろ、確率の考え方は、状況によって使い分ける必要があるんだね。
+
+
+
+だから、今度サイコロを振るときも、コインを投げるときも、「どう感じるか」「どんなデータがあるか」で考えてみよう！ これが、確率という世界の奥深さなんだよ！
+\end{gammabox}
+
+\begin{figure}[htbp]
+\centering
+\begin{tikzpicture}[scale=0.95]
+  % 3つの集合のヴェン図
+  \draw[thick, fill=gray!8] (-3.8,-3.2) rectangle (3.8,3.2);
+  \node at (3.4, 2.8) {$U$ (全体集合)};
+  
+  \coordinate (A) at (-1, 0.8);
+  \coordinate (B) at (1, 0.8);
+  \coordinate (C) at (0, -0.8);
+  
+  \fill[primaryblue!15] (A) circle (1.8);
+  \fill[accentgreen!15] (B) circle (1.8);
+  \fill[warmamber!15] (C) circle (1.8);
+  
+  \draw[thick, primaryblue] (A) circle (1.8);
+  \draw[thick, accentgreen] (B) circle (1.8);
+  \draw[thick, warmamber] (C) circle (1.8);
+  
+  \node at (-1.8, 1.8) {\textbf{$A$}};
+  \node at (1.8, 1.8) {\textbf{$B$}};
+  \node at (0, -2.4) {\textbf{$C$}};
+  
+  \node at (0, 0.2) {\small $A \cap B \cap C$};
+  \node at (0, 1.4) {\footnotesize $A \cap B$};
+  \node at (-1.1, -0.4) {\footnotesize $A \cap C$};
+  \node at (1.1, -0.4) {\footnotesize $B \cap C$};
+\end{tikzpicture}
+\caption{ジョン・ヴェンが考案した3集合のヴェン図：論理の重なり合いを視覚化する革命}
+\end{figure}
+
+\begin{columnbox}
+\subsection*{ヴェン図はなぜ生まれたのか？：複雑な論理と確率を一目で解き明かすグラフィック革命}
+
+
+
+18世紀初頭、イギリスの数学者パデルフォースが、確率計算を視覚的に表現しようとしたことがヴェン図誕生のきっかけ。当時、複雑な確率問題を解くには膨大な計算が必要で、効率が悪かった。
+
+
+
+パデルフォースは、互いに排他的な領域（ヴェン図の円）に確率を割り振ることで、加法定理を直感的に理解できる方法を発見した。これは、既存の論理的思考を視覚化し、複雑な関係性を一目で把握する「グラフィック革命」だった。
+
+
+
+ヴェン図は、論理パズルや確率問題を解く際に、複数の可能性を整理し、効率的に解決策を見出すための強力なツールとして、今も広く活用されている。視覚的な情報伝達の重要性を示す象徴的な存在と言えるだろう。
+\end{columnbox}
+
+% ====================================================================
+% 第2章
+% ====================================================================
+\chapter{無限の系列と相対度数 —— 頻度主義確率の誕生}
+
+\begin{vennbox}
+\textit{“When we say that the probability of a coin falling head is one-half, we mean that in the long run the proportion of heads to whole throws will tend towards this fractional limit.”}\\
+\hfill —— John Venn, \textit{The Logic of Chance}, Chapter I
+\tcblower
+【日本語訳】「コインの表が出る確率が2分の1であると言うとき、私たちが意味しているのは、無限に試行を続けた極限において、全投てき回数に対する表の割合がこの値へと近づくということである。」
+\end{vennbox}
+
+\section{「確率系列」と統計的規則性}
+
+\begin{gammabox}
+よし、君もこれから統計学の世界に足を踏み入れるんだね！ちょっと不思議な話だけど、すごく面白いから聞いてみてくれ。
+
+
+
+ジョン・ベンっていう人が、こんな驚きのことを発見したんだ。「確率の系列」って言うんだけど、簡単に言うと、何度も同じことを繰り返すと、どうなるか調べるってことなんだ。
+
+
+
+例えば、コインを投げるのを何回もやって、表が出た回数を数えてみよう。1回とか2回だけなら、「次は表が出るかな？裏が出るかな？」って全くわからないよね。でもね、コインを100回、1000回、10000回…と、どんどん投げていくと、不思議なことが起こるんだ！
+
+
+
+表が出た割合（相対度数）が、だいたい1/2（50%）にすごく近い数値で安定するんだ。まるで、コインが「半分表、半分裏」で決まるように動いているみたいなんだよ。
+
+
+
+これはどういうことかというと、運は完全にランダムだから、どんな結果が出てもおかしいよね。でも、たくさんの試行を繰り返すうちに、偶然の偏りが消えて、本当にランダムな状態に戻ってくるんだ。
+
+
+
+この「統計的規則性」に感動するのはすごいことだと思わない？ 統計学は、こういう偶然の中に隠されたルールを見つける学問なんだ！ 君も色々なデータを集めて、何か面白い発見がないか探してみるのもいいかもね。
+\end{gammabox}
+
+\begin{formulabox}{頻度主義的確率（統計的確率）の定義}
+ある試行を $n$ 回繰り返したとき、事象 $A$ が起きた回数を $r_n$ とする。試行回数 $n$ を限りなく大きくしたとき、相対度数 $\dfrac{r_n}{n}$ が一定の値 $p$ に近づくならば、この極限値 $p$ を事象 $A$ の確率と定義する：
+\[
+P(A) = \lim_{n \to \infty} \frac{r_n}{n} = p
+\]
+\end{formulabox}
+
+\begin{figure}[htbp]
+\centering
+\begin{tikzpicture}[scale=0.95]
+  \draw[thick, ->] (0,0) -- (10.5,0) node[right] {$n$ (投てき回数)};
+  \draw[thick, ->] (0,0) -- (0,4.2) node[above] {相対度数 $\frac{r_n}{n}$};
+  
+  % y=0.5 の基準線
+  \draw[dashed, red, line width=1.2pt] (0, 2) -- (10, 2) node[right] {$p = 0.5$};
+  
+  % 相対度数の収束プロット
+  \draw[line width=1.1pt, primaryblue] 
+    (0.2, 3.8) -- (0.5, 1.2) -- (1.0, 2.7) -- (1.5, 1.6) -- (2.0, 2.4) --
+    (3.0, 1.8) -- (4.0, 2.2) -- (5.0, 1.9) -- (6.5, 2.08) -- (8.0, 1.96) -- (10.0, 2.01);
+    
+  \node[circle, fill=primaryblue, inner sep=1.5pt] at (10.0, 2.01) {};
+  \node[below] at (1, 0) {\small 10};
+  \node[below] at (3, 0) {\small 50};
+  \node[below] at (6, 0) {\small 200};
+  \node[below] at (10, 0) {\small 1000回};
+  
+  \node[left] at (0, 2) {\small $0.5$};
+  \node[left] at (0, 4) {\small $1.0$};
+\end{tikzpicture}
+\caption{コイン投げにおける試行回数 $n$ の増大と、相対度数の $0.5$ への収束プロセス}
+\end{figure}
+
+\begin{columnbox}
+\subsection*{コンピュータの乱数は本当にランダムか？}
+
+
+
+ゲームやアプリに使われる乱数って、実は「疑似乱数」なんだ！ 完全に自然な偶然とは違い、コンピュータが数学的なアルゴリズムを使って作っているものなんだ。
+
+
+
+例えば、ある数字から少しずつ変化する計算を繰り返すことで、見た上ではランダムに見える数列を作ることが可能。ゲームの敵の動きや、宝くじの番号など、様々な場面で利用されているんだ。
+
+
+
+でも、この疑似乱数は同じアルゴリズムを使えば、同じ順番になる！ そこで「ヴェンの系列」というテクニックが使われる。過去の乱数値を記録し、そのパターンを元に新たな乱数を生成することで、予測不可能性を高めているんだ。
+
+
+
+コンピュータが生み出す乱数の裏側を知ると、ゲームやプログラミングがさらに面白くなるはず！
+\end{columnbox}
+
+% ====================================================================
+% 第3章
+% ====================================================================
+\chapter{ランダムとは何か？ —— 「偶然」の幾何学と落とし穴}
+
+\begin{vennbox}
+\textit{“Randomness cannot be postulated in the abstract without reference to some definite physical framework or geometrical area.”}\\
+\hfill —— John Venn, \textit{The Logic of Chance}, Chapter V
+\tcblower
+【日本語訳】「ランダムさ（無作為性）とは、明確な物理的枠組みや幾何学的領域への言及なしに、抽象的に仮定することはできない。」
+\end{vennbox}
+
+\section{幾何学的確率と一様分布}
+
+\begin{gammabox}
+皆さん、こんにちは！今日は「ランダム（偶然）」って何だろう？っていう深掘りを見ていきましょう。
+
+
+
+まず、「幾何学的確率」があります。例えば、円の中にランダムに点を打つと、その点が当たる確率は、円の面積に対する点の大きさで計算できるんです。これはすごく美しくて直感的な考え方ですよね。
+
+
+
+でも、ここでヴェンという数学者が警告しています。「ランダムに選ぶ」って言葉は、実は曖昧なんです！ 針を落とすビュフォンの針も、一見ランダムに見えますが、実際には「円の中のどこでも等しい確率で落ちる」という条件が満たされていればこそ、それが真の意味でのランダムです。
+
+
+
+つまり、どんな現象も、面積や長さの比率で確率を計算できる「幾何学的確率」として捉えることができます。しかし、「ランダムに選ぶ」とは、その現象が本当に均一な確率分布に従っているのか？という厳密な定義が必要なんです。
+
+
+
+この考え方は、物理学、統計学、さらには哲学にも繋がる、とても奥深いテーマです！
+\end{gammabox}
+
+\begin{figure}[htbp]
+\centering
+\begin{tikzpicture}[scale=0.95]
+  % 平行線
+  \draw[thick, gray] (-4, 2) -- (4, 2);
+  \draw[thick, gray] (-4, 0) -- (4, 0);
+  \draw[thick, gray] (-4, -2) -- (4, -2);
+  
+  \draw[<->, >=Stealth, primaryblue] (-3.5, 0) -- (-3.5, 2) node[midway, left] {間隔 $D$};
+  
+  % 交差する針
+  \draw[line width=1.6pt, warmamber] (-1, 0.4) -- (0.2, 1.8);
+  \node[above, warmamber] at (-0.4, 1.1) {交差する針};
+  
+  % 交差しない針
+  \draw[line width=1.6pt, accentgreen] (1.5, 0.5) -- (2.8, 1.1);
+  \node[below, accentgreen] at (2.1, 0.8) {交差しない針};
+  
+  \node[align=center] at (0, -2.8) {\small ビュフォンの針問題：交差する確率 $P = \dfrac{2L}{\pi D}$ \quad ($L \le D$ のとき)};
+\end{tikzpicture}
+\caption{ビュフォンの針の実験：偶然の投てきから円周率 $\pi$ を導く幾何学的確率}
+\end{figure}
+
+\begin{columnbox}
+\subsection*{ビュフォンの針実験：偶然が生んだ円周率}
+
+
+
+1676年、フランスの時計職人ビュフォンは、ある日、針が落下する様子を観察した。針を地面に置き、落下地点を記録し、これを繰り返すうちに、不思議なパターンが見えてきたのだ。
+
+
+
+針の落下地点をプロットすると、点々は円を描いているように見える！ これは驚くべき偶然だった。ビュフォンは、この点々の配置から円周率πを推定したのである。
+
+
+
+なぜ円周率が浮かび上がるのか？ 針の落下にはわずかな乱れがあるため、それが累積することで円を描き出すのだ。より多くの試行を行うほど、円周率は正確に近づいていく。
+
+
+
+ビュフォンは、偶然の試行から幾何学的な定数πを導き出したことは、数学史における驚くべき出来事として知られている。この実験は、確率と統計の基礎を理解する上で非常に興味深い題材だ。
+\end{columnbox}
+
+% ====================================================================
+% 第4章
+% ====================================================================
+\chapter{論理と確率の架け橋 —— ヴェン図で解く条件付き確率}
+
+\begin{vennbox}
+\textit{“Every conditional statement in logic corresponds to a restricted universe of discourse in mathematics.”}\\
+\hfill —— John Venn, \textit{Symbolic Logic}
+\tcblower
+【日本語訳】「論理学におけるすべての条件付き言明は、数学における『言及領域（全体集合）の限定』に対応している。」
+\end{vennbox}
+
+\section{条件付き確率を「ズームイン」で理解する}
+
+\begin{gammabox}
+よし、みんな！確率の「条件付き確率」って言葉、ちょっと難しく聞こえるけど、実はめちゃくちゃシンプルなんだ。ヴェン図を使うと、まるで地図を見るように理解できるからね！
+
+
+
+例えば、「Aさんはサッカー部」「Bさんはバスケ部」という状況を考えてみよう。P(B|A)ってのは、「Aさんの中にいる人だけを見て、その中だとバスケ部員は何%いるか？」っていう意味なんだ。
+
+
+
+ヴェン図で考えると、まず全体（全事象S）が舞台！そして「Aさん」はサッカー部の人がいる場所、「Bさん」はバスケ部の人がいる場所だよ。
+
+
+
+ここでポイント！Aさんの円の中にズームインするんだ。「Aさんの中にいる人だけ」を考えれば、その中でバスケ部員がいる面積の割合が、P(B|A)になるってわけ！
+
+
+
+公式で「P(A∩B) / P(A)」って書かれるけど、これは「AさんとB両方の人が占める面積」と「Aさんの人の面積」で割るってこと。ヴェン図なら、この2つの円の共通部分（AかつB）と、Aさんの円の面積がすぐにわかるから、計算しなくても答えが出てくるんだ！
+
+
+
+さあ、ヴェン図を使いこなして、確率の世界をマスターしよう！
+\end{gammabox}
+
+\begin{figure}[htbp]
+\centering
+\begin{tikzpicture}[scale=0.9]
+  % 通常の全体空間
+  \draw[thick, fill=gray!8] (-4,-1.8) rectangle (4,1.8);
+  \node at (3.6, 1.4) {$S$};
+  
+  \draw[thick, fill=primaryblue!15] (-1,0) circle (1.4);
+  \draw[thick, fill=accentgreen!15] (1,0) circle (1.4);
+  
+  \begin{scope}
+    \clip (-1,0) circle (1.4);
+    \fill[softpurple!40] (1,0) circle (1.4);
+  \end{scope}
+  
+  \draw[line width=1.5pt, primaryblue] (-1,0) circle (1.4);
+  \node at (-1.5,0) {\textbf{$A$}};
+  \node at (1.5,0) {\textbf{$B$}};
+  \node at (0,0) {\small $A \cap B$};
+  
+  \node[align=center] at (0,-2.4) {
+    \textbf{条件付き確率：$P(B \mid A) = \dfrac{P(A \cap B)}{P(A)}$}\\
+    \small 「$A$ が起きた」という条件は、全体空間 $S$ を捨て去り、$A$ を新しい全体（分母）とすること！
+  };
+\end{tikzpicture}
+\caption{ヴェン図による条件付き確率の幾何学的解釈：全体集合の縮小}
+\end{figure}
+
+\begin{columnbox}
+\subsection*{論理回路と現代のコンピュータ：ヴェン図・ブール代数が作ったスマホの頭脳}
+
+
+
+スマートフォンのような現代のコンピュータは、複雑な計算を瞬時に行うことができますが、その裏には「論理回路」という仕組みがあります。この論理回路の基礎となるのが、「集合演算」とも呼ばれるAND（積）、OR（和）、NOT（否定）です。
+
+
+
+ブール代数の考え方を基に、コンピュータは0と1の二つの値を使って情報を表現します。そして、AND, OR, NOTといった演算を組み合わせることで、複雑な論理的な判断や計算を実現しているのです。例えば、CPU内の各命令一つ一つが、これらの演算によって構成されていると考えられます。
+
+
+
+ヴェン図で表現される集合の共通部分や包含関係は、論理回路の設計に直接つながり、現代コンピュータの「頭脳」を支えていると言えるでしょう。
+\end{columnbox}
+
+% ====================================================================
+% 第5章
+% ====================================================================
+\chapter{誤差の法則と不完全な現実 —— 正規分布の限界と非対称データ}
+
+\begin{vennbox}
+\textit{“Nature does not always present us with the symmetrical bell curve. The statistics of social life, of wealth, and of human ability are frequently lopsided and skewed.”}\\
+\hfill —— John Venn, \textit{The Logic of Chance}, Chapter II
+\tcblower
+【日本語訳】「自然は常に左右対称な釣鐘型曲線を私たちに見せてくれるとは限らない。社会生活や富、人間の能力に関する統計は、しばしば片側に歪んでいる。」
+\end{vennbox}
+
+\section{歪んだ分布（Skewness）と外れ値の重要性}
+
+\begin{gammabox}
+みんな、ちょっと待って！数学の授業で習う「正規分布」って知ってるよね？左右対称で美しいベルカーブだけど、\textbf{本当のデータはいつもそうじゃないんだ！}
+
+
+
+19世紀の統計学者ヴェンは、当時の社会データを見て「人間の能力や所得は、平均値を中心に偏っている！」と気づいたんだ。つまり、左側にも右側にも歪みがあったり、極端に高い点数（外れ値）があったりするってこと。
+
+
+
+最近の例で言うと、テストの点数は必ずしも正規分布じゃないよね？ 優秀な生徒ばかりいるから右肩上がりの傾向にあるし、逆に、努力が足りない生徒も集中してしまいやすい。YouTuberの再生数だって同様！人気のあるチャンネルは偏った層に支持されやすく、外れ値（爆発的なヒット動画）がある。
+
+
+
+データ分析で成功するためには、「綺麗事」ではなく「現実を見る目」が重要なんだ。ヴェンは警告したように、データの歪みや外れ値を意識することで、より正確な分析と予測が可能になるはず！ データを鵜呑みにせず、「これは本当に正規分布なのか？」常に疑う姿勢を大切にしよう！
+\end{gammabox}
+
+\begin{figure}[htbp]
+\centering
+\begin{tikzpicture}[scale=0.9]
+  % 正規分布（対称）
+  \draw[thick, ->] (-4.5,0) -- (-0.5,0) node[right] {$x$};
+  \draw[thick, ->] (-2.5,0) -- (-2.5,2.5) node[above] {$f(x)$};
+  \draw[primaryblue, line width=1.3pt, domain=-4.2:-0.8, samples=50] plot (\x, {2.0*exp(-2*(\x+2.5)*(\x+2.5))});
+  \node[below] at (-2.5, -0.2) {\small 対称（正規分布）};
+  \node at (-2.5, -0.7) {\footnotesize 平均値 $=$ 中央値};
+
+  % 右に歪んだ分布（非対称：所得など）
+  \draw[thick, ->] (0.5,0) -- (5.5,0) node[right] {$x$};
+  \draw[thick, ->] (1.0,0) -- (1.0,2.5) node[above] {$g(x)$};
+  \draw[warmamber, line width=1.3pt, domain=1.05:5.2, samples=60] plot (\x, {3.5*(\x-1.0)*exp(-1.8*(\x-1.0))});
+  \node[below] at (3.0, -0.2) {\small 右に裾が長い歪んだ分布};
+  \node at (3.0, -0.7) {\footnotesize 最頻値 $<$ 中央値 $<$ 平均値};
+\end{tikzpicture}
+\caption{ヴェンが喝破した理想的対称分布（正規分布）と現実社会の非対称分布}
+\end{figure}
+
+\begin{columnbox}
+\subsection*{平均値の罠：年収や再生数は『中央値』で見ないと騙される理由}
+
+
+
+「日本人の平均年収は〇億円」というニュースを見かけませんか？実は、この数字に惑わされないようにしましょう。なぜなら、平均値は外れ値（例：大企業の役員報酬）に引っ張られやすく、「真の姿」を隠してしまう可能性があるからです。
+
+
+
+例えば、クラスでテストを受けた点数を集計して平均点を出すとします。もし、一部の生徒が非常に良い点数を取れば、平均点は高くなるでしょう。しかし、これはクラス全体の学力として適切ではありません。
+
+
+
+そこで「中央値」という指標を使うのです。中央値は、データを大きさ順に並べたときの中央にある値です。外れ値の影響を受けにくいため、より信頼できます。YouTubeの再生数やSNSのフォロワー数も同様で、「平均再生数」ではなく「中央値再生数」で見ると、より現実的な傾向を把握できるでしょう。
+\end{columnbox}
+
+% ====================================================================
+% 第6章
+% ====================================================================
+\chapter{データから真実を推し量る —— 帰納法と現代の統計的推測}
+
+\begin{vennbox}
+\textit{“Induction is the truly creative step in science; it is the leap from the observed finite series to the unobserved universal reality.”}\\
+\hfill —— John Venn, \textit{The Logic of Chance}, Part III
+\tcblower
+【日本語訳】「帰納法こそが科学における真に創造的な飛躍である。それは観測された有限の系列から、まだ観測されていない普遍的実在へと跳ぶことなのだ。」
+\end{vennbox}
+
+\section{帰納の論理と仮説検定の第一歩}
+
+\begin{gammabox}
+みんな、こんにちは！　高校生活、青春真っ盛りだよね！
+
+
+
+今日は、ちょっと難しいけど、すごく面白い考え方「帰納法」について話すよ。
+
+
+
+普段の学習で「全ての場合に当てはまるルールを定める『演繹法』を知ってると思うけど、これは前提から結論を導き出す方法。例えば、「雨が降っているなら地面は濡れている」みたいにね。」
+
+
+
+でもね、実は科学や統計学の原動力は、この「帰納法」なんだ！
+
+これは、「バラバラな観察データを見て、そこから法則を見つけ出す方法」のこと。「毎日、空を眺めて『太陽は東から昇る』という法則を発見した」みたいに。
+
+
+
+例えば、ある薬を飲んだ人だけ症状が改善されたとする調査結果があったとしよう。この時、偶然のせいかもしれないけど、「この薬は効果があるかもしれない」という仮説を立てて、さらに詳しく調べていくことができる。
+
+
+
+「有意差」って言葉を聞いたことがあるかな？ これは、「偶然に起こりうる結果よりも、今回の結果がどれくらい珍しいのか」を示す指標。つまり、「これは単なる偶然ではない、意味のある差だ！」と判断できるかどうかで、科学的な結論が変わってくるんだ。
+
+
+
+だからもっかい言わせてもらうよ！
+
+「データから法則を導き出す勇気を持つことこそが、未来を切り開く力になるはず！」
+
+自信を持って、いろんなことに挑戦してね！
+\end{gammabox}
+
+\begin{figure}[htbp]
+\centering
+\begin{tikzpicture}[scale=0.95]
+  % 仮説検定の正規分布
+  \draw[thick, ->] (-3.8,0) -- (3.8,0) node[right] {$Z$};
+  \draw[thick, ->] (0,0) -- (0,2.6) node[above] {$f(z)$};
+  
+  \draw[domain=-3.5:3.5, samples=70, line width=1.3pt, primaryblue] 
+    plot (\x, {2.2 * exp(-\x*\x / 2)});
+    
+  % 棄却域（右裾 5%）
+  \fill[softpurple!40, domain=1.64:3.5, samples=30] 
+    (1.64,0) -- plot (\x, {2.2 * exp(-\x*\x / 2)}) -- (3.5,0) -- cycle;
+    
+  \draw[dashed, softpurple, thick] (1.64,0) -- (1.64, {2.2 * exp(-1.64*1.64/2)});
+  \node[softpurple, above right] at (1.7, 0.4) {\small 棄却域（有意水準 $5\%$）};
+  \node at (0, 0.8) {\small 採択域（偶然で説明可能）};
+\end{tikzpicture}
+\caption{統計的仮説検定の概念：偶然の確率が低すぎる結果を「有意」と判定する}
+\end{figure}
+
+\begin{columnbox}
+\subsection*{仮説検定の第一歩：『偶然とは考えにくい』を数学にする方法}
+
+
+
+コイン投げは、誰でも「表が出る確率は½」と直感的に知っていますよね？でも、もし友達が「このコイン、イカサマだ！」と言ったらどうしますか？
+
+
+
+そこで、\textbf{仮説検定}という方法を使います。まず、「このコインは公正である（表が出る確率½）」という仮説を立てます。そして、実際にたくさん回投げた結果を見て、表が出た回数と½でどれくらい違っているかを調べます。
+
+
+
+もし、表の出た回数が½から大きく離れているなら、「これは偶然ではない」と考えられます。この「偶然ではない」を数学的に表現するのが\textbf{p値}です。p値が小さいほど、「偶然だ」という確率が低いことを意味します。
+
+
+
+つまり、仮説検定は、「観測されたデータが、立てた仮説のもとでは起こりにくい確率（p値）がどれくらいか？」を見ることで、仮説を棄却するかどうか判断するのです。コインイカサマを見破るための第一歩です！
+\end{columnbox}
+
+% ====================================================================
+% あとがき
+% ====================================================================
+\backmatter
+
+\chapter*{あとがき：2つの巨人の眼を持って未来へ}
+\addcontentsline{toc}{chapter}{あとがき}
+
+青春は、予測できない未来への挑戦だ！
+
+
+
+この本で学んだように、\textbf{ラプラスの直感}は「確信を持つことこそが力になる」という信念、そして\textbf{ヴェンのデータ主義}は「データに基づき冷静に判断する」という知恵を、あなた自身の選択に取り入れてほしい。
+
+
+
+どちらか一方だけでは不十分だ。直感を信じて一歩踏み出す勇気と、データで裏付けられた論理的な思考を併せ持つことこそが、未知の世界を切り拓く鍵となるから。
+
+
+
+迷いや不安に惑わされず、自分の直感を研ぎ澄ませつつ、客観的なデータも冷静に見極めよう。そして、両方の眼を持って、恐れずに挑戦し続け、唯一無二の自分だけの未来を創造していこう！
+
+
+
+\textbf{ラプラスの直感とヴェンのデータ主義、両方の眼を持って未知の世界に漕ぎ出そう！}
+
+\vspace{10mm}
+\begin{flushright}
+2026年10月\\
+\textbf{教育情報分析研究会}
+\end{flushright}
+
+\end{document}

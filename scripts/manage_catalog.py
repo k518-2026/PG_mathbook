@@ -57,19 +57,20 @@ Project Gutenberg のパブリックドメイン数学古典（Bookshelf 672 等
 
 書籍の追加・生成時は `catalog.json` を通じて重複が厳格に管理されています。
 
-| ID | 原著名・著者 | 入門書タイトル | 章数 | 状態 | 原稿 (TeX) | 完成版 (PDF) | 登録日時 |
-|---|---|---|---|---|---|---|---|
+| ID | 原著名 | 入門書タイトル | 著者 | 章数 | 状態 | 原稿 (TeX) | 完成版 (PDF) | 登録日時 |
+|---|---|---|---|---|---|---|---|---|
 """
     for b in catalog.get("books", []):
         b_id = b.get("gutenberg_id", "")
-        orig = f"**{b.get('original_title', '')}**<br>({b.get('author', '')})"
+        orig = f"**{b.get('original_title', '')}**<br>({b.get('original_author', '')})"
         title = f"**{b.get('japanese_title', '')}**"
+        author = f"**{b.get('author', '教育情報分析研究会')}**"
         chapters = b.get("chapters_count", "-")
         status = b.get("status", "完成")
         tex_link = f"[{os.path.basename(b.get('tex_file', ''))}]({b.get('tex_file', '')})" if b.get('tex_file') else "-"
         pdf_link = f"[{os.path.basename(b.get('pdf_file', ''))}]({b.get('pdf_file', '')})" if b.get('pdf_file') else "-"
         date = b.get("created_at", "")[:10]
-        md_content += f"| {b_id} | {orig} | {title} | {chapters} | {status} | {tex_link} | {pdf_link} | {date} |\n"
+        md_content += f"| {b_id} | {orig} | {title} | {author} | {chapters} | {status} | {tex_link} | {pdf_link} | {date} |\n"
 
     md_content += """
 ---
