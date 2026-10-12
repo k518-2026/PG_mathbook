@@ -14,7 +14,7 @@ Project Gutenberg のパブリックドメイン数学古典（Bookshelf 672 等
 |---|---|---|---|---|---|---|---|---|
 | 58881 | [**A Philosophical Essay on Probabilities**](https://www.gutenberg.org/ebooks/58881)<br>(Pierre-Simon Laplace) | **高校生のためのラプラス確率・統計入門 —— 決定論的宇宙観・10の原理から最小二乗法・道徳科学まで** | **教育情報分析研究会** | 12 (58頁) | 完成 | [laplace_probability_intro.tex](books/58881_laplace_probability/laplace_probability_intro.tex) | [laplace_probability_intro.pdf](books/58881_laplace_probability/laplace_probability_intro.pdf) | 2026-10-12 |
 | 57359 | [**The Logic of Chance, 3rd edition**](https://www.gutenberg.org/ebooks/57359)<br>(John Venn) | **高校生のためのヴェン確率論入門 —— 客観的頻度論・確率系列からランダム性の数理・平均論まで** | **教育情報分析研究会** | 12 (62頁) | 完成 | [venn_logic_of_chance_intro.tex](books/57359_venn_logic_of_chance/venn_logic_of_chance_intro.tex) | [venn_logic_of_chance_intro.pdf](books/57359_venn_logic_of_chance/venn_logic_of_chance_intro.pdf) | 2026-10-12 |
-| 15114 | [**An Investigation of the Laws of Thought**](https://www.gutenberg.org/ebooks/15114)<br>(George Boole) | **高校生のためのブール代数と確率論入門 —— 『思考の法則』で学ぶ論理・確率・コンピュータの数学** | **教育情報分析研究会** | 8 | 完成 | [boole_laws_of_thought_intro.tex](books/15114_boole_laws_of_thought/boole_laws_of_thought_intro.tex) | [boole_laws_of_thought_intro.pdf](books/15114_boole_laws_of_thought/boole_laws_of_thought_intro.pdf) | 2026-10-12 |
+| 15114 | [**An Investigation of the Laws of Thought**](https://www.gutenberg.org/ebooks/15114)<br>(George Boole) | **高校生のためのブール代数と確率論入門 —— 思考の法則から記号論理・確率の代数化・コンピュータ回路まで** | **教育情報分析研究会** | 12 (67頁) | 完成 | [boole_laws_of_thought_intro.tex](books/15114_boole_laws_of_thought/boole_laws_of_thought_intro.tex) | [boole_laws_of_thought_intro.pdf](books/15114_boole_laws_of_thought/boole_laws_of_thought_intro.pdf) | 2026-10-12 |
 
 ---
 
