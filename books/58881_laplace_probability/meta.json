@@ -1,0 +1,19 @@
+{
+  "gutenberg_id": "58881",
+  "original_title": "A Philosophical Essay on Probabilities",
+  "original_author": "Pierre-Simon Laplace",
+  "japanese_title": "高校生のためのラプラス確率・統計入門 —— 歴史的名著『確率の哲学的試論』で解き明かす数学の神髄",
+  "author": "Pierre-Simon Laplace (原著) / Google Antigravity & google/gemma-3-4b (編著・解説)",
+  "category": "Mathematics / Probability & Statistics (Project Gutenberg Bookshelf 672)",
+  "language": "ja",
+  "chapters_count": 6,
+  "pages": 23,
+  "status": "完成",
+  "created_at": "2026-10-12T23:03:00+09:00",
+  "book_dir": "books/58881_laplace_probability",
+  "tex_file": "books/58881_laplace_probability/laplace_probability_intro.tex",
+  "pdf_file": "books/58881_laplace_probability/laplace_probability_intro.pdf",
+  "model_used": "google/gemma-3-4b (LM Studio @ http://192.168.128.16:1234/)",
+  "compiler": "LuaLaTeX (LuaHBTeX / TeX Live 2026)",
+  "description": "Project Gutenberg Bookshelf 672収載のラプラス『確率の哲学的試論』を底本に、高校生向け（数A・数B・数C）に平易かつ本質的に解説した確率・統計入門書。TikZ図版、例題、探究コラムを多数収録。"
+}

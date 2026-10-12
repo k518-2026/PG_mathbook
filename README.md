@@ -1,12 +1,36 @@
 # PG_mathbook: プロジェクト・グーテンベルク古典数学入門シリーズ
 
-Project Gutenberg のパブリックドメイン数学古典（Bookshelf 672 等）をもとに、ローカルLLM（google/gemma-3-4b）および現代的解説を加味して制作された、高校生向け数学入門書の蓄積リポジトリです。原稿は LuaLaTeX で組版され、美しい数式と TikZ による図版を含みます。
+Project Gutenberg のパブリックドメイン数学古典（Bookshelf 672 等）をもとに、ローカルLLM（google/gemma-3-4b）および現代的教育解説を加味して制作された、高校生向け数学入門書の蓄積リポジトリです。
 
-## 収録カタログ（重複管理リスト）
+原稿は LuaLaTeX（LuaHBTeX + LuaTeX-ja + TikZ）で高品質に組版され、美しい数式と視覚的な図版を豊富に含んでいます。
 
-| Gutenberg ID | 書名 (原題) | 著者 | 日本語入門書タイトル | 状態 | texファイル | PDF |
-|---|---|---|---|---|---|---|
-| (準備中) | | | | | | |
+---
 
-## 重複管理について
-書籍を追加する際は `catalog.json` を参照し、同一 Gutenberg ID または同一古典著作が重複して登録されないように管理しています。
+## 収録カタログ（重複管理システム）
+
+書籍の追加・生成時は `catalog.json` を通じて重複が厳格に管理されています。
+
+| ID | 原著名・著者 | 入門書タイトル | 章数 | 状態 | 原稿 (TeX) | 完成版 (PDF) | 登録日時 |
+|---|---|---|---|---|---|---|---|
+| 58881 | **A Philosophical Essay on Probabilities**<br>(Pierre-Simon Laplace (原著) / Google Antigravity & google/gemma-3-4b (編著・解説)) | **高校生のためのラプラス確率・統計入門 —— 歴史的名著『確率の哲学的試論』で解き明かす数学の神髄** | 6 | 完成 | [laplace_probability_intro.tex](books/58881_laplace_probability/laplace_probability_intro.tex) | [laplace_probability_intro.pdf](books/58881_laplace_probability/laplace_probability_intro.pdf) | 2026-10-12 |
+
+---
+
+## リポジトリ構成
+```
+PG_mathbook/
+├── catalog.json                 # 全書籍の重複管理・メタデータ台帳
+├── README.md                    # 本目録
+└── books/
+    └── <ID>_<short_name>/
+        ├── <book_name>.tex      # LuaLaTeX原稿ソース
+        ├── <book_name>.pdf      # 製本済み高品質PDF
+        └── meta.json            # 書籍個別メタデータ
+```
+
+## 組版環境
+- Engine: **LuaLaTeX (LuaHBTeX / TeX Live 2026)**
+- Japanese typesetting: `luatexja`, `ltjsbook`
+- Figures: `tikz`, `pgfplots`
+- Box & Layout: `tcolorbox`, `amsmath`, `amssymb`
+- LLM Assistance: `google/gemma-3-4b` (LM Studio)

@@ -1,0 +1,608 @@
+import os
+import sys
+import json
+
+sys.stdout.reconfigure(encoding='utf-8')
+
+BOOK_DIR = 'e:/GoogleAntigravity/PG_mathbook/books/58881_laplace_probability'
+CACHE_FILE = os.path.join(BOOK_DIR, 'gemma_generated_cache.json')
+TEX_FILE = os.path.join(BOOK_DIR, 'laplace_probability_intro.tex')
+
+with open(CACHE_FILE, 'r', encoding='utf-8') as f:
+    cache = json.load(f)
+
+def tex_escape(text):
+    """Format text safely for LaTeX."""
+    # Convert markdown headers
+    lines = text.split('\n')
+    res = []
+    for line in lines:
+        line = line.strip()
+        if not line:
+            res.append('')
+            continue
+        if line.startswith('### '):
+            res.append(r'\subsubsection*{' + line[4:].strip() + '}')
+        elif line.startswith('## '):
+            res.append(r'\subsection*{' + line[3:].strip() + '}')
+        elif line.startswith('# '):
+            res.append(r'\subsection*{' + line[2:].strip() + '}')
+        elif line.startswith('*   ') or line.startswith('-   '):
+            res.append(r'\begin{itemize}\item ' + line[4:].strip() + r'\end{itemize}')
+        else:
+            # handle bold **word** -> \textbf{word}
+            parts = line.split('**')
+            if len(parts) > 1:
+                new_line = ""
+                for i, p in enumerate(parts):
+                    if i % 2 == 1:
+                        new_line += r"\textbf{" + p + "}"
+                    else:
+                        new_line += p
+                line = new_line
+            res.append(line)
+    text = '\n\n'.join(res)
+    # Escape single & or % if not macro
+    # (Text generated usually doesn't have raw latex macros)
+    return text
+
+foreword_txt = tex_escape(cache['foreword'])
+ch1_intro_txt = tex_escape(cache['ch1_intro'])
+ch1_col_txt = tex_escape(cache['ch1_column'])
+ch2_intro_txt = tex_escape(cache['ch2_intro'])
+ch2_col_txt = tex_escape(cache['ch2_column'])
+ch3_intro_txt = tex_escape(cache['ch3_intro'])
+ch3_col_txt = tex_escape(cache['ch3_column'])
+ch4_intro_txt = tex_escape(cache['ch4_intro'])
+ch4_col_txt = tex_escape(cache['ch4_column'])
+ch5_intro_txt = tex_escape(cache['ch5_intro'])
+ch5_col_txt = tex_escape(cache['ch5_column'])
+ch6_intro_txt = tex_escape(cache['ch6_intro'])
+ch6_col_txt = tex_escape(cache['ch6_column'])
+afterword_txt = tex_escape(cache['afterword'])
+
+tex_content = r"""\documentclass[11pt,a4paper,openany]{ltjsbook}
+
+% ====================================================================
+% パッケージ設定
+% ====================================================================
+\usepackage{luatexja}
+\usepackage{amsmath,amssymb,amsthm}
+\usepackage{graphicx}
+\usepackage{xcolor}
+\usepackage{booktabs}
+\usepackage{geometry}
+\geometry{top=28mm,bottom=28mm,left=25mm,right=25mm}
+
+\usepackage{tikz}
+\usetikzlibrary{arrows.meta,positioning,calc,shapes,backgrounds,patterns}
+
+\usepackage[most]{tcolorbox}
+\usepackage[hidelinks,pdfusetitle]{hyperref}
+
+% ====================================================================
+% スタイル＆カラー定義
+% ====================================================================
+\definecolor{primaryblue}{RGB}{24, 76, 120}
+\definecolor{accentteal}{RGB}{0, 130, 130}
+\definecolor{warmamber}{RGB}{180, 90, 20}
+\definecolor{softrose}{RGB}{140, 40, 60}
+\definecolor{darkslate}{RGB}{35, 45, 60}
+
+% ラプラスの原典引用ボックス
+\newtcolorbox{laplacebox}[1][]{
+  colback=primaryblue!6!white,
+  colframe=primaryblue!85!black,
+  fonttitle=\bfseries\sffamily,
+  title={【ラプラスの言葉】Laplace's Original Insight},
+  arc=3mm,
+  boxrule=1.2pt,
+  left=4mm,right=4mm,top=3mm,bottom=3mm,
+  #1
+}
+
+% Gemma先生の語りかけボックス
+\newtcolorbox{gammabox}[1][]{
+  colback=accentteal!6!white,
+  colframe=accentteal!85!black,
+  fonttitle=\bfseries\sffamily,
+  title={【Gemma先生の語りかけ】確率の世界へようこそ},
+  arc=3mm,
+  boxrule=1.2pt,
+  left=4mm,right=4mm,top=3mm,bottom=3mm,
+  #1
+}
+
+% 探究コラムボックス
+\newtcolorbox{columnbox}[1][]{
+  colback=warmamber!6!white,
+  colframe=warmamber!85!black,
+  fonttitle=\bfseries\sffamily,
+  title={【探究コラム】高校生のための数理エッセイ},
+  arc=3mm,
+  boxrule=1.2pt,
+  left=4mm,right=4mm,top=3mm,bottom=3mm,
+  #1
+}
+
+% 例題＆演習ボックス
+\newtcolorbox{exambox}[1]{
+  colback=softrose!5!white,
+  colframe=softrose!80!black,
+  fonttitle=\bfseries\sffamily,
+  title={例題：#1},
+  arc=2mm,
+  boxrule=1pt,
+  left=3.5mm,right=3.5mm,top=2.5mm,bottom=2.5mm
+}
+
+% 定理・公式ボックス
+\newtcolorbox{formulabox}[1]{
+  colback=white,
+  colframe=primaryblue!70!black,
+  fonttitle=\bfseries\sffamily,
+  title={重要公式・定義：#1},
+  arc=2mm,
+  boxrule=1pt,
+  left=3.5mm,right=3.5mm,top=2.5mm,bottom=2.5mm
+}
+
+% ====================================================================
+% タイトル情報
+% ====================================================================
+\title{
+  \vspace{-10mm}
+  {\Huge\bfseries\sffamily 高校生のためのラプラス確率・統計入門}\\[4mm]
+  {\Large\sffamily 歴史的名著『確率の哲学的試論』で解き明かす数学の神髄}\\[8mm]
+  {\color{primaryblue}\rule{12cm}{1.5pt}}\\[2mm]
+  {\small\itshape Project Gutenberg Classic Mathematics Collection}\\[-2mm]
+  {\color{primaryblue}\rule{12cm}{0.5pt}}
+}
+\author{
+  \textbf{原著：ピエール＝シモン・ラプラス} (Pierre-Simon Laplace)\\[2mm]
+  \textbf{編著・解説：Google Antigravity \& google/gemma-3-4b}\\[1mm]
+  {\small （底本：Project Gutenberg EBook \#58881 \textit{A Philosophical Essay on Probabilities}）}
+}
+\date{2026年10月 制版}
+
+\begin{document}
+
+\maketitle
+
+% ====================================================================
+% まえがき
+% ====================================================================
+\frontmatter
+
+\chapter*{まえがき：不確実な世界を生き抜くための武器}
+\addcontentsline{toc}{chapter}{まえがき}
+
+""" + foreword_txt + r"""
+
+\bigskip
+本書は、1814年に大数学者ピエール＝シモン・ラプラス（Pierre-Simon Laplace, 1749--1827）が発表した不朽の名著『確率の哲学的試論』（\textit{Essai philosophique sur les probabilités}、Project Gutenberg EBook \#58881）を底本とし、日本の高校数学（数学A「場合の数と確率」、数学B・数学C「確率分布と統計的な推測」）を学ぶ高校生に向けて、現代的な視点と視覚的図解、そしてローカルLLM（\texttt{google/gemma-3-4b}）の親身なナビゲーションを融合して制作された入門書です。
+
+数式の厳密な美しさと、日常や社会に生きる確率のダイナミズムを、ぜひ心ゆくまで楽しんでください！
+
+\tableofcontents
+
+\mainmatter
+
+% ====================================================================
+% 第1章
+% ====================================================================
+\chapter{偶然と必然のあいだ —— 「ラプラスの悪魔」と確率の誕生}
+
+\begin{laplacebox}
+\textit{“All events, even those which on account of their insignificance do not seem to follow the great laws of nature, are a result of them just as necessarily as the revolutions of the sun.”}\\
+\hfill —— Pierre-Simon Laplace, \textit{A Philosophical Essay on Probabilities}, Chapter II
+\tcblower
+【日本語訳】「太陽の運行と同じように必然的に、一見取るに足らないように思える出来事であっても、自然の偉大な法則に従わないものは一つとして存在しない。」
+\end{laplacebox}
+
+\section{ラプラスの悪魔と決定論の世界観}
+
+ニュートン力学を極限まで発展させたラプラスは、もし宇宙の全粒子の位置と速度を知り、それらを一瞬で計算できる知性（のちに**「ラプラスの悪魔」**と呼ばれる存在）がいるならば、未来のすべては過去と同様に完全に予知できるはずだと考えました。
+
+\begin{gammabox}
+""" + ch1_intro_txt + r"""
+\end{gammabox}
+
+\begin{figure}[htbp]
+\centering
+\begin{tikzpicture}[scale=0.95, every node/.style={transform shape}]
+  % 決定論的宇宙
+  \node[draw, rounded corners, fill=primaryblue!10, text width=6cm, align=center, inner sep=3mm] (demon) at (0,2.5) {
+    \textbf{ラプラスの悪魔の視点（全知）}\\
+    \small 全粒子の初期条件 $+$ 運動方程式\\
+    $\Downarrow$\\
+    \textbf{未来は完全に1つに確定（決定論）}
+  };
+  
+  % 人間の視点
+  \node[draw, rounded corners, fill=accentteal!10, text width=6cm, align=center, inner sep=3mm] (human) at (8,2.5) {
+    \textbf{私たちの視点（有限の知性）}\\
+    \small 複雑な系・膨大な要因・情報の欠落\\
+    $\Downarrow$\\
+    \textbf{無知を補う「確率的思考」の誕生}
+  };
+  
+  \draw[thick, <->, >=Stealth, primaryblue] (demon) -- (human) node[midway, above] {\small 情報のギャップ};
+  
+  % 標本空間の図
+  \node[draw, circle, fill=softrose!15, minimum size=2.8cm, label=above:{\textbf{全事象（標本空間 $S$）}}] at (4,-1.5) {};
+  \node[draw, circle, fill=warmamber!30, minimum size=1.5cm, align=center] at (4,-1.5) {事象 $A$\\$n(A)$ 通り};
+  \node at (4,-3.2) {\small 古典的確率：$P(A) = \dfrac{n(A)}{n(S)}$ \quad （すべての根元事象が「同様に確からしい」とき）};
+\end{tikzpicture}
+\caption{ラプラスの決定論的宇宙観と、私たちの「無知」を照らす確率の概念}
+\end{figure}
+
+\section{古典的確率の定義と「同様に確からしさ」}
+
+ラプラスは、確率を次のように定義しました。
+
+\begin{formulabox}{古典的確率（数学的確率）の定義}
+ある試行において、起こりうるすべての結果（根元事象）が $N$ 通りあり、それらのどれが起こることも**同様に確からしい（equally possible）**とき、ある事象 $A$ を生じさせる結果が $a$ 通りあるならば、事象 $A$ が起こる確率 $P(A)$ は次の比で定義される：
+\[
+P(A) = \frac{a}{N} = \frac{n(A)}{n(S)}
+\]
+\end{formulabox}
+
+この「同様に確からしい」という前提は、サイコロの歪みがないことや、トランプが均等によく切られているという仮定に基づきます。
+
+\begin{exambox}{サイコロの確率と同様に確からしさ}
+公平な6面のサイコロを1回投げるとき、全事象 $S = \{1, 2, 3, 4, 5, 6\}$ であり、$n(S) = 6$。\\
+(1) 奇数の目が出る事象 $A = \{1, 3, 5\}$ の確率は $P(A) = \dfrac{3}{6} = \dfrac{1}{2}$。\\
+(2) 素数の目が出る事象 $B = \{2, 3, 5\}$ の確率は $P(B) = \dfrac{3}{6} = \dfrac{1}{2}$。
+\end{exambox}
+
+\begin{columnbox}
+""" + ch1_col_txt + r"""
+\end{columnbox}
+
+% ====================================================================
+% 第2章
+% ====================================================================
+\chapter{確率計算の基本ルール —— 加法定理・乗法定理・期待値}
+
+\begin{laplacebox}
+\textit{“The probability of the occurrence of an event which can occur in several ways is the sum of the probabilities of these different ways.”}\\
+\hfill —— Pierre-Simon Laplace, \textit{A Philosophical Essay on Probabilities}, Chapter III (Principle II)
+\tcblower
+【日本語訳】「いくつかの排反な方法のいずれかによって生じうる事象の確率は、それら個々の方法の確率の総和に等しい。」
+\end{laplacebox}
+
+\section{加法定理と乗法定理}
+
+高校数学Aで学ぶ2大基本公式は、ラプラスが整理した基本原理の核をなすものです。
+
+\begin{formulabox}{確率の加法定理と乗法定理}
+\textbf{1. 加法定理（和事象の確率）：}\\
+事象 $A, B$ に対し、一般に
+\[
+P(A \cup B) = P(A) + P(B) - P(A \cap B)
+\]
+特に $A$ と $B$ が排反事象（同時に起こらない：$A \cap B = \emptyset$）のときは、$P(A \cup B) = P(A) + P(B)$ となる。
+
+\smallskip
+\textbf{2. 乗法定理（積事象の確率）：}\\
+事象 $A$ が起こったもとで $B$ が起こる**条件付き確率**を $P_A(B) = P(B \mid A)$ と表すとき、
+\[
+P(A \cap B) = P(A) \cdot P(B \mid A)
+\]
+特に $A$ と $B$ が互いに独立であるときは、$P(A \cap B) = P(A) \cdot P(B)$ が成り立つ。
+\end{formulabox}
+
+\begin{figure}[htbp]
+\centering
+\begin{tikzpicture}[scale=0.9]
+  % ベン図
+  \draw[thick, fill=gray!10] (-3.5,-2) rectangle (3.5,2);
+  \node at (3.1, 1.6) {$S$};
+  
+  \begin{scope}
+    \clip (-1,0) circle (1.5);
+    \fill[warmamber!40] (1,0) circle (1.5);
+  \end{scope}
+  
+  \draw[thick, primaryblue] (-1,0) circle (1.5);
+  \draw[thick, accentteal] (1,0) circle (1.5);
+  
+  \node at (-1.5,0) {\textbf{$A$}};
+  \node at (1.5,0) {\textbf{$B$}};
+  \node at (0,0) {\small $A \cap B$};
+  
+  \node[align=center] at (0,-2.5) {\small 加法定理：$P(A \cup B) = P(A) + P(B) - P(A \cap B)$};
+\end{tikzpicture}
+\caption{和事象と積事象のベン図による幾何学的表現}
+\end{figure}
+
+\section{数学的期待値と「精神的期待値（効用）」}
+
+\begin{gammabox}
+""" + ch2_intro_txt + r"""
+\end{gammabox}
+
+\begin{formulabox}{数学的期待値の定義}
+確率変数 $X$ が値 $x_1, x_2, \dots, x_n$ をとる確率がそれぞれ $p_1, p_2, \dots, p_n$（ただし $\sum p_i = 1$）であるとき、期待値 $E(X)$ は次式で定義される：
+\[
+E(X) = \sum_{i=1}^n x_i p_i = x_1 p_1 + x_2 p_2 + \dots + x_n p_n
+\]
+\end{formulabox}
+
+\begin{exambox}{くじ引きの公平性と期待値}
+参加費200円のくじがある。賞金と当たる確率は次の通り：
+\begin{center}
+\begin{tabular}{cccc}
+\toprule
+等数 & 1等 & 2等 & ハズレ \\
+\midrule
+賞金 & 1,000円 & 300円 & 0円 \\
+確率 & 0.1 & 0.2 & 0.7 \\
+\bottomrule
+\end{tabular}
+\end{center}
+賞金の期待値は：
+\[
+E(X) = 1000 \times 0.1 + 300 \times 0.2 + 0 \times 0.7 = 100 + 60 = 160\text{ 円}
+\]
+参加費が200円なので、1回引くごとの平均収支は $160 - 200 = -40$ 円（マイナス）。数学的には引けば引くほど損をする設計になっている。
+\end{exambox}
+
+\begin{columnbox}
+""" + ch2_col_txt + r"""
+\end{columnbox}
+
+% ====================================================================
+% 第3章
+% ====================================================================
+\chapter{結果から原因を探る —— ベイズの定理と逆確率}
+
+\begin{laplacebox}
+\textit{“The probability of the existence of any one of these causes is a fraction whose numerator is the probability of the event resulting from this cause, and whose denominator is the sum of similar products.”}\\
+\hfill —— Pierre-Simon Laplace, \textit{A Philosophical Essay on Probabilities}, Chapter III (Principle VI)
+\tcblower
+【日本語訳】「生じうる原因のうち特定の原因が存在する確率は、その原因から事象が生じる確率を分子とし、すべての原因についての同様の積の総和を分母とする分数である。」
+\end{laplacebox}
+
+\section{「逆確率」という革命的パラダイム}
+
+\begin{gammabox}
+""" + ch3_intro_txt + r"""
+\end{gammabox}
+
+\section{ベイズの定理の数学的定式化}
+
+\begin{formulabox}{ベイズの定理（逆確率の公式）}
+全事象 $S$ が互いに排反な原因事象 $B_1, B_2, \dots, B_k$ に分割されており、結果として事象 $A$（ただし $P(A) > 0$）が観測されたとき、結果 $A$ を引き起こした原因が $B_i$ である**事後確率** $P(B_i \mid A)$ は次式で与えられる：
+\[
+P(B_i \mid A) = \frac{P(B_i \cap A)}{P(A)} = \frac{P(B_i) P(A \mid B_i)}{\sum_{j=1}^k P(B_j) P(A \mid B_j)}
+\]
+\begin{itemize}
+  \item $P(B_i)$：事前確率（結果を知る前に原因 $B_i$ が起きている確率）
+  \item $P(A \mid B_i)$：尤度（原因 $B_i$ のもとで結果 $A$ が生じる確率）
+  \item $P(B_i \mid A)$：事後確率（結果 $A$ を観測した後に更新された確率）
+\end{itemize}
+\end{formulabox}
+
+\begin{figure}[htbp]
+\centering
+\begin{tikzpicture}[scale=0.85]
+  % 樹形図（ツリーダイアグラム）
+  \node[circle, fill=primaryblue, text=white, inner sep=2pt] (root) at (0,0) {母集団};
+  
+  \node[circle, fill=accentteal!30, inner sep=2pt] (b1) at (3.5, 1.8) {感染者 $B_1$};
+  \node[circle, fill=gray!20, inner sep=2pt] (b2) at (3.5, -1.8) {非感染者 $B_2$};
+  
+  \node (pos1) at (8, 2.5) {陽性 $A$ (真陽性)};
+  \node (neg1) at (8, 1.1) {陰性};
+  
+  \node (pos2) at (8, -1.1) {陽性 $A$ (偽陽性)};
+  \node (neg2) at (8, -2.5) {陰性};
+  
+  \draw[thick, ->] (root) -- (b1) node[midway, above] {\small $P(B_1)=0.01$};
+  \draw[thick, ->] (root) -- (b2) node[midway, below] {\small $P(B_2)=0.99$};
+  
+  \draw[thick, ->] (b1) -- (pos1) node[midway, above] {\small $P(A \mid B_1)=0.95$};
+  \draw[thick, ->] (b1) -- (neg1) node[midway, below] {\small $0.05$};
+  
+  \draw[thick, ->] (b2) -- (pos2) node[midway, above] {\small $P(A \mid B_2)=0.05$};
+  \draw[thick, ->] (b2) -- (neg2) node[midway, below] {\small $0.95$};
+\end{tikzpicture}
+\caption{医療検査における事前確率から検査結果（陽性）への条件付き確率ツリー}
+\end{figure}
+
+\begin{exambox}{偽陽性のパラドックス}
+罹患率が $1\%$（$P(B_1) = 0.01$）の病気がある。この検査は：
+\begin{itemize}
+  \item 感染者に陽性反応が出る確率（感度）：$95\%$（$P(A \mid B_1) = 0.95$）
+  \item 非感染者に陽性反応が出る確率（偽陽性率）：$5\%$（$P(A \mid B_2) = 0.05$）
+\end{itemize}
+検査を受けて「陽性」と出た人が、本当に感染している確率 $P(B_1 \mid A)$ は何％か？
+\tcblower
+\textbf{【解】}
+陽性となる全確率 $P(A)$ は：
+\[
+P(A) = 0.01 \times 0.95 + 0.99 \times 0.05 = 0.0095 + 0.0495 = 0.0590
+\]
+このうち、本当に感染者から出た陽性の割合は：
+\[
+P(B_1 \mid A) = \frac{0.0095}{0.0590} = \frac{95}{590} \approx 0.161 \quad (16.1\%)
+\]
+驚くべきことに、検査精度が95％であっても、陽性反応が出た人が本当に病気である確率は約 $16\%$ に過ぎない！これが事前確率の低さ（稀少性）がもたらす「直感の罠」である。
+\end{exambox}
+
+\begin{columnbox}
+""" + ch3_col_txt + r"""
+\end{columnbox}
+
+% ====================================================================
+% 第4章
+% ====================================================================
+\chapter{偶然の奥に潜む規則性 —— 大数の法則と正規分布}
+
+\begin{laplacebox}
+\textit{“The curve of probability of the occurrences of events which are repeated indefinitely approaches a symmetrical bell-shaped form.”}\\
+\hfill —— Pierre-Simon Laplace, \textit{A Philosophical Essay on Probabilities}, Chapter VIII
+\tcblower
+【日本語訳】「無限に繰り返される事象の生起確率が描く曲線は、左右対称の釣鐘型（ベルカーブ）の形へと漸近していく。」
+\end{laplacebox}
+
+\section{大数の法則：偶然の集積が生む必然}
+
+\begin{gammabox}
+""" + ch4_intro_txt + r"""
+\end{gammabox}
+
+\begin{formulabox}{大数の弱法則（Khinchinの法則）}
+互いに独立で同一の分布に従う確率変数 $X_1, X_2, \dots, X_n$（期待値 $\mu$、分散 $\sigma^2$）の標本平均 $\bar{X} = \frac{1}{n}\sum_{i=1}^n X_i$ に対し、任意の正の数 $\varepsilon > 0$ について
+\[
+\lim_{n \to \infty} P(|\bar{X} - \mu| < \varepsilon) = 1
+\]
+すなわち、試行回数 $n$ が十分に大きくなれば、観測される標本平均は真の平均値 $\mu$ にいくらでも近づく。
+\end{formulabox}
+
+\section{中心極限定理と正規分布の出現}
+
+ラプラスはド・モアブルの研究を拡張し、二項分布の極限として**正規分布（ガウス・ラプラス分布）**を導出しました。
+
+\begin{figure}[htbp]
+\centering
+\begin{tikzpicture}[scale=1.1]
+  \draw[thick, ->] (-3.8,0) -- (3.8,0) node[right] {$z = \frac{x-\mu}{\sigma}$};
+  \draw[thick, ->] (0,0) -- (0,2.6) node[above] {$f(z)$};
+  
+  % 標準正規分布曲線
+  \draw[domain=-3.5:3.5, samples=70, smooth, line width=1.5pt, primaryblue] 
+    plot (\x, {2.2 * exp(-\x*\x / 2)});
+    
+  % 塗りつぶし ([-1, 1])
+  \fill[accentteal!25, domain=-1:1, samples=40] 
+    (-1,0) -- plot (\x, {2.2 * exp(-\x*\x / 2)}) -- (1,0) -- cycle;
+    
+  \draw[dashed] (-1,0) -- (-1, {2.2 * exp(-0.5)});
+  \draw[dashed] (1,0) -- (1, {2.2 * exp(-0.5)});
+  
+  \node at (0,0.8) {\small 約 $68.3\%$};
+  \node at (0,-0.4) {$\mu$};
+  \node at (-1,-0.4) {$\mu-\sigma$};
+  \node at (1,-0.4) {$\mu+\sigma$};
+  \node at (-2,-0.4) {$\mu-2\sigma$};
+  \node at (2,-0.4) {$\mu+2\sigma$};
+\end{tikzpicture}
+\caption{標準正規分布曲線（釣鐘型曲線）と $\mu \pm \sigma$ 区間}
+\end{figure}
+
+\begin{columnbox}
+""" + ch4_col_txt + r"""
+\end{columnbox}
+
+% ====================================================================
+% 第5章
+% ====================================================================
+\chapter{自然と社会を科学する統計学 —— 誤差論・生命表・AI}
+
+\begin{laplacebox}
+\textit{“It is seen by this essay that the theory of probabilities is at bottom only common sense reduced to calculation; it makes us appreciate with exactitude that which accurate minds feel with a sort of instinct for which ofttimes they are unable to give a reason.”}\\
+\hfill —— Pierre-Simon Laplace, \textit{A Philosophical Essay on Probabilities}, Chapter XVIII
+\tcblower
+【日本語訳】「確率論とは、煎じ詰めれば良識（コモンセンス）を計算へと還元したものにすぎない。正確な精神の持ち主が直感で感じ取りながらも、しばしばその理由を説明できないような事柄を、厳密に評価させてくれるのである。」
+\end{laplacebox}
+
+\section{観測誤差を乗り越える最小二乗法}
+
+\begin{gammabox}
+""" + ch5_intro_txt + r"""
+\end{gammabox}
+
+\begin{figure}[htbp]
+\centering
+\begin{tikzpicture}[scale=0.95]
+  \draw[thick, ->] (0,0) -- (6.5,0) node[right] {$x$ (観測時刻・説明変数)};
+  \draw[thick, ->] (0,0) -- (0,5) node[above] {$y$ (惑星の位置・目的変数)};
+  
+  % 回帰直線
+  \draw[line width=1.3pt, primaryblue] (0.5, 0.8) -- (6, 4.4) node[right] {$y = ax + b$};
+  
+  % データ点と残差
+  \coordinate (p1) at (1.2, 1.9);
+  \coordinate (p2) at (2.2, 1.6);
+  \coordinate (p3) at (3.5, 3.2);
+  \coordinate (p4) at (4.5, 3.1);
+  \coordinate (p5) at (5.5, 4.5);
+  
+  \foreach \pt in {p1, p2, p3, p4, p5} {
+    \fill[warmamber] (\pt) circle (2.8pt);
+  }
+  
+  % 残差の垂線
+  \draw[dashed, softrose, thick] (1.2, 1.9) -- (1.2, 1.25);
+  \draw[dashed, softrose, thick] (2.2, 1.6) -- (2.2, 1.91);
+  \draw[dashed, softrose, thick] (3.5, 3.2) -- (3.5, 2.76);
+  \draw[dashed, softrose, thick] (4.5, 3.1) -- (4.5, 3.42);
+  \draw[dashed, softrose, thick] (5.5, 4.5) -- (5.5, 4.07);
+  
+  \node[softrose, right] at (3.5, 3.0) {\small 残差 $e_i = y_i - (ax_i + b)$};
+  \node[align=center] at (3,-1) {\small 最小二乗法の原理：残差平方和 $\sum e_i^2$ を最小にする直線 $(a, b)$ を求める};
+\end{tikzpicture}
+\caption{最小二乗法による直線回帰と残差の幾何学的表現}
+\end{figure}
+
+\begin{columnbox}
+""" + ch5_col_txt + r"""
+\end{columnbox}
+
+% ====================================================================
+% 第6章
+% ====================================================================
+\chapter{確率の錯覚に騙されないために —— 直感と理性の戦い}
+
+\begin{laplacebox}
+\textit{“The mind has its illusions as well as the sense of sight; and as touch corrects the latter, so reflection and calculus correct the former.”}\\
+\hfill —— Pierre-Simon Laplace, \textit{A Philosophical Essay on Probabilities}, Chapter XVI
+\tcblower
+【日本語訳】「視覚に錯視があるように、人間の精神にも錯覚が存在する。そして触覚が視覚の錯覚を正すように、内省と計算こそが精神の錯覚を正すのである。」
+\end{laplacebox}
+
+\section{ギャンブラーの誤謬と認知バイアス}
+
+\begin{gammabox}
+""" + ch6_intro_txt + r"""
+\end{gammabox}
+
+\begin{formulabox}{試行の独立性と錯覚の打破}
+コインを $n$ 回投げるとき、前 $n-1$ 回がすべて裏であったとしても、第 $n$ 回目に表が出る確率は依然として
+\[
+P(\text{第 $n$ 回目が表} \mid \text{過去 $n-1$ 回が裏}) = P(\text{表}) = \frac{1}{2}
+\]
+コインには「記憶」も「反動」もない。過去の独立な試行の結果が、未来の公平なコインの物理的確率を変えることは絶対にない。
+\end{formulabox}
+
+\begin{columnbox}
+""" + ch6_col_txt + r"""
+\end{columnbox}
+
+% ====================================================================
+% あとがき
+% ====================================================================
+\backmatter
+
+\chapter*{あとがき：確率的思考で未来を切り拓く}
+\addcontentsline{toc}{chapter}{あとがき}
+
+""" + afterword_txt + r"""
+
+\vspace{10mm}
+\begin{flushright}
+2026年10月\\
+Google Antigravity 編著チーム\\
+with google/gemma-3-4b on LM Studio
+\end{flushright}
+
+\end{document}
+"""
+
+with open(TEX_FILE, 'w', encoding='utf-8') as f:
+    f.write(tex_content)
+
+print(f"Successfully generated {TEX_FILE} ({len(tex_content)} chars)")
