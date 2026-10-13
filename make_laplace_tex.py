@@ -16,22 +16,38 @@ def build_laplace_tex():
         (12, '確率論の歴史と近代科学の進展：真理への接近', 'Historical Development and Scientific Induction')
     ]
     
-    # TikZ figures for chapters
+    # TikZ figures for all 12 chapters (completely redesigning to eliminate any text overlapping)
     tikz_figures = {
         1: r'''\begin{figure}[htbp]
 \centering
 \begin{tikzpicture}[scale=0.9, >=stealth]
-    \draw[thick, fill=softblue, draw=primaryblue] (-5.5, -2) rectangle (5.5, 2.5);
-    \node[draw=primaryblue, fill=white, rounded corners, inner sep=6pt] at (0, 1.8) {\bfseries ラプラスの決定論的宇宙観と認識の階層};
+    % Outer container with ample space
+    \draw[thick, fill=softblue, draw=primaryblue] (-6.2, -2.4) rectangle (6.2, 2.6);
+    \node[draw=primaryblue, fill=white, rounded corners, inner sep=5pt] at (0, 2.1) {\bfseries ラプラスの決定論的宇宙観と認識の階層};
     
-    \node[draw=crimson, fill=white, ellipse, align=center, inner sep=4pt] (god) at (-3.2, 0.2) {\textbf{ラプラスの知性（悪魔）}\\\footnotesize 全原子の位置・運動量を把握\\\footnotesize 過去・未来の完全な計算};
-    \node[draw=primaryblue, fill=white, rounded corners, align=center, inner sep=4pt] (human) at (3.2, 0.2) {\textbf{有限な人間の知性}\\\footnotesize 不完全な初期情報・複雑性\\\footnotesize 確率論による合理的推論};
+    % Laplace Demon Node (clean rounded rectangle with fixed text width)
+    \node[draw=crimson, fill=white, rounded corners, align=center, text width=4.0cm, inner sep=5pt] (god) at (-3.6, 0.4) {
+        \textbf{ラプラスの知性（悪魔）}\\[2pt]
+        \footnotesize 全原子の位置・運動量を把握\\[1pt]
+        \footnotesize 過去と未来の完全な計算
+    };
     
-    \draw[->, very thick, warmamber] (-1.2, 0.2) -- (1.2, 0.2);
-    \node[above] at (0, 0.2) {\footnotesize 完全な決定};
-    \node[below] at (0, 0.2) {\footnotesize 情報の欠落};
+    % Finite Human Mind Node
+    \node[draw=primaryblue, fill=white, rounded corners, align=center, text width=4.0cm, inner sep=5pt] (human) at (3.6, 0.4) {
+        \textbf{有限な人間の知性}\\[2pt]
+        \footnotesize 不完全な初期情報・複雑性\\[1pt]
+        \footnotesize 確率論による合理的推論
+    };
     
-    \node[draw=darkslate, fill=softgreen, rounded corners, inner sep=4pt] at (0, -1.3) {\textbf{確率論の使命}：完全な無知と完全な確実性の架橋};
+    % Connecting arrow with distinct, non-overlapping labels
+    \draw[->, very thick, warmamber] (-1.3, 0.4) -- (1.3, 0.4);
+    \node[above=3pt] at (0, 0.4) {\footnotesize 完全な決定性};
+    \node[below=3pt] at (0, 0.4) {\footnotesize 情報の不完全性};
+    
+    % Mission of probability at bottom with full clearance
+    \node[draw=darkslate, fill=softgreen, rounded corners, text width=9.6cm, align=center, inner sep=5pt] at (0, -1.5) {
+        \textbf{確率論の使命}：完全な無知と完全な確実性を架橋する合理的判断の数理
+    };
 \end{tikzpicture}
 \caption{決定論的宇宙における人間の知性と確率論の役割}
 \label{fig:laplace_demon}
@@ -39,20 +55,37 @@ def build_laplace_tex():
 
         2: r'''\begin{figure}[htbp]
 \centering
-\begin{tikzpicture}[scale=0.85, >=stealth]
-    \draw[thick, fill=softamber, draw=warmamber] (-5, -2) rectangle (5, 2.8);
-    \node[draw=warmamber, fill=white, rounded corners, inner sep=5pt] at (0, 2.2) {\bfseries ラプラスの基本10原理の構造};
+\begin{tikzpicture}[scale=0.80, >=stealth]
+    \draw[thick, fill=softamber, draw=warmamber] (-7.2, -3.2) rectangle (7.2, 3.2);
+    \node[draw=warmamber, fill=white, rounded corners, inner sep=5pt] at (0, 2.6) {\bfseries ラプラス『確率の基本10原理』の体系的構造};
     
-    \node[draw=primaryblue, fill=white, rectangle, align=center] (p1) at (-3, 0.8) {\textbf{原理 1}\\\footnotesize 同様に確からしい事象の比};
-    \node[draw=primaryblue, fill=white, rectangle, align=center] (p2) at (0, 0.8) {\textbf{原理 2--5}\\\footnotesize 乗法定理・加法定理\\\footnotesize 条件付き確率};
-    \node[draw=primaryblue, fill=white, rectangle, align=center] (p6) at (3, 0.8) {\textbf{原理 6--7}\\\footnotesize 原因の確率（ベイズ）\\\footnotesize 逆確率の原理};
+    \node[draw=primaryblue, fill=white, rounded corners, align=center, text width=3.2cm, inner sep=4pt] (p1) at (-4.7, 0.6) {
+        \textbf{第1原理}\\[2pt]
+        \footnotesize 同様に確からしい事象の比\\[1pt]
+        \footnotesize $P(A) = \frac{m}{n}$（古典的定義）
+    };
     
-    \draw[->, thick] (p1) -- (p2);
-    \draw[->, thick] (p2) -- (p6);
+    \node[draw=primaryblue, fill=white, rounded corners, align=center, text width=3.2cm, inner sep=4pt] (p2) at (0, 0.6) {
+        \textbf{第2--5原理}\\[2pt]
+        \footnotesize 加法定理・乗法定理\\[1pt]
+        \footnotesize 条件付き確率 $P(A \cap B)$
+    };
     
-    \node[draw=accentgreen, fill=white, rounded corners, align=center] (p8) at (0, -1.1) {\textbf{原理 8--10}\\\footnotesize 数学的期待値・将来事象の予測生起確率};
-    \draw[->, thick] (p2) -- (p8);
-    \draw[->, thick] (p6) -- (p8);
+    \node[draw=primaryblue, fill=white, rounded corners, align=center, text width=3.2cm, inner sep=4pt] (p6) at (4.7, 0.6) {
+        \textbf{第6--7原理}\\[2pt]
+        \footnotesize 原因の確率（ベイズ逆確率）\\[1pt]
+        \footnotesize 事後確率の推論
+    };
+    
+    \draw[->, very thick, warmamber] (-3.0, 0.6) -- (-1.7, 0.6);
+    \draw[->, very thick, warmamber] (1.7, 0.6) -- (3.0, 0.6);
+    
+    \node[draw=accentgreen, fill=softgreen, rounded corners, align=center, text width=11.2cm, inner sep=5pt] (p8) at (0, -1.9) {
+        \textbf{第8--10原理：意思決定と将来予測の数理}\\[2pt]
+        \footnotesize 数学的期待値 $E[X] = \sum x_i p_i$、継起の規則（日の出問題）、道徳的希望（効用論）
+    };
+    
+    \draw[->, thick, accentgreen] (0, -0.3) -- (0, -1.3);
 \end{tikzpicture}
 \caption{古典的確率定義からベイズ推論・期待値に至る10原理の連関}
 \label{fig:laplace_principles}
@@ -61,17 +94,31 @@ def build_laplace_tex():
         3: r'''\begin{figure}[htbp]
 \centering
 \begin{tikzpicture}[scale=0.85, >=stealth]
-    \draw[->] (0,0) -- (7,0) node[right] {\footnotesize 富 $x$};
-    \draw[->] (0,0) -- (0,4) node[above] {\footnotesize 効用 $U(x)$};
-    \draw[thick, primaryblue, domain=0.2:6.5, samples=100] plot (\x, {1.2*ln(\x) + 1.2});
-    \node[primaryblue, above right] at (4, {1.2*ln(4)+1.2}) {$U(x) = k \ln(x)$（モラル・ホープ）};
-    \draw[dashed, crimson] (0,0) -- (6, 3.5) node[right] {\footnotesize 数学的富（線形期待値）};
+    % Coordinate axes
+    \draw[->, thick] (0,0) -- (7.8,0) node[right] {\footnotesize 富の保有量 $x$};
+    \draw[->, thick] (0,0) -- (0,5.0) node[above] {\footnotesize 効用・満足度 $U(x)$};
     
-    \draw[fill=accentgreen] (1.5, {1.2*ln(1.5)+1.2}) circle (2pt);
-    \draw[fill=accentgreen] (4.5, {1.2*ln(4.5)+1.2}) circle (2pt);
-    \node[below] at (1.5, 0) {\footnotesize $x_1$};
-    \node[below] at (4.5, 0) {\footnotesize $x_2$};
-    \node[draw=warmamber, fill=softamber, rounded corners, inner sep=3pt] at (3.5, 0.8) {\footnotesize 限界効用逓減};
+    % Logarithmic utility curve (Moral Hope)
+    \draw[very thick, primaryblue, domain=0.4:6.8, samples=100] plot (\x, {1.05*ln(\x) + 1.3});
+    \node[primaryblue, right] at (6.8, 3.32) {\footnotesize \textbf{対数効用曲線} $U(x) = k \ln\left(\frac{x}{\alpha}\right)$};
+    
+    % Linear mathematical wealth line placed with clear separation
+    \draw[thick, crimson, dashed] (0,0) -- (6.8, 1.85);
+    \node[crimson, below right] at (4.2, 0.95) {\footnotesize 数学的富（線形増加 $y = cx$）};
+    
+    % Guide points and dotted lines
+    \draw[fill=primaryblue] (1.5, {1.05*ln(1.5)+1.3}) circle (2pt);
+    \draw[fill=primaryblue] (5.5, {1.05*ln(5.5)+1.3}) circle (2pt);
+    \draw[dotted, darkslate] (1.5, 0) -- (1.5, {1.05*ln(1.5)+1.3});
+    \draw[dotted, darkslate] (5.5, 0) -- (5.5, {1.05*ln(5.5)+1.3});
+    
+    \node[below] at (1.5, 0) {\footnotesize 貧困時 $x_1$};
+    \node[below] at (5.5, 0) {\footnotesize 裕福時 $x_2$};
+    
+    % Marginal utility diminishing callout safely in far upper-left
+    \node[draw=warmamber, fill=softamber, rounded corners, inner sep=4pt] at (2.4, 4.3) {
+        \footnotesize \textbf{限界効用逓減}：富が増すほど1単位の喜びは減少
+    };
 \end{tikzpicture}
 \caption{ダニエル・ベルヌーイとラプラスの対数効用関数（精神的期待値）}
 \label{fig:moral_hope}
@@ -79,34 +126,124 @@ def build_laplace_tex():
 
         4: r'''\begin{figure}[htbp]
 \centering
-\begin{tikzpicture}[scale=0.85, >=stealth]
-    \node[draw=primaryblue, fill=softblue, rounded corners, align=center, inner sep=6pt] (seq) at (-3.5, 1) {\textbf{確率列の空間}\\\footnotesize $P(X=0), P(X=1), \dots, P(X=n)$};
-    \node[draw=accentgreen, fill=softgreen, rounded corners, align=center, inner sep=6pt] (gen) at (3.5, 1) {\textbf{連続解析の空間}\\\footnotesize $G(t) = \sum_{k=0}^\infty P(X=k) t^k$};
+\begin{tikzpicture}[scale=0.80, >=stealth]
+    \draw[thick, fill=softblue, draw=primaryblue] (-7.2, -3.1) rectangle (7.2, 3.1);
     
-    \draw[<->, very thick, warmamber] (seq) -- (gen);
-    \node[above] at (0, 1) {\bfseries 母関数変換};
-    \node[below] at (0, 1) {\footnotesize 畳み込み和 $\to$ 多項式の積};
+    \node[draw=primaryblue, fill=white, rounded corners, align=center, text width=4.2cm, inner sep=5pt] (seq) at (-4.4, 1.0) {
+        \textbf{離散確率列の空間}\\[2pt]
+        \footnotesize $\{p_0, p_1, p_2, \dots, p_n\}$\\[1pt]
+        \footnotesize 畳み込み和 $r_n = \sum p_k q_{n-k}$
+    };
     
-    \node[draw=darkslate, fill=white, rounded corners, align=center] at (0, -1) {\textbf{微積分とテイラー展開の適用}\\\footnotesize $E[X] = G'(1), \quad V(X) = G''(1) + G'(1) - \{G'(1)\}^2$};
+    \node[draw=accentgreen, fill=white, rounded corners, align=center, text width=4.2cm, inner sep=5pt] (gen) at (4.4, 1.0) {
+        \textbf{解析的母関数の空間}\\[2pt]
+        \footnotesize $G(t) = \sum_{k=0}^\infty p_k t^k$\\[1pt]
+        \footnotesize 多項式・巾級数の代数積 $G_X(t)G_Y(t)$
+    };
+    
+    \draw[<->, very thick, warmamber] (-1.8, 1.0) -- (1.8, 1.0);
+    \node[above=3pt] at (0, 1.0) {\bfseries 母関数変換};
+    \node[below=3pt] at (0, 1.0) {\footnotesize 代数化と連続化};
+    
+    \node[draw=darkslate, fill=softgreen, rounded corners, text width=11.2cm, align=center, inner sep=5pt] at (0, -1.8) {
+        \textbf{微分積分による統計量の直接抽出}\\[2pt]
+        \footnotesize 期待値 $E[X] = G'(1)$、分散 $V(X) = G''(1) + G'(1) - \{G'(1)\}^2$
+    };
 \end{tikzpicture}
 \caption{ラプラス母関数による離散確率と連続解析学の融合}
 \label{fig:generating_function}
 \end{figure}''',
 
+        5: r'''\begin{figure}[htbp]
+\centering
+\begin{tikzpicture}[scale=0.80, >=stealth]
+    \draw[thick, fill=softamber, draw=warmamber] (-7.2, -3.0) rectangle (7.2, 3.0);
+    \node[draw=warmamber, fill=white, rounded corners, inner sep=5pt] at (0, 2.5) {\bfseries 偶然の遊戯（Games of Chance）と対称性の数理};
+    
+    \node[draw=primaryblue, fill=white, rounded corners, align=center, text width=3.3cm, inner sep=4pt] (dice) at (-4.7, 0.7) {
+        \textbf{サイコロ・コイン}\\[2pt]
+        \footnotesize 幾何学的完全対称性\\[1pt]
+        \footnotesize $P(1) = \cdots = P(6) = \frac{1}{6}$
+    };
+    
+    \node[draw=crimson, fill=white, rounded corners, align=center, text width=3.3cm, inner sep=4pt] (cards) at (0, 0.7) {
+        \textbf{トランプ・くじ引き}\\[2pt]
+        \footnotesize 非復元抽出と組合せ論\\[1pt]
+        \footnotesize 超幾何分布・配分問題
+    };
+    
+    \node[draw=darkslate, fill=white, rounded corners, align=center, text width=3.3cm, inner sep=4pt] (lottery) at (4.7, 0.7) {
+        \textbf{国家宝くじの分析}\\[2pt]
+        \footnotesize 期待値の構造的赤字\\[1pt]
+        \footnotesize $E[\text{払戻}] < \text{購入額}$
+    };
+    
+    \node[draw=darkslate, fill=softgreen, rounded corners, text width=11.2cm, align=center, inner sep=5pt] at (0, -1.8) {
+        \textbf{ラプラスの洞察}：賭博の数理は愚行の戒めであり、合理的意思決定の規範である
+    };
+\end{tikzpicture}
+\caption{古典的等確率モデルと偶然の遊戯における公平な期待値}
+\label{fig:games_of_chance}
+\end{figure}''',
+
+        6: r'''\begin{figure}[htbp]
+\centering
+\begin{tikzpicture}[scale=0.80, >=stealth]
+    \draw[thick, fill=softblue, draw=primaryblue] (-7.2, -3.0) rectangle (7.2, 3.0);
+    \node[draw=primaryblue, fill=white, rounded corners, inner sep=5pt] at (0, 2.5) {\bfseries 未知の偏りとベイズ的確率更新};
+    
+    \node[draw=primaryblue, fill=white, rounded corners, align=center, text width=3.5cm, inner sep=4pt] (prior) at (-4.8, 0.7) {
+        \textbf{事前確率 $P(\theta)$}\\[2pt]
+        \footnotesize コインの歪み度合い $\theta$\\[1pt]
+        \footnotesize 「無差別原則」の一様分布
+    };
+    
+    \node[draw=crimson, fill=softrose, rounded corners, align=center, text width=3.5cm, inner sep=4pt] (post) at (4.8, 0.7) {
+        \textbf{事後確率 $P(\theta|D)$}\\[2pt]
+        \footnotesize データ $D$ による信念更新\\[1pt]
+        \footnotesize 真の母数付近へ鋭く集中
+    };
+    
+    \draw[->, very thick, warmamber] (-2.5, 0.7) -- (2.4, 0.7);
+    \node[above=3pt] at (-0.05, 0.7) {\bfseries 観測データ $D$ の集積};
+    \node[below=3pt] at (-0.05, 0.7) {\footnotesize 表が $p$ 回、裏が $q$ 回};
+    
+    \node[draw=darkslate, fill=white, rounded corners, text width=11.2cm, align=center, inner sep=5pt] at (0, -1.8) {
+        \textbf{ラプラスの継起の規則}：過去 $n$ 回成功した事象の次回生起確率は $\frac{n+1}{n+2}$
+    };
+\end{tikzpicture}
+\caption{未知の不平等とデータ観測によるベイズ事後確率の収束}
+\label{fig:bayesian_updating}
+\end{figure}''',
+
         7: r'''\begin{figure}[htbp]
 \centering
-\begin{tikzpicture}[scale=0.9, >=stealth]
-    \draw[->] (-4,0) -- (4,0) node[right] {\footnotesize $z$};
-    \draw[->] (0,0) -- (0,3.2) node[above] {\footnotesize $\phi(z)$};
+\begin{tikzpicture}[scale=0.85, >=stealth]
+    % Title node placed safely at the very top
+    \node[draw=warmamber, fill=softamber, rounded corners, inner sep=4pt] at (0, 4.3) {
+        \textbf{ド・モアブル＝ラプラスの中心極限定理}
+    };
     
-    \draw[thick, primaryblue, domain=-3.5:3.5, samples=100] plot (\x, {2.8*exp(-\x*\x/2)});
-    \node[primaryblue, above right] at (1.2, 1.8) {$\phi(z) = \frac{1}{\sqrt{2\pi}} e^{-z^2/2}$};
+    % Coordinate axes
+    \draw[->, thick] (-4.5,0) -- (4.5,0) node[right] {\footnotesize 標準化変数 $z$};
+    \draw[->, thick] (0,0) -- (0,3.3);
+    \node[left=3pt] at (0, 3.2) {\footnotesize 確率密度 $\phi(z)$};
     
-    \draw[fill=softblue, opacity=0.5] (-1,0) -- plot[domain=-1:1] (\x, {2.8*exp(-\x*\x/2)}) -- (1,0) -- cycle;
-    \draw[<->, thick] (-1, -0.4) -- (1, -0.4);
-    \node[below] at (0, -0.4) {\footnotesize 68.26\% ($[-1, 1]$)};
+    % Fill area [-1, 1]
+    \draw[fill=softblue, opacity=0.6] (-1,0) -- plot[domain=-1:1, samples=60] (\x, {2.7*exp(-\x*\x/2)}) -- (1,0) -- cycle;
     
-    \node[draw=warmamber, fill=white, inner sep=4pt] at (0, 1) {\textbf{ド・モアブル＝ラプラスの定理}};
+    % Normal curve
+    \draw[very thick, primaryblue, domain=-4.0:4.0, samples=100] plot (\x, {2.7*exp(-\x*\x/2)});
+    
+    % Formula clearly in upper right with generous clearance
+    \node[primaryblue, above right] at (1.1, 2.2) {$\phi(z) = \frac{1}{\sqrt{2\pi}} e^{-z^2/2}$};
+    
+    % Percentages below axis with ample spacing
+    \draw[<->, thick, crimson] (-1, -0.5) -- (1, -0.5);
+    \node[below=2pt, crimson] at (0, -0.5) {\footnotesize $1\sigma$ 区間：$68.26\%$（$[-1, 1]$）};
+    
+    \draw[<->, thick, darkslate] (-2, -1.2) -- (2, -1.2);
+    \node[below=2pt, darkslate] at (0, -1.2) {\footnotesize $2\sigma$ 区間：$95.44\%$（$[-2, 2]$）};
 \end{tikzpicture}
 \caption{二項分布の極限としての正規分布曲線（誤差関数）}
 \label{fig:normal_distribution}
@@ -115,25 +252,164 @@ def build_laplace_tex():
         8: r'''\begin{figure}[htbp]
 \centering
 \begin{tikzpicture}[scale=0.85, >=stealth]
-    \draw[->] (0,0) -- (6,0) node[right] {\footnotesize 観測値 $x$};
-    \draw[->] (0,0) -- (0,4.5) node[above] {\footnotesize 観測値 $y$};
+    % Coordinate axes
+    \draw[->, thick] (0,0) -- (7.2,0) node[right] {\footnotesize 観測条件 $x$};
+    \draw[->, thick] (0,0) -- (0,5.2) node[above] {\footnotesize 観測結果 $y$};
     
-    \draw[fill=crimson] (1, 1.2) circle (2.5pt);
-    \draw[fill=crimson] (2, 2.1) circle (2.5pt);
-    \draw[fill=crimson] (3, 2.4) circle (2.5pt);
-    \draw[fill=crimson] (4, 3.6) circle (2.5pt);
-    \draw[fill=crimson] (5, 3.9) circle (2.5pt);
+    % Scatter points
+    \draw[fill=crimson] (1.0, 1.2) circle (2.5pt);
+    \draw[fill=crimson] (2.2, 2.1) circle (2.5pt);
+    \draw[fill=crimson] (3.6, 2.5) circle (2.5pt);
+    \draw[fill=crimson] (4.8, 3.8) circle (2.5pt);
+    \draw[fill=crimson] (6.0, 4.1) circle (2.5pt);
     
-    \draw[thick, primaryblue] (0.5, 0.9) -- (5.5, 4.3) node[right] {\footnotesize 最確直線 $y = ax + b$};
+    % Regression line
+    \draw[very thick, primaryblue] (0.5, 1.0) -- (6.6, 4.5) node[right] {\textbf{最確直線} $y = ax + b$};
     
-    \draw[dashed, darkslate] (2, 2.1) -- (2, 2.05);
-    \draw[dashed, darkslate] (3, 2.4) -- (3, 2.75);
-    \node[right] at (3, 2.55) {\footnotesize 残差 $\epsilon_i$};
+    % Residual dashed lines
+    \draw[dashed, crimson, thick] (2.2, 2.1) -- (2.2, 1.98);
+    \draw[dashed, crimson, thick] (3.6, 2.5) -- (3.6, 2.78);
+    \draw[dashed, crimson, thick] (4.8, 3.8) -- (4.8, 3.47);
     
-    \node[draw=accentgreen, fill=softgreen, rounded corners, inner sep=4pt] at (3, 0.6) {$\sum \epsilon_i^2 \to \text{最小}$（最小二乗法）};
+    \node[crimson, below right=3pt] at (4.8, 3.3) {\footnotesize 残差 $\epsilon_i = y_i - (ax_i+b)$};
+    
+    % Least squares principle box safely in clear upper-left region
+    \node[draw=accentgreen, fill=softgreen, rounded corners, inner sep=4pt] at (2.4, 4.5) {
+        \footnotesize \textbf{最小二乗法}：残差平方和 $\sum_{i=1}^n \epsilon_i^2 \to \text{最小}$
+    };
 \end{tikzpicture}
-\caption{天体観測と最小二乗法：残差平方和の最小化}
+\caption{天体観測と最小二乗法：残差平方和の最小化による最確値の決定}
 \label{fig:least_squares}
+\end{figure}''',
+
+        9: r'''\begin{figure}[htbp]
+\centering
+\begin{tikzpicture}[scale=0.80, >=stealth]
+    \draw[thick, fill=softrose, draw=crimson] (-7.2, -3.0) rectangle (7.2, 3.0);
+    \node[draw=crimson, fill=white, rounded corners, inner sep=5pt] at (0, 2.5) {\bfseries 道徳科学（Moral Sciences）と裁判の確率モデル};
+    
+    \node[draw=darkslate, fill=white, rounded corners, align=center, text width=3.3cm, inner sep=4pt] (wit) at (-4.7, 0.7) {
+        \textbf{証言の信憑性}\\[2pt]
+        \footnotesize 証人の正直さ $p$ と観察能力\\[1pt]
+        \footnotesize 伝聞の連鎖による減衰
+    };
+    
+    \node[draw=primaryblue, fill=white, rounded corners, align=center, text width=3.3cm, inner sep=4pt] (jury) at (0, 0.7) {
+        \textbf{陪審員の多数決}\\[2pt]
+        \footnotesize 有罪評決の基準多数 $k/n$\\[1pt]
+        \footnotesize コンドルセの陪審定理
+    };
+    
+    \node[draw=crimson, fill=white, rounded corners, align=center, text width=3.3cm, inner sep=4pt] (err) at (4.7, 0.7) {
+        \textbf{誤判の確率}\\[2pt]
+        \footnotesize 無実の者を処罰するリスク\\[1pt]
+        \footnotesize 定員と評決比率の最適化
+    };
+    
+    \node[draw=darkslate, fill=white, rounded corners, text width=11.2cm, align=center, inner sep=5pt] at (0, -1.8) {
+        \textbf{ラプラスの主張}：正義と人道を守るため、司法手続きは客観的確率論に基礎づけられるべきである
+    };
+\end{tikzpicture}
+\caption{裁判の評決確率と人道主義に基づく司法制度の数理的分析}
+\label{fig:moral_sciences}
+\end{figure}''',
+
+        10: r'''\begin{figure}[htbp]
+\centering
+\begin{tikzpicture}[scale=0.80, >=stealth]
+    \draw[thick, fill=softblue, draw=primaryblue] (-7.2, -3.3) rectangle (7.2, 3.3);
+    \node[draw=primaryblue, fill=white, rounded corners, inner sep=5pt] at (0, 2.7) {\bfseries 生命表（Mortality Table）と社会制度の数理};
+    
+    \node[draw=primaryblue, fill=white, rounded corners, align=center, text width=3.3cm, inner sep=4pt] (pop) at (-4.7, 0.7) {
+        \textbf{人口動態の統計}\\[2pt]
+        \footnotesize 出生率・死亡率の長期観測\\[1pt]
+        \footnotesize 年齢別生存関数 $l(x)$
+    };
+    
+    \node[draw=warmamber, fill=white, rounded corners, align=center, text width=3.3cm, inner sep=4pt] (life) at (0, 0.7) {
+        \textbf{平均余命の算出}\\[2pt]
+        \footnotesize $e_x = \frac{1}{l(x)} \int_x^\infty l(t) dt$\\[1pt]
+        \footnotesize 疾病・予防接種の効果
+    };
+    
+    \node[draw=accentgreen, fill=white, rounded corners, align=center, text width=3.3cm, inner sep=4pt] (ins) at (4.7, 0.7) {
+        \textbf{公的保険・年金}\\[2pt]
+        \footnotesize 収支均等の原則\\[1pt]
+        \footnotesize 大数の法則による破綻防止
+    };
+    
+    \node[draw=darkslate, fill=softgreen, rounded corners, text width=11.2cm, align=center, inner sep=5pt] at (0, -2.0) {
+        \textbf{社会数理の夜明け}：個人の寿命の不確定性が、国家規模の統計で強固な秩序へと転化する
+    };
+\end{tikzpicture}
+\caption{生命表と大数の法則に基づく公的年金・保険制度の数理基盤}
+\label{fig:mortality_table}
+\end{figure}''',
+
+        11: r'''\begin{figure}[htbp]
+\centering
+\begin{tikzpicture}[scale=0.80, >=stealth]
+    \draw[thick, fill=softamber, draw=warmamber] (-7.2, -3.3) rectangle (7.2, 3.3);
+    \node[draw=warmamber, fill=white, rounded corners, inner sep=5pt] at (0, 2.7) {\bfseries 確率的錯覚（Illusions）と認知的バイアス};
+    
+    \node[draw=crimson, fill=white, rounded corners, align=center, text width=3.4cm, inner sep=4pt] (gambler) at (-4.7, 0.7) {
+        \textbf{ギャンブラーの誤謬}\\[2pt]
+        \footnotesize 「赤が連続したから次は黒」\\[1pt]
+        \footnotesize 独立試行の無記憶性の軽視
+    };
+    
+    \node[draw=darkslate, fill=white, rounded corners, align=center, text width=3.3cm, inner sep=4pt] (avail) at (0, 0.7) {
+        \textbf{生々しさのバイアス}\\[2pt]
+        \footnotesize 飛行機事故や奇跡の過大視\\[1pt]
+        \footnotesize 稀な事象への過剰な恐怖
+    };
+    
+    \node[draw=primaryblue, fill=white, rounded corners, align=center, text width=3.3cm, inner sep=4pt] (base) at (4.7, 0.7) {
+        \textbf{基準母数の無視}\\[2pt]
+        \footnotesize 事前確率（ベースレート）忘却\\[1pt]
+        \footnotesize 偽陽性を見抜けない直感
+    };
+    
+    \node[draw=darkslate, fill=softgreen, rounded corners, text width=11.2cm, align=center, inner sep=5pt] at (0, -2.0) {
+        \textbf{ラプラスの警鐘}：感覚に頼る人間は誤る。数理計算のみが錯覚から理性を解放する
+    };
+\end{tikzpicture}
+\caption{人間の直感が陥りやすい確率的錯覚とバイアスの数理的分類}
+\label{fig:cognitive_illusions}
+\end{figure}''',
+
+        12: r'''\begin{figure}[htbp]
+\centering
+\begin{tikzpicture}[scale=0.76, >=stealth]
+    \draw[thick, fill=softblue, draw=primaryblue] (-7.2, -3.5) rectangle (7.2, 4.2);
+    
+    \node[draw=darkslate, fill=white, rounded corners, align=center, text width=5.5cm, inner sep=4pt] (pascal) at (-3.7, 3.1) {
+        \textbf{パスカルとフェルマー（1654）}\\[2pt]
+        \footnotesize 賭けの中断問題・古典的確率
+    };
+    
+    \node[draw=primaryblue, fill=softblue, rounded corners, align=center, text width=5.5cm, inner sep=4pt] (bern) at (3.7, 3.1) {
+        \textbf{ヤコブ・ベルヌーイ（1713）}\\[2pt]
+        \footnotesize 大数の弱法則『推測法』
+    };
+    
+    \node[draw=crimson, fill=softamber, rounded corners, text width=9.6cm, align=center, inner sep=5pt] (laplace) at (0, 0.4) {
+        \textbf{\large ピエール＝シモン・ラプラス（1812 / 1814）}\\[2pt]
+        \normalsize 『確率の解析的理論』『確率の哲学的試論』\\[2pt]
+        \footnotesize 決定論的宇宙観・中心極限定理・最小二乗法・ベイズ逆確率の集大成
+    };
+    
+    \node[draw=accentgreen, fill=softgreen, rounded corners, align=center, text width=11.2cm, inner sep=5pt] (modern) at (0, -2.4) {
+        \textbf{現代の統計科学・データサイエンス・AI技術}\\[2pt]
+        \footnotesize ガウス、ポアソン、コルモゴロフ公理系を経て機械学習・現代社会のインフラへ
+    };
+    
+    \draw[->, very thick, warmamber] (-3.0, 2.3) -- (-1.8, 1.6);
+    \draw[->, very thick, warmamber] (3.0, 2.3) -- (1.8, 1.6);
+    \draw[->, very thick, primaryblue] (0, -0.85) -- (0, -1.65);
+\end{tikzpicture}
+\caption{確率論の誕生からラプラスの集大成、そして現代データ科学への発展系譜}
+\label{fig:laplace_history}
 \end{figure}'''
     }
 
@@ -248,7 +524,7 @@ def build_laplace_tex():
 
 \chapter*{刊行によせて}
 \addcontentsline{toc}{chapter}{刊行によせて}
-本書は、18世紀から19世紀にかけて数学・天文学・物理学のあらゆる分野に不滅の足跡を遺した大数学者ピエール＝シモン・ラプラス侯爵（Pierre-Simon, Marquis de Laplace, 1749--1827）が著した名著『確率の哲学的試論』（\textit{Essai philosophique sur les probabilités}、1814年刊、Project Gutenberg \\#58881）を、現代の高校生および初学者が完全に理解できるよう、全12章と用語事典・総合演習問題により再構成した本格的入門書である。
+本書は、18世紀から19世紀にかけて数学・天文学・物理学のあらゆる分野に不滅の足跡を遺した大数学者ピエール＝シモン・ラプラス侯爵（Pierre-Simon, Marquis de Laplace, 1749--1827）が著した名著『確率の哲学的試論』（\textit{Essai philosophique sur les probabilités}、1814年刊、Project Gutenberg \#58881）を、現代の高校生および初学者が完全に理解できるよう、全12章と用語事典・総合演習問題により再構成した本格的入門書である。
 
 ラプラスの確率論は、単なる「サイコロの目の計算」にとどまらない。ニュートン力学の確立によってもたらされた「決定論的宇宙観」を起点とし、不完全な知識しか持ち得ない人間がいかにして真理を推論し、未来のリスクを制御し、合理的な社会的意思決定を行うべきかという、深遠な認識論を展開している。
 
@@ -267,35 +543,119 @@ def build_laplace_tex():
         with open(path, 'r', encoding='utf-8') as f:
             raw_text = f.read()
         
+        # Pre-clean specific mathematical formulas from raw cache
+        raw_text = raw_text.replace(
+            '`SSR = Σ [r_i]^2 = Σ [y_i - f(x_i)]^2`  (Σ は全ての i についての合計)',
+            r'$\mathrm{SSR} = \sum [r_i]^2 = \sum [y_i - f(x_i)]^2$（$\sum$ は全ての $i$ についての合計）'
+        )
+        raw_text = raw_text.replace(
+            '`r_i = y_i - f(x_i)`  (で、`y_i` は i番目の観測値、`f(x_i)` は x<sub>i</sub> における理論的な予測値)',
+            r'$r_i = y_i - f(x_i)$（ここで $y_i$ は $i$ 番目の観測値、$f(x_i)$ は $x_i$ における理論的予測値）'
+        )
+        raw_text = raw_text.replace(
+            '平均寿命 (E[X]) = ∫₀^∞ S(x) dx  =  ∫₀^∞ (1 - S(x)) dx',
+            r'平均寿命（$E[X]$）$= \int_0^\infty S(x) \, dx = \int_0^\infty (1 - S(x)) \, dx$'
+        )
+        raw_text = raw_text.replace(
+            '平均寿命（μ） = Σ [年齢 * 生存確率] / 総人口',
+            r'平均寿命（$\mu$）$= \frac{\sum [\text{年齢} \times \text{生存確率}]}{\text{総人口}}$'
+        )
+        raw_text = raw_text.replace(
+            'P(X = k) = (ⁿCₖ) * pᵏ * (1-p)⁽ⁿ⁻ᵏ⁾',
+            r'$P(X = k) = {}_n\mathrm{C}_k \cdot p^k (1-p)^{n-k}$'
+        )
+        raw_text = raw_text.replace(
+            'ⁿCₖ = n! / (k! * (n-k)! )',
+            r'${}_n\mathrm{C}_k = \frac{n!}{k!(n-k)!}$'
+        )
+        raw_text = raw_text.replace(
+            'P(p | H) = (1/2) * [N(p | 0.5, σ^2)]',
+            r'$P(p \mid H) = \frac{1}{2} \mathcal{N}(p \mid 0.5, \sigma^2)$'
+        )
+        raw_text = raw_text.replace('<sub>i</sub>', '$_i$')
+        raw_text = raw_text.replace('<sub>0</sub>', '$_0$')
+        raw_text = raw_text.replace('<sub>1</sub>', '$_1$')
+
         # Clean text
         lines = raw_text.split('\n')
         cleaned_lines = []
         for line in lines:
             s = line.strip()
+            if not s:
+                continue
             if s.startswith('### '):
                 t = s[4:].replace('&', r'\&').replace('_', r'\_')
                 cleaned_lines.append(r'\section{' + t + '}')
+                continue
             elif s.startswith('#### '):
                 t = s[5:].replace('&', r'\&').replace('_', r'\_')
                 cleaned_lines.append(r'\subsection{' + t + '}')
-            elif s.startswith('- ') or s.startswith('* '):
-                item_content = s[2:].replace('&', r'\\&').replace('**', '')
-                item_content = re.sub(r'(?<!\\\\)%', r'\\%', item_content)
-                item_content = re.sub(r'(?<!\\\\)#', r'\\#', item_content)
-                item_content = item_content.replace('_', r'\_').replace('^', r'\textasciicircum{}')
-                item_content = item_content.replace('', '')
-                cleaned_lines.append(r'\begin{itemize}\item ' + item_content + r'\end{itemize}')
+                continue
+
+            # Check if list item
+            is_item = False
+            is_enum = False
+            if s.startswith('- ') or s.startswith('* '):
+                is_item = True
+                s = s[2:].strip()
             elif re.match(r'^\d+\.\s+', s):
-                cleaned_lines.append(r'\begin{enumerate}\item ' + re.sub(r'^\d+\.\s+', '', s) + r'\end{enumerate}')
+                is_enum = True
+                s = re.sub(r'^\d+\.\s+', '', s).strip()
+
+            # Remove bold markdown **
+            s = s.replace('**', '')
+
+            # Convert markdown code backticks to math
+            s = re.sub(r'`([^`]+)`', r'$\1$', s)
+
+            # Convert markdown italics like *p* to $p$
+            s = re.sub(r'(?<![a-zA-Z0-9])\*([a-zA-Z0-9])\*(?![a-zA-Z0-9])', r'$\1$', s)
+
+            # Convert Greek and math symbols before math block protection
+            s = s.replace('σ^2', r'$\sigma^2$')
+            s = s.replace('σ²', r'$\sigma^2$')
+            s = s.replace('σ', r'$\sigma$')
+            s = s.replace('μ', r'$\mu$')
+            s = s.replace('λ', r'$\lambda$')
+            s = s.replace('θ', r'$\theta$')
+            s = s.replace('π', r'$\pi$')
+            s = s.replace('α', r'$\alpha$')
+            s = s.replace('β', r'$\beta$')
+            s = s.replace('Σ', r'$\sum$')
+            s = s.replace('∫', r'$\int$')
+            s = s.replace('∞', r'$\infty$')
+            s = re.sub(r'(?<!\$)\b([a-zA-Z])\^(\d+)\b(?!\$)', r'$\1^\2$', s)
+
+            # Protect ALL existing math blocks: $$...$$ and $...$
+            math_blocks = []
+            def save_display_math(m):
+                idx = len(math_blocks)
+                math_blocks.append(m.group(0))
+                return f"QQQMATHBLOCK{idx}QQQ"
+
+            s_temp = re.sub(r'\$\$.*?\$\$', save_display_math, s)
+            s_temp = re.sub(r'\$.*?\$', save_display_math, s_temp)
+
+            # In remaining pure text only: escape LaTeX special characters
+            s_temp = s_temp.replace('&', r'\&')
+            s_temp = re.sub(r'(?<!\\)%', r'\%', s_temp)
+            s_temp = re.sub(r'(?<!\\)#', r'\#', s_temp)
+            s_temp = s_temp.replace('_', r'\_')
+            s_temp = s_temp.replace('`', '')
+            s_temp = re.sub(r'(?<!\\)\^', r'\textasciicircum{}', s_temp)
+
+            # Restore math blocks completely untouched
+            for idx, mb in enumerate(math_blocks):
+                s_temp = s_temp.replace(f"QQQMATHBLOCK{idx}QQQ", mb)
+
+            if is_item:
+                cleaned_lines.append(r'\begin{itemize}\item ' + s_temp + r'\end{itemize}')
+            elif is_enum:
+                cleaned_lines.append(r'\begin{enumerate}\item ' + s_temp + r'\end{enumerate}')
             else:
-                c = s.replace('&', r'\&').replace('**', '')
-                # escape %
-                c = re.sub(r'(?<!\\)%', r'\%', c)
-                # escape #
-                c = re.sub(r'(?<!\\)#', r'\#', c)
-                cleaned_lines.append(c)
-        
-        body = '\n\n'.join([l for l in cleaned_lines if l])
+                cleaned_lines.append(s_temp)
+
+        body = '\n\n'.join(cleaned_lines)
         
         # Insert TikZ figure if available
         fig = tikz_figures.get(num, '')
@@ -450,6 +810,15 @@ E[U] = 0.99 \times \ln(100) + 0.01 \times \ln(90)
 
     full_tex = preamble + '\n'.join(tex_chapters) + glossary + '\n\\end{document}\n'
     
+
+    rep = {
+        '⁰': '$^0$', '¹': '$^1$', '²': '$^2$', '³': '$^3$', '⁴': '$^4$', '⁵': '$^5$', '⁶': '$^6$', '⁷': '$^7$', '⁸': '$^8$', '⁹': '$^9$',
+        '₀': '$_0$', '₁': '$_1$', '₂': '$_2$', '₃': '$_3$', '₄': '$_4$', '₅': '$_5$', '₆': '$_6$', '₇': '$_7$', '₈': '$_8$', '₉': '$_9$',
+        'ₖ': '$_k$', 'ⁿ': '$^n$', '⁻': '-', '⁺': '+', '⁽': '(', '⁾': ')', 'ᵏ': '$^k$'
+    }
+    for k, v in rep.items():
+        full_tex = full_tex.replace(k, v)
+
     out_path = r'books/58881_laplace_probability/laplace_probability_intro.tex'
     with open(out_path, 'w', encoding='utf-8') as f:
         f.write(full_tex)
