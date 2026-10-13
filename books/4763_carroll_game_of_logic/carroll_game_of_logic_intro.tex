@@ -1,0 +1,1894 @@
+\documentclass[a4paper,11pt,openany]{ltjsbook}
+\usepackage{luatexja}
+\usepackage{luatexja-fontspec}
+\usepackage{amsmath,amssymb,amsfonts,amsthm}
+\usepackage{geometry}
+\geometry{top=24mm,bottom=24mm,left=24mm,right=24mm,footskip=10mm}
+\usepackage{tikz}
+\usetikzlibrary{shapes,arrows,positioning,calc,patterns,backgrounds}
+\usepackage{tcolorbox}
+\tcbuselibrary{skins,breakable}
+\usepackage{hyperref}
+\usepackage{enumitem}
+\usepackage{booktabs}
+\usepackage{fancyhdr}
+
+\definecolor{primaryblue}{RGB}{24, 76, 120}
+\definecolor{secondaryblue}{RGB}{70, 130, 180}
+\definecolor{darkslate}{RGB}{30, 45, 60}
+\definecolor{softblue}{RGB}{240, 245, 250}
+\definecolor{warmgold}{RGB}{180, 130, 20}
+\definecolor{warmamber}{RGB}{210, 140, 20}
+\definecolor{softamber}{RGB}{254, 250, 240}
+\definecolor{crimson}{RGB}{160, 30, 45}
+\definecolor{softrose}{RGB}{253, 242, 242}
+\definecolor{accentgreen}{RGB}{40, 120, 70}
+\definecolor{softgreen}{RGB}{240, 248, 242}
+
+\hypersetup{
+    colorlinks=true,
+    linkcolor=primaryblue,
+    citecolor=accentgreen,
+    urlcolor=warmamber,
+    pdftitle={高校生のためのルイス・キャロル論理学入門},
+    pdfauthor={教育情報分析研究会}
+}
+
+\newtcolorbox{historybox}[2][]{
+    enhanced,
+    breakable,
+    colback=softblue,
+    colframe=primaryblue,
+    fonttitle=\bfseries\gtfamily,
+    title={#2},
+    sharp corners,
+    boxrule=1pt,
+    left=12pt, right=12pt, top=10pt, bottom=10pt,
+    #1
+}
+
+\newtcolorbox{examplebox}[2][]{
+    enhanced,
+    breakable,
+    colback=softgreen,
+    colframe=accentgreen,
+    fonttitle=\bfseries\gtfamily,
+    title={#2},
+    sharp corners,
+    boxrule=1pt,
+    left=12pt, right=12pt, top=10pt, bottom=10pt,
+    #1
+}
+
+\newtcolorbox{warningbox}[2][]{
+    enhanced,
+    breakable,
+    colback=softrose,
+    colframe=crimson,
+    fonttitle=\bfseries\gtfamily,
+    title={#2},
+    sharp corners,
+    boxrule=1pt,
+    left=12pt, right=12pt, top=10pt, bottom=10pt,
+    #1
+}
+
+\pagestyle{fancy}
+\fancyhf{}
+\fancyhead[LE,RO]{\thepage}
+\fancyhead[LO]{\nouppercase{\rightmark}}
+\fancyhead[RE]{\nouppercase{\leftmark}}
+\renewcommand{\headrulewidth}{0.4pt}
+
+\title{\Huge\textbf{高校生のためのルイス・キャロル論理学入門}\\[6mm]
+\Large\textbf{『論理の遊戯』とダイアグラムで楽しむ記号論理・三段論法・確率の数理}\\[4mm]
+\large 原著：ルイス・キャロル（チャールズ・ドジソン）『論理の遊戯』\\[2mm]
+\normalsize (Project Gutenberg eBook \#4763: \textit{The Game of Logic})}
+
+\author{\textbf{教育情報分析研究会}\\[2mm]
+\small 数学教育・統計分析リサーチユニット}
+\date{2026年10月 初版（全50頁規模・原著完全準拠版）}
+
+\begin{document}
+\maketitle
+
+\frontmatter
+\tableofcontents
+
+\chapter*{刊行によせて}
+\addcontentsline{toc}{chapter}{刊行によせて}
+本書は、『不思議の国のアリス』の作者として世界中に知られる英国の天才、ルイス・キャロル（Lewis Carroll, 本名チャールズ・ラトウィッジ・ドジソン Charles Lutwidge Dodgson, 1832--1898、オックスフォード大学クライスト・チャーチ数学講師）が著した歴史的名著『論理の遊戯』（\textit{The Game of Logic}、1886年刊、Project Gutenberg \#4763）を底本とし、現代の高校生に向けて丁寧に解き明かした本格的入門書である。
+
+キャロルは本書において、中世以来の難解で退屈な暗記科目と化していたアリストテレス論理学を、**「赤と灰のカウンター」**と**「四角いゲーム盤（キャロル・ダイアグラム）」**を用いた、誰もが一人または二人で楽しく遊べる「思考のボードゲーム」へと鮮やかに生まれ変わらせた。
+しかし、本書は単なる子どものパズルではない。それはジョージ・ブールが拓いた記号代数学と、ジョン・ヴェンが提案した集合図をさらに発展させ、のちの20世紀においてデジタルコンピュータの回路設計（カルノー図）や、確率空間の幾何学的表現へと結実する、極めて先駆的で強固な数理的基礎を備えている。
+
+著者である「教育情報分析研究会」は、高校数学（数学A「集合と命題」「場合の数と確率」、情報I「論理回路とディジタル演算」、数学B・C「統計的推測」）を学ぶ若者たちが、キャロルのユーモアあふれる言葉の遊戯を通して、現代情報社会を生き抜くための「確固たる論理的思考力」を楽しく、かつ深く体得できるよう、全12章と用語事典・総合演習問題により本書を編纂した。
+
+\mainmatter
+
+\chapter{不思議の国の数学者：チャールズ・ドジソンと『論理の遊戯』の世界}
+\label{ch:1}
+
+\begin{historybox}{原著における位置づけ：The Mathematician of Wonderland and The Game of Logic}
+本章はルイス・キャロル『論理の遊戯』（Project Gutenberg \#4763）の該当章および数理体系に直接基づき、
+四角いダイアグラムと赤・灰のカウンターによる論理のアルゴリズムを、現代の高校数学・情報科学の視点から完全に読み解くものである。
+\end{historybox}
+
+\#\# 第1章：不思議の国の数学者：チャールズ・ドジソンと『論理の遊戯』の世界
+
+教育情報分析研究会　数学教育・統計分析リサーチユニット
+
+\section{1. 二つの顔を持つ天才：オックスフォード大学の数学講師と童話作家}
+
+『不思議の国のアリス』や『鏡の国のアリス』の作者として、世界中の人々に愛され続けているルイス・キャロル（Lewis Carroll, 1832--1898）。彼の真の名はチャールズ・ラトウィッジ・ドジソン（Charles Lutwidge Dodgson）といい、英国オックスフォード大学の最高峰カレッジであるクライスト・チャーチにおいて、26年間にわたり数学と論理学の教鞭を執り続けた極めて厳格かつ敬虔な数学者でした。
+
+世間一般において、ドジソンが書いた物語と彼が講義した数学は、まったく別個の無関係な世界であると捉えられがちです。しかし、近現代の科学史および数理論理学の発展を振り返るとき、これら二つの世界は深い根底において完全にひとつに結びついていました。『アリス』の物語に散りばめられた「終わらないお茶会」「帽子屋の謎かけ」「チェスの盤面を模した世界の冒険」といった名場面の数々は、言葉の曖昧さ、形式的推論の規則、そして論理的矛盾を徹底的に突き詰める数学者ドジソンの鋭利な頭脳から生み出されたものでした。
+
+ドジソンが生きた19世紀後半のヴィクトリア朝英国は、まさに学問の地殻変動が起きていた時代でした。中世以来、オックスフォードをはじめとする大学教育の中心に君臨していたのは、古代ギリシャのアリストテレスに端を発する「伝統的論理学」でした。そこでは、難解なラテン語の専門用語（「三段論法の格（Figure）と式（Mood）」「Barbara, Celarent, Darii, Ferio」といった呪文のような暗記項目）が並び、学生たちにとって論理学とは、退屈で無味乾燥な試験科目の代名詞となっていたのです。
+
+ドジソンはこの教育的惨状に強い危機感を抱いていました。「人間の思考の正しさを保証する論理学という美しい学問が、なぜこんなにも退屈な暗記として教えられなければならないのか？」「論理とは本来、正しいルールに従って駒を動かすチェスやクリケットのように、誰もが胸を躍らせて熱中できる『知的ゲーム』であるはずだ」――こうして1886年に誕生したのが、本書の底本である歴史的傑作『The Game of Logic（論理の遊戯）』（Project Gutenberg \#4763）でした。
+
+\section{2. 伝統的アリストテレス論理学の限界と「ゲーム化」の革命}
+
+アリストテレス以来の伝統的論理学には、教育的な堅苦しさだけでなく、理論的・数理的にも重大な限界が存在していました。伝統的論理学では、前提から結論を導く推論の正しさを「言語的な形式の型」として分類していました。例えば：
+
+\begin{itemize}\item 「すべてのMはPである」（大前提）\end{itemize}
+
+\begin{itemize}\item 「すべてのSはMである」（小前提）\end{itemize}
+
+\begin{itemize}\item ゆえに「すべてのSはPである」（結論）\end{itemize}
+
+これは「第1格Barbara」と呼ばれる妥当な推論形式ですが、もし前提が否定命題になったり（「いかなるMもPではない」）、部分否定になったり（「あるSはMではない」）すると、可能な組み合わせは256通りにも膨れ上がり、そのうちどれが妥当な推論であるかを判別するために、膨大な規則と例外規則を暗記しなければならなかったのです。
+
+さらに決定的な問題は、言語表現の多義性と曖昧さです。「ある」「すべての」「ない」という日常言語の言葉遣いは、文脈によって意味が揺らぎます。例えば、「すべてのカラスは黒い」と言ったとき、世の中にカラスが1羽も存在しない場合でもこの命題は成り立つのか？という「存在前提（Existential Import）」の問題に対して、伝統的論理学は明確で統一的な幾何学的・代数的一貫性を欠いていました。
+
+ドジソンはこの問題に対し、直前に登場したジョージ・ブール（George Boole, 1815--1864）の記号代数学（『思考の法則』1854年）と、ジョン・ヴェン（John Venn, 1834--1923）の円を用いた集合図（『偶然の論理』1866年）に強い刺激を受けました。しかしドジソンは、ブールの代数方程式は初学者にはあまりに抽象的で計算が複雑すぎ、ヴェンの円の重なりは3つ以上の属性を扱うと図が歪んで誤解を生みやすいことを見抜いていました。
+
+そこで彼が考案したのが、「正方形のボード（四分割・八分割のグリッド）」と、「赤と灰の二色のカウンター（駒）」を用いるという、驚くべき幾何学的・物理的アルゴリズムだったのです。
+
+\section{3. 九枚のカウンターと二つのダイアグラム：ゲームの道具立て}
+
+『論理の遊戯』原著の冒頭（Nota Bene）には、次のような魅力的な記述があります：
+
+「本書の各冊には、表紙の口絵に似た厚紙のダイアグラムと、9枚のカウンター（赤4枚、灰5枚）が収められた封筒が添付されている。」
+
+ドジソンはこのゲームに必要な道具を極限までシンプルに設計しました：
+
+\begin{enumerate}\item 九枚のカウンター（Counters）:\end{enumerate}
+
+\begin{itemize}\item 赤カウンター（Red Counter）4枚: 事物の「存在（FULL）」を表す。その領域に少なくとも1つの要素が存在すること（現代論理学の存在記号 $\exists$）。\end{itemize}
+
+\begin{itemize}\item 灰カウンター（Grey Counter）5枚: 事物の「非存在・空（EMPTY）」を表す。その領域には1つの要素も存在しないこと（現代論理学の空集合 $\emptyset$）。\end{itemize}
+
+\begin{enumerate}\item 二つのダイアグラム（Diagrams）:\end{enumerate}
+
+\begin{itemize}\item 2属性ダイアグラム（Smaller Diagram）: 正方形を上下左右に4分割した盤面。最終的な結論を表現・確認するために用いる。\end{itemize}
+
+\begin{itemize}\item 3属性ダイアグラム（Larger Diagram）: 2属性ダイアグラムの内側にさらにもうひとつの正方形を配置し、空間を8つに分割した盤面。三段論法の大前提と小前提を同時にプロットし、中間概念を消去するために用いる。\end{itemize}
+
+キャロルは原著のまえがきで、次のようにユーモアたっぷりに語りかけています：
+
+「このゲームには、少なくとも1人のプレイヤーが必要である。私はこれより少ない人数で遊べるゲームを知らない。一方で、クリケットのように22人も集めなければならないゲームもある。22人を集める苦労に比べれば、たった1人で遊べるゲームがいかに気楽であるか！ もちろん、2人で一緒に盤を囲み、お互いの間違いを正し合いながら遊べば、その楽しさは何倍にも膨らむだろう。」
+
+\section{4. 現代数学・情報科学への直結：高校生が今学ぶべき理由}
+
+高校生の皆さんは、高校数学Aにおいて「集合と命題」「場合の数と確率」を学び、情報Iにおいて「二値論理、論理回路、条件分岐（IF文）」を学んでいます。
+
+一見すると、これらは別々の単元のように思えるかもしれません。しかし、ルイス・キャロルの『論理の遊戯』を一度でも体験すれば、それらすべてが同一の根幹から伸びた枝葉であることに気づくはずです。
+
+\begin{itemize}\item 集合の共通部分・和集合・補集合: キャロル・ボード上の正方形の区画として一目瞭然に可視化されます。\end{itemize}
+
+\begin{itemize}\item 真理値（0と1）: 灰カウンター（0：空）と赤カウンター（1：存在）の物理的配置そのものです。\end{itemize}
+
+\begin{itemize}\item デジタル回路（カルノー図）: のちに1953年、ベル研究所のモーリス・カルノーが開発した集積回路設計の標準ツールは、キャロルの正方形ボードと構造的に完全に同一のものです。\end{itemize}
+
+\begin{itemize}\item 条件付き確率とベイズの定理: ボード全体の面積を確率空間とみなし、部分領域にズームインする面積比率の計算として直感的に理解できます。\end{itemize}
+
+本書は、ルイス・キャロルが140年前に子どもたちや学生のために遺した愛すべき論理ゲームを、現代の高校生の知的水準に合わせて完全復元したものです。退屈な暗記を捨て、赤と灰の駒を手に取り、思考の盤面へと冒険に旅立ちましょう。
+
+\begin{figure}[htbp]
+\centering
+\begin{tikzpicture}[scale=0.85, >=stealth]
+    \draw[thick, fill=softblue, draw=primaryblue] (-6, -2.5) rectangle (6, 2.5);
+    \node[draw=primaryblue, fill=white, rounded corners, inner sep=6pt] at (0, 2.0) {\bfseries ルイス・キャロル（チャールズ・ドジソン）の学問と文学の統合};
+    
+    \node[draw=darkslate, fill=white, rectangle, align=center, inner sep=5pt] (lit) at (-3.5, 0.4) {\textbf{文学・言語遊戯}\\\footnotesize 『不思議の国のアリス』\\\footnotesize ノンセンス文学・言葉のパズル\\\footnotesize 厳密なルールの遊戯化};
+    \node[draw=darkslate, fill=white, rectangle, align=center, inner sep=5pt] (math) at (3.5, 0.4) {\textbf{オックスフォード数学講師}\\\footnotesize ユークリッド幾何学の擁護\\\footnotesize 行列式・代数学の講義\\\footnotesize 記号論理学の体系化};
+    
+    \node[draw=crimson, fill=softamber, rounded corners, inner sep=6pt] (game) at (0, -1.0) {\Large\bfseries 『論理の遊戯』（1886年）};
+    
+    \draw[->, very thick, warmamber] (lit) -- (game);
+    \draw[->, very thick, warmamber] (math) -- (game);
+    
+    \node[draw=darkslate, fill=softgreen, rounded corners, inner sep=4pt] at (0, -1.9) {\footnotesize 九枚のカウンターと二つのダイアグラムによる「三段論法の完全視覚化」};
+\end{tikzpicture}
+\caption{オックスフォード大数学講師ドジソンによる文学と数学的論理学の融合}
+\label{fig:carroll_synthesis}
+\end{figure}
+
+\section*{本章のまとめと確認演習}
+\begin{examplebox}{キャロル論理学の理解度チェック}
+\textbf{【問】} 本章で学んだ概念について、以下の設問に答えよ。
+\begin{enumerate}[label=(\arabic*)]
+\item キャロルが考案したダイアグラムとカウンターのルールに従い、本章の主要な命題や推論を自分の手で図示せよ。
+\item 伝統的な形式論理学やベン図と比較したとき、キャロル流の解法が持つ直観的・機械的利点を説明せよ。
+\item この思考法が現代の情報科学（論理回路・二値論理）や確率論においてどのように活かされているか考察せよ。
+\end{enumerate}
+\end{examplebox}
+
+
+\chapter{キャロル・ボードの誕生：宇宙を四分割する「2属性ダイアグラム」}
+\label{ch:2}
+
+\begin{historybox}{原著における位置づけ：The Smaller Diagram and the Division of the Universe}
+本章はルイス・キャロル『論理の遊戯』（Project Gutenberg \#4763）の該当章および数理体系に直接基づき、
+四角いダイアグラムと赤・灰のカウンターによる論理のアルゴリズムを、現代の高校数学・情報科学の視点から完全に読み解くものである。
+\end{historybox}
+
+\#\# 第2章：キャロル・ボードの誕生：宇宙を四分割する「2属性ダイアグラム」
+
+教育情報分析研究会　数学教育・統計分析リサーチユニット
+
+\section{1. 限定宇宙（Universe of Discourse）という考え方}
+
+論理的な推論を正しく進めるための第一歩は、「いま自分たちが何を話題にしているのか」という議論の対象範囲を明確に限定することです。数学や形式論理学では、この議論の全対象を含む全体集合のことを「限定宇宙（Universe of Discourse）」と呼びます。
+
+例えば、「新しいケーキはおいしい」という命題を議論するとき、私たちの関心の対象は「世界に存在するすべてのケーキ」であって、木々の葉や自動車、天体の星々ではありません。キャロルのゲーム盤（正方形の枠全体）は、まずこの「限定宇宙」そのものを表しています。現代数学の記号で言えば、全体集合 $U$ または全事象 $S$ に対応します。
+
+\section{2. 属性 $x$ とその否定 $x'$ による空間の二分割（North and South）}
+
+キャロルは、この限定宇宙にひとつの「属性（Attribute）」を導入します。属性とは、事物がある性質を持っているか否かを分ける基準のことです。
+
+いま、属性 $x$ を「新しい（new）」としましょう。すると、宇宙に存在するすべてのケーキは、厳格に次の二群に分かれます：
+
+\begin{itemize}\item 属性 $x$ を持っているケーキ（「新しいケーキ」）\end{itemize}
+
+\begin{itemize}\item 属性 $x$ を持っていないケーキ（「新しくないケーキ」）\end{itemize}
+
+キャロルは、持っていない性質をプライム記号をつけて $x'$（ノット・エックス、Not-$x$）と表しました。現代数学でいう補集合 $x^c$ や否定 $\neg x$ です。
+
+アリストテレス以来の「排中律（どんな事物も $x$ であるか $x'$ であるかのいずれかであり、中間はない）」と「矛盾律（いかなる事物も同時に $x$ でありかつ $x'$ であることはできない）」により、宇宙全体は重複なく綺麗に二分されます。
+
+キャロルはこれを、正方形の盤面を水平な境界線で「上半分（North）」と「下半分（South）」に分割することで表現しました：
+
+\begin{itemize}\item 上半分（North）: 属性 $x$ を持つものの領域（新しいケーキの部屋）\end{itemize}
+
+\begin{itemize}\item 下半分（South）: 属性 $x'$ を持つものの領域（新しくないケーキの部屋）\end{itemize}
+
+\section{3. 第2の属性 $y$ とその否定 $y'$ による四分割（West and East）}
+
+次に、キャロルは第2の独立した属性 $y$ を導入します。属性 $y$ を「おいしい（nice）」としましょう。
+
+すると同様に、すべてのケーキは「おいしいケーキ（$y$）」と「おいしくないケーキ（$y'$）」に二分されます。
+
+キャロルはこの第2の属性を、正方形を垂直な境界線で「左半分（West）」と「右半分（East）」に分割することで重ね合わせました：
+
+\begin{itemize}\item 左半分（West）: 属性 $y$ を持つものの領域（おいしいケーキの部屋）\end{itemize}
+
+\begin{itemize}\item 右半分（East）: 属性 $y'$ を持つものの領域（おいしくないケーキの部屋）\end{itemize}
+
+この2本の直交する境界線によって、正方形の限定宇宙は、互いに重なり合わない4つの独立した小部屋（Cells）へと完璧に四分割されます。これがキャロルの「Smaller Diagram（2属性ダイアグラム）」の幾何学的骨格です。
+
+\section{4. 4つの小部屋（Cells）が意味する論理的直交性}
+
+4分割された盤面の各部屋には、どのような事物が住んでいるでしょうか？
+
+\begin{enumerate}\item 北西の部屋（North-West Cell, $xy$）:\end{enumerate}
+
+\begin{itemize}\item 上段（$x$）かつ左列（$y$）$\to$ 「新しくておいしいケーキ」（集合論の積集合 $x \cap y$）\end{itemize}
+
+\begin{enumerate}\item 北東の部屋（North-East Cell, $xy'$）:\end{enumerate}
+
+\begin{itemize}\item 上段（$x$）かつ右列（$y'$）$\to$ 「新しいがおいしくないケーキ」（差集合 $x \setminus y$ または $x \cap y^c$）\end{itemize}
+
+\begin{enumerate}\item 南西の部屋（South-West Cell, $x'y$）:\end{enumerate}
+
+\begin{itemize}\item 下段（$x'$）かつ左列（$y$）$\to$ 「新しくないがおいしいケーキ」（差集合 $y \setminus x$ または $x^c \cap y$）\end{itemize}
+
+\begin{enumerate}\item 南東の部屋（South-East Cell, $x'y'$）:\end{enumerate}
+
+\begin{itemize}\item 下段（$x'$）かつ右列（$y'$）$\to$ 「新しくなく、おいしくもないケーキ」（補集合 $(x \cup y)^c$）\end{itemize}
+
+この4つのセルは、論理学および確率論において「直交基底（互いに素であり、和集合が全体宇宙を満たす分割）」を形成しています。限定宇宙内のいかなるケーキも、必ずこの4つの部屋のどこか1つに属し、決して2つの部屋に同時に属することはできません。
+
+\section{5. ベン図・オイラー図に対するキャロル図の圧倒的利点}
+
+高校数学では、集合の包含関係を表す図として「ベン図（円を用いた図）」を習います。もちろん2つの集合の重なりを見る上ではベン図も直感的ですが、キャロルの四角形分割ダイアグラムには、ベン図を凌駕する極めて重要な数学的利点があります：
+
+\begin{enumerate}\item 外側の領域（補集合）の明確さ: ベン図では「円の外側」が無限に広がる不定形の領域になりがちですが、キャロル図では外枠が明確な境界を持ち、$x'y'$ のセルが等価な広さで配置されます。\end{enumerate}
+
+\begin{enumerate}\item 幾何学的対称性: 上下（$x, x'$）と左右（$y, y'$）が直交しているため、行や列ごとの「射影（合計）」を一目で集計できます（行 $x$ の合計面積、列 $y$ の合計面積）。\end{enumerate}
+
+\begin{enumerate}\item 誤謬の排除: 領域の重なりが正方形のグリッドとして固定されているため、円の描き方によって特定の領域が潰れて見えなくなるといった作図上の誤謬が原理的に発生しません。\end{enumerate}
+
+\begin{figure}[htbp]
+\centering
+\begin{tikzpicture}[scale=1.0, >=stealth]
+    % Outer boundary of Universe
+    \draw[very thick, draw=darkslate] (-3.5, -3) rectangle (3.5, 3);
+    \node[above] at (0, 3.1) {\bfseries 限定宇宙（Universe of Discourse）：すべてのケーキの集合};
+    
+    % Horizontal dividing line (x vs x')
+    \draw[thick, draw=primaryblue] (-3.5, 0) -- (3.5, 0);
+    \node[left, primaryblue] at (-3.6, 1.5) {\Large\bfseries $x$（上段：新しいケーキ）};
+    \node[left, primaryblue] at (-3.6, -1.5) {\Large\bfseries $x'$（下段：新しくないケーキ）};
+    
+    % Vertical dividing line (y vs y')
+    \draw[thick, draw=warmamber] (0, -3) -- (0, 3);
+    \node[above, warmamber] at (-1.75, 3.4) {\Large\bfseries $y$（左列：おいしい）};
+    \node[above, warmamber] at (1.75, 3.4) {\Large\bfseries $y'$（右列：おいしくない）};
+    
+    % 4 Cells
+    \node[align=center] at (-1.75, 1.5) {\large\bfseries セル 1: $xy$\\\footnotesize 新しくておいしい};
+    \node[align=center] at (1.75, 1.5) {\large\bfseries セル 2: $xy'$\\\footnotesize 新しいがおいしくない};
+    \node[align=center] at (-1.75, -1.5) {\large\bfseries セル 3: $x'y$\\\footnotesize 新しくないがおいしい};
+    \node[align=center] at (1.75, -1.5) {\large\bfseries セル 4: $x'y'$\\\footnotesize 新しくなくおいしくもない};
+    
+    \draw[dashed, fill=softblue, opacity=0.3] (-3.5, 0) rectangle (0, 3);
+\end{tikzpicture}
+\caption{キャロルの2属性ダイアグラム（Smaller Diagram）による宇宙の4分割}
+\label{fig:carroll_smaller_diagram}
+\end{figure}
+
+\section*{本章のまとめと確認演習}
+\begin{examplebox}{キャロル論理学の理解度チェック}
+\textbf{【問】} 本章で学んだ概念について、以下の設問に答えよ。
+\begin{enumerate}[label=(\arabic*)]
+\item キャロルが考案したダイアグラムとカウンターのルールに従い、本章の主要な命題や推論を自分の手で図示せよ。
+\item 伝統的な形式論理学やベン図と比較したとき、キャロル流の解法が持つ直観的・機械的利点を説明せよ。
+\item この思考法が現代の情報科学（論理回路・二値論理）や確率論においてどのように活かされているか考察せよ。
+\end{enumerate}
+\end{examplebox}
+
+
+\chapter{赤と白のカウンター：存在と無を可視化するシンボル体系}
+\label{ch:3}
+
+\begin{historybox}{原著における位置づけ：Red and Grey Counters: The Visual Algebra of Existence and Non-Existence}
+本章はルイス・キャロル『論理の遊戯』（Project Gutenberg \#4763）の該当章および数理体系に直接基づき、
+四角いダイアグラムと赤・灰のカウンターによる論理のアルゴリズムを、現代の高校数学・情報科学の視点から完全に読み解くものである。
+\end{historybox}
+
+\#\# 第3章：赤と白のカウンター：存在と無を可視化するシンボル体系
+
+教育情報分析研究会　数学教育・統計分析リサーチユニット
+
+\section{1. キャロル・カウンターの色彩規則：「赤」と「灰」の物理的定義}
+
+正方形のボード（2属性ダイアグラム）が用意できたところで、キャロルはそこに配置する駒（カウンター）に厳密な数理的規則を与えました。
+
+原著冒頭に掲げられた詩の一節を思い出してみましょう：
+
+> *See the Sun is overhead,*
+
+> *Shining on us, FULL and RED!*
+
+> （見よ、太陽が頭上高く昇り、満ち足りて「赤」く輝いている！）
+
+> *Now the Sun is gone away,*
+
+> *And the EMPTY sky is GREY!*
+
+> （いまや太陽は去り、空っぽの虚空は「灰」色に暮れゆく！）
+
+キャロルはこの鮮やかな太陽のメタファーを通じて、カウンターの色の役割を定義しました：
+
+\begin{enumerate}\item 赤カウンター（Red Counter）＝「存在（FULL）」:\end{enumerate}
+
+\begin{itemize}\item そのセルに事物が「存在する」ことを意味します。\end{itemize}
+
+\begin{itemize}\item 数学的には、その部屋に属する要素の個数が少なくとも1個以上あること（$\text{Card}(S) \ge 1$、存在量化 $\exists x$）。\end{itemize}
+
+\begin{enumerate}\item 灰カウンター（Grey Counter）＝「空（EMPTY）」:\end{enumerate}
+
+\begin{itemize}\item そのセルに事物が「存在しない」ことを意味します。\end{itemize}
+
+\begin{itemize}\item 数学的には、その部屋が「空集合（Empty Set $\emptyset$）」であること（要素数 $= 0$）。\end{itemize}
+
+\begin{enumerate}\item 何も置かれていないセル（No Counter）＝「情報なし（UNKNOWN / 未定）」:\end{enumerate}
+
+\begin{itemize}\item その部屋に事物が存在するか空であるかについて、与えられた命題からは「何の情報も得られていない」状態を表します。\end{itemize}
+
+\section{2. 「空（0）」と「未定（Unknown）」の決定的差異：三値論理の先駆}
+
+形式論理学の歴史において、キャロルが成し遂げた最も偉大な革新のひとつが、この「空（Empty）」と「未定（Unknown）」の明確な区別です。
+
+日常会話や素朴な思考において、人間は「そこには何もない（空）」ことと「そこに何かがあるか分からない（未定）」ことを混同しがちです。例えば、「この部屋には虎はいない」と断定すること（灰カウンターを置くこと）と、「この部屋に虎がいるかどうか知らない」こと（何も置かないこと）は、論理的に天と地ほどの開きがあります。
+
+キャロルの盤上では：
+
+\begin{itemize}\item 灰カウンターを置くことは、「ここに事物が存在することは絶対にあり得ない」という積極的な排除の宣言です。\end{itemize}
+
+\begin{itemize}\item カウンターを置かないことは、「存在するかもしれないし、空かもしれないが、今は手元に判定材料がない」という知的謙虚さの保留です。\end{itemize}
+
+これは現代の情報科学において極めて重要な「三値論理（Ternary Logic：True, False, Unknown / Null）」の完全な先駆であり、データベースの欠損値（NULL）処理やAIの不確実性推論の基礎概念そのものです。
+
+\section{3. デジタル論理のビット（0と1）との完全な同型性}
+
+現代のスマートフォンやコンピュータは、すべての情報を「0」と「1」のビットの組み合わせとして処理しています。
+
+キャロルが考案したカウンターの操作は、まさにこのビット演算と完全に同型です：
+
+\begin{itemize}\item 灰カウンター $= 0$（電流が流れない、スイッチOFF、偽）\end{itemize}
+
+\begin{itemize}\item 赤カウンター $= 1$（電流が流れる、スイッチON、真）\end{itemize}
+
+もしあるセルに灰カウンター（0）が置かれたなら、その部屋の可能性は完全にシャットアウトされます。逆に赤カウンター（1）が置かれれば、その部屋には確かに実体が存在することが確定します。
+
+このように、キャロルの盤上では、抽象的な哲学的議論が「0と1の物理的トークンの配置」という客観的で機械的なアルゴリズムへと昇華されているのです。
+
+\section{4. 手を動かして実感する：高校数学の記号論理と具体的操作}
+
+高校数学Aの「集合と命題」では、以下のような記号が登場します：
+
+\begin{itemize}\item 空集合 $\emptyset$：要素を1つも持たない集合\end{itemize}
+
+\begin{itemize}\item 部分集合 $A \subset B$：$A$ のすべての要素が $B$ に属する\end{itemize}
+
+\begin{itemize}\item 補集合 $\overline{A}$：全体集合のうち $A$ に属さない要素の集合\end{itemize}
+
+教科書の紙面の上でこれらの記号を眺めているだけでは、記号の操作規則が単なる無味乾燥な数式に見えてしまうかもしれません。しかし、キャロル・ボードの上に実際に赤いコインと灰色のコインを置いてみると、その意味が一瞬で腑に落ちます：
+
+\begin{itemize}\item 「$A$ が空集合である」 $\iff$ 領域 $A$ に灰カウンターを置く。\end{itemize}
+
+\begin{itemize}\item 「$A$ に要素が存在する」 $\iff$ 領域 $A$ に赤カウンターを置く。\end{itemize}
+
+\begin{itemize}\item 「$A$ は $B$ の部分集合である」 $\iff$ $A$ の領域のうち $B$ の外側にある部分（$A \cap \overline{B}$）に灰カウンターを置く（$A$ であって $B$ でないものは存在しない）。\end{itemize}
+
+頭の中だけで抽象的な議論を空転させるのではなく、手を使って物理的な駒を配置し、視覚によって検証する――これこそがキャロルが目指した「論理の遊戯」の真髄なのです。
+
+\begin{figure}[htbp]
+\centering
+\begin{tikzpicture}[scale=0.9, >=stealth]
+    \draw[thick, fill=softblue, draw=primaryblue] (-5.8, -2.2) rectangle (5.8, 2.5);
+    \node[draw=primaryblue, fill=white, rounded corners, inner sep=5pt] at (0, 1.9) {\bfseries キャロル・カウンターの物理的記号体系};
+    
+    \node[draw=crimson, fill=softrose, circle, inner sep=6pt] (red) at (-3.5, 0.3) {\Large\bfseries 赤};
+    \node[align=center] at (-3.5, -1.0) {\textbf{存在（FULL）}\\\footnotesize その部屋に事物が「存在する」\\\footnotesize 要素数 $\ge 1$\\\footnotesize 現代の論理値：真 (1)};
+    
+    \node[draw=darkslate, fill=gray!30, circle, inner sep=6pt] (grey) at (0, 0.3) {\Large\bfseries 灰};
+    \node[align=center] at (0, -1.0) {\textbf{空（EMPTY）}\\\footnotesize その部屋に事物が「存在しない」\\\footnotesize 要素数 $= 0$（空集合 $\emptyset$）\\\footnotesize 現代の論理値：偽 (0)};
+    
+    \node[draw=darkslate, fill=white, dashed, circle, inner sep=6pt] (none) at (3.5, 0.3) {\Large\bfseries 空白};
+    \node[align=center] at (3.5, -1.0) {\textbf{未定（UNKNOWN）}\\\footnotesize 情報がない状態\\\footnotesize 存在するか空か不明\\\footnotesize 三値論理の不定値};
+    
+    \draw[<->, thick, warmamber] (red) -- (grey);
+\end{tikzpicture}
+\caption{赤カウンター（存在）と灰カウンター（空）および空白（情報なし）の3値構造}
+\label{fig:carroll_counters}
+\end{figure}
+
+\section*{本章のまとめと確認演習}
+\begin{examplebox}{キャロル論理学の理解度チェック}
+\textbf{【問】} 本章で学んだ概念について、以下の設問に答えよ。
+\begin{enumerate}[label=(\arabic*)]
+\item キャロルが考案したダイアグラムとカウンターのルールに従い、本章の主要な命題や推論を自分の手で図示せよ。
+\item 伝統的な形式論理学やベン図と比較したとき、キャロル流の解法が持つ直観的・機械的利点を説明せよ。
+\item この思考法が現代の情報科学（論理回路・二値論理）や確率論においてどのように活かされているか考察せよ。
+\end{enumerate}
+\end{examplebox}
+
+
+\chapter{3つの基本命題：Some, No, All をボード上に配置する}
+\label{ch:4}
+
+\begin{historybox}{原著における位置づけ：Three Fundamental Propositions: Some, No, and All on the Board}
+本章はルイス・キャロル『論理の遊戯』（Project Gutenberg \#4763）の該当章および数理体系に直接基づき、
+四角いダイアグラムと赤・灰のカウンターによる論理のアルゴリズムを、現代の高校数学・情報科学の視点から完全に読み解くものである。
+\end{historybox}
+
+\#\# 第4章：3つの基本命題：Some, No, All をボード上に配置する
+
+教育情報分析研究会　数学教育・統計分析リサーチユニット
+
+\section{1. キャロルが用いる3つの基本命題}
+
+『論理の遊戯』において、キャロルはあらゆる推論の構成要素として、次の3種類の命題（Propositions）のみを用います。
+
+日常言語の多様な表現も、すべてこの3つの基本形式に還元してボード上に表現します：
+
+\begin{enumerate}\item 命題 I（特称肯定命題）："Some new Cakes are nice."（いくつかの新しいケーキはおいしい）\end{enumerate}
+
+\begin{enumerate}\item 命題 E（全称否定命題）："No new Cakes are nice."（いかなる新しいケーキもおいしくない）\end{enumerate}
+
+\begin{enumerate}\item 命題 A（全称肯定命題）："All new Cakes are nice."（すべての新しいケーキはおいしい）\end{enumerate}
+
+それでは、これら3つの命題を Smaller Diagram（$x$：新しい、$y$：おいしい）の上にどのようにプロットするのか、その厳密なルールを見ていきましょう。
+
+\section{2. 命題 I（Some $x$ are $y$）：赤カウンターの配置}
+
+"Some new Cakes are nice."（いくつかの新しいケーキはおいしい）という命題を分析します。
+
+論理学において「いくつかの（Some）」という言葉は、「少なくとも1つ以上存在する（at least one）」を意味します。「全員ではない」という意味（日常会話のニュアンス）は含みません。
+
+したがって、この命題が主張している客観的事実は：
+
+「『新しくておいしいケーキ』という部屋（セル $xy$）に、少なくとも1つのケーキが存在する」
+
+ということです。
+
+【ボード上の配置規則】
+
+\begin{itemize}\item 北西のセル $xy$（上段かつ左列）の中に、赤カウンター（Red Counter）を1枚置く。\end{itemize}
+
+\begin{itemize}\item 他の3つのセル（$xy', x'y, x'y'$）には何も置かない（情報なし・未定）。\end{itemize}
+
+たったこれだけで、特称肯定命題の客観的意味が完全に表現されます。他のセルについて何も語られていない以上、カウンターを置かない（未定のままにしておく）ことが論理的に正確な態度です。
+
+\section{3. 命題 E（No $x$ are $y$）：灰カウンターの配置}
+
+次に、"No new Cakes are nice."（いかなる新しいケーキもおいしくない）という命題を分析します。
+
+この命題が主張している客観的事実は：
+
+「『新しくておいしいケーキ』という部屋（セル $xy$）には、1つのケーキも存在しない（空である）」
+
+ということです。
+
+【ボード上の配置規則】
+
+\begin{itemize}\item 北西のセル $xy$ の中に、灰カウンター（Grey Counter）を1枚置く。\end{itemize}
+
+\begin{itemize}\item 他の3つのセルには何も置かない。\end{itemize}
+
+赤カウンター（存在）と灰カウンター（空）の対比がここで鮮やかに現れます。同一の部屋 $xy$ に対して、赤が置かれれば命題 I、灰が置かれれば命題 E となり、両者は決して同時に成立し得ない「矛盾対当（Contradictory）」の関係にあることが盤上で直感的に確認できます。
+
+\section{4. 命題 A（All $x$ are $y$）：キャロル流の「二重配置」と存在前提}
+
+いよいよ、論理学史上のハイライトである全称肯定命題 "All new Cakes are nice."（すべての新しいケーキはおいしい）です。
+
+現代の数理論理学（記号論理学）では、この命題は条件文 $x \implies y$（$x$ ならば $y$ である）として定義され、「もし新しいケーキが存在するならば、それらはすべておいしい」という意味になります。したがって現代論理学では、もし世界に新しいケーキが1個も存在しない場合（$x$ が空集合の場合）でも、「すべての新しいケーキはおいしい」という命題は「真（Vacuously True）」とみなされます。
+
+しかし、ルイス・キャロルはこの解釈に真っ向から反対しました。日常言語を話す常識的な人間が「私のポケットの中のコインはすべて金貨だ」と自慢げに語ったとき、ポケットが空っぽだったら、それは嘘や詐欺ではないのか？ キャロルは日常の健全な言語直感を重視し、「All $x$ are $y$」という主張には、主語 $x$ が現実に存在するという前提（存在前提：Existential Import）が含まれると定義したのです。
+
+したがって、キャロルにおいて「All $x$ are $y$」は、次の2つの命題の同時成立（合体）を意味します：
+
+\begin{enumerate}\item 否定成分：新しくておいしくないケーキは存在しない（No x are y'）\end{enumerate}
+
+\begin{enumerate}\item 肯定成分：新しいケーキは実際に存在する（Some x are y）\end{enumerate}
+
+【ボード上の配置規則】
+
+\begin{itemize}\item 北東のセル $xy'$（新しいがおいしくない部屋）に、灰カウンター（Grey Counter）を置く。\end{itemize}
+
+\begin{itemize}\item 北西のセル $xy$（新しくておいしい部屋）に、赤カウンター（Red Counter）を置く。\end{itemize}
+
+上段（行 $x$）全体を見てください。右側が「灰（空）」で封鎖され、左側に「赤（存在）」が置かれています。これにより、「新しいケーキ（$x$）は確かに存在し、かつそのすべてがおいしい部屋（$y$）に押し込められている」という事実が、視覚的に完璧に表現されるのです。
+
+\section{5. 命題 O（Some $x$ are not $y$）と伝統的対当方形の視覚的解決}
+
+最後に、特称否定命題（命題 O）"Some new Cakes are not nice."（いくつかの新しいケーキはおいしくない）についても確認しておきましょう。
+
+これはセル $xy'$ に赤カウンターを置くことで表現されます。
+
+中世の論理学者たちは、A, E, I, O の4命題の間の関係（矛盾対当、反対対当、小反対対当、大小対当）を記憶するために「対当方形（Square of Opposition）」という複雑な図を暗記していました。
+
+しかし、キャロル・ボードを使えば、暗記など1ミリも必要ありません：
+
+\begin{itemize}\item セル $xy$ に注目：赤（I）と灰（E）は排他・矛盾。\end{itemize}
+
+\begin{itemize}\item セル $xy'$ に注目：赤（O）と灰（Allの否定成分）は排他・矛盾。\end{itemize}
+
+盤面上のコインの色を見るだけで、どの命題とどの命題が両立し、どの命題が両立しないのかが、誰の目にも一目瞭然となるのです。
+
+\begin{figure}[htbp]
+\centering
+\begin{tikzpicture}[scale=0.85, >=stealth]
+    % Prop 1: Some x are y
+    \begin{scope}[xshift=-5cm]
+        \draw[thick] (-1.5, -1.5) rectangle (1.5, 1.5);
+        \draw (-1.5, 0) -- (1.5, 0); \draw (0, -1.5) -- (0, 1.5);
+        \node[above] at (0, 1.5) {\footnotesize Some $x$ are $y$};
+        \node[fill=crimson, text=white, circle, inner sep=3pt] at (-0.75, 0.75) {赤};
+        \node[below] at (0, -1.6) {\footnotesize 特称肯定命題 (I)};
+    \end{scope}
+
+    % Prop 2: No x are y
+    \begin{scope}[xshift=0cm]
+        \draw[thick] (-1.5, -1.5) rectangle (1.5, 1.5);
+        \draw (-1.5, 0) -- (1.5, 0); \draw (0, -1.5) -- (0, 1.5);
+        \node[above] at (0, 1.5) {\footnotesize No $x$ are $y$};
+        \node[fill=gray!50, text=black, circle, inner sep=3pt] at (-0.75, 0.75) {灰};
+        \node[below] at (0, -1.6) {\footnotesize 全称否定命題 (E)};
+    \end{scope}
+
+    % Prop 3: All x are y
+    \begin{scope}[xshift=5cm]
+        \draw[thick] (-1.5, -1.5) rectangle (1.5, 1.5);
+        \draw (-1.5, 0) -- (1.5, 0); \draw (0, -1.5) -- (0, 1.5);
+        \node[above] at (0, 1.5) {\footnotesize All $x$ are $y$};
+        \node[fill=crimson, text=white, circle, inner sep=3pt] at (-0.75, 0.75) {赤};
+        \node[fill=gray!50, text=black, circle, inner sep=3pt] at (0.75, 0.75) {灰};
+        \node[below] at (0, -1.6) {\footnotesize 全称肯定命題 (A)（二重配置）};
+    \end{scope}
+\end{tikzpicture}
+\caption{3つの基本命題（Some, No, All）の Smaller Diagram 上のプロット形式}
+\label{fig:carroll_propositions}
+\end{figure}
+
+\section*{本章のまとめと確認演習}
+\begin{examplebox}{キャロル論理学の理解度チェック}
+\textbf{【問】} 本章で学んだ概念について、以下の設問に答えよ。
+\begin{enumerate}[label=(\arabic*)]
+\item キャロルが考案したダイアグラムとカウンターのルールに従い、本章の主要な命題や推論を自分の手で図示せよ。
+\item 伝統的な形式論理学やベン図と比較したとき、キャロル流の解法が持つ直観的・機械的利点を説明せよ。
+\item この思考法が現代の情報科学（論理回路・二値論理）や確率論においてどのように活かされているか考察せよ。
+\end{enumerate}
+\end{examplebox}
+
+
+\chapter{中項の導入と「3属性ダイアグラム」：8つの小部屋が織りなす思考空間}
+\label{ch:5}
+
+\begin{historybox}{原著における位置づけ：The Larger Diagram and Eight Compartments: Introducing the Middle Term}
+本章はルイス・キャロル『論理の遊戯』（Project Gutenberg \#4763）の該当章および数理体系に直接基づき、
+四角いダイアグラムと赤・灰のカウンターによる論理のアルゴリズムを、現代の高校数学・情報科学の視点から完全に読み解くものである。
+\end{historybox}
+
+\#\# 第5章：中項の導入と「3属性ダイアグラム」：8つの小部屋が織りなす思考空間
+
+教育情報分析研究会　数学教育・統計分析リサーチユニット
+
+\section{1. 三段論法の架け橋：中項（Middle Term, $m$）の登場}
+
+これまでの章では、2つの属性 $x$ と $y$ だけを扱う「Smaller Diagram」を見てきました。しかし、私たちが日常や学問において行う本格的な推論は、2つの属性だけで閉じることは滅多にありません。
+
+例えば、次の推論を考えてみましょう：
+
+\begin{itemize}\item 前提1：「すべてのケーキは甘い」\end{itemize}
+
+\begin{itemize}\item 前提2：「甘いものは虫歯の原因になる」\end{itemize}
+
+\begin{itemize}\item 結論：「ゆえに、すべてのケーキは虫歯の原因になる」\end{itemize}
+
+ここで、私たちが本当に知りたい最終的な関係は、「ケーキ（$x$）」と「虫歯の原因（$y$）」の結びつきです。しかし、前提1にも前提2にも直接その関係は書かれていません。両者を結びつけているのは、共通して登場する「甘いもの」という第3の媒介概念です。
+
+論理学において、2つの前提を仲介し、結論を導くための架け橋となるこの第3の属性のことを「中項（Middle Term）」と呼び、通常記号 $m$ で表します。中項 $m$ は推論の舞台装置であり、結論が導かれた暁には舞台から退場（消去）しなければなりません。
+
+\section{2. 「Larger Diagram」の幾何学的設計：内側と外側の二重正方形}
+
+3つの属性 $x, y, m$ を同時にボード上に配置するためには、空間をさらに細かく分割する必要があります。
+
+属性が2つのときは $2^2 = 4$ 個の小部屋でした。属性が3つになれば、$2^3 = 8$ 個の独立した小部屋が必要になります。
+
+キャロルはこの8分割空間を、どのようにして美しく幾何学的に表現したのでしょうか？
+
+彼は、Smaller Diagram（外側の正方形）の内側に、もうひとつの小さな同心の正方形を描き入れました！
+
+これがキャロルの「Larger Diagram（3属性ダイアグラム）」です：
+
+\begin{itemize}\item 上下の分割: 水平線によって上半分（$x$）と下半分（$x'$）に分ける。\end{itemize}
+
+\begin{itemize}\item 左右の分割: 垂直線によって左半分（$y$）と右半分（$y'$）に分ける。\end{itemize}
+
+\begin{itemize}\item 内外の分割:\end{itemize}
+
+\begin{itemize}\item 内側の正方形の内部: 属性 $m$ を持つ領域（中項 $m$ の世界）\end{itemize}
+
+\begin{itemize}\item 内側の正方形と外枠の間のドーナツ状の領域: 属性 $m'$ を持つ領域（中項の否定 $m'$ の世界）\end{itemize}
+
+上下（2通り）$\times$ 左右（2通り）$\times$ 内外（2通り）$= 2 \times 2 \times 2 = 8$ 通り。
+
+こうして、見事に対称的で整然とした8つの小部屋（Compartments）が誕生しました。
+
+\section{3. 8つの小部屋の住人たち}
+
+8分割された各セルの住所（論理的積）を正確に把握しましょう：
+
+\begin{enumerate}\item $xym$: 北西の内側（$x$ かつ $y$ かつ $m$：新しくて、おいしくて、甘いケーキ）\end{enumerate}
+
+\begin{enumerate}\item $xym'$: 北西の外側（$x$ かつ $y$ かつ $m'$：新しくて、おいしいが、甘くないケーキ）\end{enumerate}
+
+\begin{enumerate}\item $xy'm$: 北東の内側（$x$ かつ $y'$ かつ $m$：新しいが、おいしくなく、甘いケーキ）\end{enumerate}
+
+\begin{enumerate}\item $xy'm'$: 北東の外側（$x$ かつ $y'$ かつ $m'$：新しいが、おいしくなく、甘くもないケーキ）\end{enumerate}
+
+\begin{enumerate}\item $x'ym$: 南西の内側（$x'$ かつ $y$ かつ $m$：新しくないが、おいしくて、甘いケーキ）\end{enumerate}
+
+\begin{enumerate}\item $x'ym'$: 南西の外側（$x'$ かつ $y$ かつ $m'$：新しくないが、おいしく、甘くないケーキ）\end{enumerate}
+
+\begin{enumerate}\item $x'y'm$: 南東の内側（$x'$ かつ $y'$ かつ $m$：新しくなく、おいしくもなく、甘いケーキ）\end{enumerate}
+
+\begin{enumerate}\item $x'y'm'$: 南東の外側（$x'$ かつ $y'$ かつ $m'$：新しくなく、おいしくもなく、甘くもないケーキ）\end{enumerate}
+
+限定宇宙内のあらゆるケーキは、この8つの部屋のどこか唯一つの部屋に分類されます。
+
+\section{4. ヴェン図（3つの円）との比較：なぜキャロル図が優れているのか}
+
+高校数学では、3つの集合 $A, B, C$ を扱うとき、3つの円が重なり合ったベン図を描きます。
+
+しかし、実際に3つの円のベン図を描いて問題を解こうとしたことがある人なら、次のような困難を経験したことがあるはずです：
+
+\begin{itemize}\item 円弧が曲線であるため、特定の領域（例えば「$A$ と $C$ の共通部分だが $B$ ではない領域」など）の面積が極端に狭くなったり、歪んだりして見落としやすい。\end{itemize}
+
+\begin{itemize}\item 4つ以上の集合（4属性）に拡張しようとすると、通常の円ではすべての重なりを表現することが幾何学的に不可能になる（楕円や変形図形が必要になる）。\end{itemize}
+
+これに対して、キャロルの正方形グリッドは：
+
+\begin{enumerate}\item すべての境界線が直線（水平・垂直）で構成されている: 各領域の認識が明快で、視覚的な迷いが生じません。\end{enumerate}
+
+\begin{enumerate}\item 内外の階層構造: 内側の正方形（$m$）と外側の枠（$m'$）という直観的な階層関係により、第3の属性のオン／オフが一目で把握できます。\end{enumerate}
+
+\begin{enumerate}\item 高次元への拡張性: キャロルはのちに本書の発展として、正方形をさらに分割することで4属性（16部屋）、さらには5属性（32部屋）、8属性（256部屋）の論理図へと容易に拡張できることを示しました。\end{enumerate}
+
+キャロルの Larger Diagram は、単なる視覚的補助を超えた、きわめて高度な空間分割アルゴリズムだったのです。
+
+\begin{figure}[htbp]
+\centering
+\begin{tikzpicture}[scale=0.9, >=stealth]
+    % Outer Square
+    \draw[very thick, draw=darkslate] (-4, -4) rectangle (4, 4);
+    \node[above] at (0, 4.1) {\bfseries Larger Diagram（3属性ダイアグラム：8分割空間）};
+    
+    % Inner Square (m)
+    \draw[thick, draw=crimson, fill=softamber, opacity=0.4] (-2, -2) rectangle (2, 2);
+    
+    % Horizontal line
+    \draw[thick, draw=primaryblue] (-4, 0) -- (4, 0);
+    \node[left, primaryblue] at (-4.1, 2) {\Large $x$};
+    \node[left, primaryblue] at (-4.1, -2) {\Large $x'$};
+    
+    % Vertical line
+    \draw[thick, draw=warmamber] (0, -4) -- (0, 4);
+    \node[above, warmamber] at (-2, 4.1) {\Large $y$};
+    \node[above, warmamber] at (2, 4.1) {\Large $y'$};
+    
+    % Labels for 8 cells
+    \node at (-1, 1) {\footnotesize $xym$};
+    \node at (1, 1) {\footnotesize $xy'm$};
+    \node at (-1, -1) {\footnotesize $x'ym$};
+    \node at (1, -1) {\footnotesize $x'y'm$};
+    
+    \node at (-3, 3) {\footnotesize $xym'$};
+    \node at (3, 3) {\footnotesize $xy'm'$};
+    \node at (-3, -3) {\footnotesize $x'ym'$};
+    \node at (3, -3) {\footnotesize $x'y'm'$};
+    
+    \node[draw=crimson, fill=white, inner sep=2pt] at (0, 0) {\footnotesize 中項 $m$（内側）};
+    \node[draw=darkslate, fill=white, inner sep=2pt] at (0, 3.2) {\footnotesize 外枠 $m'$（外側）};
+\end{tikzpicture}
+\caption{中項 $m$ を含む3属性ダイアグラム（Larger Diagram）の8つの小部屋}
+\label{fig:carroll_larger_diagram}
+\end{figure}
+
+\section*{本章のまとめと確認演習}
+\begin{examplebox}{キャロル論理学の理解度チェック}
+\textbf{【問】} 本章で学んだ概念について、以下の設問に答えよ。
+\begin{enumerate}[label=(\arabic*)]
+\item キャロルが考案したダイアグラムとカウンターのルールに従い、本章の主要な命題や推論を自分の手で図示せよ。
+\item 伝統的な形式論理学やベン図と比較したとき、キャロル流の解法が持つ直観的・機械的利点を説明せよ。
+\item この思考法が現代の情報科学（論理回路・二値論理）や確率論においてどのように活かされているか考察せよ。
+\end{enumerate}
+\end{examplebox}
+
+
+\chapter{三段論法の完全解法（前編）：二つの前提をボードにプロットする技術}
+\label{ch:6}
+
+\begin{historybox}{原著における位置づけ：Plotting the Syllogism: Expressing Two Premises on the Larger Board}
+本章はルイス・キャロル『論理の遊戯』（Project Gutenberg \#4763）の該当章および数理体系に直接基づき、
+四角いダイアグラムと赤・灰のカウンターによる論理のアルゴリズムを、現代の高校数学・情報科学の視点から完全に読み解くものである。
+\end{historybox}
+
+\#\# 第6章：三段論法の完全解法（前編）：二つの前提をボードにプロットする技術
+
+教育情報分析研究会　数学教育・統計分析リサーチユニット
+
+\section{1. 三段論法の構造：二つの前提の分析}
+
+ここから、キャロルの『論理の遊戯』の核心である「三段論法（Syllogism）」の解法へと踏み込みます。
+
+三段論法は、2つの前提命題（Premises）から構成されます：
+
+\begin{itemize}\item 大前提（Premise 1）: 主語属性 $x$ と中項 $m$ の関係を述べる。\end{itemize}
+
+\begin{itemize}\item 小前提（Premise 2）: 述語属性 $y$ と中項 $m$ の関係を述べる。\end{itemize}
+
+目標は、この2つの前提から中項 $m$ を消去し、残された $x$ と $y$ の間の必然的関係（結論 Conclusion）を導き出すことです。
+
+そのための第一歩が、「与えられた2つの前提を、1枚の Larger Diagram の上に矛盾なくプロットする」という技術です。
+
+\section{2. キャロル最高の発明：「境界線上のカウンター（Sitting on the fence）」}
+
+前提をプロットする際、直ちに直面する重大な壁があります。
+
+例えば、大前提が "Some x are m"（いくつかの新しいケーキは甘い）であったとしましょう。
+
+Larger Diagram を見てください。上半分（$x$）かつ内側（$m$）の領域には、実は2つの小部屋が存在します：
+
+\begin{itemize}\item 左側の部屋 $xym$（おいしい）\end{itemize}
+
+\begin{itemize}\item 右側の部屋 $xy'm$（おいしくない）\end{itemize}
+
+大前提 "Some x are m" は、「新しくて甘いケーキが存在する」とだけ言っています。それらのケーキがおいしい（$y$）のか、おいしくない（$y'$）のかについては、この前提からは何の情報もありません！
+
+では、赤カウンター（存在）を左の $xym$ に置くべきでしょうか？ それとも右の $xy'm$ に置くべきでしょうか？ どちらか一方に勝手に置いてしまえば、前提にない情報を捏造（想像）することになってしまいます。
+
+この難問に対し、キャロルは天才的な解決策を編み出しました。
+
+「どちらの部屋か分からないなら、両方の部屋を隔てる境界線（fence：垣根）の真上に赤カウンターを跨がせて置け！」
+
+これが有名な「境界線上のカウンター（Sitting on the fence）」のルールです。
+
+境界線上に置かれた赤カウンターは、
+
+「左の部屋 $xym$ か、右の部屋 $xy'm$ の、少なくともどちらか一方（あるいは両方）に実体が存在する」
+
+という部分的な不確定情報を、幾何学的に完璧に表現しているのです。
+
+\section{3. 具体例で学ぶプロットの手順}
+
+キャロル原著の有名な例題を用いて、実際のプロットの流れを追ってみましょう：
+
+\begin{itemize}\item 大前提: "All new Cakes are nice."（すべての新しいケーキはおいしい $\implies$ $x$ と $y$）\end{itemize}
+
+\begin{itemize}\item 小前提: "No nice Cakes are wholesome."（いかなるおいしいケーキも健康的ではない $\implies$ $y$ と $m$）\end{itemize}
+
+（記号設定：$x$＝新しいケーキ、$y$＝おいしい、$m$＝健康的）
+
+\subsection{ステップ1：小前提（$y$ と $m$）のプロット}
+
+小前提 "No y are m"（いかなるおいしいケーキも健康的ではない）から始めます。
+
+これは「$y$ かつ $m$ である領域は空である」という全称否定命題です。
+
+Larger Diagram 上で、$y$（左半分）かつ $m$（内側）の領域を探します。そこには2つのセルがあります：
+
+\begin{itemize}\item 上段内側セル $xym$\end{itemize}
+
+\begin{itemize}\item 下段内側セル $x'ym$\end{itemize}
+
+この2つのセルはともに空（EMPTY）でなければなりません。したがって：
+
+セル $xym$ とセル $x'ym$ の双方に、灰カウンターを1枚ずつ置く（計2枚）。
+
+\subsection{ステップ2：大前提（$x$ と $y$）のプロット}
+
+次に、大前提 "All x are y"（すべての新しいケーキはおいしい）をプロットします。
+
+第4章で学んだ通り、これは次の2つの合成です：
+
+\begin{enumerate}\item 否定成分：No x are y'（新しくておいしくないものはない）\end{enumerate}
+
+\begin{itemize}\item $x$（上半分）かつ $y'$（右半分）の領域全体が空でなければなりません。\end{itemize}
+
+\begin{itemize}\item そこには内側セル $xy'm$ と外側セル $xy'm'$ の2つがあります。\end{itemize}
+
+\begin{itemize}\item したがって、セル $xy'm$ とセル $xy'm'$ の双方に灰カウンターを置く。\end{itemize}
+
+\begin{enumerate}\item 肯定成分：Some x are y（新しいケーキは実在する）\end{enumerate}
+
+\begin{itemize}\item $x$（上半分）かつ $y$（左半分）の領域に赤カウンターを置く必要があります。\end{itemize}
+
+\begin{itemize}\item ここには内側セル $xym$ と外側セル $xym'$ の2つがあります。\end{itemize}
+
+\begin{itemize}\item どちらに属するか確定していないため、本来なら両者を隔てる境界線（内側正方形の枠線）の上に赤カウンターを置きます。\end{itemize}
+
+\section{4. カウンターの押し出し（Dropping off the fence）：ダイナミックな推論}
+
+ここで、奇跡のような物理的連鎖が盤上で起こります！
+
+大前提によって境界線上に置かれようとした赤カウンターですが、よく見ると、内側のセル $xym$ には、ステップ1の小前提によってすでに「灰カウンター（空）」が置かれています！
+
+灰カウンターが置かれている部屋には、事物は絶対に存在できません。
+
+すると、境界線の上にいた赤カウンターはどうなるでしょうか？
+
+「内側の部屋が空（灰）で閉鎖されているのだから、赤カウンターは外側のセル $xym'$ の中へと滑り落ちる（押し出される）しかない！」
+
+2つの前提が盤上で出会うことによって、最初は不確定だった赤カウンターの位置が、空セルの圧力によって確定的なセル $xym'$ へと自動的に定まったのです。
+
+思考が機械的・力学的に進行するこの美しさこそ、キャロル論理学の醍醐味です。
+
+\begin{figure}[htbp]
+\centering
+\begin{tikzpicture}[scale=0.85, >=stealth]
+    \draw[thick] (-3, -3) rectangle (3, 3);
+    \draw[thick, crimson] (-1.5, -1.5) rectangle (1.5, 1.5);
+    \draw (-3, 0) -- (3, 0); \draw (0, -3) -- (0, 3);
+    
+    % Sitting on the fence counter
+    \node[fill=crimson, text=white, circle, inner sep=4pt] (fence) at (0, 0.75) {赤};
+    \draw[->, thick, primaryblue] (fence) -- (-0.8, 0.75) node[midway, above] {\footnotesize 灰により移動};
+    
+    \node[fill=gray!50, text=black, circle, inner sep=4pt] at (0.75, 0.75) {灰};
+    
+    \node[draw=darkslate, fill=white, rounded corners, align=center, inner sep=4pt] at (0, -3.8) {
+        \textbf{境界線上の赤カウンター（Sitting on the Fence）}\\
+        \footnotesize 前提1「Some $x$ are $m$」により境界上に置かれた赤コインは、\\
+        \footnotesize 前提2「No $m$ are $y'$」による灰コインの侵入で確定セル $xym$ へ押し出される
+    };
+\end{tikzpicture}
+\caption{境界線上のカウンター（Sitting on the fence）と前提統合のダイナミクス}
+\label{fig:carroll_sitting_fence}
+\end{figure}
+
+\section*{本章のまとめと確認演習}
+\begin{examplebox}{キャロル論理学の理解度チェック}
+\textbf{【問】} 本章で学んだ概念について、以下の設問に答えよ。
+\begin{enumerate}[label=(\arabic*)]
+\item キャロルが考案したダイアグラムとカウンターのルールに従い、本章の主要な命題や推論を自分の手で図示せよ。
+\item 伝統的な形式論理学やベン図と比較したとき、キャロル流の解法が持つ直観的・機械的利点を説明せよ。
+\item この思考法が現代の情報科学（論理回路・二値論理）や確率論においてどのように活かされているか考察せよ。
+\end{enumerate}
+\end{examplebox}
+
+
+\chapter{三段論法の完全解法（後編）：中項の消去と結論のトランスファー}
+\label{ch:7}
+
+\begin{historybox}{原著における位置づけ：Elimination of the Middle Term and Transfer of Conclusions}
+本章はルイス・キャロル『論理の遊戯』（Project Gutenberg \#4763）の該当章および数理体系に直接基づき、
+四角いダイアグラムと赤・灰のカウンターによる論理のアルゴリズムを、現代の高校数学・情報科学の視点から完全に読み解くものである。
+\end{historybox}
+
+\#\# 第7章：三段論法の完全解法（後編）：中項の消去と結論のトランスファー
+
+教育情報分析研究会　数学教育・統計分析リサーチユニット
+
+\section{1. 中項の消去（Elimination）：足場を取り払う}
+
+前章において、Larger Diagram（3属性盤）の上に2つの前提をすべてプロットし終えました。
+
+盤面の状態を整理すると：
+
+\begin{itemize}\item 北西内側 $xym$：灰（空）\end{itemize}
+
+\begin{itemize}\item 南西内側 $x'ym$：灰（空）\end{itemize}
+
+\begin{itemize}\item 北東内側 $xy'm$：灰（空）\end{itemize}
+
+\begin{itemize}\item 北東外側 $xy'm'$：灰（空）\end{itemize}
+
+\begin{itemize}\item 北西外側 $xym'$：赤（存在！）\end{itemize}
+
+ここで、三段論法の究極の目的を思い出してください。
+
+私たちの目的は、主語 $x$（新しいケーキ）と述語 $m$（健康的）の間の関係を導くことです（あるいは小前提の設定に応じて $x$ と $y$ の関係）。
+
+本問では、中項は $y$（おいしい）であり、大前提「すべての新しいケーキはおいしい」と小前提「おいしいケーキは健康的ではない」から、「新しいケーキ（$x$）」と「健康的（$m$）」の関係を導くことでした。
+
+中項 $y$ は、推論を媒介するための「足場」に過ぎません。建物が完成したら足場を解体するように、私たちは盤面から中項 $y$ の境界線（左右の区別）を取り払わなければなりません。これが「中項の消去（Elimination）」です。
+
+\section{2. 結論のトランスファー（Transfer）：Smaller Diagram への転写}
+
+中項を消去して残った情報（$x$ と $m$ の関係）を、最終的な結果表示盤である「Smaller Diagram（2属性盤）」へと移し替えます。この操作をキャロルは「トランスファー（Transfer：転写）」と呼びました。
+
+いま、Smaller Diagram の上下を $x, x'$（新しい／新しくない）、左右を $m, m'$（健康的／健康的でない）と再設定して、Larger Diagram から情報を転写してみましょう：
+
+\begin{enumerate}\item セル $xm$（新しくて健康的な部屋）への転写:\end{enumerate}
+
+\begin{itemize}\item Larger Diagram における $xm$ の領域は、左側の $xym$ と右側の $xy'm$ の和集合です。\end{itemize}
+
+\begin{itemize}\item 前章の結果を見ると、セル $xym$ は「灰（空）」、セル $xy'm$ も「灰（空）」です。\end{itemize}
+
+\begin{itemize}\item $0 + 0 = 0$ ですから、$xm$ の領域全体には事物が1つも存在しません！\end{itemize}
+
+\begin{itemize}\item したがって、Smaller Diagram のセル $xm$ に灰カウンターを1枚置く。\end{itemize}
+
+\begin{enumerate}\item セル $xm'$（新しくて健康的でない部屋）への転写:\end{enumerate}
+
+\begin{itemize}\item Larger Diagram における $xm'$ の領域は、左側の $xym'$ と右側の $xy'm'$ の和集合です。\end{itemize}
+
+\begin{itemize}\item セル $xy'm'$ は「灰（空）」ですが、セル $xym'$ には「赤カウンター（存在）」が確かに鎮座しています！\end{itemize}
+
+\begin{itemize}\item したがって、Smaller Diagram のセル $xm'$ に赤カウンターを1枚置く。\end{itemize}
+
+\section{3. 結論の読み解き：必然的真理の誕生}
+
+転写が完了した Smaller Diagram を眺めてみましょう：
+
+\begin{itemize}\item セル $xm$ に「灰カウンター」\end{itemize}
+
+\begin{itemize}\item セル $xm'$ に「赤カウンター」\end{itemize}
+
+第4章で学んだ基本命題のプロット規則を思い出してください。
+
+行 $x$（上段）において、$m$ が灰で封鎖され、$m'$ に赤が置かれています。
+
+これはまさに、全称肯定命題 A の形そのものではありませんか！
+
+読み解き：
+
+\begin{itemize}\item 否定命題として読めば："No new Cakes are wholesome."（いかなる新しいケーキも健康的ではない）\end{itemize}
+
+\begin{itemize}\item 肯定命題として読めば："All new Cakes are unwholesome."（すべての新しいケーキは不健康である）\end{itemize}
+
+前提1「すべての新しいケーキはおいしい」と前提2「おいしいケーキは健康的ではない」から、寸分の狂いもなく、必然的な結論「いかなる新しいケーキも健康的ではない」が導かれました！
+
+\section{4. アリストテレス全19格の機械的解消：中世の暗記呪文の終焉}
+
+中世ヨーロッパの大学では、学生たちは三段論法の妥当な形式を覚えるために、次のようなラテン語の暗記詩を何百回も唱えさせられていました：
+
+> *Barbara, Celarent, Darii, Ferioque prioris;*
+
+> *Cesare, Camestres, Festino, Baroco secundae;*
+
+> *Tertia Darapti, Disamis, Datisi, Felapton, Bocardo, Ferison habet;*
+
+> *Quarta insuper addit Bramantip, Camenes, Dimaris, Fesapo, Fresison.*
+
+この詩の母音（A, E, I, O）が命題の組み合わせを表し、頭文字が変形規則を表すという、極めて難解な暗記体系でした。
+
+しかし、ルイス・キャロルのゲーム盤の前に立てば、このような暗記はすべて過去の遺物となります。
+
+第1格であろうと、第2格であろうと、第3格であろうと、第4格であろうと、やるべきことは常に同一のアルゴリズムです：
+
+\begin{enumerate}\item 前提1を Larger Diagram にプロットする（必要なら境界線に置く）。\end{enumerate}
+
+\begin{enumerate}\item 前提2を Larger Diagram にプロットする（灰カウンターで赤を押し出す）。\end{enumerate}
+
+\begin{enumerate}\item 中項を無視して、残ったコインを Smaller Diagram に転写する。\end{enumerate}
+
+\begin{enumerate}\item 転写された盤面から結論を日本語に直す。\end{enumerate}
+
+例外もなければ、特別な暗記規則もありません。純粋な幾何学的・機械的手続きに従うだけで、人類のあらゆる正しい推論が自動的に導き出されるのです。これこそ、ドジソンがヴィクトリア朝の教育界に叩きつけた「論理の民主化」の勝利でした。
+
+\begin{figure}[htbp]
+\centering
+\begin{tikzpicture}[scale=0.85, >=stealth]
+    % Larger Diagram with m
+    \begin{scope}[xshift=-3.8cm]
+        \draw[thick] (-2, -2) rectangle (2, 2);
+        \draw[thick, crimson] (-1, -1) rectangle (1, 1);
+        \draw (-2, 0) -- (2, 0); \draw (0, -2) -- (0, 2);
+        \node[above] at (0, 2.1) {\bfseries Larger Diagram ($x, y, m$)};
+        \node[fill=crimson, text=white, circle, inner sep=3pt] at (-0.5, 0.5) {赤};
+        \node[fill=gray!50, text=black, circle, inner sep=3pt] at (0.5, 0.5) {灰};
+        \node[fill=gray!50, text=black, circle, inner sep=3pt] at (1.5, 1.5) {灰};
+        \node[below] at (0, -2.2) {\footnotesize 両前提の合成完了};
+    \end{scope}
+
+    % Transfer arrow
+    \draw[->, very thick, warmamber] (-1.2, 0) -- (1.2, 0) node[midway, above] {\bfseries 中項 $m$ の消去} node[midway, below] {\footnotesize 結論のトランスファー};
+
+    % Smaller Diagram
+    \begin{scope}[xshift=3.8cm]
+        \draw[thick] (-1.8, -1.8) rectangle (1.8, 1.8);
+        \draw (-1.8, 0) -- (1.8, 0); \draw (0, -1.8) -- (0, 1.8);
+        \node[above] at (0, 1.9) {\bfseries Smaller Diagram ($x, y$)};
+        \node[fill=crimson, text=white, circle, inner sep=3pt] at (-0.9, 0.9) {赤};
+        \node[fill=gray!50, text=black, circle, inner sep=3pt] at (0.9, 0.9) {灰};
+        \node[below] at (0, -2.0) {\footnotesize 結論：「All $x$ are $y$」};
+    \end{scope}
+\end{tikzpicture}
+\caption{3属性ボードから2属性ボードへの「中項消去と結論転写（Transfer）」の全貌}
+\label{fig:carroll_elimination_transfer}
+\end{figure}
+
+\section*{本章のまとめと確認演習}
+\begin{examplebox}{キャロル論理学の理解度チェック}
+\textbf{【問】} 本章で学んだ概念について、以下の設問に答えよ。
+\begin{enumerate}[label=(\arabic*)]
+\item キャロルが考案したダイアグラムとカウンターのルールに従い、本章の主要な命題や推論を自分の手で図示せよ。
+\item 伝統的な形式論理学やベン図と比較したとき、キャロル流の解法が持つ直観的・機械的利点を説明せよ。
+\item この思考法が現代の情報科学（論理回路・二値論理）や確率論においてどのように活かされているか考察せよ。
+\end{enumerate}
+\end{examplebox}
+
+
+\chapter{論理の落とし穴：キャロル・ボードが暴く「形式的誤謬」}
+\label{ch:8}
+
+\begin{historybox}{原著における位置づけ：Fallacies Unmasked: The Fallacy of Undistributed Middle and Beyond}
+本章はルイス・キャロル『論理の遊戯』（Project Gutenberg \#4763）の該当章および数理体系に直接基づき、
+四角いダイアグラムと赤・灰のカウンターによる論理のアルゴリズムを、現代の高校数学・情報科学の視点から完全に読み解くものである。
+\end{historybox}
+
+\#\# 第8章：論理の落とし穴：キャロル・ボードが暴く「形式的誤謬」
+
+教育情報分析研究会　数学教育・統計分析リサーチユニット
+
+\section{1. 誤謬（Fallacies）とは何か？}
+
+正しい前提から正しくない結論を導いてしまう誤った推論のことを、論理学では「誤謬（Fallacy：誤謬／詭弁）」と呼びます。
+
+日常会話、政治家の演説、SNSの議論、あるいは悪質な広告などにおいて、人間はしばしば「一見すると筋が通っているように見えるが、実は論理的に完全に破綻している推論」に騙されてしまいます。
+
+アリストテレス以来の論理学では、誤謬のパターンに様々な名前をつけて分類してきましたが、言葉による説明だけでは「なぜそれが間違いなのか」を直感的に納得することは容易ではありませんでした。
+
+しかし、キャロル・ボードを使えば、誤謬は「盤面上のカウンターの配置エラー」として、誰の目にも一瞬で明白な形で可視化されます。
+
+\section{2. 最も頻出する罠：「中項不周延の誤謬（Undistributed Middle）」}
+
+形式論理学において最も有名で、かつ日常でも最も頻繁に犯される誤謬が「中項不周延の誤謬（Fallacy of Undistributed Middle）」です。
+
+具体例を見てみましょう：
+
+\begin{itemize}\item 前提1：「すべての犬は動物である」（All $x$ are $m$）\end{itemize}
+
+\begin{itemize}\item 前提2：「すべての猫は動物である」（All $y$ are $m$）\end{itemize}
+
+\begin{itemize}\item 誤った結論：「ゆえに、すべての犬は猫である」（All $x$ are $y$ ？？）\end{itemize}
+
+誰もが「そんな馬鹿な結論があるか」と笑うでしょう。しかし、形式的に見ると、なぜこの推論は破綻しているのでしょうか？
+
+キャロルの Larger Diagram の上で実際にプロットしてみましょう：
+
+\begin{enumerate}\item 前提1（All $x$ are $m$）のプロット:\end{enumerate}
+
+\begin{itemize}\item $x$ であって $m'$（外側）のセル $xym'$ と $xy'm'$ に灰カウンターを置く。\end{itemize}
+
+\begin{itemize}\item $x$ かつ $m$（内側）の領域に赤カウンターを置くが、それが $y$ か $y'$ か不明なため、境界線（fence）の上に赤カウンターを置く。\end{itemize}
+
+\begin{enumerate}\item 前提2（All $y$ are $m$）のプロット:\end{enumerate}
+
+\begin{itemize}\item $y$ であって $m'$（外側）のセル $xym'$ と $x'ym'$ に灰カウンターを置く。\end{itemize}
+
+\begin{itemize}\item $y$ かつ $m$（内側）の領域に赤カウンターを置くが、それが $x$ か $x'$ か不明なため、境界線の上に赤カウンターを置く。\end{itemize}
+
+さあ、盤面を見てください！
+
+内側正方形（$m$）の領域において、赤カウンターは境界線（fence）の上に跨がったまま、どちらの小部屋にも落ちていません！
+
+なぜなら、どのセルにも相手を押し出すための「灰カウンター」が入っていないからです。
+
+この状態で、中項 $m$ を消去して Smaller Diagram（$x$ と $y$ の関係）に転写しようとしても：
+
+「赤カウンターが境界線の上に跨がったままであるため、$xy$（犬かつ猫）にあるのか、$xy'$（犬だが猫ではない）にあるのか、決定することが原理的に不可能である！」
+
+Smaller Diagram に転写できる確定的情報が何ひとつ残らない――これが「推論不能（No Conclusion）」の幾何学的証明です。
+
+中項である「動物（$m$）」という概念が、犬の側でも猫の側でも「全体（周延）」として捉えられておらず、単に「動物という広い世界の一部」として言及されているに過ぎないため、犬と猫の間にいかなる架け橋も架けることができなかったのです。
+
+\section{3. 両前提否定の誤謬（Fallacy of Negative Premises）}
+
+もうひとつの代表的な誤謬は、2つの前提がともに否定命題（No...）であるケースです：
+
+\begin{itemize}\item 前提1：「いかなる魚も哺乳類ではない」（No $x$ are $m$）\end{itemize}
+
+\begin{itemize}\item 前提2：「いかなる爬虫類も哺乳類ではない」（No $y$ are $m$）\end{itemize}
+
+\begin{itemize}\item 誤った推論：「ゆえに、魚と爬虫類には何らかの関係がある？？」\end{itemize}
+
+Larger Diagram 上でプロットしてみると：
+
+\begin{itemize}\item 前提1により、$x$ かつ $m$（内側）の部屋が灰で閉鎖される。\end{itemize}
+
+\begin{itemize}\item 前提2により、$y$ かつ $m$（内側）の部屋が灰で閉鎖される。\end{itemize}
+
+内側正方形（$m$）全体が灰色のカウンターで完全に埋め尽くされ、中項 $m$ を通じた情報の行き来が物理的に完全に遮断されてしまいます。外側の領域（$m'$）には赤カウンターの手がかりが一切ないため、やはり Smaller Diagram に転写できる結論はゼロです。
+
+「2つのものが共通して何かではない」という情報からは、その2つのものの間に肯定的であれ否定的であれ、いかなる必然的関係も導くことはできないのです。
+
+\section{4. 現代社会を生き抜くための批判的思考力（Critical Thinking）}
+
+高校生の皆さんがこれから大学や社会に出ていくとき、メディアやインターネット上には、巧妙に論理をすり替えた誤謬や詭弁が溢れています：
+
+\begin{itemize}\item 「あの政党の支持者は減税を主張している。テロリストも政府への不満を主張している。したがって、あの政党はテロリストの仲間だ」（中項不周延の誤謬）\end{itemize}
+
+\begin{itemize}\item 「この薬を飲まなかった人は治らなかった。私もこの薬を飲まなかった。したがって私は治らない」（前件否定の誤謬）\end{itemize}
+
+キャロル・ボードの思考法を身につけた人は、このような怪しい議論に出会ったとき、心の中に即座に「正方形の盤面」を展開することができます。
+
+「待てよ、中項の境界線上にカウンターが取り残されていないか？」「その部屋は本当に灰カウンターで封鎖されているのか？」
+
+感情や言葉の勢いに流されず、推論の骨格を冷静にボード上にマッピングして検証する力――それこそが、ルイス・キャロルが『論理の遊戯』を通じて次代を担う若者たちに授けたかった、最大の知的防壁なのです。
+
+\begin{figure}[htbp]
+\centering
+\begin{tikzpicture}[scale=0.85, >=stealth]
+    \draw[thick, fill=softrose, draw=crimson] (-5.5, -2) rectangle (5.5, 2.5);
+    \node[draw=crimson, fill=white, rounded corners, inner sep=5pt] at (0, 1.8) {\bfseries 中項不周延の誤謬（Fallacy of Undistributed Middle）の可視化};
+    
+    \node[draw=darkslate, fill=white, rectangle, align=center, inner sep=4pt] (p1) at (-3.2, 0.2) {\textbf{前提1：犬は動物}\\\footnotesize Some/All $x$ are $m$\\\footnotesize $m$ の一部に属する};
+    \node[draw=darkslate, fill=white, rectangle, align=center, inner sep=4pt] (p2) at (3.2, 0.2) {\textbf{前提2：猫は動物}\\\footnotesize Some/All $y$ are $m$\\\footnotesize $m$ の一部に属する};
+    
+    \node[draw=crimson, fill=white, rounded corners, inner sep=5pt] (err) at (0, -1.0) {\textbf{中項 $m$ が全体（周延）をカバーしない}};
+    
+    \draw[->, thick, warmamber] (p1) -- (err);
+    \draw[->, thick, warmamber] (p2) -- (err);
+    
+    \node[draw=darkslate, fill=white, inner sep=3pt] at (0, -1.7) {\footnotesize ボード上：赤カウンターが境界線から動けず、結論ボードに転写不能（推論破綻）};
+\end{tikzpicture}
+\caption{キャロル・ボードが視覚的に暴く中項不周延の誤謬の幾何学的証明}
+\label{fig:carroll_fallacy_middle}
+\end{figure}
+
+\section*{本章のまとめと確認演習}
+\begin{examplebox}{キャロル論理学の理解度チェック}
+\textbf{【問】} 本章で学んだ概念について、以下の設問に答えよ。
+\begin{enumerate}[label=(\arabic*)]
+\item キャロルが考案したダイアグラムとカウンターのルールに従い、本章の主要な命題や推論を自分の手で図示せよ。
+\item 伝統的な形式論理学やベン図と比較したとき、キャロル流の解法が持つ直観的・機械的利点を説明せよ。
+\item この思考法が現代の情報科学（論理回路・二値論理）や確率論においてどのように活かされているか考察せよ。
+\end{enumerate}
+\end{examplebox}
+
+
+\chapter{キャロル図からカルノー図へ：現代デジタル回路と情報科学への直結}
+\label{ch:9}
+
+\begin{historybox}{原著における位置づけ：From Carroll Diagrams to Karnaugh Maps and Modern Digital Logic}
+本章はルイス・キャロル『論理の遊戯』（Project Gutenberg \#4763）の該当章および数理体系に直接基づき、
+四角いダイアグラムと赤・灰のカウンターによる論理のアルゴリズムを、現代の高校数学・情報科学の視点から完全に読み解くものである。
+\end{historybox}
+
+\#\# 第9章：キャロル図からカルノー図へ：現代デジタル回路と情報科学への直結
+
+教育情報分析研究会　数学教育・統計分析リサーチユニット
+
+\section{1. 67年の時を超えた再発見：モーリス・カルノーと論理回路}
+
+1886年にルイス・キャロルが『論理の遊戯』を出版してから67年後の1953年、アメリカ・ベル研究所の電気工学者モーリス・カルノー（Maurice Karnaugh, 1924--2022）は、電気通信学会の論文誌に一本の画期的な論文を発表しました。その題名は『The Map Method for Synthesis of Combinational Logic Circuits（組み合わせ論理回路の合成のためのマップ法）』というものでした。
+
+当時、ベル研究所では電話の自動交換機や初期の電子計算機の開発が急速に進んでおり、何千個ものリレーや真空管を組み合わせて論理回路を設計していました。しかし、回路が複雑になるにつれて、ブール代数の数式を手計算で簡略化することが極めて困難になり、無駄なスイッチや配線が増えて故障や遅延の原因となっていました。
+
+カルノーが提案した手法は、驚くべきことに、かつてルイス・キャロルがオックスフォードで子どもたちのために考案した正方形ダイアグラムと、数学的・幾何学的に完全に同一の構造を持っていたのです！
+
+今日、世界中の大学の情報工学部や高校の「情報I」の発展授業で教えられている「カルノー図（Karnaugh Map）」は、キャロル図が現代デジタルテクノロジーの心臓部として蘇った姿に他なりません。
+
+\section{2. カルノー図の幾何学：隣接性とグレイコード}
+
+カルノー図の最大の特徴は、「隣り合うセル同士は、入力変数が1ビット（1つの属性）だけ異なるように配置されている」という点です。
+
+キャロル図をもう一度見てみましょう：
+
+\begin{itemize}\item 上段（$x$）から下段（$x'$）へ移動すると、属性 $x$ だけが反転する。\end{itemize}
+
+\begin{itemize}\item 左列（$y$）から右列（$y'$）へ移動すると、属性 $y$ だけが反転する。\end{itemize}
+
+この配置は、現代の情報理論において「グレイコード（Gray Code：交番2進符号）」と呼ばれる符号系列と完全に一致しています。
+
+カルノーはこの幾何学的隣接性を利用して、ブール代数の基本定理：
+
+$$A \cdot B + A \cdot \overline{B} = A \cdot (B + \overline{B}) = A \cdot 1 = A$$
+
+（$B$ であっても $B$ でなくても $A$ であるなら、変数 $B$ は無関係であり消去できる）
+
+という論理圧縮を、「盤面上で隣り合う2つのセルを長方形で囲む（ループを作る）」という視覚的操作に完全に置き換えたのです。
+
+\section{3. キャロル図による論理式の最小化アルゴリズム}
+
+具体的に見てみましょう。あるコンピュータの入力信号 $x, y$ に対し、出力 $f(x, y)$ が次のように与えられているとします：
+
+\begin{itemize}\item $xy$（新しくておいしい）のとき：出力 1（動作する）\end{itemize}
+
+\begin{itemize}\item $xy'$（新しいがおいしくない）のとき：出力 1（動作する）\end{itemize}
+
+\begin{itemize}\item $x'y$（新しくないがおいしい）のとき：出力 0（停止）\end{itemize}
+
+\begin{itemize}\item $x'y'$（新しくなくおいしくもない）のとき：出力 0（停止）\end{itemize}
+
+これを素朴に回路にすると、「($x$ AND $y$) OR ($x$ AND NOT $y$)」という複雑な論理ゲートが必要になります。
+
+しかし、キャロル・ボード（カルノー図）の上にプロットすると：
+
+\begin{itemize}\item 北西セル $xy$ に「1（赤）」\end{itemize}
+
+\begin{itemize}\item 北東セル $xy'$ に「1（赤）」\end{itemize}
+
+この隣り合う2つのセルを横長の長方形で一括りに囲むと、属性 $y$（左と右）の境界を完全に跨いでいることが分かります。
+
+つまり、「$y$ が真であろうと偽であろうと、行 $x$（上段全体）でありさえすれば常に出力は 1 である」という事実が視覚的に一瞬で判明します。
+
+したがって、回路は単純に：
+
+$$f(x, y) = x$$
+
+（単に信号 $x$ をそのまま通すだけ）にまで最小化できるのです！
+
+\section{4. 論理ゲートからCPUへ：キャロル図が動かす現代文明}
+
+高校「情報I」で学ぶ基本論理回路は、すべてキャロル図の上で定義できます：
+
+\begin{itemize}\item AND回路（論理積）: セル $xy$ のみが 1 の状態。\end{itemize}
+
+\begin{itemize}\item OR回路（論理和）: セル $xy, xy', x'y$ の3部屋が 1 の状態（$x'y'$ のみが 0）。\end{itemize}
+
+\begin{itemize}\item NOT回路（論理否定）: 行や列を反転させる操作。\end{itemize}
+
+\begin{itemize}\item XOR回路（排他的論理和）: 市松模様に対角線の2部屋（$xy'$ と $x'y$）だけが 1 の状態。\end{itemize}
+
+さらに、コンピュータが足し算を行うための基本単位である「半加算器（Half Adder）」は、2つの入力ビット $A, B$ から、和（Sum $= A \text{ XOR } B$）と桁上がり（Carry $= A \text{ AND } B$）を出力しますが、これもキャロル図の上にプロットすれば、加算という算術演算が論理空間の幾何学的分割から自然に湧き出すことが理解できます。
+
+ルイス・キャロルが描いた四角いゲーム盤は、決して古びた紙の上のパズルではありません。いま皆さんが手に持っているスマートフォンのCPUの中で、1秒間に何十億回と点滅しているトランジスタのスイッチング動作そのものなのです。
+
+\begin{figure}[htbp]
+\centering
+\begin{tikzpicture}[scale=0.85, >=stealth]
+    % Carroll Diagram (1886)
+    \begin{scope}[xshift=-3.5cm]
+        \draw[thick] (-1.8, -1.8) rectangle (1.8, 1.8);
+        \draw (-1.8, 0) -- (1.8, 0); \draw (0, -1.8) -- (0, 1.8);
+        \node[above] at (0, 1.9) {\textbf{キャロル図 (1886)}};
+        \node at (-0.9, 0.9) {$xy$}; \node at (0.9, 0.9) {$xy'$};
+        \node at (-0.9, -0.9) {$x'y$}; \node at (0.9, -0.9) {$x'y'$};
+        \node[below] at (0, -2.0) {\footnotesize 集合・命題の空間分割};
+    \end{scope}
+
+    % Arrow
+    \draw[->, very thick, primaryblue] (-1.0, 0) -- (1.0, 0) node[midway, above] {\footnotesize 67年の時を経て} node[midway, below] {\footnotesize ベル研究所};
+
+    % Karnaugh Map (1953)
+    \begin{scope}[xshift=3.5cm]
+        \draw[thick] (-1.8, -1.8) rectangle (1.8, 1.8);
+        \draw (-1.8, 0) -- (1.8, 0); \draw (0, -1.8) -- (0, 1.8);
+        \node[above] at (0, 1.9) {\textbf{カルノー図 (1953)}};
+        \node at (-0.9, 0.9) {\bfseries 1}; \node at (0.9, 0.9) {\bfseries 1};
+        \node at (-0.9, -0.9) {\bfseries 0}; \node at (0.9, -0.9) {\bfseries 0};
+        \draw[rounded corners, crimson, thick] (-1.6, 0.3) rectangle (1.6, 1.5);
+        \node[below] at (0, -2.0) {\footnotesize 論理式の簡略化：$f = x$};
+    \end{scope}
+\end{tikzpicture}
+\caption{キャロルの論理図からモーリス・カルノーのカルノー図（Karnaugh Map）への継承}
+\label{fig:carroll_karnaugh}
+\end{figure}
+
+\section*{本章のまとめと確認演習}
+\begin{examplebox}{キャロル論理学の理解度チェック}
+\textbf{【問】} 本章で学んだ概念について、以下の設問に答えよ。
+\begin{enumerate}[label=(\arabic*)]
+\item キャロルが考案したダイアグラムとカウンターのルールに従い、本章の主要な命題や推論を自分の手で図示せよ。
+\item 伝統的な形式論理学やベン図と比較したとき、キャロル流の解法が持つ直観的・機械的利点を説明せよ。
+\item この思考法が現代の情報科学（論理回路・二値論理）や確率論においてどのように活かされているか考察せよ。
+\end{enumerate}
+\end{examplebox}
+
+
+\chapter{論理から確率へ：キャロル・ボードで解く条件付き確率とベイズの定理}
+\label{ch:10}
+
+\begin{historybox}{原著における位置づけ：From Logic to Probability: Conditional Probability and Bayes Theorem on the Board}
+本章はルイス・キャロル『論理の遊戯』（Project Gutenberg \#4763）の該当章および数理体系に直接基づき、
+四角いダイアグラムと赤・灰のカウンターによる論理のアルゴリズムを、現代の高校数学・情報科学の視点から完全に読み解くものである。
+\end{historybox}
+
+\#\# 第10章：論理から確率へ：キャロル・ボードで解く条件付き確率とベイズの定理
+
+教育情報分析研究会　数学教育・統計分析リサーチユニット
+
+\section{1. 論理空間から確率空間への幾何学的飛躍}
+
+ルイス・キャロルの論理図は、真偽（0と1）を扱う記号論理学にとどまらず、高校数学A・B・Cの中核である「確率論および統計的推測」を直感的にマスターするための最強のツールでもあります。
+
+これまで、キャロル・ボードの外枠は「議論の対象となる事物の全体（限定宇宙）」を表していました。
+
+いま、このボード全体の面積を 「全確率 $P(S) = 1$（$100\%$）」 と定めてみましょう。
+
+すると、盤面を構成する4つのセル（$xy, xy', x'y, x'y'$）の面積は、それぞれの事象が同時に発生する「結合確率（Joint Probability）」を表すことになります：
+
+\begin{itemize}\item セル $xy$ の面積 $= P(X \cap Y)$\end{itemize}
+
+\begin{itemize}\item セル $xy'$ の面積 $= P(X \cap Y^c)$\end{itemize}
+
+\begin{itemize}\item セル $x'y$ の面積 $= P(X^c \cap Y)$\end{itemize}
+
+\begin{itemize}\item セル $x'y'$ の面積 $= P(X^c \cap Y^c)$\end{itemize}
+
+事象 $X$ の確率 $P(X)$ は上段全体の面積であり、事象 $Y$ の確率 $P(Y)$ は左列全体の面積です。4つのセルの面積の総和は、必ず $1$（盤面全体）になります。
+
+\section{2. 条件付き確率の幾何学的定義：部分領域への「ズームイン」}
+
+高校数学Aにおいて、多くの高校生がつまずきやすい難所のひとつが「条件付き確率（Conditional Probability）」の公式です：
+
+$$P(Y|X) = \frac{P(X \cap Y)}{P(X)}$$
+
+教科書に書かれたこの数式を丸暗記しようとすると、「なぜ分母が $P(X)$ になるのか？」「どちらが条件でどちらが求めたい確率なのか？」と混乱してしまいがちです。
+
+しかし、キャロル・ボードを使えば、条件付き確率は「舞台（分母）のズームインと面積比」として一瞬で理解できます！
+
+\begin{itemize}\item 「事象 $X$ が起こったという条件の下で（given $X$）」とはどういうことか？\end{itemize}
+
+$\implies$ 「下段（$X^c$）をすべて捨て去り、上段（行 $X$）だけを新しい宇宙として虫眼鏡でズームインする」 ということです！
+
+\begin{itemize}\item その新しい宇宙（上段全体：面積 $P(X)$）の中で、事象 $Y$ を満たす部分（セル $xy$：面積 $P(X \cap Y)$）はどれだけの割合を占めているか？\end{itemize}
+
+$\implies$ それこそが面積比 $\frac{P(X \cap Y)}{P(X)}$ そのものです！
+
+公式を覚える必要など全くありません。キャロルのボード上で「条件となった行（または列）にカメラを近づけ、その中での小部屋の面積比を測る」――ただそれだけで、条件付き確率の幾何学的本質が完全に手に入ります。
+
+\section{3. ベイズの定理（逆確率）と感染症検査のパラドックス}
+
+このキャロル・ボードによる確率解法が最も劇的な威力を発揮するのが、現代AIや医療統計の要である「ベイズの定理（Bayes' Theorem）」です。
+
+有名な「感染症検査のパラドックス」を解いてみましょう：
+
+\begin{itemize}\item ある新興感染症の罹患率は人口の $1\%$（$100$ 人に $1$ 人）である。\end{itemize}
+
+\begin{itemize}\item この検査キットは、感染者を $95\%$ の精度で「陽性」と判定する（感度 $95\%$）。\end{itemize}
+
+\begin{itemize}\item また、非感染者を $90\%$ の精度で正しく「陰性」と判定する（特異度 $90\%$、偽陽性率 $10\%$）。\end{itemize}
+
+\begin{itemize}\item 【問題】 ある人が検査を受けて「陽性」と出た。この人が本当に感染している確率は何パーセントか？\end{itemize}
+
+直感的には「精度95\%の検査で陽性が出たのだから、90\%以上の確率で感染しているだろう」と思いがちです。しかし、これが人間の直感の罠です。
+
+キャロル・ボード（縦横 $100 \times 100 = 10,000$ 人の正方形）を描いて、実際に人数をプロットしてみましょう！
+
+\subsection{キャロル・ボードによる4分割プロット}
+
+\begin{enumerate}\item 行の分割（真の罹患 $X$ と非罹患 $X^c$）:\end{enumerate}
+
+\begin{itemize}\item 上段（感染者 $X$）：$10,000 \times 0.01 = 100$ 人\end{itemize}
+
+\begin{itemize}\item 下段（非感染者 $X^c$）：$10,000 \times 0.99 = 9,900$ 人\end{itemize}
+
+\begin{enumerate}\item 列の分割（検査陽性 $Y$ と検査陰性 $Y^c$）:\end{enumerate}
+
+\begin{itemize}\item 北西セル $xy$（感染していて正しく陽性）: $100 \times 0.95 = 95$ 人\end{itemize}
+
+\begin{itemize}\item 北東セル $xy'$（感染しているが見逃し陰性）: $100 \times 0.05 = 5$ 人\end{itemize}
+
+\begin{itemize}\item 南西セル $x'y$（非感染者なのに誤って陽性＝偽陽性）: $9,900 \times 0.10 = 990$ 人！\end{itemize}
+
+\begin{itemize}\item 南東セル $x'y'$（非感染者で正しく陰性）: $9,900 \times 0.90 = 8,910$ 人\end{itemize}
+
+\subsection{ズームインと面積比の計算}
+
+検査結果が「陽性」であったということは、事象 $Y$ が起こったということです。
+
+したがって、私たちの視界は「左列（陽性の部屋全体）」へとズームインされます：
+
+\begin{itemize}\item 陽性と判定された人の総数（左列全体の面積）：\end{itemize}
+
+$$95 + 990 = 1,085 \text{ 人}$$
+
+この左列の住人の中で、本当に感染している人（北西セル $xy$）の割合は：
+
+$$P(X|Y) = \frac{95}{1,085} = \frac{19}{217} \approx 0.0876 \quad (8.76\%)$$
+
+なんと、陽性と判定されたにもかかわらず、本当に感染している確率はわずか $8.8\%$（約11人に1人） に過ぎないのです！
+
+\section{4. なぜ直感が裏切られるのか：事前確率の重み}
+
+なぜこのような直感に反する結果になるのでしょうか？
+
+キャロル・ボードを見れば、その理由は一目瞭然です。
+
+下段の非感染者（$9,900$ 人）の人口規模が、上段の感染者（$100$ 人）に比べて圧倒的に巨大だからです。
+
+偽陽性率がたった $10\%$ であっても、$9,900$ 人の $10\%$ は $990$ 人という大群になります。真の陽性者（$95$ 人）など、偽陽性者の大群の前に軽々と呑み込まれてしまうのです。
+
+ベイズの定理の難解な数式：
+
+$$P(X|Y) = \frac{P(Y|X)P(X)}{P(Y|X)P(X) + P(Y|X^c)P(X^c)}$$
+
+を必死に暗記しなくても、キャロルの正方形ボードを頭の中に描き、4つのセルの面積比を見るだけで、誰でもこの高度な確率的真理を迷うことなく導き出せるようになります。
+
+\begin{figure}[htbp]
+\centering
+\begin{tikzpicture}[scale=0.9, >=stealth]
+    % Board as Probability Space
+    \draw[very thick, draw=darkslate] (-3.5, -2) rectangle (3.5, 2);
+    \node[above] at (0, 2.1) {\bfseries 全事象（確率空間：面積 $S=1$）};
+    
+    \draw[thick, draw=primaryblue] (-3.5, 0.5) -- (3.5, 0.5);
+    \draw[thick, draw=warmamber] (0, -2) -- (0, 2);
+    
+    % Condition X highlighted
+    \fill[softblue, opacity=0.6] (-3.5, 0.5) rectangle (3.5, 2);
+    \node[left, primaryblue] at (-3.6, 1.25) {\bfseries 事象 $X$};
+    
+    % Intersection X and Y
+    \fill[softgreen, opacity=0.8] (-3.5, 0.5) rectangle (0, 2);
+    \node at (-1.75, 1.25) {\large\bfseries $X \cap Y$};
+    \node at (1.75, 1.25) {\footnotesize $X \cap Y^c$};
+    
+    \node[draw=darkslate, fill=white, rounded corners, inner sep=4pt] at (0, -1.0) {
+        \Large $P(Y|X) = \frac{\text{セル } (X \cap Y) \text{ の面積}}{\text{行 } X \text{ の全面積}} = \frac{P(X \cap Y)}{P(X)}$
+    };
+\end{tikzpicture}
+\caption{キャロル・ボード上の条件付き確率：部分領域へのズームインと面積比}
+\label{fig:carroll_bayes_prob}
+\end{figure}
+
+\section*{本章のまとめと確認演習}
+\begin{examplebox}{キャロル論理学の理解度チェック}
+\textbf{【問】} 本章で学んだ概念について、以下の設問に答えよ。
+\begin{enumerate}[label=(\arabic*)]
+\item キャロルが考案したダイアグラムとカウンターのルールに従い、本章の主要な命題や推論を自分の手で図示せよ。
+\item 伝統的な形式論理学やベン図と比較したとき、キャロル流の解法が持つ直観的・機械的利点を説明せよ。
+\item この思考法が現代の情報科学（論理回路・二値論理）や確率論においてどのように活かされているか考察せよ。
+\end{enumerate}
+\end{examplebox}
+
+
+\chapter{言葉の迷宮とパズル演習：『論理の遊戯』原著の傑作問題に挑む}
+\label{ch:11}
+
+\begin{historybox}{原著における位置づけ：Cross Questions and Crooked Answers: Carrollian Logic Puzzles}
+本章はルイス・キャロル『論理の遊戯』（Project Gutenberg \#4763）の該当章および数理体系に直接基づき、
+四角いダイアグラムと赤・灰のカウンターによる論理のアルゴリズムを、現代の高校数学・情報科学の視点から完全に読み解くものである。
+\end{historybox}
+
+\#\# 第11章：言葉の迷宮とパズル演習：『論理の遊戯』原著の傑作問題に挑む
+
+教育情報分析研究会　数学教育・統計分析リサーチユニット
+
+\section{1. キャロルならではのユーモア・パズル集}
+
+ルイス・キャロル『論理の遊戯』原著の第2章（Cross Questions：交差する問い）、第3章（Crooked Answers：曲がりくねった答え）、第4章（Hit or Miss：当たりか外れか）には、キャロルの豊かな文学的想像力が遺憾なく発揮された、奇妙で愉快なパズルが満載されています。
+
+当時の教科書が「すべての人間は死すべきものである。ソクラテスは人間である……」といった堅苦しい例文ばかりを扱っていたのに対し、キャロルは次のような命題を読者に突きつけました：
+
+\begin{itemize}\item 「すべての赤ちゃんは非論理的である」\end{itemize}
+
+\begin{itemize}\item 「ワニを飼いならすことができる人間は一人もいない」\end{itemize}
+
+\begin{itemize}\item 「非論理的な人間は、決してワニを飼いならすことはできない」\end{itemize}
+
+\begin{itemize}\item 「ドラゴンを軽蔑する者は、決して勇敢ではない」\end{itemize}
+
+\begin{itemize}\item 「豚は空を飛ぶことができないが、もし羽が生えたらどうなるか？」\end{itemize}
+
+これらのユーモラスな例文は、決して単なるふざけ半分ではありません。日常の先入観や常識（「赤ちゃんは可愛い」「ワニは危険だ」など）を一度完全に遮断し、純粋な記号と形式的関係性だけに集中して推論を行うという、現代数学の極めて重要な公理的態度を訓練するための周到な教育的仕掛けだったのです。
+
+\section{2. 連鎖三段論法（ソリテス / Sorites）の多段解法}
+
+キャロル・パズルの白眉が、3つ以上の前提が鎖のように連なる「連鎖三段論法（ソリテス / Sorites）」です。
+
+原著から代表的な傑作問題を引用し、実際に解いてみましょう：
+
+【問題：赤ちゃんとおとなの論理】
+
+\begin{itemize}\item 前提1："Babies are illogical."（すべての赤ちゃんは非論理的である）\end{itemize}
+
+\begin{itemize}\item 前提2："Nobody is despised who can manage a crocodile."（ワニを飼いならせる者は、誰からも軽蔑されない）\end{itemize}
+
+\begin{itemize}\item 前提3："Illogical persons are despised."（非論理的な人間は、誰からも軽蔑される）\end{itemize}
+
+\begin{itemize}\item 【問】 この3つの前提から導かれる、必然的な結論は何か？\end{itemize}
+
+一見すると、赤ちゃんとワニと軽蔑という、全く無関係に見える言葉が入り乱れており、頭が混乱しそうになります。
+
+しかし、落ち着いて属性を記号化してみましょう：
+
+\begin{itemize}\item 宇宙 $U$：すべての人間\end{itemize}
+
+\begin{itemize}\item 属性 $b$：赤ちゃん（Baby）\end{itemize}
+
+\begin{itemize}\item 属性 $i$：非論理的（Illogical）\end{itemize}
+
+\begin{itemize}\item 属性 $c$：ワニを飼いならせる（Crocodile manager）\end{itemize}
+
+\begin{itemize}\item 属性 $d$：軽蔑される（Despised）\end{itemize}
+
+各前提を論理式に変換します：
+
+\begin{enumerate}\item 前提1：$b \implies i$（すべての赤ちゃんは非論理的である）\end{enumerate}
+
+\begin{enumerate}\item 前提2：$c \implies d'$（ワニを飼いならせる者は軽蔑されない $\iff$ 対偶をとると $d \implies c'$：軽蔑される者はワニを飼いならせない）\end{enumerate}
+
+\begin{enumerate}\item 前提3：$i \implies d$（非論理的な人間は軽蔑される）\end{enumerate}
+
+さあ、この3つの命題を鎖のようにつなげてみましょう！
+
+$$b \implies i \implies d \implies c'$$
+
+中間項である「非論理的（$i$）」と「軽蔑される（$d$）」が、見事なリレーのバトンパスのように次々と消去（Elimination）されていきます！
+
+残された最初と最後の項を結ぶと：
+
+$$b \implies c'$$
+
+すなわち、
+
+「No babies can manage a crocodile.」
+
+（いかなる赤ちゃんも、ワニを飼いならすことはできない！）
+
+という、論理的に寸分の狂いもない必然的真理が導き出されるのです。
+
+\section{3. 日常言語の曖昧さを排する「論理的翻訳力」}
+
+キャロルがこのパズル演習を通じて私たちに伝えたかったもうひとつの決定的な教訓は、「日常言語を厳密な論理命題へと翻訳する技術」の重要性です。
+
+日本語や英語の日常表現には、様々なレトリック（修辞）や倒語が含まれます：
+
+\begin{itemize}\item 「〜でない者はいない」 $\implies$ 全称肯定命題（二重否定の肯定化）\end{itemize}
+
+\begin{itemize}\item 「〜に限って…である」 $\implies$ 条件の逆転への注意\end{itemize}
+
+\begin{itemize}\item 「必ずしも〜とは限らない」 $\implies$ 全称否定ではなく特称否定\end{itemize}
+
+現代の大学入試の現代文読解、小論文、英語の長文読解、そして数学の論理的証明問題において、多くの受験生が失点する原因は、文章の背後にある「論理の骨格」を見失ってしまうことにあります。
+
+言葉の装飾に惑わされず、「主語は何か」「述語は何か」「除外されている条件は何か」を正確に抽出し、キャロル・ボードの上にプロットできる翻訳能力を身につけること――これこそが、高校生にとって一生の財産となる本物の読解力なのです。
+
+\begin{figure}[htbp]
+\centering
+\begin{tikzpicture}[scale=0.85, >=stealth]
+    \node[draw=primaryblue, fill=softblue, rounded corners, inner sep=5pt] (p1) at (-4, 1.5) {前提1：赤ちゃん $\to$ 非論理的};
+    \node[draw=primaryblue, fill=softblue, rounded corners, inner sep=5pt] (p2) at (0, 1.5) {前提2：非論理的 $\to$ 危険管理不能};
+    \node[draw=primaryblue, fill=softblue, rounded corners, inner sep=5pt] (p3) at (4, 1.5) {前提3：ワニの飼育者 $\to$ 危険管理可能};
+    
+    \node[draw=crimson, fill=softamber, rounded corners, inner sep=6pt] (chain) at (0, -0.3) {\Large\bfseries 中間概念の連鎖的消去（Sorites）};
+    
+    \draw[->, thick, warmamber] (p1) -- (chain);
+    \draw[->, thick, warmamber] (p2) -- (chain);
+    \draw[->, thick, warmamber] (p3) -- (chain);
+    
+    \node[draw=accentgreen, fill=softgreen, rounded corners, inner sep=5pt] (conc) at (0, -1.8) {\Large\bfseries 必然的結論：いかなる赤ちゃんもワニを飼いならすことはできない};
+    \draw[->, very thick, accentgreen] (chain) -- (conc);
+\end{tikzpicture}
+\caption{キャロルのユーモア連鎖三段論法（ソリテス）の多段消去プロセス}
+\label{fig:carroll_sorites}
+\end{figure}
+
+\section*{本章のまとめと確認演習}
+\begin{examplebox}{キャロル論理学の理解度チェック}
+\textbf{【問】} 本章で学んだ概念について、以下の設問に答えよ。
+\begin{enumerate}[label=(\arabic*)]
+\item キャロルが考案したダイアグラムとカウンターのルールに従い、本章の主要な命題や推論を自分の手で図示せよ。
+\item 伝統的な形式論理学やベン図と比較したとき、キャロル流の解法が持つ直観的・機械的利点を説明せよ。
+\item この思考法が現代の情報科学（論理回路・二値論理）や確率論においてどのように活かされているか考察せよ。
+\end{enumerate}
+\end{examplebox}
+
+
+\chapter{論理的思考の真髄：記号・図・ゲームがひらく数学の未来}
+\label{ch:12}
+
+\begin{historybox}{原著における位置づけ：The Essence of Logical Thinking: Games, Symbols, and the Future of Mathematics}
+本章はルイス・キャロル『論理の遊戯』（Project Gutenberg \#4763）の該当章および数理体系に直接基づき、
+四角いダイアグラムと赤・灰のカウンターによる論理のアルゴリズムを、現代の高校数学・情報科学の視点から完全に読み解くものである。
+\end{historybox}
+
+\#\# 第12章：論理的思考の真髄：記号・図・ゲームがひらく数学の未来
+
+教育情報分析研究会　数学教育・統計分析リサーチユニット
+
+\section{1. 人類の思考を巡る壮大な知の系譜}
+
+本書を通じて、私たちはオックスフォードの数学者ルイス・キャロルが創案した『論理の遊戯』の世界を旅してきました。
+
+ここで立ち止まり、古代から現代に至る数理論理学の壮大な知のパノラマを振り返ってみましょう。
+
+\begin{enumerate}\item アリストテレス（紀元前4世紀）:\end{enumerate}
+
+人類で初めて「推論の正しさ」を感情や内容から切り離し、形式（三段論法）として体系化しました。
+
+\begin{enumerate}\item ジョージ・ブール（1854年）:\end{enumerate}
+
+『思考の法則』において、言語の論理を代数方程式（$x^2=x$）として定式化し、思考を計算へと昇華させました。
+
+\begin{enumerate}\item ジョン・ヴェン（1866年）:\end{enumerate}
+
+『偶然の論理』において、集合の重なりを視覚的な円ダイアグラム（ベン図）で表現し、客観的データに基づく統計的思考を打ち立てました。
+
+\begin{enumerate}\item ルイス・キャロル（1886年）:\end{enumerate}
+
+『論理の遊戯』において、難解だった論理学を四角いダイアグラムと赤・灰のカウンターによる「誰もが参加できるゲーム」へと変革しました。
+
+\begin{enumerate}\item クロード・シャノン（1937年）:\end{enumerate}
+
+ブール代数とキャロル図の原理を電気スイッチ回路に応用し、現代のデジタルコンピュータを誕生させました。
+
+\begin{enumerate}\item アラン・チューリングと現代AI（20世紀中盤〜現在）:\end{enumerate}
+
+機械的な記号操作の極限としてチューリングマシンを構想し、今日の人工知能（ニューラルネットワーク・大規模言語モデル）の繁栄を導きました。
+
+アリストテレスが「形式化」し、ブールが「代数化」し、ヴェンが「視覚化」し、キャロルが「ゲーム化」した思考のアルゴリズムは、現代の私たちが手にするスマートフォン、スーパーコンピュータ、そしてAIのすべての基礎へと一本の途切れない糸で繋がっているのです。
+
+\section{2. 「推論をゲームにする」という思想の先見性}
+
+キャロルが成し遂げた最大の功績は、「高度で抽象的な数学的推論を、物理的なルールに従ったゲームにできる」ということを実証した点にあります。
+
+これは現代のコンピュータサイエンスの根本原理そのものです。コンピュータは「意味」を理解して動いているわけではありません。コンピュータの内部で行われているのは、キャロル・ボードの上で赤と灰のカウンターをルール通りにスライドさせ、境界線から押し出し、別のボードへと転写するのと全く同じ、「あらかじめ定められた構文規則（シンタックス）に従った機械的な物理的操作」に過ぎません。
+
+意味を直接操作するのではなく、正しい形式的ルールに従ってトークンを操作すれば、結果として得られる配置は「必ず意味的にも正しい真理を表現している」――この奇跡のような数学の健全性と完全性を、キャロルは19世紀のヴィクトリア朝において、子どもたちや学生たちにゲームの手触りを通じて教えようとしたのです。
+
+\section{3. 生成AI時代における人間の論理的思考の価値}
+
+21世紀の現在、生成AI（人工知能）の進化は目覚ましく、文章の要約やプログラミングのコード生成など、多くの知的作業をAIが瞬時に肩代わりしてくれる時代が到来しました。
+
+そのような時代において、人間が自分自身の頭で「論理的に考えること」を学ぶ意味は、果たしてどこにあるのでしょうか？
+
+答えは明確です。AIが提示した答えが本当に正しいのか、前提が歪んでいないか、中項不周延の誤謬や偽陽性の罠に陥っていないかを批判的に検証（Fact Check）できるのは、確固たる論理的リテラシーを持った人間だけだからです。
+
+AIがもっともらしく語る流暢な文章の中に潜む前提の破綻を見抜き、議論を客観的な構成要素に分解し、自分自身の手で検証可能な盤面の上に再構成してみる。これこそが、AIを単なるブラックボックスとして盲信するのではなく、強力な道具として使いこなすための人間の知性の砦です。
+
+\section{4. 未来を拓く高校生読者へのメッセージ}
+
+高校生の皆さん。数学とは、試験で点を取るためだけに存在する退屈な計算ドリルではありません。
+
+それは、複雑で不条理に見えるこの世界を、偏見や感情に惑わされることなく、澄んだ目で客観的に見通すための「最高の思考の翼」です。
+
+ルイス・キャロルが遺した九枚のカウンターと二つのダイアグラムは、皆さんにその翼を授けてくれました。
+
+自分の手で駒を置き、境界線を見つめ、論理の必然的な帰結を導き出すときのあの知的なスリルと歓びを、どうか生涯忘れないでください。
+
+本書で身につけた論理的思考の力を持って、皆さんがこれから出会う未知の学問、未知の社会の課題へと、勇気を持って漕ぎ出していくことを、教育情報分析研究会の一同、心より応援しています。
+
+\begin{figure}[htbp]
+\centering
+\begin{tikzpicture}[scale=0.85, >=stealth]
+    \node[draw=darkslate, fill=white, rounded corners, inner sep=4pt] (ari) at (0, 3) {\textbf{アリストテレス（前4世紀）}：三段論法・形式論理の定式化};
+    \node[draw=darkslate, fill=softblue, rounded corners, inner sep=4pt] (boo) at (0, 1.8) {\textbf{ジョージ・ブール（1854）}：思考の法則・論理の代数化 ($x^2=x$)};
+    \node[draw=darkslate, fill=softamber, rounded corners, inner sep=4pt] (ven) at (-3, 0.6) {\textbf{ジョン・ヴェン（1866）}：ベン図・客観的頻度論};
+    \node[draw=crimson, fill=softrose, rounded corners, inner sep=5pt] (car) at (3, 0.6) {\textbf{ルイス・キャロル（1886）}：キャロル図・論理のゲーム化};
+    \node[draw=darkslate, fill=softgreen, rounded corners, inner sep=4pt] (sha) at (0, -0.6) {\textbf{クロード・シャノン（1937）}：ブール代数によるスイッチング回路設計};
+    \node[draw=primaryblue, fill=softblue, rounded corners, inner sep=5pt] (mod) at (0, -1.8) {\Large\bfseries 現代のコンピュータ・人工知能・データサイエンス};
+    
+    \draw[->, thick] (ari) -- (boo);
+    \draw[->, thick] (boo) -- (ven);
+    \draw[->, thick] (boo) -- (car);
+    \draw[->, thick] (ven) -- (sha);
+    \draw[->, thick] (car) -- (sha);
+    \draw[->, very thick, primaryblue] (sha) -- (mod);
+\end{tikzpicture}
+\caption{論理学・記号数学・情報科学の壮大な発展系譜とキャロルの位置づけ}
+\label{fig:carroll_historical_lineage}
+\end{figure}
+
+\section*{本章のまとめと確認演習}
+\begin{examplebox}{キャロル論理学の理解度チェック}
+\textbf{【問】} 本章で学んだ概念について、以下の設問に答えよ。
+\begin{enumerate}[label=(\arabic*)]
+\item キャロルが考案したダイアグラムとカウンターのルールに従い、本章の主要な命題や推論を自分の手で図示せよ。
+\item 伝統的な形式論理学やベン図と比較したとき、キャロル流の解法が持つ直観的・機械的利点を説明せよ。
+\item この思考法が現代の情報科学（論理回路・二値論理）や確率論においてどのように活かされているか考察せよ。
+\end{enumerate}
+\end{examplebox}
+
+\backmatter
+\chapter{ルイス・キャロル論理学 重要用語辞典（Glossary）}
+\label{ch:glossary}
+\addcontentsline{toc}{chapter}{ルイス・キャロル論理学 重要用語辞典}
+
+\begin{description}[leftmargin=3.5cm, style=nextline]
+\item[限定宇宙（Universe of Discourse）]
+議論や推論の対象となるすべての事物の全体集合。キャロル・ボードの外枠全体がこの限定宇宙を表し、現代集合論における普遍集合（Universal Set）$U$ または全事象 $S$ に相当する。
+
+\item[2属性ダイアグラム（Smaller Diagram）]
+2つの排他的属性 $x, x'$（上下の二分割）と $y, y'$（左右の二分割）によって、限定宇宙を4つの小部屋（$xy, xy', x'y, x'y'$）に分割した正方形の盤面。2つの命題の関係や三段論法の最終結論を表示するために用いられる。
+
+\item[3属性ダイアグラム（Larger Diagram）]
+2属性ダイアグラムに第3の属性である中項 $m$（内側の正方形）と $m'$（外枠の領域）を追加し、空間を $2^3 = 8$ 個の小部屋に分割した盤面。三段論法の2つの前提を統合し、中項を消去するために用いられる。
+
+\item[赤カウンター（Red Counter）]
+キャロル・ゲームにおいて「事物の存在（Existence / FULL）」を表す赤い駒。そのセルに少なくとも1つの要素が存在すること（要素数 $\ge 1$、現代論理学の存在量化 $\exists$）を意味する。
+
+\item[灰カウンター（Grey Counter）]
+「事物の非存在（Empty / 0）」を表す灰色の駒。そのセルには1つの要素も存在しないこと（空集合 $\emptyset$）を意味する。
+
+\item[空白セル（Empty Cell / Unknown）]
+カウンターが置かれていないセル。その部屋に事物が存在するか空であるかについて「何の情報もない（未定）」ことを表す。キャロルは「情報なし」と「空（0）」を厳格に区別した。
+
+\item[特称肯定命題（Particular Affirmative, I）]
+「いくつかの $x$ は $y$ である（Some $x$ are $y$）」。セル $xy$ に赤カウンターを1枚置くことで表現される。
+
+\item[全称否定命題（Universal Negative, E）]
+「いかなる $x$ も $y$ ではない（No $x$ are $y$）」。セル $xy$ に灰カウンターを置くことで表現される。
+
+\item[全称肯定命題（Universal Affirmative, A）]
+「すべての $x$ は $y$ である（All $x$ are $y$）」。キャロル流の解釈では、セル $xy'$ に灰カウンターを置き、かつセル $xy$ に赤カウンターを置く「二重配置」として定義される。
+
+\item[特称否定命題（Particular Negative, O）]
+「いくつかの $x$ は $y$ ではない（Some $x$ are not $y$）」。セル $xy'$ に赤カウンターを置くことで表現される。
+
+\item[存在前提（Existential Import）]
+全称命題「すべての $x$ は $y$ である」と主張するとき、主語 $x$ の外延が存在することを前提とするか否かという問題。現代論理学では空集合でも真とするが、キャロルは日常言語の健全性から存在を前提とした。
+
+\item[中項（Middle Term, $m$）]
+三段論法において、大前提と小前提の双方に含まれ、両者を媒介して結論を導くための架け橋となる概念。結論には現れず、推論の過程で消去される。
+
+\item[境界線上のカウンター（Sitting on the Fence）]
+ある前提（例：「Some $x$ are $m$」）において、第3の属性 $y$ に関する情報が不明な場合、赤カウンターを2つのセルの境界線（fence）の上にまたがって置くキャロルの卓越した図的技法。
+
+\item[カウンターの押し出し（Dropping off the Fence）]
+境界線上に置かれた赤カウンターが、別の前提によって片方のセルに灰カウンターが置かれた際、空となったセルを避けてもう一方のセルの中へと確定的に落ちる力学的推論プロセス。
+
+\item[消去法（Elimination）]
+三段論法において、3属性ダイアグラム上で中項 $m$ の境界を無視し、$x$ と $y$ の関係のみを抽出する手続き。ブール代数における消去定理の幾何学的実行である。
+
+\item[結論のトランスファー（Transfer of Conclusion）]
+Larger Diagram で中項 $m$ を消去した結果（$x$ と $y$ の残存情報）を、Smaller Diagram へとそっくり移し替えて最終結論を読み取る操作。
+
+\item[三段論法（Syllogism）]
+2つの前提命題（大前提・小前提）から論理的必然性をもって1つの結論を導き出す演繹的推論形式。アリストテレス以来の形式論理学の中核。
+
+\item[中項不周延の誤謬（Fallacy of Undistributed Middle）]
+中項 $m$ が前提においてその全外延にわたって言及されていないため、$x$ と $y$ の間に必然的な関係を導けない形式的誤謬。キャロル・ボード上では、赤カウンターが境界線上に留まり続け結論盤へ移せないこととして可視化される。
+
+\item[両前提否定の誤謬（Fallacy of Negative Premises）]
+2つの前提がともに否定命題（No...）であるとき、いかなる肯定的または必然的結論も導けないという規則。盤面上で中項の内外がいずれも遮断されるため推論が成立しない。
+
+\item[連鎖三段論法（ソリテス / Sorites）]
+3つ以上の前提が鎖のように連なり、多数の中間項を順次消去していく多段論法。キャロルが好んでパズルとして出題した。
+
+\item[カルノー図（Karnaugh Map）]
+1953年にモーリス・カルノーが開発した、ブール代数の論理式を最小化するための格子図。キャロル・ダイアグラムの正方形セル分割と論理的・構造的に完全同型である。
+
+\item[論理積（AND / 共通部分）]
+2つの属性がともに成り立つ領域。キャロル・ボードにおける小部屋（$xy$ など）の交差に対応する。
+
+\item[論理和（OR / 和集合）]
+2つの属性の少なくとも一方が成り立つ領域。ボード上で隣接する複数のセルをまとめたブロックとして視覚化される。
+
+\item[二値論理（Binary Logic）]
+真（1）と偽（0）の2つの値のみを扱う論理体系。現代のデジタルコンピュータやプログラミング言語の動作原理。
+
+\item[三値論理（Ternary Logic）]
+真・偽に加えて「未定・不明（Unknown）」の第3の状態を明示的に扱う論理体系。キャロルのカウンターなし状態がこれに相当する。
+
+\item[結合確率（Joint Probability, $P(X \cap Y)$）]
+2つの事象 $X$ と $Y$ が同時に発生する確率。キャロル・ボードを面積1の確率空間とみなしたとき、セル $xy$ の面積に対応する。
+
+\item[条件付き確率（Conditional Probability, $P(Y|X)$）]
+事象 $X$ が起こったという条件下で、事象 $Y$ が起こる確率。盤面全体から行 $X$ にズームインし、その中でセル $xy$ が占める面積比 $\frac{P(X \cap Y)}{P(X)}$ として定義される。
+
+\item[ベイズの定理（Bayes' Theorem）]
+結果の観察（検査陽性など）から、その原因（真の罹患）の事後確率を逆算する公式。キャロル・ボード上の分割セルの比率計算として直感的に導出できる。
+
+\item[感度と特異度（Sensitivity and Specificity）]
+検査の性能を表す指標。感度は陽性のものを正しく陽性と判定する確率、特異度は陰性のものを正しく陰性と判定する確率。
+
+\item[客観的論理主義（Carroll's Logicism）]
+思考や言語を主観的な感覚や曖昧さに委ねず、客観的な記号・図形・機械的ルールによって一意に決定しようとするキャロルの数学的態度。
+\end{description}
+
+\chapter{高校生のための総合演習問題と詳細解答}
+\label{ch:final_exam}
+\addcontentsline{toc}{chapter}{高校生のための総合演習問題と詳細解答}
+
+\section*{総合問題}
+\begin{enumerate}[label=\textbf{【問題\arabic*】}]
+\item ある学校の生徒集団において、属性 $x$ を「理系選択者」、属性 $y$ を「チェス同好会員」とする。
+次の命題をキャロルの Smaller Diagram 上にプロットし、それぞれの盤面の意味を説明せよ。
+\begin{enumerate}[label=(\alph*)]
+\item 「理系選択者の中にチェス同好会員がいる（Some $x$ are $y$）」
+\item 「文系選択者（$x'$）にはチェス同好会員は一人もいない（No $x'$ are $y$）」
+\item 「すべての理系選択者はチェス同好会員である（All $x$ are $y$）」
+\end{enumerate}
+
+\item 次の2つの前提から、キャロルの Larger Diagram（3属性盤）を用いて中項 $m$ を消去し、導かれる結論を Smaller Diagram 上に転写して日本語で述べよ。
+\begin{itemize}
+\item 大前提：「すべての数学者は思索家である（All $x$ are $m$）」
+\item 小前提：「思索家でせっかちな者はいない（No $m$ are $y$）」
+\end{itemize}
+（ただし、$x$：数学者、$m$：思索家、$y$：せっかちな者 とする）
+
+\item ある新興感染症の検査キットについて考える。全人口における真の罹患者の割合（事前確率）を $1\%$ とする。この検査キットは、実際に感染している人を $95\%$ の確率で「陽性」と判定し（感度 $95\%$）、感染していない人を $90\%$ の確率で正しく「陰性」と判定する（特異度 $90\%$、偽陽性率 $10\%$）。
+キャロル・ボード（面積 $10000$ の正方形）を用いてこの確率空間を4つのセルに分割し、ある人が「陽性」と判定されたとき、その人が実際に感染している確率（事後確率）を求めよ。
+\end{enumerate}
+
+\section*{詳細な解答と解説}
+\begin{description}[leftmargin=2.5cm, style=nextline]
+\item[問題1の解答]
+\begin{enumerate}[label=(\alph*)]
+\item セル $xy$（上段左：理系かつチェス会員）に赤カウンターを1枚置く。
+【解説】これは集合 $x \cap y \neq \emptyset$ を意味し、理系かつチェス愛好者である生徒が少なくとも1人実在することを示す。
+
+\item セル $x'y$（下段左：文系かつチェス会員）に灰カウンターを1枚置く。
+【解説】これは集合 $x' \cap y = \emptyset$（空集合）を意味し、文系かつチェス同好会の部屋には誰も存在しないことを表す。
+
+\item セル $xy'$（上段右：理系かつチェス非会員）に灰カウンターを置き、セル $xy$（上段左）に赤カウンターを置く。
+【解説】キャロル流の全称肯定命題の完全表現である。「チェスをやらない理系生徒はゼロである（灰）」と同時に「理系生徒は実在する（赤）」という二重の条件を満たす。
+\end{enumerate}
+
+\item[問題2の解答]
+ステップ1（前提1のプロット）：大前提「All $x$ are $m$」より、外側（$m'$）の $x$ 領域であるセル $xym'$ とセル $xy'm'$ の双方に灰カウンターを置く。また、$x$ の存在により内側（$m$）の境界線上に赤カウンターを置く。
+ステップ2（前提2のプロット）：小前提「No $m$ are $y$」より、内側（$m$）の $y$ 領域であるセル $xym$ に灰カウンターを置く。
+ステップ3（カウンターの押し出し）：内側境界線上にあった赤カウンターは、左セル $xym$ に灰カウンターが入ったため、右セル $xy'm$ へと確定的に落ちる。
+ステップ4（中項 $m$ の消去と転写）：中項 $m$ を取り除き、$x$ と $y$ の関係に注目すると、セル $xy$ は $xym, xym'$ ともに灰（空）、セル $xy'$ は赤（存在）が残る。
+Smaller Diagram に転写すると、上段左（$xy$）に灰、上段右（$xy'$）に赤が配置される。
+【結論】「No $x$ are $y$（いかなる数学者もせっかちではない）」、あるいは「All $x$ are $y'$（すべての数学者はせっかちではない）」。
+
+\item[問題3の解答]
+全体を $10,000$ 人の正方形ボード（横 $100 \times$ 縦 $100$）とする。
+行の分割（真の罹患 $x$ と非罹患 $x'$）：
+\begin{itemize}
+\item 罹患者（$x$）：$10,000 \times 0.01 = 100$ 人（上段）
+\item 非罹患者（$x'$）：$10,000 \times 0.99 = 9,900$ 人（下段）
+\end{itemize}
+列の分割（検査陽性 $y$ と検査陰性 $y'$）：
+\begin{itemize}
+\item セル $xy$（罹患かつ陽性）：$100 \times 0.95 = 95$ 人
+\item セル $xy'$（罹患かつ陰性）：$100 \times 0.05 = 5$ 人
+\item セル $x'y$（非罹患だが偽陽性）：$9,900 \times (1 - 0.90) = 990$ 人
+\item セル $x'y'$（非罹患かつ真陰性）：$9,900 \times 0.90 = 8,910$ 人
+\end{itemize}
+陽性と判定された全生徒（列 $y$ の全面積）は、
+\[
+\text{陽性者総数} = 95 + 990 = 1,085 \text{ 人}
+\]
+この列 $y$ の中で、実際に感染しているセル $xy$ の割合（条件付き確率）は、
+\[
+P(x|y) = \frac{95}{1,085} = \frac{19}{217} \approx 0.0876 \quad (8.76\%)
+\]
+【解説】感度 $95\%$ という高精度な検査であっても、ベースの罹患率が $1\%$ と低い場合、陽性と出た人のうち実際に感染している確率はわずか $8.76\%$（約 $11$ 人に $1$ 人）に過ぎない。この「偽陽性の罠」が、キャロル・ボードの面積比として一目瞭然に可視化される。
+\end{description}
+
+\end{document}

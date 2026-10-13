@@ -5,7 +5,7 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <title>PG_mathbook | 高校生のための古典数学入門ライブラリ</title>
   <meta name="description" content="Project Gutenberg の数学古典から高校生向けの本格的な確率・統計・論理入門書を編纂・製本するプロジェクト。原著リンク付き目録。" />
-  <link rel="stylesheet" href="style.css" />
+  <link rel="stylesheet" href="../style.css" />
 </head>
 <body>
   <header class="site-header">
@@ -18,7 +18,7 @@
       </p>
       <div class="meta-strip">
         <span class="strip-pill">編著者：<strong>教育情報分析研究会</strong></span>
-        <span class="strip-pill">収録作品：<strong>3</strong> 冊</span>
+        <span class="strip-pill">収録作品：<strong>4</strong> 冊</span>
         <span class="strip-pill">組版：<strong>LuaLaTeX (LuaHBTeX / TeX Live 2026)</strong></span>
         <span class="strip-pill">重複管理：<strong>catalog.json 連携済み</strong></span>
       </div>
@@ -32,20 +32,20 @@
         <input type="search" id="searchInput" placeholder="タイトル・原著名・著者・キーワードで検索..." oninput="filterBooks()" />
       </div>
       <div class="toolbar-actions">
-        <span id="matchCount" class="match-badge">全 3 件表示中</span>
+        <span id="matchCount" class="match-badge">全 4 件表示中</span>
         <button class="theme-toggle-btn" onclick="toggleTheme()" id="themeBtn" aria-label="テーマ切替">🌙 ダーク表示</button>
       </div>
     </section>
 
     <section class="books-grid" id="booksGrid">
 
-      <div class="book-card" data-search="高校生のためのラプラス確率・統計入門 —— 決定論的宇宙観・10の原理から最小二乗法・道徳科学まで A Philosophical Essay on Probabilities Pierre-Simon Laplace 教育情報分析研究会 58881 Project Gutenberg #58881収載のラプラス『確率の哲学的試論』を底本に、決定論的宇宙観・10の原理・母関数・最小二乗法・道徳科学までを完全網羅した全12章・58ページの本格的数学入門書。">
+      <div class="book-card" data-search="高校生のためのラプラス確率・統計入門 —— 歴史的名著『確率の哲学的試論』で解き明かす数学の神髄 A Philosophical Essay on Probabilities Pierre-Simon Laplace 教育情報分析研究会 58881 Project Gutenberg Bookshelf 672収載のラプラス『確率の哲学的試論』を底本に、決定論的宇宙観・確率の基本10原理・期待値・ベイズ逆確率・大数の法則・中心極限定理・最小二乗法・道徳科学までを完全網羅した全12章・58ページの本格的入門書。TikZ図版、例題解説、用語辞典、総合演習付。">
         <div class="card-header">
           <span class="badge badge-id">Gutenberg #58881</span>
           <span class="badge badge-pages">12章 / 58頁</span>
           <span class="badge badge-author">教育情報分析研究会</span>
         </div>
-        <h2 class="book-title">高校生のためのラプラス確率・統計入門 —— 決定論的宇宙観・10の原理から最小二乗法・道徳科学まで</h2>
+        <h2 class="book-title">高校生のためのラプラス確率・統計入門 —— 歴史的名著『確率の哲学的試論』で解き明かす数学の神髄</h2>
         <div class="original-meta">
           <span class="label">原著：</span>
           <a href="https://www.gutenberg.org/ebooks/58881" target="_blank" rel="noopener noreferrer" class="orig-link" title="Project Gutenbergで原著を見る">
@@ -53,29 +53,29 @@
             <svg class="icon-ext" viewBox="0 0 24 24" width="14" height="14" fill="none" stroke="currentColor" stroke-width="2"><path d="M18 13v6a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V8a2 2 0 0 1 2-2h6"></path><polyline points="15 3 21 3 21 9"></polyline><line x1="10" y1="14" x2="21" y2="3"></line></svg>
           </a>
         </div>
-        <p class="book-desc">Project Gutenberg #58881収載のラプラス『確率の哲学的試論』を底本に、決定論的宇宙観・10の原理・母関数・最小二乗法・道徳科学までを完全網羅した全12章・58ページの本格的数学入門書。</p>
+        <p class="book-desc">Project Gutenberg Bookshelf 672収載のラプラス『確率の哲学的試論』を底本に、決定論的宇宙観・確率の基本10原理・期待値・ベイズ逆確率・大数の法則・中心極限定理・最小二乗法・道徳科学までを完全網羅した全12章・58ページの本格的入門書。TikZ図版、例題解説、用語辞典、総合演習付。</p>
         <div class="engine-info">
-          <span class="engine-tag">⚡ 生成エンジン: google/gemma-3-4b (LM Studio @ http://192.168.128.16:1234/)</span>
+          <span class="engine-tag">⚡ 生成エンジン: gemma4:12b (Ollama @ http://192.168.128.62:11434/)</span>
         </div>
         <div class="card-actions">
-          <a href="books/58881_laplace_probability/laplace_probability_intro.pdf" class="btn btn-pdf" target="_blank">
+          <a href="../books/58881_laplace_probability/laplace_probability_intro.pdf" class="btn btn-pdf" target="_blank">
             <svg viewBox="0 0 24 24" width="16" height="16" fill="none" stroke="currentColor" stroke-width="2"><path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"></path><polyline points="14 2 14 8 20 8"></polyline><line x1="16" y1="13" x2="8" y2="13"></line><line x1="16" y1="17" x2="8" y2="17"></line><polyline points="10 9 9 9 8 9"></polyline></svg>
             PDF製本版を読む (58P)
           </a>
-          <a href="books/58881_laplace_probability/laplace_probability_intro.tex" class="btn btn-tex" target="_blank">
+          <a href="../books/58881_laplace_probability/laplace_probability_intro.tex" class="btn btn-tex" target="_blank">
             <svg viewBox="0 0 24 24" width="16" height="16" fill="none" stroke="currentColor" stroke-width="2"><polyline points="16 18 22 12 16 6"></polyline><polyline points="8 6 2 12 8 18"></polyline></svg>
             TeX原稿ソース
           </a>
         </div>
       </div>
 
-      <div class="book-card" data-search="高校生のためのヴェン確率論入門 —— 客観的頻度論・確率系列からランダム性の数理・平均論まで The Logic of Chance, 3rd edition John Venn 教育情報分析研究会 57359 Project Gutenberg #57359収載のジョン・ヴェン『偶然の論理』を底本に、客観的頻度論・確率系列・ランダム性の数理・平均論と代表値の限界までを完全網羅した全12章・62ページの本格的数学入門書。">
+      <div class="book-card" data-search="高校生のためのヴェン確率論入門 —— 『偶然の論理』とヴェン図でひもとく客観的データと統計の科学 The Logic of Chance, 3rd edition John Venn 教育情報分析研究会 57359 Project Gutenberg Bookshelf 672収載のジョン・ヴェン『偶然の論理』を底本に、客観的頻度論・確率系列の安定性・ランダム性の数理・幾何学的確率・主観確率批判・平均論・帰納推論を全12章・62ページで徹底解明した本格教科書。TikZ図版、例題解説、用語辞典、総合演習付。">
         <div class="card-header">
           <span class="badge badge-id">Gutenberg #57359</span>
           <span class="badge badge-pages">12章 / 62頁</span>
           <span class="badge badge-author">教育情報分析研究会</span>
         </div>
-        <h2 class="book-title">高校生のためのヴェン確率論入門 —— 客観的頻度論・確率系列からランダム性の数理・平均論まで</h2>
+        <h2 class="book-title">高校生のためのヴェン確率論入門 —— 『偶然の論理』とヴェン図でひもとく客観的データと統計の科学</h2>
         <div class="original-meta">
           <span class="label">原著：</span>
           <a href="https://www.gutenberg.org/ebooks/57359" target="_blank" rel="noopener noreferrer" class="orig-link" title="Project Gutenbergで原著を見る">
@@ -83,29 +83,29 @@
             <svg class="icon-ext" viewBox="0 0 24 24" width="14" height="14" fill="none" stroke="currentColor" stroke-width="2"><path d="M18 13v6a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V8a2 2 0 0 1 2-2h6"></path><polyline points="15 3 21 3 21 9"></polyline><line x1="10" y1="14" x2="21" y2="3"></line></svg>
           </a>
         </div>
-        <p class="book-desc">Project Gutenberg #57359収載のジョン・ヴェン『偶然の論理』を底本に、客観的頻度論・確率系列・ランダム性の数理・平均論と代表値の限界までを完全網羅した全12章・62ページの本格的数学入門書。</p>
+        <p class="book-desc">Project Gutenberg Bookshelf 672収載のジョン・ヴェン『偶然の論理』を底本に、客観的頻度論・確率系列の安定性・ランダム性の数理・幾何学的確率・主観確率批判・平均論・帰納推論を全12章・62ページで徹底解明した本格教科書。TikZ図版、例題解説、用語辞典、総合演習付。</p>
         <div class="engine-info">
-          <span class="engine-tag">⚡ 生成エンジン: google/gemma-3-4b (LM Studio @ http://192.168.128.16:1234/)</span>
+          <span class="engine-tag">⚡ 生成エンジン: gemma4:12b (Ollama @ http://192.168.128.62:11434/)</span>
         </div>
         <div class="card-actions">
-          <a href="books/57359_venn_logic_of_chance/venn_logic_of_chance_intro.pdf" class="btn btn-pdf" target="_blank">
+          <a href="../books/57359_venn_logic_of_chance/venn_logic_of_chance_intro.pdf" class="btn btn-pdf" target="_blank">
             <svg viewBox="0 0 24 24" width="16" height="16" fill="none" stroke="currentColor" stroke-width="2"><path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"></path><polyline points="14 2 14 8 20 8"></polyline><line x1="16" y1="13" x2="8" y2="13"></line><line x1="16" y1="17" x2="8" y2="17"></line><polyline points="10 9 9 9 8 9"></polyline></svg>
             PDF製本版を読む (62P)
           </a>
-          <a href="books/57359_venn_logic_of_chance/venn_logic_of_chance_intro.tex" class="btn btn-tex" target="_blank">
+          <a href="../books/57359_venn_logic_of_chance/venn_logic_of_chance_intro.tex" class="btn btn-tex" target="_blank">
             <svg viewBox="0 0 24 24" width="16" height="16" fill="none" stroke="currentColor" stroke-width="2"><polyline points="16 18 22 12 16 6"></polyline><polyline points="8 6 2 12 8 18"></polyline></svg>
             TeX原稿ソース
           </a>
         </div>
       </div>
 
-      <div class="book-card" data-search="高校生のためのブール代数と確率論入門 —— 思考の法則から記号論理・確率の代数化・コンピュータ回路まで An Investigation of the Laws of Thought George Boole 教育情報分析研究会 15114 Project Gutenberg Bookshelf 672収載のジョージ・ブール『思考の法則』を底本に、記号論理・真理値・ブール代数の公理系から、確率の代数方程式体系、ブール不等式、ベイズ逆確率、論理ゲート回路、現代AIまでを完全網羅した33ページの本格教科書。">
+      <div class="book-card" data-search="高校生のためのブール代数と確率論入門 —— 『思考の法則』で学ぶ論理・確率・コンピュータの数学 An Investigation of the Laws of Thought George Boole 教育情報分析研究会 15114 Project Gutenberg Bookshelf 672収載のジョージ・ブール『思考の法則』を底本に、二値論理・べき等律・ブール展開定理・消去法・確率の代数方程式体系・フレシェ＝ブール不等式・論理回路までを完全網羅した全12章・67ページの本格教科書。TikZ図版、例題解説、用語辞典、総合演習付。">
         <div class="card-header">
           <span class="badge badge-id">Gutenberg #15114</span>
           <span class="badge badge-pages">12章 / 67頁</span>
           <span class="badge badge-author">教育情報分析研究会</span>
         </div>
-        <h2 class="book-title">高校生のためのブール代数と確率論入門 —— 思考の法則から記号論理・確率の代数化・コンピュータ回路まで</h2>
+        <h2 class="book-title">高校生のためのブール代数と確率論入門 —— 『思考の法則』で学ぶ論理・確率・コンピュータの数学</h2>
         <div class="original-meta">
           <span class="label">原著：</span>
           <a href="https://www.gutenberg.org/ebooks/15114" target="_blank" rel="noopener noreferrer" class="orig-link" title="Project Gutenbergで原著を見る">
@@ -113,16 +113,46 @@
             <svg class="icon-ext" viewBox="0 0 24 24" width="14" height="14" fill="none" stroke="currentColor" stroke-width="2"><path d="M18 13v6a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V8a2 2 0 0 1 2-2h6"></path><polyline points="15 3 21 3 21 9"></polyline><line x1="10" y1="14" x2="21" y2="3"></line></svg>
           </a>
         </div>
-        <p class="book-desc">Project Gutenberg Bookshelf 672収載のジョージ・ブール『思考の法則』を底本に、記号論理・真理値・ブール代数の公理系から、確率の代数方程式体系、ブール不等式、ベイズ逆確率、論理ゲート回路、現代AIまでを完全網羅した33ページの本格教科書。</p>
+        <p class="book-desc">Project Gutenberg Bookshelf 672収載のジョージ・ブール『思考の法則』を底本に、二値論理・べき等律・ブール展開定理・消去法・確率の代数方程式体系・フレシェ＝ブール不等式・論理回路までを完全網羅した全12章・67ページの本格教科書。TikZ図版、例題解説、用語辞典、総合演習付。</p>
         <div class="engine-info">
           <span class="engine-tag">⚡ 生成エンジン: gemma4:12b (Ollama @ http://192.168.128.62:11434/)</span>
         </div>
         <div class="card-actions">
-          <a href="books/15114_boole_laws_of_thought/boole_laws_of_thought_intro.pdf" class="btn btn-pdf" target="_blank">
+          <a href="../books/15114_boole_laws_of_thought/boole_laws_of_thought_intro.pdf" class="btn btn-pdf" target="_blank">
             <svg viewBox="0 0 24 24" width="16" height="16" fill="none" stroke="currentColor" stroke-width="2"><path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"></path><polyline points="14 2 14 8 20 8"></polyline><line x1="16" y1="13" x2="8" y2="13"></line><line x1="16" y1="17" x2="8" y2="17"></line><polyline points="10 9 9 9 8 9"></polyline></svg>
             PDF製本版を読む (67P)
           </a>
-          <a href="books/15114_boole_laws_of_thought/boole_laws_of_thought_intro.tex" class="btn btn-tex" target="_blank">
+          <a href="../books/15114_boole_laws_of_thought/boole_laws_of_thought_intro.tex" class="btn btn-tex" target="_blank">
+            <svg viewBox="0 0 24 24" width="16" height="16" fill="none" stroke="currentColor" stroke-width="2"><polyline points="16 18 22 12 16 6"></polyline><polyline points="8 6 2 12 8 18"></polyline></svg>
+            TeX原稿ソース
+          </a>
+        </div>
+      </div>
+
+      <div class="book-card" data-search="高校生のためのルイス・キャロル論理学入門 —— 『論理の遊戯』とダイアグラムで楽しむ記号論理・三段論法・確率の数理 The Game of Logic Lewis Carroll 教育情報分析研究会 4763 Project Gutenberg Bookshelf 672収載のルイス・キャロル『論理の遊戯』を底本に、赤・灰のカウンターと四角いダイアグラムによる三段論法の完全解法、境界線上のカウンター、誤謬の看破、カルノー図によるデジタル論理回路、条件付き確率とベイズの定理までを全12章・58ページで完全体系化した入門書。TikZ図版、例題解説、用語辞典、総合演習付。">
+        <div class="card-header">
+          <span class="badge badge-id">Gutenberg #4763</span>
+          <span class="badge badge-pages">12章 / 58頁</span>
+          <span class="badge badge-author">教育情報分析研究会</span>
+        </div>
+        <h2 class="book-title">高校生のためのルイス・キャロル論理学入門 —— 『論理の遊戯』とダイアグラムで楽しむ記号論理・三段論法・確率の数理</h2>
+        <div class="original-meta">
+          <span class="label">原著：</span>
+          <a href="https://www.gutenberg.org/ebooks/4763" target="_blank" rel="noopener noreferrer" class="orig-link" title="Project Gutenbergで原著を見る">
+            <strong>The Game of Logic</strong> <span>(Lewis Carroll)</span>
+            <svg class="icon-ext" viewBox="0 0 24 24" width="14" height="14" fill="none" stroke="currentColor" stroke-width="2"><path d="M18 13v6a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V8a2 2 0 0 1 2-2h6"></path><polyline points="15 3 21 3 21 9"></polyline><line x1="10" y1="14" x2="21" y2="3"></line></svg>
+          </a>
+        </div>
+        <p class="book-desc">Project Gutenberg Bookshelf 672収載のルイス・キャロル『論理の遊戯』を底本に、赤・灰のカウンターと四角いダイアグラムによる三段論法の完全解法、境界線上のカウンター、誤謬の看破、カルノー図によるデジタル論理回路、条件付き確率とベイズの定理までを全12章・58ページで完全体系化した入門書。TikZ図版、例題解説、用語辞典、総合演習付。</p>
+        <div class="engine-info">
+          <span class="engine-tag">⚡ 生成エンジン: gemma4:12b (Ollama @ http://192.168.128.62:11434/)</span>
+        </div>
+        <div class="card-actions">
+          <a href="../books/4763_carroll_game_of_logic/carroll_game_of_logic_intro.pdf" class="btn btn-pdf" target="_blank">
+            <svg viewBox="0 0 24 24" width="16" height="16" fill="none" stroke="currentColor" stroke-width="2"><path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"></path><polyline points="14 2 14 8 20 8"></polyline><line x1="16" y1="13" x2="8" y2="13"></line><line x1="16" y1="17" x2="8" y2="17"></line><polyline points="10 9 9 9 8 9"></polyline></svg>
+            PDF製本版を読む (58P)
+          </a>
+          <a href="../books/4763_carroll_game_of_logic/carroll_game_of_logic_intro.tex" class="btn btn-tex" target="_blank">
             <svg viewBox="0 0 24 24" width="16" height="16" fill="none" stroke="currentColor" stroke-width="2"><polyline points="16 18 22 12 16 6"></polyline><polyline points="8 6 2 12 8 18"></polyline></svg>
             TeX原稿ソース
           </a>
