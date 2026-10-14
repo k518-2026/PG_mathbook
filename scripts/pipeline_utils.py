@@ -59,3 +59,52 @@ def verify_and_check_math(japanese_text, original_english=""):
     )
     note = call_lm_studio(prompt, system_prompt="", model="qwen2.5-math-7b-instruct", max_tokens=250, temperature=0.1)
     return note
+
+OLLAMA_URL = "http://192.168.128.62:11434/api/generate"
+
+def call_ollama(prompt, system_prompt="", model="gemma4:12b"):
+    """
+    Call Ollama API on http://192.168.128.62:11434/
+    """
+    full_prompt = prompt
+    if system_prompt:
+        full_prompt = f"{system_prompt}\n\n{prompt}"
+        
+    payload = {
+        "model": model,
+        "prompt": full_prompt,
+        "stream": False,
+        "options": {
+            "temperature": 0.3,
+            "num_predict": 4096
+        }
+    }
+    payload["think"] = False
+    
+    req = urllib.request.Request(
+        OLLAMA_URL,
+        data=json.dumps(payload).encode("utf-8"),
+        headers={"Content-Type": "application/json"}
+    )
+    
+    with urllib.request.urlopen(req, timeout=300) as response:
+        result = json.loads(response.read().decode("utf-8"))
+        return result.get("response", "").strip()
+
+def generate_highschool_exposition(verified_translation, chapter_topic, model="gemma4:12b"):
+    """
+    Step 3: Generate pedagogical lecture for high school students using Ollama
+    """
+    sys_prompt = (
+        "あなたは高校生に寄り添う親しみやすく明快な数学・物理の名講師です。"
+        "原著の格調高い翻訳と数学的検証結果をもとに、高校生（数学I・II・B・III）でも根本から感動的に理解できるよう、"
+        "日常の具体例、直観的解説、図解のイメージ、ステップごとの数式展開（LaTeX形式）、用語解説を交えた"
+        "非常に丁寧で魅力的な解説講義を執筆してください。"
+    )
+    prompt = (
+        f"【テーマ】：{chapter_topic}\n\n"
+        f"以下の原著の日本語訳（数学校閲済み）の内容を踏まえ、高校生に向けた丁寧で深い解説講義を作成してください：\n\n"
+        f"{verified_translation[:3500]}"
+    )
+    return call_ollama(prompt, system_prompt=sys_prompt, model=model)
+
