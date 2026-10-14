@@ -91,20 +91,32 @@ def call_ollama(prompt, system_prompt="", model="gemma4:12b"):
         result = json.loads(response.read().decode("utf-8"))
         return result.get("response", "").strip()
 
-def generate_highschool_exposition(verified_translation, chapter_topic, model="gemma4:12b"):
+def generate_adult_relearning_exposition(verified_translation, chapter_topic, model="gemma4:12b"):
     """
-    Step 3: Generate pedagogical lecture for high school students using Ollama
+    Step 3: Generate pedagogical lecture for adult re-learners (50s-80s) using Ollama.
+    Explains historical mathematical classics using junior high and high school mathematics.
+    Difficult concepts are explained even more thoroughly than the original text.
     """
     sys_prompt = (
-        "あなたは高校生に寄り添う親しみやすく明快な数学・物理の名講師です。"
-        "原著の格調高い翻訳と数学的検証結果をもとに、高校生（数学I・II・B・III）でも根本から感動的に理解できるよう、"
-        "日常の具体例、直観的解説、図解のイメージ、ステップごとの数式展開（LaTeX形式）、用語解説を交えた"
-        "非常に丁寧で魅力的な解説講義を執筆してください。"
+        "あなたは『古典で学び直す数学 —— いまからでも遅くない高校までの数学で理解する歴史的名著』の専任ナビゲーターです。\n"
+        "読者対象は、50代から80代の大人です。「学生時代に数学で挫折してしまったが、もう一度挑戦したい」「大人になって知的好奇心から数学の本質を味わいたい」という方々です。\n"
+        "以下の執筆指針を厳格に守って、充実した丁寧な解説講義を執筆してください：\n\n"
+        "【執筆指針】\n"
+        "1. 前提知識は中学校・高校数学（方程式、関数のグラフ、三角比、確率の基礎、微分積分の直観的イメージ）に限定し、難しい大学レベルの専門用語は使わずに平易に解きほぐす。\n"
+        "2. 難しい概念や数式は、原著以上に一歩一歩のステップを省かずに懇切丁寧に説明する。なぜその計算や式変形が成り立つのかを読者が納得できるよう示す。\n"
+        "3. 人生経験豊かな大人の読者が深く共感できるよう、歴史的背景（なぜ当時の大数学者がその問題に挑んだのか）や日常・社会との結びつき、知的興奮を生き生きと伝える。\n"
+        "4. 語り口は知的で温かく、読者を励まし伴走する丁寧な敬体（です・ます調）とする。\n"
+        "5. 図解のイメージ（ベン図、グラフ、数直線、幾何的配置など）を言葉でも豊かに描写し、数式はLaTeX形式（$...$, $$...$$）で明快に記載する。"
     )
     prompt = (
-        f"【テーマ】：{chapter_topic}\n\n"
-        f"以下の原著の日本語訳（数学校閲済み）の内容を踏まえ、高校生に向けた丁寧で深い解説講義を作成してください：\n\n"
+        f"【本章のテーマ】：{chapter_topic}\n\n"
+        f"以下の原著の日本語訳（数理校閲済み）の内容をもとに、大人の読者が中学校・高校の数学の知識で根本からスッキリ納得できるよう、"
+        f"原著以上に丁寧で感動的な「学び直し解説講義」を執筆してください：\n\n"
         f"{verified_translation[:3500]}"
     )
     return call_ollama(prompt, system_prompt=sys_prompt, model=model)
+
+# Backwards compatibility alias
+def generate_highschool_exposition(verified_translation, chapter_topic, model="gemma4:12b"):
+    return generate_adult_relearning_exposition(verified_translation, chapter_topic, model=model)
 

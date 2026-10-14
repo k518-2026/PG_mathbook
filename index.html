@@ -3,26 +3,27 @@
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>PG_mathbook | 古典数学原著・高校生向け入門ライブラリ</title>
-  <meta name="description" content="Project Gutenberg の数学古典を底本に、原著日本語全訳と高校生向け丁寧な解説講義を同一作品枠で統合した数学教育ライブラリ。" />
+  <title>古典で学び直す数学 | いまからでも遅くない高校までの数学で理解する歴史的名著</title>
+  <meta name="description" content="50代から80代の大人へ贈る数学学び直しライブラリ。昔数学で挫折してしまった方や知的好奇心に燃える大人のために、Project Gutenbergの古典原典を中学校・高校数学で原著以上に丁寧に解き明かします。" />
   <link rel="stylesheet" href="style.css" />
 </head>
 <body>
   <header class="site-header">
     <div class="header-inner">
-      <div class="site-badge">PROJECT GUTENBERG CLASSIC MATH & SCIENCE SERIES</div>
-      <h1 class="site-title">古典数学・科学原著と高校生のための入門ライブラリ</h1>
+      <div class="site-badge">REDISCOVERING MATHEMATICS THROUGH CLASSICS</div>
+      <h1 class="site-title">古典で学び直す数学</h1>
       <p class="site-subtitle">
-        Project Gutenberg（Bookshelf 672 等）収載の世界的名著を底本に、
-        <strong>「原著の忠実な日本語翻訳・数学校閲」</strong> と <strong>「高校生のための丁寧な解説講義・図解」</strong> を
-        1つの枠組みに統合して対照学習できるオープン教育ライブラリです。<br>
-        各枠の最上部にある<strong>「Gutenberg原著を開く」</strong>から、いつでも英語・仏語の一次資料を直接照合できます。
+        —— <strong>いまからでも遅くない、高校までの数学で理解する歴史的名著</strong> ——<br>
+        「学生のころ数学に挫折してしまった」「大人になった今だからこそ、数学の奥深い美しさを味わいたい」<br>
+        50代〜80代の読者に向けて、人類の知的至宝（ラプラス、ポアンカレ、ヴェン、ブール、キャロル、トンプソン）を
+        <strong>中学校・高校で習う数学だけを使って、原著以上に一歩一歩丁寧に解き明かす</strong>大人のためのオープン数学ライブラリです。<br>
+        各枠の最上部にある<strong>「Gutenberg原著を開く」</strong>から、いつでも英語・仏語の一次資料へ立ち返ることができます。
       </p>
       <div class="meta-strip">
-        <span class="strip-pill">編著者：<strong>教育情報分析研究会</strong></span>
-        <span class="strip-pill">対象古典作品：<strong>6</strong> 作品</span>
-        <span class="strip-pill">製本版：<strong>7</strong> 冊</span>
-        <span class="strip-pill">組版：<strong>LuaLaTeX (TeX Live 2026 / TikZ)</strong></span>
+        <span class="strip-pill">対象読者：<strong>50代〜80代・大人の学び直し</strong></span>
+        <span class="strip-pill">前提知識：<strong>中学校・高校までの数学</strong></span>
+        <span class="strip-pill">収録古典：<strong>6</strong> 作品（全 <strong>7</strong> 冊）</span>
+        <span class="strip-pill">組版：<strong>LuaLaTeX (TeX Live 2026 / TikZ図版多数)</strong></span>
         <span class="strip-pill">重複管理：<strong>catalog.json 連携済み</strong></span>
       </div>
     </div>
@@ -32,7 +33,7 @@
     <section class="toolbar">
       <div class="search-box">
         <svg class="search-icon" viewBox="0 0 24 24" width="18" height="18" fill="none" stroke="currentColor" stroke-width="2"><circle cx="11" cy="11" r="8"></circle><line x1="21" y1="21" x2="16.65" y2="16.65"></line></svg>
-        <input type="search" id="searchInput" placeholder="原著名・タイトル・著者・キーワードで検索..." oninput="filterBooks()" />
+        <input type="search" id="searchInput" placeholder="古典原著名・タイトル・著者・数学テーマで検索..." oninput="filterBooks()" />
       </div>
       <div class="toolbar-actions">
         <span id="matchCount" class="match-badge">全 6 作品表示中</span>
@@ -40,10 +41,10 @@
       </div>
     </section>
 
-    <!-- 原著と高校生向け本が同じ枠に入る統合グリッド -->
+    <!-- 原著と学び直し本が同じ枠に入る統合グリッド -->
     <section class="works-container" id="worksContainer">
 
-      <article class="work-box" data-search="58881 A Philosophical Essay on Probabilities Pierre-Simon Laplace 確率の哲学的試論 —— 決定論的宇宙観と確率計算の全体系（原著全18章 完全翻訳・数学校閲版） ピエール＝シモン・ラプラス（著） / 教育情報分析研究会（訳・数理校閲） Project Gutenberg eBook #58881収載のラプラス『確率の哲学的試論』全18章（決定論・10の原理・期待値・母関数法・極限定理・最小二乗法・道徳科学・証言・裁判・生命表・諸制度・錯覚論・科学的方法・1816年までの歴史）を、qwen2.5-7b-instructによる忠実な日本語翻訳とqwen2.5-math-7b-instructによる厳密な数理・LaTeX校閲を経て完全製本した全18章・108ページの決定版全訳学術書。 qwen2.5-7b-instruct (翻訳) & qwen2.5-math-7b-instruct (数理校閲) @ http://192.168.128.16:1234/ 高校生のためのラプラス確率・統計入門 —— 歴史的名著『確率の哲学的試論』で解き明かす数学の神髄 教育情報分析研究会 Project Gutenberg Bookshelf 672収載のラプラス『確率の哲学的試論』を底本に、決定論的宇宙観・確率の基本10原理・期待値・ベイズ逆確率・大数の法則・中心極限定理・最小二乗法・道徳科学までを完全網羅した全12章・58ページの本格的入門書。TikZ図版、例題解説、用語辞典、総合演習付。 gemma4:12b (Ollama @ http://192.168.128.62:11434/)">
+      <article class="work-box" data-search="58881 A Philosophical Essay on Probabilities Pierre-Simon Laplace 確率の哲学的試論 —— 決定論的宇宙観と確率計算の全体系（原著全18章 完全翻訳・数学校閲版） ピエール＝シモン・ラプラス（著） / 教育情報分析研究会（訳・数理校閲） Project Gutenberg eBook #58881収載のラプラス『確率の哲学的試論』全18章（決定論・10の原理・期待値・母関数法・極限定理・最小二乗法・道徳科学・証言・裁判・生命表・諸制度・錯覚論・科学的方法・1816年までの歴史）を、qwen2.5-7b-instructによる忠実な日本語翻訳とqwen2.5-math-7b-instructによる厳密な数理・LaTeX校閲を経て完全製本した全18章・108ページの決定版全訳学術書。 qwen2.5-7b-instruct (翻訳) & qwen2.5-math-7b-instruct (数理校閲) @ http://192.168.128.16:1234/ 古典で学び直すラプラス確率・統計入門 —— 歴史的名著『確率の哲学的試論』を高校までの数学で読み解く 教育情報分析研究会 Project Gutenberg Bookshelf 672収載のラプラス『確率の哲学的試論』を底本に、大人になって学び直す読者のために、決定論的宇宙観・確率の基本10原理・期待値・ベイズ逆確率・大数の法則・中心極限定理・最小二乗法を高校数学（確率・関数のグラフ）の範囲で原著以上に懇切丁寧に紐解く全12章・58ページの入門書。TikZ図版、例題解説、用語辞典、総合演習付。 gemma4:12b (Ollama @ http://192.168.128.62:11434/)">
         <!-- 原著マスターヘッダー（同じ枠の最上部） -->
         <header class="work-header">
           <div class="work-header-top">
@@ -65,7 +66,7 @@
           </div>
         </header>
 
-        <!-- 原著と高校生向けの本を統合収容するボディ -->
+        <!-- 原著と大人の学び直し本を統合収容するボディ -->
         <div class="work-body">
 
         <div class="edition-grid">
@@ -93,22 +94,22 @@
             </div>
           </div>
 
-          <!-- 高校生のための本 -->
+          <!-- 古典で学び直す大人のための入門書 -->
           <div class="edition-panel edition-highschool">
             <div class="edition-badge-bar">
-              <span class="badge badge-highschool">高校生のための入門書</span>
+              <span class="badge badge-highschool">大人のための学び直し入門書</span>
               <span class="badge badge-pages">12章 / 58頁</span>
             </div>
-            <h3 class="edition-title">高校生のためのラプラス確率・統計入門 —— 歴史的名著『確率の哲学的試論』で解き明かす数学の神髄</h3>
-            <div class="edition-author"><span class="label">編著：</span>教育情報分析研究会</div>
-            <p class="edition-desc">Project Gutenberg Bookshelf 672収載のラプラス『確率の哲学的試論』を底本に、決定論的宇宙観・確率の基本10原理・期待値・ベイズ逆確率・大数の法則・中心極限定理・最小二乗法・道徳科学までを完全網羅した全12章・58ページの本格的入門書。TikZ図版、例題解説、用語辞典、総合演習付。</p>
+            <h3 class="edition-title">古典で学び直すラプラス確率・統計入門 —— 歴史的名著『確率の哲学的試論』を高校までの数学で読み解く</h3>
+            <div class="edition-author"><span class="label">編著・解説：</span>教育情報分析研究会</div>
+            <p class="edition-desc">Project Gutenberg Bookshelf 672収載のラプラス『確率の哲学的試論』を底本に、大人になって学び直す読者のために、決定論的宇宙観・確率の基本10原理・期待値・ベイズ逆確率・大数の法則・中心極限定理・最小二乗法を高校数学（確率・関数のグラフ）の範囲で原著以上に懇切丁寧に紐解く全12章・58ページの入門書。TikZ図版、例題解説、用語辞典、総合演習付。</p>
             <div class="engine-info">
               <span class="engine-tag">⚡ gemma4:12b (Ollama @ http://192.168.128.62:11434/)</span>
             </div>
             <div class="card-actions">
               <a href="books/58881_laplace_probability/laplace_probability_intro.pdf" class="btn btn-pdf btn-hs" target="_blank">
                 <svg viewBox="0 0 24 24" width="16" height="16" fill="none" stroke="currentColor" stroke-width="2"><path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"></path><polyline points="14 2 14 8 20 8"></polyline><line x1="16" y1="13" x2="8" y2="13"></line><line x1="16" y1="17" x2="8" y2="17"></line><polyline points="10 9 9 9 8 9"></polyline></svg>
-                PDF入門書を読む (58P)
+                PDF学び直し版を読む (58P)
               </a>
               <a href="books/58881_laplace_probability/laplace_probability_intro.tex" class="btn btn-tex" target="_blank">
                 <svg viewBox="0 0 24 24" width="16" height="16" fill="none" stroke="currentColor" stroke-width="2"><polyline points="16 18 22 12 16 6"></polyline><polyline points="8 6 2 12 8 18"></polyline></svg>
@@ -121,7 +122,7 @@
         </div>
       </article>
 
-      <article class="work-box" data-search="57359 The Logic of Chance, 3rd edition John Venn 高校生のためのヴェン確率論入門 —— 『偶然の論理』とヴェン図でひもとく客観的データと統計の科学 教育情報分析研究会 Project Gutenberg Bookshelf 672収載のジョン・ヴェン『偶然の論理』を底本に、客観的頻度論・確率系列の安定性・ランダム性の数理・幾何学的確率・主観確率批判・平均論・帰納推論を全12章・62ページで徹底解明した本格教科書。TikZ図版、例題解説、用語辞典、総合演習付。 gemma4:12b (Ollama @ http://192.168.128.62:11434/)">
+      <article class="work-box" data-search="57359 The Logic of Chance, 3rd edition John Venn 古典で学び直すヴェン確率論入門 —— 『偶然の論理』と実社会具体例でひもとく客観的データと統計の科学 教育情報分析研究会 Project Gutenberg Bookshelf 672収載のジョン・ヴェン『偶然の論理』を底本に、工場不良品率・GPS測位・サイコロ力学・世論調査・がん検診・生命保険など実社会の豊富かつ具体的な12の事例と計算ステップを組み込み、客観的頻度論・確率系列の安定性・ランダム性・幾何学的確率・主観確率批判・平均論・帰納推論を、大人の知的好奇心に応えて中学校・高校数学で原著以上に分かりやすく再構成・解説した全12章・70ページの本格教科書。TikZ図版、例題解説、用語辞典、総合演習付。 gemma4:12b (Ollama @ http://192.168.128.62:11434/)">
         <!-- 原著マスターヘッダー（同じ枠の最上部） -->
         <header class="work-header">
           <div class="work-header-top">
@@ -143,25 +144,25 @@
           </div>
         </header>
 
-        <!-- 原著と高校生向けの本を統合収容するボディ -->
+        <!-- 原著と大人の学び直し本を統合収容するボディ -->
         <div class="work-body">
 
         <div class="edition-single">
           <div class="edition-panel edition-highschool">
             <div class="edition-badge-bar">
-              <span class="badge badge-highschool">高校生のための古典数学入門書</span>
-              <span class="badge badge-pages">12章 / 62頁</span>
+              <span class="badge badge-highschool">古典で学び直す数学入門書</span>
+              <span class="badge badge-pages">12章 / 70頁</span>
               <span class="badge badge-author">教育情報分析研究会</span>
             </div>
-            <h3 class="edition-title">高校生のためのヴェン確率論入門 —— 『偶然の論理』とヴェン図でひもとく客観的データと統計の科学</h3>
-            <p class="edition-desc">Project Gutenberg Bookshelf 672収載のジョン・ヴェン『偶然の論理』を底本に、客観的頻度論・確率系列の安定性・ランダム性の数理・幾何学的確率・主観確率批判・平均論・帰納推論を全12章・62ページで徹底解明した本格教科書。TikZ図版、例題解説、用語辞典、総合演習付。</p>
+            <h3 class="edition-title">古典で学び直すヴェン確率論入門 —— 『偶然の論理』と実社会具体例でひもとく客観的データと統計の科学</h3>
+            <p class="edition-desc">Project Gutenberg Bookshelf 672収載のジョン・ヴェン『偶然の論理』を底本に、工場不良品率・GPS測位・サイコロ力学・世論調査・がん検診・生命保険など実社会の豊富かつ具体的な12の事例と計算ステップを組み込み、客観的頻度論・確率系列の安定性・ランダム性・幾何学的確率・主観確率批判・平均論・帰納推論を、大人の知的好奇心に応えて中学校・高校数学で原著以上に分かりやすく再構成・解説した全12章・70ページの本格教科書。TikZ図版、例題解説、用語辞典、総合演習付。</p>
             <div class="engine-info">
               <span class="engine-tag">⚡ gemma4:12b (Ollama @ http://192.168.128.62:11434/)</span>
             </div>
             <div class="card-actions">
               <a href="books/57359_venn_logic_of_chance/venn_logic_of_chance_intro.pdf" class="btn btn-pdf" target="_blank">
                 <svg viewBox="0 0 24 24" width="16" height="16" fill="none" stroke="currentColor" stroke-width="2"><path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"></path><polyline points="14 2 14 8 20 8"></polyline><line x1="16" y1="13" x2="8" y2="13"></line><line x1="16" y1="17" x2="8" y2="17"></line><polyline points="10 9 9 9 8 9"></polyline></svg>
-                PDF製本版を読む (62P)
+                PDF製本版を読む (70P)
               </a>
               <a href="books/57359_venn_logic_of_chance/venn_logic_of_chance_intro.tex" class="btn btn-tex" target="_blank">
                 <svg viewBox="0 0 24 24" width="16" height="16" fill="none" stroke="currentColor" stroke-width="2"><polyline points="16 18 22 12 16 6"></polyline><polyline points="8 6 2 12 8 18"></polyline></svg>
@@ -174,7 +175,7 @@
         </div>
       </article>
 
-      <article class="work-box" data-search="15114 An Investigation of the Laws of Thought George Boole 高校生のためのブール代数と確率論入門 —— 『思考の法則』で学ぶ論理・確率・コンピュータの数学 教育情報分析研究会 Project Gutenberg Bookshelf 672収載のジョージ・ブール『思考の法則』を底本に、二値論理・べき等律・ブール展開定理・消去法・確率の代数方程式体系・フレシェ＝ブール不等式・論理回路までを完全網羅した全12章・67ページの本格教科書。TikZ図版、例題解説、用語辞典、総合演習付。 gemma4:12b (Ollama @ http://192.168.128.62:11434/)">
+      <article class="work-box" data-search="15114 An Investigation of the Laws of Thought George Boole 古典で学び直すブール代数と論理入門 —— 『思考の法則』で学ぶ記号論理・確率・コンピュータの原点 教育情報分析研究会 Project Gutenberg Bookshelf 672収載のジョージ・ブール『思考の法則』を底本に、二値論理・べき等律・ブール展開定理・消去法・確率の代数方程式体系・論理回路までを、高校数学（集合と論理・方程式）の基礎から原著以上に懇切丁寧に解説した全12章・67ページの本格教科書。TikZ図版、例題解説、用語辞典、総合演習付。 gemma4:12b (Ollama @ http://192.168.128.62:11434/)">
         <!-- 原著マスターヘッダー（同じ枠の最上部） -->
         <header class="work-header">
           <div class="work-header-top">
@@ -196,18 +197,18 @@
           </div>
         </header>
 
-        <!-- 原著と高校生向けの本を統合収容するボディ -->
+        <!-- 原著と大人の学び直し本を統合収容するボディ -->
         <div class="work-body">
 
         <div class="edition-single">
           <div class="edition-panel edition-highschool">
             <div class="edition-badge-bar">
-              <span class="badge badge-highschool">高校生のための古典数学入門書</span>
+              <span class="badge badge-highschool">古典で学び直す数学入門書</span>
               <span class="badge badge-pages">12章 / 67頁</span>
               <span class="badge badge-author">教育情報分析研究会</span>
             </div>
-            <h3 class="edition-title">高校生のためのブール代数と確率論入門 —— 『思考の法則』で学ぶ論理・確率・コンピュータの数学</h3>
-            <p class="edition-desc">Project Gutenberg Bookshelf 672収載のジョージ・ブール『思考の法則』を底本に、二値論理・べき等律・ブール展開定理・消去法・確率の代数方程式体系・フレシェ＝ブール不等式・論理回路までを完全網羅した全12章・67ページの本格教科書。TikZ図版、例題解説、用語辞典、総合演習付。</p>
+            <h3 class="edition-title">古典で学び直すブール代数と論理入門 —— 『思考の法則』で学ぶ記号論理・確率・コンピュータの原点</h3>
+            <p class="edition-desc">Project Gutenberg Bookshelf 672収載のジョージ・ブール『思考の法則』を底本に、二値論理・べき等律・ブール展開定理・消去法・確率の代数方程式体系・論理回路までを、高校数学（集合と論理・方程式）の基礎から原著以上に懇切丁寧に解説した全12章・67ページの本格教科書。TikZ図版、例題解説、用語辞典、総合演習付。</p>
             <div class="engine-info">
               <span class="engine-tag">⚡ gemma4:12b (Ollama @ http://192.168.128.62:11434/)</span>
             </div>
@@ -227,7 +228,7 @@
         </div>
       </article>
 
-      <article class="work-box" data-search="4763 The Game of Logic Lewis Carroll 高校生のためのルイス・キャロル論理学入門 —— 『論理の遊戯』とダイアグラムで楽しむ記号論理・三段論法・確率の数理 教育情報分析研究会 Project Gutenberg Bookshelf 672収載のルイス・キャロル『論理の遊戯』を底本に、赤・灰のカウンターと四角いダイアグラムによる三段論法の完全解法、境界線上のカウンター、誤謬の看破、カルノー図によるデジタル論理回路、条件付き確率とベイズの定理までを全12章・58ページで完全体系化した入門書。TikZ図版、例題解説、用語辞典、総合演習付。 gemma4:12b (Ollama @ http://192.168.128.62:11434/)">
+      <article class="work-box" data-search="4763 The Game of Logic Lewis Carroll 古典で学び直すルイス・キャロル論理学入門 —— 『論理の遊戯』とダイアグラムで楽しむ三段論法と確率の数理 教育情報分析研究会 Project Gutenberg Bookshelf 672収載のルイス・キャロル『論理の遊戯』を底本に、赤・灰のカウンターと四角いダイアグラムによる三段論法の完全解法、境界線上のカウンター、誤謬の看破、カルノー図、条件付き確率とベイズの定理を、パズル感覚で大人が楽しく学べるよう高校数学の範囲で徹底解説した全12章・58ページの入門書。TikZ図版、例題解説、用語辞典、総合演習付。 gemma4:12b (Ollama @ http://192.168.128.62:11434/)">
         <!-- 原著マスターヘッダー（同じ枠の最上部） -->
         <header class="work-header">
           <div class="work-header-top">
@@ -249,18 +250,18 @@
           </div>
         </header>
 
-        <!-- 原著と高校生向けの本を統合収容するボディ -->
+        <!-- 原著と大人の学び直し本を統合収容するボディ -->
         <div class="work-body">
 
         <div class="edition-single">
           <div class="edition-panel edition-highschool">
             <div class="edition-badge-bar">
-              <span class="badge badge-highschool">高校生のための古典数学入門書</span>
+              <span class="badge badge-highschool">古典で学び直す数学入門書</span>
               <span class="badge badge-pages">12章 / 58頁</span>
               <span class="badge badge-author">教育情報分析研究会</span>
             </div>
-            <h3 class="edition-title">高校生のためのルイス・キャロル論理学入門 —— 『論理の遊戯』とダイアグラムで楽しむ記号論理・三段論法・確率の数理</h3>
-            <p class="edition-desc">Project Gutenberg Bookshelf 672収載のルイス・キャロル『論理の遊戯』を底本に、赤・灰のカウンターと四角いダイアグラムによる三段論法の完全解法、境界線上のカウンター、誤謬の看破、カルノー図によるデジタル論理回路、条件付き確率とベイズの定理までを全12章・58ページで完全体系化した入門書。TikZ図版、例題解説、用語辞典、総合演習付。</p>
+            <h3 class="edition-title">古典で学び直すルイス・キャロル論理学入門 —— 『論理の遊戯』とダイアグラムで楽しむ三段論法と確率の数理</h3>
+            <p class="edition-desc">Project Gutenberg Bookshelf 672収載のルイス・キャロル『論理の遊戯』を底本に、赤・灰のカウンターと四角いダイアグラムによる三段論法の完全解法、境界線上のカウンター、誤謬の看破、カルノー図、条件付き確率とベイズの定理を、パズル感覚で大人が楽しく学べるよう高校数学の範囲で徹底解説した全12章・58ページの入門書。TikZ図版、例題解説、用語辞典、総合演習付。</p>
             <div class="engine-info">
               <span class="engine-tag">⚡ gemma4:12b (Ollama @ http://192.168.128.62:11434/)</span>
             </div>
@@ -280,7 +281,7 @@
         </div>
       </article>
 
-      <article class="work-box" data-search="33283 Calculus Made Easy Silvanus P. Thompson 高校生のための微積分入門 —— 『Calculus Made Easy』で直観的にわかる微分・積分・極限から物理・曲線の数理まで 教育情報分析研究会 Project Gutenberg eBook #33283収載のシルバヌス・P・トンプソン『Calculus Made Easy（誰にもわかる微積分）』を底本に、「一人の人間ができることは他の人間にもできる」の箴言のもと、微小量dx/dy、小ささの階級と無視の数理、幾何学的傾き、ベキ関数の微分、和差積商・連鎖律、高階微分と運動力学、極大極小最適化、ネイピア数eの自己同一性、三角関数円運動、微積分学の基本定理までを完全網羅した全12章・71ページの大作教科書。TikZ図版（重なりゼロ設計）、例題解説、用語辞典、総合演習付。 gemma4:12b (Ollama @ http://192.168.128.62:11434/)">
+      <article class="work-box" data-search="33283 Calculus Made Easy Silvanus P. Thompson 古典で学び直す微積分入門 —— 『Calculus Made Easy』で直観的にわかる微分・積分・極限から曲線の数理まで 教育情報分析研究会 Project Gutenberg eBook #33283収載のシルバヌス・P・トンプソン『Calculus Made Easy（誰にもわかる微積分）』を底本に、「一人の人間ができることは他の人間にもできる」の箴言のもと、微小量dx/dy、小ささの階級と無視の数理、幾何学的傾き、ベキ関数の微分、和差積商・連鎖律、高階微分と運動力学、極大極小最適化、ネイピア数e、三角関数、微積分学の基本定理までを、大人向けの丁寧なステップ解説で完全網羅した全12章・71ページの大作教科書。TikZ図版、例題解説、用語辞典、総合演習付。 gemma4:12b (Ollama @ http://192.168.128.62:11434/)">
         <!-- 原著マスターヘッダー（同じ枠の最上部） -->
         <header class="work-header">
           <div class="work-header-top">
@@ -302,18 +303,18 @@
           </div>
         </header>
 
-        <!-- 原著と高校生向けの本を統合収容するボディ -->
+        <!-- 原著と大人の学び直し本を統合収容するボディ -->
         <div class="work-body">
 
         <div class="edition-single">
           <div class="edition-panel edition-highschool">
             <div class="edition-badge-bar">
-              <span class="badge badge-highschool">高校生のための古典数学入門書</span>
+              <span class="badge badge-highschool">古典で学び直す数学入門書</span>
               <span class="badge badge-pages">12章 / 71頁</span>
               <span class="badge badge-author">教育情報分析研究会</span>
             </div>
-            <h3 class="edition-title">高校生のための微積分入門 —— 『Calculus Made Easy』で直観的にわかる微分・積分・極限から物理・曲線の数理まで</h3>
-            <p class="edition-desc">Project Gutenberg eBook #33283収載のシルバヌス・P・トンプソン『Calculus Made Easy（誰にもわかる微積分）』を底本に、「一人の人間ができることは他の人間にもできる」の箴言のもと、微小量dx/dy、小ささの階級と無視の数理、幾何学的傾き、ベキ関数の微分、和差積商・連鎖律、高階微分と運動力学、極大極小最適化、ネイピア数eの自己同一性、三角関数円運動、微積分学の基本定理までを完全網羅した全12章・71ページの大作教科書。TikZ図版（重なりゼロ設計）、例題解説、用語辞典、総合演習付。</p>
+            <h3 class="edition-title">古典で学び直す微積分入門 —— 『Calculus Made Easy』で直観的にわかる微分・積分・極限から曲線の数理まで</h3>
+            <p class="edition-desc">Project Gutenberg eBook #33283収載のシルバヌス・P・トンプソン『Calculus Made Easy（誰にもわかる微積分）』を底本に、「一人の人間ができることは他の人間にもできる」の箴言のもと、微小量dx/dy、小ささの階級と無視の数理、幾何学的傾き、ベキ関数の微分、和差積商・連鎖律、高階微分と運動力学、極大極小最適化、ネイピア数e、三角関数、微積分学の基本定理までを、大人向けの丁寧なステップ解説で完全網羅した全12章・71ページの大作教科書。TikZ図版、例題解説、用語辞典、総合演習付。</p>
             <div class="engine-info">
               <span class="engine-tag">⚡ gemma4:12b (Ollama @ http://192.168.128.62:11434/)</span>
             </div>
@@ -333,7 +334,7 @@
         </div>
       </article>
 
-      <article class="work-box" data-search="37157 Science and Hypothesis Henri Poincaré 科学と仮説 —— 数学・幾何学・物理学の基礎をめぐる省察（原著全13章 日本語訳・数学校閲・高校生向け解説付） アンリ・ポアンカレ（著） / 教育情報分析研究会（訳・数理校閲・解説） Project Gutenberg eBook #37157収載のアンリ・ポアンカレ『科学と仮説』全13章。qwen2.5-7b-instructによる忠実な直訳（Step 1）、qwen2.5-math-7b-instructによる数理校閲（Step 2）、Ollama gemma4:12bによる高校生向け丁寧な解説講義（Step 3）の全プロセスを完全実行し、TikZ図版（ポアンカレ円板モデル、デデキント切断、三感覚空間ベン図、エネルギー保存、正規分布、電磁波、ローレンツ質量曲線等）を多数配置して製本した全13章・159ページの決定版学術解説書。 qwen2.5-7b-instruct (Step 1 原著直訳) & qwen2.5-math-7b-instruct (Step 2 数理校閲) @ http://192.168.128.16:1234/ + gemma4:12b (Step 3 高校生向け解説講義) @ http://192.168.128.62:11434/">
+      <article class="work-box" data-search="37157 Science and Hypothesis Henri Poincaré 古典で学び直す科学と仮説 —— 数学・幾何学・物理学の基礎をめぐる省察（原著全13章 日本語訳・数学校閲・大人のための丁寧な解説付） アンリ・ポアンカレ（著） / 教育情報分析研究会（訳・数理校閲・解説） Project Gutenberg eBook #37157収載のアンリ・ポアンカレ『科学と仮説』全13章。qwen2.5-7b-instructによる忠実な直訳（Step 1）、qwen2.5-math-7b-instructによる数理校閲（Step 2）、Ollama gemma4:12bによる大人の学び直しに向けた懇切丁寧な解説講義（Step 3）の全プロセスを完全実行し、TikZ図版（ポアンカレ円板モデル、デデキント切断、三感覚空間ベン図、エネルギー保存、正規分布、電磁波、ローレンツ質量曲線等）を多数配置して製本した全13章・159ページの決定版学術解説書。 qwen2.5-7b-instruct (Step 1 原著直訳) & qwen2.5-math-7b-instruct (Step 2 数理校閲) @ http://192.168.128.16:1234/ + gemma4:12b (Step 3 大人のための丁寧な解説講義) @ http://192.168.128.62:11434/">
         <!-- 原著マスターヘッダー（同じ枠の最上部） -->
         <header class="work-header">
           <div class="work-header-top">
@@ -355,20 +356,20 @@
           </div>
         </header>
 
-        <!-- 原著と高校生向けの本を統合収容するボディ -->
+        <!-- 原著と大人の学び直し本を統合収容するボディ -->
         <div class="work-body">
 
         <div class="edition-single">
           <div class="edition-panel edition-combined">
             <div class="edition-badge-bar">
-              <span class="badge badge-combined">原著全訳 ＋ 数学校閲 ＋ 高校生向け解説講義（合本集成版）</span>
+              <span class="badge badge-combined">原著全訳 ＋ 数学校閲 ＋ 大人のための丁寧な解説講義（合本集成版）</span>
               <span class="badge badge-pages">13章 / 159頁</span>
               <span class="badge badge-author">アンリ・ポアンカレ（著） / 教育情報分析研究会（訳・数理校閲・解説）</span>
             </div>
-            <h3 class="edition-title">科学と仮説 —— 数学・幾何学・物理学の基礎をめぐる省察（原著全13章 日本語訳・数学校閲・高校生向け解説付）</h3>
-            <p class="edition-desc">Project Gutenberg eBook #37157収載のアンリ・ポアンカレ『科学と仮説』全13章。qwen2.5-7b-instructによる忠実な直訳（Step 1）、qwen2.5-math-7b-instructによる数理校閲（Step 2）、Ollama gemma4:12bによる高校生向け丁寧な解説講義（Step 3）の全プロセスを完全実行し、TikZ図版（ポアンカレ円板モデル、デデキント切断、三感覚空間ベン図、エネルギー保存、正規分布、電磁波、ローレンツ質量曲線等）を多数配置して製本した全13章・159ページの決定版学術解説書。</p>
+            <h3 class="edition-title">古典で学び直す科学と仮説 —— 数学・幾何学・物理学の基礎をめぐる省察（原著全13章 日本語訳・数学校閲・大人のための丁寧な解説付）</h3>
+            <p class="edition-desc">Project Gutenberg eBook #37157収載のアンリ・ポアンカレ『科学と仮説』全13章。qwen2.5-7b-instructによる忠実な直訳（Step 1）、qwen2.5-math-7b-instructによる数理校閲（Step 2）、Ollama gemma4:12bによる大人の学び直しに向けた懇切丁寧な解説講義（Step 3）の全プロセスを完全実行し、TikZ図版（ポアンカレ円板モデル、デデキント切断、三感覚空間ベン図、エネルギー保存、正規分布、電磁波、ローレンツ質量曲線等）を多数配置して製本した全13章・159ページの決定版学術解説書。</p>
             <div class="engine-info">
-              <span class="engine-tag">⚡ qwen2.5-7b-instruct (Step 1 原著直訳) & qwen2.5-math-7b-instruct (Step 2 数理校閲) @ http://192.168.128.16:1234/ + gemma4:12b (Step 3 高校生向け解説講義) @ http://192.168.128.62:11434/</span>
+              <span class="engine-tag">⚡ qwen2.5-7b-instruct (Step 1 原著直訳) & qwen2.5-math-7b-instruct (Step 2 数理校閲) @ http://192.168.128.16:1234/ + gemma4:12b (Step 3 大人のための丁寧な解説講義) @ http://192.168.128.62:11434/</span>
             </div>
             <div class="card-actions">
               <a href="books/37157_poincare_science_and_hypothesis/poincare_science_and_hypothesis_intro.pdf" class="btn btn-pdf" target="_blank">
@@ -389,16 +390,20 @@
     </section>
 
     <section class="info-section">
-      <h2>📚 原著と高校生向け書籍の対照・統合設計について</h2>
+      <h2>📚 『古典で学び直す数学』の基本理念</h2>
       <p>
-        本ライブラリでは、ラプラス、ポアンカレ、ジョン・ヴェン、ジョージ・ブール、ルイス・キャロル、トンプソンといった歴史的巨星たちのパブリックドメイン原典をもとに、
-        <strong>「原著の厳密な数学的・哲学的論理（Step 1 &amp; Step 2）」</strong> と
-        <strong>「高校生が直観と図解で感動的に理解できる教育講義（Step 3）」</strong> を
-        同じ作品枠（ボックス）の中に収めて一覧・比較できるようにデザインしています。
+        数学は、若い学生だけの試験勉強の道具ではありません。むしろ、人生経験を積んだ大人だからこそ、
+        「なぜ確率という不確実なものを人間は計算しようとしたのか」「記号論理はなぜコンピュータを生み出したのか」「無限小とは一体何なのか」という
+        問いの深さと、それを乗り越えた先人たちの思考の美しさに心から感動できるはずです。
+      </p>
+      <p>
+        本ライブラリでは、大学レベルの難解な専門用語を振りかざすのではなく、
+        <strong>「中学校や高校で誰もが一度は目にしたことのある数式やグラフ（1次・2次関数、方程式、確率、図形）」</strong>だけを道具として用います。
+        難解な概念ほどステップを省略せず、原著以上に懇切丁寧に図解（TikZ）と例題を交えて解説しています。
       </p>
       <p>
         書籍の追加・更新は <code>catalog.json</code> を通じて厳格に重複判定され、同一 Gutenberg ID の二重登録を防止しています。
-        すべての一次資料（Project Gutenberg EBook）への直リンクを完備し、いつでも原典へと立ち返ることができるオープンな数学教育環境を提供しています。
+        すべての作品枠に Project Gutenberg の原典への直リンクを備え、学び直しの旅をどこまでも深く楽しんでいただけます。
       </p>
     </section>
   </main>
@@ -406,6 +411,7 @@
   <footer class="site-footer">
     <div class="footer-inner">
       <p>&copy; 2026 <strong>教育情報分析研究会</strong> (Educational Information Analysis Study Group)</p>
+      <p>古典で学び直す数学シリーズ —— Project Gutenberg パブリックドメイン数学古典集成</p>
       <p>Source Repository: <a href="https://github.com/k518-2026/PG_mathbook" target="_blank" rel="noopener noreferrer">https://github.com/k518-2026/PG_mathbook</a></p>
     </div>
   </footer>
