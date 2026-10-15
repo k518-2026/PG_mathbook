@@ -32,9 +32,25 @@ ROMAN_TITLES = {
 }
 
 def clean_latex(text):
+    # Strip any AI preamble lines about translation
+    text = re.sub(r'^(?:以下[^\n]*|忠実[^\n]*|次[^\n]*|この[^\n]*|原著[^\n]*)(?:翻訳|日本語訳)[^\n]*[：:\n]*', '', text, flags=re.MULTILINE)
+    text = re.sub(r'【(?:翻訳|日本語訳|訳文)】\s*', '', text)
+    text = re.sub(r'次のように翻訳します[：:]\s*', '', text)
+    text = re.sub(r'以下が[^\n]*翻訳[^\n]*[：:]\s*', '', text)
+    text = re.sub(r'以下の文章を忠実に日本語[へに]翻訳[しいたします]+[：:]\s*', '', text)
+    text = re.sub(r'以下の原著英文を忠実に日本語[へに]翻訳[しいたします]+[：:]\s*', '', text)
+    text = re.sub(r'以下の文を忠実に日本語[へに]翻訳[しいたします]+[：:]\s*', '', text)
+    text = re.sub(r'以下、?原著英文を忠実に日本語[へに]翻訳[しいたします]+[：:]\s*', '', text)
+    text = re.sub(r'以下は、?原著英文を忠実に日本語[へに]翻訳[しいたします]+[：:]\s*', '', text)
+    text = re.sub(r'以下に、?原著英文を忠実に[^\n]*[：:]\s*', '', text)
+    text = re.sub(r'忠実に日本語[へに]翻訳[しいたします]+[：:]\s*', '', text)
+    text = re.sub(r'忠実に日本語[へに]翻訳したもの[を示します結果です]+[：:]\s*', '', text)
+    text = re.sub(r'忠実に日本語[へに]翻訳すると以下のようになります[：:]\s*', '', text)
+    text = re.sub(r'忠実に翻訳したもの[を示します]+[：:]\s*', '', text)
+    text = re.sub(r'忠実に翻訳し、自然な日本語表現に調整しました[^\n]*\n?', '', text)
+    text = re.sub(r'忠実な翻訳です[。：:\n]?', '', text)
+
     # Fix common artifacts
-    text = text.replace("次のように翻訳します：", "")
-    text = text.replace("以下の文章を忠実に日本語に翻訳します：", "")
     text = text.replace("哲学的確率論への献辞", "")
     text = text.replace("確率に関する論考.", "")
     text = text.replace("確率論の計算.", "")
