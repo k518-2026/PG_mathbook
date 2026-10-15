@@ -34,11 +34,21 @@ ROMAN_TITLES = {
 }
 
 def clean_latex(text):
-    text = text.replace("次のように翻訳します：", "")
-    text = text.replace("以下の文章を忠実に日本語に翻訳します：", "")
-    text = text.replace("以下が忠実な日本語翻訳です：", "")
-    text = text.replace("忠実に日本語へ翻訳いたします：", "")
-    text = text.replace("以下が翻訳です：", "")
+    # Strip any AI preamble lines about translation
+    text = re.sub(r'^(?:以下[^\n]*|忠実[^\n]*|次[^\n]*|この[^\n]*|原著[^\n]*)(?:翻訳|日本語訳)[^\n]*[：:\n]*', '', text, flags=re.MULTILINE)
+    text = re.sub(r'【(?:翻訳|日本語訳|訳文)】\s*', '', text)
+    text = re.sub(r'次のように翻訳します[：:]\s*', '', text)
+    text = re.sub(r'以下が[^\n]*翻訳[^\n]*[：:]\s*', '', text)
+    text = re.sub(r'以下の文章を忠実に日本語[へに]翻訳[しいたします]+[：:]\s*', '', text)
+    text = re.sub(r'以下の原著英文を忠実に日本語[へに]翻訳[しいたします]+[：:]\s*', '', text)
+    text = re.sub(r'以下の文を忠実に日本語[へに]翻訳[しいたします]+[：:]\s*', '', text)
+    text = re.sub(r'以下、?原著英文を忠実に日本語[へに]翻訳[しいたします]+[：:]\s*', '', text)
+    text = re.sub(r'以下は、?原著英文を忠実に日本語[へに]翻訳[しいたします]+[：:]\s*', '', text)
+    text = re.sub(r'以下に、?原著英文を忠実に[^\n]*[：:]\s*', '', text)
+    text = re.sub(r'忠実に日本語[へに]翻訳[しいたします]+[：:]\s*', '', text)
+    text = re.sub(r'忠実に日本語[へに]翻訳したもの[を示します]+[：:]\s*', '', text)
+    text = re.sub(r'忠実に日本語[へに]翻訳すると以下のようになります[：:]\s*', '', text)
+    text = re.sub(r'忠実に翻訳したもの[を示します]+[：:]\s*', '', text)
 
     # Clean stray OCR or translation artifacts
     text = text.replace("£", "$p$")
@@ -46,6 +56,17 @@ def clean_latex(text):
     text = text.replace("\\}", "}")
     text = text.replace(r"\±", r"\pm")
     text = text.replace(r"-\frac{1}{500}", r"$-\frac{1}{500}$")
+
+    # Simplified Chinese to Japanese kanji mapping
+    kanji_map = {
+        '储': '儲', '质': '質', '转': '転', '误': '誤', '产': '産',
+        '计': '計', '设': '設', '读': '読', '对': '対', '电': '電',
+        '标': '標', '录': '録', '错': '錯', '识': '識', '损': '損',
+        '盘': '盤', '备': '備', '码': '碼', '员': '員', '进': '進',
+        '观': '観', '类': '類', '态': '態', '规': '規', '则': '則'
+    }
+    for k, v in kanji_map.items():
+        text = text.replace(k, v)
 
     # Replace carets and symbols outside math
     parts = re.split(r'(\$\$.*?\$\$|\$.*?\$|\\\(.*?\\\)|\\\[.*?\\\])', text, flags=re.DOTALL)
