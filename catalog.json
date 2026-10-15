@@ -47,7 +47,26 @@
       "gutenberg_url": "https://www.gutenberg.org/ebooks/58881"
     },
     {
-      "gutenberg_id": "57359-intro",
+      "gutenberg_id": "57359",
+      "original_title": "The Logic of Chance, 3rd edition",
+      "original_author": "John Venn",
+      "japanese_title": "偶然の論理 —— 客観的頻度論と確率の論理的・物理的基礎（原著全19章 完全翻訳・数学校閲版）",
+      "author": "ジョン・ヴェン（著） / 教育情報分析研究会（訳・数理校閲）",
+      "category": "Mathematics / Probability & Statistics (Project Gutenberg eBook #57359)",
+      "language": "ja",
+      "chapters_count": 19,
+      "pages": 247,
+      "status": "完成",
+      "created_at": "2026-10-15T20:38:00+09:00",
+      "book_dir": "books/57359_venn_logic_of_chance",
+      "tex_file": "books/57359_venn_logic_of_chance/venn_logic_of_chance_translation.tex",
+      "pdf_file": "books/57359_venn_logic_of_chance/venn_logic_of_chance_translation.pdf",
+      "model_used": "qwen2.5-7b-instruct (翻訳) & qwen2.5-math-7b-instruct (数理校閲) @ http://192.168.128.16:1234/",
+      "compiler": "LuaLaTeX (LuaHBTeX / TeX Live 2026)",
+      "description": "Project Gutenberg eBook #57359収載のジョン・ヴェン『偶然の論理（第3版・決定版）』全19章（確率の物理的基礎・誤差法則批判・因果性・ランダム性・主観的信念測定批判・推論規則・継起則批判・帰納法・設計論批判・様相論・諸誤謬・保険と賭博・証言・奇跡論批判・平均論・真理への近似理論）を、qwen2.5-7b-instructによる忠実な日本語翻訳とqwen2.5-math-7b-instructによる厳密な数理・LaTeX校閲を経て完全製本した全19章・247ページの決定版全訳学術書。",
+      "gutenberg_url": "https://www.gutenberg.org/ebooks/57359"
+    },
+    {
       "original_title": "The Logic of Chance, 3rd edition",
       "original_author": "John Venn",
       "japanese_title": "古典で学び直すヴェン確率論入門 —— 『偶然の論理』と実社会具体例でひもとく客観的データと統計の科学",
