@@ -285,6 +285,26 @@
       "compiler": "LuaLaTeX (LuaHBTeX / TeX Live 2026)",
       "description": "Project Gutenberg eBook #25447収載のバートランド・ラッセル『神秘主義と論理』を底本に、50代から80代の大人の学び直しの読者に向けて、神秘主義と科学的論理の調和、論理主義プログラム、ラッセルのパラドックス（理髪師の謎）、階型理論（型システム）、ゼノンのパラドックスと無限等比級数、カントールの超限数（アレフ0と対角線論法）、記述理論、直接親知と記述、微分方程式と因果律の批判、数学の冷徹な美、科学的哲学の方法、チューリング機械とAI自動定理証明（Lean 4）への系譜を、高校数学と実社会の具体例（サイバーセキュリティ、スマートコントラクト、自動運転認識、気象シミュレーション等）で懇切丁寧に読み解く全12章・65ページの決定版入門書。TikZ図版12点、重要用語辞典、総合演習問題10問と詳細解答付。",
       "gutenberg_url": "https://www.gutenberg.org/ebooks/25447"
+    },
+    {
+      "gutenberg_id": "30155",
+      "original_title": "Relativity: The Special and the General Theory",
+      "original_author": "Albert Einstein",
+      "japanese_title": "特殊および一般相対性理論について —— 物理的実在の幾何学化と時空連続体の全体系（原著全32節・付録4篇 完全翻訳・数学校閲版）",
+      "author": "アルベルト・アインシュタイン 著 / 教育情報分析研究会 訳・校閲",
+      "category": "Theoretical Physics & Relativity (Project Gutenberg eBook #30155)",
+      "language": "ja",
+      "chapters_count": 37,
+      "pages": 86,
+      "status": "完成",
+      "created_at": "2026-10-16 23:22:13",
+      "book_dir": "books/30155_einstein_relativity",
+      "tex_file": "books/30155_einstein_relativity/einstein_relativity_translation.tex",
+      "pdf_file": "books/30155_einstein_relativity/einstein_relativity_translation.pdf",
+      "model_used": "qwen2.5-7b-instruct (Direct Translation) & qwen2.5-math-7b-instruct (Mathematical Review)",
+      "compiler": "LuaLaTeX",
+      "description": "アルベルト・アインシュタインの主著『特殊および一般相対性理論について』の全32節および付録4篇（全37セクション）を一切の省略・要約なく原著直訳し、数理的厳密さを徹底校閲した完全直訳版。ローレンツ変換、ミンコフスキー4次元時空、等価原理、ガウス座標計量テンソル、重力場方程式と検証（水星の近日点移動・光の湾曲・赤方偏移）、有限かつ境界なき宇宙論モデルまで、アインシュタイン自身の筆致と数式展開を完全再現。",
+      "gutenberg_url": "https://www.gutenberg.org/ebooks/30155"
     }
   ]
 }
