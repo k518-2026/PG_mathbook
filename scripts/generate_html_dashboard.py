@@ -58,9 +58,8 @@ def generate_html():
         sections_html = ""
 
         if len(b_list) >= 2:
-            # Case: Laplace (#58881) has both full translation and re-learning guide
-            full_trans = next((b for b in b_list if "-intro" not in b.get("gutenberg_id", "") and "全訳" in b.get("japanese_title", "")), b_list[0])
-            intro_book = next((b for b in b_list if "-intro" in b.get("gutenberg_id", "") or "学び直す" in b.get("japanese_title", "")), b_list[1])
+            full_trans = next((b for b in b_list if "-intro" not in b.get("gutenberg_id", "")), b_list[0])
+            intro_book = next((b for b in b_list if "-intro" in b.get("gutenberg_id", "")), b_list[1])
 
             sections_html = f"""
         <div class="edition-grid">
