@@ -305,6 +305,26 @@
       "compiler": "LuaLaTeX",
       "description": "アルベルト・アインシュタインの主著『特殊および一般相対性理論について』の全32節および付録4篇（全37セクション）を一切の省略・要約なく原著直訳し、数理的厳密さを徹底校閲した完全直訳版。ローレンツ変換、ミンコフスキー4次元時空、等価原理、ガウス座標計量テンソル、重力場方程式と検証（水星の近日点移動・光の湾曲・赤方偏移）、有限かつ境界なき宇宙論モデルまで、アインシュタイン自身の筆致と数式展開を完全再現。",
       "gutenberg_url": "https://www.gutenberg.org/ebooks/30155"
+    },
+    {
+      "gutenberg_id": "25447",
+      "original_title": "Mysticism and Logic and Other Essays",
+      "original_author": "Bertrand Russell",
+      "japanese_title": "神秘主義と論理、その他の試論 —— 論理原子論・無限の数学・科学的認識論の全体系（原著全10篇・序文 完全翻訳・数理論理校閲版）",
+      "author": "バートランド・ラッセル 著 / 教育情報分析研究会 訳・校閲",
+      "category": "Mathematical Philosophy & Epistemology (Project Gutenberg eBook #25447)",
+      "language": "ja",
+      "chapters_count": 11,
+      "pages": 111,
+      "status": "完成",
+      "created_at": "2026-10-17 04:34:16",
+      "book_dir": "books/25447_russell_mathematical_philosophy",
+      "tex_file": "books/25447_russell_mathematical_philosophy/russell_mysticism_and_logic_translation.tex",
+      "pdf_file": "books/25447_russell_mathematical_philosophy/russell_mysticism_and_logic_translation.pdf",
+      "model_used": "qwen2.5-7b-instruct (Direct Translation) & qwen2.5-math-7b-instruct (Mathematical Review)",
+      "compiler": "LuaLaTeX",
+      "description": "20世紀最大の論理学者・哲学者バートランド・ラッセルの歴史的論文集『神秘主義と論理』の全10篇および序文（全11セクション）を一切の省略・要約なく原著直訳し、集合論・記号論理・認識論の厳密さを徹底校閲した完全直訳版。カントールの無限集合論、ゼノンのパラドックスの解決、センス・データと物理学の論理的構成、因果律批判、記述の理論まで、ラッセル自身の格調高い文体と数理的論理構成を完全再現。",
+      "gutenberg_url": "https://www.gutenberg.org/ebooks/25447"
     }
   ]
 }
