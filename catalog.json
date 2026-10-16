@@ -245,6 +245,26 @@
       "compiler": "LuaLaTeX (LuaHBTeX / TeX Live 2026)",
       "description": "Project Gutenberg eBook #37157収載のポアンカレ『科学と仮説』を底本に、50代から80代の大人の学び直しの読者に向けて、数学的帰納法、デデキントの切断、非ユークリッド幾何学（ポアンカレ円板）、幾何学的空間の構成、ニュートン力学の循環定義、エネルギー保存則、オッカムの剃刀、カオス理論、電磁気学と光速不変の萌芽を、高校数学と実社会の具体例（ブロックチェーン、GPS、VR、AI、SPring-8等）で懇切丁寧に読み解く全13章・65ページの決定版入門書。TikZ図版、例題解説、用語辞典、総合演習付。",
       "gutenberg_url": "https://www.gutenberg.org/ebooks/37157"
+    },
+    {
+      "gutenberg_id": "30155-intro",
+      "original_title": "Relativity: The Special and the General Theory",
+      "original_author": "Albert Einstein",
+      "japanese_title": "古典で学び直すアインシュタイン相対性理論入門 —— いまからでも遅くない、高校までの数学で理解する歴史的名著",
+      "author": "教育情報分析研究会",
+      "category": "Theoretical Physics & Mathematics (Project Gutenberg eBook #30155)",
+      "language": "ja",
+      "chapters_count": 12,
+      "pages": 63,
+      "status": "完成",
+      "created_at": "2026-10-16T21:00:00+09:00",
+      "book_dir": "books/30155_einstein_relativity",
+      "tex_file": "books/30155_einstein_relativity/einstein_relativity_intro.tex",
+      "pdf_file": "books/30155_einstein_relativity/einstein_relativity_intro.pdf",
+      "model_used": "gemma4:12b (Ollama @ http://192.168.128.62:11434/)",
+      "compiler": "LuaLaTeX (LuaHBTeX / TeX Live 2026)",
+      "description": "Project Gutenberg eBook #30155収載のアインシュタイン『特殊および一般相対性理論について』を底本に、50代から80代の大人の学び直しの読者に向けて、幾何学の物理的意味、光速度不変の原理、列車と堤防の同時性の不一致、三平方の定理で解く光時計の時間遅れ、ローレンツ収縮、E=mc^2の質量エネルギー等価性、4次元時空と光円錐、等価原理、回転円盤と非ユークリッド幾何学、エディントン日食観測と重力レンズ、ブラックホール、動的宇宙とダークエネルギーの復活を、高校数学と実社会の具体例（GPS測位補正、新幹線実験、ミューオン寿命延伸、PET診断、スカイツリー重力実験等）で懇切丁寧に読み解く全12章・63ページの決定版入門書。TikZ図版12点、重要用語辞典、総合演習問題10選と詳細解答付。",
+      "gutenberg_url": "https://www.gutenberg.org/ebooks/30155"
     }
   ]
 }
