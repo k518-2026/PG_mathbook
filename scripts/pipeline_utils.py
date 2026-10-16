@@ -43,8 +43,9 @@ def translate_english_to_japanese(english_text):
         "英語の数学原著を、一切の要約や省略を行わず、原文の論理・語調・数式に忠実に、格調高い正確な日本語に翻訳してください。"
         "文中の数式や変数はLaTeX形式（$...$ または $$...$$）で記述してください。"
         "中国語は一切使わず、自然な日本語のみで記述してください。"
+        "【最重要指示】「以下の文章を忠実に日本語へ翻訳しました：」「以下が翻訳です：」などの前置き・挨拶・挨拶文・注釈・解説などのメタテキストは一切出力せず、翻訳本文のみを直接出力してください。"
     )
-    prompt = f"以下の原著英文を忠実に日本語へ翻訳してください：\n\n{english_text}"
+    prompt = f"以下の原著英文を忠実に日本語へ翻訳してください（前置き・注釈・解説は一切出力せず、翻訳文のみを出力すること）：\n\n{english_text}"
     return call_lm_studio(prompt, system_prompt=sys_prompt, model="qwen2.5-7b-instruct", max_tokens=2500, temperature=0.1)
 
 def verify_and_check_math(japanese_text, original_english=""):

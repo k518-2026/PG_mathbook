@@ -83,7 +83,8 @@
       "model_used": "gemma4:12b (Ollama @ http://192.168.128.62:11434/)",
       "compiler": "LuaLaTeX (LuaHBTeX / TeX Live 2026)",
       "description": "Project Gutenberg Bookshelf 672収載のジョン・ヴェン『偶然の論理』を底本に、工場不良品率・GPS測位・サイコロ力学・世論調査・がん検診・生命保険など実社会の豊富かつ具体的な12の事例と計算ステップを組み込み、客観的頻度論・確率系列の安定性・ランダム性・幾何学的確率・主観確率批判・平均論・帰納推論を、大人の知的好奇心に応えて中学校・高校数学で原著以上に分かりやすく再構成・解説した全12章・70ページの本格教科書。TikZ図版、例題解説、用語辞典、総合演習付。",
-      "gutenberg_url": "https://www.gutenberg.org/ebooks/57359"
+      "gutenberg_url": "https://www.gutenberg.org/ebooks/57359",
+      "gutenberg_id": "57359-intro"
     },
     {
       "gutenberg_id": "15114",
@@ -166,7 +167,7 @@
       "gutenberg_url": "https://www.gutenberg.org/ebooks/4763"
     },
     {
-      "gutenberg_id": "33283",
+      "gutenberg_id": "33283-intro",
       "original_title": "Calculus Made Easy",
       "original_author": "Silvanus P. Thompson",
       "japanese_title": "古典で学び直す微積分入門 —— 『Calculus Made Easy』で直観的にわかる微分・積分・極限から曲線の数理まで",
@@ -204,6 +205,26 @@
       "compiler": "LuaLaTeX (LuaHBTeX / TeX Live 2026)",
       "description": "Project Gutenberg eBook #37157収載のアンリ・ポアンカレ『科学と仮説』全13章。qwen2.5-7b-instructによる忠実な直訳（Step 1）、qwen2.5-math-7b-instructによる数理校閲（Step 2）、Ollama gemma4:12bによる大人の学び直しに向けた懇切丁寧な解説講義（Step 3）の全プロセスを完全実行し、TikZ図版（ポアンカレ円板モデル、デデキント切断、三感覚空間ベン図、エネルギー保存、正規分布、電磁波、ローレンツ質量曲線等）を多数配置して製本した全13章・159ページの決定版学術解説書。",
       "gutenberg_url": "https://www.gutenberg.org/ebooks/37157"
+    },
+    {
+      "gutenberg_id": "33283",
+      "original_title": "Calculus Made Easy",
+      "original_author": "Silvanus P. Thompson",
+      "japanese_title": "誰にもわかる微積分 —— 微分と積分の極めて容易な手引書（原著全24章・付録 完全翻訳・数学校閲版）",
+      "author": "シルバヌス・P・トンプソン（著） / 教育情報分析研究会（訳・数理校閲）",
+      "category": "Mathematics / Differential & Integral Calculus (Project Gutenberg eBook #33283)",
+      "language": "ja",
+      "chapters_count": 26,
+      "pages": 147,
+      "status": "完成",
+      "created_at": "2026-10-16T10:15:00+09:00",
+      "book_dir": "books/33283_thompson_calculus",
+      "tex_file": "books/33283_thompson_calculus/thompson_calculus_translation.tex",
+      "pdf_file": "books/33283_thompson_calculus/thompson_calculus_translation.pdf",
+      "model_used": "qwen2.5-7b-instruct (翻訳) & qwen2.5-math-7b-instruct (数理校閲) @ http://192.168.128.16:1234/",
+      "compiler": "LuaLaTeX (LuaHBTeX / TeX Live 2026)",
+      "description": "Project Gutenberg eBook #33283収載のシルバヌス・P・トンプソン『Calculus Made Easy（誰にもわかる微積分）』全24章および2つの付録（標準公式表、全演習問題の解答）を、qwen2.5-7b-instructによる原著完全翻訳とqwen2.5-math-7b-instructによる厳密な数理校閲を経て製本した全26区分・147ページの決定版全訳書。「一人の愚か者が成し得たことは、他の愚か者にも成し得る」の格言から始まる世界で最も平易で実践的な微積分古典。",
+      "gutenberg_url": "https://www.gutenberg.org/ebooks/33283"
     }
   ]
 }

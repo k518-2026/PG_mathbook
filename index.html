@@ -22,7 +22,7 @@
       <div class="meta-strip">
         <span class="strip-pill">対象読者：<strong>50代〜80代・大人の学び直し</strong></span>
         <span class="strip-pill">前提知識：<strong>中学校・高校までの数学</strong></span>
-        <span class="strip-pill">収録古典：<strong>7</strong> 作品（全 <strong>10</strong> 冊）</span>
+        <span class="strip-pill">収録古典：<strong>6</strong> 作品（全 <strong>11</strong> 冊）</span>
         <span class="strip-pill">組版：<strong>LuaLaTeX (TeX Live 2026 / TikZ図版多数)</strong></span>
         <span class="strip-pill">重複管理：<strong>catalog.json 連携済み</strong></span>
       </div>
@@ -36,7 +36,7 @@
         <input type="search" id="searchInput" placeholder="古典原著名・タイトル・著者・数学テーマで検索..." oninput="filterBooks()" />
       </div>
       <div class="toolbar-actions">
-        <span id="matchCount" class="match-badge">全 7 作品表示中</span>
+        <span id="matchCount" class="match-badge">全 6 作品表示中</span>
         <button class="theme-toggle-btn" onclick="toggleTheme()" id="themeBtn" aria-label="テーマ切替">🌙 ダーク表示</button>
       </div>
     </section>
@@ -122,12 +122,12 @@
         </div>
       </article>
 
-      <article class="work-box" data-search="57359 The Logic of Chance, 3rd edition John Venn 偶然の論理 —— 客観的頻度論と確率の論理的・物理的基礎（原著全19章 完全翻訳・数学校閲版） ジョン・ヴェン（著） / 教育情報分析研究会（訳・数理校閲） Project Gutenberg eBook #57359収載のジョン・ヴェン『偶然の論理（第3版・決定版）』全19章（確率の物理的基礎・誤差法則批判・因果性・ランダム性・主観的信念測定批判・推論規則・継起則批判・帰納法・設計論批判・様相論・諸誤謬・保険と賭博・証言・奇跡論批判・平均論・真理への近似理論）を、qwen2.5-7b-instructによる忠実な日本語翻訳とqwen2.5-math-7b-instructによる厳密な数理・LaTeX校閲を経て完全製本した全19章・247ページの決定版全訳学術書。 qwen2.5-7b-instruct (翻訳) & qwen2.5-math-7b-instruct (数理校閲) @ http://192.168.128.16:1234/">
+      <article class="work-box" data-search="57359 The Logic of Chance, 3rd edition John Venn 偶然の論理 —— 客観的頻度論と確率の論理的・物理的基礎（原著全19章 完全翻訳・数学校閲版） ジョン・ヴェン（著） / 教育情報分析研究会（訳・数理校閲） Project Gutenberg eBook #57359収載のジョン・ヴェン『偶然の論理（第3版・決定版）』全19章（確率の物理的基礎・誤差法則批判・因果性・ランダム性・主観的信念測定批判・推論規則・継起則批判・帰納法・設計論批判・様相論・諸誤謬・保険と賭博・証言・奇跡論批判・平均論・真理への近似理論）を、qwen2.5-7b-instructによる忠実な日本語翻訳とqwen2.5-math-7b-instructによる厳密な数理・LaTeX校閲を経て完全製本した全19章・247ページの決定版全訳学術書。 qwen2.5-7b-instruct (翻訳) & qwen2.5-math-7b-instruct (数理校閲) @ http://192.168.128.16:1234/ 古典で学び直すヴェン確率論入門 —— 『偶然の論理』と実社会具体例でひもとく客観的データと統計の科学 教育情報分析研究会 Project Gutenberg Bookshelf 672収載のジョン・ヴェン『偶然の論理』を底本に、工場不良品率・GPS測位・サイコロ力学・世論調査・がん検診・生命保険など実社会の豊富かつ具体的な12の事例と計算ステップを組み込み、客観的頻度論・確率系列の安定性・ランダム性・幾何学的確率・主観確率批判・平均論・帰納推論を、大人の知的好奇心に応えて中学校・高校数学で原著以上に分かりやすく再構成・解説した全12章・70ページの本格教科書。TikZ図版、例題解説、用語辞典、総合演習付。 gemma4:12b (Ollama @ http://192.168.128.62:11434/)">
         <!-- 原著マスターヘッダー（同じ枠の最上部） -->
         <header class="work-header">
           <div class="work-header-top">
             <span class="work-id-badge">Project Gutenberg #57359</span>
-            <span class="work-editions-count">収録エディション: 1 版</span>
+            <span class="work-editions-count">収録エディション: 2 版</span>
           </div>
           <div class="work-original-hero">
             <div class="hero-left">
@@ -147,14 +147,15 @@
         <!-- 原著と大人の学び直し本を統合収容するボディ -->
         <div class="work-body">
 
-        <div class="edition-single">
-          <div class="edition-panel edition-highschool">
+        <div class="edition-grid">
+          <!-- 原著日本語訳・数学校閲版 -->
+          <div class="edition-panel edition-academic">
             <div class="edition-badge-bar">
-              <span class="badge badge-highschool">古典で学び直す数学入門書</span>
+              <span class="badge badge-academic">原著日本語全訳・数学校閲版</span>
               <span class="badge badge-pages">19章 / 246頁</span>
-              <span class="badge badge-author">ジョン・ヴェン（著） / 教育情報分析研究会（訳・数理校閲）</span>
             </div>
             <h3 class="edition-title">偶然の論理 —— 客観的頻度論と確率の論理的・物理的基礎（原著全19章 完全翻訳・数学校閲版）</h3>
+            <div class="edition-author"><span class="label">訳・校閲：</span>ジョン・ヴェン（著） / 教育情報分析研究会（訳・数理校閲）</div>
             <p class="edition-desc">Project Gutenberg eBook #57359収載のジョン・ヴェン『偶然の論理（第3版・決定版）』全19章（確率の物理的基礎・誤差法則批判・因果性・ランダム性・主観的信念測定批判・推論規則・継起則批判・帰納法・設計論批判・様相論・諸誤謬・保険と賭博・証言・奇跡論批判・平均論・真理への近似理論）を、qwen2.5-7b-instructによる忠実な日本語翻訳とqwen2.5-math-7b-instructによる厳密な数理・LaTeX校閲を経て完全製本した全19章・247ページの決定版全訳学術書。</p>
             <div class="engine-info">
               <span class="engine-tag">⚡ qwen2.5-7b-instruct (翻訳) & qwen2.5-math-7b-instruct (数理校閲) @ http://192.168.128.16:1234/</span>
@@ -162,7 +163,7 @@
             <div class="card-actions">
               <a href="books/57359_venn_logic_of_chance/venn_logic_of_chance_translation.pdf" class="btn btn-pdf" target="_blank">
                 <svg viewBox="0 0 24 24" width="16" height="16" fill="none" stroke="currentColor" stroke-width="2"><path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"></path><polyline points="14 2 14 8 20 8"></polyline><line x1="16" y1="13" x2="8" y2="13"></line><line x1="16" y1="17" x2="8" y2="17"></line><polyline points="10 9 9 9 8 9"></polyline></svg>
-                PDF製本版を読む (246P)
+                PDF全訳版を読む (246P)
               </a>
               <a href="books/57359_venn_logic_of_chance/venn_logic_of_chance_translation.tex" class="btn btn-tex" target="_blank">
                 <svg viewBox="0 0 24 24" width="16" height="16" fill="none" stroke="currentColor" stroke-width="2"><polyline points="16 18 22 12 16 6"></polyline><polyline points="8 6 2 12 8 18"></polyline></svg>
@@ -170,52 +171,23 @@
               </a>
             </div>
           </div>
-        </div>
 
-        </div>
-      </article>
-
-      <article class="work-box" data-search=" The Logic of Chance, 3rd edition John Venn 古典で学び直すヴェン確率論入門 —— 『偶然の論理』と実社会具体例でひもとく客観的データと統計の科学 教育情報分析研究会 Project Gutenberg Bookshelf 672収載のジョン・ヴェン『偶然の論理』を底本に、工場不良品率・GPS測位・サイコロ力学・世論調査・がん検診・生命保険など実社会の豊富かつ具体的な12の事例と計算ステップを組み込み、客観的頻度論・確率系列の安定性・ランダム性・幾何学的確率・主観確率批判・平均論・帰納推論を、大人の知的好奇心に応えて中学校・高校数学で原著以上に分かりやすく再構成・解説した全12章・70ページの本格教科書。TikZ図版、例題解説、用語辞典、総合演習付。 gemma4:12b (Ollama @ http://192.168.128.62:11434/)">
-        <!-- 原著マスターヘッダー（同じ枠の最上部） -->
-        <header class="work-header">
-          <div class="work-header-top">
-            <span class="work-id-badge">Project Gutenberg #</span>
-            <span class="work-editions-count">収録エディション: 1 版</span>
-          </div>
-          <div class="work-original-hero">
-            <div class="hero-left">
-              <span class="hero-label">原著（一次資料）：</span>
-              <a href="https://www.gutenberg.org/ebooks/57359" target="_blank" rel="noopener noreferrer" class="orig-hero-link" title="Project Gutenberg で原著テキストを直接閲覧">
-                <strong class="orig-hero-title">The Logic of Chance, 3rd edition</strong>
-                <span class="orig-hero-author">(John Venn)</span>
-                <svg class="icon-ext" viewBox="0 0 24 24" width="16" height="16" fill="none" stroke="currentColor" stroke-width="2"><path d="M18 13v6a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V8a2 2 0 0 1 2-2h6"></path><polyline points="15 3 21 3 21 9"></polyline><line x1="10" y1="14" x2="21" y2="3"></line></svg>
-              </a>
-            </div>
-            <a href="https://www.gutenberg.org/ebooks/57359" target="_blank" rel="noopener noreferrer" class="btn-gutenberg-pill">
-              Gutenberg原著を開く ↗
-            </a>
-          </div>
-        </header>
-
-        <!-- 原著と大人の学び直し本を統合収容するボディ -->
-        <div class="work-body">
-
-        <div class="edition-single">
+          <!-- 古典で学び直す大人のための入門書 -->
           <div class="edition-panel edition-highschool">
             <div class="edition-badge-bar">
-              <span class="badge badge-highschool">古典で学び直す数学入門書</span>
+              <span class="badge badge-highschool">大人のための学び直し入門書</span>
               <span class="badge badge-pages">12章 / 70頁</span>
-              <span class="badge badge-author">教育情報分析研究会</span>
             </div>
             <h3 class="edition-title">古典で学び直すヴェン確率論入門 —— 『偶然の論理』と実社会具体例でひもとく客観的データと統計の科学</h3>
+            <div class="edition-author"><span class="label">編著・解説：</span>教育情報分析研究会</div>
             <p class="edition-desc">Project Gutenberg Bookshelf 672収載のジョン・ヴェン『偶然の論理』を底本に、工場不良品率・GPS測位・サイコロ力学・世論調査・がん検診・生命保険など実社会の豊富かつ具体的な12の事例と計算ステップを組み込み、客観的頻度論・確率系列の安定性・ランダム性・幾何学的確率・主観確率批判・平均論・帰納推論を、大人の知的好奇心に応えて中学校・高校数学で原著以上に分かりやすく再構成・解説した全12章・70ページの本格教科書。TikZ図版、例題解説、用語辞典、総合演習付。</p>
             <div class="engine-info">
               <span class="engine-tag">⚡ gemma4:12b (Ollama @ http://192.168.128.62:11434/)</span>
             </div>
             <div class="card-actions">
-              <a href="books/57359_venn_logic_of_chance/venn_logic_of_chance_intro.pdf" class="btn btn-pdf" target="_blank">
+              <a href="books/57359_venn_logic_of_chance/venn_logic_of_chance_intro.pdf" class="btn btn-pdf btn-hs" target="_blank">
                 <svg viewBox="0 0 24 24" width="16" height="16" fill="none" stroke="currentColor" stroke-width="2"><path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"></path><polyline points="14 2 14 8 20 8"></polyline><line x1="16" y1="13" x2="8" y2="13"></line><line x1="16" y1="17" x2="8" y2="17"></line><polyline points="10 9 9 9 8 9"></polyline></svg>
-                PDF製本版を読む (70P)
+                PDF学び直し版を読む (70P)
               </a>
               <a href="books/57359_venn_logic_of_chance/venn_logic_of_chance_intro.tex" class="btn btn-tex" target="_blank">
                 <svg viewBox="0 0 24 24" width="16" height="16" fill="none" stroke="currentColor" stroke-width="2"><polyline points="16 18 22 12 16 6"></polyline><polyline points="8 6 2 12 8 18"></polyline></svg>
@@ -384,12 +356,12 @@
         </div>
       </article>
 
-      <article class="work-box" data-search="33283 Calculus Made Easy Silvanus P. Thompson 古典で学び直す微積分入門 —— 『Calculus Made Easy』で直観的にわかる微分・積分・極限から曲線の数理まで 教育情報分析研究会 Project Gutenberg eBook #33283収載のシルバヌス・P・トンプソン『Calculus Made Easy（誰にもわかる微積分）』を底本に、「一人の人間ができることは他の人間にもできる」の箴言のもと、微小量dx/dy、小ささの階級と無視の数理、幾何学的傾き、ベキ関数の微分、和差積商・連鎖律、高階微分と運動力学、極大極小最適化、ネイピア数e、三角関数、微積分学の基本定理までを、大人向けの丁寧なステップ解説で完全網羅した全12章・71ページの大作教科書。TikZ図版、例題解説、用語辞典、総合演習付。 gemma4:12b (Ollama @ http://192.168.128.62:11434/)">
+      <article class="work-box" data-search="33283 Calculus Made Easy Silvanus P. Thompson 古典で学び直す微積分入門 —— 『Calculus Made Easy』で直観的にわかる微分・積分・極限から曲線の数理まで 教育情報分析研究会 Project Gutenberg eBook #33283収載のシルバヌス・P・トンプソン『Calculus Made Easy（誰にもわかる微積分）』を底本に、「一人の人間ができることは他の人間にもできる」の箴言のもと、微小量dx/dy、小ささの階級と無視の数理、幾何学的傾き、ベキ関数の微分、和差積商・連鎖律、高階微分と運動力学、極大極小最適化、ネイピア数e、三角関数、微積分学の基本定理までを、大人向けの丁寧なステップ解説で完全網羅した全12章・71ページの大作教科書。TikZ図版、例題解説、用語辞典、総合演習付。 gemma4:12b (Ollama @ http://192.168.128.62:11434/) 誰にもわかる微積分 —— 微分と積分の極めて容易な手引書（原著全24章・付録 完全翻訳・数学校閲版） シルバヌス・P・トンプソン（著） / 教育情報分析研究会（訳・数理校閲） Project Gutenberg eBook #33283収載のシルバヌス・P・トンプソン『Calculus Made Easy（誰にもわかる微積分）』全24章および2つの付録（標準公式表、全演習問題の解答）を、qwen2.5-7b-instructによる原著完全翻訳とqwen2.5-math-7b-instructによる厳密な数理校閲を経て製本した全26区分・147ページの決定版全訳書。「一人の愚か者が成し得たことは、他の愚か者にも成し得る」の格言から始まる世界で最も平易で実践的な微積分古典。 qwen2.5-7b-instruct (翻訳) & qwen2.5-math-7b-instruct (数理校閲) @ http://192.168.128.16:1234/">
         <!-- 原著マスターヘッダー（同じ枠の最上部） -->
         <header class="work-header">
           <div class="work-header-top">
             <span class="work-id-badge">Project Gutenberg #33283</span>
-            <span class="work-editions-count">収録エディション: 1 版</span>
+            <span class="work-editions-count">収録エディション: 2 版</span>
           </div>
           <div class="work-original-hero">
             <div class="hero-left">
@@ -409,14 +381,15 @@
         <!-- 原著と大人の学び直し本を統合収容するボディ -->
         <div class="work-body">
 
-        <div class="edition-single">
-          <div class="edition-panel edition-highschool">
+        <div class="edition-grid">
+          <!-- 原著日本語訳・数学校閲版 -->
+          <div class="edition-panel edition-academic">
             <div class="edition-badge-bar">
-              <span class="badge badge-highschool">古典で学び直す数学入門書</span>
+              <span class="badge badge-academic">原著日本語全訳・数学校閲版</span>
               <span class="badge badge-pages">12章 / 71頁</span>
-              <span class="badge badge-author">教育情報分析研究会</span>
             </div>
             <h3 class="edition-title">古典で学び直す微積分入門 —— 『Calculus Made Easy』で直観的にわかる微分・積分・極限から曲線の数理まで</h3>
+            <div class="edition-author"><span class="label">訳・校閲：</span>教育情報分析研究会</div>
             <p class="edition-desc">Project Gutenberg eBook #33283収載のシルバヌス・P・トンプソン『Calculus Made Easy（誰にもわかる微積分）』を底本に、「一人の人間ができることは他の人間にもできる」の箴言のもと、微小量dx/dy、小ささの階級と無視の数理、幾何学的傾き、ベキ関数の微分、和差積商・連鎖律、高階微分と運動力学、極大極小最適化、ネイピア数e、三角関数、微積分学の基本定理までを、大人向けの丁寧なステップ解説で完全網羅した全12章・71ページの大作教科書。TikZ図版、例題解説、用語辞典、総合演習付。</p>
             <div class="engine-info">
               <span class="engine-tag">⚡ gemma4:12b (Ollama @ http://192.168.128.62:11434/)</span>
@@ -424,7 +397,31 @@
             <div class="card-actions">
               <a href="books/33283_thompson_calculus/thompson_calculus_intro.pdf" class="btn btn-pdf" target="_blank">
                 <svg viewBox="0 0 24 24" width="16" height="16" fill="none" stroke="currentColor" stroke-width="2"><path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"></path><polyline points="14 2 14 8 20 8"></polyline><line x1="16" y1="13" x2="8" y2="13"></line><line x1="16" y1="17" x2="8" y2="17"></line><polyline points="10 9 9 9 8 9"></polyline></svg>
-                PDF製本版を読む (71P)
+                PDF全訳版を読む (71P)
+              </a>
+              <a href="books/33283_thompson_calculus/thompson_calculus_intro.tex" class="btn btn-tex" target="_blank">
+                <svg viewBox="0 0 24 24" width="16" height="16" fill="none" stroke="currentColor" stroke-width="2"><polyline points="16 18 22 12 16 6"></polyline><polyline points="8 6 2 12 8 18"></polyline></svg>
+                TeX原稿ソース
+              </a>
+            </div>
+          </div>
+
+          <!-- 古典で学び直す大人のための入門書 -->
+          <div class="edition-panel edition-highschool">
+            <div class="edition-badge-bar">
+              <span class="badge badge-highschool">大人のための学び直し入門書</span>
+              <span class="badge badge-pages">12章 / 71頁</span>
+            </div>
+            <h3 class="edition-title">古典で学び直す微積分入門 —— 『Calculus Made Easy』で直観的にわかる微分・積分・極限から曲線の数理まで</h3>
+            <div class="edition-author"><span class="label">編著・解説：</span>教育情報分析研究会</div>
+            <p class="edition-desc">Project Gutenberg eBook #33283収載のシルバヌス・P・トンプソン『Calculus Made Easy（誰にもわかる微積分）』を底本に、「一人の人間ができることは他の人間にもできる」の箴言のもと、微小量dx/dy、小ささの階級と無視の数理、幾何学的傾き、ベキ関数の微分、和差積商・連鎖律、高階微分と運動力学、極大極小最適化、ネイピア数e、三角関数、微積分学の基本定理までを、大人向けの丁寧なステップ解説で完全網羅した全12章・71ページの大作教科書。TikZ図版、例題解説、用語辞典、総合演習付。</p>
+            <div class="engine-info">
+              <span class="engine-tag">⚡ gemma4:12b (Ollama @ http://192.168.128.62:11434/)</span>
+            </div>
+            <div class="card-actions">
+              <a href="books/33283_thompson_calculus/thompson_calculus_intro.pdf" class="btn btn-pdf btn-hs" target="_blank">
+                <svg viewBox="0 0 24 24" width="16" height="16" fill="none" stroke="currentColor" stroke-width="2"><path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"></path><polyline points="14 2 14 8 20 8"></polyline><line x1="16" y1="13" x2="8" y2="13"></line><line x1="16" y1="17" x2="8" y2="17"></line><polyline points="10 9 9 9 8 9"></polyline></svg>
+                PDF学び直し版を読む (71P)
               </a>
               <a href="books/33283_thompson_calculus/thompson_calculus_intro.tex" class="btn btn-tex" target="_blank">
                 <svg viewBox="0 0 24 24" width="16" height="16" fill="none" stroke="currentColor" stroke-width="2"><polyline points="16 18 22 12 16 6"></polyline><polyline points="8 6 2 12 8 18"></polyline></svg>
