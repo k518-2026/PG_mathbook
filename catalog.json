@@ -265,6 +265,26 @@
       "compiler": "LuaLaTeX (LuaHBTeX / TeX Live 2026)",
       "description": "Project Gutenberg eBook #30155収載のアインシュタイン『特殊および一般相対性理論について』を底本に、50代から80代の大人の学び直しの読者に向けて、幾何学の物理的意味、光速度不変の原理、列車と堤防の同時性の不一致、三平方の定理で解く光時計の時間遅れ、ローレンツ収縮、E=mc^2の質量エネルギー等価性、4次元時空と光円錐、等価原理、回転円盤と非ユークリッド幾何学、エディントン日食観測と重力レンズ、ブラックホール、動的宇宙とダークエネルギーの復活を、高校数学と実社会の具体例（GPS測位補正、新幹線実験、ミューオン寿命延伸、PET診断、スカイツリー重力実験等）で懇切丁寧に読み解く全12章・63ページの決定版入門書。TikZ図版12点、重要用語辞典、総合演習問題10選と詳細解答付。",
       "gutenberg_url": "https://www.gutenberg.org/ebooks/30155"
+    },
+    {
+      "gutenberg_id": "25447-intro",
+      "original_title": "Mysticism and Logic and Other Essays",
+      "original_author": "Bertrand Russell",
+      "japanese_title": "古典で学び直すラッセル数理哲学入門 —— いまからでも遅くない、高校までの数学で理解する歴史的名著",
+      "author": "教育情報分析研究会",
+      "category": "Mathematical Philosophy & Logic (Project Gutenberg eBook #25447)",
+      "language": "ja",
+      "chapters_count": 12,
+      "pages": 65,
+      "status": "完成",
+      "created_at": "2026-10-16T22:00:00+09:00",
+      "book_dir": "books/25447_russell_mathematical_philosophy",
+      "tex_file": "books/25447_russell_mathematical_philosophy/russell_mathematical_philosophy_intro.tex",
+      "pdf_file": "books/25447_russell_mathematical_philosophy/russell_mathematical_philosophy_intro.pdf",
+      "model_used": "gemma4:12b (Ollama @ http://192.168.128.62:11434/)",
+      "compiler": "LuaLaTeX (LuaHBTeX / TeX Live 2026)",
+      "description": "Project Gutenberg eBook #25447収載のバートランド・ラッセル『神秘主義と論理』を底本に、50代から80代の大人の学び直しの読者に向けて、神秘主義と科学的論理の調和、論理主義プログラム、ラッセルのパラドックス（理髪師の謎）、階型理論（型システム）、ゼノンのパラドックスと無限等比級数、カントールの超限数（アレフ0と対角線論法）、記述理論、直接親知と記述、微分方程式と因果律の批判、数学の冷徹な美、科学的哲学の方法、チューリング機械とAI自動定理証明（Lean 4）への系譜を、高校数学と実社会の具体例（サイバーセキュリティ、スマートコントラクト、自動運転認識、気象シミュレーション等）で懇切丁寧に読み解く全12章・65ページの決定版入門書。TikZ図版12点、重要用語辞典、総合演習問題10問と詳細解答付。",
+      "gutenberg_url": "https://www.gutenberg.org/ebooks/25447"
     }
   ]
 }
