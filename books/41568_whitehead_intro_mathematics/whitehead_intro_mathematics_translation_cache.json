@@ -1,0 +1,14 @@
+{
+  "Chapter_1": {
+    "number": 1,
+    "title_en": "Chapter I: The Abstract Nature of Mathematics",
+    "length_en": 9189,
+    "chunks_done": 1,
+    "translation_pieces": [
+      "数学の研究は、しばしば失望から始まる傾向がある。科学の重要な応用、概念的な興味深いアイデア、そして論理的な厳密さのある手法により、迅速に興味深い過程への導入を期待させる。私たちはその科学によって星が重りづけられ、一滴の水中の数十億の分子が数えられるということが教えられる。しかし、ハムレットの父の幽霊のように、この偉大な科学は私たちの精神的な武器による取り組みを逃れてしまう——「ここにいる、そこにもいる、そして消えた」——そして見えてくるものは、幽霊が粗雑な方法で説明できないほどの優れた存在であるという理由では説明されないような虚構性を示す。\n\nこの科学が期待通りにならない理由は、その基本的な概念が学生に技術的な手続きから解き放たれて説明されていないためである。したがって、不幸な学習者は、全体的な概念が光っていない多くの詳細を理解しようと必死になる。もちろん、技術的な能力は価値ある精神活動の第一条件である：ミルトンのリズムやシェリーの情熱を理解するまでに、単語を拼写し、個々の文字の形が確実にある間、その詩の美しさを十分に評価することはできない。この意味では、学習には王道は存在しない。しかし、技術的な過程にのみ注目し、全体的な概念を考えることから除外することも誤りである。ここに、教条主義への道がある。"
+    ],
+    "math_notes": [
+      "To verify the mathematical formulas and logic in the given passage, let's break it down step by step.\n\n1. **Understanding the passing statement:**\n   - The study of mathematics is apt to commence in disappointment.\n   - The important applications of the science, the theoretical interest of its ideas, and the logical rigour of its methods all generate the expectation of a-speedy introduction to processes of interest.\n   - We are told that by its aid the stars are weighed and the billions of molecules in a drop of water are counted.\n   - yet, like the ghost of Hamlet's father, this great science eludes the efforts of our mental weapons to grasp it---``Tis here, 'tis there, 'tis gone''---and what we do see does not suggest the same excused for illusiveness as sufficed for the ghost, that it is too noble for our gross methods.\n   - ``A show of violence,\" if ever excusable, may surely be \"offered\" to the trivial results which occupy the page.\n\n2. **Identifying mathematical concepts:**\n   - The passage mentions the weight of stars and the count of molecules in a drop of water. These are examples of large numbers and precise"
+    ]
+  }
+}
