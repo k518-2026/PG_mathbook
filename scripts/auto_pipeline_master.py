@@ -124,11 +124,24 @@ def run_cmd(cmd, cwd=PROJECT_ROOT, timeout=1800):
 
 
 def try_start_local_lm_studio():
-    """If running on the LM Studio host machine and server is not up yet, start it via lms CLI."""
+    """If running on the LM Studio host machine and server is not up yet, start LM Studio app and server via lms CLI."""
+    lm_app_candidates = [
+        os.path.expandvars(r"%LOCALAPPDATA%\Programs\LM Studio\LM Studio.exe"),
+        r"C:\Program Files\LM Studio\LM Studio.exe",
+    ]
+    for app_path in lm_app_candidates:
+        if os.path.exists(app_path):
+            ok_tl, out_tl = run_cmd('tasklist /FI "IMAGENAME eq LM Studio.exe"', timeout=10)
+            if "LM Studio.exe" not in out_tl:
+                log(f"Launching LM Studio application ({app_path})...")
+                subprocess.Popen([app_path], stdout=subprocess.DEVNULL, stderr=subprocess.DEVNULL)
+                time.sleep(12)
+            break
+
     lms_exe = os.path.expanduser(r"~\.lmstudio\bin\lms.exe")
     if os.path.exists(lms_exe):
-        log(f"Found local LM Studio CLI ({lms_exe}). Ensuring local API server is started...")
-        run_cmd(f'"{lms_exe}" server start', timeout=30)
+        log(f"Found local LM Studio CLI ({lms_exe}). Starting API server on 0.0.0.0:1234...")
+        run_cmd(f'"{lms_exe}" server start --bind 0.0.0.0 --port 1234 --cors', timeout=30)
 
 
 def wait_for_lm_studio(timeout_seconds=300, check_interval=10):
@@ -733,6 +746,7 @@ def run_all_pipelines(check_only=False):
             item["status"] = "in_progress"
             with open(QUEUE_FILE, "w", encoding="utf-8") as f:
                 json.dump(qdata, f, ensure_ascii=False, indent=2)
+            git_commit_and_push(f"chore(startup): Auto-pipeline started on {socket.gethostname()} for eBook #{gid}")
 
             done = process_queued_book(item)
             if done:
