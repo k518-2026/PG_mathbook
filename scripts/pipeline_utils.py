@@ -1,38 +1,78 @@
 # -*- coding: utf-8 -*-
 """
-Pipeline utilities for Laplace Translation & Math Verification
-Model 1 (Translation): qwen2.5-7b-instruct
-Model 2 (Math Check): qwen2.5-math-7b-instruct
+Pipeline utilities for Original Book Translation, Math Verification, and Adult Re-learning Intro Books.
+Uses ONLY LM Studio at http://192.168.128.16:1234/ (or http://localhost:1234/ when running directly on sff7020).
+Step 1 (Translation): qwen2.5-7b-instruct
+Step 2 (Math Check): qwen2.5-math-7b-instruct
+Step 3 (Adult Re-learning Exposition): qwen2.5-7b-instruct
 """
 
-import urllib.request
+import os
 import json
 import time
+import urllib.request
+import urllib.error
 
-LM_STUDIO_URL = "http://192.168.128.16:1234/v1/chat/completions"
+LM_STUDIO_CANDIDATES = [
+    os.getenv("LM_STUDIO_HOST", "").rstrip("/"),
+    "http://localhost:1234",
+    "http://192.168.128.16:1234",
+    "http://sff7020:1234",
+]
 
-def call_lm_studio(prompt, system_prompt="", model="qwen2.5-7b-instruct", max_tokens=2500, temperature=0.1):
+_RESOLVED_BASE_URL = None
+
+
+def resolve_lm_studio_base_url(timeout=5):
+    global _RESOLVED_BASE_URL
+    if _RESOLVED_BASE_URL:
+        return _RESOLVED_BASE_URL
+    for base in LM_STUDIO_CANDIDATES:
+        if not base:
+            continue
+        try:
+            req = urllib.request.Request(f"{base}/v1/models")
+            with urllib.request.urlopen(req, timeout=timeout) as resp:
+                if resp.status == 200:
+                    _RESOLVED_BASE_URL = base
+                    return base
+        except Exception:
+            continue
+    return "http://192.168.128.16:1234"
+
+
+def call_lm_studio(prompt, system_prompt="", model="qwen2.5-7b-instruct", max_tokens=2500, temperature=0.1, retries=3):
+    base_url = resolve_lm_studio_base_url()
+    url = f"{base_url}/v1/chat/completions"
+
     messages = []
     if system_prompt:
         messages.append({"role": "system", "content": system_prompt})
     messages.append({"role": "user", "content": prompt})
-    
+
     payload = {
         "model": model,
         "messages": messages,
         "max_tokens": max_tokens,
-        "temperature": temperature
+        "temperature": temperature,
     }
-    
-    req = urllib.request.Request(
-        LM_STUDIO_URL,
-        data=json.dumps(payload).encode("utf-8"),
-        headers={"Content-Type": "application/json"}
-    )
-    
-    with urllib.request.urlopen(req, timeout=120) as response:
-        result = json.loads(response.read().decode("utf-8"))
-        return result["choices"][0]["message"]["content"].strip()
+
+    last_err = None
+    for attempt in range(retries):
+        try:
+            req = urllib.request.Request(
+                url,
+                data=json.dumps(payload).encode("utf-8"),
+                headers={"Content-Type": "application/json"},
+            )
+            with urllib.request.urlopen(req, timeout=180) as response:
+                result = json.loads(response.read().decode("utf-8"))
+                return result["choices"][0]["message"]["content"].strip()
+        except Exception as e:
+            last_err = e
+            time.sleep(3)
+    raise RuntimeError(f"LM Studio call failed after {retries} retries: {last_err}")
+
 
 def translate_english_to_japanese(english_text):
     """
@@ -42,11 +82,12 @@ def translate_english_to_japanese(english_text):
         "あなたは数学古典の専門翻訳家です。"
         "英語の数学原著を、一切の要約や省略を行わず、原文の論理・語調・数式に忠実に、格調高い正確な日本語に翻訳してください。"
         "文中の数式や変数はLaTeX形式（$...$ または $$...$$）で記述してください。"
-        "中国語は一切使わず、自然な日本語のみで記述してください。"
-        "【最重要指示】「以下の文章を忠実に日本語へ翻訳しました：」「以下が翻訳です：」などの前置き・挨拶・挨拶文・注釈・解説などのメタテキストは一切出力せず、翻訳本文のみを直接出力してください。"
+        "中国語（簡体字・繁体字の中国語表現）は一切使わず、自然な日本語のみで記述してください。"
+        "【最重要指示】「以下の文章を忠実に日本語へ翻訳しました：」「以下が翻訳です：」などの前置き・挨拶・注釈・解説などのメタテキストは一切出力せず、翻訳本文のみを直接出力してください。"
     )
     prompt = f"以下の原著英文を忠実に日本語へ翻訳してください（前置き・注釈・解説は一切出力せず、翻訳文のみを出力すること）：\n\n{english_text}"
     return call_lm_studio(prompt, system_prompt=sys_prompt, model="qwen2.5-7b-instruct", max_tokens=2500, temperature=0.1)
+
 
 def verify_and_check_math(japanese_text, original_english=""):
     """
@@ -61,45 +102,14 @@ def verify_and_check_math(japanese_text, original_english=""):
     note = call_lm_studio(prompt, system_prompt="", model="qwen2.5-math-7b-instruct", max_tokens=250, temperature=0.1)
     return note
 
-OLLAMA_URL = "http://192.168.128.62:11434/api/generate"
 
-def call_ollama(prompt, system_prompt="", model="gemma4:12b"):
+def generate_adult_relearning_exposition(verified_translation, chapter_topic, model="qwen2.5-7b-instruct"):
     """
-    Call Ollama API on http://192.168.128.62:11434/
-    """
-    full_prompt = prompt
-    if system_prompt:
-        full_prompt = f"{system_prompt}\n\n{prompt}"
-        
-    payload = {
-        "model": model,
-        "prompt": full_prompt,
-        "stream": False,
-        "options": {
-            "temperature": 0.3,
-            "num_predict": 4096
-        }
-    }
-    payload["think"] = False
-    
-    req = urllib.request.Request(
-        OLLAMA_URL,
-        data=json.dumps(payload).encode("utf-8"),
-        headers={"Content-Type": "application/json"}
-    )
-    
-    with urllib.request.urlopen(req, timeout=300) as response:
-        result = json.loads(response.read().decode("utf-8"))
-        return result.get("response", "").strip()
-
-def generate_adult_relearning_exposition(verified_translation, chapter_topic, model="gemma4:12b"):
-    """
-    Step 3: Generate pedagogical lecture for adult re-learners (50s-80s) using Ollama.
+    Step 3: Generate pedagogical lecture for adult re-learners (50s-80s) using LM Studio (http://192.168.128.16:1234/).
     Explains historical mathematical classics using junior high and high school mathematics.
-    Difficult concepts are explained even more thoroughly than the original text.
     """
     sys_prompt = (
-        "あなたは『古典で学び直す数学 —— いまからでも遅くない高校までの数学で理解する歴史的名著』の専任ナビゲーターです。\n"
+        "あなたは『古典で学び直す数学』の専任ナビゲーターです。\n"
         "読者対象は、50代から80代の大人です。「学生時代に数学で挫折してしまったが、もう一度挑戦したい」「大人になって知的好奇心から数学の本質を味わいたい」という方々です。\n"
         "以下の執筆指針を厳格に守って、充実した丁寧な解説講義を執筆してください：\n\n"
         "【執筆指針】\n"
@@ -107,17 +117,17 @@ def generate_adult_relearning_exposition(verified_translation, chapter_topic, mo
         "2. 難しい概念や数式は、原著以上に一歩一歩のステップを省かずに懇切丁寧に説明する。なぜその計算や式変形が成り立つのかを読者が納得できるよう示す。\n"
         "3. 人生経験豊かな大人の読者が深く共感できるよう、歴史的背景（なぜ当時の大数学者がその問題に挑んだのか）や日常・社会との結びつき、知的興奮を生き生きと伝える。\n"
         "4. 語り口は知的で温かく、読者を励まし伴走する丁寧な敬体（です・ます調）とする。\n"
-        "5. 図解のイメージ（ベン図、グラフ、数直線、幾何的配置など）を言葉でも豊かに描写し、数式はLaTeX形式（$...$, $$...$$）で明快に記載する。"
+        "5. 数式はLaTeX形式（$...$, $$...$$）で明快に記載し、中国語は一切混入させず自然な日本語のみで記述する。"
     )
     prompt = (
         f"【本章のテーマ】：{chapter_topic}\n\n"
         f"以下の原著の日本語訳（数理校閲済み）の内容をもとに、大人の読者が中学校・高校の数学の知識で根本からスッキリ納得できるよう、"
         f"原著以上に丁寧で感動的な「学び直し解説講義」を執筆してください：\n\n"
-        f"{verified_translation[:3500]}"
+        f"{verified_translation[:3000]}"
     )
-    return call_ollama(prompt, system_prompt=sys_prompt, model=model)
+    return call_lm_studio(prompt, system_prompt=sys_prompt, model="qwen2.5-7b-instruct", max_tokens=3000, temperature=0.2)
+
 
 # Backwards compatibility alias
-def generate_highschool_exposition(verified_translation, chapter_topic, model="gemma4:12b"):
+def generate_highschool_exposition(verified_translation, chapter_topic, model="qwen2.5-7b-instruct"):
     return generate_adult_relearning_exposition(verified_translation, chapter_topic, model=model)
-

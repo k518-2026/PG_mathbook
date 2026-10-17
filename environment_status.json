@@ -1,0 +1,16 @@
+{
+  "timestamp": "2026-10-17 12:15:59",
+  "hostname": "MINISFORUM64GB",
+  "python": "Python 3.14.7",
+  "git": "git version 2.55.0.windows.5",
+  "lualatex": "This is LuaHBTeX, Version 1.24.0 (TeX Live 2026)",
+  "lm_studio_url": "http://192.168.128.16:1234",
+  "lm_studio_models": [
+    "qwen2.5-math-7b-instruct",
+    "paultimothymooney/qwen2.5-7b-instruct",
+    "lmstudio-community/qwen2.5-7b-instruct",
+    "qwen2.5-7b-instruct-1m",
+    "text-embedding-nomic-embed-text-v1.5"
+  ],
+  "ready": true
+}
