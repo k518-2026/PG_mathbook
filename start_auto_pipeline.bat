@@ -53,16 +53,18 @@ if exist "%USERPROFILE%\.lmstudio\bin\lms.exe" (
 )
 
 echo.
-echo [1/3] Syncing latest repository from GitHub...
-git checkout -- .pipeline.lock 2>nul
-git pull --rebase --autostash origin main
+echo [1/3] Syncing latest repository from GitHub (conflict-free)...
+git rebase --abort 2>nul
+git merge --abort 2>nul
+git fetch origin main
+git reset --hard origin/main
 
 echo.
 echo [2/3] Launching Master Auto-Pipeline Script...
 python scripts\auto_pipeline_master.py
 
 echo.
-echo [3/3] Cycle finished. Checking again in 120 seconds for next queued book...
+echo [3/3] Cycle finished. Checking again in 60 seconds for next queued book...
 echo ==================================================================
-timeout /t 120 /nobreak > nul
+timeout /t 60 /nobreak > nul
 goto LOOP_START

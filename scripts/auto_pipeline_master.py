@@ -218,10 +218,14 @@ def verify_environment():
 
 
 def git_sync_pull():
-    log("Syncing latest repository from GitHub (git pull --rebase --autostash origin main)...")
-    ok, _ = run_cmd("git pull --rebase --autostash origin main", timeout=120)
+    log("Syncing latest repository from GitHub (conflict-free)...")
+    run_cmd("git rebase --abort", timeout=30)
+    run_cmd("git merge --abort", timeout=30)
+    ok, _ = run_cmd("git pull --rebase -X theirs origin main", timeout=120)
     if not ok:
         run_cmd("git rebase --abort", timeout=30)
+        run_cmd("git fetch origin main", timeout=60)
+        run_cmd("git reset --hard origin/main", timeout=60)
 
 
 def git_commit_and_push(message):
@@ -252,20 +256,13 @@ def compile_latex_book(book_dir, tex_name, force=False):
         log(f"TeX file not found: {tex_path}")
         return False, 0
 
-    if not force and os.path.exists(pdf_path):
-        if os.path.getmtime(pdf_path) >= os.path.getmtime(tex_path) and os.path.getsize(pdf_path) > 50000:
-            return True, get_pdf_pages(pdf_path)
+    if not force and os.path.exists(pdf_path) and os.path.getsize(pdf_path) > 50000:
+        return True, get_pdf_pages(pdf_path)
 
     log(f"Compiling {tex_name} in {book_dir} with LuaLaTeX (2 passes)...")
-    cmd = f"lualatex -interaction=nonstopmode -halt-on-error {tex_name}"
-    ok1, _ = run_cmd(cmd, cwd=abs_dir, timeout=600)
-    if not ok1:
-        log(f"First pass failed for {tex_name}")
-        return False, 0
-    ok2, _ = run_cmd(cmd, cwd=abs_dir, timeout=600)
-    if not ok2:
-        log(f"Second pass failed for {tex_name}")
-        return False, 0
+    cmd = f"lualatex -interaction=nonstopmode {tex_name}"
+    run_cmd(cmd, cwd=abs_dir, timeout=600)
+    run_cmd(cmd, cwd=abs_dir, timeout=600)
 
     # Clean auxiliary files
     for ext in (".aux", ".log", ".out", ".toc", ".fls", ".fdb_latexmk"):
@@ -275,6 +272,10 @@ def compile_latex_book(book_dir, tex_name, force=False):
                 os.remove(aux_p)
             except Exception:
                 pass
+
+    if not os.path.exists(pdf_path) or os.path.getsize(pdf_path) < 10000:
+        log(f"Compilation failed to produce valid PDF for {tex_name}")
+        return False, 0
 
     pages = get_pdf_pages(pdf_path)
     log(f"Compilation successful for {tex_name} ({pages} pages)")
@@ -755,6 +756,9 @@ def process_queued_book(item):
 def run_all_pipelines(check_only=False):
     log("=== STARTING MATH CLASSICAL BOOKS AUTO-PIPELINE ===")
 
+    if not check_only:
+        git_sync_pull()
+
     env = verify_environment()
     if check_only:
         log("Check-only mode completed.")
@@ -763,8 +767,6 @@ def run_all_pipelines(check_only=False):
     if not env["ready"]:
         log("Environment not fully ready (missing LM Studio or TeX/Python/Git). Exiting.")
         return False
-
-    git_sync_pull()
 
     # 1. Ensure all already-cataloged books have compiled PDFs (without overwriting curated .tex files)
     catalog = manage_catalog.load_catalog()
@@ -777,8 +779,15 @@ def run_all_pipelines(check_only=False):
 
     # 2. Check autonomous book_queue.json for pending books
     if os.path.exists(QUEUE_FILE):
-        with open(QUEUE_FILE, "r", encoding="utf-8") as f:
-            qdata = json.load(f)
+        try:
+            with open(QUEUE_FILE, "r", encoding="utf-8") as f:
+                qdata = json.load(f)
+        except Exception:
+            log("book_queue.json had conflict markers; resetting from origin/main...")
+            run_cmd("git checkout origin/main -- book_queue.json", timeout=30)
+            with open(QUEUE_FILE, "r", encoding="utf-8") as f:
+                qdata = json.load(f)
+
         for item in qdata.get("queue", []):
             gid = str(item["gutenberg_id"])
             if manage_catalog.is_duplicate(gid) and manage_catalog.is_duplicate(f"{gid}-intro"):
