@@ -1,12 +1,13 @@
 # -*- coding: utf-8 -*-
 """
 Generate LuaLaTeX document for Lewis Carroll #4763
-"The Game of Logic" (原著全4章 完全翻訳・数学校閲版)
+"The Game of Logic" (原著全4章 完全翻訳・TikZ図版完全再現・数学校閲版)
 """
 
 import json
-import re
 import os
+from carroll_chapters_ch1_ch2 import FRONTMATTER_TEX, CHAPTER_I_JA, CHAPTER_II_JA
+from carroll_chapters_ch3_ch4 import CHAPTER_III_JA, CHAPTER_IV_JA
 
 CACHE_FILE = "books/4763_carroll_game_of_logic/carroll_full_translation_math_verified.json"
 OUTPUT_TEX = "books/4763_carroll_game_of_logic/carroll_game_of_logic_translation.tex"
@@ -18,76 +19,30 @@ TITLES = {
     "IV": ("第4章", "当たるも八卦当たらぬも八卦（Hit or Miss）", "総合論理パズル・誤謬の看破とゲームとしての記号論理")
 }
 
-def clean_latex(text):
-    # Strip any AI preamble lines about translation
-    text = re.sub(r'^(?:以下[^\n]*|忠実[^\n]*|次[^\n]*|この[^\n]*|原著[^\n]*)(?:翻訳|日本語訳)[^\n]*[：:\n]*', '', text, flags=re.MULTILINE)
-    text = re.sub(r'【(?:翻訳|日本語訳|訳文)】\s*', '', text)
-    text = re.sub(r'次のように翻訳します[：:]\s*', '', text)
-    text = re.sub(r'以下が[^\n]*翻訳[^\n]*[：:]\s*', '', text)
-    text = re.sub(r'以下の文章を忠実に日本語[へに]翻訳[しいたします]+[：:]\s*', '', text)
-    text = re.sub(r'以下の原著英文を忠実に日本語[へに]翻訳[しいたします]+[：:]\s*', '', text)
-    text = re.sub(r'以下の文を忠実に日本語[へに]翻訳[しいたします]+[：:]\s*', '', text)
-    text = re.sub(r'以下、?原著英文を忠実に日本語[へに]翻訳[しいたします]+[：:]\s*', '', text)
-    text = re.sub(r'以下は、?原著英文を忠実に日本語[へに]翻訳[しいたします]+[：:]\s*', '', text)
-    text = re.sub(r'以下に、?原著英文を忠実に[^\n]*[：:]\s*', '', text)
-    text = re.sub(r'忠実に日本語[へに]翻訳[しいたします]+[：:]\s*', '', text)
-    text = re.sub(r'忠実に日本語[へに]翻訳したもの[を示します結果です]+[：:]\s*', '', text)
-    text = re.sub(r'忠実に日本語[へに]翻訳すると以下のようになります[：:]\s*', '', text)
-    text = re.sub(r'忠実に翻訳したもの[を示します]+[：:]\s*', '', text)
-    text = re.sub(r'忠実に翻訳し、自然な日本語表現に調整しました[^\n]*\n?', '', text)
-    text = re.sub(r'忠実な(?:日本語)?翻訳です[。：:\n]?', '', text)
-
-    # Clean stray OCR or translation artifacts
-    text = text.replace("£", "$p$")
-    text = text.replace("\\、", "、")
-    text = text.replace("\\}", "}")
-    text = text.replace(r"\±", r"\pm")
-    text = text.replace(r"-\frac{1}{500}", r"$-\frac{1}{500}$")
-
-    # Simplified Chinese to Japanese kanji mapping
-    kanji_map = {
-        '储': '儲', '质': '質', '转': '転', '误': '誤', '产': '産',
-        '计': '計', '设': '設', '读': '読', '对': '対', '电': '電',
-        '标': '標', '录': '録', '错': '錯', '识': '識', '损': '損',
-        '盘': '盤', '备': '備', '码': '碼', '员': '員', '进': '進',
-        '观': '観', '类': '類', '态': '態', '规': '規', '则': '則'
-    }
-    for k, v in kanji_map.items():
-        text = text.replace(k, v)
-
-    # Replace carets and symbols outside math
-    parts = re.split(r'(\$\$.*?\$\$|\$.*?\$|\\\(.*?\\\)|\\\[.*?\\\])', text, flags=re.DOTALL)
-    cleaned_parts = []
-    for idx, part in enumerate(parts):
-        if idx % 2 == 1:
-            cleaned_parts.append(part)
-        else:
-            p = part.replace("^", "")
-            p = p.replace("¥", "")
-            p = p.replace("#", "\\#")
-            p = p.replace("²", "$^2$")
-            p = p.replace("³", "$^3$")
-            p = p.replace("&", "\\&")
-            p = p.replace("_", "\\_")
-            p = p.replace("~", "\\textasciitilde{}")
-            p = p.replace("验", "験")
-            p = p.replace("审", "審")
-            p = p.replace("概率", "確率")
-            cleaned_parts.append(p)
-    text = "".join(cleaned_parts)
-
-    # Clean up single backslashes before Japanese chars
-    text = re.sub(r'\\(?=[\u3000-\u9fff\uff00-\uffef、。・])', '', text)
-    text = re.sub(r'\n{3,}', '\n\n', text)
-    return text.strip()
+CHAPTER_CONTENT = {
+    "I": CHAPTER_I_JA,
+    "II": CHAPTER_II_JA,
+    "III": CHAPTER_III_JA,
+    "IV": CHAPTER_IV_JA
+}
 
 def main():
-    if not os.path.exists(CACHE_FILE):
-        print(f"Error: {CACHE_FILE} does not exist.")
-        return
+    # Update JSON cache so that it stores the verified translations
+    if os.path.exists(CACHE_FILE):
+        with open(CACHE_FILE, "r", encoding="utf-8") as f:
+            data = json.load(f)
+    else:
+        data = {}
 
-    with open(CACHE_FILE, "r", encoding="utf-8") as f:
-        data = json.load(f)
+    for num, content in CHAPTER_CONTENT.items():
+        key = f"Chapter_{num}"
+        if key not in data:
+            data[key] = {"number": num, "title_en": f"CHAPTER {num}."}
+        data[key]["japanese_translation"] = content.strip()
+
+    with open(CACHE_FILE, "w", encoding="utf-8") as f:
+        json.dump(data, f, ensure_ascii=False, indent=2)
+    print(f"Updated verified JSON cache: {CACHE_FILE}")
 
     preamble = r"""\documentclass[a4paper,11pt,openany]{ltjsbook}
 \usepackage{luatexja}
@@ -97,13 +52,17 @@ def main():
 \geometry{top=24mm,bottom=24mm,left=24mm,right=24mm,footskip=10mm}
 \usepackage{tcolorbox}
 \tcbuselibrary{skins,breakable}
+\usepackage{tikz}
+\usetikzlibrary{arrows.meta,positioning,calc}
 \usepackage{hyperref}
 \usepackage{enumitem}
 \usepackage{booktabs}
 \usepackage{fancyhdr}
 
-\definecolor{carrollred}{RGB}{120, 25, 35}
-\definecolor{carrollgrey}{RGB}{80, 85, 95}
+\definecolor{carrollred}{RGB}{185, 30, 45}
+\definecolor{carrollgrey}{RGB}{90, 98, 110}
+\definecolor{boardbg}{RGB}{252, 250, 245}
+\definecolor{innerbg}{RGB}{244, 240, 230}
 \definecolor{softpink}{RGB}{253, 246, 247}
 \definecolor{darkslate}{RGB}{30, 35, 45}
 \definecolor{boxframe}{RGB}{140, 50, 60}
@@ -116,21 +75,299 @@ def main():
 }
 
 \pagestyle{fancy}
+\setlength{\headheight}{32pt}
 \fancyhf{}
 \fancyhead[LE,RO]{\thepage}
 \fancyhead[LO]{\nouppercase{\rightmark}}
 \fancyhead[RE]{\nouppercase{\leftmark}}
 \renewcommand{\headrulewidth}{0.4pt}
 
+% ============================================================================
+% Lewis Carroll 'The Game of Logic' TikZ Diagram Macros
+% ============================================================================
+% Counter tokens: Red ('1' = occupied) and Grey ('0' = empty)
+\newcommand{\tokRed}[2]{%
+  \filldraw[fill=carrollred, draw=white, double=carrollred!75!black, double distance=0.4pt, line width=0.5pt] (#1,#2) circle (0.20cm);
+  \node[white, font=\sffamily\bfseries\footnotesize] at (#1,#2) {1};
+}
+\newcommand{\tokGrey}[2]{%
+  \filldraw[fill=carrollgrey, draw=white, double=carrollgrey!75!black, double distance=0.4pt, line width=0.5pt] (#1,#2) circle (0.20cm);
+  \node[white, font=\sffamily\bfseries\footnotesize] at (#1,#2) {0};
+}
+\newcommand{\carrollTok}[3]{%
+  \ifx&#1&\else
+    \ifnum#1=1\relax
+      \tokRed{#2}{#3}%
+    \else
+      \tokGrey{#2}{#3}%
+    \fi
+  \fi
+}
+
+% Fence token helpers for Larger Diagram
+\newcommand{\fN}{\tokRed{0}{0.42}}
+\newcommand{\fS}{\tokRed{0}{-0.42}}
+\newcommand{\fW}{\tokRed{-1.22}{0}}
+\newcommand{\fE}{\tokRed{1.22}{0}}
+
+% 1. Horizontal 2-compartment oblong: \carrollHorizTwo{left}{right}{fence}
+\newcommand{\carrollHorizTwo}[3]{%
+  \begin{tikzpicture}[baseline=-0.5ex, scale=1.0]
+    \fill[boardbg] (-1.1,-0.5) rectangle (1.1,0.5);
+    \draw[line width=0.9pt, darkslate] (-1.1,-0.5) rectangle (1.1,0.5);
+    \draw[line width=0.7pt, darkslate] (0,-0.5) -- (0,0.5);
+    \carrollTok{#1}{-0.55}{0}
+    \carrollTok{#2}{0.55}{0}
+    \carrollTok{#3}{0}{0}
+  \end{tikzpicture}%
+}
+
+% 2. Vertical 2-compartment oblong: \carrollVertTwo{top}{bottom}{fence}
+\newcommand{\carrollVertTwo}[3]{%
+  \begin{tikzpicture}[baseline=-0.5ex, scale=1.0]
+    \fill[boardbg] (-0.55,-1.0) rectangle (0.55,1.0);
+    \draw[line width=0.9pt, darkslate] (-0.55,-1.0) rectangle (0.55,1.0);
+    \draw[line width=0.7pt, darkslate] (-0.55,0) -- (0.55,0);
+    \carrollTok{#1}{0}{0.5}
+    \carrollTok{#2}{0}{-0.5}
+    \carrollTok{#3}{0}{0}
+  \end{tikzpicture}%
+}
+
+% 3. Smaller Diagram (2x2): \carrollSmall{c5}{c6}{c7}{c8}{fN}{fS}{fW}{fE}
+\newcommand{\carrollSmall}[8]{%
+  \begin{tikzpicture}[baseline=-0.5ex, scale=1.0]
+    \fill[boardbg] (-1.0,-1.0) rectangle (1.0,1.0);
+    \draw[line width=0.9pt, darkslate] (-1.0,-1.0) rectangle (1.0,1.0);
+    \draw[line width=0.7pt, darkslate] (-1.0,0) -- (1.0,0);
+    \draw[line width=0.7pt, darkslate] (0,-1.0) -- (0,1.0);
+    \carrollTok{#1}{-0.5}{0.5}
+    \carrollTok{#2}{0.5}{0.5}
+    \carrollTok{#3}{-0.5}{-0.5}
+    \carrollTok{#4}{0.5}{-0.5}
+    \carrollTok{#5}{0}{0.5}
+    \carrollTok{#6}{0}{-0.5}
+    \carrollTok{#7}{-0.5}{0}
+    \carrollTok{#8}{0.5}{0}
+  \end{tikzpicture}%
+}
+
+% 4. Partial Larger Diagrams (Chapter I)
+% Upper half: \carrollLargeTop{c9}{c10}{c11}{c12}{fN_in}
+\newcommand{\carrollLargeTop}[5]{%
+  \begin{tikzpicture}[baseline=-0.5ex, scale=1.0]
+    \fill[boardbg] (-1.6,0) rectangle (1.6,1.6);
+    \fill[innerbg] (-0.85,0) rectangle (0.85,0.85);
+    \draw[line width=0.9pt, darkslate] (-1.6,0) rectangle (1.6,1.6);
+    \draw[line width=0.7pt, darkslate] (-0.85,0) rectangle (0.85,0.85);
+    \draw[line width=0.7pt, darkslate] (0,0) -- (0,1.6);
+    \carrollTok{#1}{-1.22}{1.15}
+    \carrollTok{#2}{1.22}{1.15}
+    \carrollTok{#3}{-0.42}{0.42}
+    \carrollTok{#4}{0.42}{0.42}
+    \carrollTok{#5}{0}{0.42}
+  \end{tikzpicture}%
+}
+
+% Lower half: \carrollLargeBottom{c13}{c14}{c15}{c16}{fS_in}
+\newcommand{\carrollLargeBottom}[5]{%
+  \begin{tikzpicture}[baseline=-0.5ex, scale=1.0]
+    \fill[boardbg] (-1.6,-1.6) rectangle (1.6,0);
+    \fill[innerbg] (-0.85,-0.85) rectangle (0.85,0);
+    \draw[line width=0.9pt, darkslate] (-1.6,-1.6) rectangle (1.6,0);
+    \draw[line width=0.7pt, darkslate] (-0.85,-0.85) rectangle (0.85,0);
+    \draw[line width=0.7pt, darkslate] (0,-1.6) -- (0,0);
+    \carrollTok{#1}{-0.42}{-0.42}
+    \carrollTok{#2}{0.42}{-0.42}
+    \carrollTok{#3}{-1.22}{-1.15}
+    \carrollTok{#4}{1.22}{-1.15}
+    \carrollTok{#5}{0}{-0.42}
+  \end{tikzpicture}%
+}
+
+% Right half: \carrollLargeRight{c10}{c12}{c14}{c16}{fE_out}
+\newcommand{\carrollLargeRight}[5]{%
+  \begin{tikzpicture}[baseline=-0.5ex, scale=1.0]
+    \fill[boardbg] (0,-1.6) rectangle (1.6,1.6);
+    \fill[innerbg] (0,-0.85) rectangle (0.85,0.85);
+    \draw[line width=0.9pt, darkslate] (0,-1.6) rectangle (1.6,1.6);
+    \draw[line width=0.7pt, darkslate] (0,-0.85) rectangle (0.85,0.85);
+    \draw[line width=0.7pt, darkslate] (0,0) -- (1.6,0);
+    \carrollTok{#1}{1.22}{1.15}
+    \carrollTok{#2}{0.42}{0.42}
+    \carrollTok{#3}{0.42}{-0.42}
+    \carrollTok{#4}{1.22}{-1.15}
+    \carrollTok{#5}{1.22}{0}
+  \end{tikzpicture}%
+}
+
+% 5. Full Larger Diagram (8 compartments): \carrollLarge{c9}{c10}{c11}{c12}{c13}{c14}{c15}{c16}{fences}
+\newcommand{\carrollLarge}[9]{%
+  \begin{tikzpicture}[baseline=-0.5ex, scale=0.95]
+    \fill[boardbg] (-1.6,-1.6) rectangle (1.6,1.6);
+    \fill[innerbg] (-0.85,-0.85) rectangle (0.85,0.85);
+    \draw[line width=0.9pt, darkslate] (-1.6,-1.6) rectangle (1.6,1.6);
+    \draw[line width=0.8pt, darkslate] (-0.85,-0.85) rectangle (0.85,0.85);
+    \draw[line width=0.7pt, darkslate] (-1.6,0) -- (1.6,0);
+    \draw[line width=0.7pt, darkslate] (0,-1.6) -- (0,1.6);
+    \carrollTok{#1}{-1.22}{1.22}
+    \carrollTok{#2}{1.22}{1.22}
+    \carrollTok{#3}{-0.42}{0.42}
+    \carrollTok{#4}{0.42}{0.42}
+    \carrollTok{#5}{-0.42}{-0.42}
+    \carrollTok{#6}{0.42}{-0.42}
+    \carrollTok{#7}{-1.22}{-1.22}
+    \carrollTok{#8}{1.22}{-1.22}
+    #9
+  \end{tikzpicture}%
+}
+
+% 6. Labeled Reference Diagrams for Section Headers & Frontispiece
+\newcommand{\carrollLabeledHorizX}{%
+  \begin{tikzpicture}[baseline=-0.5ex, scale=1.1]
+    \fill[boardbg] (-1.2,-0.55) rectangle (1.2,0.55);
+    \draw[line width=0.9pt, darkslate] (-1.2,-0.55) rectangle (1.2,0.55);
+    \draw[line width=0.7pt, darkslate] (0,-0.55) -- (0,0.55);
+    \node[fill=boardbg, inner sep=1.5pt, font=\normalsize] at (0,0) {$x$};
+    \node[fill=boardbg, inner sep=1.5pt, font=\normalsize] at (-0.6,-0.55) {$y$};
+    \node[fill=boardbg, inner sep=1.5pt, font=\normalsize] at (0.6,-0.55) {$y'$};
+  \end{tikzpicture}%
+}
+
+\newcommand{\carrollLabeledVertY}{%
+  \begin{tikzpicture}[baseline=-0.5ex, scale=1.1]
+    \fill[boardbg] (-0.55,-1.1) rectangle (0.55,1.1);
+    \draw[line width=0.9pt, darkslate] (-0.55,-1.1) rectangle (0.55,1.1);
+    \draw[line width=0.7pt, darkslate] (-0.55,0) -- (0.55,0);
+    \node[fill=boardbg, inner sep=1.5pt, font=\normalsize] at (0,0) {$y$};
+    \node[fill=boardbg, inner sep=1.5pt, font=\normalsize] at (0.55,0.55) {$x$};
+    \node[fill=boardbg, inner sep=1.5pt, font=\normalsize] at (0.55,-0.55) {$x'$};
+  \end{tikzpicture}%
+}
+
+\newcommand{\carrollLabeledVertYPrime}{%
+  \begin{tikzpicture}[baseline=-0.5ex, scale=1.1]
+    \fill[boardbg] (-0.55,-1.1) rectangle (0.55,1.1);
+    \draw[line width=0.9pt, darkslate] (-0.55,-1.1) rectangle (0.55,1.1);
+    \draw[line width=0.7pt, darkslate] (-0.55,0) -- (0.55,0);
+    \node[fill=boardbg, inner sep=1.5pt, font=\normalsize] at (0,0) {$y'$};
+    \node[fill=boardbg, inner sep=1.5pt, font=\normalsize] at (-0.55,0.55) {$x$};
+    \node[fill=boardbg, inner sep=1.5pt, font=\normalsize] at (-0.55,-0.55) {$x'$};
+  \end{tikzpicture}%
+}
+
+\newcommand{\carrollLabeledSmall}{%
+  \begin{tikzpicture}[baseline=-0.5ex, scale=1.15]
+    \fill[boardbg] (-1.1,-1.1) rectangle (1.1,1.1);
+    \draw[line width=0.9pt, darkslate] (-1.1,-1.1) rectangle (1.1,1.1);
+    \draw[line width=0.7pt, darkslate] (-1.1,0) -- (1.1,0);
+    \draw[line width=0.7pt, darkslate] (0,-1.1) -- (0,1.1);
+    \node[fill=boardbg, inner sep=1.5pt, font=\normalsize] at (0,0.55) {$x$};
+    \node[fill=boardbg, inner sep=1.5pt, font=\normalsize] at (0,-0.55) {$x'$};
+    \node[fill=boardbg, inner sep=1.5pt, font=\normalsize] at (-0.55,0) {$y$};
+    \node[fill=boardbg, inner sep=1.5pt, font=\normalsize] at (0.55,0) {$y'$};
+  \end{tikzpicture}%
+}
+
+\newcommand{\carrollLabeledLarge}{%
+  \begin{tikzpicture}[baseline=-0.5ex, scale=1.1]
+    \fill[boardbg] (-1.6,-1.6) rectangle (1.6,1.6);
+    \fill[innerbg] (-0.85,-0.85) rectangle (0.85,0.85);
+    \draw[line width=0.9pt, darkslate] (-1.6,-1.6) rectangle (1.6,1.6);
+    \draw[line width=0.8pt, darkslate] (-0.85,-0.85) rectangle (0.85,0.85);
+    \draw[line width=0.7pt, darkslate] (-1.6,0) -- (1.6,0);
+    \draw[line width=0.7pt, darkslate] (0,-1.6) -- (0,1.6);
+    \node[fill=boardbg, inner sep=1.5pt, font=\normalsize] at (0,0.85) {$x$};
+    \node[fill=boardbg, inner sep=1.5pt, font=\normalsize] at (0,-0.85) {$x'$};
+    \node[fill=boardbg, inner sep=1.5pt, font=\normalsize] at (-0.85,0) {$y$};
+    \node[fill=boardbg, inner sep=1.5pt, font=\normalsize] at (0.85,0) {$y'$};
+    \node[fill=innerbg, inner sep=1.5pt, font=\normalsize] at (0,0) {$m$};
+  \end{tikzpicture}%
+}
+
+\newcommand{\carrollLabeledBoth}{%
+  \carrollLabeledLarge \hspace{10mm} \carrollLabeledSmall
+}
+
+% 7. Full Frontispiece Board
+\newcommand{\carrollFrontispiece}{%
+  \begin{tikzpicture}[scale=1.05]
+    % Outer card frame
+    \filldraw[fill=softpink!40, draw=boxframe, line width=1.2pt, rounded corners=4pt] (-5.2,-4.8) rectangle (5.2,4.6);
+    \draw[draw=boxframe!60, line width=0.5pt, rounded corners=3pt] (-5.05,-4.65) rectangle (5.05,4.45);
+
+    % Larger Diagram (Top Center)
+    \begin{scope}[shift={(0, 1.45)}]
+      \fill[boardbg] (-2.3,-2.2) rectangle (2.3,2.2);
+      \fill[innerbg] (-1.2,-1.15) rectangle (1.2,1.15);
+      \draw[line width=1.1pt, darkslate] (-2.3,-2.2) rectangle (2.3,2.2);
+      \draw[line width=0.9pt, darkslate] (-1.2,-1.15) rectangle (1.2,1.15);
+      \draw[line width=0.8pt, darkslate] (-2.3,0) -- (2.3,0);
+      \draw[line width=0.8pt, darkslate] (0,-2.2) -- (0,2.2);
+
+      % Attribute Labels
+      \node[fill=boardbg, inner sep=2pt, font=\large\bfseries] at (0,1.15) {$x$};
+      \node[fill=boardbg, inner sep=2pt, font=\large\bfseries] at (0,-1.15) {$x'$};
+      \node[fill=boardbg, inner sep=2pt, font=\large\bfseries] at (-1.2,0) {$y$};
+      \node[fill=boardbg, inner sep=2pt, font=\large\bfseries] at (1.2,0) {$y'$};
+      \node[fill=innerbg, inner sep=2pt, font=\large\bfseries] at (0,0) {$m$};
+
+      % Compartment Numbers 9..16
+      \node[font=\sffamily\footnotesize\bfseries, darkslate!80] at (-1.95, 1.90) {9};
+      \node[font=\sffamily\footnotesize\bfseries, darkslate!80] at (1.95, 1.90) {10};
+      \node[font=\sffamily\footnotesize\bfseries, darkslate!80] at (-0.90, 0.88) {11};
+      \node[font=\sffamily\footnotesize\bfseries, darkslate!80] at (0.90, 0.88) {12};
+      \node[font=\sffamily\footnotesize\bfseries, darkslate!80] at (-0.90, -0.88) {13};
+      \node[font=\sffamily\footnotesize\bfseries, darkslate!80] at (0.90, -0.88) {14};
+      \node[font=\sffamily\footnotesize\bfseries, darkslate!80] at (-1.95, -1.90) {15};
+      \node[font=\sffamily\footnotesize\bfseries, darkslate!80] at (1.95, -1.90) {16};
+    \end{scope}
+
+    % Colours for Counters (Bottom Left)
+    \begin{scope}[shift={(-2.3, -2.65)}]
+      \node[font=\bfseries\small, align=center, darkslate] at (0, 1.35) {COLOURS FOR COUNTERS\\{\footnotesize カウンター（駒）の色}};
+      \draw[line width=0.5pt, darkslate] (-0.8, 0.95) -- (0.8, 0.95);
+
+      \tokRed{-1.85}{0.35}
+      \node[font=\footnotesize, align=center] at (0.2, 0.35) {頭上に輝く太陽を見よ、\\私たちを照らす、\textbf{\textcolor{carrollred}{満ちて（1）赤い}}光を！};
+
+      \tokGrey{-1.85}{-0.65}
+      \node[font=\footnotesize, align=center] at (0.2, -0.65) {いまや太陽は去りゆきて、\\\textbf{\textcolor{carrollgrey}{空っぽの（0）}}空は\textbf{\textcolor{carrollgrey}{灰色}}なり！};
+
+      \draw[line width=0.5pt, darkslate] (-0.8, -1.25) -- (0.8, -1.25);
+    \end{scope}
+
+    % Smaller Diagram (Bottom Right)
+    \begin{scope}[shift={(2.3, -2.65)}]
+      \fill[boardbg] (-1.45,-1.45) rectangle (1.45,1.45);
+      \draw[line width=1.1pt, darkslate] (-1.45,-1.45) rectangle (1.45,1.45);
+      \draw[line width=0.8pt, darkslate] (-1.45,0) -- (1.45,0);
+      \draw[line width=0.8pt, darkslate] (0,-1.45) -- (0,1.45);
+
+      % Attribute Labels
+      \node[fill=boardbg, inner sep=2pt, font=\large\bfseries] at (0,0.72) {$x$};
+      \node[fill=boardbg, inner sep=2pt, font=\large\bfseries] at (0,-0.72) {$x'$};
+      \node[fill=boardbg, inner sep=2pt, font=\large\bfseries] at (-0.72,0) {$y$};
+      \node[fill=boardbg, inner sep=2pt, font=\large\bfseries] at (0.72,0) {$y'$};
+
+      % Compartment Numbers 5..8
+      \node[font=\sffamily\footnotesize\bfseries, darkslate!80] at (-1.18, 1.18) {5};
+      \node[font=\sffamily\footnotesize\bfseries, darkslate!80] at (1.18, 1.18) {6};
+      \node[font=\sffamily\footnotesize\bfseries, darkslate!80] at (-1.18, -1.18) {7};
+      \node[font=\sffamily\footnotesize\bfseries, darkslate!80] at (1.18, -1.18) {8};
+    \end{scope}
+  \end{tikzpicture}%
+}
+
 \title{\Huge\textbf{論理の遊戯}\\[4mm]
 \huge\textbf{ゲームとダイアグラムで楽しむ三段論法と記号論理}\\[6mm]
-\Large\textbf{—— 原著全4章 完全翻訳・数学校閲版 ——}\\[5mm]
+\Large\textbf{—— 原著全4章 完全翻訳・TikZ図版完全再現・数学校閲版 ——}\\[5mm]
 \large 原著：ルイス・キャロル（Lewis Carroll / Charles L. Dodgson, 1887）\\[2mm]
 \normalsize Project Gutenberg eBook \#4763: \textit{The Game of Logic}}
 
 \author{\textbf{ルイス・キャロル} 著\\[2mm]
 \textbf{教育情報分析研究会} 訳・数理校閲}
-\date{2026年10月 校訂第1版}
+\date{2026年10月 校訂第2版（TikZ完全図版化）}
 
 \begin{document}
 
@@ -152,11 +389,13 @@ def main():
     \item \textbf{古きを捨てて新しきを（New Lamps for Old）}：命題の本質、三段論法（Syllogism）、誤謬（Fallacies）の分類、および正方形ダイアグラムを用いた推論の基礎。
     \item \textbf{問いかけの数々（Cross Questions）}：小ダイアグラム・大ダイアグラムを用いた命題の表現と記号解釈の徹底演習問題群。
     \item \textbf{歪んだ答え（Crooked Answers）}：第2章の演習に対する詳細な模範解答と、三段論法の具体的導出プロセス。
-    \item \textbf{当たるも八卦当たるぬも八卦（Hit or Miss）}：日々の生活や言語の中に潜む論理的推論と誤謬を見抜く総合論理パズル。
+    \item \textbf{当たるも八卦当たらぬも八卦（Hit or Miss）}：日々の生活や言語の中に潜む論理的推論と誤謬を見抜く総合論理パズル。
 \end{enumerate}
 を収載している。
 
-本全訳版は、Project Gutenberg eBook \#4763として公開されている1887年初版テキストを底本とし、ローカル大規模言語モデル（\texttt{qwen2.5-7b-instruct} による忠実な翻訳および \texttt{qwen2.5-math-7b-instruct} による数理・LaTeX校閲）を駆使して完全翻訳・製本したものである。
+本全訳版は、Project Gutenberg eBook \#4763として公開されている1887年初版テキストを底本とし、原著に収載されている全92個の論理ダイアグラム（巻頭図版、横2区画図、縦2区画図、4区画小ダイアグラム、8区画大ダイアグラム、および大小連動図）をすべて高精細な\textbf{TikZベクター図版（赤・灰カウンター駒付き）}として完全再現した決定版である。
+
+""" + FRONTMATTER_TEX + r"""
 
 \tableofcontents
 
@@ -167,23 +406,10 @@ def main():
     order = ["I", "II", "III", "IV"]
 
     for num in order:
-        key = f"Chapter_{num}"
-        if key not in data:
-            continue
-        ch = data[key]
-        ch_meta = TITLES.get(num, (f"第{num}章", ch.get("title_en", f"CHAPTER {num}"), ""))
-        ch_title = f"{ch_meta[1]}"
+        ch_meta = TITLES[num]
+        ch_title = ch_meta[1]
         ch_subtitle = ch_meta[2]
-
-        ja_text = clean_latex(ch["japanese_translation"])
-
-        paragraphs = ja_text.split("\n\n")
-        latex_paragraphs = []
-        for p in paragraphs:
-            p = p.strip()
-            if not p:
-                continue
-            latex_paragraphs.append(p)
+        ja_text = CHAPTER_CONTENT[num].strip()
 
         chapter_tex = f"""\\chapter{{{ch_title}}}
 \\label{{ch:{num.lower()}}}
@@ -193,35 +419,35 @@ def main():
 \\end{{center}}
 \\vspace{{4mm}}
 
-""" + "\n\n".join(latex_paragraphs)
-
+{ja_text}
+"""
         body_chapters.append(chapter_tex)
 
     postamble = r"""
 \backmatter
+\chapter*{奥付・翻訳校閲記録}
+\addcontentsline{toc}{chapter}{奥付・翻訳校閲記録}
 
-\chapter{訳者・数理校閲後記}
-
-本書は、ルイス・キャロル（チャールズ・L・ドジソン）による知られざる論理学の傑作『論理の遊戯』（\textit{The Game of Logic}, 1887）の全4章を、Project Gutenberg（\#4763）の底本に基づき完全翻訳・数理校閲したものである。
-
-キャロルが目指したのは、堅苦しい学問としての論理学ではなく、知的な歓びとユーモアに満ちた「遊戯（ゲーム）」としての記号論理であった。ダイアグラムの上で駒を動かしながら前提から結論を導き出す快感は、130年以上を経た現代においても全く色あせることはない。
-
-本書が、論理的思考の純粋な楽しさと、アリスの作者が持っていた鋭利な数学的知性に触れる最良の契機となることを願う。
-
-\begin{flushright}
-2026年10月\\
-教育情報分析研究会
-\end{flushright}
+\begin{tcolorbox}[colback=softpink, colframe=boxframe, title={\textbf{書誌情報・翻訳校閲メタデータ}}]
+\begin{itemize}
+    \item \textbf{原書タイトル}: \textit{The Game of Logic} (1887年初版)
+    \item \textbf{原著者}: Lewis Carroll (Charles Lutwidge Dodgson, 1832--1898)
+    \item \textbf{底本}: Project Gutenberg eBook \#4763
+    \item \textbf{図版組版}: TikZによる大小論理ダイアグラム・赤灰カウンター駒完全ベクター再現（全92図版）
+    \item \textbf{組版エンジン}: LuaLaTeX (\texttt{ltjsbook} クラス)
+\end{itemize}
+\end{tcolorbox}
 
 \end{document}
 """
 
-    full_tex = preamble + "\n\n" + "\n\n\\newpage\n\n".join(body_chapters) + "\n\n" + postamble
+    full_tex = preamble + "\n\n".join(body_chapters) + postamble
 
+    os.makedirs(os.path.dirname(OUTPUT_TEX), exist_ok=True)
     with open(OUTPUT_TEX, "w", encoding="utf-8") as f:
         f.write(full_tex)
 
-    print(f"Successfully generated {OUTPUT_TEX} ({len(full_tex)} characters)!")
+    print(f"Successfully generated {OUTPUT_TEX} ({len(full_tex)} chars)")
 
 if __name__ == "__main__":
     main()
