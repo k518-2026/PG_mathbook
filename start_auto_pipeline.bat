@@ -10,9 +10,9 @@ REM Ensure standard install locations are in PATH
 if exist "C:\texlive\2026\bin\windows" set "PATH=C:\texlive\2026\bin\windows;%PATH%"
 if exist "C:\texlive\2025\bin\windows" set "PATH=C:\texlive\2025\bin\windows;%PATH%"
 if exist "C:\Program Files\Git\cmd" set "PATH=C:\Program Files\Git\cmd;%PATH%"
+if exist "C:\Python315" set "PATH=C:\Python315;C:\Python315\Scripts;%PATH%"
 if exist "C:\Python314" set "PATH=C:\Python314;C:\Python314\Scripts;%PATH%"
 if exist "C:\Python313" set "PATH=C:\Python313;C:\Python313\Scripts;%PATH%"
-if exist "C:\Python312" set "PATH=C:\Python312;C:\Python312\Scripts;%PATH%"
 if exist "%USERPROFILE%\.lmstudio\bin" set "PATH=%USERPROFILE%\.lmstudio\bin;%PATH%"
 
 echo ==================================================================
@@ -28,6 +28,7 @@ if "%1"=="--boot" (
     timeout /t 10 /nobreak > nul
 )
 
+:LOOP_START
 REM If LM Studio app is installed on this PC, ensure LM Studio GUI/daemon is running first
 if exist "%LOCALAPPDATA%\Programs\LM Studio\LM Studio.exe" (
     tasklist /FI "IMAGENAME eq LM Studio.exe" 2>NUL | find /I /N "LM Studio.exe">NUL
@@ -53,6 +54,7 @@ if exist "%USERPROFILE%\.lmstudio\bin\lms.exe" (
 
 echo.
 echo [1/3] Syncing latest repository from GitHub...
+git checkout -- .pipeline.lock 2>nul
 git pull --rebase --autostash origin main
 
 echo.
@@ -60,6 +62,7 @@ echo [2/3] Launching Master Auto-Pipeline Script...
 python scripts\auto_pipeline_master.py
 
 echo.
-echo [3/3] Process finished. See auto_pipeline.log for details.
+echo [3/3] Cycle finished. Checking again in 120 seconds for next queued book...
 echo ==================================================================
-timeout /t 10
+timeout /t 120 /nobreak > nul
+goto LOOP_START
