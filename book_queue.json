@@ -11,22 +11,8 @@
       "translation_title_ja": "数学入門 —— 抽象の力と数理的思考の体系（原著全17章 完全翻訳・数学校閲版）",
       "intro_title_ja": "古典で学び直すホワイトヘッド数学入門",
       "category": "Mathematics & Philosophy of Science (Project Gutenberg eBook #41568)",
-      "gutenberg_txt_url": "https://www.gutenberg.org/cache/epub/41568/pg41568.txt",
+      "gutenberg_txt_url": "https://www.gutenberg.org/files/41568/41568-t/41568-t.tex",
       "gutenberg_url": "https://www.gutenberg.org/ebooks/41568",
-      "status": "in_progress"
-    },
-    {
-      "gutenberg_id": "21076",
-      "slug": "dedekind_theory_of_numbers",
-      "book_dir": "books/21076_dedekind_theory_of_numbers",
-      "original_title": "Essays on the Theory of Numbers",
-      "original_author": "Richard Dedekind",
-      "author_ja": "リヒャルト・デデキント",
-      "translation_title_ja": "数論講義 —— 連続性と無理数・数とは何か（原著完全翻訳・数学校閲版）",
-      "intro_title_ja": "古典で学び直すデデキント実数論・数論入門",
-      "category": "Mathematics / Foundations & Number Theory (Project Gutenberg eBook #21076)",
-      "gutenberg_txt_url": "https://www.gutenberg.org/cache/epub/21076/pg21076.txt",
-      "gutenberg_url": "https://www.gutenberg.org/ebooks/21076",
       "status": "pending"
     },
     {
@@ -36,11 +22,25 @@
       "original_title": "On the Study and Difficulties of Mathematics",
       "original_author": "Augustus De Morgan",
       "author_ja": "オーガスタス・ド・モルガン",
-      "translation_title_ja": "数学の学習とその困難について —— 算術・代数・幾何の論理的基礎（原著完全翻訳・数学校閲版）",
+      "translation_title_ja": "数学の学習とその困難について —— 算術・代数・幾何の論理的基礎（原著全17章 完全翻訳・数学校閲版）",
       "intro_title_ja": "古典で学び直すド・モルガン数学思考入門",
       "category": "Mathematics / Logic & Pedagogy (Project Gutenberg eBook #39088)",
-      "gutenberg_txt_url": "https://www.gutenberg.org/cache/epub/39088/pg39088.txt",
+      "gutenberg_txt_url": "https://www.gutenberg.org/files/39088/39088-t/39088-t.tex",
       "gutenberg_url": "https://www.gutenberg.org/ebooks/39088",
+      "status": "pending"
+    },
+    {
+      "gutenberg_id": "31246",
+      "slug": "ball_history_of_mathematics",
+      "book_dir": "books/31246_ball_history_of_mathematics",
+      "original_title": "A Short Account of the History of Mathematics",
+      "original_author": "W. W. Rouse Ball",
+      "author_ja": "W・W・ラウス・ボール",
+      "translation_title_ja": "数学史概説 —— 古代から近代に至る数理思想の展開（原著完全翻訳・数学校閲版）",
+      "intro_title_ja": "古典で学び直すラウス・ボール数学史入門",
+      "category": "Mathematics / History of Mathematics (Project Gutenberg eBook #31246)",
+      "gutenberg_txt_url": "https://www.gutenberg.org/files/31246/31246-t/31246-t.tex",
+      "gutenberg_url": "https://www.gutenberg.org/ebooks/31246",
       "status": "pending"
     },
     {
@@ -53,7 +53,7 @@
       "translation_title_ja": "純粋数学教程 —— 実数・関数・極限・微積分の厳密解析体系（原著完全翻訳・数学校閲版）",
       "intro_title_ja": "古典で学び直すハーディ純粋数学・解析入門",
       "category": "Mathematics / Real & Complex Analysis (Project Gutenberg eBook #38769)",
-      "gutenberg_txt_url": "https://www.gutenberg.org/cache/epub/38769/pg38769.txt",
+      "gutenberg_txt_url": "https://www.gutenberg.org/files/38769/38769-t/38769-t.tex",
       "gutenberg_url": "https://www.gutenberg.org/ebooks/38769",
       "status": "pending"
     }

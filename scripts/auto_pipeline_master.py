@@ -295,6 +295,7 @@ def get_pdf_pages(pdf_path):
 
 def strip_gutenberg_boilerplate(raw_text):
     start_markers = [
+        r"\begin{document}",
         "*** START OF THE PROJECT GUTENBERG EBOOK",
         "*** START OF THIS PROJECT GUTENBERG EBOOK",
         "***START OF THE PROJECT GUTENBERG EBOOK",
@@ -303,6 +304,7 @@ def strip_gutenberg_boilerplate(raw_text):
         "*** END OF THE PROJECT GUTENBERG EBOOK",
         "*** END OF THIS PROJECT GUTENBERG EBOOK",
         "***END OF THE PROJECT GUTENBERG EBOOK",
+        r"\end{document}",
         "End of the Project Gutenberg EBook",
         "End of Project Gutenberg's",
     ]
@@ -316,17 +318,44 @@ def strip_gutenberg_boilerplate(raw_text):
             break
     for m in end_markers:
         idx = text.find(m)
-        if idx != -1:
+        if idx != -1 and idx > 1000:
             text = text[:idx]
             break
     return text.strip()
 
 
 def extract_chapters_generic(clean_text):
-    """Splits a Gutenberg math book into chapters/sections reliably."""
-    # Remove LaTeX preamble if the Gutenberg txt is a TeX-derived plain text
-    lines = clean_text.split("\n")
+    """Splits a Gutenberg math book (either Gutenberg -t.tex or plain .txt) into chapters/sections reliably."""
     chapters = []
+
+    # 1. Check for Gutenberg TeX \Chapter[...]{Num}{Title} macro (e.g., #41568, #39088, #31246, #38769)
+    tex_ch_iter = list(
+        re.finditer(r"\\Chapter(?:\s*\[[^\]]*\])?\s*\{([^\}]+)\}\s*\{([^\}]+)\}", clean_text)
+    )
+    valid_tex = [m for m in tex_ch_iter if m.group(1).strip().lower() != "number"]
+    if len(valid_tex) >= 3:
+        for i, m in enumerate(valid_tex):
+            start_pos = m.end()
+            end_pos = valid_tex[i + 1].start() if i + 1 < len(valid_tex) else len(clean_text)
+            ch_num_str = re.sub(r"\s+", " ", m.group(1)).strip()
+            ch_title_str = re.sub(r"[\s~]+", " ", m.group(2)).strip()
+            body = clean_text[start_pos:end_pos].strip()
+            # Truncate if trailing Index/Bibliography section starts inside last chapter
+            sec_idx = re.search(r"\\Section(?:\[[^\]]*\])?\{(?:Index|Bibliography|Note)", body)
+            if sec_idx:
+                body = body[: sec_idx.start()].strip()
+            if len(body) >= 300:
+                chapters.append({
+                    "number": len(chapters) + 1,
+                    "title": f"Chapter {ch_num_str}: {ch_title_str}",
+                    "text": body,
+                    "length": len(body),
+                })
+        if len(chapters) >= 3:
+            return chapters
+
+    # 2. Check for plain text CHAPTER / SECTION headings
+    lines = clean_text.split("\n")
     pattern = re.compile(
         r"^(?:CHAPTER|Chapter|SECTION|Section|PART|Part|ESSAY|Essay)\s+([IVXLCDM]+|\d+)(?:[\.\:\s—\-]+(.*))?$"
     )
@@ -336,12 +365,10 @@ def extract_chapters_generic(clean_text):
         s = line.strip()
         m = pattern.match(s)
         if m:
-            # Skip TOC lines that end with page numbers or leader dots
             if re.search(r"\.\.\.|\s+\d+$", s):
                 continue
             matches.append((idx, m.group(1), (m.group(2) or "").strip()))
 
-    # Filter out TOC duplicates: keep matches that have substantial text (>600 chars) before next match
     valid_matches = []
     for i, (line_idx, ch_num, ch_sub) in enumerate(matches):
         next_idx = matches[i + 1][0] if i + 1 < len(matches) else len(lines)
@@ -351,7 +378,6 @@ def extract_chapters_generic(clean_text):
             if ch_sub:
                 title += f": {ch_sub}"
             else:
-                # Check next non-empty line for title
                 for lookahead in range(line_idx + 1, min(line_idx + 5, next_idx)):
                     cand = lines[lookahead].strip()
                     if cand and len(cand) < 90:
@@ -364,7 +390,7 @@ def extract_chapters_generic(clean_text):
             chapters.append({"number": i, "title": title, "text": body, "length": len(body)})
         return chapters
 
-    # Fallback: split into ~12000-character logical parts by double newline
+    # 3. Fallback: split into ~12000-character logical parts by double newline
     chunks = chunk_text(clean_text, max_len=12000)
     for i, ch_text in enumerate(chunks, start=1):
         chapters.append({
@@ -566,14 +592,29 @@ def process_queued_book(item):
 
     raw_txt_path = os.path.join(abs_book_dir, f"pg{gid}.txt")
     if not os.path.exists(raw_txt_path):
-        url = item["gutenberg_txt_url"]
-        log(f"Downloading Gutenberg eBook #{gid} from {url}...")
-        req = urllib.request.Request(url, headers={"User-Agent": "Mozilla/5.0"})
-        with urllib.request.urlopen(req, timeout=60) as resp:
-            raw_bytes = resp.read()
+        candidate_urls = [
+            item.get("gutenberg_txt_url", ""),
+            f"https://www.gutenberg.org/files/{gid}/{gid}-t/{gid}-t.tex",
+            f"https://www.gutenberg.org/cache/epub/{gid}/pg{gid}.txt",
+            f"https://www.gutenberg.org/files/{gid}/{gid}-0.txt",
+        ]
+        raw_bytes = None
+        for url in [u for u in candidate_urls if u]:
+            try:
+                log(f"Downloading Gutenberg eBook #{gid} from {url}...")
+                req = urllib.request.Request(url, headers={"User-Agent": "Mozilla/5.0"})
+                with urllib.request.urlopen(req, timeout=60) as resp:
+                    raw_bytes = resp.read()
+                if raw_bytes:
+                    log(f"Downloaded {len(raw_bytes)} bytes from {url}")
+                    break
+            except Exception as e:
+                log(f"URL {url} failed ({e}), trying next fallback...")
+        if not raw_bytes:
+            log(f"Failed to download eBook #{gid} from all candidate URLs.")
+            return False
         with open(raw_txt_path, "wb") as f:
             f.write(raw_bytes)
-        log(f"Downloaded {len(raw_bytes)} bytes to {raw_txt_path}")
 
     with open(raw_txt_path, "r", encoding="utf-8", errors="replace") as f:
         raw_text = f.read()
@@ -639,6 +680,8 @@ def process_queued_book(item):
                 json.dump(cache_data, f, ensure_ascii=False, indent=2)
 
             chunks_translated_this_session += 1
+            if chunks_translated_this_session == 1:
+                git_commit_and_push(f"chore(auto-pipeline): First chunk translated for #{gid} Ch.{num}")
 
         ch_state["japanese_translation"] = "\n\n".join(pieces)
         with open(cache_path, "w", encoding="utf-8") as f:
