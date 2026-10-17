@@ -325,6 +325,26 @@
       "compiler": "LuaLaTeX",
       "description": "20世紀最大の論理学者・哲学者バートランド・ラッセルの歴史的論文集『神秘主義と論理』の全10篇および序文（全11セクション）を一切の省略・要約なく原著直訳し、集合論・記号論理・認識論の厳密さを徹底校閲した完全直訳版。カントールの無限集合論、ゼノンのパラドックスの解決、センス・データと物理学の論理的構成、因果律批判、記述の理論まで、ラッセル自身の格調高い文体と数理的論理構成を完全再現。",
       "gutenberg_url": "https://www.gutenberg.org/ebooks/25447"
+    },
+    {
+      "gutenberg_id": "41568-intro",
+      "original_title": "An Introduction to Mathematics",
+      "original_author": "Alfred North Whitehead",
+      "japanese_title": "古典で学び直すホワイトヘッド数学入門",
+      "author": "教育情報分析研究会",
+      "category": "Mathematics & Philosophy of Science (Project Gutenberg eBook #41568)",
+      "language": "ja",
+      "chapters_count": 12,
+      "pages": 60,
+      "status": "完成",
+      "created_at": "2026-10-17T18:23:33+09:00",
+      "book_dir": "books/41568_whitehead_intro_mathematics",
+      "tex_file": "books/41568_whitehead_intro_mathematics/whitehead_intro_mathematics_intro.tex",
+      "pdf_file": "books/41568_whitehead_intro_mathematics/whitehead_intro_mathematics_intro.pdf",
+      "model_used": "qwen2.5-7b-instruct & qwen2.5-math-7b-instruct @ http://192.168.128.16:1234/",
+      "compiler": "LuaLaTeX (LuaHBTeX / TeX Live 2026)",
+      "description": "Project Gutenberg eBook #41568収載のアルフレッド・ノース・ホワイトヘッド『An Introduction to Mathematics』を底本に、大人の学び直しの読者に向けて高校数学の範囲で原著以上に懇切丁寧に解き明かす入門書。",
+      "gutenberg_url": "https://www.gutenberg.org/ebooks/41568"
     }
   ]
 }
