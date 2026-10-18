@@ -455,6 +455,66 @@ def build_translation_tex(item, chapters, cache_data, tex_path):
     pdfauthor={{{author_ja}}}
 }}
 
+\usepackage{{array}}
+\usepackage{{calc}}
+
+% Gutenberg Math & Syllogism macros
+\newlength{{\TmpLen}}
+\newenvironment{{Syllogism}}{{$\begin{{array}}{{*{3}{{lc}}}}}}{{\end{{array}}$}}
+
+\newcommand{{\PadTo}}[3][c]{{\settowidth{{\TmpLen}}{{$#2$}}\makebox[\TmpLen][#1]{{$#3$}}}}
+\newcommand{{\PadTxt}}[3][c]{{\settowidth{{\TmpLen}}{{\text{{#2}}}}\makebox[\TmpLen][#1]{{#3}}}}
+\newcommand{{\Syl}}[7]{{#1 & (#2)\quad & #3#4 & #5 & #6#7 \\}}
+\newcommand{{\Thus}}{{\therefore}}
+\newcommand{{\Circ}}{{\bigcirc}}
+\newcommand{{\Sqr}}{{\square}}
+\newcommand{{\Tri}}{{\bigtriangleup}}
+\newcommand{{\Add}}[1]{{#1}}
+\newcommand{{\etc}}{{\text{{etc}}}}
+\newcommand{{\Log}}{{\operatorname{{Log}}}}
+\newcommand{{\Squeeze}}[2][0.95]{{\scalebox{{#1}}[1]{{$#2$}}}}
+\newcommand{{\arc}}{{\text{{arc}}}}
+\newcommand{{\radius}}{{\text{{radius}}}}
+\newcommand{{\PgSep}}[1]{{}}
+\newcommand{{\PageSep}}[1]{{}}
+\newcommand{{\Ed}}{{\text{{Ed}}}}
+\newcommand{{\Ord}}[1]{{\textsuperscript{{#1}}}}
+\newcommand{{\Tag}}[1]{{\tag*{{\ensuremath{{#1}}}}}}
+\newcommand{{\efrac}}[2]{{\frac{{#1}}{{#2}}}}
+\newcommand{{\Title}}[1]{{\textit{{#1}}}}
+\newcommand{{\DPad}}[1]{{\PadTo[l]{{9''''}}{{#1}}}}
+\newcommand{{\Z}}{{\phantom{{0}}}}
+\newcommand{{\Neg}}{{\phantom{{-}}}}
+\newcommand{{\Strut}}[1][12pt]{{\rule{{0pt}}{{#1}}}}
+\newcommand{{\ds}}{{\displaystyle}}
+\newcommand{{\ArrayCompress}}[1][0.6]{{\renewcommand{{\arraystretch}}{{#1}}}}
+\newcommand{{\Figure}}[2][]{{}}
+\newcommand{{\Dpt}}{{\raisebox{{1.25ex}}{{.}}}}
+\newcommand{{\CompBox}}[1]{{\begin{{minipage}}[t]{{0.45\textwidth}}\small #1\end{{minipage}}}}
+\newcommand{{\Comparison}}[2]{{\par\noindent\vspace{{8pt}}\CompBox{{#1}}\hfil\CompBox{{#2}}\par}}
+\newcommand{{\Eq}}[1]{{\ensuremath{{#1}}}}
+\newcommand{{\Pagelabel}}[1]{{\phantomsection\label{{page:#1}}}}
+\newcommand{{\PageRef}}[2][page]{{\hyperref[page:#2]{{#1~\pageref*{{page:#2}}}}}}
+\newcommand{{\GLT}}[4]{{\left.\begin{{array}}{{l}}\ds#1 \\ \ds #3\end{{array}}\right\}} >=< \left\{{\begin{{array}}{{l}}\ds#2 \\ \ds #4\end{{array}}\right.}}}
+
+
+
+
+
+
+
+
+
+
+\newcommand{\opp}{\text{opp}}
+\newcommand{\adj}{\text{adj}}
+\newcommand{\hyp}{\text{hyp}}
+\providecommand{\cosec}{\operatorname{cosec}}
+\newcommand{\TEntry}[2][]{#2}
+\newcommand{\Reason}[2][]{#2}
+\newcommand{\BAR}[1]{\overline{#1}}
+\newcommand{\gcm}{\operatorname{gcm}}
+
 \pagestyle{{fancy}}
 \fancyhf{{}}
 \fancyhead[LE,RO]{{\thepage}}
@@ -549,6 +609,16 @@ def build_intro_book_via_lm_studio(item, chapters, cache_data, abs_book_dir, int
     pdftitle={{{title_ja}}},
     pdfauthor={{教育情報分析研究会}}
 }}
+
+
+\newcommand{\opp}{\text{opp}}
+\newcommand{\adj}{\text{adj}}
+\newcommand{\hyp}{\text{hyp}}
+\providecommand{\cosec}{\operatorname{cosec}}
+\newcommand{\TEntry}[2][]{#2}
+\newcommand{\Reason}[2][]{#2}
+\newcommand{\BAR}[1]{\overline{#1}}
+\newcommand{\gcm}{\operatorname{gcm}}
 
 \pagestyle{{fancy}}
 \fancyhf{{}}

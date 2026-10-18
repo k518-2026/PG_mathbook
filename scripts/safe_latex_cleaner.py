@@ -30,7 +30,8 @@ def clean_text_for_latex(text):
         math_tokens.append(math_str)
         return "ZZZMATHTOKEN" + str(len(math_tokens)-1) + "ZZZ"
 
-    # Stash all standard math environments first!
+    # Stash all standard math and equation/array environments first!
+    t = re.sub(r'\\begin\{(align\*?|gather\*?|multline\*?|equation\*?|array|Syllogism)\}.*?\\end\{\1\}', lambda m: add_token(m.group(0)), t, flags=re.DOTALL)
     t = re.sub(r'\$\$.*?\$\$', lambda m: add_token(m.group(0)), t, flags=re.DOTALL)
     t = re.sub(r'\\\[.*?\\\]', lambda m: add_token(m.group(0)), t, flags=re.DOTALL)
     t = re.sub(r'\\\(.*?\\\)', lambda m: add_token(m.group(0)), t, flags=re.DOTALL)
