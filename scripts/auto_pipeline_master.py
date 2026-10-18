@@ -495,7 +495,7 @@ def build_translation_tex(item, chapters, cache_data, tex_path):
 \newcommand{{\Eq}}[1]{{\ensuremath{{#1}}}}
 \newcommand{{\Pagelabel}}[1]{{\phantomsection\label{{page:#1}}}}
 \newcommand{{\PageRef}}[2][page]{{\hyperref[page:#2]{{#1~\pageref*{{page:#2}}}}}}
-\newcommand{{\GLT}}[4]{{\left.\begin{{array}}{{l}}\ds#1 \\ \ds #3\end{{array}}\right\}} >=< \left\{{\begin{{array}}{{l}}\ds#2 \\ \ds #4\end{{array}}\right.}}}
+\newcommand{{\GLT}}[4]{{\left.\begin{{array}}{{l}}\ds#1 \\ \ds #3\end{{array}}\right\}} >=< \left\{{\begin{{array}}{{l}}\ds#2 \\ \ds #4\end{{array}}\right.}}
 
 
 
@@ -506,14 +506,14 @@ def build_translation_tex(item, chapters, cache_data, tex_path):
 
 
 
-\newcommand{\opp}{\text{opp}}
-\newcommand{\adj}{\text{adj}}
-\newcommand{\hyp}{\text{hyp}}
-\providecommand{\cosec}{\operatorname{cosec}}
-\newcommand{\TEntry}[2][]{#2}
-\newcommand{\Reason}[2][]{#2}
-\newcommand{\BAR}[1]{\overline{#1}}
-\newcommand{\gcm}{\operatorname{gcm}}
+\newcommand{{\opp}}{{\text{{opp}}}}
+\newcommand{{\adj}}{{\text{{adj}}}}
+\newcommand{{\hyp}}{{\text{{hyp}}}}
+\providecommand{{\cosec}}{{\operatorname{{cosec}}}}
+\newcommand{{\TEntry}}[2][]{{#2}}
+\newcommand{{\Reason}}[2][]{{#2}}
+\newcommand{{\BAR}}{{\rule{{0.25in}}{{1pt}}}}
+\newcommand{{\gcm}}{{\operatorname{{gcm}}}}
 
 \pagestyle{{fancy}}
 \fancyhf{{}}
@@ -611,14 +611,14 @@ def build_intro_book_via_lm_studio(item, chapters, cache_data, abs_book_dir, int
 }}
 
 
-\newcommand{\opp}{\text{opp}}
-\newcommand{\adj}{\text{adj}}
-\newcommand{\hyp}{\text{hyp}}
-\providecommand{\cosec}{\operatorname{cosec}}
-\newcommand{\TEntry}[2][]{#2}
-\newcommand{\Reason}[2][]{#2}
-\newcommand{\BAR}[1]{\overline{#1}}
-\newcommand{\gcm}{\operatorname{gcm}}
+\newcommand{{\opp}}{{\text{{opp}}}}
+\newcommand{{\adj}}{{\text{{adj}}}}
+\newcommand{{\hyp}}{{\text{{hyp}}}}
+\providecommand{{\cosec}}{{\operatorname{{cosec}}}}
+\newcommand{{\TEntry}}[2][]{{#2}}
+\newcommand{{\Reason}}[2][]{{#2}}
+\newcommand{{\BAR}}{{\rule{{0.25in}}{{1pt}}}}
+\newcommand{{\gcm}}{{\operatorname{{gcm}}}}
 
 \pagestyle{{fancy}}
 \fancyhf{{}}
