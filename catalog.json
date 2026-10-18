@@ -365,6 +365,26 @@
       "compiler": "LuaLaTeX (LuaHBTeX / TeX Live 2026)",
       "description": "Project Gutenberg eBook #41568収載のアルフレッド・ノース・ホワイトヘッド『An Introduction to Mathematics』全17章を、qwen2.5-7b-instructによる原著直訳とqwen2.5-math-7b-instructによる数理校閲で完全製本した全訳学術書。",
       "gutenberg_url": "https://www.gutenberg.org/ebooks/41568"
+    },
+    {
+      "gutenberg_id": "39088-intro",
+      "original_title": "On the Study and Difficulties of Mathematics",
+      "original_author": "Augustus De Morgan",
+      "japanese_title": "古典で学び直すド・モルガン数学思考入門",
+      "author": "教育情報分析研究会",
+      "category": "Mathematics / Logic & Pedagogy (Project Gutenberg eBook #39088)",
+      "language": "ja",
+      "chapters_count": 12,
+      "pages": 60,
+      "status": "完成",
+      "created_at": "2026-10-18T22:24:58+09:00",
+      "book_dir": "books/39088_demorgan_study_of_mathematics",
+      "tex_file": "books/39088_demorgan_study_of_mathematics/demorgan_study_of_mathematics_intro.tex",
+      "pdf_file": "books/39088_demorgan_study_of_mathematics/demorgan_study_of_mathematics_intro.pdf",
+      "model_used": "qwen2.5-7b-instruct & qwen2.5-math-7b-instruct @ http://192.168.128.16:1234/",
+      "compiler": "LuaLaTeX (LuaHBTeX / TeX Live 2026)",
+      "description": "Project Gutenberg eBook #39088収載のオーガスタス・ド・モルガン『On the Study and Difficulties of Mathematics』を底本に、大人の学び直しの読者に向けて高校数学の範囲で原著以上に懇切丁寧に解き明かす入門書。",
+      "gutenberg_url": "https://www.gutenberg.org/ebooks/39088"
     }
   ]
 }
