@@ -61,6 +61,7 @@ git reset --hard origin/main
 
 echo.
 echo [2/3] Launching Master Auto-Pipeline Script...
+if exist ".pipeline.lock" del /f /q ".pipeline.lock" 2>nul
 python scripts\auto_pipeline_master.py
 
 echo.
