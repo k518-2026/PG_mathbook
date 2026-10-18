@@ -1,0 +1,14 @@
+{
+  "Chapter_1": {
+    "number": 1,
+    "title_en": "Chapter I.: Introductory Remarks on the Nature and Objects of Mathematics.",
+    "length_en": 14407,
+    "chunks_done": 1,
+    "translation_pieces": [
+      "以下の文章を忠実に日本語へ翻訳しました：\n\nこの論文の目的は、（1）数学の学生に対して、家庭教師のない場合でも、最も適切な学習コースを示し、一つの科学分野を別のものに移行するまでの範囲を指示することである。また、彼がどの種類の応用問題に取り組むべきかについても案内することである。（2）初学者にとって困難であり、誤解されやすい様々な点について詳しく論じ、操作のルーチンには入らずにその性質について説明することである。"
+    ],
+    "math_notes": [
+      "To verify the mathematical formulas, probabilities, and logic in the given passage, we need to analyze each part of the statement carefully. However, the passage provided does not contain any specific mathematical formulas or probabilities. It is a general statement about the object of a treatise on mathematics.\n\nLet's break down the key points of the passage:\n\n1. **To point out to the student of Mathematics, who has not the advantage of a tutor, the course of study which it is most advisable that he should follow:**\n   - This point suggests that the treatise should provide a clear and structured path for students to follow in their study of mathematics.\n   - It implies that the treatise should be didactic and easy to follow.\n\n2. **The extent to which he should pursue one part of the science before he commences another:**\n   - This point suggests that the treatise should provide a logical order in which to study different parts of mathematics.\n   - It implies that the treatise should build upon previously established concepts.\n\n3. **To describe at length the nature without going into the routine of the operations:**\n   - This point suggests that the treatise should provide a deep understanding of the concepts and their applications.\n   - It implies"
+    ]
+  }
+}
