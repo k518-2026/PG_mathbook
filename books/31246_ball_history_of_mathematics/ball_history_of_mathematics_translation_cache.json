@@ -2742,12 +2742,14 @@
     "number": 106,
     "title_en": "Section 106",
     "length_en": 11860,
-    "chunks_done": 1,
+    "chunks_done": 2,
     "translation_pieces": [
-      "現代の合成幾何学は、1800年にモンジュ、1803年にカルノ、1822年にポンセレットの著作により起源をもつと述べることができるが、これらはドイツで受けた大きな発展を予告するに過ぎなかった。そして、ステイナーとフォン・スタウトはおそらくその発展を最もよく説明した人物である。"
+      "現代の合成幾何学は、1800年にモンジュ、1803年にカルノ、1822年にポンセレットの著作により起源をもつと述べることができるが、これらはドイツで受けた大きな発展を予告するに過ぎなかった。そして、ステイナーとフォン・スタウトはおそらくその発展を最もよく説明した人物である。",
+      "Jacob Steiner「アポロニウス以来の最高峰の幾何学者」は、1796年3月18日にウツンドルフで生まれ、1863年4月1日にベルンで亡くなった。彼の父親は農民であり、少年は14歳になるまで読み書きを学ぶ機会がなかった。その後、ハイデルベルクに進み、ベルリンへと移り、授業料で生活費を賄った。\n\n『系統的展開』は1832年に出版され、即座に彼の名声を確立させた：この著作には双対原理、射束やペンシルなどの射影および等比関係についての完全な議論が含まれており、これらは計量的な性質に基づいている。クリーレ、ジャコビ、そしてホフマンdt・ Humboldtによって感銘を受けた影響により、ベルリンにSteinerを幾何学教授として招聘し、彼はその座から亡くなるまで務めた。\n\n彼の他の重要な研究は主に『クリーレの雑誌』に掲載された論文の中に含まれており、これらは代数曲線や表面、 pedalとroulette、最大値と最小値に関する性質についての議論を主に扱っている：これらの議論は純粋に幾何学的である。Steinerの著作は最近の合成幾何学における古典的な参考文献として評価されるべきである。"
     ],
     "math_notes": [
-      "To verify the mathematical formulas, probabilities, and logic in the given passage, we need to check each reference and ensure it is correctly represented in standard LaTeX. However, since there are no actual mathematical formulas or probabilities provided in the passage, we will focus on verifying the logical structure and the representation of the names.\n\n1. **Monge**:\n   - Reference: Monge in 1800\n   - LaTeX: \\index{Monge!ref.\\ to}Monge\n   - Verification: The reference is correctly formatted with the name Monge followed by the year and a footnote indicating the origin.\n\n2. **Carnot**:\n   - Reference: Carnot in 1803\n   - LaTeX: \\index{Carnot, Lazare!ref.\\ to}Carnot\n   - Verification: The reference is correctly formatted with the name Carnot followed by the year and a footnote indicating the origin. Note that \"Lazare\" is an additional author who contributed to the work.\n\n3. **Poncelet**:\n   - Reference: Poncelet in 1822\n   - LaTeX: \\index{Poncelet!ref.\\ to"
+      "To verify the mathematical formulas, probabilities, and logic in the given passage, we need to check each reference and ensure it is correctly represented in standard LaTeX. However, since there are no actual mathematical formulas or probabilities provided in the passage, we will focus on verifying the logical structure and the representation of the names.\n\n1. **Monge**:\n   - Reference: Monge in 1800\n   - LaTeX: \\index{Monge!ref.\\ to}Monge\n   - Verification: The reference is correctly formatted with the name Monge followed by the year and a footnote indicating the origin.\n\n2. **Carnot**:\n   - Reference: Carnot in 1803\n   - LaTeX: \\index{Carnot, Lazare!ref.\\ to}Carnot\n   - Verification: The reference is correctly formatted with the name Carnot followed by the year and a footnote indicating the origin. Note that \"Lazare\" is an additional author who contributed to the work.\n\n3. **Poncelet**:\n   - Reference: Poncelet in 1822\n   - LaTeX: \\index{Poncelet!ref.\\ to",
+      "To verify the mathematical formulas, probabilities, and logic in the given passage, we need to carefully examine each part of the text. However, the passage does not contain any specific mathematical formulas or probabilities. It is a biographical account of Jacob Steiner, a mathematician, and his contributions to geometry.\n\nSince there are no mathematical expressions to verify, the key mathematical verification note is:\n\n\\boxed{\\text{No mathematical formulas or probabilities are present in the passage.}}"
     ]
   }
 }
