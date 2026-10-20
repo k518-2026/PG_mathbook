@@ -405,6 +405,26 @@
       "compiler": "LuaLaTeX (LuaHBTeX / TeX Live 2026)",
       "description": "Project Gutenberg eBook #39088収録のオーガスタス・ド・モルガン『数学の学習とその困難について』全17章を、qwen2.5-7b-instructによる直訳とqwen2.5-math-7b-instructによる数理校閲を経てLuaLaTeXで完全組版した決定版全訳書（126ページ）。",
       "gutenberg_url": "https://www.gutenberg.org/ebooks/39088"
+    },
+    {
+      "gutenberg_id": "31246-intro",
+      "original_title": "A Short Account of the History of Mathematics",
+      "original_author": "W. W. Rouse Ball",
+      "japanese_title": "古典で学び直すラウス・ボール数学史入門",
+      "author": "教育情報分析研究会",
+      "category": "Mathematics / History of Mathematics (Project Gutenberg eBook #31246)",
+      "language": "ja",
+      "chapters_count": 12,
+      "pages": 60,
+      "status": "完成",
+      "created_at": "2026-10-20T19:31:10+09:00",
+      "book_dir": "books/31246_ball_history_of_mathematics",
+      "tex_file": "books/31246_ball_history_of_mathematics/ball_history_of_mathematics_intro.tex",
+      "pdf_file": "books/31246_ball_history_of_mathematics/ball_history_of_mathematics_intro.pdf",
+      "model_used": "qwen2.5-7b-instruct & qwen2.5-math-7b-instruct @ http://192.168.128.16:1234/",
+      "compiler": "LuaLaTeX (LuaHBTeX / TeX Live 2026)",
+      "description": "Project Gutenberg eBook #31246収載のW・W・ラウス・ボール『A Short Account of the History of Mathematics』を底本に、大人の学び直しの読者に向けて高校数学の範囲で原著以上に懇切丁寧に解き明かす入門書。",
+      "gutenberg_url": "https://www.gutenberg.org/ebooks/31246"
     }
   ]
 }
