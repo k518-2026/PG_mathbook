@@ -674,7 +674,9 @@ def process_queued_book(item):
             try:
                 log(f"Downloading Gutenberg eBook #{gid} from {url}...")
                 req = urllib.request.Request(url, headers={"User-Agent": "Mozilla/5.0"})
-                with urllib.request.urlopen(req, timeout=60) as resp:
+                import ssl
+                ctx = ssl._create_unverified_context()
+                with urllib.request.urlopen(req, context=ctx, timeout=60) as resp:
                     raw_bytes = resp.read()
                 if raw_bytes:
                     log(f"Downloaded {len(raw_bytes)} bytes from {url}")
