@@ -1,0 +1,14 @@
+{
+  "Chapter_1": {
+    "number": 1,
+    "title_en": "Chapter I: REAL VARIABLES",
+    "length_en": 91396,
+    "chunks_done": 1,
+    "translation_pieces": [
+      "第一章 実変数\n\n1. 有理数。分数$r = p/q$、ここで$p$と$q$は正または負の整数であるとき、そのような分数を有理数と呼ぶ。以下の仮定が成り立つとする：(i) $p$と$q$に共通な因子がないようにする。共通な因子がある場合、それぞれをそれで割ることができる。(ii) $q$は正であるようにする。なぜなら\n\\[\np/(-q) = (-p)/q,\\quad (-p)/(-q) = p/q.\n\\]\nこのように定義された有理数に加えて、「有理数$0$」を$p = 0$として導入することができる。\n\n読者は、一般的な有理数の操作に関する算術則について既に馴染みがあると仮定する。以下に示す例は、これ以上の知識が要求されない。\n\n例題 I.\n1. $r$と$s$が有理数であるとき、$r + s$, $r - s$, $rs$, および $r/s$も有理数である（最後の場合は$s \\neq 0$であることが条件）。\n\n2. $\\lambda$, $m$, および $n$が正の有理数であり、$m > n$であるとき、$\\lambda(m^{2} - n^{2})$, $2\\lambda mn$, および $\\lambda(m^{2} + n^{2})$も正の有理数である。よって、すべての辺の長さが有理数である直角三角形を任意に決定する方法を示せ。\n\n3. 終わりのある小数は、分母に$2$または$5$以外の素因数を持たない有理数を表す。逆もまた真であり、このような有理数は一意的に終了小数として表現できる。\n\n[一般的小数理論については第IV章で考慮する。]\n\n4. 正の有理数は以下の単純な順列で並べることができる：\n\\[\n\\tfrac{1}{1},\\quad\n\\tfrac{2}{1},\\quad\n\\tfrac{1}{2},\\quad\n\\tfrac{3}{1},\\quad\n\\tfrac{2}{2},\\quad\n\\tfrac{1}{3},\\quad\n\\tfrac{4}{1},\\quad\n\\tfrac{3}{2},\\quad\n\\tfrac{2}{3},\\quad\n\\tfrac{1}{4}, \\ \\dots.\n\\]\n\n$p/q$がこの数列の$\\left[\\frac{1}{2}(p + q - 1)(p + q - 2) + q\\right]$番目の項であることを示せ。"
+    ],
+    "math_notes": [
+      "To verify the mathematical formulas and logic in the given passage, let's analyze each part step by step.\n\n1. **Definition of Rational Numbers:**\n   A fraction \\( r = p/q \\), where \\( p \\) and \\( q \\) are integers (positive or negative), is called a rational number. This definition is correct. We can assume without loss of generality that \\( p \\) and \\( q \\) have no common factor (by dividing both by their greatest common divisor) and that \\( q \\) is positive (since \\( p/(-q) = (-p)/q \\) and \\( (-p)/(-q) = p/q \\)). Adding the rational number 0 (which can be represented as \\( 0/1 \\)) is also correct.\n\n2. **Arithmetical Rules for Rational Numbers:**\n   We need to verify that the sum, difference, product, and quotient of two rational numbers are also rational numbers, except when the denominator is zero (division by zero is undefined).\n\n   - **Sum of Rational Numbers:**\n     Let \\( r = p/q \\) and \\( s = u/v \\). Then,\n     \\[\n     r + s = \\frac{p}{"
+    ]
+  }
+}
