@@ -724,7 +724,7 @@ def process_queued_book(item):
             cache_data[key] = {
                 "number": num,
                 "title_en": ch["title"],
-                "length_en": ch["length"],
+                "length_en": ch.get("length", len(ch.get("text", ""))),
                 "chunks_done": 0,
                 "translation_pieces": [],
                 "math_notes": [],
