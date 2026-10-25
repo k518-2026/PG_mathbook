@@ -79,14 +79,16 @@ def translate_english_to_japanese(english_text):
     Step 1: Translate English original faithfully into Japanese using qwen2.5-7b-instruct
     """
     sys_prompt = (
-        "あなたは数学古典の専門翻訳家です。"
-        "英語の数学原著を、一切の要約や省略を行わず、原文の論理・語調・数式に忠実に、格調高い正確な日本語に翻訳してください。"
-        "文中の数式や変数はLaTeX形式（$...$ または $$...$$）で記述してください。"
-        "中国語（簡体字・繁体字の中国語表現）は一切使わず、自然な日本語のみで記述してください。"
-        "【最重要指示】「以下の文章を忠実に日本語へ翻訳しました：」「以下が翻訳です：」などの前置き・挨拶・注釈・解説などのメタテキストは一切出力せず、翻訳本文のみを直接出力してください。"
+        "あなたは世界最高峰の数学専門翻訳家です。"
+        "英語の純粋数学書（G. H. ハーディ著）を、原文の数式と厳密な論理展開を1字1句忠実に維持し、最高品質の学術日本語（自然な標準日本語）のみで翻訳してください。"
+        "中国語（簡体字・繁体字・我達・它達・进行・如果・但是などの中国語語彙・構文）は絶対に混入させず、完全に排除してください。"
+        "数式はLaTeX形式（$...$ または $$...$$）を正確に保持してください。"
+        "【最重要】『以下の文章を忠実に日本語へ翻訳しました：』などの前置き・挨拶・注釈・解説は一切出力せず、翻訳本文のみを出力してください。"
     )
-    prompt = f"以下の原著英文を忠実に日本語へ翻訳してください（前置き・注釈・解説は一切出力せず、翻訳文のみを出力すること）：\n\n{english_text}"
-    return call_lm_studio(prompt, system_prompt=sys_prompt, model="qwen2.5-7b-instruct", max_tokens=2500, temperature=0.1)
+    prompt = f"以下の数学原著英文を、中国語を一切交えず格調高い標準日本語のみに翻訳してください（前置き・解説は一切不要、翻訳本文のみ出力）：\n\n{english_text}"
+    res = call_lm_studio(prompt, system_prompt=sys_prompt, model="qwen2.5-7b-instruct", max_tokens=2500, temperature=0.1)
+    res = re.sub(r'^(?:以下の(?:文章|原著英文|英文)?を?[^：\n]*[：:\n]+)+', '', res.strip()).strip()
+    return res
 
 
 def verify_and_check_math(japanese_text, original_english=""):
