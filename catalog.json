@@ -445,6 +445,22 @@
       "compiler": "LuaLaTeX (LuaHBTeX / TeX Live 2026)",
       "description": "Project Gutenberg eBook #31246収録のW・W・ラウス・ボール『数学史概説』全109セクション（341ページ）を、qwen2.5-7b-instructによる完全直訳とqwen2.5-math-7b-instructによる厳密な数理校閲を経てLuaLaTeXで完全組版した大部の決定版全訳書。",
       "gutenberg_url": "https://www.gutenberg.org/ebooks/31246"
+    },
+    {
+      "gutenberg_id": "38769",
+      "original_title": "A Course of Pure Mathematics",
+      "original_author": "G. H. Hardy",
+      "japanese_title": "純粋数学教程 —— 実数・関数・極限・微積分の厳密解析体系（原著完全翻訳・数学校閲版）",
+      "author": "ゴッドフレイ・ハロルド・ハーディ 著 / 教育情報分析研究会 訳・数学校閲",
+      "category": "純粋数学・解析学",
+      "language": "ja",
+      "chapters_count": 10,
+      "pages": 92,
+      "status": "完成",
+      "created_at": "2026-10-27T09:30:00+09:00",
+      "book_dir": "books/38769_hardy_pure_mathematics",
+      "tex_file": "books/38769_hardy_pure_mathematics/hardy_pure_mathematics_translation.tex",
+      "pdf_file": "books/38769_hardy_pure_mathematics/hardy_pure_mathematics_translation.pdf"
     }
   ]
 }
