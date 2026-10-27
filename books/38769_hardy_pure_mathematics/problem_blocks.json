@@ -1,0 +1,832 @@
+[
+  {
+    "start": 154,
+    "end": 156,
+    "text": "\n为了得到表示正有理数 $r = p/q$ 的点，我達选择点 $A_{r}$ 使得\n\\["
+  },
+  {
+    "start": 158,
+    "end": 160,
+    "text": "\\]\n其中 $A_{0}A_{r}$ 是沿与 $A_{0}A_{1}$ 同方向延伸的线段。当如 \\Fig{1} 所示将该线水平画在纸上时，我達假设是从左到右的方向。为了得到表示负有理数 $r = -s$ 的点，自然地可以认为长度是一个具有符号的量，如果沿 $A_{0}A_{1}$ 方向测量，则为正；若反方向测量则为负，因此 $AB = -BA$；我達取表示 $r$ 的点为 $A_{-s}$ 使得\n\\["
+  },
+  {
+    "start": 164,
+    "end": 166,
+    "text": "\nこれ样，に対して每一个正有理数或负有理数的值 $r$，我達都可以在该线上得到一个点 $A_{r}$，并且満たす\n\\["
+  },
+  {
+    "start": 168,
+    "end": 170,
+    "text": "\\]\n{\\Loosen 且如果自然地将 $A_{0}A_{1}$ 取为长度单位，并写成 $A_{0}A_{1} = 1$，则有}\n\\["
+  },
+  {
+    "start": 172,
+    "end": 176,
+    "text": "\\]\n我達将点 $A_{r}$ 称作该线上的 \\emph{有理点}。\n\n3. 無理数。如果读者在该线上依次标出所有分母为 $1, 2, 3, \\dots$ 的有理数対应的点，他将很容易说服自己可以非常紧密地覆盖整个线段。我達可以更精确地表述如下：\\emph{如果我達取 $\\Lambda$ 上的任意一段 $BC$，我達可以在 $BC$ 上找到任意多个有理点}。\n"
+  },
+  {
+    "start": 180,
+    "end": 182,
+    "text": "\\]\nという条件を満たすものがあると仮定すれば、$A_{1}A_{2}$を$k$等分すると、少なくとも一つの分割点（例えば$P$）は$BC$の内部に含まれますが、$B$または$C$とは重複しません。もしこれが成り立たなければ、$BC$は$A_{1}A_{2}$を$k$等分したうちのいずれかの部分に完全に含まれることになり、これは条件\\eqref{1}と矛盾します。しかし、$P$は明らかに分母が$k$の有理数に対応しています。したがって、少なくとも一つの有理点$P$が$B$と$C$の間にあることが分かります。すると、さらに別の有理点$Q$を$B$と$P$の間に見つけることができ、また$B$と$Q$の間に別の有理点を見つけることができ、これを無限に繰り返すことができます；つまり、先述した通り、任意に多くの有理点を見つけることが可能です。このような状況を表現するために、「$BC$には無数の有理点が含まれる」と言います。\n"
+  },
+  {
+    "start": 184,
+    "end": 186,
+    "text": "\nこのような文句「\\emph{無数}」や「\\emph{無限}」の意味は、例えば「$BC$には無数の有理点が含まれる」や「$BC$上には無限の有理点がある」といった文脈で考慮されることが詳しく述べられます。\\okrickRef{第IV章}{IV}\\@。主張「無限の正整数がある」とは、「任意に大きな正整数$n$に対しても、それよりも多くの正整数を見つけることができる」という意味です。これはどのような$n$であっても明らかに真であり、例えば$n = 100,000$や$n = 100,000,000$の場合でも同じです。この主張は「任意に多くの正整数を見つけることができる」という意味と完全に等価です。\n"
+  },
+  {
+    "start": 188,
+    "end": 190,
+    "text": "\nこれらの考慮から、読者は線の性質を十分理解するために、その上にある有理点のみを考えることで十分であると考えるかもしれません。そして確かに、線を単に有理点だけで構成し、他の点（もし存在する場合）をすべて排除した場合、残された図形は直感的な直線の性質の多くを持ち、ざっくりと言えば、直線に非常に似た外観と挙動を持つでしょう。\n"
+  },
+  {
+    "start": 229,
+    "end": 231,
+    "text": "\nそれから、我々の要求は、既に構築された有理点以外の点Pと数xの存在を含むことが明らかになります。すなわち、$A_{0}P = x$, $x^{2} = 2$；そして（読者には初等代数から覚えているように）私たちは$x = \\sqrt{2}$と書きます。\n"
+  },
+  {
+    "start": 311,
+    "end": 313,
+    "text": "\n5. 无理数（续）。我達已经将正有理数分为两类，即 \\( L \\) 和 \\( R \\)，満たす以下条件：(i) \\( R \\) 的任意元素大于 \\( L \\) 的任意元素；(ii) 我達可以找到 \\( L \\) 和 \\( R \\) 中的两个元素，它達之间的差可以任意小；(iii) \\( L \\) 没有最大值且 \\( R \\) 没有最小值。我達常识中的直线属性、初等几何和初等代数的要求都要求存在一个数\\( x \\)，它大于所有 \\( L \\) 的元素而小于所有 \\( R \\) 的元素，并且存在相应的点 \\( P \\) 在直线上，使得 \\( P \\) 将対应于 \\( L \\) 中的元素的点与対应于 \\( R \\) 中的元素的点分开。\n\\%[図表：図3。]"
+  },
+  {
+    "start": 361,
+    "end": 363,
+    "text": "\n\\paragraph{6. 无理数（续）．} 第4節では、正の有理数\\( x \\)を二つのクラスに分ける特別な方法について議論した。その中で一つのクラスの要素に対して\\( x^2 < 2 \\)であり、もう一つのクラスの要素に対して\\( x^2 > 2 \\)であるような分類法があった。このような分類法は問題の数を「分割」と呼ぶ。明らかに、同じように二つのクラスの要素が不等式 \\( x^3 < 2 \\)と\\( x^3 > 2 \\)、または\\( x^4 < 7 \\)と\\( x^4 > 7 \\)で特徴付けられるような「分割」を作成することも可能である。現在では、このような「分割」の原理を正の有理数全体に対して一般化した形で述べてみよう。\n"
+  },
+  {
+    "start": 404,
+    "end": 406,
+    "text": "\n读者はまた、我々が採用した「実数」という概念の定義の正確な形式には特別な論理的重要性はないと注意すべきであることに留意すべきである。我々は「実数」を区間、すなわちクラスのペアとして定義した。同様に、「実数」を下側のクラスや上側のクラスとして定義することができる；実際には、実数のクラスと同じ性質を持つ無限多種類のエンティティのクラスを定義することも容易である。数学において重要なのは、その記号が何かしらの解釈が可能であることです；一般的に、多くの解釈が可能です。そして、数学的な観点から言えば、採用する解釈は関係ありません。\n"
+  },
+  {
+    "start": 418,
+    "end": 420,
+    "text": "\n9. 実数間の量的关系。実数概念を拡張した以上、等号、不等号、加法、乗法などの概念も対応する形で拡張せざるを得ないことが明白である。これらの考え方が新しい実数に適用できることを示し、その拡張によって通常の代数学の法則が依然として有効であり、実数に対して一般に代数的操作を行う方法は有理数（§1）に対して同じようにできるかを証明する必要がある。これらすべてを系統的に行うと相当なスペースを占めるため、より系统的な議論の進行方法を概略的に示すことに留まる。\n"
+  },
+  {
+    "start": 772,
+    "end": 774,
+    "text": "\nLet us then suppose that \\( P \\) and \\( Q \\) are two properties which are mutually exclusive, and one of which is possessed by every real number. Further let us suppose that any number which possesses \\( P \\) is less than any which possesses \\( Q \\). We call the numbers which possess \\( P \\) the \\emph{lower} or \\emph{left-hand class} \\( L \\), and those which possess \\( Q \\) the \\emph{upper} or \\emph{right-hand class} \\( R \\).\n"
+  },
+  {
+    "start": 775,
+    "end": 777,
+    "text": "\\begin{Remark}\nThus \\( P \\) might be \\( x \\leq \\sqrt{2} \\) and \\( Q \\) be \\( x > \\sqrt{2} \\). It is important to observe that a pair of properties which suffice to define a section of the rational numbers may not suffice to define one of the real numbers. This is so, for example, with the pair `\\( x < \\sqrt{2} \\)' and `\\( x > \\sqrt{2} \\)' or (if we confine ourselves to positive numbers) with `\\( x^2 < 2 \\)' and `\\( x^2 > 2 \\)'. Every rational number possesses one or other of the properties, but not every real number, since in either case \\( \\sqrt{2} \\) escapes classification.\n\\end{Remark}"
+  },
+  {
+    "start": 778,
+    "end": 780,
+    "text": "\nThere are now two possibilities. Either \\( L \\) has a greatest member \\( l \\), or \\( R \\) has a least member \\( r \\). Both of these events cannot occur. For if \\( L \\) had a greatest member \\( l \\), and \\( R \\) a least member \\( r \\), the number \\( \\frac{1}{2}(l + r) \\) would be greater than all members of \\( L \\) and less than all members of \\( R \\), and so could not belong to either class. On the other hand one event must occur.\n"
+  },
+  {
+    "start": 806,
+    "end": 808,
+    "text": "\\Paragraph{18. 積聚点}\n任意の方法で定義された実数の系またはそれに対応する直線上の点の系を、実数の集合または点の集合と呼びます。例えば、すべての正整数やすべての有理点が含まれる集合などが考えられます。\n"
+  },
+  {
+    "start": 1145,
+    "end": 1147,
+    "text": "\\end{alignat*}\nwhere the $a$'s~and~$b$'s are integers. Write $x + y = z$, $y = z - x$ in the second, and eliminate~$x$. We thus get an equation of similar form\n\\["
+  },
+  {
+    "start": 1149,
+    "end": 1151,
+    "text": "\\]\nsatisfied by~$z$. Similarly for the other cases.\n"
+  },
+  {
+    "start": 1155,
+    "end": 1158,
+    "text": "\\]\nwhere $a_{0}$, $a_{1}$, \\dots,~$a_{n}$ are any algebraical numbers, then $x$~is an algebraical\nnumber. [We have $n + 1$~equations of the type\n\\["
+  },
+  {
+    "start": 1161,
+    "end": 1166,
+    "text": "\\]\nin which the coefficients $a_{0, r}$, $a_{1, r}, \\dots$ are integers. Eliminate $a_{0}$, $a_{1}$, \\dots,~$a_{n}$\nbetween these and the original equation for~$x$.]\n\n35. Apply this process to the equation $x^{2} - 2x\\sqrt{2} + \\sqrt{3} = 0$.\n"
+  },
+  {
+    "start": 1188,
+    "end": 1190,
+    "text": "\n[It will be found that $y^{2} + y + 1 = 0$.]\n\\end{Examples}"
+  },
+  {
+    "start": 1366,
+    "end": 1368,
+    "text": "$y$軸方向の測定スケールは$x$軸方向よりも大幅に小さく設定することが便利で、図が不自然な大きさにならないようにします。}\nそうすると、$x$が大きいほど$x$の高次幂が急速に増加することを理解し、多項式\n\\["
+  },
+  {
+    "start": 1824,
+    "end": 1826,
+    "text": "\n直線上を動く粒子には \\emph{一つの自由度} しかありません。その運動方向が固定されているため、その位置は直线上の一点の距離という1つの測定値で完全に決定されます。例えば、直線を基本線 $\\Lambda$ とし、その上の任意の点の位置は単一の座標 $x$ で決定されます。一方、平面内で動く粒子には \\emph{二つの自由度} があります；その位置は2つの座標の決定によって完全に固定されます。\n"
+  },
+  {
+    "start": 2019,
+    "end": 2021,
+    "text": "\n\\item{22.} 无理数的几何作图。第I章で、与えられた単位長から等しい長さ$\\sqrt{2}$を得る簡単な幾何学的な作図法を一つまたは二つ示した。また、任意の二次方程式$ax^{2} + 2bx + c = 0$の根を構築する方法も示した。これは係数$a$, $b$, $c$の比が与えられた場合、つまり$a$, $b$, $c$が有理数である場合に、任意の長さを構築できることが保証されていると仮定した。これらのすべての作図法はユークリッド的なものであり、直尺と Compass だけを使用したものだった。\n"
+  },
+  {
+    "start": 2050,
+    "end": 2052,
+    "text": "\n24. 仅用直尺从给定单位长度开始可以构造的唯一长度是有理长度。\n"
+  },
+  {
+    "start": 2532,
+    "end": 2534,
+    "text": "\nWe might have developed the whole theory of complex numbers from this point of view. Starting with the ideas of \\(x\\) as representing a displacement along \\(OX\\), and of \\(i\\) as a symbol of operation equivalent to turning \\(x\\) through a right angle, we should have been led to regard \\(yi\\) as a displacement of magnitude \\(y\\) along \\(OY\\). It would then have been natural to define \\(x + yi\\) as in §37 and §40, and \\((x + yi)i\\) would have represented the displacement obtained by turning \\(x + yi\\) through a right angle, i.e., \\(-y + xi\\). Finally, we should naturally have defined \\((x + yi)x'\\) as \\(xx' + yx'i\\), \\((x + yi)y'i\\) as \\(-yy' + xy'i\\), and \\((x + yi)(x' + y'i)\\) as the sum of these displacements, i.e., as\n\\["
+  },
+  {
+    "start": 2537,
+    "end": 2539,
+    "text": "\n43. The equations \\(z^2 + 1 = 0\\) and \\(az^2 + 2bz + c = 0\\). There is no real number \\(z\\) such that \\(z^2 + 1 = 0\\); this is expressed by saying that the equation has \\emph{no real roots}. But, as we have just seen, the two complex numbers \\(i\\) and \\(-i\\) satisfy this equation. We express this by saying that the equation has \\emph{the two complex roots} \\(i\\) and \\(-i\\). Since \\(i\\) satisfies \\(z^2 = -1\\), it is sometimes written in the form \\(\\sqrt{-1}\\).\n"
+  },
+  {
+    "start": 2621,
+    "end": 2623,
+    "text": "Figure[2.5in]{24}{p085}\n点 $P$ を $z$ \\emph{の点}、または $z$ に対応する点と呼び、$z$ を \\emph{主座標}、$x$ を \\emph{実部}、$y$ を \\emph{虚部}、$r$ を \\emph{絶対値}、$\\theta$ を \\emph{振幅} と呼びます。そして\n\\["
+  },
+  {
+    "start": 2628,
+    "end": 2630,
+    "text": "\n$y = 0$ のとき、$z$ を \\emph{実数} と呼びます。$x = 0$ のとき、$z$ を \\emph{純虚数} と呼びます。虚部の符号のみが異なる複素数 $x + yi$, $x - yi$ を \\emph{共轭} と呼びます。共轭な複素数の和 $2x$ および積 $x^{2} + y^{2}$ はともに実数であり、両者の絶対値は $\\sqrtp{x^{2} + y^{2}}$ で同じであり、その積はどちらかの絶対値の平方と等しいことに注意します。例えば実数係数を持つ二次方程式の根は非実数の場合には共轭です。\n"
+  },
+  {
+    "start": 2642,
+    "end": 2644,
+    "text": "\n\\Item{(1)} 二つの複素数の和の実部（または虚部）は、その実部（または虚部）の和に等しい。\n"
+  },
+  {
+    "start": 2751,
+    "end": 2754,
+    "text": "\nこの定理はしばしば次のように述べられる：「実数係数の方程式において複素根は共役なペアで現れる」。これは、有理数係数の方程式における無理性根が共轭するペアで現れるという結果（\\Exs{viii}.7）と比較されるべきである。\\footnote\n  {有理数 $a$, $b$ に対して $a + \\sqrt{b}$, $a - \\sqrt{b}$ のような数はしばしば「共轭」であると言われる。}\n"
+  },
+  {
+    "start": 2762,
+    "end": 2766,
+    "text": "\n3. 任意の複素数の和の絶対値はその実部（または虚部）の総和以上である。\n\n4. 二つの複素数の和と積がどちらも実数である場合、その二つの数は実数か共轭であるべきである。\n"
+  },
+  {
+    "start": 2860,
+    "end": 2862,
+    "text": "\n11. 顶点が点 \\( a \\), \\( b \\), \\( c \\) と点 \\( x \\), \\( y \\), \\( z \\) のそれぞれの二つの三角形は相似である条件は次の行列式が0であること：\n\\["
+  },
+  {
+    "start": 2884,
+    "end": 2886,
+    "text": "\\]\nと置き、実部と虚部を等しくするようにします。これにより2つの方程式が得られ、これらは2つの実数 \\( x \\) および \\( y \\) を決定します。方程式が実数の根を持つ条件は \\( y = 0 \\) で、これは \\( ax + b = 0 \\), \\( Ax + B = 0 \\) であり、これらの方程式が一致する条件は \\( aB - bA = 0 \\) です。\n"
+  },
+  {
+    "start": 2891,
+    "end": 2893,
+    "text": "\n除非 \\(a\\) 和 \\(A\\) 同时为零，我達可以を通じて除以 \\(a + iA\\) 来化简。因此，我達可以考虑以下形式作为方程式的标准形式：\n\\["
+  },
+  {
+    "start": 2895,
+    "end": 2897,
+    "text": "\\]\n将 \\(z = x + yi\\) 代入并分别比较实部和虚部，我達得到关于 \\(x\\) 和 \\(y\\) 的一组联立方程式：\n\\["
+  },
+  {
+    "start": 2901,
+    "end": 2903,
+    "text": "\n设\n\\["
+  },
+  {
+    "start": 2908,
+    "end": 2910,
+    "text": "\\]\n上述方程式变为：\n\\["
+  },
+  {
+    "start": 2914,
+    "end": 2916,
+    "text": "\n平方并相加，我達得到：\n\\["
+  },
+  {
+    "start": 2921,
+    "end": 2927,
+    "text": "\n符号的选择应使 \\(\\xi\\eta\\) 与 \\(k\\) 同号：即若 \\(k\\) 为正，则取同号；若 \\(k\\) 为负，则取异号。\n\n等根条件。两根相等仅当上述两个平方根同时消失，即 \\(h = 0, k = 0\\) 或 \\(c = b^2 - B^2, C = 2bB\\)。これ些条件等价于单个条件 \\(c + Ci = (b + Bi)^2\\)，明らかに表示方程式 \\(\\eqref{1}\\) 的左边是一个完全平方。\n\n实根条件。若 \\(x^2 + 2(b + Bi)x + (c + Ci) = 0\\) 中 \\(x\\) 为实数，则有 \\(x^2 + 2bx + c = 0, 2Bx + C = 0\\)。消去 \\(x\\) 后，我達得到所需条件：\n\\["
+  },
+  {
+    "start": 2930,
+    "end": 2932,
+    "text": "\n纯虚根条件。容易验证为：\n\\["
+  },
+  {
+    "start": 2935,
+    "end": 2937,
+    "text": "\n\\Par{共轭複素根の条件。} 二つの共轭複素数の和と積はともに実数であるため、$b + Bi$ および $c + Ci$ がともに実数となるためには $B = 0$, $C = 0$ でなければなりません。したがって、方程式（1）が共轭複素根のペアを持つのは係数が実数である場合のみです。読者は根の明示的な表現を利用してこの結論を確認してください。さらに、$b^{2} \\geq c$ の場合でも根は実数となることがあります。したがって、共轭根を持つためには $B = 0$, $C = 0$, $b^{2} < c$ である必要があります。\n"
+  },
+  {
+    "start": 2941,
+    "end": 2943,
+    "text": "\\]\nここで $G$ および $H$ は複素数であり、方程式が（a）実根、（b）純虚根、（c）共轭複素根のペアを持つことが与えられています。$H = \\lambda + \\mu i$, $G = \\rho + \\sigma i$ とすると以下の結論を得ます。\n"
+  },
+  {
+    "start": 2947,
+    "end": 2949,
+    "text": "\n\\Par{\\Item{（c）}共轭複素根のペアの条件。} このような根を $x + yi$ および $x - yi$ とする。三次方程式の根と係数の関係から、以下の式を得る：\n\\["
+  },
+  {
+    "start": 3009,
+    "end": 3011,
+    "text": "\n\\Item{21.} \\Topic{双線形变换。} 方程式\n\\["
+  },
+  {
+    "start": 3373,
+    "end": 3375,
+    "text": "\n\\item{7.} $z^{2} + z'^{2} = 1$ のとき、点 $z$,~$z'$ は焦点が点 $1$,~$-1$ である楕円の共轭直径の端点である。［もし $CP$,~$CD$ が楕円の共轭半径であり、$S$,~$H$ がその焦点であるとき、$CD$ は $\\angle SPH$ の外角の二等分線に平行であり、$SP · HP = CD^{2}$ である］\n"
+  },
+  {
+    "start": 3433,
+    "end": 3435,
+    "text": "\n---任意の実直線上には無数の共轭虚点のペアが存在する；一般に虚直線には一つだけ実点が存在し、虚直線には共轭虚点のペアは存在しない：---そして、二つの与えられた虚点を結ぶ直線が実直線である条件（ia）と、二つの虚直線の交点が実点である条件（ib）を求めよ。\n"
+  },
+  {
+    "start": 3503,
+    "end": 3505,
+    "text": "\n25. \\( z = \\frac{1}{2}\\{Z + (1/Z)\\} \\)という変換について議論し、特に円 \\( X^{2} + Y^{2} = \\alpha^{2} \\)が共轭楕円（コンファコール・エルリプティクス）に変換されることを示せ。その楕円は\n\\["
+  },
+  {
+    "start": 3767,
+    "end": 3769,
+    "text": "\nこのような符号 $\\pm\\infty$ の使用により、しばしば $n^{2} \\to +\\infty$ を $n^{2} \\to \\infty$ と書き換えることが便利であり、一般的に $\\infty$ の代わりに $+\\infty$ を用いることで記号の統一性を確保することが好ましい有时会。\n"
+  },
+  {
+    "start": 3771,
+    "end": 3773,
+    "text": "\n\\ Paragraph{58. 极限の定義。} 前段落の議論後、読者は一般の極限の概念を理解できるべきである。ざっくりと言えば、$\\phi(n)$ が $n$ が大きいとき $l$ に近似的に等しいとすれば、$\\phi(n)$ は $n$ が無限大に向かうとき $l$ に収束すると言える。しかし、この主張の意味は前段落で与えられた説明によって十分に理解できるとしても、厳密な数学的定義としては十分ではない。実際、これは「十分大きな値の $n$ に対して $\\phi(n)$ が $l$ から $\\DELTA$ よりも小さい差異を持つ」の一連の主張と等価である。この主張は $\\DELTA = .01$ または $.0001$ または任意の正数に対して真でなければならず、そのような任意の $\\DELTA$ の値に対しては、ある一定の値 $n_{0}(\\DELTA)$ 以降の任意の $n$ についても真である。通常、より小さな $\\DELTA$ ほどこの値 $n_{0}(\\DELTA)$ が大きくなる。\n"
+  },
+  {
+    "start": 3780,
+    "end": 3782,
+    "text": "\nこの表記法では、以下のように定義を簡略化することができます：「任意に与えられた正の数 δ 无论多小，我達都能找到 n₀(δ) 使得当 n ≥ n₀(δ) 时 |φ(n) - l| < δ，则称 φ(n) 在 n 趋于无穷大时趋于极限 l，并写作\n\\["
+  },
+  {
+    "start": 4050,
+    "end": 4053,
+    "text": "\n\\paragraph{63. 极限に関するいくつかの一般定理}\n\\topic{\\item{A.} 已知行为的两个函数之和的行为}\n"
+  },
+  {
+    "start": 4147,
+    "end": 4152,
+    "text": "\nThe results 1--7 cover all the cases which are really distinct.\nBefore passing on to consider the product of two functions, we\nmay point out that the result of Theorem~I may be immediately\nextended to the sum of three or more functions which tend to\nlimits as $n\\to\\infty$."
+  },
+  {
+    "start": 4396,
+    "end": 4398,
+    "text": "\n如果我達把 PQ 分成两半，至少有一半包含无穷多个 S 的点。我達选择包含これ些点的那一半，或者如果两边都包含，则选择左边那一半；并用 \\(P_1Q_1\\) 表示所选的那半段（图 28）。\nもし PQ を二等分すると、少なくとも一方には S の無数の点が含まれている。その一方を選び、両方にある場合は左側の半分を選ぶ。このようにして、次の列挙された区間を定義できる："
+  },
+  {
+    "start": 4503,
+    "end": 4505,
+    "text": "\\footnotetext\n  {これらの例題は特に重要であり、後述する文书中にもいくつか用いられるので、十分に研究すべきである。}\n\\PageSep{136}"
+  },
+  {
+    "start": 5175,
+    "end": 5177,
+    "text": "\\begin{Remark}\n\\節番号{80. 有界集合的边界。}任意の実数 $s$ の系または集合 $S$ について、ある数 $K$ が存在して $s \\leq K$ であるとき、$S$ を \\emph{上に有界}という。また、ある数 $k$ が存在して $s \\geq k$ であるとき、$S$ を \\emph{下に有界}という。$S$ が上に有界かつ下に有界であるとき、単に $S$ を \\emph{有界}という。\n"
+  },
+  {
+    "start": 5223,
+    "end": 5226,
+    "text": "\nWe call $\\Lambda$ and $\\lambda$ respectively the 上限と下限の不確定性\nof $\\phi(n)$ as $n$ tends to infinity; and write\n\\["
+  },
+  {
+    "start": 5233,
+    "end": 5235,
+    "text": "\n(2) $\\Lambda$ and $\\lambda$ are the upper and lower bounds of the aggregate of intermediate\nnumbers, if any such exist;"
+  },
+  {
+    "start": 5236,
+    "end": 5257,
+    "text": "\n(3) If $\\DELTA$ is any positive number, then $\\phi(n) < \\Lambda + \\DELTA$ for all sufficiently large\nvalues of $n$, and $\\phi(n) > \\Lambda - \\DELTA$ for an infinity of values of $n$;\n\n(4) 同様に $\\phi(n) > \\lambda - \\DELTA$ for all sufficiently large values of $n$, and\n$\\phi(n) < \\lambda + \\DELTA$ for an infinity of values of $n$;\n\n(5) The necessary and sufficient condition that $\\phi(n)$ should tend to a limit\nis that $\\Lambda = \\lambda$, and in this case the limit is $l$, the common value of $\\lambda$ and $\\Lambda$.\n\nOf these properties, (1) is an immediate consequence of the definitions;\nand we can prove (2) as follows. If $\\Lambda = \\lambda = l$, there can be at most one intermediate\nnumber, viz. $l$, and there is nothing to prove. Suppose then that\n$\\Lambda > \\lambda$. Any intermediate number $\\xi$ is less than any superior and greater than\nany inferior number, so that $\\lambda \\leq \\xi \\leq \\Lambda$. But if $\\lambda < \\xi < \\Lambda$ then $\\xi$ must be\nintermediate, since it is plainly neither superior nor inferior. Hence there are\nintermediate numbers as near as we please to either $\\lambda$ or $\\Lambda$.\n\nTo prove (3) we observe that $\\Lambda + \\DELTA$ is superior and $\\Lambda - \\DELTA$ intermediate or\ninferior. The result is then an immediate consequence of the definitions; and\nthe proof of (4) is substantially the same.\n"
+  },
+  {
+    "start": 5389,
+    "end": 5391,
+    "text": "\n実数関数や級数の場合、収束性や振動性、有限または無限について定義を与えた。しかし、複素関数や級数の場合、$\\rho(n)$および$\\sigma(n)$の挙動を考慮する必要があるため、多くの可能性があり、これほどまでに価値あるものとは言い難い。必要な場合にこのような区別が必要な場合は、実部または虚部が個別にどのように振舞うかにより定義することとする。\n"
+  },
+  {
+    "start": 5546,
+    "end": 5548,
+    "text": "\n実部と虚部を分離すると、\n"
+  },
+  {
+    "start": 5754,
+    "end": 5756,
+    "text": "\n\\Item{(2)} $b^{2} < ac$ ならば、根は共轭複素数（\\okrickRef{第III章}{§43}）であり、次のように書くことができる：\n\\["
+  },
+  {
+    "start": 5852,
+    "end": 5854,
+    "text": "\\章[連続変数の関数の極限]\n{\\V}{連続変数の関数の極限。連続関数と不连续関数}\n"
+  },
+  {
+    "start": 6117,
+    "end": 6119,
+    "text": "が成り立ちます。\\Tag{(2)}\nなぜなら、$x$がほぼゼロと等しいとき、$\\psi(x)$は不仅ほぼ零だが実際的にも零と等しくなるからです。しかし、$\\psi(0) = 1$です。この関数のグラフは$x$軸に点$x = 0$を除き、孤立した一点$(0, 1)$で構成されます。式\\Tag{(2)}は、$y$軸に向かってグラフを移動するとき、曲線の縦座標が常に零であり、限界としてゼロに収束することを表します。この事実は孤立した点$(0, 1)$の位置に関係ありません。\n"
+  },
+  {
+    "start": 6385,
+    "end": 6387,
+    "text": "\n我達现在証明、$\\phi(x)$が$x$の関数として$\\S98$で定義された連続性を持つ場合、実際にはその性質を有することである。ある一定の$x$の範囲において、$x_0$の右側に存在し、$\\phi(x) < \\eta$となる範囲がある。これは$\\phi(x_0) < \\eta$であり、したがって$x = x_0$における$\\phi(x)$は$\\eta$未満であるから、$x$が$x_0$に十分近い場合、$\\phi(x) - \\phi(x_0)$が$\\eta - \\phi(x_0)$未満であれば成立する。また、$\\phi(x)$が$x = x_0$において連続であることから、この条件は$x$が$x_0$に十分近いかぎり満たされる。同様に、ある一定の$x$の範囲において、$x_1$の左側に存在し、$\\phi(x) > \\eta$となる範囲がある。\n"
+  },
+  {
+    "start": 6481,
+    "end": 6483,
+    "text": "\n\\paragraph{103. 区間に於ける関数の振動} 任意に与えられた有界な関数\\(\\phi(x)\\)について、その上界と下界をそれぞれ \\(M\\) および \\(m\\) とする。このとき、\\(a \\leq c \\leq b\\) の場合、\\(M(a, b)\\)は \\(M(a, c)\\) および \\(M(c, b)\\) の大きい方、また \\(m(a, b)\\)は \\(m(a, c)\\) および \\(m(c, b)\\) の小さい方に等しい。この数値 \\(O(a, b)\\)，つまり区間\\((a, b)\\)または\\([a, b]\\)における\\(\\phi(x)\\)の上界と下界的差を、\\(\\phi(x)\\)在区间\\((a, b)\\)或は\\([a, b]\\)的振動と呼ぶ。関数 \\(M(a, b)\\)，\\(m(a, b)\\)，\\(O(a, b)\\) の最も単純な性質は以下の通りである。\n"
+  },
+  {
+    "start": 6542,
+    "end": 6544,
+    "text": "\\]\nを asociate します。ただし、$\\EPSILON$ は $1$ より小さい正の数です。$0$ を $0/1$、$1$ を $1/1$ とみなしますが、これらの場合、区間の一部が区間 $\\DPmod{(0, 1)}{[0, 1]}$ 外側にある部分は reject します。これにより無限個の区間を定義し、これらは明らかに重複していることがわかります。なぜなら、$p/q$ 以外の無数の有理点が $p/q$ に関連付けられた区間に存在するからです。\n"
+  },
+  {
+    "start": 6556,
+    "end": 6562,
+    "text": "\n我達知道$a$是至少一个区间$(a, a_{1})$或$[a, a_{1}]$的左端点。同时，我達也知道$a_{1}$位于至少一个区间$(a_{1}', a_{2})$或$[a_{1}', a_{2}]$内。类似地，$a_{2}$位于某个区间$(a_{2}', a_{3})$或$[a_{2}', a_{3}]$内。明らかに、除非在有限步后$a_{n}$与$b$重合，否则これ个论证可以无限重复。\n\n如果在有限步骤后$a_{n}$确实与$b$重合，则无需进一步证明，因为我達已经得到了一个从$I$的区间中选出的有限集合，并且具有所需性质。若$a_{n}$从未与$b$重合，则点$a_{1}$、$a_{2}$、$a_{3}$等（因为每个点都位于其前驱点的右侧）将趋向于某个极限位置，但これ个极限位置目前看来可以是$(a, b)$内的任意位置。\n\n现在假设从$a$开始执行上述过程的所有可能方式，从而得到所有类型的序列$a_{1}$、$a_{2}$、$a_{3}$等。我達可以证明，必须存在至少一个これ样的序列，在有限步骤后到达$b$。\n"
+  },
+  {
+    "start": 6623,
+    "end": 6625,
+    "text": "\n107節. 複数変数の連続関数。連続性と不连续性の概念は、独立した複数の変数を持つ関数に拡張することができます（第II章、31節以降参照）。このような関数に対するその適用は、私たちはこの章で考慮してきた問題よりも遥かに複雑かつ困難な問題を提起します。ここではこれらの問題について詳細に議論することは不可能ですが、後続において連続な二変数の関数が何を意味するかを知る必要がありますので、その定義を以下に示します。これは第98節最後の定義の直接的な一般化です。\n"
+  },
+  {
+    "start": 6954,
+    "end": 6956,
+    "text": "\nThe reader should observe that this method cannot be applied to \\( x^{p/q} \\), where \\( p/q \\) is a rational fraction, as we have no means of expressing \\( (x + h)^{p/q} \\) as a finite series of powers of \\( h \\). We shall show later on (\\S118) that the result of this example holds for all rational values of \\( m \\). Meanwhile, the reader will find it instructive to determine \\( \\phi'(x) \\) when \\( m \\) has some special fractional value (e.g., \\( \\frac{1}{2} \\)), by means of some special device.]\n"
+  },
+  {
+    "start": 7194,
+    "end": 7196,
+    "text": "\n\\Paragraph{116. 标准形式。} 今後、少数の最も基本的な関数型の導函数の形についてより系統的に調査する予定である。\n"
+  },
+  {
+    "start": 7382,
+    "end": 7384,
+    "text": "\nThis result may also be deduced as a corollary from §xxxvi.3.\nもし $\\phi(x) = x^{m}$ のとき、"
+  },
+  {
+    "start": 7793,
+    "end": 7795,
+    "text": "\nLet \\( x_1 \\)と\\( x_2 \\)を区間内の\\( x \\)の二つの値とする，并且満たす \\( x_1 < x_2 \\)。我々は \\( \\phi(x_1) < \\phi(x_2) \\) を示す必要がある。まず第一に、\\(\\phi(x_1)\\) は等しくなることはできない；もし等しいとすると、定理Bにより、\\( x_1 \\)と\\( x_2 \\)の間に存在する \\( x \\) の値で \\(\\phi'(x) = 0\\) となる。また、\\(\\phi(x_1)\\) より大きいこともできない。なぜなら、\\(\\phi'(x_1)\\) が正であるから、定理Aにより、\\( x > x_1 \\)かつ十分に \\( x_1 \\) に近いとき、\\(\\phi(x)\\)は\\(\\phi(x_1)\\)より大きい。従って、ある \\( x = x_3 \\) の値が存在し、\\( x_1 < x_3 < x_2 \\)で \\(\\phi(x_3) = \\phi(x_1)\\) となる；そして定理Bにより、\\( x_1 \\)と\\( x_3 \\)の間に存在する \\( x \\) の値で \\(\\phi'(x) = 0\\) となる。\n"
+  },
+  {
+    "start": 7942,
+    "end": 7944,
+    "text": "\n微分η关于ξ的导数为0，当且仅当\n\\["
+  },
+  {
+    "start": 7946,
+    "end": 7952,
+    "text": "\\]\n或 \\(\\xi^{2} = pq\\)。因此，如果p和q同号，则导数有两个根；如果异号，则没有根。后者情况下，η的图形如图41a所示。\n\n当p和q均为正时，η的一般图形如图41b所示，并且容易看出 \\(\\xi = \\sqrt{pq}\\) 与える极大值，\\(\\xi = -\\sqrt{pq}\\) 与える极小值。最大值为 \\(-1/(\\sqrt{p} - \\sqrt{q})^{2}\\)，最小值为 \\(-1/(\\sqrt{p} + \\sqrt{q})^{2}\\)，后者较大。\n\n特别地，当 \\(p = q\\) 时，函数形式为\n\\["
+  },
+  {
+    "start": 7954,
+    "end": 7958,
+    "text": "\\]\n其图形如图41c所示。\n\n上述讨论在 \\(\\lambda = 0\\) 即 \\(a/A = b/B\\) 的情况下失效。但在これ种情况下，\n\\["
+  },
+  {
+    "start": 7960,
+    "end": 7962,
+    "text": "\\]\n设为上述形式，且 \\(dy/dx = 0\\) 与える单值 \\(x = \\frac{1}{2}(x_{1} + x_{2})\\)。绘制图形后可以看出，该值与える极大值或极小值，取决于 \\(\\mu\\) 的正负。图42所示的图形対应于前者情况。\n\\["
+  },
+  {
+    "start": 8111,
+    "end": 8113,
+    "text": "\n3. 第 124 节末尾で述べた定理を平均値の定理を使って証明せよ。\n"
+  },
+  {
+    "start": 8115,
+    "end": 8117,
+    "text": "\n4. 平均値の定理を使って第 113 节の定理 (6) を証明し、導出に用いる微分が連続であると仮定せよ。\n"
+  },
+  {
+    "start": 8159,
+    "end": 8161,
+    "text": "\n次に、問題 (2) について述べる。微分の場合には導関数の直接的な定義があり、最初から唯一のものしか存在しないことが明らかである。逆問題の場合でも答えはほぼ同様に単純である：\\(\\phi(x)\\) が問題の一つの解であれば、任意の定数 \\(C\\) の値に対して \\(\\phi(x) + C\\) もまた解であり、すべての可能な解は \\(\\phi(x) + C\\) の形で表される。これは第 126 节からすぐに導かれる。\n"
+  },
+  {
+    "start": 8426,
+    "end": 8428,
+    "text": "\\Paragraph{131. 理数函数の実用的な積分に関する注記}\n第130節の解析から、任意の実理数函数$R(x)$の積分を求めることができる一般的方法が得られる。ただし、方程式$Q(x) = 0$を解けることが前提である。単純な場合（上記例5のように）では、この方法の適用は比較的簡単である。より複雑な場合では、作業量が時として許容不能となり、他の装置を使用せざるを得ない。本書の目的には実用的な積分問題の詳細な論述は含まれていない。より詳しい情報が必要な読者は、Goursatの『解析教程』第2版第1巻（pp. 246 et seq.）、Bertrandの『积分计算』およびBowes and Bowes社によるBromwichの小冊子『基本积分』（1911年）を参照されたい。\n"
+  },
+  {
+    "start": 8430,
+    "end": 8432,
+    "text": "\\footnote\n  {作者の小冊子「单一变量函数的积分」（剑桥数学论文集，第2号，1915年第二版）参照。実際ではこれほど頻繁には起こらない。}\n\\end{Remark}"
+  },
+  {
+    "start": 8460,
+    "end": 8462,
+    "text": "\\]\nとなります。後者の積分は \\(t\\) の有理関数の積分であり、第 130 节で述べた方法によって計算できます。\n"
+  },
+  {
+    "start": 8736,
+    "end": 8738,
+    "text": "\nThe subject of integration is of the form \\( \\frac{P}{Q} \\), where \\( P \\) and \\( Q \\) are polynomials in \\( x \\) and \\( \\sqrt{X} \\). It may therefore be reduced to the form\n"
+  },
+  {
+    "start": 8744,
+    "end": 8746,
+    "text": "\nwhere \\( A \\), \\( B \\), \\(\\dots\\) are rational functions of \\( x \\). The only new problem which arises is that of the integration of a function of the form \\( F\\sqrt{X} \\), or, what is the same thing, \\( G/\\sqrt{X} \\), where \\( G \\) is a rational function of \\( x \\). And the integral\n"
+  },
+  {
+    "start": 8751,
+    "end": 8755,
+    "text": "\ncan always be evaluated by splitting up \\( G \\) into partial fractions. When we do this, integrals of three different types may arise.\n\n(i) In the first place there may be integrals of the type\n"
+  },
+  {
+    "start": 8760,
+    "end": 8762,
+    "text": "\nwhere \\( m \\) is a positive integer. The cases in which \\( m = 0 \\) or \\( m = 1 \\) have been disposed of in Section 136. In order to calculate the integrals corresponding to larger values of \\( m \\), we observe that\n"
+  },
+  {
+    "start": 8768,
+    "end": 8772,
+    "text": "\nwhere \\( \\alpha \\), \\( \\beta \\), \\( \\gamma \\) are constants whose values may be easily calculated. It is clear that, when we integrate this equation, we obtain a relation between three successive integrals of the type Eq.(3). As we know the values of the integral for \\( m = 0 \\) and \\( m = 1 \\), we can calculate in turn its values for all other values of \\( m \\).\n\n(ii) In the second place there may be integrals of the type\n"
+  },
+  {
+    "start": 8777,
+    "end": 8779,
+    "text": "\nwhere \\( p \\) is real. If we make the substitution \\( x - p = 1/t \\), then this integral is reduced to an integral in \\( t \\) of the type Eq.(3).\n"
+  },
+  {
+    "start": 8929,
+    "end": 8931,
+    "text": "2. 任意の方法で積分せよ $\\cos ax \\cos bx$, $\\sin ax \\sin bx$, $\\cos ax \\sin bx$,\n$\\cos^{2}x$, $\\sin^{3}x$, $\\cos^{4}x$, $\\cos x \\cos 2x \\cos 3x$, $\\cos^{3}2x \\sin^{2}3x$, $\\cos^{5}x \\sin^{7}x$. [このような場合、減化公式（VI 39）を使用することが時々便利である有时。]\n"
+  },
+  {
+    "start": 9343,
+    "end": 9345,
+    "text": "\n\\item[25.] 椭圆 \\( (x^2/a^2) + (y^2/b^2) = 1 \\) が中心と共通する円によって切り取られる最大の鋭角は \\( \\arctan\\{(a^2 - b^2)/2ab\\} \\) である。\n"
+  },
+  {
+    "start": 9881,
+    "end": 9883,
+    "text": "\nLet us suppose bahwa最初の \\( n \\) つの導関数\n\\["
+  },
+  {
+    "start": 10112,
+    "end": 10114,
+    "text": "\n12. 楕円において点 $P$ での曲率半径は $CD^{3}/ab$ であり、ここで $CD$ は $CP$ に直交する半径共轭線分である。\n"
+  },
+  {
+    "start": 10429,
+    "end": 10431,
+    "text": "\\]\nが \\(\\delta x \\to 0\\) のときに成り立ちます。これはしばしば \\(\\delta x\\) が小さいときに \\(dy\\) は \\(\\delta y\\) の主部であるという表現で述べ occasionally expressed by saying that \\(dy\\) is the *principal part* of \\(\\delta y\\) when \\(\\delta x\\) is small, と解釈されます。また、\\(ax\\) は \\(x\\) が小さいときに \\(ax + bx^2\\) の主部であるというように考えることができます。\n\\end{Remark}"
+  },
+  {
+    "start": 10586,
+    "end": 10588,
+    "text": "\nLet us now suppose \\( f(x, y) \\) possesses a derivative \\( f_{x}'(x, y) \\) which is also continuous near \\( (a, b) \\). If \\( f(x, y) = 0 \\), \\( x = a + h \\), \\( y = b + k \\), we have\n\\["
+  },
+  {
+    "start": 10590,
+    "end": 10592,
+    "text": "\\]\nwhere \\( \\epsilon \\) and \\( \\eta \\) tend to zero with \\( h \\) and \\( k \\). Thus\n\\["
+  },
+  {
+    "start": 10599,
+    "end": 10601,
+    "text": "\n9. The equation of the tangent to the curve \\( f(x, y) = 0 \\), at the point \\( x_0 \\), \\( y_0 \\), is\n\\["
+  },
+  {
+    "start": 10608,
+    "end": 10610,
+    "text": "\n私たちは確かに長方形の面積が何を意味するかを知っていますし、その面積は辺の積で測定されます。また、ユークリッドによって証明された三角形や平行四边形、多角形の性質により、これらの図形の面積にも特定の意味を付与することができます。しかし、これまでに知っている限りでは、曲線で囲まれた図形の面積に対する直接的な定義は提供されていません。現在では、$F(x)$ の定義を与える方法を示し、その存在性を証明することを説明します。\\footnote{以下の議論は、ゴルサールの『解析教程』（第2版）vol.~i, pp.~171~\\textit{et~seq.} に模倣されていますが、ゴルサールの手法は格段に一般化されています。}\n"
+  },
+  {
+    "start": 10629,
+    "end": 10632,
+    "text": "\n{\\Loosen 明らかに、$f(x)$ 在区间 $(a, b)$ 中的下界为 $m$ 时，有 $S \\geq m(b - a)$. 因此，$S$ 的总和是有界的，并且具有一个下界，我達将其记作 $J$.\n$S$ 的任何值都不小于 $J$，但存在一些 $S$ 的值，它達小于任意大于 $J$ 的数.}\n\\PageSep{285}"
+  },
+  {
+    "start": 10752,
+    "end": 10756,
+    "text": "\nWe therefore define the measure of the angle \\( AOP \\) on the notion not of length but of \\emph{area}. We define the measure of the angle \\( AOP \\) as \\emph{twice the area of the sector \\( AOP \\) of the unit circle}.\n\nSuppose, in particular, that \\( OA \\) is \\( y = 0 \\) and that \\( OP \\) is \\( y = mx \\), where \\( m > 0 \\). The area is a function of \\( m \\), which we may denote by \\( \\phi(m) \\). If we write \\( \\mu \\) for \\( (1 + m^{2})^{-\\frac{1}{2}} \\), then \\( P \\) is the point \\( (\\mu, m\\mu) \\), and\n\\["
+  },
+  {
+    "start": 10758,
+    "end": 10760,
+    "text": "\\]\nDifferentiating with respect to \\( m \\), we find\n\\["
+  },
+  {
+    "start": 10763,
+    "end": 10765,
+    "text": "\\]\nThus the analytical equivalent of our definition would be to define \\( \\arctan m \\) by the equation\n\\["
+  },
+  {
+    "start": 10767,
+    "end": 10769,
+    "text": "\\]\nand the whole theory of the circular functions could be worked out from this starting point, just as the theory of the logarithm is worked out from a similar definition in Chapter IX. See Appendix III.\n"
+  },
+  {
+    "start": 10774,
+    "end": 10776,
+    "text": "\\]\nand in particular that\n\\["
+  },
+  {
+    "start": 11154,
+    "end": 11156,
+    "text": "\n\\item{12.} ボネッットの第2中值定理の形式。$f'(x)$が恒等的に符号を持つ場合、かつ$f(b)$と$f(a) - f(b)$が同じ符号を持つとき、\n\\["
+  },
+  {
+    "start": 12042,
+    "end": 12044,
+    "text": "\n\\Paragraph{171. 收敛与发散的进一步测试。}\n第311頁から第313頁の例により、一般的なテスト \\SecNo[§]{168} では扱えない単純かつ興味深い正項級数の種類があることが示される。実際、$u_{n+1}/u_{n}$ が $n \\to \\infty$ のとき極限に収束する最も簡単な系列の場合、一般的なテスト \\SecNo[§]{168} はこの極限が $1$ のとき一般に失敗する。したがって、例 lxvii.5 ではこれらのテストが失敗し、特別な装置を用いることになった。その本質は、幾何級数ではなく、例 lxvii.4 の系列を比較系列として使用することだった。"
+  },
+  {
+    "start": 12289,
+    "end": 12291,
+    "text": "\nWe can prove this by an argument which we have used already in the special case of the series \\(\\sum (1/n)\\). In the first place,\n\\begin{gather*}"
+  },
+  {
+    "start": 12295,
+    "end": 12297,
+    "text": "\\end{gather*}\nIf \\(\\sum 2^{n}\\phi(2^{n})\\) diverges, then so do \\(\\sum 2^{n+1}\\phi(2^{n+1})\\) and \\(\\sum 2^{n}\\phi(2^{n+1})\\), and then the inequalities just obtained show that \\(\\sum \\phi(n)\\) diverges.\n\\PageSep{321}"
+  },
+  {
+    "start": 12298,
+    "end": 12300,
+    "text": "\nOn the other hand,\n\\["
+  },
+  {
+    "start": 12303,
+    "end": 12307,
+    "text": "\\]\nand so on. And from this set of inequalities it follows that if \\(\\sum 2^{n}\\phi(2^{n})\\) converges, then so does \\(\\sum \\phi(n)\\). Thus the theorem is established.\n\nFor our present purposes the field of application of this test is practically the same as that of the Integral Test. It enables us to discuss the series \\(\\sum n^{-s}\\) with equal ease. For \\(\\sum n^{-s}\\) will converge or diverge according as \\(\\sum 2^{n}2^{-ns}\\) converges or diverges, i.e., according as \\(s > 1\\) or \\(s \\leq 1\\).\n"
+  },
+  {
+    "start": 12308,
+    "end": 12312,
+    "text": "\\begin{Examples}{LXXII.}\n\\Item{1.} Show that if \\(a\\) is any positive integer greater than 1 then \\(\\sum \\phi(n)\\) is convergent or divergent according as \\(\\sum a^{n}\\phi(a^{n})\\) is convergent or divergent. [Use the same arguments as above, taking groups of \\(a\\), \\(a^{2}\\), \\(a^{3}\\), \\dots terms.]\n\n\\Item{2.} If \\(\\sum 2^{n}\\phi(2^{n})\\) converges then it is obvious that \\(\\lim 2^{n}\\phi(2^{n}) = 0\\). Hence deduce Abel's Theorem of §173.\n\\end{Examples}"
+  },
+  {
+    "start": 12370,
+    "end": 12372,
+    "text": "\n\\Paragraph{178. $\\phi(x)$ が正の場合} シリーズに対する定理 A--D と類似した、無限積分式（1）（第 177 节）の収束性または発散性に関する一般定理を考慮すること自然です。第 177 节で既に述べたように、A は列に対しても積分に対しても真であることが示されています（式（ii）参照）。B に対応する定理は以下の通りです：無限積分式（1）の収束性の必要十分条件は、ある定数 $K$ を用いて、\n"
+  },
+  {
+    "start": 12386,
+    "end": 12388,
+    "text": "\nWe may observe that d'Alembert's test (\\S168), depending as it does on the notion of successive terms, has no analogue for integrals; and that the analogue of Cauchy's test is not of much importance, and in any case could only be formulated when we have investigated in greater detail the theory of the function\n\\["
+  },
+  {
+    "start": 12390,
+    "end": 12392,
+    "text": "\\]\nas we shall do in Chapter IX. The most important special tests are obtained by comparison with the integral\n\\["
+  },
+  {
+    "start": 12394,
+    "end": 12398,
+    "text": "\\]\nwhose convergence or divergence we have investigated in \\S175, and are as follows: \n\\begin{Result}\nif $\\phi(x) < Kx^{-s}$, where $s > 1$, when $x \\geq a$, then\n\\["
+  },
+  {
+    "start": 12400,
+    "end": 12404,
+    "text": "\\]\nis convergent; and if $\\phi(x) > Kx^{-s}$, where $s \\leq 1$, when\n$x \\geq a$, then the integral is divergent; and in particular, if\n$\\lim x^{s}\\phi(x) = l$, where $l > 0$, then the integral is convergent or\ndivergent according as $s > 1$ or $s \\leq 1$."
+  },
+  {
+    "start": 12407,
+    "end": 12409,
+    "text": "\\begin{Remark}\nThere is one fundamental property of a convergent infinite series in regard to which the analogy between infinite series and infinite integrals breaks down. If $\\sum \\phi(n)$ is convergent then $\\phi(n) \\to 0$; but it is not always true, even when $\\phi(x)$ is always positive, that if $\\int_{a}^{\\infty} \\phi(x)\\, dx$ is convergent then $\\phi(x) \\to 0$.\n\\end{Remark}"
+  },
+  {
+    "start": 12450,
+    "end": 12454,
+    "text": "\n5. 不尽積分至负无穷。もし$\\ds\\int_{\\xi}^{a} \\phi(x)\\, dx$が$\\xi \\to -\\infty$のとき極限$l$に収束するならば、我々は$\\ds\\int_{-\\infty}^{a} \\phi(x)\\, dx$を収束し、その値が$l$であると定義する。このような積分は前節で議論した積分と同じく、すべての性質において類似している：読者はそれらを形式化することに困難を感じないだろう。\n\n6. 不尽積分从负无穷至正无穷。もし積分\n\\["
+  },
+  {
+    "start": 12813,
+    "end": 12815,
+    "text": "\n\\Item{15.} 置換と部分積分について。置換による変形公式および部分積分の公式は、第一種だけでなく第二種の無限積分に対しても当然拡張できます。読者は自己で一般の定理を導出すべきです。これは第 179 节の線に従って行います。\n"
+  },
+  {
+    "start": 13034,
+    "end": 13036,
+    "text": "\nたとえば、$\\sum v_{n}$ の収敛性から $\\sum u_{n}$ の収敛性を推論したいとする場合があります。その際には\n\\["
+  },
+  {
+    "start": 13043,
+    "end": 13045,
+    "text": "\\]\nを推論し、したがって $\\sum v_{n}$ は収敛すると結論付けることができます。また、$u$ のみが正で、各 $v$ が対応する $u$ よりも数値的に小さい場合、\n\\["
+  },
+  {
+    "start": 13047,
+    "end": 13049,
+    "text": "\\]\nを推論し、したがって $\\sum v_{n}$ は絶対収敛すると結論付けることができます。しかし、$u$ の項と $v$ の項が符号に制限がない一般の場合には、\n\\["
+  },
+  {
+    "start": 13051,
+    "end": 13055,
+    "text": "\\]\nを推論するしかありません。これにより $\\sum v_{n}$ の絶対収敛性が $\\sum u_{n}$ の絶対収敛性から推論できるが、$\\sum u_{n}$ が条件付き収敛である場合、何らの推論もできません。\n\n\\Paragraph{例} 略して見ると、級数 $1 - \\frac{1}{2} + \\frac{1}{3} - \\frac{1}{4} + \\dots$ は収敛します。しかし、各項が前者の級数の対応する項よりも数値的に小さいにもかかわらず、級数 $\\frac{1}{2} + \\frac{1}{3} + \\frac{1}{4} + \\frac{1}{5} + \\dots$ は収散します。\n"
+  },
+  {
+    "start": 13244,
+    "end": 13246,
+    "text": "\nThe sine series converges to zero if \\(\\theta\\) is a multiple of \\(\\pi\\). The cosine series oscillates finitely if \\(\\theta\\) is an odd multiple of \\(\\pi\\) and diverges if \\(\\theta\\) is an even multiple of \\(\\pi\\).\n"
+  },
+  {
+    "start": 13291,
+    "end": 13293,
+    "text": "\n絶対収束する級数は明らかに収束します。実部と虚部がそれぞれ収束するからです。また、ディリクレの定理（§169, §185）は、$\\sum v_{n}$ および $\\sum w_{n}$ の個別の級数に対して適用することで、絶対収束する複素級数にも即座に拡張できます。\n"
+  },
+  {
+    "start": 13330,
+    "end": 13332,
+    "text": "\n换句话说、級数が点 \\( P \\) で収束するならば、原点から \\( P \\) よりも近いすべての点でも絶対収束します。\n"
+  },
+  {
+    "start": 13395,
+    "end": 13397,
+    "text": "\n実部と虚部は両方とも収束するが、絶対収束しない（\\( \\theta \\) が \\( \\pi \\) の奇数倍でない限り）。\\( \\theta \\) が \\( \\pi \\) の奇数倍のとき、\\( z = -1 \\) となり、級数は \\( -1 - \\frac{1}{2} - \\frac{1}{3} - \\cdots \\) となり発散し、\\(-\\infty\\) に収束する。したがって、対数的級数はその収束円周上のすべての点で収束し、\\( z = -1 \\) の点を除く。\n"
+  },
+  {
+    "start": 13865,
+    "end": 13867,
+    "text": "\nWe shall now consider how $\\log x$ behaves as $x$ varies from $0$ towards $\\infty$. It follows at once from the definition that $\\log x$ is a continuous function of $x$ which increases steadily with $x$ and has a derivative\n\\["
+  },
+  {
+    "start": 13869,
+    "end": 13873,
+    "text": "\\]\nand it follows from §175 that $\\log x$ tends to $\\infty$ as $x \\to \\infty$.\n\nIf $x$ is positive but less than $1$, then $\\log x$ is negative. For\n\\["
+  },
+  {
+    "start": 13875,
+    "end": 13877,
+    "text": "\\]\nMoreover, if we make the substitution $t = 1/u$ in the integral, we obtain\n\\["
+  },
+  {
+    "start": 13881,
+    "end": 13885,
+    "text": "\\]\nThus $\\log x$ tends steadily to $-\\infty$ as $x$ decreases from $1$ to $0$.\n\nThe general form of the graph of the logarithmic function is shown in Fig. 52. Since the derivative of $\\log x$ is $1/x$, the slope of the curve is very gentle when $x$ is very large, and very steep when $x$ is very small.\n"
+  },
+  {
+    "start": 13886,
+    "end": 13888,
+    "text": "\\begin{Examples}{LXXXII.}\n\\Item{1.} Prove from the definition that if $u > 0$ then\n\\["
+  },
+  {
+    "start": 13891,
+    "end": 13895,
+    "text": "\n[For $\\log(1 + u) = \\int_{0}^{u} \\frac{dt}{1 + t}$, and the subject of integration lies between $1$ and $1/(1 + u)$.]\n\n\\Item{2.} Prove that $\\log(1 + u)$ lies between $u - \\frac{u^2}{2}$ and $u - \\frac{u^2}{2(1 + u)}$ when $u$ is positive. [Use the fact that $\\log(1 + u) = u - \\int_{0}^{u} \\frac{t\\, dt}{1 + t}$.]\n"
+  },
+  {
+    "start": 14154,
+    "end": 14156,
+    "text": "\nWe saw that $\\frac{\\log x}{x^{\\beta}} \\to 0$ as $x \\to \\infty$, for any positive value of~$\\beta$ however small. Writing $\\alpha$ for~$\\frac{1}{\\beta}$, we see that $\\frac{(\\log x)^{\\alpha}}{x} \\to 0$ for any value of~$\\alpha$ however large. The result follows on putting $x = e^{y}$. It is also clear that $e^{\\gamma y}$ tends to~$\\infty$ if $\\gamma > 0$, and to~$0$ if $\\gamma < 0$, and in each case more rapidly than any power of~$y$.\n"
+  },
+  {
+    "start": 14157,
+    "end": 14159,
+    "text": "\\begin{Remark}\nFrom this result, we can construct a `scale of infinity' similar to that constructed in \\SecNo[§]{202}, but extending in the opposite direction; i.e., a scale of functions which tend to~$\\infty$ more and more rapidly as $x \\to \\infty$. The exponential function was introduced by inverting the equation $y = \\log x$ into $x = e^{y}$; and we have accordingly, up to the present, used $y$ as the independent and $x$ as the dependent variable in discussing its properties. We shall now revert to the more natural plan of taking~$x$ as the independent variable, except when it is necessary to consider a pair of equations of the type $y = \\log x$, $x = e^{y}$ simultaneously, or when there is some other special reason to the contrary. The scale is\n\\["
+  },
+  {
+    "start": 14165,
+    "end": 14167,
+    "text": "\nThe reader should try to apply the remarks about the logarithmic scale, made in \\SecNo[§]{202} and \\Exs{lxxxiv}, to this `exponential scale' also. The two scales may of course (if the order of one is reversed) be combined into one scale\n\\["
+  },
+  {
+    "start": 15139,
+    "end": 15141,
+    "text": "\n誤差は $x^{4}/N^{7}$ の量级である。この過程を $\\sqrt{907}$ に適用する。\n"
+  },
+  {
+    "start": 15351,
+    "end": 15353,
+    "text": "\n\\%[** TN: No paragraph break in the original]\n対数を取って \\Ex{16.} を用いる。"
+  },
+  {
+    "start": 15800,
+    "end": 15802,
+    "text": "\\]\nそして主値はその虚部が $-\\pi$ から $\\pi$ の間にあることを特徴づけます。\n"
+  },
+  {
+    "start": 15847,
+    "end": 15851,
+    "text": "\n1. 以上で \\(-\\pi < \\theta < \\pi\\) と仮定し、\\(z\\) が実数かつ負の値である場合を除外しました。この場合、点 \\(1\\) から点 \\(z\\) への直線は \\(0\\) を通りますので、積分経路として適さないものとなります。両端 \\(\\pi\\) および \\(-\\pi\\) は \\(\\am z\\) の値であり、\\(\\theta\\) はこれらいずれかの値に等しいことになります。また \\(r = -z\\) です。任意の値の \\(\\Log z\\) の実部と虚部は \\(x\\) および \\(y\\) に対して連続な関数ですが、\\(x = 0\\), \\(y = 0\\) の場合を除きます。\n\n2. \\(\\Log z\\) の任意の値の実部と虚部は \\(x\\) および \\(y\\) に対して連続な関数です。\n"
+  },
+  {
+    "start": 15916,
+    "end": 15918,
+    "text": "によって決定される最小の正角である。\n$1 + i\\sqrt{3}$ の $\\Log\\Log$ の双無限集合の値を概略的に描き、そのうち哪些が $\\log\\Log(1 + i \\sqrt{3})$ の値であり、哪些が $\\Log\\log(1 + i\\sqrt{3})$ の値であるか示せ。\n"
+  },
+  {
+    "start": 15930,
+    "end": 15932,
+    "text": "\\Theorem\n指数関数 $\\exp \\zeta$ は $\\zeta$ の単值関数である。\n\\end{Theorem}"
+  },
+  {
+    "start": 15979,
+    "end": 15981,
+    "text": "\nもし$\\eta = 0$とすると、$\\exp \\xi = e^{\\xi}$であり、これは既に第222節で推測した通りである。明らかに$\\exp (\\xi + i\\eta)$の実部と虚部は全ての$\\xi$と$\\eta$に対して$\\xi$と$\\eta$の連続関数である。\n"
+  },
+  {
+    "start": 16043,
+    "end": 16045,
+    "text": "\\end{gather*}\nここで $m$ は任意の整数値を持てます。$m$ が全ての可能な整数値を取ると、この式は $q$ 個だけ異なる値を取り、これらは第 48 节で見つけた $a^{p/q}$ の値と一致します。したがって、新しい定義も第 III 章の定義と一致しています。\n"
+  },
+  {
+    "start": 16150,
+    "end": 16152,
+    "text": "\n\\item{10.} どのような値の $\\zeta$ に対して (\\ia) 任意の値、(\\ib) 主値であるかを次のように分類せよ。 (i) 実数 (ii) 纯虚数 (iii) 単位長度？\n"
+  },
+  {
+    "start": 16315,
+    "end": 16317,
+    "text": "\\]\nこれらの公式はすべての $\\xi$ と $\\eta$ の値に対して成り立ちます。興味深いのは、$\\xi$ と $\\eta$ が実数である場合です。このとき、複素数の余弦および正弦の実部と虚部を表す式を得ることができます。\n"
+  },
+  {
+    "start": 16319,
+    "end": 16321,
+    "text": "   (i) 実数\n   (ii) 纯粹な虚数。例えば、$\\cos\\zeta$ は $\\eta = 0$ や $\\xi$ が $\\pi$ の何倍でも実数となる。\n"
+  },
+  {
+    "start": 16379,
+    "end": 16381,
+    "text": "\n\\Item{8.} \\Topic{方程式 $\\cos\\zeta = a$ の解、ここで $a$ は実数。} $\\zeta = \\xi + i\\eta$ と置き、実部と虚部を比較すると\n\\["
+  },
+  {
+    "start": 16409,
+    "end": 16411,
+    "text": "\n如果我達令 $\\cosh^{2} \\eta = x$，则有\n\\["
+  },
+  {
+    "start": 16608,
+    "end": 16610,
+    "text": "\\]\nここで $Y$ は $-\\pi < Y \\leq \\pi$ を満たす $y$ の関数である。また $f(y)$ は微分可能であり、実部と虚部 $\\cos Y$ および $\\sin Y$ も微分可能で、従って連続関数である。したがって $Y$ も $y$ の連続関数である。もし $y$ から $y + k$ に変化すると $Y$ が $Y + K$ に変化するとき、$K$ は $k$ とともに零に収束し\n\\["
+  },
+  {
+    "start": 16844,
+    "end": 16846,
+    "text": "\nまた、$z^{m} = r^{m}(\\cos m\\theta + i\\sin m\\theta)$ より、式 (5) の \\SecNo[§]{234} における実部と虚部を比較すると\n\\begin{align*}"
+  },
+  {
+    "start": 16967,
+    "end": 16969,
+    "text": "\n从式（1）我達可以推导出一些在下一节中需要用到的结果。もし$t$と$h$が実数であり、$h$が十分に小さいとき、\n"
+  },
+  {
+    "start": 16980,
+    "end": 16982,
+    "text": "\n次節ではさらに、任意の実数または複素数$m$に対して$t$に関する$(1 + tz)^m$の微分公式が必要です。まず、複素関数$\\phi(t) = \\psi(t) + i\\chi(t)$について考えます。実部と虚部が導関数を持つとき、\n"
+  },
+  {
+    "start": 17091,
+    "end": 17093,
+    "text": "\\end{align*}\nすべての逆正接が$-\\frac{1}{2}\\pi$から$\\frac{1}{2}\\pi$までである。特に、$\\theta = \\frac{1}{2}\\pi$, $z = ir$と仮定し、実部と虚部を比較すると\n\\begin{align*}"
+  },
+  {
+    "start": 17211,
+    "end": 17213,
+    "text": "\n既に知っている（\\Ex{xvii}.4）ことでは、方程式は無数の実数解を持つ。今、$z = x + iy$ と置き、実部と虚部を等しくする。次のように得られる：\n\\["
+  },
+  {
+    "start": 17250,
+    "end": 17252,
+    "text": "\n14. 变換。第III章（§xxi．21 以降，および§MiscExs III 22 以降）では，二変数 $z$，$Z$ の平面間に関係 $z = f(Z)$ を持つ図形の幾何学的関係についていくつかの単純な例を検討しました。現在は，対数関数，指数関数，または三角関数を含む関係の場合について考察します。\n"
+  },
+  {
+    "start": 17273,
+    "end": 17275,
+    "text": "\\]\nであり、異なる$X_{0}$の値に対してこれらの楕円は共軸系を形成し、$Y = Y_{0}$の直線に対応する共轭共軸双曲線系も形成します。$Z$が$X = X_{0}$または$Y = Y_{0}$の直線全体を描くとき、$z$の変化を追跡せよ。また、$z$が共軸系の焦点間のセグメントと$x$軸の残りの部分で形成される退化した楕円や双曲線を描くとき、$Z$はどのように変化するか。\n"
+  },
+  {
+    "start": 17310,
+    "end": 17312,
+    "text": "\\]\nについて議論し、$x$ と $y$ が一定である直線は共轭楕円と双曲線の族に対応し、その焦点は点 $Z = a$ および $Z = b$ であることを示す。\n"
+  },
+  {
+    "start": 17353,
+    "end": 17355,
+    "text": "\n26. $Z = z^{ai}$, $a$ が実数のとき，$z$ が実軸を通って原点に近づくとき，$Z$ は原点を中心とする円周上を無限に回り続け，$Z$ の実部と虚部は有限に振動する。\n"
+  },
+  {
+    "start": 17425,
+    "end": 17427,
+    "text": "\n\\Item{39.} \\(Ax^{2} + 2Bx + C = 0\\) の根が虚部符号異なるとき、次の積分が成り立つことを証明せよ：\n\\["
+  },
+  {
+    "start": 17440,
+    "end": 17442,
+    "text": "\n任意の $Z$ の値に対して無数の異なる $\\am Z$ の値があり、これらは $Z$ が $\\Gamma$ 上を動くにつれて連続的に変化します。\\footnote{ここで $\\Gamma$ が原点を通らないという仮定が必要です。}各点に対応する特定の $\\am Z$ の値を選択するために、まず初期の $Z$ の値に対応する特定の値を選び、その後 $Z$ が $\\Gamma$ 上を動くにつれてこの値の連続的な変化を追います。以下の議論においては、「$Z$ の振幅」や式 $\\am Z$ を用いて、選択した特定の振幅の値を指すことにします。したがって、$\\am Z$ は実部と虚部 $X, Y$ の関数として一価かつ連続な関数を表します。\nページ分割点：434"
+  },
+  {
+    "start": 17634,
+    "end": 17636,
+    "text": "\n\\appendix{II}{(第九章、第十章へ)}{重极限問題に関する一考察}\n"
+  },
+  {
+    "start": 17757,
+    "end": 17759,
+    "text": "\n进一步的发展仅依赖于加法定理。書き換えると、\n"
+  },
+  {
+    "start": 17815,
+    "end": 17820,
+    "text": "\nhomogeneous と common 卡尔丹几何之间可以建立一种相关性，在これ种相关性中，第一系统的所有元素（特殊元素除外）在第二系统中有対应的元素。例如，直线 $ax + by + cz = 0$ 対应于直线 $ax + by + c = 0$。第一直线上的每一个点在第二直线上都有対应点，但有一个例外，即 $z = 0$ 的点。\n当 $(x, y, z)$ 在第一直线上变化，并趋向于 $z = 0$ 的特殊点时，対应的第二直线上的点的变化使得它与原点的距离趋于无穷大。これ种相关性在历史上具有重要意义，因为该领域的词汇就是从これ里派生出来的，而且它经常用于说明目的。然而これ只是说明而已，不能基于此来建立几何无穷的理性解释。学生中普遍存在的混乱正是由于通常使用的解析几何教科书中将说明误认为真实情况而产生的。\n\n創作物は公有領域の印刷版から作成し、これらの著作物には米国での著作権が存在しないため、財団（そしてあなた！）は米国内で許可なく複製・配布を行うことができます。著作権料を支払うことなく、Project Gutenberg-tmの概念と商標を保護する特別な規定は、このライセンスの利用規約の一部に記載されています。Project Gutenbergは登録商標であり、電子書籍を有偿で販売することは許可されていませんが、特定の場合には例外があります。この電子書籍を有償で配布しない場合、ルールを遵守するのは非常に簡単です。この電子書籍を使用して几乎任何目的，如衍生作品的创作、报告撰写、表演和研究都是允许的。您可以修改并打印分发これ些公共领域的电子书——您几乎可以做任何事情。但是，重新发布必须遵循商标许可，尤其是商业重新发布。\n"
+  },
+  {
+    "start": 17830,
+    "end": 17836,
+    "text": "\n1.C. ザ・プロジェクト・ジンクルベルト・リテラリー・アーカイブ・ファウンデーション（以下、「ファウンデーション」または「PGLAF」という）は、プロジェクト・ジンクルベルト-tm電子作品の集積著作権を所有しています。几乎所有的集合中的个别作品在美国均为公有领域。如果您位于美国并且所涉个别作品在美国为公有领域，我達不主张阻止您复制、分发、表演、展示或基于该作品创建衍生作品的权利，只要所有対项目・ジンクルベルトの参照被移除。当然，我達希望您能を通じて遵守本协议条款来支持项目・ジンクルベルト-tm的使命，即促进电子作品的免费访问，并且在不收费分享これ些作品时附带完整的项目・ジンクルベルト-tm许可证。\n\n1.D. 你所在的国家或地区的版权法也规范了你可以対これ部作品做什么。大多数国家的版权法处于不断变化之中。如果您不在美国，请在下载、复制、展示、表演、分发或基于此作品或其他项目・ジンクルベルト-tm作品创建衍生作品之前，检查您所在国家的法律以及本协议的条款。\n\n1.E. 除非你已经移除了所有対プロジェクト・ジンクルベルトの参照：\n"
+  }
+]

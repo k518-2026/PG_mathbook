@@ -42,7 +42,7 @@ def resolve_lm_studio_base_url(timeout=5):
     return "http://192.168.128.16:1234"
 
 
-def call_lm_studio(prompt, system_prompt="", model="qwen2.5-7b-instruct", max_tokens=2500, temperature=0.1, retries=3):
+def call_lm_studio(prompt, system_prompt="", model="qwen2.5-7b-instruct", max_tokens=2500, temperature=0.1, retries=5):
     base_url = resolve_lm_studio_base_url()
     url = f"{base_url}/v1/chat/completions"
 
@@ -66,12 +66,12 @@ def call_lm_studio(prompt, system_prompt="", model="qwen2.5-7b-instruct", max_to
                 data=json.dumps(payload).encode("utf-8"),
                 headers={"Content-Type": "application/json"},
             )
-            with urllib.request.urlopen(req, timeout=180) as response:
+            with urllib.request.urlopen(req, timeout=300) as response:
                 result = json.loads(response.read().decode("utf-8"))
                 return result["choices"][0]["message"]["content"].strip()
         except Exception as e:
             last_err = e
-            time.sleep(3)
+            time.sleep(10)
     raise RuntimeError(f"LM Studio call failed after {retries} retries: {last_err}")
 
 

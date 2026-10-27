@@ -1,0 +1,278 @@
+[
+  {
+    "id": 1,
+    "start_line": 773,
+    "end_line": 779,
+    "text": "Let us then suppose that \\( P \\) and \\( Q \\) are two properties which are mutually exclusive, and one of which is possessed by every real number. Further let us suppose that any number which possesses \\( P \\) is less than any which possesses \\( Q \\). We call the numbers which possess \\( P \\) the \\emph{lower} or \\emph{left-hand class} \\( L \\), and those which possess \\( Q \\) the \\emph{upper} or \\emph{right-hand class} \\( R \\).\n\n\\begin{Remark}\nThus \\( P \\) might be \\( x \\leq \\sqrt{2} \\) and \\( Q \\) be \\( x > \\sqrt{2} \\). It is important to observe that a pair of properties which suffice to define a section of the rational numbers may not suffice to define one of the real numbers. This is so, for example, with the pair `\\( x < \\sqrt{2} \\)' and `\\( x > \\sqrt{2} \\)' or (if we confine ourselves to positive numbers) with `\\( x^2 < 2 \\)' and `\\( x^2 > 2 \\)'. Every rational number possesses one or other of the properties, but not every real number, since in either case \\( \\sqrt{2} \\) escapes classification.\n\\end{Remark}\n\nThere are now two possibilities. Either \\( L \\) has a greatest member \\( l \\), or \\( R \\) has a least member \\( r \\). Both of these events cannot occur. For if \\( L \\) had a greatest member \\( l \\), and \\( R \\) a least member \\( r \\), the number \\( \\frac{1}{2}(l + r) \\) would be greater than all members of \\( L \\) and less than all members of \\( R \\), and so could not belong to either class. On the other hand one event must occur."
+  },
+  {
+    "id": 2,
+    "start_line": 1146,
+    "end_line": 1146,
+    "text": "where the $a$'s~and~$b$'s are integers. Write $x + y = z$, $y = z - x$ in the second, and eliminate~$x$. We thus get an equation of similar form"
+  },
+  {
+    "id": 3,
+    "start_line": 1150,
+    "end_line": 1150,
+    "text": "satisfied by~$z$. Similarly for the other cases."
+  },
+  {
+    "id": 4,
+    "start_line": 1156,
+    "end_line": 1157,
+    "text": "where $a_{0}$, $a_{1}$, \\dots,~$a_{n}$ are any algebraical numbers, then $x$~is an algebraical\nnumber. [We have $n + 1$~equations of the type"
+  },
+  {
+    "id": 5,
+    "start_line": 1162,
+    "end_line": 1165,
+    "text": "in which the coefficients $a_{0, r}$, $a_{1, r}, \\dots$ are integers. Eliminate $a_{0}$, $a_{1}$, \\dots,~$a_{n}$\nbetween these and the original equation for~$x$.]\n\n35. Apply this process to the equation $x^{2} - 2x\\sqrt{2} + \\sqrt{3} = 0$."
+  },
+  {
+    "id": 6,
+    "start_line": 1189,
+    "end_line": 1189,
+    "text": "[It will be found that $y^{2} + y + 1 = 0$.]"
+  },
+  {
+    "id": 7,
+    "start_line": 2533,
+    "end_line": 2533,
+    "text": "We might have developed the whole theory of complex numbers from this point of view. Starting with the ideas of \\(x\\) as representing a displacement along \\(OX\\), and of \\(i\\) as a symbol of operation equivalent to turning \\(x\\) through a right angle, we should have been led to regard \\(yi\\) as a displacement of magnitude \\(y\\) along \\(OY\\). It would then have been natural to define \\(x + yi\\) as in §37 and §40, and \\((x + yi)i\\) would have represented the displacement obtained by turning \\(x + yi\\) through a right angle, i.e., \\(-y + xi\\). Finally, we should naturally have defined \\((x + yi)x'\\) as \\(xx' + yx'i\\), \\((x + yi)y'i\\) as \\(-yy' + xy'i\\), and \\((x + yi)(x' + y'i)\\) as the sum of these displacements, i.e., as"
+  },
+  {
+    "id": 8,
+    "start_line": 2538,
+    "end_line": 2538,
+    "text": "43. The equations \\(z^2 + 1 = 0\\) and \\(az^2 + 2bz + c = 0\\). There is no real number \\(z\\) such that \\(z^2 + 1 = 0\\); this is expressed by saying that the equation has \\emph{no real roots}. But, as we have just seen, the two complex numbers \\(i\\) and \\(-i\\) satisfy this equation. We express this by saying that the equation has \\emph{the two complex roots} \\(i\\) and \\(-i\\). Since \\(i\\) satisfies \\(z^2 = -1\\), it is sometimes written in the form \\(\\sqrt{-1}\\)."
+  },
+  {
+    "id": 9,
+    "start_line": 4148,
+    "end_line": 4151,
+    "text": "The results 1--7 cover all the cases which are really distinct.\nBefore passing on to consider the product of two functions, we\nmay point out that the result of Theorem~I may be immediately\nextended to the sum of three or more functions which tend to"
+  },
+  {
+    "id": 10,
+    "start_line": 5224,
+    "end_line": 5225,
+    "text": "We call $\\Lambda$ and $\\lambda$ respectively the 上限と下限の不確定性\nof $\\phi(n)$ as $n$ tends to infinity; and write"
+  },
+  {
+    "id": 11,
+    "start_line": 5234,
+    "end_line": 5256,
+    "text": "(2) $\\Lambda$ and $\\lambda$ are the upper and lower bounds of the aggregate of intermediate\nnumbers, if any such exist;\n\n(3) If $\\DELTA$ is any positive number, then $\\phi(n) < \\Lambda + \\DELTA$ for all sufficiently large\nvalues of $n$, and $\\phi(n) > \\Lambda - \\DELTA$ for an infinity of values of $n$;\n\n(4) 同様に $\\phi(n) > \\lambda - \\DELTA$ for all sufficiently large values of $n$, and\n$\\phi(n) < \\lambda + \\DELTA$ for an infinity of values of $n$;\n\n(5) The necessary and sufficient condition that $\\phi(n)$ should tend to a limit\nis that $\\Lambda = \\lambda$, and in this case the limit is $l$, the common value of $\\lambda$ and $\\Lambda$.\n\nOf these properties, (1) is an immediate consequence of the definitions;\nand we can prove (2) as follows. If $\\Lambda = \\lambda = l$, there can be at most one intermediate\nnumber, viz. $l$, and there is nothing to prove. Suppose then that\n$\\Lambda > \\lambda$. Any intermediate number $\\xi$ is less than any superior and greater than\nany inferior number, so that $\\lambda \\leq \\xi \\leq \\Lambda$. But if $\\lambda < \\xi < \\Lambda$ then $\\xi$ must be\nintermediate, since it is plainly neither superior nor inferior. Hence there are\nintermediate numbers as near as we please to either $\\lambda$ or $\\Lambda$.\n\nTo prove (3) we observe that $\\Lambda + \\DELTA$ is superior and $\\Lambda - \\DELTA$ intermediate or\ninferior. The result is then an immediate consequence of the definitions; and\nthe proof of (4) is substantially the same."
+  },
+  {
+    "id": 12,
+    "start_line": 6955,
+    "end_line": 6955,
+    "text": "The reader should observe that this method cannot be applied to \\( x^{p/q} \\), where \\( p/q \\) is a rational fraction, as we have no means of expressing \\( (x + h)^{p/q} \\) as a finite series of powers of \\( h \\). We shall show later on (\\S118) that the result of this example holds for all rational values of \\( m \\). Meanwhile, the reader will find it instructive to determine \\( \\phi'(x) \\) when \\( m \\) has some special fractional value (e.g., \\( \\frac{1}{2} \\)), by means of some special device.]"
+  },
+  {
+    "id": 13,
+    "start_line": 7383,
+    "end_line": 7383,
+    "text": "This result may also be deduced as a corollary from §xxxvi.3."
+  },
+  {
+    "id": 14,
+    "start_line": 8737,
+    "end_line": 8737,
+    "text": "The subject of integration is of the form \\( \\frac{P}{Q} \\), where \\( P \\) and \\( Q \\) are polynomials in \\( x \\) and \\( \\sqrt{X} \\). It may therefore be reduced to the form"
+  },
+  {
+    "id": 15,
+    "start_line": 8745,
+    "end_line": 8745,
+    "text": "where \\( A \\), \\( B \\), \\(\\dots\\) are rational functions of \\( x \\). The only new problem which arises is that of the integration of a function of the form \\( F\\sqrt{X} \\), or, what is the same thing, \\( G/\\sqrt{X} \\), where \\( G \\) is a rational function of \\( x \\). And the integral"
+  },
+  {
+    "id": 16,
+    "start_line": 8752,
+    "end_line": 8754,
+    "text": "can always be evaluated by splitting up \\( G \\) into partial fractions. When we do this, integrals of three different types may arise.\n\n(i) In the first place there may be integrals of the type"
+  },
+  {
+    "id": 17,
+    "start_line": 8761,
+    "end_line": 8761,
+    "text": "where \\( m \\) is a positive integer. The cases in which \\( m = 0 \\) or \\( m = 1 \\) have been disposed of in Section 136. In order to calculate the integrals corresponding to larger values of \\( m \\), we observe that"
+  },
+  {
+    "id": 18,
+    "start_line": 8769,
+    "end_line": 8771,
+    "text": "where \\( \\alpha \\), \\( \\beta \\), \\( \\gamma \\) are constants whose values may be easily calculated. It is clear that, when we integrate this equation, we obtain a relation between three successive integrals of the type Eq.(3). As we know the values of the integral for \\( m = 0 \\) and \\( m = 1 \\), we can calculate in turn its values for all other values of \\( m \\).\n\n(ii) In the second place there may be integrals of the type"
+  },
+  {
+    "id": 19,
+    "start_line": 8778,
+    "end_line": 8778,
+    "text": "where \\( p \\) is real. If we make the substitution \\( x - p = 1/t \\), then this integral is reduced to an integral in \\( t \\) of the type Eq.(3)."
+  },
+  {
+    "id": 20,
+    "start_line": 9882,
+    "end_line": 9882,
+    "text": "Let us suppose bahwa最初の \\( n \\) つの導関数"
+  },
+  {
+    "id": 21,
+    "start_line": 10430,
+    "end_line": 10430,
+    "text": "が \\(\\delta x \\to 0\\) のときに成り立ちます。これはしばしば \\(\\delta x\\) が小さいときに \\(dy\\) は \\(\\delta y\\) の主部であるという表現で述べ occasionally expressed by saying that \\(dy\\) is the *principal part* of \\(\\delta y\\) when \\(\\delta x\\) is small, と解釈されます。また、\\(ax\\) は \\(x\\) が小さいときに \\(ax + bx^2\\) の主部であるというように考えることができます。"
+  },
+  {
+    "id": 22,
+    "start_line": 10587,
+    "end_line": 10587,
+    "text": "Let us now suppose \\( f(x, y) \\) possesses a derivative \\( f_{x}'(x, y) \\) which is also continuous near \\( (a, b) \\). If \\( f(x, y) = 0 \\), \\( x = a + h \\), \\( y = b + k \\), we have"
+  },
+  {
+    "id": 23,
+    "start_line": 10591,
+    "end_line": 10591,
+    "text": "where \\( \\epsilon \\) and \\( \\eta \\) tend to zero with \\( h \\) and \\( k \\). Thus"
+  },
+  {
+    "id": 24,
+    "start_line": 10600,
+    "end_line": 10600,
+    "text": "9. The equation of the tangent to the curve \\( f(x, y) = 0 \\), at the point \\( x_0 \\), \\( y_0 \\), is"
+  },
+  {
+    "id": 25,
+    "start_line": 10753,
+    "end_line": 10755,
+    "text": "We therefore define the measure of the angle \\( AOP \\) on the notion not of length but of \\emph{area}. We define the measure of the angle \\( AOP \\) as \\emph{twice the area of the sector \\( AOP \\) of the unit circle}.\n\nSuppose, in particular, that \\( OA \\) is \\( y = 0 \\) and that \\( OP \\) is \\( y = mx \\), where \\( m > 0 \\). The area is a function of \\( m \\), which we may denote by \\( \\phi(m) \\). If we write \\( \\mu \\) for \\( (1 + m^{2})^{-\\frac{1}{2}} \\), then \\( P \\) is the point \\( (\\mu, m\\mu) \\), and"
+  },
+  {
+    "id": 26,
+    "start_line": 10759,
+    "end_line": 10759,
+    "text": "Differentiating with respect to \\( m \\), we find"
+  },
+  {
+    "id": 27,
+    "start_line": 10764,
+    "end_line": 10764,
+    "text": "Thus the analytical equivalent of our definition would be to define \\( \\arctan m \\) by the equation"
+  },
+  {
+    "id": 28,
+    "start_line": 10768,
+    "end_line": 10768,
+    "text": "and the whole theory of the circular functions could be worked out from this starting point, just as the theory of the logarithm is worked out from a similar definition in Chapter IX. See Appendix III."
+  },
+  {
+    "id": 29,
+    "start_line": 10775,
+    "end_line": 10775,
+    "text": "and in particular that"
+  },
+  {
+    "id": 30,
+    "start_line": 12290,
+    "end_line": 12290,
+    "text": "We can prove this by an argument which we have used already in the special case of the series \\(\\sum (1/n)\\). In the first place,"
+  },
+  {
+    "id": 31,
+    "start_line": 12296,
+    "end_line": 12299,
+    "text": "If \\(\\sum 2^{n}\\phi(2^{n})\\) diverges, then so do \\(\\sum 2^{n+1}\\phi(2^{n+1})\\) and \\(\\sum 2^{n}\\phi(2^{n+1})\\), and then the inequalities just obtained show that \\(\\sum \\phi(n)\\) diverges.\n\\PageSep{321}\n\nOn the other hand,"
+  },
+  {
+    "id": 32,
+    "start_line": 12304,
+    "end_line": 12311,
+    "text": "and so on. And from this set of inequalities it follows that if \\(\\sum 2^{n}\\phi(2^{n})\\) converges, then so does \\(\\sum \\phi(n)\\). Thus the theorem is established.\n\nFor our present purposes the field of application of this test is practically the same as that of the Integral Test. It enables us to discuss the series \\(\\sum n^{-s}\\) with equal ease. For \\(\\sum n^{-s}\\) will converge or diverge according as \\(\\sum 2^{n}2^{-ns}\\) converges or diverges, i.e., according as \\(s > 1\\) or \\(s \\leq 1\\).\n\n\\begin{Examples}{LXXII.}\n\\Item{1.} Show that if \\(a\\) is any positive integer greater than 1 then \\(\\sum \\phi(n)\\) is convergent or divergent according as \\(\\sum a^{n}\\phi(a^{n})\\) is convergent or divergent. [Use the same arguments as above, taking groups of \\(a\\), \\(a^{2}\\), \\(a^{3}\\), \\dots terms.]\n\n\\Item{2.} If \\(\\sum 2^{n}\\phi(2^{n})\\) converges then it is obvious that \\(\\lim 2^{n}\\phi(2^{n}) = 0\\). Hence deduce Abel's Theorem of §173."
+  },
+  {
+    "id": 33,
+    "start_line": 12387,
+    "end_line": 12387,
+    "text": "We may observe that d'Alembert's test (\\S168), depending as it does on the notion of successive terms, has no analogue for integrals; and that the analogue of Cauchy's test is not of much importance, and in any case could only be formulated when we have investigated in greater detail the theory of the function"
+  },
+  {
+    "id": 34,
+    "start_line": 12391,
+    "end_line": 12391,
+    "text": "as we shall do in Chapter IX. The most important special tests are obtained by comparison with the integral"
+  },
+  {
+    "id": 35,
+    "start_line": 12395,
+    "end_line": 12397,
+    "text": "whose convergence or divergence we have investigated in \\S175, and are as follows: \n\\begin{Result}\nif $\\phi(x) < Kx^{-s}$, where $s > 1$, when $x \\geq a$, then"
+  },
+  {
+    "id": 36,
+    "start_line": 12401,
+    "end_line": 12403,
+    "text": "is convergent; and if $\\phi(x) > Kx^{-s}$, where $s \\leq 1$, when\n$x \\geq a$, then the integral is divergent; and in particular, if\n$\\lim x^{s}\\phi(x) = l$, where $l > 0$, then the integral is convergent or"
+  },
+  {
+    "id": 37,
+    "start_line": 12408,
+    "end_line": 12408,
+    "text": "There is one fundamental property of a convergent infinite series in regard to which the analogy between infinite series and infinite integrals breaks down. If $\\sum \\phi(n)$ is convergent then $\\phi(n) \\to 0$; but it is not always true, even when $\\phi(x)$ is always positive, that if $\\int_{a}^{\\infty} \\phi(x)\\, dx$ is convergent then $\\phi(x) \\to 0$."
+  },
+  {
+    "id": 38,
+    "start_line": 13245,
+    "end_line": 13245,
+    "text": "The sine series converges to zero if \\(\\theta\\) is a multiple of \\(\\pi\\). The cosine series oscillates finitely if \\(\\theta\\) is an odd multiple of \\(\\pi\\) and diverges if \\(\\theta\\) is an even multiple of \\(\\pi\\)."
+  },
+  {
+    "id": 39,
+    "start_line": 13866,
+    "end_line": 13866,
+    "text": "We shall now consider how $\\log x$ behaves as $x$ varies from $0$ towards $\\infty$. It follows at once from the definition that $\\log x$ is a continuous function of $x$ which increases steadily with $x$ and has a derivative"
+  },
+  {
+    "id": 40,
+    "start_line": 13870,
+    "end_line": 13872,
+    "text": "and it follows from §175 that $\\log x$ tends to $\\infty$ as $x \\to \\infty$.\n\nIf $x$ is positive but less than $1$, then $\\log x$ is negative. For"
+  },
+  {
+    "id": 41,
+    "start_line": 13876,
+    "end_line": 13876,
+    "text": "Moreover, if we make the substitution $t = 1/u$ in the integral, we obtain"
+  },
+  {
+    "id": 42,
+    "start_line": 13882,
+    "end_line": 13887,
+    "text": "Thus $\\log x$ tends steadily to $-\\infty$ as $x$ decreases from $1$ to $0$.\n\nThe general form of the graph of the logarithmic function is shown in Fig. 52. Since the derivative of $\\log x$ is $1/x$, the slope of the curve is very gentle when $x$ is very large, and very steep when $x$ is very small.\n\n\\begin{Examples}{LXXXII.}\n\\Item{1.} Prove from the definition that if $u > 0$ then"
+  },
+  {
+    "id": 43,
+    "start_line": 13892,
+    "end_line": 13894,
+    "text": "[For $\\log(1 + u) = \\int_{0}^{u} \\frac{dt}{1 + t}$, and the subject of integration lies between $1$ and $1/(1 + u)$.]\n\n\\Item{2.} Prove that $\\log(1 + u)$ lies between $u - \\frac{u^2}{2}$ and $u - \\frac{u^2}{2(1 + u)}$ when $u$ is positive. [Use the fact that $\\log(1 + u) = u - \\int_{0}^{u} \\frac{t\\, dt}{1 + t}$.]"
+  },
+  {
+    "id": 44,
+    "start_line": 14155,
+    "end_line": 14158,
+    "text": "We saw that $\\frac{\\log x}{x^{\\beta}} \\to 0$ as $x \\to \\infty$, for any positive value of~$\\beta$ however small. Writing $\\alpha$ for~$\\frac{1}{\\beta}$, we see that $\\frac{(\\log x)^{\\alpha}}{x} \\to 0$ for any value of~$\\alpha$ however large. The result follows on putting $x = e^{y}$. It is also clear that $e^{\\gamma y}$ tends to~$\\infty$ if $\\gamma > 0$, and to~$0$ if $\\gamma < 0$, and in each case more rapidly than any power of~$y$.\n\n\\begin{Remark}\nFrom this result, we can construct a `scale of infinity' similar to that constructed in \\SecNo[§]{202}, but extending in the opposite direction; i.e., a scale of functions which tend to~$\\infty$ more and more rapidly as $x \\to \\infty$. The exponential function was introduced by inverting the equation $y = \\log x$ into $x = e^{y}$; and we have accordingly, up to the present, used $y$ as the independent and $x$ as the dependent variable in discussing its properties. We shall now revert to the more natural plan of taking~$x$ as the independent variable, except when it is necessary to consider a pair of equations of the type $y = \\log x$, $x = e^{y}$ simultaneously, or when there is some other special reason to the contrary. The scale is"
+  },
+  {
+    "id": 45,
+    "start_line": 14166,
+    "end_line": 14166,
+    "text": "The reader should try to apply the remarks about the logarithmic scale, made in \\SecNo[§]{202} and \\Exs{lxxxiv}, to this `exponential scale' also. The two scales may of course (if the order of one is reversed) be combined into one scale"
+  },
+  {
+    "id": 46,
+    "start_line": 15352,
+    "end_line": 15352,
+    "text": "\\%[** TN: No paragraph break in the original]"
+  }
+]
