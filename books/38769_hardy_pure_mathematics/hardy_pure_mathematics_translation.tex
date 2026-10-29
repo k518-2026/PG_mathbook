@@ -126,32 +126,20 @@
 
 \providecommand{\sqrtb}[1]{\sqrt{#1}}
 \providecommand{\Fig}[1]{【図#1】}
-
 \providecommand{\MiscEx}[1]{\textbf{雑題~#1}}
 \providecommand{\Tag}[1]{\tag{#1}}
-
 \providecommand{\DPchg}[2]{#2}
 \providecommand{\pagetsep}[1]{}
-\providecommand{}[2][]{#2}
-
 \providecommand{\am}{\operatorname{am}}
-\providecommand{\CenterDef}[3][]{\par
-oindent\makebox[2em][l]{#2}#3\par}
+\providecommand{\CenterDef}[3][]{\par\noindent\makebox[2em][l]{#2}#3\par}
 \providecommand{\ia}{(a)}
 \providecommand{\ib}{(b)}
 \providecommand{\ic}{(c)}
-\providecommand{\sqrtb}[1]{\sqrt{#1}}
-\providecommand{\MathTrip}[1]{	ext{ [Math. Trip. #1]}}
-\providecommand{\Topic}[1]{	extbf{#1}}
-
-
+\providecommand{\MathTrip}[1]{\text{ [Math. Trip. #1]}}
+\providecommand{\Topic}[1]{\textbf{#1}}
 \providecommand{\tsum}{\sum}
-\providecommand{\Ex}[1]{	extbf{例題~#1}}
+\providecommand{\Ex}[1]{\textbf{例題~#1}}
 \providecommand{\Appendix}[3]{\chapter*{付録 #1：#2}\addcontentsline{toc}{chapter}{付録 #1：#2}\noindent\textbf{#3}\par\vspace{0.5em}}
-\providecommand{\Fig}[1]{	extbf{図~#1}}
-\providecommand{}{}
-
-
 \providecommand{\MS}[1]{\text{ [MS #1]}}
 \providecommand{\Emph}[1]{\textbf{#1}}
 \providecommand{\Ie}{\text{i.e. }}
@@ -159,8 +147,6 @@ oindent\makebox[2em][l]{#2}#3\par}
 \providecommand{\Itemp}[1]{\par\noindent\textbf{#1}\ }
 \providecommand{\bigsqrt}[1]{\sqrt{#1}}
 \providecommand{\Construction}[2][]{\par\noindent\textbf{作図 #1}\ }
-
-
 \providecommand{\MC}{,}
 \providecommand{\arccot}{\operatorname{arccot}}
 \providecommand{\cosech}{\operatorname{cosech}}
@@ -174,9 +160,7 @@ oindent\makebox[2em][l]{#2}#3\par}
 \clearpage
 \mainmatter
 
-\chapter{第1章：Chapter I: REAL VARIABLES}
-
-第一章 実変数
+\chapter{第1章：実変数 (REAL VARIABLES)}
 
 1. 有理数。分数$r = p/q$、ここで$p$と$q$は正または負の整数であるとき、そのような分数を有理数と呼ぶ。以下の仮定が成り立つとする：(i) $p$と$q$に共通な因子がないようにする。共通な因子がある場合、それぞれをそれで割ることができる。(ii) $q$は正であるようにする。なぜなら
 \[

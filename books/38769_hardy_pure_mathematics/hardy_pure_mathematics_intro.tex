@@ -8,10 +8,13 @@
 \tcbuselibrary{skins,breakable}
 \usepackage{hyperref}
 \usepackage{fancyhdr}
+\usepackage{tikz}
+\usetikzlibrary{arrows.meta,calc,positioning,shapes.geometric}
 
 \definecolor{primaryblue}{RGB}{20, 60, 110}
 \definecolor{softblue}{RGB}{238, 244, 252}
 \definecolor{darkslate}{RGB}{35, 45, 60}
+\definecolor{accentcrimson}{RGB}{160, 30, 45}
 
 \hypersetup{
     colorlinks=true,
@@ -134,6 +137,30 @@ A_0A_r = r
 
 \subsection*{\section*{3.2 無理数の存在性}}
 
+\begin{center}
+\begin{tikzpicture}[scale=1.2, >=Stealth]
+    % Draw real line
+    \draw[->, thick, darkslate] (-1, 0) -- (6, 0) node[right] {数直線 $\Lambda$};
+    % Axis ticks
+    \foreach \x/\label in {0/0, 1/1, 2/2, 3/3, 4/4, 5/5} {
+        \draw[darkslate] (\x, 0.1) -- (\x, -0.1) node[below] {\small $\label$};
+    }
+    % Left class L
+    \draw[line width=2.5pt, primaryblue] (-0.8, 0) -- (1.414, 0);
+    \node[above=8pt, primaryblue] at (0.7, 0) {\textbf{下組 $L$}: 有理数 $q \le 0$ または $q^2 < 2$};
+    % Right class R
+    \draw[line width=2.5pt, accentcrimson!80!black] (1.414, 0) -- (5.8, 0);
+    \node[above=8pt, accentcrimson!80!black] at (3.8, 0) {\textbf{上組 $R$}: 有理数 $q > 0$ かつ $q^2 > 2$};
+    % Cut point sqrt(2)
+    \draw[dashed, red!80!black, line width=1.2pt] (1.414, -0.8) -- (1.414, 1.2);
+    \filldraw[fill=white, draw=red!80!black, line width=1.5pt] (1.414, 0) circle (3pt);
+    \node[below=14pt, red!80!black] at (1.414, 0) {\textbf{切断点 $\sqrt{2}$（無理数による「裂け目」）}};
+\end{tikzpicture}
+\par\vspace{0.4em}
+\small\textbf{概念図 1.1}：デデキント切断による無理数 $\sqrt{2}$ の定義。有理数直線は最大元のない下組 $L$ と最小元のない上組 $R$ に分断され、その境界に実数 $\sqrt{2}$ が唯一確定する。
+\end{center}
+
+
 もし直線上にすべての分母が \( 1, 2, 3, \dots \) の有理数を順に並べて表示すると、直線全体を非常に密に覆うことがわかります。つまり、任意の区間 \( BC \) 内には無数の有理点が存在します。
 
 具体的な証明は以下の通りです：
@@ -218,6 +245,35 @@ k \cdot BC > 1
 \clearpage
 
 \chapter{第3講：Chapter III: COMPLEX NUMBERS}
+
+\begin{center}
+\begin{tikzpicture}[scale=1.3, >=Stealth]
+    % Axes
+    \draw[->, thick, darkslate] (-1, 0) -- (4, 0) node[right] {実軸 $\mathrm{Re}(z)$};
+    \draw[->, thick, darkslate] (0, -0.8) -- (0, 3) node[above] {虚軸 $\mathrm{Im}(z)$};
+    % Origin
+    \node[below left] at (0, 0) {$O$};
+    % Complex point z = (2.5, 2.0)
+    \coordinate (Z) at (2.5, 2.0);
+    \coordinate (X) at (2.5, 0);
+    \coordinate (Y) at (0, 2.0);
+    % Projections
+    \draw[dashed, gray] (0, 2.0) -- (Z) -- (2.5, 0);
+    % Vector
+    \draw[->, line width=1.5pt, primaryblue] (0, 0) -- (Z) node[above right] {$z = x + iy = r e^{i\theta}$};
+    % Angle arc
+    \draw[->, thick, accentcrimson] (0.8, 0) arc (0:38.66:0.8);
+    \node[accentcrimson] at (1.1, 0.35) {$\theta = \arg(z)$};
+    % Radius label
+    \node[primaryblue, above left] at (1.25, 1.0) {$r = |z| = \sqrt{x^2 + y^2}$};
+    % Coordinates on axes
+    \draw (2.5, 0.08) -- (2.5, -0.08) node[below] {$x = r\cos\theta$};
+    \draw (0.08, 2.0) -- (-0.08, 2.0) node[left] {$y = r\sin\theta$};
+\end{tikzpicture}
+\par\vspace{0.4em}
+\small\textbf{概念図 3.1}：ガウス平面（複素数平面）における直交座標表示 $x+iy$ と極形式 $r(\cos\theta + i\sin\theta)$。
+\end{center}
+
 
 \subsection*{Chapter III: 複素数}
 
@@ -324,6 +380,33 @@ y = n^2
 
 \chapter{第5講：Chapter V: LIMITS OF FUNCTIONS OF A CONTINUOUS VARIABLE. CONTINUOUS AND DISCONTINUOUS FUNCTIONS}
 
+\begin{center}
+\begin{tikzpicture}[scale=1.2, >=Stealth]
+    % Axes
+    \draw[->, thick, darkslate] (-0.5, 0) -- (6, 0) node[right] {$x$};
+    \draw[->, thick, darkslate] (0, -0.5) -- (0, 4.5) node[above] {$y = f(x)$};
+    % Function curve y = 0.12*(x-1)^2 + 1.2
+    \draw[domain=0.5:5.2, smooth, variable=\x, line width=1.2pt, primaryblue] plot ({\x}, {0.12*(\x-1)*(\x-1) + 1.2});
+    % Target point (3.0, 2.16)
+    \coordinate (P) at (3.0, 2.16);
+    % Epsilon band
+    \fill[softblue, opacity=0.7] (0, 1.46) rectangle (5.5, 2.86);
+    \draw[dashed, accentcrimson, thick] (0, 2.86) node[left] {\small $L + \varepsilon$} -- (5.5, 2.86);
+    \draw[dashed, accentcrimson, thick] (0, 1.46) node[left] {\small $L - \varepsilon$} -- (5.5, 1.46);
+    \draw[darkslate, dashed] (0, 2.16) node[left] {$L = f(x_0)$} -- (3.0, 2.16);
+    % Delta interval
+    \draw[dashed, primaryblue, thick] (2.0, 0) node[below] {\small $x_0 - \delta$} -- (2.0, 1.46);
+    \draw[dashed, primaryblue, thick] (4.0, 0) node[below] {\small $x_0 + \delta$} -- (4.0, 2.86);
+    \draw[darkslate, dashed] (3.0, 0) node[below] {$x_0$} -- (3.0, 2.16);
+    \filldraw[primaryblue] (P) circle (2.5pt);
+    \draw[<->, accentcrimson, thick] (4.8, 1.46) -- (4.8, 2.86) node[midway, right] {$2\varepsilon$ 許容帯};
+    \draw[<->, primaryblue, thick] (2.0, 0.4) -- (4.0, 0.4) node[midway, above] {$2\delta$ 近傍};
+\end{tikzpicture}
+\par\vspace{0.4em}
+\small\textbf{概念図 5.1}：連続性と極限の $\varepsilon\text{-}\delta$ 論法。任意の許容誤差 $\varepsilon > 0$（赤色帯）に対して定義域の近傍幅 $\delta > 0$（青色帯）を適切に選べば、グラフの曲線がすべて許容帯の中に収まる。
+\end{center}
+
+
 \subsection*{Chapter V: 連続変数の関数の極限}
 
 \subsection*{89. $x$ が無限大に向かうときの極限}
@@ -376,6 +459,47 @@ y = n^2
 \clearpage
 
 \chapter{第6講：Chapter VI: DERIVATIVES AND INTEGRALS}
+
+\begin{center}
+\begin{tikzpicture}[scale=1.05, >=Stealth]
+    % Left side: Derivative
+    \begin{scope}[shift={(0,0)}]
+        \draw[->, thick, darkslate] (-0.5, 0) -- (4.5, 0) node[right] {$x$};
+        \draw[->, thick, darkslate] (0, -0.5) -- (0, 3.8) node[above] {$y$};
+        % Curve
+        \draw[domain=0.5:4.0, smooth, variable=\x, line width=1.2pt, primaryblue] plot ({\x}, {0.25*\x*\x - 0.2*\x + 0.8});
+        % Secant and Tangent at x=2
+        \coordinate (P) at (2, 1.4);
+        \coordinate (Q) at (3.2, 2.728);
+        % Secant line
+        \draw[dashed, gray!80!black] (0.8, 0.19) -- (3.8, 3.33) node[right] {\footnotesize 割線};
+        % Tangent line
+        \draw[thick, accentcrimson] (0.8, 0.44) -- (3.6, 2.68) node[right] {\footnotesize 接線 $f'(x)$};
+        \filldraw[primaryblue] (P) circle (2pt) node[below right] {$P(x, f(x))$};
+        \filldraw[gray!80!black] (Q) circle (2pt) node[above left] {$Q(x+h, f(x+h))$};
+        \node[below] at (2, -0.6) {\textbf{(a) 導関数（接線の傾き）}};
+    \end{scope}
+
+    % Right side: Riemann Sum
+    \begin{scope}[shift={(6.2,0)}]
+        \draw[->, thick, darkslate] (-0.5, 0) -- (5.0, 0) node[right] {$x$};
+        \draw[->, thick, darkslate] (0, -0.5) -- (0, 3.8) node[above] {$y$};
+        % Rectangles
+        \foreach \i/\h in {1.0/0.78, 1.5/1.0, 2.0/1.32, 2.5/1.72, 3.0/2.22, 3.5/2.80} {
+            \filldraw[fill=softblue, draw=primaryblue!60!black] (\i, 0) rectangle (\i+0.5, \h);
+        }
+        % Curve again on top
+        \draw[domain=0.8:4.2, smooth, variable=\x, line width=1.3pt, primaryblue] plot ({\x}, {0.18*\x*\x + 0.6});
+        \draw (1.0, 0.1) -- (1.0, -0.1) node[below] {$a$};
+        \draw (4.0, 0.1) -- (4.0, -0.1) node[below] {$b$};
+        \node at (2.5, 0.9) {\small $\sum f(\xi_i)\Delta x$};
+        \node[below] at (2.5, -0.6) {\textbf{(b) 定積分（リーマン和の極限 $\int_a^b f(x)dx$）}};
+    \end{scope}
+\end{tikzpicture}
+\par\vspace{0.4em}
+\small\textbf{概念図 6.1}：微積分学の二大支柱。(a) 割線の極限としての接線の傾き（微分）と、(b) 短冊状長方形の面積の総和の極限としての曲線下の面積（定積分）。
+\end{center}
+
 
 \subsection*{第六章 微分と積分}
 
@@ -515,6 +639,39 @@ f(b) = f(a) + (b - a)f'(a) + \frac{1}{2}(b - a)^2 f''(a) + \cdots + \frac{1}{n!}
 \clearpage
 
 \chapter{第8講：Chapter VIII: THE CONVERGENCE OF INFINITE SERIES AND INFINITE INTEGRALS}
+
+\begin{center}
+\begin{tikzpicture}[scale=1.1, >=Stealth]
+    % Real line
+    \draw[->, thick, darkslate] (-0.5, 0) -- (8.5, 0) node[right] {和 $S_n$};
+    % Convergence point S
+    \draw[dashed, accentcrimson, line width=1.2pt] (4.0, -0.8) -- (4.0, 1.8);
+    \node[above, accentcrimson] at (4.0, 1.8) {\textbf{収束値 $S$}};
+    % Partial sums oscillating around S
+    % S_1 = 1.0, S_2 = 6.5, S_3 = 2.2, S_4 = 5.2, S_5 = 3.2, S_6 = 4.6
+    \filldraw[primaryblue] (1.0, 0) circle (2.5pt) node[below=4pt] {$S_1$};
+    \filldraw[primaryblue] (6.5, 0) circle (2.5pt) node[below=4pt] {$S_2$};
+    \filldraw[primaryblue] (2.2, 0) circle (2.5pt) node[below=4pt] {$S_3$};
+    \filldraw[primaryblue] (5.2, 0) circle (2.5pt) node[below=4pt] {$S_4$};
+    \filldraw[primaryblue] (3.2, 0) circle (2.5pt) node[below=4pt] {$S_5$};
+    \filldraw[primaryblue] (4.6, 0) circle (2.5pt) node[below=4pt] {$S_6$};
+
+    % Arcs showing oscillation
+    \draw[->, thick, primaryblue] (1.0, 0.2) to[out=45, in=135] (6.5, 0.2);
+    \draw[->, thick, primaryblue] (6.5, -0.3) to[out=225, in=315] (2.2, -0.3);
+    \draw[->, thick, primaryblue] (2.2, 0.2) to[out=45, in=135] (5.2, 0.2);
+    \draw[->, thick, primaryblue] (5.2, -0.3) to[out=225, in=315] (3.2, -0.3);
+    \draw[->, thick, primaryblue] (3.2, 0.2) to[out=45, in=135] (4.6, 0.2);
+
+    % Epsilon band around S
+    \draw[<->, accentcrimson, thick] (3.0, 1.2) -- (5.0, 1.2) node[midway, above] {$|S_n - S| < \varepsilon$};
+    \draw[dashed, accentcrimson] (3.0, 0) -- (3.0, 1.2);
+    \draw[dashed, accentcrimson] (5.0, 0) -- (5.0, 1.2);
+\end{tikzpicture}
+\par\vspace{0.4em}
+\small\textbf{概念図 8.1}：交代級数の振動と収束（ライプニッツの判定法・コーシーの収束条件）。部分和 $S_n$ が収束値 $S$ を挟んで振動しながら振幅を縮小させ、極限値へと収束していく幾何学的イメージ。
+\end{center}
+
 
 \subsection*{Chapter VIII: 不定期級数および不定積分の収束}
 
