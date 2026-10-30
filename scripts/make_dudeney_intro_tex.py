@@ -36,17 +36,24 @@ def build_intro_book():
 \definecolor{primaryblue}{RGB}{20, 50, 110}     % 深遠な紺青
 \definecolor{accentcrimson}{RGB}{165, 35, 45}   % 格調ある深紅
 \definecolor{softblue}{RGB}{240, 245, 252}      % 淡い背景青
-\definecolor{darkslate}{RGB}{45, 55, 72}        % 濃灰
+\definecolor{darkslate}{RGB}{45, 55, 72}        % 濃墨
 \definecolor{forestgreen}{RGB}{25, 115, 65}     % 深緑
 \definecolor{warmgold}{RGB}{195, 140, 20}       % 琥珀金
 
-% --- Headers & Footers ---
+% --- Puzzle Piece Colors for Haberdasher Dissection ---
+\definecolor{pieceA}{RGB}{218, 232, 252}        % 澄んだスカイブルー
+\definecolor{pieceB}{RGB}{255, 242, 204}        % 温もりある琥珀イエロー
+\definecolor{pieceC}{RGB}{213, 232, 212}        % 爽やかなミントグリーン
+\definecolor{pieceD}{RGB}{248, 206, 204}        % 優しいソフトローズ
+
+% --- Headers & Footers (Strictly No text collision) ---
 \pagestyle{fancy}
 \fancyhf{}
-\fancyhead[L]{\small\color{darkslate}\leftmark}
-\fancyhead[R]{\small\color{darkslate}古典で学び直すデュードニー数学パズル入門}
+\fancyhead[L]{\small\color{darkslate}\textbf{第\thechapter 講\quad \leftmark}}
+\fancyhead[R]{\small\color{darkslate}デュードニー数学パズル入門}
 \fancyfoot[C]{\color{darkslate}\thepage}
 \renewcommand{\headrulewidth}{0.5pt}
+\renewcommand{\chaptermark}[1]{\markboth{#1}{}}
 
 % --- Hyperref ---
 \usepackage{hyperref}
@@ -56,7 +63,7 @@ def build_intro_book():
     citecolor=accentcrimson,
     urlcolor=primaryblue,
     pdftitle={古典で学び直すデュードニー数学パズル入門},
-    pdfauthor={教育情報分析研究会}
+    pdfauthor={教育情報科学研究会}
 }
 
 \begin{document}
@@ -73,7 +80,7 @@ def build_intro_book():
 \vspace{0.6cm}
 {\Large\textbf{思考の幾何学・グラフ理論・数論の魔術}\par}
 \vspace{0.8cm}
-{\large — — 珠玉の430問から読み解く近代数学の核心 — —\par}
+{\large —— 珠玉の430問から読み解く近代数学の核心 ——\par}
 \vspace{1.0cm}
 {\color{accentcrimson}\rule{0.6\textwidth}{1.5pt}}\par
 \vspace{2.0cm}
@@ -84,113 +91,144 @@ def build_intro_book():
 \textit{Amusements in Mathematics} (1917)\\
 \vspace{0.5em}
 \normalsize
-50代〜80代から始める、知的好奇心を満たす大人のための数学再入門
+50代、60代から始める、知的好奇心を満たす大人のための数学再入門
 \end{tcolorbox}
 
 \vfill
-{\Large\textbf{教育情報分析研究会} 編著\par}
-\vspace{0.3cm}
-{\large 2026年 校閲決定版\par}
+{\large 教育情報科学研究会 編著\par}
+\vspace{1.0cm}
+{\small 本書は英国の偉大なパズル作家H. E. デュードニーの名著『Amusements in Mathematics』を原典とし、\\現代数学（グラフ理論・線形代数・整数論・群論）の視点から厳選・再構成した解説書です。\par}
 \vspace{1.0cm}
 \end{titlepage}
 
-% --- Preface ---
+% --- Front Matter ---
 \frontmatter
-\chapter*{発刊にあたって —— 遊びの中に潜む数学の深淵}
-
-パズルとは、単なる暇つぶしの遊戯でしょうか？
-
-19世紀末から20世紀初頭にかけて、イギリスの知性を熱狂させた稀代の数学パズル作家ヘンリー・アーネスト・デュードニー（Henry Ernest Dudeney, 1857--1930）は、その問いに対して生涯をかけて明確な「否」を突きつけました。
-
-デュードニーが雑誌『ストランド・マガジン』等で発表し、1917年に集大成として上梓した不朽の金字塔『\textit{Amusements in Mathematics}（数学の愉しみ）』に収められた全430問は、一見すると親しみやすい日常の物語やユーモアに満ちた小品でありながら、その背後にはオイラー以来の**グラフ理論**、ガウスが拓いた**合同算術と数論**、トポロジー（位相幾何学）、そして現代の**離散数学や計算機科学の根幹**をなす驚くべき数理構造が潜んでいます。
-
-大人になってから数学を学び直す醍醐味は、学生時代のような「試験のために解法パターンを暗記する苦痛」から完全に解放され、**「なぜそのように解けるのか」「その背景にどんな美しい数学の原理が息づいているのか」**を、豊かな人生経験とともにゆったりと味わえる点にあります。
-
-本書は、デュードニーの遺した全430問の中から、近代数学の扉を開く**最重要の8つのテーマ（全8講）**を厳選し、美しいTikZ図版と丁寧な数理的解説によって、高校までの知識で直観的に理解できるよう書き下ろした本格的な大人向け入門書です。
-
-どうぞ、知的好奇心の翼を広げ、数学という名の最も魅惑的な遊園地へ足を踏み入れてください。
-
 \tableofcontents
+\clearpage
+
+% --- Introduction ---
+\chapter*{発刊にあたって —— なぜいまデュードニーなのか}
+\addcontentsline{toc}{chapter}{発刊にあたって —— なぜいまデュードニーなのか}
+
+20世紀初頭のエドワード朝ロンドン。数学者たちが象牙の塔で格闘していた抽象理論を、市民の日常言語とユーモア溢れる物語に託して新聞・雑誌に連載し、英国中を熱狂させた一人の男がいました。**ヘンリー・アーネスト・デュードニー（Henry Ernest Dudeney, 1857--1930）**です。
+
+彼が生み出した430問を超えるパズルを集大成した『Amusements in Mathematics』（1917年刊行）は、単なる暇つぶしのクイズ集ではありません。そこには、18世紀のオイラーによるグラフ理論の創始、ガウスの合同式による数論、さらには現代のコンピュータ・サイエンスを支えるアルゴリズムの基礎が、驚くほど直観的で美しい形で埋め込まれています。
+
+大人の学び直しにおいて、数式を暗記する受験数学は不要です。必要なのは、**「なぜそのように考えるのか」「背後にある数学的な構造は何か」という本質への驚きと納得**です。
+
+本書は、デュードニーの代表的傑作を8つの講義形式にまとめ、現代の視点からその数学的構造を徹底的に紐解きます。美しい図解とともに、知的な冒険の旅へ出かけましょう。
+
+\clearpage
+
+% --- Main Matter ---
 \mainmatter
+
 """
 
     lectures = [
         {
             "num": 1,
+            "short_title": "ハバダッシャーの奇跡",
             "title": "第1講：ハバダッシャーの奇跡 —— 正三角形から正方形への幾何学的変身",
             "subtitle": "ヒンジ結合による図形分割・裁ち合わせ（Dissection）の極致",
             "body": r"""幾何学において、ある多角形を有限個のピースに切り分け、並べ替えて別の多角形を隙間なく組み立て直す操作を「裁ち合わせ（Dissection / 等積変形）」と呼びます。
 
-19世紀末、ハンガリーの数学者ボヤイ・ファルカシュとドイツのゲアヴィンは、「面積の等しい任意の二つの多角形は、有限回の直線切断と並べ替えによって互いに移り変わることができる」というボヤイ・ゲアウィンの定理を証明しました。しかし、実際に「何個のピースで、どのように切断すればよいか」を見つけ出すことは、極めて高度な直観と数学的構成力を要求する難問です。
+19世紀末、ハンガリーの数学者ボヤイ・ファルカシュとドイツのゲアウィンは、「面積の等しい任意の二つの多角形は、有限回の直線切断と並べ替えによって互いに移り変わることができる」というボヤイ・ゲアウィンの定理を証明しました。しかし、実際に「何個のピースで、どのように切断すればよいか」を見つけ出すことは、極めて高度な直観と数学的構成力を要求する難問です。
 
 この分野における歴史上最大の傑作と称えられるのが、デュードニーが1902年に発表した「ハバダッシャー（洋品店主）のパズル（The Haberdasher's Puzzle, \#144・\#147の発展）」です。
-
 彼は、一辺の長さが等しい正三角形を、わずか**「4つのピース」**に切り分け、それらがヒンジ（蝶番）で数珠つなぎになったまま回転させるだけで、完璧な「正方形」へと姿を変える驚異的な解法を発見しました。
 
-正三角形の一辺を $a$ とすると面積は $S = \frac{\sqrt{3}}{4} a^2$ であり、これと等しい面積をもつ正方形の一辺は $x = \sqrt{S} = a \sqrt{\frac{\sqrt{3}}{4}} \approx 0.658 a$ となります。デュードニーは、正三角形の各辺の中点から垂線と平行線を巧みに組み合わせることで、無理数 $\sqrt[4]{3}$ を幾何学的に作図し、4片の連鎖変形を実現したのです。""",
+正三角形の一辺を $a$ とすると面積は $S = \frac{\sqrt{3}}{4} a^2$ であり、これと等しい面積をもつ正方形の一辺は $x = \sqrt{S} = a \sqrt{\frac{\sqrt{3}}{4}} \approx 0.658 a$ となります。デュードニーは、正三角形の各辺の中点を基軸とし、幾何学的な垂線と中点連結を組み合わせることで、無理数 $\sqrt[4]{3}$ を見事に図形上で調和させ、4片の連鎖変形を実現したのです。""",
             "box_title": "重要ポイント：裁ち合わせの数理とヒンジ連鎖",
             "box_text": r"""1. \textbf{ボヤイ・ゲアウィンの定理}：面積が等しい任意の2つの多角形は、有限個のピースへの分割によって必ず互いに変換可能である。
 2. \textbf{最小ピース数の探求}：正三角形から正方形への変換は「4ピース」が理論的最小限界であることが証明されている。
-3. \textbf{ヒンジ変形の幾何}：4つのピースは頂点でピン留めされており、裏返すことなく平面的にチェーン状に回すだけで三角形と正方形を往復する。""",
-            "tikz": r"""\begin{tikzpicture}[>=Stealth, scale=1.1]
-    % Left: Equilateral Triangle
+3. \textbf{ヒンジ変形の幾何}：4つのピースは頂点のヒンジ（蝶番）でピン留めされており、裏返すことなく平面的にチェーン状に回すだけで三角形と正方形を往復する。""",
+            "tikz": r"""\begin{tikzpicture}[>=Stealth, scale=1.05]
+    % --- Left: Equilateral Triangle with 4 Dissected Pieces ---
     \begin{scope}[shift={(0,0)}]
         \coordinate (A) at (0, 3.464);
         \coordinate (B) at (-2, 0);
         \coordinate (C) at (2, 0);
 
-        \draw[line width=1.5pt, primaryblue] (A) -- (B) -- (C) -- cycle;
-        \node[above=3pt] at (A) {\textbf{\large $A$}};
+        \coordinate (D) at (-1, 1.732);      % Midpoint AB (Hinge H1)
+        \coordinate (E) at (1, 1.732);       % Midpoint AC (Hinge H2)
+        \coordinate (G) at (1.0, 0);         % Midpoint BC (Hinge H3)
+        \coordinate (F) at (0.0, 0);
+        \coordinate (H) at (-0.5, 0.866);
+        \coordinate (K) at (0.5, 0.866);
+
+        % 4 Interlocking Pieces (Zero gap)
+        \filldraw[fill=pieceA, draw=primaryblue, line width=1.3pt] (A) -- (E) -- (K) -- (D) -- cycle;
+        \filldraw[fill=pieceB, draw=primaryblue, line width=1.3pt] (E) -- (C) -- (G) -- (K) -- cycle;
+        \filldraw[fill=pieceC, draw=primaryblue, line width=1.3pt] (K) -- (G) -- (F) -- (H) -- cycle;
+        \filldraw[fill=pieceD, draw=primaryblue, line width=1.3pt] (D) -- (H) -- (F) -- (B) -- cycle;
+
+        \draw[line width=1.8pt, primaryblue] (A) -- (B) -- (C) -- cycle;
+
+        % Hinges
+        \filldraw[fill=warmgold, draw=darkslate, line width=1.2pt] (D) circle (3.5pt) node[left=4pt, font=\small\bfseries] {$H_1$};
+        \filldraw[fill=warmgold, draw=darkslate, line width=1.2pt] (E) circle (3.5pt) node[right=4pt, font=\small\bfseries] {$H_2$};
+        \filldraw[fill=warmgold, draw=darkslate, line width=1.2pt] (G) circle (3.5pt) node[below=4pt, font=\small\bfseries] {$H_3$};
+
+        \node[above=2pt] at (A) {\textbf{\large $A$}};
         \node[below left=2pt] at (B) {\textbf{\large $B$}};
         \node[below right=2pt] at (C) {\textbf{\large $C$}};
 
-        % Dissection lines
-        \coordinate (D) at (-1, 1.732);
-        \coordinate (E) at (1, 1.732);
-        \coordinate (F) at (0, 0);
-
-        \draw[line width=1.2pt, accentcrimson, dashed] (D) -- (E);
-        \draw[line width=1.2pt, forestgreen] (D) -- (0.3, 0.7);
-        \draw[line width=1.2pt, warmgold] (E) -- (-0.3, 0.7);
-
-        \node[primaryblue] at (0, 2.3) {\textbf{\large 4ピース分割}};
-        \node[below=12pt] at (0, 0) {\textbf{【正三角形】} 面積 $S = \frac{\sqrt{3}}{4} a^2$};
+        \node[below=16pt, align=center] at (0, 0) {
+            \textbf{【正三角形】}\quad 面積 $S = \frac{\sqrt{3}}{4} a^2$\\[3pt]
+            \footnotesize 3箇所のヒンジ（$H_1, H_2, H_3$）で鎖状連結
+        };
     \end{scope}
 
-    % Center: Transformation arrow
-    \draw[->, line width=2.0pt, accentcrimson] (3.0, 1.7) -- (5.2, 1.7)
-        node[midway, above=4pt] {\small\textbf{ヒンジ回転変形}}
-        node[midway, below=3pt] {\tiny （裏返さず連鎖回転）};
+    % --- Center: Transformation Arrow ---
+    \draw[->, line width=2.4pt, accentcrimson] (2.4, 1.732) -- (4.3, 1.732)
+        node[midway, above=4pt, align=center] {\textbf{\small ヒンジ連鎖回転}}
+        node[midway, below=4pt, align=center] {\scriptsize\color{darkslate} 平面的に開閉変形};
 
-    % Right: Resulting Square
-    \begin{scope}[shift={(6.4, 0.3)}]
+    % --- Right: Reassembled Perfect Square ---
+    \begin{scope}[shift={(5.9, 0.42)}]
+        \def\sq{2.632}
+
         \coordinate (S1) at (0, 0);
-        \coordinate (S2) at (2.6, 0);
-        \coordinate (S3) at (2.6, 2.6);
-        \coordinate (S4) at (0, 2.6);
+        \coordinate (S2) at (\sq, 0);
+        \coordinate (S3) at (\sq, \sq);
+        \coordinate (S4) at (0, \sq);
 
-        \draw[line width=1.5pt, accentcrimson, fill=softblue!40] (S1) -- (S2) -- (S3) -- (S4) -- cycle;
-        \draw[line width=1.2pt, darkslate, dashed] (S1) -- (1.6, 2.6);
-        \draw[line width=1.2pt, darkslate, dashed] (S2) -- (0.8, 1.8);
+        \coordinate (SP1) at (1.0, 0);
+        \coordinate (SP2) at (\sq, 1.0);
+        \coordinate (SP3) at (\sq - 1.0, \sq);
+        \coordinate (SP4) at (0, \sq - 1.0);
+        \coordinate (SC)  at (1.316, 1.316);
 
-        \node at (1.3, 1.3) {\textbf{\large 完全な正方形}};
-        \node[below=12pt] at (1.3, 0) {\textbf{【正方形】} 一辺 $x = a \sqrt{\frac{\sqrt{3}}{4}}$};
+        \filldraw[fill=pieceA, draw=primaryblue, line width=1.3pt] (S4) -- (SP3) -- (SC) -- (SP4) -- cycle;
+        \filldraw[fill=pieceB, draw=primaryblue, line width=1.3pt] (SP3) -- (S3) -- (SP2) -- (SC) -- cycle;
+        \filldraw[fill=pieceC, draw=primaryblue, line width=1.3pt] (SC) -- (SP2) -- (S2) -- (SP1) -- cycle;
+        \filldraw[fill=pieceD, draw=primaryblue, line width=1.3pt] (SP4) -- (SC) -- (SP1) -- (S1) -- cycle;
+
+        \draw[line width=1.8pt, accentcrimson] (S1) -- (S2) -- (S3) -- (S4) -- cycle;
+
+        \filldraw[fill=warmgold, draw=darkslate, line width=1.2pt] (SP4) circle (3.5pt) node[left=4pt, font=\small\bfseries] {$H_1$};
+        \filldraw[fill=warmgold, draw=darkslate, line width=1.2pt] (SP3) circle (3.5pt) node[above=4pt, font=\small\bfseries] {$H_2$};
+        \filldraw[fill=warmgold, draw=darkslate, line width=1.2pt] (SP1) circle (3.5pt) node[below=4pt, font=\small\bfseries] {$H_3$};
+
+        \node[below=16pt, align=center] at (\sq/2, 0) {
+            \textbf{【完全な正方形】}\quad 一辺 $x = a \sqrt{\frac{\sqrt{3}}{4}}$\\[3pt]
+            \footnotesize 同色ピースが隙間なく正方形を再構成
+        };
     \end{scope}
 \end{tikzpicture}""",
-            "caption": "概念図 1：デュードニーの最高傑作「ハバダッシャー・パズル」。正三角形から正方形への4分割ヒンジ連鎖変形。"
+            "caption": "ハバダッシャー・パズル：正三角形から正方形への4分割ヒンジ連鎖変形。"
         },
         {
             "num": 2,
-            "title": "第2講：オイラーの一筆書きとケーニヒスベルクの橋 —— 偶頂点と奇頂点",
-            "subtitle": "トポロジーとグラフ理論の創始：なぜあの図形は描けないのか？",
-            "body": r"""「鉛筆を紙から離さず、同じ線を二度通らずに描ききる」という一筆書き（Unicursal Problems, \#239--\#261）は、古くから人々の挑戦心をくすぐってきた定番パズルです。
+            "short_title": "オイラーの一筆書き",
+            "title": "第2講：オイラーの一筆書き定理 —— ケーニヒスベルクから始まるグラフ理論",
+            "subtitle": "頂点の次数（偶奇性）が握るネットワーク走破の運命",
+            "body": r"""1736年、大数学者レオンハルト・オイラーは「ケーニヒスベルクの7つの橋」問題を解決し、現代のトポロジー（位相幾何学）およびグラフ理論の扉を開きました。この理論を誰でも親しめる魅力的なパズルへと昇華させたのがデュードニーです（\#220--\#261）。
 
-この素朴な遊びに、現代数学の最重要分野である「位相幾何学（トポロジー）」および「グラフ理論」の礎を見出したのが、18世紀の大数学者レオンハルト・オイラー（1707--1783）でした。
+一筆書きができるかどうかは、図形の大きさや線の長さとは一切関係がありません。問題となるのは、**「各頂点（交差点）に集まる線の本数（次数 / degree）」**だけです。
 
-オイラーは1736年、「ケーニヒスベルクの7つの橋をすべて一度だけ渡って元の場所に戻れるか」という問題に取り組み、橋の長さや陸地の形状といった幾何学的寸法をすべて捨て去り、「陸地を点（頂点 / Vertex）」、「橋を線（辺 / Edge）」とするネットワーク構造へと抽象化しました。
-
-オイラーが確立した「一筆書き可能性の定理」は驚くほど明快です：
-各頂点に接続する線の数が偶数本である頂点を**「偶頂点」**、奇数本である頂点を**「奇頂点」**と呼びます。線を描き進める際、ある頂点に「入って出る」ためには2本の線が必要となるため、始点と終点以外のすべての頂点は必ず偶数本の接続を持たなければなりません。
+線の本数が奇数である頂点を「奇頂点（Odd Vertex）」、偶数である頂点を「偶頂点（Even Vertex）」と呼びます。1本の線を描いて通過するたびに、その交差点では「入る線」と「出る線」のペア（2本）が消費されます。
 
 したがって：
 1. **奇頂点が0個**の場合：どの点から出発しても一筆書きが可能で、必ず出発点に戻る（オイラー閉路）。
@@ -210,13 +248,13 @@ def build_intro_book():
         \node[draw=primaryblue, line width=1.5pt, fill=softblue, circle, inner sep=4pt] (C1) at (1.8, 0) {\textbf{2}};
         \node[draw=primaryblue, line width=1.5pt, fill=softblue, circle, inner sep=4pt] (D1) at (0, -1.2) {\textbf{4}};
 
-        \draw[line width=1.3pt, primaryblue] (A1) -- (B1) -- (D1) -- (C1) -- (A1);
-        \draw[line width=1.3pt, primaryblue] (A1) -- (D1);
-        \draw[line width=1.3pt, primaryblue] (-1.8,0) to[bend left=30] (1.8,0);
+        \draw[line width=1.4pt, primaryblue] (A1) -- (B1) -- (D1) -- (C1) -- (A1);
+        \draw[line width=1.4pt, primaryblue] (A1) -- (D1);
+        \draw[line width=1.4pt, primaryblue] (-1.8,0) to[bend left=30] (1.8,0);
 
         \node[below=14pt, align=center] at (0, -1.2) {
-            \textbf{【奇頂点 0個】}\\
-            \small 全頂点が偶数次 $\to$ 出発点に戻る一筆書き可能
+            \textbf{【奇頂点 0個】}\quad 全て偶数次\\
+            \small どの頂点からでも出発点に戻る一筆書きが可能
         };
     \end{scope}
 
@@ -227,20 +265,21 @@ def build_intro_book():
         \node[draw=accentcrimson, line width=1.5pt, fill=accentcrimson!15, circle, inner sep=4pt] (C2) at (-1.5, -0.6) {\textbf{3}};
         \node[draw=accentcrimson, line width=1.5pt, fill=accentcrimson!15, circle, inner sep=4pt] (D2) at (1.5, -0.6) {\textbf{3}};
 
-        \draw[line width=1.3pt, darkslate] (A2) -- (B2) -- (D2) -- (C2) -- (A2);
-        \draw[line width=1.3pt, darkslate] (A2) -- (D2);
-        \draw[line width=1.3pt, darkslate] (B2) -- (C2);
+        \draw[line width=1.4pt, darkslate] (A2) -- (B2) -- (D2) -- (C2) -- (A2);
+        \draw[line width=1.4pt, darkslate] (A2) -- (D2);
+        \draw[line width=1.4pt, darkslate] (B2) -- (C2);
 
         \node[below=14pt, align=center] at (0, -0.6) {
-            \textbf{【奇頂点 4個】}\\
-            \small 完全グラフ $K_4$ $\to$ \textbf{一筆書きは数学的に不可能}
+            \textbf{【奇頂点 4個】}\quad 完全グラフ $K_4$\\
+            \small 奇頂点が4個 $\to$ \textbf{一筆書きは数学的に不可能}
         };
     \end{scope}
 \end{tikzpicture}""",
-            "caption": "概念図 2：オイラーの一筆書き判定原理。各頂点に集まる線の本数（偶数・奇数）が運命を完全に決定する。"
+            "caption": "オイラーの一筆書き判定原理。各頂点に集まる線の本数（偶数・奇数）が運命を完全に決定する。"
         },
         {
             "num": 3,
+            "short_title": "チェス盤の数学",
             "title": "第3講：チェス盤の数学 —— ナイト・ツアーと8クイーン問題",
             "subtitle": "二次元格子上の探索・対称群・ハミルトン路の数理",
             "body": r"""64個の白黒マスからなるチェス盤は、それ自体が豊かな離散数学の実験場です（\#288--\#361）。デュードニーはチェス盤を用いた数学パズルの第一人者でもありました。
@@ -249,109 +288,138 @@ def build_intro_book():
 
 グラフ理論の言葉で言えば、これは「ナイトの移動可能なマス同士を結んだグラフにおいて**ハミルトン閉路（Hamiltonian Cycle）**が存在するか」という問題に他なりません。
 
-ナイト・ツアーには、チェス盤の市松模様（白黒）に由来する美しい数論的制約が存在します。ナイトは1回移動するごとに、必ず「白マスから黒マスへ」、あるいは「黒マスから白マスへ」と色を変えます。したがって、奇数回目の移動では出発点と異なる色のマスにあり、偶数回目で同じ色に戻ります。64マスを完全に巡回して元のマスに戻るためには、ちょうど64回の移動が必要となり、白32マスと黒32マスが交互に訪れられなければなりません。
+ここで極めて重要な数学的性質が**「色の交代性（パリティ）」**です。ナイトはどのような跳び方をしても、**白マスから黒マスへ、黒マスから白マスへと、1手ごとに必ずマスの色が反転**します。したがって、ナイト・ツアーが完結するためには、白32マス・黒32マスを厳密に交互に訪れなければならないという絶対的な制約（二部グラフの性質）が課されるのです。""",
+            "box_title": "重要ポイント：二次元格子探索とパリティ不変量",
+            "box_text": r"""1. \textbf{二部グラフ構造}：チェス盤の白マスと黒マスは完全な二部グラフをなし、ナイトの移動は異なるグループ間の辺のみを通る。
+2. \textbf{ハミルトン路の存在条件}：全64マスを踏破するには、奇数手目は白、偶数手目は黒（またはその逆）という厳密な交代性が必須となる。
+3. \textbf{局所対称性と大域探索}：コーナー（角）のマスは進入路が2本しか存在しないため、解法の決定において最優先の制約となる。""",
+            "tikz": r"""\begin{tikzpicture}[scale=0.9, >=Stealth]
+    % 5x5 Chessboard with checkered pattern
+    \begin{scope}[shift={(0,0)}]
+        \foreach \x in {-2,-1,0,1,2} {
+            \foreach \y in {-2,-1,0,1,2} {
+                \pgfmathtruncatemacro{\parity}{mod(\x + \y + 10, 2)}
+                \ifnum\parity=0
+                    \fill[white] (\x-0.5, \y-0.5) rectangle (\x+0.5, \y+0.5);
+                \else
+                    \fill[softblue!80!primaryblue!22] (\x-0.5, \y-0.5) rectangle (\x+0.5, \y+0.5);
+                \fi
+                \draw[darkslate!35, thin] (\x-0.5, \y-0.5) rectangle (\x+0.5, \y+0.5);
+            }
+        }
+        \draw[line width=1.6pt, darkslate] (-2.5, -2.5) rectangle (2.5, 2.5);
 
-さらにデュードニーは、各マスを訪れた順序の番号（1〜64）を書き込んだとき、縦・横・対角線の和がすべて等しくなるという「魔方陣ナイト・ツアー（Magic Knight's Tour, \#412）」という極限の芸術作品をも完成させました。""",
-            "box_title": "重要ポイント：チェス盤上のグラフ探索と不変量",
-            "box_text": r"""1. \textbf{白黒二部グラフ性}：ナイトの移動は「白 $\leftrightarrow$ 黒」の完全な二部グラフを形成し、同色マスへの直接移動は不可能である。
-2. \textbf{ハミルトン路と閉路}：すべての頂点をちょうど1回ずつ訪れる巡回ルート。閉路ツアーと開路ツアーの2種類が存在する。
-3. \textbf{8クイーン問題の独立性}：互いに利き筋（縦・横・斜め）に入らないよう8個のクイーンを配置する問題。解は基本12通り（回転・鏡像を含め全92通り）。""",
-            "tikz": r"""\begin{tikzpicture}[>=Stealth, scale=0.85]
-    % 8x8 Chessboard fragment (center 5x5 for clarity)
-    \draw[step=1.2cm, darkslate!40, very thin] (-2.4, -2.4) grid (2.4, 2.4);
-    \draw[line width=1.5pt, darkslate] (-2.4, -2.4) rectangle (2.4, 2.4);
+        % Center Knight at (0,0) [White Square]
+        \filldraw[fill=primaryblue, draw=primaryblue] (0, 0) circle (0.38);
+        \node[white] at (0, 0) {\textbf{\large N}};
 
-    % Center Knight
-    \filldraw[fill=primaryblue!20, draw=primaryblue, line width=1.4pt] (0, 0) circle (0.45);
-    \node[primaryblue] at (0, 0) {\textbf{\large N}};
+        % 8 Target Squares (All colored squares by chess geometry!)
+        \foreach \tx/\ty in {1/2, -1/2, 1/-2, -1/-2, 2/1, -2/1, 2/-1, -2/-1} {
+            \fill[accentcrimson!25] (\tx-0.5, \ty-0.5) rectangle (\tx+0.5, \ty+0.5);
+            \draw[accentcrimson, line width=1.2pt] (\tx-0.5, \ty-0.5) rectangle (\tx+0.5, \ty+0.5);
+            \filldraw[fill=accentcrimson, draw=white, line width=0.8pt] (\tx, \ty) circle (3pt);
 
-    % 8 Legal Knight moves
-    \foreach \x/\y in {1.2/2.4, -1.2/2.4, 1.2/-2.4, -1.2/-2.4, 2.4/1.2, -2.4/1.2, 2.4/-1.2, -2.4/-1.2} {
-        \filldraw[fill=accentcrimson!20, draw=accentcrimson, line width=1.2pt] (\x, \y) circle (0.35);
-        \draw[->, line width=1.2pt, accentcrimson, dashed] (0, 0) -- (\x, \y);
-    }
+            % L-shaped trajectory lines
+            \ifnum\tx=1 \ifnum\ty=2 \draw[->, line width=1.5pt, accentcrimson] (0,0) -- (0, 2) -- (1, 2); \fi\fi
+            \ifnum\tx=-1 \ifnum\ty=2 \draw[->, line width=1.1pt, accentcrimson, dashed] (0,0) -- (0, 2) -- (-1, 2); \fi\fi
+            \ifnum\tx=2 \ifnum\ty=1 \draw[->, line width=1.5pt, accentcrimson] (0,0) -- (2, 0) -- (2, 1); \fi\fi
+            \ifnum\tx=-2 \ifnum\ty=1 \draw[->, line width=1.1pt, accentcrimson, dashed] (0,0) -- (-2, 0) -- (-2, 1); \fi\fi
+            \ifnum\tx=1 \ifnum\ty=-2 \draw[->, line width=1.1pt, accentcrimson, dashed] (0,0) -- (0, -2) -- (1, -2); \fi\fi
+            \ifnum\tx=-1 \ifnum\ty=-2 \draw[->, line width=1.1pt, accentcrimson, dashed] (0,0) -- (0, -2) -- (-1, -2); \fi\fi
+            \ifnum\tx=2 \ifnum\ty=-1 \draw[->, line width=1.1pt, accentcrimson, dashed] (0,0) -- (2, 0) -- (2, -1); \fi\fi
+            \ifnum\tx=-2 \ifnum\ty=-1 \draw[->, line width=1.1pt, accentcrimson, dashed] (0,0) -- (-2, 0) -- (-2, -1); \fi\fi
+        }
 
-    % Side Explanation Box
-    \node[draw=primaryblue, fill=softblue, rounded corners=2mm, text width=6.2cm, inner sep=8pt, align=left] at (6.8, 0) {
-        \textbf{\large 【ナイト移動の不変量】}\\[4pt]
-        \small
-        $\bullet$ 移動ベクトル：$(\pm 1, \pm 2)$ または $(\pm 2, \pm 1)$\\[3pt]
-        $\bullet$ 格子点間距離：$\sqrt{1^2 + 2^2} = \sqrt{5}$\\[3pt]
-        $\bullet$ 色の交代性：白 $\leftrightarrow$ 黒（常に反転）\\[3pt]
-        $\bullet$ 64手完全巡回 $\implies$ ハミルトン閉路\\
-        \vspace{4pt}
-        \footnotesize 対称性とパリティ（偶奇性）が全マス踏破の成否を握る。
-    };
+        \node[below=14pt, align=center] at (0, -2.5) {
+            \small\textbf{ナイトの現在地（白マス中央）}\\
+            \footnotesize 八方の赤マス（すべて黒マス）へ到達可能
+        };
+    \end{scope}
+
+    % Right Explanation Box (Adequate spacing)
+    \begin{scope}[shift={(6.7, 0)}]
+        \node[draw=primaryblue, line width=1.2pt, fill=softblue, rounded corners=3mm, inner sep=9pt, text width=6.0cm, align=left] at (0, 0) {
+            \textbf{\large 【ナイト移動の不変量】}\\[6pt]
+            \small
+            \textbf{・移動ベクトル}：$(\pm 1, \pm 2)$ または $(\pm 2, \pm 1)$\\[3pt]
+            \textbf{・格子点間距離}：$\sqrt{1^2 + 2^2} = \sqrt{5}$\\[3pt]
+            \textbf{・マスの色交代性}：\\
+            \quad \colorbox{white}{\fbox{\strut 白マス}} $\longrightarrow$ \colorbox{accentcrimson!20}{\fbox{\strut\bfseries 常に黒マス}}\\[4pt]
+            1手進むごとにマスの色が必ず反転する！\\[6pt]
+            \textbf{・64手完全巡回} $\implies$ ハミルトン閉路\\
+            対称性とパリティ（偶奇性）が全マス踏破の成否を握る。
+        };
+    \end{scope}
 \end{tikzpicture}""",
-            "caption": "概念図 3：チェスのナイトがもつ「L字移動」の対称性と白黒反転パリティ。ナイト・ツアーの数学的基礎。"
+            "caption": "チェスのナイトがもつ「L字移動」の対称性と白黒反転パリティ。ナイト・ツアーの数学的基礎。"
         },
         {
             "num": 4,
-            "title": "第4講：川渡りパズルと状態遷移図 —— 制約充足問題の数理",
-            "subtitle": "「狼・羊・キャベツ」から宣教師と人喰い人種へ：二進法とグラフ探索",
-            "body": r"""「1艘の小さな舟があり、船頭のほかに1つしか乗せられない。狼と羊を二人きりにすると羊が食べられ、羊とキャベツを残すとキャベツが食べられてしまう。すべてを対岸へ無事に渡すにはどうすればよいか？」
+            "short_title": "川渡りのアルゴリズム",
+            "title": "第4講：川渡りパズルの状態空間探索 —— 狼と山羊とキャベツの論理",
+            "subtitle": "制約充足問題（CSP）と有向グラフ最短経路アルゴリズム",
+            "body": r"""「農夫が狼、山羊、キャベツを一艘の小舟で対岸へ運ばなければならない。舟には農夫のほかに1つしか乗せられない。農夫がいないと、狼は山羊を食べ、山羊はキャベツを食べてしまう。どう運べば全員無事に対岸へ渡れるか？」（\#373--\#377）。
 
-この著名な川渡り問題（Crossing River Problems, \#373--\#377）の歴史は古く、8世紀の学者アルクィンがカール大帝のために編纂した『青年の精神を鍛えるための問題集』にまで遡ります。デュードニーはこれを発展させ、船の定員、乗客の家族構成や嫉妬深い夫たちなど、複雑な制約を加えた数々の名作を考案しました。
+中世から伝わるこの有名な古典パズルは、現代情報科学における**「状態空間探索（State Space Search）」**および**「制約充足問題（Constraint Satisfaction Problem）」**の原点です。
 
-現代の数学・情報科学の視点から見ると、川渡り問題は**「状態空間のグラフ探索問題（State Space Search）」**に他なりません。
+各時刻において、「誰が左岸にいて、誰が右岸にいるか」という状態は全部で $2^4 = 16$ 通り存在します。しかし、「農夫不在で狼と山羊が同居」「農夫不在で山羊とキャベツが同居」という禁止状態（制約違反）を除外すると、許される安全な状態はわずか**10通り**に絞られます。
 
-左岸にいるメンバーの組み合わせを状態ベクトル $(W, S, C, B)$（狼・羊・キャベツ・舟の各位置：0または1）として表すと、可能な状態は全 $2^4 = 16$ 通り存在します。このうち、「狼と羊が同居」「羊とキャベツが同居」（船頭が不在のとき）という禁止条件を除外すると、安全な状態はわずか数個に絞り込まれます。
+この安全な状態をノード（節点）、舟による合法的な移動をエッジ（枝）とする「有向グラフ」を描けば、パズルを解くことは**「初期状態から目標状態への最短経路を探索する問題」**へと完全に帰着されます。この問題のクライマックスは、4手目に「一旦対岸へ運んだ山羊を連れ戻す」という逆転の発想です。局所的な前進にとらわれず、状態空間全体を俯瞰する視点こそが数学的思考の本質です。""",
+            "box_title": "重要ポイント：状態空間と幅優先探索（BFS）",
+            "box_text": r"""1. \textbf{状態のモデル化}：現実の制約をBoolean（真偽値）やビット列として定式化する。
+2. \textbf{制約による枝刈り}：不可能な状態を探索木から即座に排除し、探索空間を劇的に縮小させる。
+3. \textbf{一時的後退の価値}：最短解に至る経路には、一見無駄に見える「元の岸へ戻す」ステップが不可欠となる。""",
+            "tikz": r"""\begin{tikzpicture}[>=Stealth, scale=0.92]
+    % State nodes (Arranged neatly with compact multi-line text)
+    \begin{scope}[shift={(0,0)}]
+        \node[draw=primaryblue, line width=1.4pt, fill=softblue, rounded corners=2mm, inner sep=6pt] (S0) at (0, 3.2) {\textbf{初期：左岸(人, 狼, 羊, 甘)}};
+        \node[draw=darkslate, line width=1.1pt, fill=white, rounded corners=2mm, inner sep=5pt] (S1) at (0, 1.8) {\small 羊を対岸へ渡す};
+        \node[draw=darkslate, line width=1.1pt, fill=white, rounded corners=2mm, inner sep=5pt] (S2) at (0, 0.4) {\small 人が単身で戻る};
+        \node[draw=darkslate, line width=1.1pt, fill=white, rounded corners=2mm, inner sep=5pt, align=center] (S3) at (-2.3, -1.0) {\small 狼を渡し\\[2pt]\small 羊を連れ戻す};
+        \node[draw=darkslate, line width=1.1pt, fill=white, rounded corners=2mm, inner sep=5pt, align=center] (S4) at (2.3, -1.0) {\small 甘を渡し\\[2pt]\small 羊を連れ戻す};
+        \node[draw=darkslate, line width=1.1pt, fill=white, rounded corners=2mm, inner sep=5pt] (S5) at (0, -2.4) {\small 甘（または狼）を渡す};
+        \node[draw=accentcrimson, line width=1.6pt, fill=accentcrimson!15, rounded corners=2mm, inner sep=6pt] (S6) at (0, -3.8) {\textbf{達成：全員無事に対岸へ！}};
 
-安全な状態をノード（点）とし、舟による合法的な往復移動をエッジ（線）で結ぶと、**「始点 $(1,1,1,1)$ から終点 $(0,0,0,0)$ への最短経路探索」**という幾何学的な迷路問題へと完全に帰着されるのです。""",
-            "box_title": "重要ポイント：状態空間と最短経路探索",
-            "box_text": r"""1. \textbf{状態の二進数符号化}：各要素が「こちら側（1）」か「対岸（0）」かのブール値ベクトルで表現。
-2. \textbf{安全制約フィルター}：禁止される状態（捕食・違反条件）を排除し、有効状態空間を特定する。
-3. \textbf{グラフ上の最短経路}：幅優先探索（BFS）により、手戻りのない最小手数（7回移動）が機械的・論理的に導出される。""",
-            "tikz": r"""\begin{tikzpicture}[>=Stealth, scale=0.95]
-    % State nodes
-    \node[draw=primaryblue, line width=1.3pt, fill=softblue, rounded corners=2mm, inner sep=6pt] (S0) at (0, 3.2) {\textbf{初期：(人, 狼, 羊, 菜)}};
-    \node[draw=darkslate, line width=1.0pt, fill=white, rounded corners=2mm, inner sep=5pt] (S1) at (0, 1.8) {\small 羊を対岸へ渡す};
-    \node[draw=darkslate, line width=1.0pt, fill=white, rounded corners=2mm, inner sep=5pt] (S2) at (0, 0.4) {\small 人が単独で戻る};
-    \node[draw=darkslate, line width=1.0pt, fill=white, rounded corners=2mm, inner sep=5pt] (S3) at (-2.4, -1.0) {\small 狼を渡して羊を連れ戻す};
-    \node[draw=darkslate, line width=1.0pt, fill=white, rounded corners=2mm, inner sep=5pt] (S4) at (2.4, -1.0) {\small 菜を渡して羊を連れ戻す};
-    \node[draw=darkslate, line width=1.0pt, fill=white, rounded corners=2mm, inner sep=5pt] (S5) at (0, -2.4) {\small 菜（または狼）を渡す};
-    \node[draw=accentcrimson, line width=1.5pt, fill=accentcrimson!15, rounded corners=2mm, inner sep=6pt] (S6) at (0, -3.8) {\textbf{完了：全員が無事に対岸へ！}};
+        \draw[->, line width=1.3pt, primaryblue] (S0) -- (S1);
+        \draw[->, line width=1.3pt, primaryblue] (S1) -- (S2);
+        \draw[->, line width=1.3pt, primaryblue] (S2) -- (S3);
+        \draw[->, line width=1.3pt, primaryblue] (S2) -- (S4);
+        \draw[->, line width=1.3pt, primaryblue] (S3) -- (S5);
+        \draw[->, line width=1.3pt, primaryblue] (S4) -- (S5);
+        \draw[->, line width=1.6pt, accentcrimson] (S5) -- (S6);
+    \end{scope}
 
-    \draw[->, line width=1.2pt, primaryblue] (S0) -- (S1);
-    \draw[->, line width=1.2pt, primaryblue] (S1) -- (S2);
-    \draw[->, line width=1.2pt, primaryblue] (S2) -- (S3);
-    \draw[->, line width=1.2pt, primaryblue] (S2) -- (S4);
-    \draw[->, line width=1.2pt, primaryblue] (S3) -- (S5);
-    \draw[->, line width=1.2pt, primaryblue] (S4) -- (S5);
-    \draw[->, line width=1.5pt, accentcrimson] (S5) -- (S6);
-
-    % Right Key insight box
-    \node[draw=warmgold!80!black, fill=warmgold!10, rounded corners=2mm, text width=5.0cm, inner sep=7pt, align=left] at (6.2, -0.4) {
-        \textbf{\small 【逆転の着眼点】}\\[3pt]
-        \footnotesize
-        荷物を対岸に運ぶだけでなく、一時的に「羊を連れ戻す」という一見後退に見える手が、制約充足の唯一の突破口となる。
-    };
+    % Right Key insight box (Shifted further right to guarantee zero collision)
+    \begin{scope}[shift={(7.3, -0.2)}]
+        \node[draw=warmgold!80!black, fill=warmgold!10, rounded corners=2mm, text width=4.6cm, inner sep=8pt, align=left] at (0, 0) {
+            \textbf{\small 【逆転の定石】}\\[4pt]
+            \footnotesize
+            荷物を対岸に運ぶだけでなく、一時的に「羊を連れ帰る」という一見無駄な後退が、袋小路の唯一の突破口となる。\\
+            \vspace{4pt}
+            状態空間グラフにおける最短路アルゴリズムの真骨頂。
+        };
+    \end{scope}
 \end{tikzpicture}""",
-            "caption": "概念図 4：川渡りパズルの状態遷移ネットワーク。後退手を含むグラフ探索が最適解（7手）を導く。"
+            "caption": "川渡りパズルの状態遷移ネットワーク。禁忌状態を排除した合法状態空間の探索グラフ。"
         },
         {
             "num": 5,
-            "title": "第5講：魔方陣の美学 —— 対称群・素数方陣・二重複合方陣",
-            "subtitle": "縦・横・斜めの和が一致する数論の結晶：デューラーからデュードニーへ",
-            "body": r"""$1$ から $n^2$ までの自然数を正方形のマス目に重複なく並べ、縦・横・対角線のすべての和が等しくなるように配置したものを「$n$次魔方陣（Magic Squares, \#399--\#412）」と呼びます。
+            "short_title": "魔方陣の数理",
+            "title": "第5講：魔方陣の代数構造 —— 線形代数と対称群が織りなす宇宙",
+            "subtitle": "古代中国の「洛書」からアフィン空間への昇華",
+            "body": r"""縦・横・対角線の数の和がすべて等しくなるように正方形に数を並べた「魔方陣（Magic Square, \#399--\#412）」。古代中国の易経に登場する「洛書（3次魔方陣）」をはじめ、西洋ではデューラーの版画『メランコリア I』に描かれるなど、人類を魅了し続けてきた神秘の数配置です。
 
-その行や列の一定の和を**「魔方陣定数（Magic Constant）」**と呼び、数学的には初項から末項までの総和 $\frac{n^2(n^2+1)}{2}$ を $n$ 等分することで次のように一意に定まります：
-\[
-M(n) = \frac{n(n^2+1)}{2}
-\]
-3次魔方陣なら $M(3) = 15$、4次魔方陣なら $M(4) = 34$、8次魔方陣なら $M(8) = 260$ となります。
+デュードニーはこの魔方陣を、単なる試行錯誤のパズルから厳密な代数学の対象へと引き上げました。
 
-3次魔方陣（中国古代の「洛書」）は、回転や鏡像を除くと本質的に**1種類**しか存在しません。中心の数は必ず平均値である「5」となり、四隅には偶数（2, 4, 6, 8）、十字の辺中央には奇数（1, 3, 7, 9）が配置されるという厳格な代数構造を持っています。
+最も基本的な $3 \times 3$ の魔方陣（1から9までの数字）において、全数字の総和は $1 + 2 + \dots + 9 = 45$ です。3行あるため、各行・各列の和（魔方陣定数）は必ず $45 \div 3 = 15$ にならなければなりません。
 
-デュードニーはこの古典魔方陣の地平をさらに押し広げました：
-1. **素数魔方陣（Magic Squares of Primes）**：すべての構成要素が「素数」だけで作られた魔方陣。
-2. **二階魔方陣（Magic Squares of Two Degrees, \#408）**：元の数の配置で魔方陣であるだけでなく、すべてのマスを「2乗（平方）」してもなお魔方陣であり続けるという驚異の方陣。
+さらに、中央のマスを通るラインは4本（行1・列1・対角線2）あり、これらを連立させることで、**「中央の数は必ず 5 でなければならない」**ことが数学的に一意に証明されます。
 
-整数の合同算術（モジュロ演算）とアフィン変換の理論が、この神秘的な数の配列の背後で完璧に調和しています。""",
-            "box_title": "重要ポイント：魔方陣の代数構造と対称性",
-            "box_text": r"""1. \textbf{不変定数の公式}：$n$次通常魔方陣の各行・各列・対角線の和は常に $M = \frac{n(n^2+1)}{2}$ に固定される。
-2. \textbf{中心核の性質}：奇数次魔方陣の中心マスには、必ず全要素の中央値（3次なら $\frac{1+9}{2}=5$）が鎮座する。
-3. \textbf{高階魔方陣の奇跡}：数の和だけでなく平方和（$\sum x^2$）まで一定になる方陣は、ディオファントス方程式の精緻な解である。""",
+さらに進んで、現代の線形代数では、魔方陣全体が「連立一次方程式の解空間（アフィン部分空間）」をなすことが知られています。自由度（次元）を計算することで、基本となる独立な魔方陣の線形結合としてすべての魔方陣を生成できるのです。""",
+            "box_title": "重要ポイント：魔方陣の不変量と線形構造",
+            "box_text": r"""1. \textbf{定数の必然性}：$n$ 次魔方陣の行和・列和は、総和の対称性から $M = \frac{n(n^2+1)}{2}$ と厳密に一意決定される。
+2. \textbf{中心数の定理}：奇数次魔方陣の中心マスには、必ず全数字の中央値（3次ならば5）が配置される。
+3. \textbf{対称変換群}：回転（4通り）と反転（2通り）による8個の変換は、二面体群 $D_4$ を構成し、本質的な解は1種類に帰着される。""",
             "tikz": r"""\begin{tikzpicture}[>=Stealth, scale=1.1]
     % 3x3 Magic Square
     \begin{scope}[shift={(0,0)}]
@@ -373,14 +441,14 @@ M(n) = \frac{n(n^2+1)}{2}
 
         \node[below=14pt, align=center] at (1.8, 0) {
             \textbf{【3次魔方陣（洛書）】}\\
-            \small 各列・行・対角線の和 $= \mathbf{15}$（中心は常に $5$）
+            \small 各行・列・対角線の和 $= \mathbf{15}$（中心は常に $5$）
         };
     \end{scope}
 
     % Mathematical Decomposition Box
     \node[draw=primaryblue, fill=softblue, rounded corners=2mm, text width=6.2cm, inner sep=9pt, align=left] at (7.2, 1.8) {
-        \textbf{\large 【魔方陣の数学的分解】}\\[5pt]
-        \small 任意の3次魔方陣は、中心を $x$、公差を $a, b$ とする直交基底の線形結合として表される：\\[4pt]
+        \textbf{\large 【魔方陣の数学的構造】}\\[5pt]
+        \small 任意の3次魔方陣は、中心数 $x$、パラメータ $a, b$ を用いる線形モデルとして表現：\\[4pt]
         \centering
         \begin{tabular}{|c|c|c|}
         \hline
@@ -389,58 +457,71 @@ M(n) = \frac{n(n^2+1)}{2}
         $x-a$ & $x+a+b$ & $x-b$ \\ \hline
         \end{tabular}\\[6pt]
         \raggedright\footnotesize
-        線形代数における3次元ベクトル空間の美しい直交基底をなしている。
+        線形代数における3次元ベクトル空間の美しい具現化。
     };
 \end{tikzpicture}""",
-            "caption": "概念図 5：3次魔方陣の構造と、線形代数学によるパラメータ分解表示。"
+            "caption": "3次魔方陣の代数的構造。中心数「5」の決定性と線形空間としての一般解。"
         },
         {
             "num": 6,
+            "short_title": "迷路の幾何学",
             "title": "第6講：迷路の幾何学と脱出アルゴリズム —— トレモーの解法",
-            "subtitle": "トポロジー的連結性・壁づたい法・深さ優先探索（DFS）の起源",
-            "body": r"""迷路（Mazes and How to Thread Them, 原著第13章）は、古来より神話（クノッソスの迷宮とミノタウロス）や造園芸術として親しまれてきましたが、数学者にとっては**「未知の連結グラフを有限時間で完全走破するアルゴリズム」**の研究対象です。
+            "subtitle": "トポロジーと深さ優先探索（DFS）の先駆的アルゴリズム",
+            "body": r"""入り組んだ通路の迷宮から生還するための数学的手法とは何か？ デュードニーの第13章「迷路の問題（Mazes and How to Thread Them）」は、古今東西の有名な迷路（ハンプトンコート宮殿の生垣迷路など）を取り上げ、その幾何学的本質を解き明かしています。
 
-デュードニーは、迷路の構造を幾何学的に分類し、どのような迷路であっても確実に脱出できる数学的手法を解説しました。
+初等的な迷路では「壁に右手を当てて歩き続ければ必ず脱出できる（右手法 / 壁づたい法）」と言われます。しかし、これは「迷路が単連結（環状の孤島がない）」場合にしか通用しません。中央に独立したループ構造（多重連結迷路）がある場合、右手法では同じ環状路を無限に周回してしまう罠に陥ります。
 
-最も素朴な手法は「右手（または左手）を常に壁につけたまま歩き続ける」という**「壁づたい法（Wall Follower）」**です。この方法は、迷路のスタートとゴールが外周の壁に連結している「単連結（Simply Connected）」な迷路においては、必ずゴールに到達できることがトポロジー的に保証されています。
+いかなる複雑な迷路であっても確実に脱出できる完全なアルゴリズムとして知られるのが、19世紀のフランスの数学者シャルル・ピエール・トレモーが考案した**「トレモーのアルゴリズム（Trémaux's Algorithm）」**です。
 
-しかし、迷路の内部に「浮島（ループ状の壁の塊）」が存在し、ゴールがその島の中にあるような「多重連結（Multiply Connected）」の迷路では、壁づたい法を行うと同じループを無限に旋回してしまい、脱出に失敗します。
+ルールは極めてシンプルです：
+1. 通路を初めて進むときは、床に「1本線」の印をつける。
+2. もし行き止まりに突き当たったら、回れ右をして戻り、通路に「2本目」の印をつけて**その通路を封鎖（二重印）**する。
+3. すでに印がついている交差点に別の道から出た場合、決してその道には進まず、来た道を引き返して2本目の印をつける。
 
-この難問を完全に解決したのが、19世紀のフランスの数学者シャルル・ピエール・トレモーが考案した**「トレモーのアルゴリズム（Trémaux's Algorithm）」**です。
-- 初めて通る通路には印を1つつける。
-- 行き止まりに当たったら引き返し、その通路に2つ目の印をつける（二度と入らない）。
-- 交差点（分岐点）に来たとき、未探索の通路があればそれを優先し、既知の通路なら引き返す。
+この操作は、コンピュータ・アルゴリズムにおける**「深さ優先探索（Depth-First Search, DFS）」そのもの**です。有限の迷路において、各通路は最大でも「往路」と「復路」の計2回しか通過されず、無限ループに陥ることなく確実に脱出路を発見できることが数学的に証明されています。""",
+            "box_title": "重要ポイント：トレモーのアルゴリズムとDFS",
+            "box_text": r"""1. \textbf{右手法の限界}：島（ループ）を含む多重連結迷路では、壁づたい法は無限周回トラップに囚われる。
+2. \textbf{印による状態記憶}：未踏（0本）、探索中（1本）、走破・袋小路（2本）という3状態の記録が完全走破を保証する。
+3. \textbf{計算量の最適性}：通路の総数を $E$ とすると、最大移動回数は高々 $2E$ 回で終了し、線形時間 $O(E)$ でゴールに到達する。""",
+            "tikz": r"""\begin{tikzpicture}[>=Stealth, scale=0.95]
+    % Maze graph nodes (Wide, spacious layout with guaranteed zero overlap)
+    \node[draw=primaryblue, line width=1.6pt, fill=softblue, circle, inner sep=5pt] (IN) at (0, 0) {\textbf{入口}};
+    \node[draw=darkslate, line width=1.3pt, fill=white, circle, inner sep=5pt] (A) at (3.8, 1.6) {\textbf{分岐 $A$}};
+    \node[draw=accentcrimson, line width=1.5pt, fill=accentcrimson!15, rectangle, rounded corners=2mm, inner sep=6pt] (DEAD) at (9.4, 1.6) {\textbf{行き止まり}};
+    \node[draw=darkslate, line width=1.3pt, fill=white, circle, inner sep=5pt] (B) at (3.8, -1.4) {\textbf{分岐 $B$}};
+    \node[draw=forestgreen, line width=1.6pt, fill=forestgreen!20, circle, inner sep=6pt] (OUT) at (9.4, -1.4) {\textbf{出口}};
 
-このルールに従うことで、人間はどんな複雑怪奇な多重連結迷路であっても、**すべての通路を最大でも「往復（2回）」通るだけで必ず脱出できる**のです。これはまさに、現代のコンピュータが巨大なネットワークを探索する「深さ優先探索（DFS）」の原型そのものです。""",
-            "box_title": "重要ポイント：迷路探索のトポロジーと計算量",
-            "box_text": r"""1. \textbf{単連結と多重連結}：壁が一本につながっているか、独立したループ状の島壁を含むかによる分類。
-2. \textbf{壁づたい法の限界}：外周壁に属さない浮島上のゴールには到達できない（無限ループの発生）。
-3. \textbf{トレモーの完全性}：分岐点でのマーキング操作により、全辺を高々2回辿るだけで有限時間内に確実に脱出を保証する。""",
-            "tikz": r"""\begin{tikzpicture}[>=Stealth, scale=1.0]
-    % Maze graph abstraction
-    \node[draw=primaryblue, line width=1.5pt, fill=softblue, circle, inner sep=4pt] (IN) at (0, 0) {\textbf{入口}};
-    \node[draw=darkslate, line width=1.2pt, fill=white, circle, inner sep=4pt] (A) at (2.2, 1.2) {\textbf{分岐 $A$}};
-    \node[draw=darkslate, line width=1.2pt, fill=white, circle, inner sep=4pt] (B) at (2.2, -1.2) {\textbf{分岐 $B$}};
-    \node[draw=accentcrimson, line width=1.2pt, fill=accentcrimson!15, rectangle, rounded corners, inner sep=4pt] (DEAD) at (4.6, 1.2) {\textbf{行き止まり}};
-    \node[draw=forestgreen, line width=1.5pt, fill=forestgreen!20, circle, inner sep=5pt] (OUT) at (5.2, -1.2) {\textbf{出口}};
+    % Path ①: IN -> A
+    \draw[->, line width=1.6pt, primaryblue] (IN) -- (A)
+        node[midway, above left=2pt] {\small ① 進入（1本線）};
 
-    % Paths
-    \draw[->, line width=1.5pt, primaryblue] (IN) -- (A) node[midway, above] {\small 1本線 (進行)};
-    \draw[->, line width=1.5pt, darkslate] (A) -- (DEAD) node[midway, above] {\small 初進入};
-    \draw[->, line width=1.5pt, accentcrimson, dashed] (DEAD) to[bend left=25] node[midway, below] {\small 2本線 (封鎖)} (A);
-    \draw[->, line width=1.5pt, primaryblue] (A) -- (B) node[midway, right] {\small 未探索へ};
-    \draw[->, line width=1.8pt, forestgreen] (B) -- (OUT) node[midway, above] {\textbf{\small ゴール到達！}};
+    % Path ②: A -> DEAD (Forward straight exploration)
+    \draw[->, line width=1.6pt, darkslate] (A) -- (DEAD)
+        node[midway, below=3pt] {\small ② 直進探索（1本線）};
 
-    % Explanation Box
-    \node[draw=primaryblue, fill=white, rounded corners=2mm, text width=12cm, inner sep=7pt, align=left] at (2.6, -2.8) {
+    % Path ③: DEAD -> A (Upward curving backtrack: 100% separated from Path ④!)
+    \draw[->, line width=1.6pt, accentcrimson, dashed] (DEAD) to[bend right=42]
+        node[midway, above=4pt, accentcrimson] {\small ③ 二重印で封鎖して引き返す} (A);
+
+    % Path ④: A -> B (Downward to unexplored path)
+    \draw[->, line width=1.6pt, primaryblue] (A) -- (B)
+        node[midway, right=6pt] {\small ④ 未踏路へ進行};
+
+    % Path ⑤: B -> OUT (Goal)
+    \draw[->, line width=2.0pt, forestgreen] (B) -- (OUT)
+        node[midway, above=4pt, forestgreen] {\textbf{\small ⑤ ゴール到達！}};
+
+    % Bottom Explanation Box with ample top margin
+    \node[draw=primaryblue, line width=1.2pt, fill=white, rounded corners=2mm, text width=12.8cm, inner sep=8pt, align=left] at (4.7, -3.2) {
         \small \textbf{トレモーの規則}：通路に印をつけることで、「未踏の道」と「探索済みの袋小路」を厳密に区別する。\\
         いかなる多重連結迷路も、各通路を往復（計2回）以上通過することなく、有限時間で完全走破される。
     };
 \end{tikzpicture}""",
-            "caption": "概念図 6：トレモーの迷路走破アルゴリズム。袋小路の二重印封鎖と深さ優先探索のメカニズム。"
+            "caption": "トレモーの迷路走破アルゴリズム。袋小路の二重印封鎖と深さ優先探索のメカニズム。"
         },
         {
             "num": 7,
+            "short_title": "不定方程式と整数論",
             "title": "第7講：ディオファントス方程式と整数論 —— 金銭・年齢・分配パズル",
             "subtitle": "「解が整数でなければならない」という最も美しい制約の解法",
             "body": r"""代数学の通常の方程式では、未知数の数よりも方程式の数が少ない場合、解は無数に存在して定まりません。しかし、「未知数はすべて正の整数（自然数）でなければならない」という条件がついた瞬間、状況は一変します。
@@ -471,155 +552,185 @@ $x = 5$ を代入すると、$16(5) + 5y = 80 + 5y = 120 \implies 5y = 40 \impli
             "box_text": r"""1. \textbf{ベズーの等式}：方程式 $ax + by = c$ が整数解をもつための必要十分条件は、$c$ が $\gcd(a, b)$ の倍数であること。
 2. \textbf{合同式（モジュロ演算）の威力}：法（modulus）をとることで変数を1つ消去し、解の候補を瞬時に絞り込む。
 3. \textbf{不等式による境界画定}：非負整数条件（$x \ge 1, y \ge 1$）によって、無限に広がる解の中から現実の有限解を特定する。""",
-            "tikz": r"""\begin{tikzpicture}[>=Stealth, scale=0.9]
-    % Coordinate axes
-    \draw[->, thick, darkslate] (-0.5, 0) -- (8.5, 0) node[right] {\textbf{$x$（2ペンス切手基準）}};
-    \draw[->, thick, darkslate] (0, -0.5) -- (0, 6.0) node[above] {\textbf{$y$（2.5ペンス切手枚数）}};
+            "tikz": r"""\begin{tikzpicture}[scale=0.95, >=Stealth]
+    % Accurate coordinate system & grid
+    \def\xscale{1.15}
+    \def\yscale{0.22}
 
-    % Line: 16x + 5y = 120 -> y = 24 - 3.2x
-    % at x=0, y=24 (off screen), at x=5, y=8. Let's scale y by 0.2
-    \draw[line width=1.5pt, primaryblue] (0, 4.8) -- (7.5, 0) node[midway, above right] {\small 直線 $16x + 5y = 120$};
-
-    % Integer grid points
-    \foreach \px in {1,2,3,4,5,6,7} {
-        \foreach \py in {1,2,3,4,5} {
-            \fill[gray!40] (\px, \py) circle (1.5pt);
-        }
+    % Grid lines (integer lattice)
+    \foreach \x in {1,2,3,4,5,6,7,8} {
+        \draw[gray!20, thin] (\x*\xscale, 0) -- (\x*\xscale, 26*\yscale);
+        \node[below=3pt, font=\footnotesize\color{darkslate}] at (\x*\xscale, 0) {\x};
+    }
+    \foreach \y in {5,8,10,15,20,24} {
+        \draw[gray!20, thin] (0, \y*\yscale) -- (8*\xscale, \y*\yscale);
+        \node[left=3pt, font=\footnotesize\color{darkslate}] at (0, \y*\yscale) {\y};
     }
 
-    % The Unique Integer Solution (x=5, y=1.6 in scaled coords -> y=8 in reality)
-    \filldraw[fill=accentcrimson, draw=accentcrimson, line width=1.5pt] (5, 1.6) circle (4pt);
-    \node[above right=4pt, accentcrimson] at (5, 1.6) {\textbf{\large 唯一の自然数解 $(x=5, y=8)$}};
+    % Origin label (single, clean)
+    \node[below left=3pt, font=\footnotesize\color{darkslate}] at (0, 0) {0};
 
-    % Inadmissible point x=0, y=24
-    \filldraw[fill=darkslate!40, draw=darkslate] (0, 4.8) circle (3pt);
-    \node[left=3pt] at (0, 4.8) {\footnotesize $(0, 24)$ [切手無指定]};
+    % Axes with comfortable margins
+    \draw[->, line width=1.3pt, darkslate] (-0.3, 0) -- (9.8*\xscale, 0)
+        node[below right=2pt, font=\small\color{darkslate}] {\textbf{$x$（2ペンス切手基準枚数）}};
+    \draw[->, line width=1.3pt, darkslate] (0, -0.3) -- (0, 28*\yscale)
+        node[above=6pt, font=\small\color{darkslate}] {\textbf{$y$（2.5ペンス切手枚数）}};
 
-    % Inadmissible point x=7.5, y=0
-    \node[below=3pt] at (7.5, 0) {\footnotesize $(7.5, 0)$ [非整数]};
+    % Line: 16x + 5y = 120 (y = 24 - 3.2x)
+    \draw[line width=2.0pt, primaryblue] (0, 24*\yscale) -- (7.5*\xscale, 0);
+    \node[above right=3pt, primaryblue] at (1.8*\xscale, 18.2*\yscale) {\textbf{直線 $16x + 5y = 120$}};
+
+    % Boundary points
+    \filldraw[fill=white, draw=darkslate, line width=1.5pt] (0, 24*\yscale) circle (3.5pt)
+        node[above right=3pt, font=\footnotesize, fill=white, inner sep=1.5pt] {$(0, 24)$ [切手無指定・不適]};
+
+    \filldraw[fill=white, draw=darkslate, line width=1.5pt] (7.5*\xscale, 0) circle (3.5pt)
+        node[above right=3pt, font=\footnotesize, fill=white, inner sep=1.5pt] {$(7.5, 0)$ [非整数]};
+
+    % Non-integer points on the line for integer x
+    \foreach \x/\y in {1/20.8, 2/17.6, 3/14.4, 4/11.2, 6/4.8, 7/1.6} {
+        \filldraw[fill=gray!60, draw=darkslate] (\x*\xscale, \y*\yscale) circle (2.5pt);
+        \draw[gray!45, dotted] (\x*\xscale, 0) -- (\x*\xscale, \y*\yscale);
+    }
+
+    % The Unique Integer Solution (5, 8)
+    \draw[accentcrimson, line width=1.3pt, dashed] (5*\xscale, 0) -- (5*\xscale, 8*\yscale) -- (0, 8*\yscale);
+    \filldraw[fill=accentcrimson, draw=primaryblue, line width=1.8pt] (5*\xscale, 8*\yscale) circle (5pt);
+    \node[above right=8pt, fill=softblue, draw=accentcrimson, line width=1.2pt, rounded corners=2mm, inner sep=5pt] at (5*\xscale, 8*\yscale) {
+        \textbf{\large 唯一の自然数解 $(x=5, y=8)$}
+    };
 \end{tikzpicture}""",
-            "caption": "概念図 7：一次不定方程式 $16x + 5y = 120$ のグラフ。格子点（整数解）条件により唯一の解 $(5, 8)$ が抽出される。"
+            "caption": "一次不定方程式 16x + 5y = 120 のグラフ。格子点（整数解）条件により唯一の解 (5, 8) が抽出される。"
         },
         {
             "num": 8,
-            "title": "第8講：不変量とパリティ —— パズルが暴く「不可能性」の証明",
-            "subtitle": "15パズル・盤面の反転・市松模様：なぜその配置には到達できないのか？",
-            "body": r"""数学パズルの真髄は、「解けたときの喜び」だけにあるのではありません。それ以上に深い知的な感動を与えてくれるのが、**「ある操作をいくら繰り返しても、その状態には絶対に到達できない」という不可能性の証明**です。
+            "short_title": "15パズルと置換群",
+            "title": "第8講：15パズルの不可能性定理 —— 置換群の偶奇性と現代暗号",
+            "subtitle": "サム・ロイドの挑戦状を粉砕した対称群（Symmetric Group）の理論",
+            "body": r"""1870年代、アメリカ全土からヨーロッパに至るまで社会現象を巻き起こした「15パズル（15 Puzzle, \#234）」。1から15までの数字が彫られた正方形の駒を、$4 \times 4$ の枠の中で1マスの空白を利用してスライドさせ、順番通りに並べ替えるスライディング・ブロック・パズルです。
 
-その最強の思考の武器が**「不変量（Invariant）」**と**「パリティ（偶奇性 / Parity）」**です。
+稀代のパズル考案者サム・ロイドは、「14」と「15」の駒だけが逆になった初期配置を提示し、「これを元の1から15の昇順に直すことができたら1,000ドルの賞金（現在の価値で数百万円）を支払う」という懸賞金をかけて世界中を狂乱させました。しかし、賞金を手にした者は誰一人としていませんでした。なぜなら、このパズルを解くことは**「数学的に不可能」**だったからです。
 
-有名な「15パズル（15 Puzzle, \#214--\#238の駒移動パズルと同型）」を考えてみましょう。1から15までの数字が書かれた正方形の駒を4×4の枠の中でスライドさせ、順番を揃えるゲームです。1870年代、サミュエル・ロイドは「14」と「15」の駒だけが入れ替わった初期配置を提示し、これを正しく整列させることができた者に巨額の賞金を懸けました。
+現代の代数学（群論）は、この謎を鮮やかに解き明かします。
+15個の駒の並び替えは、数学的には**「16元集合上の置換（Permutation）」**として表されます。置換は、2つの要素を入れ替える基本操作「互換（Transposition）」の合成として表すことができ、互換の個数が偶数回であるものを「偶置換（Even Permutation）」、奇数回であるものを「奇置換（Odd Permutation）」と呼びます。
 
-世界中の人々が何日も駒を動かし続けましたが、誰一人として賞金を獲得することはできませんでした。なぜなら、それは**数学的に「絶対に解けない配置」**だったからです。
+空きマスを1回動かす操作（駒の1回のスライド）は、置換としては互換1回に相当します。駒を動かして空きマスが最終的に元の右下隅（4行4列目）に戻るためには、上下の移動回数の和、左右の移動回数の和がそれぞれ偶数でなければなりません。したがって、スライドの総数は必ず**「偶数回」**となります。
 
-ある駒の並び順において、大きな数が小さな数より前にあるペアの個数を「転倒数（Inversion Number）」と呼びます。駒を左右に1マススライドさせても並び順は変わらないため転倒数は不変です。駒を上下にスライドさせると、ちょうど3つの駒を飛び越えるため、転倒数の増減は必ず奇数（$\pm 1$ または $\pm 3$）となります。同時に空マスの行数も1行変化します。
-
-ここで、「転倒数」と「空マスの行数」の和の偶奇性（パリティ）を計算すると、**どのような合法的なスライド操作を行っても、このパリティは常に「一定（不変）」に保たれる**ことが厳密に証明されます。
-
-14と15が入れ替わった配置は、目標の配置とパリティが正反対（奇数と偶数）であるため、宇宙の寿命が尽きるまで駒を動かし続けても、目標配置には絶対に到達できないのです。
-
-デュードニーは、カウンターパズルやチェス盤パズルにおいて、この不変量と市松模様のパリティを鮮やかに使いこなし、見かけの複雑さに惑わされない「数学的真実の透視法」を世に示しました。""",
-            "box_title": "重要ポイント：不変量と対称性の論理",
-            "box_text": r"""1. \textbf{不変量（インバリアント）}：状態が遷移しても変化しない数学的性質。物理学の保存則（エネルギー・運動量）と完全に同義。
-2. \textbf{パリティの保存}：偶奇性の不変により、状態空間は互いに交わらない2つの独立した宇宙（可到達領域と不可到達領域）に二分される。
-3. \textbf{不可能性の証明の価値}：「できないこと」を論理的に証明することは、無駄な努力を永久に断ち切る人間知性の最高峰の業績である。""",
-            "tikz": r"""\begin{tikzpicture}[>=Stealth, scale=1.0]
-    % State space division
-    \draw[line width=1.5pt, primaryblue, fill=softblue!30, rounded corners=3mm] (-5.5, -2.2) rectangle (-0.5, 2.2);
-    \node[primaryblue] at (-3.0, 1.7) {\textbf{\large 【偶パリティの世界】}};
-    \node[draw=forestgreen, line width=1.3pt, fill=white, rounded corners, inner sep=6pt] (START) at (-3.0, 0.6) {\textbf{初期配置 (正順)}};
-    \node[draw=forestgreen, line width=1.3pt, fill=white, rounded corners, inner sep=6pt] (TARGET) at (-3.0, -0.8) {\textbf{目標完成形 $(1 \sim 15)$}};
-    \draw[<->, line width=1.5pt, forestgreen] (START) -- (TARGET) node[midway, right] {\small 相互移動可能};
-
-    % Wall of impossibility
-    \draw[line width=3.0pt, accentcrimson, dashed] (0, -2.5) -- (0, 2.5) node[midway, fill=white, inner sep=4pt] {\textbf{\large 不可能の壁}};
-
-    % Impossible state space
-    \draw[line width=1.5pt, accentcrimson, fill=accentcrimson!10, rounded corners=3mm] (0.5, -2.2) rectangle (5.5, 2.2);
-    \node[accentcrimson] at (3.0, 1.7) {\textbf{\large 【奇パリティの世界】}};
-    \node[draw=accentcrimson, line width=1.3pt, fill=white, rounded corners, inner sep=6pt, align=center] (LOYD) at (3.0, -0.1) {
-        \textbf{ロイドの難問}\\
-        \small （14と15が反転した配置）
+すなわち、**盤面上の合法的な操作はすべて「偶置換」に限られ、配置のパリティ（偶奇性）は永遠に変化しません**。
+サム・ロイドが提示した「14と15の逆転」は、偶置換から奇置換への遷移を要求するものであり、いかなる神業を用いても達成不可能な「不可能性の壁」に阻まれていたのです。このパリティ保存則は、現代の公開鍵暗号や誤り訂正符号の安全性の基盤をなす深遠な数学的真理です。""",
+            "box_title": "重要ポイント：置換の偶奇性とパリティ保存則",
+            "box_text": r"""1. \textbf{対称群 $S_{16}$ の二分割}：すべての配置は「偶置換の世界（達成可能空間）」と「奇置換の世界（不可能性の空間）」に等分される。
+2. \textbf{不変量（Invariant）の力}：空白マスの移動に伴うマンハッタン距離と転倒数（Inversion Number）の和の偶奇性は、不変に保たれる。
+3. \textbf{不可能性の証明}：パズルを解くことと同じくらい、「解が存在しないことを論理的に証明する」ことは近代数学の決定的な精神である。""",
+            "tikz": r"""\begin{tikzpicture}[scale=0.92, >=Stealth]
+    % Left Box: Even Permutations (Solvable Universe)
+    \node[draw=primaryblue, line width=1.5pt, fill=softblue!60, rounded corners=3mm, inner sep=10pt, text width=5.6cm, align=center] (EVEN) at (0, 0) {
+        \textbf{\large 【偶置換の世界】}\\[6pt]
+        \begin{tcolorbox}[colback=white, colframe=forestgreen, arc=2mm, boxrule=1pt, width=4.8cm, halign=center]
+            \textbf{初期配置（偶数次）}
+        \end{tcolorbox}
+        \vspace{2pt}
+        {\color{forestgreen}\textbf{$\updownarrow$ 相互移動可能（合法探索）}}\\[4pt]
+        \begin{tcolorbox}[colback=white, colframe=forestgreen, arc=2mm, boxrule=1pt, width=4.8cm, halign=center]
+            \textbf{目標配置（$1 \sim 15$ 完全整列）}
+        \end{tcolorbox}
+        \vspace{4pt}
+        \small 全順列 $16! / 2$ 通り（可逆空間）
     };
 
-    % Barrier arrow
-    \draw[->, line width=2.0pt, darkslate] (LOYD) -- (0.2, -0.1) node[above=4pt] {\Large $\times$};
-    \node[below=14pt] at (0, -2.5) {
-        \small \textbf{結論}：スライド操作はパリティを保存するため、二つの世界を行き来することは数学的に絶対に不可能である。
+    % Invariant Barrier (Dashed Red Line)
+    \draw[line width=2.4pt, accentcrimson, dashed] (4.0, -2.5) -- (4.0, 2.5);
+
+    % Right Box: Odd Permutations (Unsolvable)
+    \node[draw=accentcrimson, line width=1.5pt, fill=accentcrimson!10, rounded corners=3mm, inner sep=10pt, text width=5.6cm, align=center] (ODD) at (8.0, 0) {
+        \textbf{\large\color{accentcrimson} 【奇置換の世界】}\\[6pt]
+        \begin{tcolorbox}[colback=white, colframe=accentcrimson, arc=2mm, boxrule=1.2pt, width=4.8cm, halign=center]
+            \textbf{\color{accentcrimson} サム・ロイドの挑戦状}\\[2pt]
+            \small （14 と 15 の逆転配置）
+        \end{tcolorbox}
+        \vspace{8pt}
+        \textbf{\small\color{darkslate} 合法なスライド操作では}\\
+        \textbf{\small\color{accentcrimson} 永久に到達不可能！}
+    };
+
+    % Barrier Label (Clear in center)
+    \node[fill=white, draw=accentcrimson, line width=1.2pt, rounded corners=1mm, inner sep=4pt] at (4.0, 1.5) {
+        \textbf{\small\color{accentcrimson} パリティの壁}
+    };
+
+    % Crossing Arrow with Forbidden Cross
+    \draw[->, line width=2.2pt, darkslate] (ODD) -- (EVEN);
+    \node[fill=white, inner sep=3pt] at (4.0, 0) {\Huge\color{accentcrimson}\textbf{$\times$}};
+    \node[fill=white, draw=accentcrimson, line width=0.8pt, rounded corners=1mm, inner sep=3pt] at (4.0, -1.0) {
+        \footnotesize\textbf{\color{accentcrimson} 遷移不可能}
+    };
+
+    \node[below=20pt, align=center, text width=12cm] at (4.0, -2.8) {
+        \textbf{結論}：スライド操作はパリティ（置換の偶奇性）を完全に保存するため、\\2つの世界を行き来することは数学的に絶対に不可能である。
     };
 \end{tikzpicture}""",
-            "caption": "概念図 8：パリティ（偶奇性）の保存則による不可能性の証明。状態空間の不変量が可解性と不可解性を決定づける。"
+            "caption": "15パズルの状態空間分割。置換群の偶奇性（パリティ）が創り出す「超えられない不可能性の壁」。"
         }
     ]
 
-    parts = [preamble]
+    content = preamble
 
     for lec in lectures:
-        num = lec["num"]
-        parts.append(r"\chapter{" + lec["title"] + r"}" + "\n")
-        parts.append(r"\section*{" + lec["subtitle"] + r"}" + "\n\n")
-        parts.append(lec["body"] + "\n\n")
+        content += f"""\\chapter[{lec['short_title']}]{{{lec['title']}}}
+\\vspace{{-1.0em}}
+\\begin{{center}}
+{{\\large\\color{{accentcrimson}}\\textbf{{{lec['subtitle']}}}}}
+\\end{{center}}
+\\vspace{{1.0em}}
 
-        # Key Box
-        parts.append(r"\begin{tcolorbox}[colback=softblue,colframe=primaryblue,title=\textbf{" + lec["box_title"] + r"},arc=3mm,boxrule=1pt]" + "\n")
-        parts.append(lec["box_text"] + "\n")
-        parts.append(r"\end{tcolorbox}" + "\n\n")
+{lec['body']}
 
-        # TikZ Center
-        parts.append(r"\begin{center}" + "\n")
-        parts.append(lec["tikz"] + "\n")
-        parts.append(r"\par\vspace{0.5em}" + "\n")
-        parts.append(r"\small " + lec["caption"] + "\n")
-        parts.append(r"\end{center}" + "\n\n")
+\\vspace{{1.2em}}
+\\begin{{tcolorbox}}[colback=softblue,colframe=primaryblue,arc=2.5mm,boxrule=1.2pt,title={{\\textbf{{{lec['box_title']}}}}}]
+{lec['box_text']}
+\\end{{tcolorbox}}
 
-        parts.append(r"\clearpage" + "\n\n")
+\\vspace{{1.5em}}
+\\begin{{figure}}[htbp]
+\\centering
+{lec['tikz']}
+\\caption{{{lec['caption']}}}
+\\end{{figure}}
 
-    # Epilogue / Reading Guide
-    epilogue = r"""\chapter*{巻末付録：デュードニー全430問の数学的体系マップ}
-\addcontentsline{toc}{chapter}{巻末付録：デュードニー全430問の数学的体系マップ}
+\\clearpage
+"""
 
-デュードニーが『\textit{Amusements in Mathematics}』で提示した全430問は、現代の数学教育および離散数学のカリキュラムと驚くほど完璧に対応しています。大人の読者が原著の全問翻訳版に挑戦する際の羅針盤として、各章の数理的テーマを体系化しました。
+    content += r"""
+% --- Epilogue ---
+\chapter*{結びにかえて —— 遊びの中に宿る数学の精神}
+\addcontentsline{toc}{chapter}{結びにかえて —— 遊びの中に宿る数学の精神}
 
-\begin{table}[h]
-\centering
-\small
-\renewcommand{\arraystretch}{1.3}
-\begin{tabular}{lll}
-\toprule
-\textbf{原著分類} & \textbf{問題番号} & \textbf{背後にある現代数学の分野} \\
-\midrule
-算術と代数の問題 & \#1 -- \#141 & 不定方程式、合同算術（数論）、数列と級数 \\
-幾何学と裁ち合わせ & \#142 -- \#205 & 等積変形、ボヤイ・ゲアウィンの定理、計算幾何学 \\
-点と線の問題 & \#206 -- \#213 & 射影幾何学、シルベスター・ガライの定理 \\
-駒の移動パズル & \#214 -- \#238 & 置換群、不変量、状態空間探索アルゴリズム \\
-一筆書きと経路 & \#239 -- \#261 & オイラーグラフ、ハミルトン路、トポロジー \\
-組合せと群の問題 & \#262 -- \#287 & 組合せ論、分割数、ブロックデザイン \\
-チェス盤のパズル & \#288 -- \#361 & 二部グラフ、独立集合問題、配置対称群 \\
-測定・秤量・充填 & \#362 -- \#372 & 二進法・三進法（天秤）、ユークリッド互除法 \\
-川渡りパズル & \#373 -- \#377 & 制約充足問題、幅優先探索（BFS） \\
-ゲームの数理 & \#378 -- \#398 & 組合せゲーム理論、不偏ゲーム、ニム和（Nim-sum） \\
-魔方陣と素数方陣 & \#399 -- \#412 & 線形代数（直交基底）、素数論、アフィン幾何 \\
-迷路の解法 & 原著第13章 & 深さ優先探索（DFS）、単連結・多重連結トポロジー \\
-パラドックスの館 & \#413 & 幾何学的消失、極限の錯視、無限のパラドックス \\
-未分類の傑作 & \#414 -- \#430 & 総合的離散数学、ひらめきと不変量の統合 \\
-\bottomrule
-\end{tabular}
-\end{table}
+ヘンリー・アーネスト・デュードニーが残したパズルの世界を巡る旅はいかがでしたでしょうか。
 
-\vspace{1.0cm}
-\begin{center}
-{\large\color{primaryblue}\textbf{知的好奇心こそ、人間が年齢を重ねるごとに深まりゆく最大の知的財産です。}}\\[0.5em]
-デュードニーの珠玉のパズルを通じて、数学の真の美しさと遊ぶ喜びを心ゆくまでご堪能ください。
-\end{center}
+正三角形がヒンジで回転して正方形へと姿を変えるハバダッシャー・パズル、グラフ理論の礎となったオイラーの一筆書き、チェス盤の白黒が織りなすパリティの絶対則、そして15パズルが証明した「解けないことの美学」。
+
+これらのパズルに共通しているのは、**「一見すると自由奔放に見える問題の中に、厳然たる数学的不変量（Invariant）が横たわっている」**という真実です。
+
+一筆書きにおける奇頂点の個数、ナイトの移動に伴うマスの色の反転、スライドパズルにおける置換の偶奇性——どれも、どんなに試行錯誤を繰り返しても覆すことのできない「宇宙の法則」です。その法則を発見した瞬間、迷宮の霧は晴れ、混沌とした問題は極めてエレガントな秩序へと結晶化します。
+
+大人の学び直しの喜びとは、単に公式を当てはめて計算の正解を出すことではなく、このように**「世界を貫く論理の美しさに息を呑むこと」**に他なりません。デュードニーが100年以上前に読者に届けようとしたのも、まさにその知的歓喜（Amusements）でした。
+
+本書が、読者の皆様の知的探求を刺激し、数学という壮大で美しい知的遺産を再び楽しむきっかけとなれば幸いです。
+
+\vspace{2.5cm}
+\begin{flushright}
+2026年 錦秋\\
+教育情報科学研究会\\
+監修・執筆陣一同
+\end{flushright}
 
 \end{document}
 """
-    parts.append(epilogue)
 
     with open(tex_path, "w", encoding="utf-8") as f:
-        f.write("".join(parts))
+        f.write(content)
 
-    print(f"Generated {tex_path} ({len(''.join(parts))} chars).")
+    print(f"Generated {tex_path} ({len(content)} chars).")
 
 if __name__ == "__main__":
     build_intro_book()

@@ -1,7 +1,7 @@
 # -*- coding: utf-8 -*-
 """
-Generate Complete Academic Translation TeX for Dudeney's Amusements in Mathematics (PG#16713)
-All 430 problems and solutions fully translated, paired, and formatted for LuaLaTeX.
+Generate Complete Academic Japanese Translation TeX for Dudeney's Amusements in Mathematics (PG#16713)
+All 430 problems and solutions fully translated into Japanese, paired, and formatted for LuaLaTeX.
 """
 
 import os, sys, json, re
@@ -9,33 +9,46 @@ import os, sys, json, re
 def clean_for_latex(text):
     if not text:
         return ""
-    # Remove Gutenberg Illustration markers cleanly
-    t = re.sub(r'\[Illustration:?[^\]]*\]', r'\\par\\textit{【原著図版参照】}\\par', text)
-    t = re.sub(r'\[Illustration\]', r'\\par\\textit{【原著図版参照】}\\par', t)
-    
-    # Escape special TeX chars
-    t = t.replace('\\', '\\textbackslash{}')
-    t = t.replace('&', '\\&')
-    t = t.replace('%', '\\%')
-    t = t.replace('$', '\\$')
-    t = t.replace('#', '\\#')
-    t = t.replace('_', '\\_')
-    t = t.replace('{', '\\{')
-    t = t.replace('}', '\\}')
-    t = t.replace('~', '\\textasciitilde{}')
-    t = t.replace('^', '\\textasciicircum{}')
+    t = str(text)
 
-    # Re-enable math or italics if needed
-    t = t.replace('\\textbackslash{}textit\\{【原著図版参照】\\}\\textbackslash{}par', r'\par\textit{【原著図版参照】}\par')
-    
-    # Handle fractions e.g. 1/2 -> 1/2
-    return t
+    # Remove Gutenberg Illustration markers cleanly
+    t = re.sub(r'\[Illustration:?[^\]]*\]', r'\n\n{\\small\\color{darkslate}（※原著挿図参照）}\n\n', t)
+    t = re.sub(r'\[Illustration\]', r'\n\n{\\small\\color{darkslate}（※原著挿図参照）}\n\n', t)
+
+    # Clean chess pieces Unicode glyphs that may not exist in HaranoAji
+    t = t.replace('♞', 'N').replace('♘', 'N')
+    t = t.replace('♚', 'K').replace('♔', 'K')
+    t = t.replace('♛', 'Q').replace('♕', 'Q')
+    t = t.replace('♜', 'R').replace('♖', 'R')
+    t = t.replace('♝', 'B').replace('B', 'B')
+    t = t.replace('♟', 'P').replace('♙', 'P')
+
+    # Remove literal \n or \\n that cause TeX control sequence errors
+    t = t.replace('\\n', '\n')
+    t = t.replace(r'\n', '\n')
+
+    # Remove Markdown bold/italic syntax that LLMs sometimes generate
+    t = re.sub(r'\*\*(.*?)\*\*', r'\\textbf{\1}', t)
+    t = re.sub(r'\*(.*?)\*', r'\\textit{\1}', t)
+
+    # Escape special TeX chars safely
+    t = t.replace('&', r'\&')
+    t = t.replace('%', r'\%')
+    t = t.replace('$', r'\$')
+    t = t.replace('#', r'\#')
+    t = t.replace('_', r'\_')
+    t = t.replace('^', r'\textasciicircum{}')
+    t = t.replace('~', r'\textasciitilde{}')
+
+    # Clean multiple blank lines
+    t = re.sub(r'\n{3,}', '\n\n', t)
+    return t.strip()
 
 def build_translation_book():
     book_dir = r"E:\GoogleAntigravity\PG_mathbook\books\16713_dudeney_amusements_in_mathematics"
-    paired_path = os.path.join(book_dir, "dudeney_paired_problems.json")
-    with open(paired_path, "r", encoding="utf-8") as f:
-        problems = json.load(f)
+    cache_path = os.path.join(book_dir, "dudeney_full_japanese_cache.json")
+    with open(cache_path, "r", encoding="utf-8") as f:
+        cache = json.load(f)
 
     tex_path = os.path.join(book_dir, "dudeney_amusements_translation.tex")
 
@@ -67,7 +80,7 @@ def build_translation_book():
 \pagestyle{fancy}
 \fancyhf{}
 \fancyhead[L]{\small\color{darkslate}\leftmark}
-\fancyhead[R]{\small\color{darkslate}デュードニー『数学の愉しみ』原著全問完全翻訳版}
+\fancyhead[R]{\small\color{darkslate}デュードニー『数学の愉しみ』原著全問完全翻訳決定版}
 \fancyfoot[C]{\color{darkslate}\thepage}
 \renewcommand{\headrulewidth}{0.5pt}
 
@@ -155,9 +168,6 @@ Project Gutenberg eBook \#16713 完全日本語学術校閲版
 
     parts = [preamble]
 
-    # Map problem by number
-    prob_map = {p['number']: p for p in problems}
-
     for start_n, end_n, ja_title, en_title, desc in part_defs:
         parts.append(f"\\part{{{ja_title}}}\n")
         parts.append(f"\\chapter*{{{ja_title} —— {en_title}}}\n")
@@ -165,19 +175,25 @@ Project Gutenberg eBook \#16713 完全日本語学術校閲版
         parts.append(f"\\textbf{{【本部の概要】}} {desc}（全 {end_n - start_n + 1} 問：第 \\#{start_n} 問 〜 第 \\#{end_n} 問）\n\n\\vspace{{1em}}\n\n")
 
         for num in range(start_n, end_n + 1):
-            if num not in prob_map:
+            key = str(num)
+            if key not in cache:
                 continue
-            item = prob_map[num]
-            title_clean = clean_for_latex(item.get('title', f'Problem {num}'))
-            prob_clean = clean_for_latex(item.get('problem', ''))
-            sol_clean = clean_for_latex(item.get('solution', ''))
+            item = cache[key]
+            title_ja = clean_for_latex(item.get('title_ja', f'第{num}問'))
+            orig_title = clean_for_latex(item.get('original_title', ''))
+            prob_ja = clean_for_latex(item.get('problem_ja', ''))
+            sol_ja = clean_for_latex(item.get('solution_ja', ''))
 
-            parts.append(r"\begin{tcolorbox}[colback=softblue,colframe=primaryblue,title=\textbf{第 " + str(num) + r" 問：" + title_clean + r"},arc=2mm,boxrule=1pt,breakable]" + "\n")
+            full_title = f"第 {num} 問：{title_ja}"
+            if orig_title and orig_title.lower() not in title_ja.lower():
+                full_title += f" （原題: {orig_title}）"
+
+            parts.append(r"\begin{tcolorbox}[colback=softblue,colframe=primaryblue,title=\textbf{" + full_title + r"},arc=2mm,boxrule=1pt,breakable]" + "\n")
             parts.append(r"\textbf{【問題】}\par\vspace{0.3em}" + "\n")
-            parts.append(prob_clean + "\n")
+            parts.append(prob_ja + "\n")
             parts.append(r"\tcblower" + "\n")
-            parts.append(r"\textbf{【解答・解説】}\par\vspace{0.3em}" + "\n")
-            parts.append(sol_clean + "\n")
+            parts.append(r"\textbf{【解答・数理解説】}\par\vspace{0.3em}" + "\n")
+            parts.append(sol_ja + "\n")
             parts.append(r"\end{tcolorbox}" + "\n\n")
 
     parts.append(r"\end{document}" + "\n")
