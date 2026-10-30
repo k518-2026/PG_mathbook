@@ -565,6 +565,46 @@
       "language": "ja",
       "created_at": "2026-10-30T20:05:00.768770",
       "status": "完成"
+    },
+    {
+      "gutenberg_id": "16713",
+      "original_title": "Amusements in Mathematics",
+      "original_author": "Henry Ernest Dudeney",
+      "japanese_title": "数学の愉しみ —— 全430問 原著完全翻訳・数理的解答解説決定版",
+      "author": "ヘンリー・アーネスト・デュードニー（著） / 教育情報分析研究会（訳）",
+      "category": "Mathematics / Mathematical Recreations (Project Gutenberg eBook #16713)",
+      "description": "近代数学パズルの開祖H.E.デュードニーによる不朽の集大成『Amusements in Mathematics』（1917年）全14部・全430問の完全日本語翻訳・解答対照決定版。算術・代数・幾何・点と線・駒移動・一筆書き・組合せ・チェス盤パズル・測定・川渡り・魔方陣・迷路・パラドックスなど、近代数学の諸原理を網羅する大著（全313ページ）。",
+      "chapters_count": 14,
+      "pages": 313,
+      "tex_file": "books/16713_dudeney_amusements_in_mathematics/dudeney_amusements_translation.tex",
+      "pdf_file": "books/16713_dudeney_amusements_in_mathematics/dudeney_amusements_translation.pdf",
+      "book_dir": "books/16713_dudeney_amusements_in_mathematics",
+      "compiler": "LuaLaTeX (LuaHBTeX / TeX Live 2026)",
+      "model_used": "qwen2.5-7b-instruct (翻訳・校閲) @ LM Studio",
+      "gutenberg_url": "https://www.gutenberg.org/ebooks/16713",
+      "language": "ja",
+      "created_at": "2026-10-30T21:28:39.965895",
+      "status": "完成"
+    },
+    {
+      "gutenberg_id": "16713-intro",
+      "original_title": "Amusements in Mathematics",
+      "original_author": "Henry Ernest Dudeney",
+      "japanese_title": "古典で学び直すデュードニー数学パズル入門 —— 思考の幾何学・グラフ理論・数論の魔術",
+      "author": "教育情報分析研究会（編著）",
+      "category": "Mathematics / Mathematical Recreations (Project Gutenberg eBook #16713)",
+      "description": "50〜80代の読者に向けた数学学び直し入門講義。ハバダッシャーの正三角形・正方形裁ち合わせ、オイラーの一筆書き定理、チェス盤のナイト・ツアーと二部グラフ、川渡りと状態遷移探索、魔方陣と線形代数、トレモーの迷路脱出アルゴリズム、ディオファントス方程式、パリティ保存則による不可能性の証明を、文字重なりのない美しいTikZ概念図版とともに高校までの知識で直観的・体系的に解説（全20ページ・全8講構成）。",
+      "chapters_count": 8,
+      "pages": 20,
+      "tex_file": "books/16713_dudeney_amusements_in_mathematics/dudeney_amusements_intro.tex",
+      "pdf_file": "books/16713_dudeney_amusements_in_mathematics/dudeney_amusements_intro.pdf",
+      "book_dir": "books/16713_dudeney_amusements_in_mathematics",
+      "compiler": "LuaLaTeX (LuaHBTeX / TeX Live 2026)",
+      "model_used": "qwen2.5-7b-instruct (講義作成) @ LM Studio",
+      "gutenberg_url": "https://www.gutenberg.org/ebooks/16713",
+      "language": "ja",
+      "created_at": "2026-10-30T21:28:39.965895",
+      "status": "完成"
     }
   ]
 }

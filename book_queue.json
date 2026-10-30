@@ -84,6 +84,20 @@
       "gutenberg_txt_url": "https://www.gutenberg.org/cache/epub/35550/pg35550.txt",
       "category": "Mathematics / History of Science (Project Gutenberg eBook #35550)",
       "status": "completed"
+    },
+    {
+      "gutenberg_id": "16713",
+      "slug": "dudeney_amusements_in_mathematics",
+      "book_dir": "books/16713_dudeney_amusements_in_mathematics",
+      "original_title": "Amusements in Mathematics",
+      "original_author": "Henry Ernest Dudeney",
+      "author_ja": "ヘンリー・アーネスト・デュードニー",
+      "translation_title_ja": "デュードニー数学パズル娯楽集 —— 原著全430問 完全翻訳・数理的解答解説決定版",
+      "intro_title_ja": "古典で学び直すデュードニー数学パズル入門 —— ハバダッシャーのパズル・一筆書き・チェス盤から群論・グラフ理論へ",
+      "category": "Mathematics / Mathematical Recreations & Combinatorics (Project Gutenberg eBook #16713)",
+      "gutenberg_txt_url": "https://www.gutenberg.org/cache/epub/16713/pg16713.txt",
+      "gutenberg_url": "https://www.gutenberg.org/ebooks/16713",
+      "status": "completed"
     }
   ]
 }
