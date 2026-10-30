@@ -154,20 +154,33 @@ LECTURES = [
 2. \textbf{背理法（二重帰謬法）}：面積が$A$であることを示すため、「$A$より大きい」と仮定しても矛盾、「$A$より小さい」と仮定しても矛盾することを厳密に示す。
 3. \textbf{現代のイプシロン・デルタ論法}：アルキメデスの論理構造は、19世紀にコーシーやワイエルシュトラスが確立した近代解析学の厳密性と完全に一致している。""",
         "tikz": r"""\begin{center}
-\begin{tikzpicture}[scale=1.1, >=Stealth]
-    % Flowchart from Eudoxus to Modern Calculus
-    \node[draw=darkslate, rounded corners, fill=white, inner sep=6pt, align=center] (EU) at (0, 0) {\textbf{エウドクソス}\\small 比の理論・取り尽くし法};
-    \node[draw=darkslate, rounded corners, fill=white, inner sep=6pt, align=center] (EL) at (3.6, 0) {\textbf{ユークリッド}\\small 『原論』の公理体系化};
-    \node[draw=primaryblue, line width=1.5pt, rounded corners, fill=softblue, inner sep=8pt, align=center] (AR) at (7.6, 0) {\textbf{アルキメデス}\\small 曲線求積・力学的思考};
-    \node[draw=accentcrimson, rounded corners, fill=white, inner sep=6pt, align=center] (NEW) at (11.8, 0) {\textbf{ニュートン / ライプニッツ}\\small 微積分学の完成};
+\begin{tikzpicture}[>=Stealth, node distance=1.2cm]
+    % Stacked 2x2 or Vertical 4-stage flow with generous spacing
+    \node[draw=darkslate, rounded corners=2mm, fill=white, inner sep=8pt, minimum width=6.2cm, align=center] (EU) at (0, 3.6) {
+        \textbf{\large エウドクソス}\\[2pt]
+        \small 比の理論・取り尽くし法の創始
+    };
+    \node[draw=darkslate, rounded corners=2mm, fill=white, inner sep=8pt, minimum width=6.2cm, align=center] (EL) at (0, 1.8) {
+        \textbf{\large ユークリッド}\\[2pt]
+        \small 『原論』による幾何学公理体系の確立
+    };
+    \node[draw=primaryblue, line width=1.5pt, rounded corners=2mm, fill=softblue, inner sep=9pt, minimum width=6.2cm, align=center] (AR) at (0, 0) {
+        \textbf{\large アルキメデス}\\[2pt]
+        \small 曲線・曲面の定量的求積と力学的直観の融合
+    };
+    \node[draw=accentcrimson, line width=1.2pt, rounded corners=2mm, fill=accentcrimson!10, inner sep=9pt, minimum width=6.2cm, align=center] (NEW) at (0, -2.4) {
+        \textbf{\large ニュートン ／ ライプニッツ}\\[2pt]
+        \small 現代微積分学の完成と体系化
+    };
 
-    \draw[->, thick, darkslate] (EU) -- (EL);
-    \draw[->, thick, darkslate] (EL) -- (AR);
-    \draw[->, line width=1.5pt, accentcrimson] (AR) -- (NEW) node[midway, above] {\small 1900年の架橋};
+    \draw[->, line width=1.2pt, darkslate] (EU) -- (EL);
+    \draw[->, line width=1.2pt, darkslate] (EL) -- (AR);
+    \draw[->, line width=1.8pt, accentcrimson] (AR) -- (NEW) node[midway, right=10pt, fill=white, inner sep=3pt, draw=accentcrimson!50, rounded corners] {\textbf{\small 1900年の時を超えた架橋}};
 
-    % Bottom Annotation
-    \node[draw=gray, fill=white, align=center, inner sep=5pt] at (5.9, -1.5) {
-        \small 古代ギリシャ幾何学は、アルキメデスにおいて「定性的な論証」から「定量的な微分・積分計算」へと昇華した
+    % Summary Box below
+    \node[draw=primaryblue!60, fill=white, rounded corners=2mm, align=center, inner sep=7pt, text width=12cm] at (0, -4.0) {
+        \small \textbf{核心的展開}：古代ギリシャ幾何学は、アルキメデスの計算力によって「定性的な論証」から\\
+        「極限と級数による定量的な微分・積分計算」へと決定的な飛躍を遂げた。
     };
 \end{tikzpicture}
 \par\vspace{0.4em}
@@ -437,28 +450,37 @@ W_1 \times L_1 = W_2 \times L_2 \quad \left(\frac{W_1}{W_2} = \frac{L_2}{L_1}\ri
 2. \textbf{ストマキオン（Stomachion）}：14片の多角形を組み合わせて正方形を作るパズルを通じ、世界最古の「組合せ数学」を研究していたことが判明。
 3. \textbf{無限小の直接操作}：円や球を「無数の厚みのない線や面」の集まりとして天秤に載せるという、ニュートン・ライプニッツ流の微積分的思考の確証。""",
         "tikz": r"""\begin{center}
-\begin{tikzpicture}[scale=1.1, >=Stealth]
-    % Ancient manuscript scroll
-    \draw[line width=1.2pt, darkslate, fill=softblue!40] (0, 0) rectangle (3.0, 3.8);
-    \node[darkslate, align=center] at (1.5, 3.3) {\small \textbf{10世紀 写本}};
-    \node[primaryblue, align=center] at (1.5, 2.0) {\footnotesize アルキメデスの\\『方法』『浮体』\\ギリシャ語数学原本};
+\begin{tikzpicture}[scale=0.92, transform shape, >=Stealth]
+    % Stage 1: Ancient Manuscript
+    \node[draw=darkslate, line width=1.2pt, fill=softblue!30, rounded corners=2mm, inner sep=10pt, text width=3.3cm, minimum height=4.2cm, align=center] (B1) at (0, 0) {
+        \textbf{\large 10世紀 写本}\\[6pt]
+        \footnotesize \textcolor{primaryblue}{\textbf{アルキメデス数学原本}}\\[4pt]
+        \footnotesize 『方法』『浮体』\\
+        世界唯一のギリシャ語記録
+    };
 
-    % Erased and overwritten
-    \draw[->, thick, darkslate] (3.2, 1.9) -- (4.8, 1.9) node[midway, above] {\small 13世紀削磨};
+    % Arrow 1
+    \draw[->, line width=1.3pt, darkslate] (2.2, 0) -- (3.8, 0) node[midway, above=4pt] {\small\textbf{13世紀 削磨}} node[midway, below=3pt] {\tiny 羊皮紙の再利用};
 
-    % Prayer book palimpsest
-    \draw[line width=1.2pt, darkslate, fill=orange!10] (5.0, 0) rectangle (8.0, 3.8);
-    \node[darkslate, align=center] at (6.5, 3.3) {\small \textbf{修道院祈祷書}};
-    \node[darkslate, align=center] at (6.5, 2.2) {\footnotesize 宗教テキストで\\上書き再利用};
-    \node[gray, align=center] at (6.5, 1.0) {\tiny (下層にアルキメデスが沈黙)};
+    % Stage 2: Palimpsest Prayer Book
+    \node[draw=darkslate, line width=1.2pt, fill=orange!12, rounded corners=2mm, inner sep=10pt, text width=3.3cm, minimum height=4.2cm, align=center] (B2) at (6.0, 0) {
+        \textbf{\large 修道院祈祷書}\\[6pt]
+        \footnotesize \textbf{宗教テキスト上書き}\\[4pt]
+        \footnotesize 文字を削り取って再製本\\
+        \vspace{6pt}
+        \tiny \textcolor{gray}{（下層に眠るアルキメデス）}
+    };
 
-    % 20th/21st Century Recovery
-    \draw[->, thick, accentcrimson] (8.2, 1.9) -- (9.8, 1.9) node[midway, above] {\small X線・光学解析};
+    % Arrow 2
+    \draw[->, line width=1.5pt, accentcrimson] (8.2, 0) -- (9.8, 0) node[midway, above=4pt] {\small\textbf{X線・多波長解析}} node[midway, below=3pt] {\tiny 科学的復元};
 
-    % Modern Revelation
-    \draw[line width=1.5pt, accentcrimson, fill=white] (10.0, 0) rectangle (13.0, 3.8);
-    \node[accentcrimson, align=center] at (11.5, 3.3) {\small \textbf{現代の蘇生}};
-    \node[accentcrimson, align=center] at (11.5, 2.0) {\footnotesize ハイベア発見(1906)\\最新科学復元(2000s)\\真の微積分思考};
+    % Stage 3: Modern Recovery
+    \node[draw=accentcrimson, line width=1.5pt, fill=white, rounded corners=2mm, inner sep=10pt, text width=3.5cm, minimum height=4.2cm, align=center] (B3) at (12.2, 0) {
+        \textbf{\large 現代の蘇生}\\[6pt]
+        \footnotesize \textbf{ハイベア発見 (1906)}\\[3pt]
+        \footnotesize 米国チーム復元 (2000s)\\[5pt]
+        \small \textcolor{accentcrimson}{\textbf{真の微積分思考の復活}}
+    };
 \end{tikzpicture}
 \par\vspace{0.4em}
 \small\textbf{概念図 8}：パリンプセスト（二重写本）の奇跡的な数奇の運命。2000年の時を超えて解読されたアルキメデスの真の思考法。
