@@ -485,6 +485,46 @@
       "compiler": "LuaLaTeX (LuaHBTeX / TeX Live 2026)",
       "description": "ハーディの名著『純粋数学教程』全10章のエッセンスを、実数論からデデキント切断、極限の厳密な論理、微積分の基本定理、級数の絶対収束、複素平面における解析関数の基本まで高校・大学初年次の数学で分かりやすく学べる全10講・26ページの入門解説書。",
       "gutenberg_url": "https://www.gutenberg.org/ebooks/38769"
+    },
+    {
+      "gutenberg_id": "22599",
+      "original_title": "The Hindu-Arabic Numerals",
+      "original_author": "David Eugene Smith and Louis Charles Karpinski",
+      "japanese_title": "インド・アラビア数字の歴史 —— ゼロの発見と近世記数法の革新（原著完全翻訳版）",
+      "author": "デイヴィッド・ユージーン・スミス & ルイス・チャールズ・カーピンスキー（著） / 教育情報分析研究会（訳）",
+      "category": "Mathematics / History of Mathematics (Project Gutenberg eBook #22599)",
+      "language": "ja",
+      "chapters_count": 8,
+      "pages": 48,
+      "status": "完成",
+      "created_at": "2026-10-30T18:35:09.509162",
+      "book_dir": "books/22599_smith_hindu_arabic_numerals",
+      "tex_file": "books/22599_smith_hindu_arabic_numerals/smith_hindu_arabic_numerals_translation.tex",
+      "pdf_file": "books/22599_smith_hindu_arabic_numerals/smith_hindu_arabic_numerals_translation.pdf",
+      "model_used": "qwen2.5-7b-instruct (翻訳) @ LM Studio",
+      "compiler": "LuaLaTeX (LuaHBTeX / TeX Live 2026)",
+      "description": "数学史の古典的名著D.E.スミス＆L.C.カーピンスキー『The Hindu-Arabic Numerals』（1911年）全8章の完全日本語翻訳決定版。古代インドのブラーフミー数字、ゼロの発見、バグダードの知恵の館での代数学的発展、ゲルベルトとフィボナッチによるヨーロッパへの伝播と計算革命を詳細に追跡。",
+      "gutenberg_url": "https://www.gutenberg.org/ebooks/22599"
+    },
+    {
+      "gutenberg_id": "22599-intro",
+      "original_title": "The Hindu-Arabic Numerals",
+      "original_author": "David Eugene Smith and Louis Charles Karpinski",
+      "japanese_title": "古典で学び直すインド・アラビア数字入門 —— ゼロの発見・位取り記数法・計算革命の全歴史",
+      "author": "教育情報分析研究会（編著）",
+      "category": "Mathematics / History of Mathematics (Project Gutenberg eBook #22599)",
+      "language": "ja",
+      "chapters_count": 8,
+      "pages": 18,
+      "status": "完成",
+      "created_at": "2026-10-30T18:35:09.509181",
+      "book_dir": "books/22599_smith_hindu_arabic_numerals",
+      "tex_file": "books/22599_smith_hindu_arabic_numerals/smith_hindu_arabic_numerals_intro.tex",
+      "pdf_file": "books/22599_smith_hindu_arabic_numerals/smith_hindu_arabic_numerals_intro.pdf",
+      "model_used": "qwen2.5-7b-instruct (講義作成) @ LM Studio",
+      "compiler": "LuaLaTeX (LuaHBTeX / TeX Live 2026)",
+      "description": "50〜80代の読者に向けた学び直し数学史入門講義。十進位取り記数法の仕組み、ゼロ（シューニャ）の哲学と誕生、アバクス計算盤から筆算への計算革命をTikZ概念図版とともに直観的・体系的に解き明かす。全8講構成。",
+      "gutenberg_url": "https://www.gutenberg.org/ebooks/22599"
     }
   ]
 }

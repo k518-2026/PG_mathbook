@@ -55,7 +55,21 @@
       "category": "Mathematics / Real & Complex Analysis (Project Gutenberg eBook #38769)",
       "gutenberg_txt_url": "https://www.gutenberg.org/files/38769/38769-t/38769-t.tex",
       "gutenberg_url": "https://www.gutenberg.org/ebooks/38769",
-      "status": "in_progress"
+      "status": "completed"
+    },
+    {
+      "gutenberg_id": "22599",
+      "slug": "smith_hindu_arabic_numerals",
+      "book_dir": "books/22599_smith_hindu_arabic_numerals",
+      "original_title": "The Hindu-Arabic Numerals",
+      "original_author": "David Eugene Smith and Louis Charles Karpinski",
+      "author_ja": "デイヴィッド・ユージーン・スミス、ルイ・チャールズ・カーピンスキー",
+      "translation_title_ja": "インド・アラビア数字の歴史 —— ゼロの発見と近世記数法の革新（原著全8章 完全翻訳・数学校閲版）",
+      "intro_title_ja": "古典で学び直すインド・アラビア数字入門 —— ゼロの発見・位取り記数法・計算革命の全歴史",
+      "category": "History of Mathematics & Numeration (Project Gutenberg eBook #22599)",
+      "gutenberg_txt_url": "https://www.gutenberg.org/cache/epub/22599/pg22599.txt",
+      "gutenberg_url": "https://www.gutenberg.org/ebooks/22599",
+      "status": "completed"
     }
   ]
 }

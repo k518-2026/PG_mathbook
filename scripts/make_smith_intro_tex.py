@@ -1,0 +1,382 @@
+# -*- coding: utf-8 -*-
+"""
+Generate Adult Re-learning Intro Book for PG#22599
+古典で学び直すインド・アラビア数字入門 —— ゼロの発見・位取り記数法・計算革命の全歴史
+10 Lectures + 5 TikZ Conceptual Diagrams + Comprehensive Summary
+"""
+
+import os
+import re
+import sys
+import json
+
+sys.stdout.reconfigure(encoding="utf-8", errors="replace")
+
+PROJECT_ROOT = r"E:\GoogleAntigravity\PG_mathbook"
+BOOK_DIR = os.path.join(PROJECT_ROOT, "books", "22599_smith_hindu_arabic_numerals")
+CACHE_FILE = os.path.join(BOOK_DIR, "smith_hindu_arabic_numerals_translation_cache.json")
+INTRO_TEX_OUT = os.path.join(BOOK_DIR, "smith_hindu_arabic_numerals_intro.tex")
+
+sys.path.insert(0, os.path.join(PROJECT_ROOT, "scripts"))
+from safe_latex_cleaner import clean_text_for_latex
+
+PREAMBLE = r"""\documentclass[a4paper,11pt,openany]{ltjsbook}
+\usepackage{luatexja}
+\usepackage{luatexja-fontspec}
+\usepackage{amsmath,amssymb,amsfonts,amsthm}
+\usepackage{geometry}
+\geometry{top=24mm,bottom=24mm,left=24mm,right=24mm,footskip=10mm}
+\usepackage{tcolorbox}
+\tcbuselibrary{skins,breakable}
+\usepackage{hyperref}
+\usepackage{fancyhdr}
+\usepackage{graphicx}
+\usepackage{tikz}
+\usetikzlibrary{arrows.meta,calc,positioning,shapes.geometric}
+
+\definecolor{primaryblue}{RGB}{20, 60, 110}
+\definecolor{darkslate}{RGB}{35, 45, 60}
+\definecolor{accentcrimson}{RGB}{160, 30, 45}
+\definecolor{softblue}{RGB}{238, 244, 252}
+
+\hypersetup{
+    colorlinks=true,
+    linkcolor=primaryblue,
+    citecolor=darkslate,
+    urlcolor=primaryblue,
+    pdftitle={古典で学び直すインド・アラビア数字入門},
+    pdfauthor={教育情報分析研究会}
+}
+
+\pagestyle{fancy}
+\fancyhf{}
+\fancyhead[LE,RO]{\thepage}
+\fancyhead[RE]{\leftmark}
+\fancyhead[LO]{\rightmark}
+\setlength{\headheight}{17.5pt}
+\renewcommand{\headrulewidth}{0.4pt}
+
+\title{
+    {\huge\bfseries\gtfamily 古典で学び直すインド・アラビア数字入門}\\[14pt]
+    {\Large ゼロの発見・位取り記数法・計算革命の全歴史}\\[8pt]
+    {\large —— 高校までの数学で読み解く記数法の知的遺産 ——}\\[16pt]
+    {\normalsize 底本：D. E. Smith \& L. C. Karpinski \textit{The Hindu-Arabic Numerals} (Project Gutenberg eBook No. 22599)}
+}
+\author{\textbf{教育情報分析研究会} 編著}
+\date{2026年10月 完全決定版}
+
+\begin{document}
+\maketitle
+\frontmatter
+\tableofcontents
+\clearpage
+
+\chapter*{はじめに：大人が学び直す「数字と計算の起源」}
+\addcontentsline{toc}{chapter}{はじめに：大人が学び直す「数字と計算の起源」}
+
+私たちが毎日何気なく使っている数字「$0, 1, 2, 3, 4, 5, 6, 7, 8, 9$」。スマートフォンでの入力、買い物のおつりの計算、銀行振込、時刻の確認に至るまで、この10個の記号を使わない日は一日たりともありません。
+
+しかし、立ち止まって考えてみてください。
+「なぜ、たった10種類の記号だけで、兆や京、さらには無限大に至るいかなる巨大な数でも完璧に書き表せるのでしょうか？」
+古代ローマの人々は「$1848$」を書き表すために「$\mathrm{MDCCCXLVIII}$」と書き、掛け算や割り算を紙の上で行うことなど不可能でした。そろばんや計算盤（アバクス）がなければ、商人たちも計算ができなかったのです。
+
+その不可能を可能にし、人類の知的生産性を何万倍にも跳ね上げた奇跡の技術こそ、**「十進位取り記数法（Place Value System）」** と **「ゼロ（$0$）の発見」** です。
+
+本書は、アメリカ数学史研究の金字塔であるスミスとカーピンスキーの古典的名著『\textit{The Hindu-Arabic Numerals}』（1911年）を土台とし、**50代から80代の大人・社会人読者**に向けて書き下ろした学び直しのための数学史入門講義です。
+
+大学の難解な専門記号や無味乾燥な暗記は一切不要です。中学・高校で親しんだ足し算・掛け算、累乗（$10^n$）の仕組みを思い出しながら、古代インドの石刻碑文、シルクロードを往来した隊商たちの交易、バグダードの知恵の館で活躍した数学者アル＝フワーリズミー、教皇ゲルベルトの知的好奇心、そしてフィボナッチによるヨーロッパ商業革命に至る雄大な歴史絵巻を、豊富な視覚的図版とともに楽しく紐解いてまいりましょう。
+
+\clearpage
+\mainmatter
+"""
+
+LECTURES = [
+    {
+        "title": "第1講：数字はどこから来たのか？ —— アラビア数字という名の「誤解」",
+        "intro": """私たちが「アラビア数字」と呼んでいる数字記号は、実はアラビア半島で生まれたものではありません。アラビア人自身が、古くからこれを「ヒンドゥーの数字（ヒサーブ・アル＝ヒンド）」と呼んで敬意を払っていました。
+
+ヨーロッパ人が初めてこの便利な数字に出会ったのがイスラム世界の書物や商人を通じてであったため、ヨーロッパ側から見て「アラビアから来た数字」＝「アラビア数字」と呼ばれるようになったのです。本書の第1講では、古代ギリシャ・ローマ、エジプト、バビロニアの記数法と対比しながら、なぜインド数字が世界を制覇したのか、その最初の謎に迫ります。""",
+        "box_title": "重要ポイント：記数法の3大分類",
+        "box_text": """1. **加法的記数法（エジプト・ローマ）**：記号を並べて足し合わせる方式。例：$\mathrm{VII} = 5 + 1 + 1 = 7$。位の概念がないため、大きな数になるほど新しい専用記号が必要になり、筆算が極めて困難。\n2. **乗法的・命名数体系（ギリシャ・中国）**：十、百、千などの単位を表す文字を併用する方式。例：三千五百二十。\n3. **位取り記数法（インド・現代）**：記号の位置そのものが「$10^0, 10^1, 10^2, 10^3$」という重みを表す方式。わずか10個の記号で全実数を表現可能。""",
+        "tikz": r"""
+\begin{center}
+\begin{tikzpicture}[scale=1.2, >=Stealth]
+    % Timeline base
+    \draw[->, thick, darkslate] (-0.5, 0) -- (11.5, 0) node[right] {時代（世紀）};
+    \foreach \x/\label in {0.5/{前3世紀}, 3.0/{5世紀}, 5.5/{9世紀}, 8.0/{1202年}, 10.5/{15世紀末}} {
+        \draw[darkslate] (\x, 0.1) -- (\x, -0.1) node[below=4pt] {\small \label};
+    }
+
+    % Nodes
+    \node[above=22pt, primaryblue, align=center] (A) at (0.5, 0) {\textbf{古代インド}\\ブラーフミー数字\\碑文石刻};
+    \node[above=22pt, primaryblue, align=center] (B) at (3.0, 0) {\textbf{位取り完成}\\ゼロの誕生\\アーリヤバタ};
+    \node[above=22pt, accentcrimson!80!black, align=center] (C) at (5.5, 0) {\textbf{バグダード}\\知恵の館\\アル＝フワーリズミー};
+    \node[above=22pt, darkslate, align=center] (D) at (8.0, 0) {\textbf{イタリア}\\フィボナッチ\\『算盤の書』};
+    \node[above=22pt, darkslate, align=center] (E) at (10.5, 0) {\textbf{全ヨーロッパ}\\活版印刷普及\\筆算の標準化};
+
+    % Draw dots and stems
+    \foreach \x in {0.5, 3.0, 5.5, 8.0, 10.5} {
+        \filldraw[primaryblue] (\x, 0) circle (3pt);
+        \draw[dashed, primaryblue, thick] (\x, 0) -- (\x, 0.7);
+    }
+
+    % Arrows showing propagation
+    \draw[->, line width=1.5pt, primaryblue] (1.3, 1.2) -- (2.2, 1.2);
+    \draw[->, line width=1.5pt, accentcrimson] (3.8, 1.2) -- (4.7, 1.2);
+    \draw[->, line width=1.5pt, darkslate] (6.3, 1.2) -- (7.2, 1.2);
+    \draw[->, line width=1.5pt, darkslate] (8.8, 1.2) -- (9.7, 1.2);
+\end{tikzpicture}
+\par\vspace{0.4em}
+\small\textbf{概念図 1}：インド・アラビア数字伝播の1800年ロードマップ。古代インドでの発明からイスラム黄金期バグダードを経由し、ルネサンス期ヨーロッパで世界共通言語となるまでの軌跡。
+\end{center}
+""",
+        "discussion": """古代ギリシャ人は幾何学において驚異的な論理的厳密性を築き上げましたが、記数法においてはアルファベットにギリシャ文字を割り当てる方式（$\alpha = 1, \beta = 2, \dots$）を用いていたため、四則演算の筆算は極端に複雑でした。
+
+ローマ数字も同様です。例えば「$\mathrm{CCCLXXVIII}$（378）」に「$\mathrm{CXCIV}$（194）」を足す作業を想像してみてください。ローマ数字には「繰り上がり」を形式的に処理するメカニズムがないため、小石（calculus：これが微積分の語源）を並べた計算盤が不可欠だったのです。インド数字がもたらした最大の恩恵は、「計算盤という物理的道具を捨て、紙の上で頭脳の思考を直接数式として展開できるようになったこと」にありました。"""
+    },
+    {
+        "title": "第2講：古代インドの石刻文字 —— ブラーフミー数字とナーナー・ガート碑文",
+        "intro": """インド数字の最古の痕跡は、紀元前3世紀のアショーカ王の石柱碑文や、紀元前2世紀のナーナー・ガート洞窟の壁面に刻まれたブラーフミー数字に遡ります。
+
+驚くべきことに、この最初期のインド数字にはまだ「ゼロ」も「位取り記法」も存在しませんでした。1から9までの独立した記号のほかに、10, 20, 30, ..., 100, 200といった単位ごとの別個の文字が使われていたのです。""",
+        "box_title": "歴史の証言：数字記号の原形",
+        "box_text": """- **1, 2, 3 の起源**：横棒（一、二、三）または縦棒が、筆記用具（葦ペンや鉄筆）による速記の過程で崩れ、斜めの結線によって「$1, 2, 3$」へと変化した。\n- **4から9の起源**：文字の頭文字（アクロフォニック）説や、古代文字（カローシュティー、ブラーフミー）の部首に由来する説が有力。\n- **位取り以前の制約**：位取りがない時代は、「200」を表すために「2」と「100」を並べるか、専用の「200の記号」を刻む必要があった。""",
+        "tikz": r"""
+\begin{center}
+\begin{tikzpicture}[scale=1.1, >=Stealth]
+    % Ancient vs Modern table
+    \node[draw, fill=softblue, rounded corners, inner sep=12pt] at (0, 0) {
+        \begin{tabular}{c|ccccccccc}
+            \textbf{記号} & 1 & 2 & 3 & 4 & 5 & 6 & 7 & 8 & 9 \\ \hline
+            \textbf{古代ブラーフミー} & --- & = & $\equiv$ & $+$ & $\mathcal{h}$ & $\varphi$ & $\mathcal{T}$ & $\mathcal{S}$ & $?$ \\
+            \textbf{現代算用数字} & 1 & 2 & 3 & 4 & 5 & 6 & 7 & 8 & 9 \\
+        \end{tabular}
+    };
+\end{tikzpicture}
+\par\vspace{0.4em}
+\small\textbf{概念図 2}：古代ブラーフミー数字から現代算用数字への記号変遷イメージ。草書化（筆を離さずに素早く書く動作）によって横棒が結ばれ、現代の「2」「3」の形が形作られた。
+\end{center}
+""",
+        "discussion": """スミスとカーピンスキーは本書の中で、数字の起源をめぐる空想的な説（例えば「角度の数が数字を表している」という俗説）を史料に基づいて明確に否定しています。
+
+数字記号の形態は、神秘的な幾何学設計によるものではなく、数百年におよぶ書記官たちの日常的な筆記の実践（速記のしやすさ、視認性の向上）を通じて自然淘汰的に洗練されていったものなのです。"""
+    },
+    {
+        "title": "第3講：位取り記数法の奇跡 —— なぜ位置だけで桁を表せるのか",
+        "intro": """古代バビロニアの六十進法や中国の算木にも部分的な位取りのアイデアは存在していましたが、十進法と完璧に結合し、誰でも容易に四則計算を行える実用的な「十進位取り記数法」として完成させたのはインド人でした。
+
+5世紀の天文学者・数学者アーリヤバタ（Aryabhata, 476--550）のサンスクリット語著作『アーリヤバティーヤ』には、「位から位へと10倍ずつ増加する（Sthanat sthanam dasagunam syat）」という明確な記述が登場します。""",
+        "box_title": "数学的構造：十進位取りの本質",
+        "box_text": """任意の自然数 $N$ は、基数 $10$ の多項式として一意的に表される：
+\[
+N = a_k 10^k + a_{k-1} 10^{k-1} + \dots + a_1 10^1 + a_0 10^0 \quad (0 \le a_i \le 9)
+\]
+位取り記数法とは、$10^k, 10^{k-1}, \dots$ という重み付けを記号列の位置に暗黙化し、単に係数列「$a_k a_{k-1} \dots a_1 a_0$」を並べる記法である。""",
+        "tikz": r"""
+\begin{center}
+\begin{tikzpicture}[scale=1.1, >=Stealth]
+    % Boxes for place value
+    \foreach \x/\w/\label in {0/千の位/{$10^3 = 1000$}, 3/百の位/{$10^2 = 100$}, 6/十の位/{$10^1 = 10$}, 9/一の位/{$10^0 = 1$}} {
+        \draw[thick, primaryblue, fill=softblue] (\x, 0) rectangle (\x+2.4, 2.0);
+        \node[above=3pt, darkslate] at (\x+1.2, 2.0) {\textbf{\w}};
+        \node[below=3pt, accentcrimson] at (\x+1.2, 0) {\small \label};
+    }
+    % Example digits for 5072
+    \node[font=\Huge\bfseries, primaryblue] at (1.2, 1.0) {5};
+    \node[font=\Huge\bfseries, accentcrimson] at (4.2, 1.0) {0};
+    \node[font=\Huge\bfseries, primaryblue] at (7.2, 1.0) {7};
+    \node[font=\Huge\bfseries, primaryblue] at (10.2, 1.0) {2};
+
+    % Arrow showing zero role
+    \draw[<-, thick, accentcrimson] (4.2, 2.8) -- (4.2, 3.8) node[above, align=center] {\textbf{「空位」を保つゼロの役割}\\[2pt]（これがないと「572」と区別できない）};
+\end{tikzpicture}
+\par\vspace{0.4em}
+\small\textbf{概念図 3}：十進位取り記数法のメカニズム（数「5072」の構造）。各枠は $10$ の冪乗の重みをもち、ゼロは「その桁に値が存在しないこと（空位）」を厳密に保持するプレースホルダーとして機能する。
+\end{center}
+""",
+        "discussion": """位取り記法が真の威力を発揮するためには、「空っぽの桁（空位）」を明示する記号が不可欠でした。
+
+もし空位を表す記号がなければ、「5072」と「572」や「50720」を紙の上で区別することができません。位取り記法とゼロは、いわばコインの表と裏であり、両者が一体となって初めて人類史上最強の計算体系が誕生したのです。"""
+    },
+    {
+        "title": "第4講：空（シューニャ）から生まれた「ゼロ」 —— なにもないことを表す記号",
+        "intro": """数学史において、ゼロの誕生ほど哲学的かつ革命的な飛躍はありませんでした。
+
+西洋の古代ギリシャ・ローマ世界では、数は「具体的な物の個数や幾何学的な長さ」として捉えられていたため、「無（何もないこと）」は存在しないものであり、数として記号化することはタブー視されていました。しかしインドの思想・哲学においては、「シューニャ（\text{śūnya}：空・虚無）」は豊かな可能性を秘めた実在として親しまれていたのです。""",
+        "box_title": "歴史の里程標：最古のゼロの確証",
+        "box_text": """- **グワリオール碑文（876年）**：インド中部グワリオールの寺院壁面に刻まれた「270」と「50」という数字の中に、小さな円形「$0$」の彫刻が明確に現存する。\n- **ブラフマグプタ（628年）**：名著『ブラーフマスプタ・シッダーンタ』において、ゼロを単なる位の目印だけでなく、計算対象となる「数（演算対象）」として世界で初めて定義（$a + 0 = a, a - 0 = a, a \times 0 = 0$ 等）。""",
+        "tikz": r"""
+\begin{center}
+\begin{tikzpicture}[scale=1.2, >=Stealth]
+    % Concept comparison: Western vs Indian
+    \draw[thick, darkslate, fill=gray!10] (-0.5, 0) rectangle (4.5, 3.5);
+    \node[above=4pt, darkslate] at (2.0, 3.5) {\textbf{【古代ギリシャ・ローマ観】}};
+    \node[align=center, darkslate] at (2.0, 1.8) {数は「物の実体や長さ」\\↓\\「何もないこと」は数ではない\\（無を数えると論理矛盾が生じる）\\↓\\**ゼロ記号を拒絶**};
+
+    \draw[thick, primaryblue, fill=softblue] (5.5, 0) rectangle (10.5, 3.5);
+    \node[above=4pt, primaryblue] at (8.0, 3.5) {\textbf{【古代インド哲学観】}};
+    \node[align=center, primaryblue] at (8.0, 1.8) {「空（シューニャ）」の深遠な実在\\↓\\空位もまた確固たる位置\\点（ビンディ）から円（0）へ\\↓\\**ゼロを独立した数として創造**};
+\end{tikzpicture}
+\par\vspace{0.4em}
+\small\textbf{概念図 4}：ゼロ誕生の思想的背景。西洋の存在論的制約を破り、インドの「空」思想が「無を数として操作する」という人類最大の知的飛躍をもたらした。
+\end{center}
+""",
+        "discussion": """ゼロという言葉の語源をたどると、サンスクリット語の「シューニャ（空）」がアラビア語で「スィフル（\text{ṣifr}：空虚）」と訳され、それがラテン語の「ゼフィルス（\text{zephirum}）」を経て現代の「ゼロ（\text{zero}）」や「サイファー（\text{cipher}：暗号）」へと変化しました。
+
+「無」を記号化したことで、引き算の結果が $0$ になることや、のちの負の数（借金を意味する数）の発見への道が拓かれたのです。"""
+    },
+    {
+        "title": "第5講：ヨーロッパの謎 —— ボエティウスの幾何学とアバクス算盤",
+        "intro": """西洋数学史における長年の大論争の一つが、「古代末期の哲学者ボエティウス（Boethius, 480--524頃）はインド数字を知っていたのか？」という問題です。
+
+中世に流布した『ボエティウスの幾何学』と呼ばれる写本には、アピセス（\text{apices}）と呼ばれる不思議な9個の数字駒が描かれていました。スミスとカーピンスキーは本書の第5章でこの難問に正面から挑んでいます。""",
+        "box_title": "史料批判の結論：後世の内挿（加筆）",
+        "box_text": """- **アピセス（Apices）**：アバクス（計算盤）の各列に置く、数字が刻まれた角柱状の駒。1から9までの形はアラビア文字の西方形（ゴバール数字）に極めて酷似している。\n- **文献学的検証**：ボエティウスの生前（6世紀初頭）には、インド本国でもゼロや位取り記号が西方へ伝播しておらず、ボエティウスがこれを知り得た証拠はない。\n- **結論**：10世紀から11世紀にかけて、修道院の写本筆写生が後から書き加えた（内挿された）偽作であることが実証された。""",
+        "tikz": r"""
+\begin{center}
+\begin{tikzpicture}[scale=1.1, >=Stealth]
+    % Abacus board
+    \draw[thick, darkslate, fill=yellow!10] (0, 0) rectangle (9.0, 3.2);
+    \node[above=4pt, darkslate] at (4.5, 3.2) {\textbf{中世ヨーロッパのアバクス（計算盤）}};
+
+    % Columns
+    \foreach \x/\col in {1.5/{千の桁}, 4.0/{百の桁}, 6.5/{十の桁}} {
+        \draw[dashed, darkslate, thick] (\x, 0) -- (\x, 3.2);
+    }
+    \node at (0.75, 2.7) {\footnotesize 万};
+    \node at (2.75, 2.7) {\footnotesize 千};
+    \node at (5.25, 2.7) {\footnotesize 百};
+    \node at (7.75, 2.7) {\footnotesize 十・一};
+
+    % Apices tokens (counters)
+    \draw[thick, fill=orange!30] (2.75, 1.2) circle (14pt) node {\textbf{3}};
+    \draw[thick, fill=orange!30] (5.25, 1.2) circle (14pt) node {\textbf{7}};
+    \draw[thick, fill=orange!30] (7.75, 1.2) circle (14pt) node {\textbf{4}};
+
+    \node[below=8pt, darkslate] at (4.5, 0) {\small 空位の桁には「駒を置かない」ことで対応（ゼロ記号はまだ盤上に不要だった）};
+\end{tikzpicture}
+\par\vspace{0.4em}
+\small\textbf{概念図 5}：中世アバクス計算盤と数字駒「アピセス」。盤の縦列自体が位（桁）を表していたため、初期のアバクス利用者は「ゼロの駒」を必要としなかった。
+\end{center}
+""",
+        "discussion": """アバクスの上では、縦の溝（桁）が位を表しているため、駒が置かれていない溝がそのまま「空位」を意味しました。そのため、初期のヨーロッパ人にとっては「ゼロという数」の概念は理解しにくく、定着が大幅に遅れる原因ともなりました。
+
+しかし、物理的な盤を離れて羊皮紙や紙の上で直接計算するためには、空位を埋めるゼロが絶対に必要だったのです。"""
+    },
+    {
+        "title": "第6講：イスラム黄金期とバグダード —— アル＝フワーリズミーの代数学と記数法",
+        "intro": """8世紀から9世紀にかけて、アッバース朝の首都バグダードは世界の学術の中心地でした。カリフ・アル＝マームーンが創設した研究所「知恵の館（バイト・アル＝ヒクマ）」には、ギリシャやインドから貴重な写本が集められました。
+
+773年頃、インドの使節団がサンスクリット語の天文・数学書『シッダーンタ』をバグダードにもたらし、イスラムの学者たちに計り知れない衝撃を与えました。""",
+        "box_title": "歴史的人物：アル＝フワーリズミー",
+        "box_text": """- **代数学の父**：ムハンマド・イブン・ムーサー・アル＝フワーリズミー（ca. 780--850）。\n- **著作『インドの数の計算法について』**：インドの十進位取り記数法とゼロをアラビア語世界に詳細に紹介した歴史的名著。\n- **現代語への遺産**：彼の名前（Al-Khowarizmi）は「アルゴリズム（\text{algorithm}）」の語源となり、著書の題名『アル＝ジャブル（\text{al-Jabr}）』は「代数学（\text{algebra}）」の語源となった。""",
+        "tikz": r"""
+\begin{center}
+\begin{tikzpicture}[scale=1.1, >=Stealth]
+    % Flowchart from Sanskrit to Arabic to Latin
+    \node[draw, thick, rounded corners, fill=softblue, align=center] (IN) at (0, 0) {\textbf{古代インド}\\サンスクリット数学書\\『シッダーンタ』};
+    \node[draw, thick, rounded corners, fill=yellow!20, align=center] (AR) at (4.8, 0) {\textbf{バグダード（知恵の館）}\\アル＝フワーリズミー\\『インドの数の計算法』};
+    \node[draw, thick, rounded corners, fill=green!15, align=center] (EU) at (9.6, 0) {\textbf{西欧中世}\\ラテン語翻訳運動\\『アルゴリトミ・デ・ヌメロ・インドルム』};
+
+    \draw[->, line width=1.8pt, primaryblue] (IN) -- (AR) node[midway, above] {\small 773年使節団};
+    \draw[->, line width=1.8pt, accentcrimson] (AR) -- (EU) node[midway, above] {\small 12世紀トレド};
+\end{tikzpicture}
+\par\vspace{0.4em}
+\small\textbf{概念図 6}：学術知の東西大航海。インドの数学的叡智がイスラム黄金期バグダードで体系化され、12世紀のラテン語翻訳運動を経て暗黒時代のヨーロッパを目覚めさせた。
+\end{center}
+""",
+        "discussion": """アラビアの学者たちは、単にインド数字をそのまま輸入しただけではありませんでした。彼らはインドの計算法をイスラム世界の商業取引や遺産相続、天文学・航海術の実用的な要請に合わせて極めて実戦的なアルゴリズムへと昇華させたのです。
+
+このバグダードの知の集積が、やがてスペイン（アンダルシア）を経由してヨーロッパへと流れ込むことになります。"""
+    },
+    {
+        "title": "第7講：教皇ゲルベルトとフィボナッチ —— 暗黒のヨーロッパを揺るがした数学革命",
+        "intro": """中世ヨーロッパがインド・アラビア数字を受け入れる決定的な契機となったのが、二人の偉大な知性でした。
+
+一人は、10世紀末にイスラム領スペインに留学して先進科学を学び、のちにローマ教皇シルヴェステル2世となったゲルベルト（Gerbert of Aurillac, ca. 945--1003）。もう一人は、ピサの豪商の息子として北アフリカでアラビア数学を学び、1202年に不朽の名著『算盤の書（Liber Abaci）』を著したレオナルド・フィボナッチ（Leonardo of Pisa）です。""",
+        "box_title": "名著『算盤の書』の冒頭宣言（1202年）",
+        "box_text": """「インド人の9つの数字はこれらである：$9, 8, 7, 6, 5, 4, 3, 2, 1$。これらの数字と、アラビア語でツェフィラム（\text{zephirum}）と呼ばれる記号 $0$ を用いることによって、いかなる数をも書き表すことができる。」\nフィボナッチはこの書物で、商人たちに四則演算、分数計算、利息計算、貨幣交換の手法を徹底的に説き、商業革命の火蓋を切った。""",
+        "tikz": r"""
+\begin{center}
+\begin{tikzpicture}[scale=1.1, >=Stealth]
+    % Contrast: Abacists vs Algorists
+    \draw[thick, darkslate, fill=red!10] (-0.5, 0) rectangle (4.5, 3.2);
+    \node[above=4pt, darkslate] at (2.0, 3.2) {\textbf{【アバクス派（Abacists）】}};
+    \node[align=center, darkslate] at (2.0, 1.6) {伝統的なそろばん・計算盤を使用\\計算過程が盤上に残らない\\ローマ数字を固守\\ギルドの秘密主義・保守派};
+
+    \draw[thick, primaryblue, fill=blue!10] (5.5, 0) rectangle (10.5, 3.2);
+    \node[above=4pt, primaryblue] at (8.0, 3.2) {\textbf{【アルゴリズム派（Algorists）】}};
+    \node[align=center, primaryblue] at (8.0, 1.6) {紙とペンによる筆算（インド数字）\\計算の検算・帳簿記録が可能\\ゼロと位取りを活用\\新興商人・大学・進歩派};
+\end{tikzpicture}
+\par\vspace{0.4em}
+\small\textbf{概念図 7}：中世ヨーロッパを二分した「計算戦争（アバクス派 vs アルゴリズム派）」。持ち運び可能で永続的な記録が残せる筆算（アルゴリズム）が、やがて全ヨーロッパの商業と科学を席巻した。
+\end{center}
+""",
+        "discussion": """フィボナッチの『算盤の書』という書名には「アバクス」という言葉が入っていますが、皮肉なことにその内容は「アバクス（物理的計算盤）を完全に不要にする筆算術」の指南書でした。
+
+商取引の記録を帳簿に残し、利息や複式簿記を正確に行うためには、計算の痕跡が消えてしまう計算盤よりも、紙の上で誰でも検算できるインド・アラビア数字の筆算が圧倒的に優れていたのです。"""
+    },
+    {
+        "title": "第8講：印刷術の夜明けと数字の完成 —— 現代世界を動かす記数法へ",
+        "intro": """13世紀から15世紀にかけて、ヨーロッパ各地の都市でインド・アラビア数字は徐々に浸透していきましたが、保守的な都市当局やギルドによる禁止令（「ゼロを改ざんして借金を増やす不正が起きる」という口実）など、激しい抵抗にも直面しました。
+
+この抵抗を完全に打ち破り、インド・アラビア数字を不可逆的な世界標準へと押し上げた決定打が、15世紀半ばのグーテンベルクによる**活版印刷術の発明**でした。""",
+        "box_title": "印刷革命による書体の固定化",
+        "box_text": """- **手写本時代の多様性**：写字生の地域や癖によって「4」がループ型（$\alpha$風）に見えたり、「5」や「7」が上下反転するなど混乱があった。\n- **金属活字の標準化**：1470年代以降、印刷された数学書や商業実務書がヨーロッパ全土に大量流通したことで、活字としての「$0, 1, 2, 3, 4, 5, 6, 7, 8, 9$」のデザインが統一された。\n- **科学革命への直結**：コペルニクス、ケプラー、ガリレオ、ニュートンらの天文学・物理学の膨大な計算は、この標準化された数字体系なしには決して達成できなかった。""",
+        "tikz": r"""
+\begin{center}
+\begin{tikzpicture}[scale=1.1, >=Stealth]
+    % Pyramid of modern science based on numbers
+    \draw[thick, primaryblue, fill=softblue] (0, 0) -- (10, 0) -- (5, 4.0) -- cycle;
+    \node at (5, 0.6) {\textbf{土台：インド・アラビア数字と十進位取り記数法}};
+    \draw[darkslate, thick] (1.5, 1.2) -- (8.5, 1.2);
+    \node at (5, 1.8) {\textbf{近世の商業革命・複式簿記・航海術}};
+    \draw[darkslate, thick] (3.0, 2.4) -- (7.0, 2.4);
+    \node at (5, 2.9) {\textbf{近代科学革命（微積分・物理法則）}};
+    \draw[darkslate, thick] (4.2, 3.4) -- (5.8, 3.4);
+    \node at (5, 3.7) {\footnotesize 現代デジタル文明};
+\end{tikzpicture}
+\par\vspace{0.4em}
+\small\textbf{概念図 8}：文明を支える数理ピラミッド。現代のスーパーコンピュータ、宇宙開発、AIに至るすべての計算科学は、古代インド人が生み出した10個の記号という礎の上に築かれている。
+\end{center}
+""",
+        "discussion": """スミスとカーピンスキーは本書の結びにおいて、インド・アラビア数字を「人類の知的歴史における最も偉大な発明の一つ」と称えています。
+
+火や車輪の発明が人類の物理的限界を拡張したように、ゼロと十進位取り記数法は人類の思考の処理能力を無限に解放しました。大人になってからこの歴史を学び直すとき、日常目にする数字の一つひとつが、古代から現代へと紡がれた人類の知のバトンであることを実感できるはずです。"""
+    }
+]
+
+
+def main():
+    parts = [PREAMBLE]
+
+    for idx, lec in enumerate(LECTURES):
+        title = lec["title"]
+        intro = lec["intro"]
+        box_t = lec["box_title"]
+        box_c = lec["box_text"]
+        tikz = lec["tikz"]
+        disc = lec["discussion"]
+
+        parts.append(f"\\chapter{{{title}}}\n\n")
+        parts.append(f"{intro}\n\n")
+
+        parts.append(r"\begin{tcolorbox}[colback=softblue,colframe=primaryblue,title=\textbf{" + box_t + r"},arc=3mm]" + "\n")
+        parts.append(f"{box_c}\n")
+        parts.append(r"\end{tcolorbox}" + "\n\n")
+
+        parts.append(f"{tikz}\n\n")
+        parts.append(f"{disc}\n\n")
+        parts.append(r"\clearpage" + "\n\n")
+
+    parts.append(r"\end{document}" + "\n")
+
+    full_tex = "".join(parts)
+    with open(INTRO_TEX_OUT, "w", encoding="utf-8") as f:
+        f.write(full_tex)
+
+    print(f"Generated {INTRO_TEX_OUT} ({len(full_tex)} chars).")
+
+
+if __name__ == "__main__":
+    main()
