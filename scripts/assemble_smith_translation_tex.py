@@ -116,9 +116,13 @@ def main():
         parts.append(f"\\chapter{{{title_ja}}}\n")
         parts.append(f"\\section*{{{en_title}}}\n\n")
 
-        jp_text = ch_data.get("japanese_translation", "")
-        # Apply clean_text_for_latex
+        jp_text = "\n\n".join(ch_data.get("translation_pieces", []))
         jp_clean = clean_text_for_latex(jp_text)
+        import re
+        jp_clean = re.sub(r"([A-Za-z0-9]+)\^([A-Za-z0-9]+)", lambda m: "$" + m.group(1) + "^{" + m.group(2) + "}$", jp_clean)
+        jp_clean = jp_clean.replace('^', '')
+        jp_clean = re.sub(r'[\u0e00-\u0eff]', '', jp_clean)
+        jp_clean = jp_clean.replace('线', '線').replace('为', '為')
         parts.append(jp_clean)
         parts.append("\n\n\\clearpage\n\n")
 
