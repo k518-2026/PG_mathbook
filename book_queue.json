@@ -70,6 +70,20 @@
       "gutenberg_txt_url": "https://www.gutenberg.org/cache/epub/22599/pg22599.txt",
       "gutenberg_url": "https://www.gutenberg.org/ebooks/22599",
       "status": "completed"
+    },
+    {
+      "gutenberg_id": "35550",
+      "slug": "heath_archimedes",
+      "original_title": "Archimedes",
+      "original_author": "Sir Thomas Little Heath",
+      "author_ja": "サー・トーマス・リトル・ヒース",
+      "translation_title_ja": "アルキメデス伝 —— 古代ギリシャ数学の巨人：その生涯と全業績の幾何学的解題（原著完全翻訳版）",
+      "intro_title_ja": "古典で学び直すアルキメデス幾何学・力学入門 —— 梃子の原理・浮力・取り尽くし法から微積分の源流へ",
+      "book_dir": "books/35550_heath_archimedes",
+      "gutenberg_url": "https://www.gutenberg.org/ebooks/35550",
+      "gutenberg_txt_url": "https://www.gutenberg.org/cache/epub/35550/pg35550.txt",
+      "category": "Mathematics / History of Science (Project Gutenberg eBook #35550)",
+      "status": "completed"
     }
   ]
 }

@@ -525,6 +525,46 @@
       "compiler": "LuaLaTeX (LuaHBTeX / TeX Live 2026)",
       "description": "50〜80代の読者に向けた学び直し数学史入門講義。十進位取り記数法の仕組み、ゼロ（シューニャ）の哲学と誕生、アバクス計算盤から筆算への計算革命をTikZ概念図版とともに直観的・体系的に解き明かす。全8講構成。",
       "gutenberg_url": "https://www.gutenberg.org/ebooks/22599"
+    },
+    {
+      "gutenberg_id": "35550",
+      "original_title": "Archimedes",
+      "original_author": "Sir Thomas Little Heath",
+      "japanese_title": "アルキメデス伝 —— 古代ギリシャ数学の巨人：その生涯と全業績の幾何学的解題（原著完全翻訳版）",
+      "author": "サー・トーマス・リトル・ヒース（著） / 教育情報分析研究会（訳）",
+      "category": "Mathematics / History of Science (Project Gutenberg eBook #35550)",
+      "description": "ギリシャ数学史の世界最高権威T.L.ヒース卿による伝記・業績解説の古典『Archimedes』（1920年）全7章および付録2編の完全日本語翻訳決定版。シラクサ防衛戦の工学兵器から、球と円柱、円の測定、放物線の求積、砂粒論、螺旋、平面の平衡、浮体論、そして1906年にハイベアが奇跡的に発見した『方法（Method）』の写本解読に至る全容を精密に校閲・翻訳。",
+      "chapters_count": 9,
+      "pages": 35,
+      "tex_file": "books/35550_heath_archimedes/heath_archimedes_translation.tex",
+      "pdf_file": "books/35550_heath_archimedes/heath_archimedes_translation.pdf",
+      "book_dir": "books/35550_heath_archimedes",
+      "compiler": "LuaLaTeX (LuaHBTeX / TeX Live 2026)",
+      "model_used": "qwen2.5-7b-instruct (翻訳) @ LM Studio",
+      "gutenberg_url": "https://www.gutenberg.org/ebooks/35550",
+      "language": "ja",
+      "created_at": "2026-10-30T20:05:00.768770",
+      "status": "完成"
+    },
+    {
+      "gutenberg_id": "35550-intro",
+      "original_title": "Archimedes",
+      "original_author": "Sir Thomas Little Heath",
+      "japanese_title": "古典で学び直すアルキメデス幾何学・力学入門 —— 梃子の原理・浮力・取り尽くし法から微積分の源流へ",
+      "author": "教育情報分析研究会（編著）",
+      "category": "Mathematics / History of Science (Project Gutenberg eBook #35550)",
+      "description": "50〜80代の読者に向けた学び直し数学・力学入門講義。球と円柱の墓碑比（2:3）、正96角形による円周率πの挟み撃ち、放物線求積と等比級数の和、砂粒論と宇宙モデル、梃子の逆比法則、浮力と王冠の謎、パリンプセスト二重写本の奇跡を美しいTikZ概念図版とともに高校までの知識で直観的・体系的に解き明かす。全8講構成。",
+      "chapters_count": 8,
+      "pages": 20,
+      "tex_file": "books/35550_heath_archimedes/heath_archimedes_intro.tex",
+      "pdf_file": "books/35550_heath_archimedes/heath_archimedes_intro.pdf",
+      "book_dir": "books/35550_heath_archimedes",
+      "compiler": "LuaLaTeX (LuaHBTeX / TeX Live 2026)",
+      "model_used": "qwen2.5-7b-instruct (講義作成) @ LM Studio",
+      "gutenberg_url": "https://www.gutenberg.org/ebooks/35550",
+      "language": "ja",
+      "created_at": "2026-10-30T20:05:00.768770",
+      "status": "完成"
     }
   ]
 }
