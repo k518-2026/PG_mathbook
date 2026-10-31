@@ -575,7 +575,7 @@
       "category": "Mathematics / Mathematical Recreations (Project Gutenberg eBook #16713)",
       "description": "近代数学パズルの開祖H.E.デュードニーによる不朽の集大成『Amusements in Mathematics』（1917年）全14部・全430問の完全日本語翻訳・解答対照決定版。算術・代数・幾何・点と線・駒移動・一筆書き・組合せ・チェス盤パズル・測定・川渡り・魔方陣・迷路・パラドックスなど、近代数学の諸原理を網羅する大著（全313ページ）。",
       "chapters_count": 14,
-      "pages": 237,
+      "pages": 222,
       "tex_file": "books/16713_dudeney_amusements_in_mathematics/dudeney_amusements_translation.tex",
       "pdf_file": "books/16713_dudeney_amusements_in_mathematics/dudeney_amusements_translation.pdf",
       "book_dir": "books/16713_dudeney_amusements_in_mathematics",

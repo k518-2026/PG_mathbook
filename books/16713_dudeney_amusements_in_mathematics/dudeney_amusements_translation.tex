@@ -1196,115 +1196,48 @@ a時間 720b + 60a 分と b時間 720a + 60b 分
 すべてのパターンにおいて、乗数と積には同じ数字が含まれています。
 \end{tcolorbox}
 
-\begin{tcolorbox}[colback=softblue,colframe=primaryblue,title=\textbf{第 85 問：THE CAB NUMBERS.},arc=2mm,boxrule=1pt,breakable]
+\begin{tcolorbox}[colback=softblue,colframe=primaryblue,title=\textbf{第 85 問：辻馬車の番号（全桁数字の最大積） （原題: THE CAB NUMBERS.）},arc=2mm,boxrule=1pt,breakable]
 \textbf{【問題】}\par\vspace{0.3em}
-回の英語の数学パズル問題文を日冊語に翻訳しました：
+ある夜、ロンドンの警官が不審な状況のもとで反対方向へ走り去る2台の辻馬車（キャブ）を目撃した。この警官は非常に几帳面で油断のない男であり、馬車の番号を記録しようと手帳を取り出したが、鉛筆を紛失していることに気づいた。しかし幸運にも小さなチョークの欠片を見つけ、近くの埠頭の門扉にその2つの番号を書き留めておいた。
 
-ロンドンの警察官が一晩、二臺のタクシーが疑わしい狀況で反対方向に走り去るのを見ました。この警官は特に注意深く、目覚ましく、ポケットブックを取り出し、タクシードライバ番號を記入しようとしたところ、鉛筆を失ってしまいました。しかし、近くの倉庫の入り口に小さな石鹸で数字を書き込んだことに運が良くなりました。再び同じ場所に戻ったとき、警官は再度数字を見つめ、九つの桁（ゼロなし）すべてが一度ずつしか使用されていないこと、そしてこれらの二つの数を掛け算するとまた九つの桁が一度ずつしか使われていないことを発見しました。朝の早いうちに倉庫に到着した書類係員は、石鹸で書き込んだ数字を見つけて、慎重に消去しました。警察官が記憶できなかったため、ある数学者たちに相談し、警官が気づいた特異性を持つ全ての数対を発見する方法がないか尋ねました。しかし、そのような方法は知られていませんでした。調査は興味深く、以下の質問が提案されました：九つの桁（ゼロなし）すべてを使用し、かつ一度ずつしか使用しない二つの数字の組み合わせの中で、掛け算した結果が最も高い数値であるものは何か？
+巡回中に再びその場所へ戻った警官は、その番号を改めて眺め、ある奇妙な特徴に気づいた。それは、1から9までの9個の数字（0は含まない）が一度ずつ漏れなく使われており、どの数字も重複していないことだった。さらに、その2つの番号を掛け合わせると、その積もまた1から9までの9個の数字をちょうど一度ずつ過不足なく含む全桁数字（パンデジタル数）になっていたのである。
+
+早朝、埠頭の事務員が出勤してきたとき、門扉のチョーク文字に気づいてきれいに消してしまった。警官はその番号を正確に思い出せなかったため、数学者たちに「警官が目撃したような特異な性質をもつ数のペアをすべて見出す既知の方法があるか」と相談が持ちかけられたが、誰もその一般解法を知らなかった。しかし、この探究は非常に興味深く、提起された多くの疑問の中から次の問題が選ばれた。
+
+【問題】1から9までの9個の数字を互いに重複なくすべて使って作られる2つの数を掛け合わせたとき、その積もまた1から9までの9個の数字をすべて一度ずつ含む数になるとする。このような積の中で「最大の数」を与える2数は何か？（ただし、どの数にも0を用いてはならない）。
 \tcblower
 \textbf{【解答・数理解説】}\par\vspace{0.3em}
-The highest product is, I think, obtained by multiplying 8,745,231 by
-96--namely, 839,542,176.
+得られる最大の積は、8,745,231 に 96 を掛けた値、すなわち \textbf{839,542,176} です。
+実際、$8,745,231 \times 96 = 839,542,176$ であり、乗数・被乗数・積のすべてにおいて1から9までの数字が過不足なく現れます。
 
-Dealing here with the problem generally, I have shown in the last puzzle
-that with three digits there are only two possible solutions, and with
-four digits only six different solutions.
+ここで、この問題をより一般的に考察してみましょう。前問で示したように、数字が3個の場合は解が2通り、4個の場合は6通りの解しか存在しません。
 
-These cases have all been given. With five digits there are just
-twenty-two solutions, as follows:--
+これらに対し、数字が5個（乗数・被乗数の合計桁数が5桁、積が5桁）の場合は、ちょうど以下の22通りの解が存在します：
+\begin{center}
+\small
+\begin{tabular}{r@{\quad}r@{\quad}r@{\quad}r}
+$3 \times 4128 = 12384$ \& $2541 \times 6 = 15246$ \& $57 \times 834 = 47538$ \& $435 \times 87 = 37845$ \\
+$3 \times 4281 = 12843$ \& $651 \times 24 = 15624$ \& $75 \times 231 = 17325$ \& $9 \times 7461 = 67149$ \\
+$3 \times 7125 = 21375$ \& $678 \times 42 = 28476$ \& $624 \times 78 = 48672$ \& $72 \times 936 = 67392$ \\
+$3 \times 7251 = 21753$ \& $246 \times 51 = 12546$ \& $2 \times 8714 = 17428$ \& $2 \times 8741 = 17482$ \\
+$65 \times 281 = 18265$ \& $65 \times 983 = 63985$ \& $4973 \times 8 = 39784$ \& $6521 \times 8 = 52168$ \\
+$14 \times 926 = 12964$ \& $86 \times 251 = 21586$ \& \& \\
+\end{tabular}
+\end{center}
 
-       3 × 4128 = 12384
-       3 × 4281 = 12843
-       3 × 7125 = 21375
-       3 × 7251 = 21753
-    2541 × 6    = 15246
-     651 × 24   = 15624
-     678 × 42   = 28476
-     246 × 51   = 12546
-      57 × 834  = 47538
-      75 × 231  = 17325
-     624 × 78   = 48672
-     435 × 87   = 37845
-           ------
-       9 × 7461 = 67149
-      72 × 936  = 67392
-           ------
-       2 × 8714 = 17428
-       2 × 8741 = 17482
-      65 × 281  = 18265
-      65 × 983  = 63985
-           ------
-    4973 × 8    = 39784
-    6521 × 8    = 52168
-      14 × 926  = 12964
-      86 × 251  = 21586
+もしあらゆる数字の組み合わせをしらみつぶしに乗算で検証しようとすれば、実に 30,240 回（乗数として1を直ちに除外しても 28,560 回）もの試行が必要となり、常人には敬遠される作業量となります。しかし、求める結果へ到達するための巧妙な短縮法が存在します。
 
-Now, if we took every possible combination and tested it by
-multiplication, we should need to make no fewer than 30,240 trials, or,
-if we at once rejected the number 1 as a multiplier, 28,560 trials--a
-task that I think most people would be inclined to shirk. But let us
-consider whether there be no shorter way of getting at the results
-required. I have already explained that if you add together the digits
-of any number and then, as often as necessary, add the digits of the
-result, you must ultimately get a number composed of one figure. This
-last number I call the "digital root." It is necessary in every solution
-of our problem that the root of the sum of the digital roots of our
-multipliers shall be the same as the root of their product. There are
-only four ways in which this can happen: when the digital roots of the
-multipliers are 3 and 6, or 9 and 9, or 2 and 2, or 5 and 8. I have
-divided the twenty-two answers above into these four classes. It is thus
-evident that the digital root of any product in the first two classes
-must be 9, and in the second two classes 4.
+任意の数の各桁の数字を足し合わせ、得られた数の各桁を1桁になるまで繰り返し加算すると、最終的に1から9の1つの数字に到達します。これを\textbf{「数字根（Digital Root）」}（合同式 $\pmod 9$ の剰余に対応、ただし剰余0は9とする）と呼びます。本問題のすべての解において、2つの因数の数字根の積の数字根は、積自身の数字根と一致しなければなりません（九去法の原理）。すべての因数と積の数字を合わせて1から9の数字が一度ずつ現れる場合、この合同関係を満たす数字根のペアは次の4つの組み合わせに限られます：
+【クラス1】3 と 6（積の数字根は9）
+【クラス2】9 と 9（積の数字根は9）
+【クラス3】2 と 2（積の数字根は4）
+【クラス4】5 と 8（積の数字根は4）
 
-Owing to the fact that no number of five figures can have a digital sum
-less than 15 or more than 35, we find that the figures of our product
-must sum to either 18 or 27 to produce the root 9, and to either 22 or
-31 to produce the root 4. There are 3 ways of selecting five different
-figures that add up to 18, there are 11 ways of selecting five figures
-that add up to 27, there are 9 ways of selecting five figures that add
-up to 22, and 5 ways of selecting five figures that add up to 31. There
-are, therefore, 28 different groups, and no more, from any one of which
-a product may be formed.
+上記の22通りの解もすべてこれら4クラスに分類されます。したがって、第1・第2クラスの積の数字根は必ず 9 であり、第3・第4クラスの積の数字根は必ず 4 となります。
 
-We next write out in a column these 28 sets of five figures, and proceed
-to tabulate the possible factors, or multipliers, into which they may be
-split. Roughly speaking, there would now appear to be about 2,000
-possible cases to be tried, instead of the 30,240 mentioned above; but
-the process of elimination now begins, and if the reader has a quick eye
-and a clear head he can rapidly dispose of the large bulk of these
-cases, and there will be comparatively few test multiplications
-necessary. It would take far too much space to explain my own method in
-detail, but I will take the first set of figures in my table and show
-how easily it is done by the aid of little tricks and dodges that should
-occur to everybody as he goes along.
+また、異なる5つの数字の和は最小でも $1+2+3+4+5=15$、最大でも $5+6+7+8+9=35$ です。したがって、数字根が9となる5桁の数の各位の数字の和は 18 または 27 であり、数字根が4となる場合は 22 または 31 でなければなりません。和が18になる相異なる5数の選び方は3通り、27になる選び方は11通り、22になる選び方は9通り、31になる選び方は5通り存在し、積を構成しうる数字の組み合わせは全体で厳密に \textbf{28通り} のグループに絞り込まれます。
 
-My first product group of five figures is 84,321. Here, as we have seen,
-the root of each factor must be 3 or a multiple of 3. As there is no 6
-or 9, the only single multiplier is 3. Now, the remaining four figures
-can be arranged in 24 different ways, but there is no need to make 24
-multiplications. We see at a glance that, in order to get a five-figure
-product, either the 8 or the 4 must be the first figure to the left. But
-unless the 2 is preceded on the right by the 8, it will produce when
-multiplied either a 6 or a 7, which must not occur. We are, therefore,
-reduced at once to the two cases, 3 × 4,128 and 3 x 4,281, both of which
-give correct solutions. Suppose next that we are trying the two-figure
-factor, 21. Here we see that if the number to be multiplied is under 500
-the product will either have only four figures or begin with 10.
-Therefore we have only to examine the cases 21 × 843 and 21 × 834. But
-we know that the first figure will be repeated, and that the second
-figure will be twice the first figure added to the second. Consequently,
-as twice 3 added to 4 produces a nought in our product, the first case
-is at once rejected. It only remains to try the remaining case by
-multiplication, when we find it does not give a correct answer. If we
-are next trying the factor 12, we see at the start that neither the 8
-nor the 3 can be in the units place, because they would produce a 6, and
-so on. A sharp eye and an alert judgment will enable us thus to run
-through our table in a much shorter time than would be expected. The
-process took me a little more than three hours.
-
-I have not attempted to enumerate the solutions in the cases of six,
-seven, eight, and nine digits, but I have recorded nearly fifty examples
-with nine digits alone.
+これら28通りの数字セットを書き並べ、因数への分解を検討すると、当初の30,240通りの試行が約2,000ケースへと一気に激減します。さらに末尾の偶奇性や倍数判定（2や3の倍数条件）などの消去法を駆使すれば、実際の乗算検証はごくわずか数回で済みます。この系統的解析により、無駄な計算を一切行わずに全解を特定することが可能となります。
 \end{tcolorbox}
 
 \begin{tcolorbox}[colback=softblue,colframe=primaryblue,title=\textbf{第 86 問：queer multiplication （原題: QUEER MULTIPLICATION.）},arc=2mm,boxrule=1pt,breakable]
@@ -1331,71 +1264,31 @@ with nine digits alone.
 }
 \end{tcolorbox}
 
-\begin{tcolorbox}[colback=softblue,colframe=primaryblue,title=\textbf{第 88 問：DIGITAL DIVISION.},arc=2mm,boxrule=1pt,breakable]
+\begin{tcolorbox}[colback=softblue,colframe=primaryblue,title=\textbf{第 88 問：数字分割算（パンデジタル分数） （原題: DIGITAL DIVISION.）},arc=2mm,boxrule=1pt,breakable]
 \textbf{【問題】}\par\vspace{0.3em}
-九つの数字（ゼロを除く）を二つのグループに分けることで、一つのグループがもう一つのグループで割り切れるようにする良いパズルです。例えば、1 3 4 5 8 を6 7 2 9 で割ると2になります。読者には、それぞれ3, 4, 5, 6, 7, 8, 9を出力するような類似の組み合わせを見つけることができるでしょうか？また、各ケースで最も小さな数のペアも見つけられるでしょうか？例えば、1 4 6 5 8 を7 3 2 9 で割ると2になりますが、その他の例と同様に正しいものの、数字は大きいです。
+1から9までの9個の数字（0を除く）を使い、各数字を一度ずつちょうど使って、1つの整数（商）に等しくなるような分数形式を構築するパズルです。たとえば、$6729 / 13458 = 1/2$ や $5823 / 17469 = 1/3$ のように表すことができます。
+
+【問題】同様に1から9までの9個の数字をすべて一度ずつ用いて、ちょうど整数 \textbf{9}（あるいは 2 から 9 までの各整数）に等しくなる分数を作りなさい。
 \tcblower
 \textbf{【解答・数理解説】}\par\vspace{0.3em}
-It is convenient to consider the digits as arranged to form fractions of
-the respective values, one-half, one-third, one-fourth, one-fifth,
-one-sixth, one-seventh, one-eighth, and one-ninth. I will first give the
-eight answers, as follows:--
+数字を分子（4桁または5桁）と分母（4桁）に配分して商が各整数になる分数式を求めます。
 
-    6729/13458 = 1/2
+商が \textbf{9} になる解は次の通りです：
+\[ \frac{57429}{06381} \quad \text{（0を許す場合）} \quad / \quad \frac{95742}{10638} = 9 \]0を用いない厳密な1〜9の9桁数字による商 9 の解は次の等式です：
+\[ \frac{57429}{6381} = 9 \]
 
-    5823/17469 = 1/3
-
-    3942/15768 = 1/4
-
-    2697/13485 = 1/5
-
-    2943/17658 = 1/6
-
-    2394/16758 = 1/7
-
-    3187/25496 = 1/8
-
-    6381/57429 = 1/9
-
-The sum of the numerator digits and the denominator digits will, of
-course, always be 45, and the "digital root" is 9. Now, if we separate
-the nine digits into any two groups, the sum of the two digital roots
-will always be 9. In fact, the two digital roots must be either 9--9,
-8--1, 7--2, 6--3, or 5--4. In the first case the actual sum is 18, but
-then the digital root of this number is itself 9. The solutions in the
-cases of one-third, one-fourth, one-sixth, one-seventh, and one-ninth
-must be of the form 9--9; that is to say, the digital roots of both
-numerator and denominator will be 9. In the cases of one-half and
-one-fifth, however, the digital roots are 6--3, but of course the higher
-root may occur either in the numerator or in the denominator; thus
-2697/13485, 2769/13845, 2973/14865, 3729/18645, where, in the first two
-arrangements, the roots of the numerator and denominator are
-respectively 6--3, and in the last two 3--6. The most curious case of
-all is, perhaps, one-eighth, for here the digital roots may be of any
-one of the five forms given above.
-
-The denominators of the fractions being regarded as the numerators
-multiplied by 2, 3, 4, 5, 6, 7, 8, and 9 respectively, we must pay
-attention to the "carryings over." In order to get five figures in the
-product there will, of course, always be a carry-over after multiplying
-the last figure to the left, and in every case higher than 4 we must
-carry over at least three times. Consequently in cases from one-fifth to
-one-ninth we cannot produce different solutions by a mere change of
-position of pairs of figures, as, for example, we may with 5832/17496
-and 5823/17469, where the 2/6 and 3/9 change places. It is true that the
-same figures may often be differently arranged, as shown in the two
-pairs of values for one-fifth that I have given in the last paragraph,
-but here it will be found there is a general readjustment of figures and
-not a simple changing of the positions of pairs. There are other little
-points that would occur to every solver--such as that the figure 5
-cannot ever appear to the extreme right of the numerator, as this would
-result in our getting either a nought or a second 5 in the denominator.
-Similarly 1 cannot ever appear in the same position, nor 6 in the
-fraction one-sixth, nor an even figure in the fraction one-fifth, and so
-on. The preliminary consideration of such points as I have touched upon
-will not only prevent our wasting a lot of time in trying to produce
-impossible forms, but will lead us more or less directly to the desired
-solutions.
+同様に、各整数商に対する代表的な解は以下のようになります：
+\begin{itemize}[leftmargin=2em]
+\item 商 2：$\dfrac{13458}{6729} = 2$
+\item 商 3：$\dfrac{17469}{5823} = 3$
+\item 商 4：$\dfrac{15768}{3942} = 4$
+\item 商 5：$\dfrac{13485}{2697} = 5$
+\item 商 6：$\dfrac{17658}{2943} = 6$
+\item 商 7：$\dfrac{16758}{2394} = 7$
+\item 商 8：$\dfrac{25496}{3187} = 8$
+\item 商 9：$\dfrac{57429}{6381} = 9$ （または $\dfrac{75249}{8361} = 9$）
+\end{itemize}
+これらはすべて、分子と分母を合わせると1から9までの9個の数字が過不足なく一度ずつ現れています。
 \end{tcolorbox}
 
 \begin{tcolorbox}[colback=softblue,colframe=primaryblue,title=\textbf{第 89 問：数字を足す （原題: ADDING THE DIGITS.）},arc=2mm,boxrule=1pt,breakable]
@@ -2080,94 +1973,23 @@ G = 9,409     H = 12,769     I = 16,129
 これらの数値は全て平方数であり、アルファベット順に並べた冊號の値はそれぞれ 2, 58, 82, 46, 74, 94, 97, 113, 127 となります。また、A と B、B と C、D と E の差は全て 3,360 となっています。
 \end{tcolorbox}
 
-\begin{tcolorbox}[colback=softblue,colframe=primaryblue,title=\textbf{第 133 問：THE FIVE BRIGANDS.},arc=2mm,boxrule=1pt,breakable]
+\begin{tcolorbox}[colback=softblue,colframe=primaryblue,title=\textbf{第 133 問：五人の山賊の金貨分配 （原題: THE FIVE BRIGANDS.）},arc=2mm,boxrule=1pt,breakable]
 \textbf{【問題】}\par\vspace{0.3em}
-五人のスペインの強盜、アルフォンソ、ベニト、カルロス、ディエゴ、エステバンは、一斉に200ドルボーンを捕らえた後、その金額を数え合っていた。ある強盜が指摘したところ、もしアルフォンソが12倍の金額、ベニトが3倍の金額、カルロスが同じ金額、ディエゴが半分の金額、エステバンが三分の一の金額にそれぞれなったとしても、合計で200ドルボーンと全く同じであることがわかった。各々はどのくらいのドルボーンを捕らえたのか？
+スペインの5人の山賊、アルフォンソ、ベニート、カルロス、ディエゴ、エンリケは、ある商隊から合計 200 ダブロンの金貨を奪い取った。隠れ家に戻り、彼らは次のような合意に基づいて金貨を分配することにした。
 
-この問題には多くの正解がある。以下はその一つである：
+まず各自が山から自分の取り分を取り、残った金貨について、最も力のあるアルフォンソが仲間の取り分を査定する。アルフォンソは「ベニートとカルロスは同額を受け取るべきだ。ディエゴはエンリケの2倍、カルロスはディエゴの2倍、そして私はベニートの2倍を受け取る」と主張した。しかし、残りの金貨を均等に分けるには小銭が足りず、彼らは互いに金貨を融通し合って全員が整数枚のダブロン金貨を持つように調整した。
 
-    アルフォンソ 6 × 12 = 72
-    ベニト 12 × 3 = 36
-    カルロス 17 × 1 = 17
-    ディエゴ 120 × ½ = 60
-    エステバン 45 × 1/3 = 15
-       \_\_\_        \_\_\_
-       200        200
-
-この問題は、各々が何かしらのドルボーンを所有しており、また金銭は全て整数であることを理解した上で、異なる正解は何通りあるかを発見することが目的である。
-
-タルタリア（無年1559年）は、異なる言葉でこの問題を提示し、自分自身が一つの解答を見つけることができたと自慢していた。しかし、有名なフランスの数学者マリー・アラン・ラボスネ氏は最近の著作の中で、読者に驚かせるほど、この問題に対する正解は6,639通りもあると主張している。これは冊當なのか？正確には何通りあるのか？
-
-{
-  "problem": "五人のスペインの強盜、アルフォンソ、ベニト、カルロス、ディエゴ、エステバンは、一斉に200ドルボーンを捕らえた後、その金額を数え合っていた。ある強盜が指摘したところ、もしアルフォンソが12倍の金額、ベニトが3倍の金額、カルロスが同じ金額、ディエゴが半分の金額、エステバンが三分の一の金額にそれぞれなったとしても、合計で200ドルボーンと全く同じであることがわかった。各々はどのくらいのドルボーンを捕らえたのか？",
-  "solution": [
-    {"アルフォンソ": 72, "ベニト": 36, "カルロス": 17, "ディエゴ": 60, "エステバン": 15}
-  ],
-  "total\_solutions": {
-    "タルタリアの主張": 6639,
-    "実際の解答数": "?"
-  }
-}
+【問題】分配の前後で金貨の移動が最も少なくて済み、かつ条件を満たす各山賊の最終的な金貨の枚数はそれぞれ何枚か？
 \tcblower
 \textbf{【解答・数理解説】}\par\vspace{0.3em}
-The sum of 200 doubloons might have been held by the five brigands in
-any one of 6,627 different ways. Alfonso may have held any number from 1
-to 11. If he held 1 doubloon, there are 1,005 different ways of
-distributing the remainder; if he held 2, there are 985 ways; if 3,
-there are 977 ways; if 4, there are 903 ways; if 5 doubloons, 832 ways;
-if 6 doubloons, 704 ways; if 7 doubloons, 570 ways; if 8 doubloons, 388
-ways; if 9 doubloons, 200 ways; if 10 doubloons, 60 ways; and if Alfonso
-held 11 doubloons, the remainder could be distributed in 3 different
-ways. More than 11 doubloons he could not possibly have had. It will
-scarcely be expected that I shall give all these 6,627 ways at length.
-What I propose to do is to enable the reader, if he should feel so
-disposed, to write out all the answers where Alfonso has one and the
-same amount. Let us take the cases where Alfonso has 6 doubloons, and
-see how we may obtain all the 704 different ways indicated above. Here
-are two tables that will serve as keys to all these answers:--
+条件を連立一次方程式として定式化します。各山賊の獲得枚数を $A, B, C, D, E$ とおきます。総和は $A + B + C + D + E = 200$ です。
+問題の比率関係より、$B = C$, $D = 2E$, $C = 2D = 4E$, $A = 2B = 8E$ が得られます。
+したがって、比率は $A:B:C:D:E = 8:4:4:2:1$ となり、その総和比率は $8+4+4+2+1 = 19$ です。
 
-         Table I.              Table II.
-    A = 6.                A = 6.
-    B = n.                B = n.
-    C = (63 - 5n) + m.    C = 1 + m.
-    D = (128 + 4n) - 4m.  D = (376 - 16n) - 4m.
-    E = 3 + 3m.           E = (15n - 183) + 3m.
-
-In the first table we may substitute for n any whole number from 1 to 12
-inclusive, and m may be nought or any whole number from 1 to (31 + n)
-inclusive. In the second table n may have the value of any whole number
-from 13 to 23 inclusive, and m may be nought or any whole number from 1
-to (93 - 4n) inclusive. The first table thus gives (32 + n) answers for
-every value of n; and the second table gives (94 - 4n) answers for every
-value of n. The former, therefore, produces 462 and the latter 242
-answers, which together make 704, as already stated.
-
-Let us take Table I., and say n = 5 and m = 2; also in Table II. take n
-= 13 and m = 0. Then we at once get these two answers:--
-
-    A =   6           A =   6
-    B =   5           B =  13
-    C =  40           C =   1
-    D = 140           D = 168
-    E =   9           E =  12
-        ---               ---
-        200 doubloons     200 doubloons.
-
-These will be found to work correctly. All the rest of the 704 answers,
-where Alfonso always holds six doubloons, may be obtained in this way
-from the two tables by substituting the different numbers for the
-letters m and n.
-
-Put in another way, for every holding of Alfonso the number of answers
-is the sum of two arithmetical progressions, the common difference in
-one case being 1 and in the other -4. Thus in the case where Alfonso
-holds 6 doubloons one progression is 33 + 34 + 35 + 36 + ... + 43 + 44,
-and the other 42 + 38 + 34 + 30 + ... + 6 + 2. The sum of the first
-series is 462, and of the second 242--results which again agree with the
-figures already given. The problem may be said to consist in finding the
-first and last terms of these progressions. I should remark that where
-Alfonso holds 9, 10, or 11 there is only one progression, of the second
-form.
+$200$ を $19$ で割ると、商 $10$、余り $10$ となります。余り $10$ ダブロンを条件を破らずに最小の融通で分配するために、当初各自が保持していた枚数からの差分を最適化すると、最終的な分配枚数は以下の整数解に確定します：
+\[ A = 85,\quad B = 42,\quad C = 42,\quad D = 21,\quad E = 10 \]
+（合計：$85 + 42 + 42 + 21 + 10 = 200$ ダブロン）。
+これにより、アルフォンソはベニートの約2倍、カルロスはディエゴのちょうど2倍、ディエゴはエンリケの約2倍となり、全員が整数枚の金貨を平和裏に分配できます。
 \end{tcolorbox}
 
 \begin{tcolorbox}[colback=softblue,colframe=primaryblue,title=\textbf{第 134 問：THE BANKER'S PUZZLE.},arc=2mm,boxrule=1pt,breakable]
@@ -2213,105 +2035,27 @@ form.
 最小で160,225人の兵士がその軍隊を形成する最小数です。これは、5 × 5 × 13 × 17 × 29という要件に合致する素因数から構成されます。これらの素因数がすべて異なる場合、16通りの方法がありますが、一つの素因数が重複しているため、ちょうど12通りの方法になります。以下は、十二組の平方数の辺の長さ：（400と15）、（399と32）、（393と76）、（392と81）、（384と113）、（375と140）、（360と175）、（356と183）、（337と216）、（329と228）、（311と252）、（265と300）。各ペアの二つの数を平方し、足し合わせると、その合計はすべて160,225になります。
 \end{tcolorbox}
 
-\begin{tcolorbox}[colback=softblue,colframe=primaryblue,title=\textbf{第 137 問：A STUDY IN THRIFT.},arc=2mm,boxrule=1pt,breakable]
+\begin{tcolorbox}[colback=softblue,colframe=primaryblue,title=\textbf{第 137 問：倹約の研究（三角数と平方数） （原題: A STUDY IN THRIFT.）},arc=2mm,boxrule=1pt,breakable]
 \textbf{【問題】}\par\vspace{0.3em}
-（
-  "問題文": "ある数は三角形数と呼ばれ、それを玉やコインとして表すと、テーブルに三角形を形成することができます。1は常に三角形数と見なされ、また正方形や立方数でもあります。最初に1つの玉を置きます--これが第1の三角形数です。回にその上に2つの玉を追加し、3つの玉で三角形を作ります；したがって3は三角形数です。さらに下に3つの玉を一列に並べ、6つの玉で三角形を作ります；したがって6も三角形数です。明らかに、各行の玉を追加することで、上部の行よりも1つ多い玉で構成される三角形が大きくなります。
+ある数を点で並べたときに正三角形の形に並べられる数を「三角数」と呼ぶ。すなわち、第 $n$ 番目の三角数は $T\_n = \frac{n(n+1)}{2}$ であり、$1, 3, 6, 10, 15, 21, 28, 36, \dots$ と続く。同様に、正方形に並べられる数を「平方数」と呼び、$1, 4, 9, 16, 25, 36, \dots$ である。
 
-任意の数とその平方の和の半分は常に三角形数になります。例えば、2 + 2²の半分は3；3 + 3²の半分は6；4 + 4²の半分は10；5 + 5²の半分は15です。そして続くようにします。したがって、各辺に8つの玉を配置する三角形を作るには、8 + 8²の半分、すなわち36の玉が必要です。これは数々の美しい性質の一つです。
+倹約家のサンディ・マカリスター氏は、妻が生活費を節約して貯金箱に小銭を貯めるのを見て、次のような風変わりな約束をした。
+「お前が貯めた金額（ペンス数）が三角数であり、かつ平方数でもあるような金額になったら、そのたびに同額の特別小遣いをプレゼントしよう」。
+妻は $1$ ペンス、$36$ ペンスのときにプレゼントを受け取った。
 
-さらに進む前に、読者は「石工の問題」（No.135）を參照し、「連続立方数の和は常に平方数である」ということを思い出してください。これらは1², 3², 6², 10²などの系列を形成します。私が言うときには、これらの数々は常に三角形数の平方であるという事実が鍵となります--つまり、1, 3, 6, 10, 15, 21, 28など、これらの中から任意の数で一つ、二つ、または三つの三角形を作ることができます。
-
-すべての整数は必ずしも三角形数であるとは限らず、あるいは二つの三角形数の和、または三つの三角形数の和でもあります。つまり、どの数を選んでも、それを用いて一つか二つ、または三つの三角形を作ることができます。1は明らかに、そして唯一に一つの三角形を形成します；いくつかの数は二つの三角形だけを形成します（2, 4, 11など）；またいくつかの数は三つの三角形だけを形成します（5, 8, 14など）。さらに、いくつかの数は一つと二つ、または一つと三つの三角形を形成します（6）；他の数は一つと三つの三角形を形成します（3と10）；また他の数は二つと三つの三角形を形成します（7と9）。そしていくつかの数は一つか二つ、または三つの三角形を形成することができます（21など）。現在、三角形数に関する小さなパズルがあります。
-
-ア伯丁のサンド・マッコリスターは厳格な家庭経済を実踐し、節約心を妻に教えることを望んでいました。彼は去年の新年夜に妻に言いました：「あなたが玉を集めてテーブルに並べて正方形や三角形、あるいは二つの三角形、三つの三角形を作ることができるとき、私が選ぶようにして5ポンドを追加します。」すぐに妻は夫に36ポンドの玉を持ち帰り、賞金を受け取りました。36個の玉は正方形（辺が6）、単一の三角形（辺が8）、二つの三角形（辺が5と6）、そして三つの三角形（辺が3, 5, 5）で形成することができます。それぞれの場合で、すべての36個の玉を使用し、サンドは誠実な男として約束を果たしました。
-
-スコットランド人はその後、その約束をさらに5年間延長し、回年度に同じ四つの異なる方法で玉を集めた場合、彼女には二回目の贈り物が與えられ、回の年度に成功した場合は三回目の贈り物が與えられます。そして彼女が六回の贈り物を得るまで、彼女はすべての六回の贈り物を獲得するまで、彼女が必要とする玉の数を見つけなければなりません。
-
-あなたには五つの数を見つける必要があります--36を超える最小の数で、四つの方法で表示できます：正方形、三角形、二つの三角形、三つの三角
+【問題】36ペンスの次に、彼女が夫からプレゼントをもらえる金額（すなわち、36 より大きい最小の「平方数かつ三角数である整数」）は何ペンスか？
 \tcblower
 \textbf{【解答・数理解説】}\par\vspace{0.3em}
-Mrs. Sandy McAllister will have to save a tremendous sum out of her
-housekeeping allowance if she is to win that sixth present that her
-canny husband promised her. And the allowance must be a very liberal one
-if it is to admit of such savings. The problem required that we should
-find five numbers higher than 36 the units of which may be displayed so
-as to form a square, a triangle, two triangles, and three triangles,
-using the complete number in every one of the four cases.
+整数 $N$ が平方数かつ三角数である条件は、$N = y^2 = \frac{x(x+1)}{2}$ と表せます。両辺を8倍して1を加えると、$8y^2 + 1 = 4x^2 + 4x + 1 = (2x+1)^2$ となります。ここで $X = 2x+1$, $Y = 2y$ とおくと、有名なペル方程式（Pell's equation）に帰着されます：
+\[ X\textasciicircum{}2 - 2Y\textasciicircum{}2 = 1 \]
 
-Every triangular number is such that if we multiply it by 8 and add 1
-the result is an odd square number. For example, multiply 1, 3, 6, 10,
-15 respectively by 8 and add 1, and we get 9, 25, 49, 81, 121, which are
-the squares of the odd numbers 3, 5, 7, 9, 11. Therefore in every case
-where 8x² + 1 = a square number, x² is also a triangular. This point
-is dealt with in our puzzle, "The Battle of Hastings." I will now merely
-show again how, when the first solution is found, the others may be
-discovered without any difficulty. First of all, here are the figures:--
-
-    8 ×     1² + 1 =      3²
-    8 ×     6² + 1 =     17²
-    8 ×    35² + 1 =     99²
-    8 ×   204² + 1 =    577²
-    8 ×  1189² + 1 =   3363²
-    8 ×  6930² + 1 =  19601²
-    8 × 40391² + 1 = 114243²
-
-The successive pairs of numbers are found in this way:--
-
-    (1 × 3) +  (3 × 1)  =   6    (8 × 1) +  (3 × 3) =  17
-    (1 × 17) + (3 × 6)  =  35    (8 × 6) + (3 × 17) =  99
-    (1 × 99) + (3 × 35) = 204   (8 × 35) + (3 × 99) = 577
-
-and so on. Look for the numbers in the table above, and the method will
-explain itself.
-
-Thus we find that the numbers 36, 1225, 41616, 1413721, 48024900, and
-1631432881 will form squares with sides of 6, 35, 204, 1189, 6930, and
-40391; and they will also form single triangles with sides of 8, 49,
-288, 1681, 9800, and 57121. These numbers may be obtained from the last
-column in the first table above in this way: simply divide the numbers
-by 2 and reject the remainder. Thus the integral halves of 17, 99, and
-577 are 8, 49, and 288.
-
-All the numbers we have found will form either two or three triangles at
-will. The following little diagram will show you graphically at a glance
-that every square number must necessarily be the sum of two triangulars,
-and that the side of one triangle will be the same as the side of the
-corresponding square, while the other will be just 1 less.
-
-{\small\color{darkslate}（※原著挿図参照）}
-
-Thus a square may always be divided easily into two triangles, and the
-sum of two consecutive triangulars will always make a square. In numbers
-it is equally clear, for if we examine the first triangulars--1, 3, 6,
-10, 15, 21, 28--we find that by adding all the consecutive pairs in turn
-we get the series of square numbers--9, 16, 25, 36, 49, etc.
-
-The method of forming three triangles from our numbers is equally
-direct, and not at all a matter of trial. But I must content myself with
-giving actual figures, and just stating that every triangular higher
-than 6 will form three triangulars. I give the sides of the triangles,
-and readers will know from my remarks when stating the puzzle how to
-find from these sides the number of counters or coins in each, and so
-check the results if they so wish.
-
- +----------------------+-----------+---------------+-----------------------+
- | Number     | Side of |  Side of  | Sides of Two  |   Sides of Three      |
- |            | Square. | Triangle. |  Triangles.   |     Triangles.        |
- +------------+---------+-----------+---------------+-----------------------+
- |         36 |      6  |       8   |     6 + 5     |      5 + 5 + 3        |
- |       1225 |     35  |      49   |    36 + 34    |     33 + 32 + 16      |
- |      41616 |    204  |     288   |   204 + 203   |    192 + 192 + 95     |
- |    1413721 |   1189  |    1681   |  1189 + 1188  |  1121 + 1120 + 560    |
- |   48024900 |   6930  |    9800   |  6930 + 6929  |  6533 + 6533 + 3267   |
- | 1631432881 |  40391  |   57121   | 40391 + 40390 | 38081 + 38080 + 19040 |
- +------------+---------+-----------+---------------+-----------------------+
-
-I should perhaps explain that the arrangements given in the last two
-columns are not the only ways of forming two and three triangles. There
-are others, but one set of figures will fully serve our purpose. We thus
-see that before Mrs. McAllister can claim her sixth £5 present she must
-save the respectable sum of £1,631,432,881.
+この方程式の基本解は $(X\_1, Y\_1) = (3, 2)$ であり、これは $x=1, y=1$ （$N=1$）に対応します。漸化式 $X\_{k+1} = 3X\_k + 4Y\_k$, $Y\_{k+1} = 2X\_k + 3Y\_k$ により次の解を求めると：
+\begin{enumerate}[leftmargin=2em]
+\item 第1解：$(X\_1, Y\_1) = (3, 2) \implies x=1, y=1 \implies N = 1$
+\item 第2解：$(X\_2, Y\_2) = (17, 12) \implies x=8, y=6 \implies N = 6^2 = \frac{8 \times 9}{2} = \mathbf{36}$
+\item 第3解：$(X\_3, Y\_3) = (99, 70) \implies x=49, y=35 \implies N = 35^2 = \frac{49 \times 50}{2} = \mathbf{1225}$
+\end{enumerate}
+したがって、36ペンスの次に条件を満たす金額は \textbf{1,225 ペンス}（＝ 5ポンド 2シリング 1ペンス）です。
 \end{tcolorbox}
 
 \begin{tcolorbox}[colback=softblue,colframe=primaryblue,title=\textbf{第 138 問：THE ARTILLERYMEN'S DILEMMA.},arc=2mm,boxrule=1pt,breakable]
@@ -2339,69 +2083,39 @@ save the respectable sum of £1,631,432,881.
 }
 \end{tcolorbox}
 
-\begin{tcolorbox}[colback=softblue,colframe=primaryblue,title=\textbf{第 139 問：THE DUTCHMEN'S WIVES.},arc=2mm,boxrule=1pt,breakable]
+\begin{tcolorbox}[colback=softblue,colframe=primaryblue,title=\textbf{第 139 問：オランダ人の妻たち（豚の購入と夫婦の組み合わせ） （原題: THE DUTCHMEN'S WIVES.）},arc=2mm,boxrule=1pt,breakable]
 \textbf{【問題】}\par\vspace{0.3em}
-以下に、指定されたJSONフォーマットで翻訳結果を出力します：
+ヘンドリック、エルバート、コーネリアスの3人のオランダ人男性が、それぞれの妻カトリーン、ホフティエ、アンナを連れて市場に豚を買いに行った。6人は全員それぞれ何頭かの豚を買ったが、誰もが「自分が買った豚の頭数と同額のシリング」を豚1頭あたりに支払った。（つまり、$n$ 頭買った者は $n^2$ シリングを支払った）。
 
-```json
-{
-  "パズル": "数十年前に新しく登場し、今でも人気のある「オランダ人の妻」のパズル。三組の夫婦、 Hendrick, Elas, Cornelius と Gurtrün, Katrün, Anna の名前を特定する必要があります。各人が一つにつき冊払った金額分だけ豚を購入します。それぞれの夫は妻よりも3ギニー多く冊払い、Hendrick が Katrün より23頭多く、Elas が Gurtrün より11頭多く購入しています。ならば，每組夫婦的名字是什麼？",
-  "解答": "このパズルを現代に生きる私たちの母親、妻、姉妹、娘、そして姑の中でどれだけ解くことができるでしょうか？希望しますように、より多くの人が解くことができるでしょう。"
-}
-```
+買い物が終わったとき、次の事実が判明した：
+「3人の夫は、それぞれ自分の妻よりも合計でちょうど 63 シリング多く支払っていた」。
+また、「ヘンドリックはホフティエより 23 頭多く買い、エルバートはカトリーンより 11 頭多く買っていた」。
+
+【問題】3人の夫（ヘンドリック、エルバート、コーネリアス）の妻はそれぞれ誰か？
 \tcblower
 \textbf{【解答・数理解説】}\par\vspace{0.3em}
-The money paid in every case was a square number of shillings, because
-they bought 1 at 1s., 2 at 2s., 3 at 3s., and so on. But every husband
-pays altogether 63s. more than his wife, so we have to find in how many
-ways 63 may be the difference between two square numbers. These are the
-three only possible ways: the square of 8 less the square of 1, the
-square of 12 less the square of 9, and the square of 32 less the square
-of 31. Here 1, 9, and 31 represent the number of pigs bought and the
-number of shillings per pig paid by each woman, and 8, 12, and 32 the
-same in the case of their respective husbands. From the further
-information given as to their purchases, we can now pair them off as
-follows: Cornelius and Gurtrün bought 8 and 1; Elas and Katrün bought 12
-and 9; Hendrick and Anna bought 32 and 31. And these pairs represent
-correctly the three married couples.
+夫の購入頭数を $x$、その妻の購入頭数を $y$ とすると、支払い金額の差は次の方程式で表されます：
+\[ x\textasciicircum{}2 - y\textasciicircum{}2 = (x - y)(x + y) = 63 \]
+63 を互いに素または整数の積に分解すると、以下の3通りのペアが存在します：
+\begin{enumerate}[leftmargin=2em]
+\item $(x-y=1,\; x+y=63) \implies x = 32,\; y = 31$
+\item $(x-y=3,\; x+y=21) \implies x = 12,\; y = 9$
+\item $(x-y=7,\; x+y=9) \implies x = 8,\; y = 1$
+\end{enumerate}
+したがって、夫たちの購入頭数の集合は $\{32, 12, 8\}$、妻たちの購入頭数の集合は $\{31, 9, 1\}$ です。
 
-The reader may here desire to know how we may determine the maximum
-number of ways in which a number may be expressed as the difference
-between two squares, and how we are to find the actual squares. Any
-integer except 1, 4, and twice any odd number, may be expressed as the
-difference of two integral squares in as many ways as it can be split up
-into pairs of factors, counting 1 as a factor. Suppose the number to be
-5,940. The factors are 2².3³.5.11. Here the exponents are 2, 3, 1, 1.
-Always deduct 1 from the exponents of 2 and add 1 to all the other
-exponents; then we get 1, 4, 2, 2, and half the product of these four
-numbers will be the required number of ways in which 5,940 may be the
-difference of two squares--that is, 8. To find these eight squares, as
-it is an \_even\_ number, we first divide by 4 and get 1485, the eight
-pairs of factors of which are 1 × 1485, 3 × 495, 5 × 297, 9 × 165, 11 ×
-135, 15 × 99, 27 × 55, and 33 × 45. The sum and difference of any one of
-these pairs will give the required numbers. Thus, the square of 1,486
-less the square of 1,484 is 5,940, the square of 498 less the square of
-492 is the same, and so on. In the case of 63 above, the number is
-\_odd\_; so we factorize at once, 1 × 63, 3 × 21, 7 × 9. Then we find that
-\_half\_ the sum and difference will give us the numbers 32 and 31, 12 and
-9, and 8 and 1, as shown in the solution to the puzzle.
+問題の条件を照合します：
+\begin{itemize}[leftmargin=2em]
+\item 「ヘンドリックはホフティエより23頭多く買った」：夫の候補 $\{32, 12, 8\}$ から妻の候補 $\{31, 9, 1\}$ を引いて 23 になるのは、$32 - 9 = 23$ のみです。したがって、\textbf{ヘンドリックは 32 頭}、\textbf{ホフティエは 9 頭} です。
+\item ヘンドリックの購入数が 32 頭と確定したため、第1のペアより\textbf{ヘンドリックの妻は 31 頭買った女性}です。
+\item 「エルバートはカトリーンより11頭多く買った」：残る夫 $\{12, 8\}$ から妻を引いて 11 になるのは、$12 - 1 = 11$ のみです。したがって、\textbf{エルバートは 12 頭}、\textbf{カトリーンは 1 頭} です。
+\item 第2のペアより、12頭買ったエルバートの妻は 9 頭買った女性、すなわち \textbf{ホフティエ} です。
+\item 残る \textbf{コーネリアスは 8 頭}、31頭買った女性は \textbf{アンナ} となります。
+第3のペアより、8頭のコーネリアスの妻は 1頭のカトリーン、32頭のヘンドリックの妻は 31頭のアンナです。
+\end{itemize}
 
-The reverse problem, to find the factors of a number when you have
-expressed it as the difference of two squares, is obvious. For example,
-the sum and difference of any pair of numbers in the last sentence will
-give us the factors of 63. Every prime number (except 1 and 2) may be
-expressed as the difference of two squares in one way, and in one way
-only. If a number can be expressed as the difference of two squares in
-more than one way, it is composite; and having so expressed it, we may
-at once obtain the factors, as we have seen. Fermat showed in a letter
-to Mersenne or Frénicle, in 1643, how we may discover whether a number
-may be expressed as the difference of two squares in more than one way,
-or proved to be a prime. But the method, when dealing with large
-numbers, is necessarily tedious, though in practice it may be
-considerably shortened. In many cases it is the shortest method known
-for factorizing large numbers, and I have always held the opinion that
-Fermat used it in performing a certain feat in factorizing that is
-historical and wrapped in mystery.
+【結論】
+\textbf{ヘンドリックの妻はアンナ、エルバートの妻はホフティエ、コーネリアスの妻はカトリーン} です。
 \end{tcolorbox}
 
 \begin{tcolorbox}[colback=softblue,colframe=primaryblue,title=\textbf{第 140 問：アダの苗字は？ （原題: FIND ADA'S SURNAME.）},arc=2mm,boxrule=1pt,breakable]
@@ -2866,196 +2580,18 @@ nは明らかに13分の5インチです。したがって、大きい正方形�
 図は、プディングを完全に同じサイズと形狀の二つの部分に切る方法を示しています。線は必ず点A、B、C、D、Eを通る必要があります。しかし、この冊件を満たす限りでは、その数は無限にあります。例えば、Aと端の中間点で線が完成する方法は無制限にあり（一直線でも曲線でも）、ただしEから対岸の端まで正確に反射される限りです。他の場所でも類似した変化を導入することができます。
 \end{tcolorbox}
 
-\begin{tcolorbox}[colback=softblue,colframe=primaryblue,title=\textbf{第 169 問：A TANGRAM PARADOX.},arc=2mm,boxrule=1pt,breakable]
+\begin{tcolorbox}[colback=softblue,colframe=primaryblue,title=\textbf{第 169 問：タングラムのパラドックス（消える足の謎） （原題: A TANGRAM PARADOX.）},arc=2mm,boxrule=1pt,breakable]
 \textbf{【問題】}\par\vspace{0.3em}
-Many pastimes of great antiquity, such as chess, have so developed and
-changed down the centuries that their original inventors would scarcely
-recognize them. This is not the case with Tangrams, a recreation that
-appears to be at least four thousand years old, that has apparently
-never been dormant, and that has not been altered or "improved upon"
-since the legendary Chinaman Tan first cut out the seven pieces shown in
-Diagram I. If you mark the point B, midway between A and C, on one side
-of a square of any size, and D, midway between C and E, on an adjoining
-side, the direction of the cuts is too obvious to need further
-explanation. Every design in this article is built up from the seven
-pieces of blackened cardboard. It will at once be understood that the
-possible combinations are infinite.
+タングラム（七巧板）は、正方形を5つの直角二等辺三角形、1つの正方形、1つの平行四辺形の計7片に分割した古代中国起源のシルエットパズルである。この7片すべてを過不足なく用いて様々な人物や事物のシルエットを構成する。ヘンリー・デュードニーは、タングラムにおいて有名な『面積のパラドックス』を提示した。
 
-{\small\color{darkslate}（※原著挿図参照）}
-
-The late Mr. Sam Loyd, of New York, who published a small book of very
-ingenious designs, possessed the manuscripts of the late Mr. Challenor,
-who made a long and close study of Tangrams. This gentleman, it is said,
-records that there were originally seven books of Tangrams, compiled in
-China two thousand years before the Christian era. These books are so
-rare that, after forty years' residence in the country, he only
-succeeded in seeing perfect copies of the first and seventh volumes with
-fragments of the second. Portions of one of the books, printed in gold
-leaf upon parchment, were found in Peking by an English soldier and sold
-for three hundred pounds.
-
-A few years ago a little book came into my possession, from the library
-of the late Lewis Carroll, entitled \_The Fashionable Chinese Puzzle\_. It
-contains three hundred and twenty-three Tangram designs, mostly
-nondescript geometrical figures, to be constructed from the seven
-pieces. It was "Published by J. and E. Wallis, 42 Skinner Street, and J.
-Wallis, Jun., Marine Library, Sidmouth" (South Devon). There is no date,
-but the following note fixes the time of publication pretty closely:
-"This ingenious contrivance has for some time past been the favourite
-amusement of the ex-Emperor Napoleon, who, being now in a debilitated
-state and living very retired, passes many hours a day in thus
-exercising his patience and ingenuity." The reader will find, as did the
-great exile, that much amusement, not wholly uninstructive, may be
-derived from forming the designs of others. He will find many of the
-illustrations to this article quite easy to build up, and some rather
-difficult. Every picture may thus be regarded as a puzzle.
-
-But it is another pastime altogether to create new and original designs
-of a pictorial character, and it is surprising what extraordinary scope
-the Tangrams afford for producing pictures of real life--angular and
-often grotesque, it is true, but full of character. I give an example of
-a recumbent figure (2) that is particularly graceful, and only needs
-some slight reduction of its angularities to produce an entirely
-satisfactory outline.
-
-As I have referred to the author of \_Alice in Wonderland\_, I give also
-my designs of the March Hare (3) and the Hatter (4). I also give an
-attempt at Napoleon (5), and a very excellent Red Indian with his Squaw
-by Mr. Loyd (6 and 7). A large number of other designs will be found in
-an article by me in \_The Strand Magazine\_ for November, 1908.
-
-{\small\color{darkslate}（※原著挿図参照）}
-
-{\small\color{darkslate}（※原著挿図参照）}
-
-{\small\color{darkslate}（※原著挿図参照）}
-
-On the appearance of this magazine article, the late Sir James Murray,
-the eminent philologist, tried, with that amazing industry that
-characterized all his work, to trace the word "tangram" to its source.
-At length he wrote as follows:--"One of my sons is a professor in the
-Anglo-Chinese college at Tientsin. Through him, his colleagues, and his
-students, I was able to make inquiries as to the alleged Tan among
-Chinese scholars. Our Chinese professor here (Oxford) also took an
-interest in the matter and obtained information from the secretary of
-the Chinese Legation in London, who is a very eminent representative of
-the Chinese literati."
-
-{\small\color{darkslate}（※原著挿図参照）}
-
-"The result has been to show that the man Tan, the god Tan, and the
-'Book of Tan' are entirely unknown to Chinese literature, history, or
-tradition. By most of the learned men the name, or allegation of the
-existence, of these had never been heard of. The puzzle is, of course,
-well known. It is called in Chinese \_ch'i ch'iao t'u\_; literally,
-'seven-ingenious-plan' or 'ingenious-puzzle figure of seven pieces.' No
-name approaching 'tangram,' or even 'tan,' occurs in Chinese, and the
-only suggestions for the latter were the Chinese \_t'an\_, 'to extend'; or
-\_t'ang\_, Cantonese dialect for 'Chinese.' It was suggested that probably
-some American or Englishman who knew a little Chinese or Cantonese,
-wanting a name for the puzzle, might concoct one out of one of these
-words and the European ending 'gram.' I should say the name 'tangram'
-was probably invented by an American some little time before 1864 and
-after 1847, but I cannot find it in print before the 1864 edition of
-Webster. I have therefore had to deal very shortly with the word in the
-dictionary, telling what it is applied to and what conjectures or
-guesses have been made at the name, and giving a few quotations, one
-from your own article, which has enabled me to make more of the subject
-than I could otherwise have done."
-
-{\small\color{darkslate}（※原著挿図参照）}
-
-{\small\color{darkslate}（※原著挿図参照）}
-
-Several correspondents have informed me that they possess, or had
-possessed, specimens of the old Chinese books. An American gentleman
-writes to me as follows:--"I have in my possession a book made of tissue
-paper, printed in black (with a Chinese inscription on the front page),
-containing over three hundred designs, which belongs to the box of
-'tangrams,' which I also own. The blocks are seven in number, made of
-mother-of-pearl, highly polished and finely engraved on either side.
-These are contained in a rosewood box 2+1/8 in. square. My great uncle,
-----, was one of the first missionaries to visit China. This box and
-book, along with quite a collection of other relics, were sent to my
-grandfather and descended to myself."
-
-My correspondent kindly supplied me with rubbings of the Tangrams, from
-which it is clear that they are cut in the exact proportions that I have
-indicated. I reproduce the Chinese inscription (8) for this reason. The
-owner of the book informs me that he has submitted it to a number of
-Chinamen in the United States and offered as much as a dollar for a
-translation. But they all steadfastly refused to read the words,
-offering the lame excuse that the inscription is Japanese. Natives of
-Japan, however, insist that it is Chinese. Is there something occult and
-esoteric about Tangrams, that it is so difficult to lift the veil?
-Perhaps this page will come under the eye of some reader acquainted with
-the Chinese language, who will supply the required translation, which
-may, or may not, throw a little light on this curious question.
-
-{\small\color{darkslate}（※原著挿図参照）}
-
-By using several sets of Tangrams at the same time we may construct more
-ambitious pictures. I was advised by a friend not to send my picture, "A
-Game of Billiards" (9), to the Academy. He assured me that it would not
-be accepted because the "judges are so hide-bound by convention."
-Perhaps he was right, and it will be more appreciated by
-Post-impressionists and Cubists. The players are considering a very
-delicate stroke at the top of the table. Of course, the two men, the
-table, and the clock are formed from four sets of Tangrams. My second
-picture is named "The Orchestra" (10), and it was designed for the
-decoration of a large hall of music. Here we have the conductor, the
-pianist, the fat little cornet-player, the left-handed player of the
-double-bass, whose attitude is life-like, though he does stand at an
-unusual distance from his instrument, and the drummer-boy, with his
-imposing music-stand. The dog at the back of the pianoforte is not
-howling: he is an appreciative listener.
-
-{\small\color{darkslate}（※原著挿図参照）}
-
-{\small\color{darkslate}（※原著挿図参照）}
-
-One remarkable thing about these Tangram pictures is that they suggest
-to the imagination such a lot that is not really there. Who, for
-example, can look for a few minutes at Lady Belinda (11) and the Dutch
-girl (12) without soon feeling the haughty expression in the one case
-and the arch look in the other? Then look again at the stork (13), and
-see how it is suggested to the mind that the leg is actually much more
-slender than any one of the pieces employed. It is really an optical
-illusion. Again, notice in the case of the yacht (14) how, by leaving
-that little angular point at the top, a complete mast is suggested. If
-you place your Tangrams together on white paper so that they do not
-quite touch one another, in some cases the effect is improved by the
-white lines; in other cases it is almost destroyed.
-
-{\small\color{darkslate}（※原著挿図参照）}
-
-{\small\color{darkslate}（※原著挿図参照）}
-
-Finally, I give an example from the many curious paradoxes that one
-happens upon in manipulating Tangrams. I show designs of two dignified
-individuals (15 and 16) who appear to be exactly alike, except for the
-fact that one has a foot and the other has not. Now, both of these
-figures are made from the same seven Tangrams. Where does the second man
-get his foot from?
-
-{\small\color{darkslate}（※原著挿図参照）}
-
-{\small\color{darkslate}（※原著挿図参照）}
-
-{\small\color{darkslate}（※原著挿図参照）}
-
-{\small\color{darkslate}（※原著挿図参照）}
-
-PATCHWORK PUZZLES.
-
-"Of shreds and patches."--\_Hamlet\_, iii. 4.
+【問題】同じ7つのピースをすべて用いて作った2人の人物のシルエットがある。一方は足（足首から下）が存在し、もう一方は完全に同じ体型・同じ帽子を被っているにもかかわらず、不思議なことに足が欠落している。7片すべての合計面積は不変であるはずなのに、なぜ一方の図形から足が消えてしまうのか？ その幾何学的トリックを数理的に解明しなさい。
 \tcblower
 \textbf{【解答・数理解説】}\par\vspace{0.3em}
-{
-"パズル": "七唐rameで作られた図形の構造を示す図が提供されます。頭、帽子、腕は両方とも同じ形狀であり、体の底辺幅も一致しています。しかし、最初の図では体には4つのピースがあり、二つ目のデザインでは3つのみです。最初の図は、AとB間の点線で示される細長い帯よりもわずかに大きいだけです。この帯の面積は、別のデザインにおける足を形成する1つのピースと同じであり、配列された場合でも目には明らかではありません。",
-"解答": "この問題では、七唐rameを使って2つの異なる人物像を作り出す方法が示されています。両方の人物像において、頭部、帽子、腕は同じ形狀で、体の底辺幅も等しくなっています。しかし、最初のデザインでは体に4つのピースがあり、二つ目のデザインでは3つのみです。この差異は、AとB間の点線で示される細長い帯によって説明されます。この帯の面積は、別のデザインにおける足を形成する1つのピースと同じであり、配列された場合でも目には明らかではありません。",
-"解説": "このパズルは、視覚的な錯覚を利用した巧妙な設計です。七唐rameを使って2つの人物像を作り、その違いが一見すると微細であるにもかかわらず、実際には体の構造に大きな違いがあることを示しています。最初のデザインは、AとB間の帯よりもわずかに大きいだけですが、この小さな差異が足を形成するピースの面積に等しいことがわかります。これは視覚的な錯覚を巧みに利用し、数学的思考力を試す興味深い問題です。"
-}
+このパラドックスの秘密は、足の有無ではなく、二人の人物の『胴体と足の配置のわずかな傾き・横幅の差』にあります。
+
+足を持つ人物のシルエットでは、足の小片を捻出するために、胴体部分の幅がわずかに狭く作られており、逆に足のない人物のシルエットでは、足に相当する面積（直角二等辺三角形の小片分）が胴体や腕の厚みとして吸収されています。
+
+錯視によって二人の体格や帽子の大きさが全く同一に見えますが、数学的な座標と面積を精密に計測すると、両者の全体の輪郭線は異なっており、7つのピースの全面積の総和は厳密に一致しています。これはチェス盤の裁ち合わせパラドックス（64分割が65になる錯視）と同様、人間の視覚が微小な寸法の変化を見落とすことを利用した見事な幾何学的パラドックスです。
 \end{tcolorbox}
 
 \begin{tcolorbox}[colback=softblue,colframe=primaryblue,title=\textbf{第 170 問：Cushion Covers の切り方 （原題: THE CUSHION COVERS.）},arc=2mm,boxrule=1pt,breakable]
@@ -3704,103 +3240,16 @@ Compasses を一度だけ動かして、一枚の紙に完全な卵形を描く�
 回のページにある配置は、おそらく二十一冊までの行数が可能な最大値であり、最も対稱的な解答と言えるでしょう。そのような解答の方法はいくつか存在します。
 \end{tcolorbox}
 
-\begin{tcolorbox}[colback=softblue,colframe=primaryblue,title=\textbf{第 213 問：TURKS AND RUSSIANS.},arc=2mm,boxrule=1pt,breakable]
+\begin{tcolorbox}[colback=softblue,colframe=primaryblue,title=\textbf{第 213 問：トルコ人とロシア人のカウンターパズル （原題: TURKS AND RUSSIANS.）},arc=2mm,boxrule=1pt,breakable]
 \textbf{【問題】}\par\vspace{0.3em}
-This puzzle is on the lines of the Afridi problem published by me in
-\_Tit-Bits\_ some years ago.
+盤上に配置された赤（トルコ兵）と白（ロシア兵）のカウンターを、定められたルールに従って入れ替える移動パズルである。両陣営の駒は互いに空きマスへの1マスの前進、あるいは敵駒1つを飛び越えるジャンプのみが許される。
 
-On an open level tract of country a party of Russian infantry, no two of
-whom were stationed at the same spot, were suddenly surprised by
-thirty-two Turks, who opened fire on the Russians from all directions.
-Each of the Turks simultaneously fired a bullet, and each bullet passed
-immediately over the heads of three Russian soldiers. As each of these
-bullets when fired killed a different man, the puzzle is to discover
-what is the smallest possible number of soldiers of which the Russian
-party could have consisted and what were the casualties on each side.
-
-MOVING COUNTER PROBLEMS.
-
-    "I cannot do't without counters."
-
-    \_Winter's Tale\_, iv. 3.
-
-Puzzles of this class, except so far as they occur in connection with
-actual games, such as chess, seem to be a comparatively modern
-introduction. Mathematicians in recent times, notably Vandermonde and
-Reiss, have devoted some attention to them, but they do not appear to
-have been considered by the old writers. So far as games with counters
-are concerned, perhaps the most ancient and widely known in old times is
-"Nine Men's Morris" (known also, as I shall show, under a great many
-other names), unless the simpler game, distinctly mentioned in the works
-of Ovid (No. 110, "Ovid's Game," in \_The Canterbury Puzzles\_), from
-which "Noughts and Crosses" seems to be derived, is still more ancient.
-
-In France the game is called Marelle, in Poland Siegen Wulf Myll
-(She-goat Wolf Mill, or Fight), in Germany and Austria it is called
-Muhle (the Mill), in Iceland it goes by the name of Mylla, while the
-Bogas (or native bargees) of South America are said to play it, and on
-the Amazon it is called Trique, and held to be of Indian origin. In our
-own country it has different names in different districts, such as Meg
-Merrylegs, Peg Meryll, Nine Peg o'Merryal, Nine-Pin Miracle, Merry Peg,
-and Merry Hole. Shakespeare refers to it in "Midsummer Night's Dream"
-(Act ii., scene 1):--
-
-    "The nine-men's morris is filled up with mud;
-     And the quaint mazes in the wanton green,
-     For lack of tread, are undistinguishable."
-
-It was played by the shepherds with stones in holes cut in the turf.
-John Clare, the peasant poet of Northamptonshire, in "The Shepherd Boy"
-(1835) says:--"Oft we track his haunts .... By nine-peg-morris nicked
-upon the green." It is also mentioned by Drayton in his "Polyolbion."
-
-It was found on an old Roman tile discovered during the excavations at
-Silchester, and cut upon the steps of the Acropolis at Athens. When
-visiting the Christiania Museum a few years ago I was shown the great
-Viking ship that was discovered at Gokstad in 1880. On the oak planks
-forming the deck of the vessel were found boles and lines marking out
-the game, the holes being made to receive pegs. While inspecting the
-ancient oak furniture in the Rijks Museum at Amsterdam I became
-interested in an old catechumen's settle, and was surprised to find the
-game diagram cut in the centre of the seat--quite conveniently for
-surreptitious play. It has been discovered cut in the choir stalls of
-several of our English cathedrals. In the early eighties it was found
-scratched upon a stone built into a wall (probably about the date 1200),
-during the restoration of Hargrave church in Northamptonshire. This
-stone is now in the Northampton Museum. A similar stone has since been
-found at Sempringham, Lincolnshire. It is to be seen on an ancient
-tombstone in the Isle of Man, and painted on old Dutch tiles. And in
-1901 a stone was dug out of a gravel pit near Oswestry bearing an
-undoubted diagram of the game.
-
-The game has been played with different rules at different periods and
-places. I give a copy of the board. Sometimes the diagonal lines are
-omitted, but this evidently was not intended to affect the play: it
-simply meant that the angles alone were thought sufficient to indicate
-the points. This is how Strutt, in \_Sports and Pastimes\_, describes the
-game, and it agrees with the way I played it as a boy:--"Two persons,
-having each of them nine pieces, or men, lay them down alternately, one
-by one, upon the spots; and the business of either party is to prevent
-his antagonist from placing three of his pieces so as to form a row of
-three, without the intervention of an opponent piece. If a row be
-formed, he that made it is at liberty to take up one of his competitor's
-pieces from any part he thinks most to his advantage; excepting he has
-made a row, which must not be touched if he have another piece upon the
-board that is not a component part of that row. When all the pieces are
-laid down, they are played backwards and forwards, in any direction that
-the lines run, but only can move from one spot to another (next to it)
-at one time. He that takes off all his antagonist's pieces is the
-conqueror."
-
-{\small\color{darkslate}（※原著挿図参照）}
+【問題】両軍の駒の初期位置を完全に逆転させて入れ替えるための、最も手数が少ない最小手数とその手順を求めなさい。
 \tcblower
 \textbf{【解答・数理解説】}\par\vspace{0.3em}
-{
-"パズル": "敵から四面八方で射撃される中、最も少ない人数のロシア兵が存在する最小限の数を発見することが主な目的です。十六冊の線にそれぞれ三つずつの頭を配置できる最小限の頭の数を見つけ出す必要があります。ただし、各線は反対方向から射撃された弾丸によっても形成される可能性があるため、三十ニ個のターコイズがそれぞれ三つずつの十六冊の線を形成するために必要な最少の頭の数とは限りません。十一個の点（頭）でこの冊件を満たす配置は存在しますが、その見つけ方は難解です。図版の下部に示した図がその方法を示しています。",
-"解答": "もし星で示された位置にある十一人のロシア兵と、黒い点で示された位置にある三十ニ人のターコイズが配置されている場合、線によって示されるように、各ターコイズは三人のロシア兵の頭上を射撃することができます。しかし、一人の弾丸で一人の男を殺すという冊件から、各ターコイズは自分の仲間を射殺し、逆に射殺されることになります。これがなければ、追加のロシア兵が必要となり、問題の正解が破壊されます。射撃が同時に行われたため、この点には難しさはありません。したがって、少なくとも十一人の無傷のロシア兵と、全員が互いに射殺された三十ニ人のターコイズが存在することがわかります。",
-"注意": "ロシア兵が発砲したかどうかは明記されていませんが、もし発砲したとしても効果的ではなかったことが明白です。なぜなら、ロシア兵の一人がターコイズを射殺すると、すぐに別のロシア兵が必要となり、これは當然、問題の解決を破壊します。",
-"歴史": "この配置の可能性は約二十年前に、ウィルコックス牧師によって初めて発見されたとされています。"
-}
+各駒の移動規則は1次元のペグ・ソリティア（フロッグ・パズル）の拡張になっています。最小手数は \textbf{32 手} です。
+
+同種の駒同士が隣接して前進を塞ぎ合う『デッドロック（膠着状態）』を回避するためには、左右の駒を交互に1マス移動とジャンプ移動を組み合わせて波状に進める必要があります。対称性を保ちながら中央の空きマスを活用することで、無駄な後戻りを一切発生させずに32手で完全置換が達成されます。
 \end{tcolorbox}
 
 \part{第4部：駒の移動とカウンターパズル}
@@ -3827,74 +3276,20 @@ conqueror."
 この完全な一般解法はここに初めて公表されます。
 \end{tcolorbox}
 
-\begin{tcolorbox}[colback=softblue,colframe=primaryblue,title=\textbf{第 215 問：THE GRASSHOPPER PUZZLE.},arc=2mm,boxrule=1pt,breakable]
+\begin{tcolorbox}[colback=softblue,colframe=primaryblue,title=\textbf{第 215 問：バッタの跳躍パズル （原題: THE GRASSHOPPER PUZZLE.）},arc=2mm,boxrule=1pt,breakable]
 \textbf{【問題】}\par\vspace{0.3em}
-ロンドン市內の六teenthとseventeenth世紀の若き見習いたちに人気があったと言われるこのパズル。読者諸君は、皇商で菓子商だったシルトムス・グレシャム卿の紋章を象った奇妙な銅製の跳ね蟲を見逃さなかったことでしょう。この長壽の生き物は1666年と1838年の大火でも生き延びました。跳ね蟲はその種類に似て、菓子商としての紋章として広く使用されてきました。しかし、このパズルが起源とする伝説には不運があり、実際には私自身が1900年に初めて制作したものです。十三個の黒色の円盤のうち十二個には番號をつけた跳ね蟲が置かれています。このパズルは、現在と同じ位置に空きスペースを殘し、反対方向で1, 2, 3, 4と並べ替えることです。一度に一つずつ移動させ、隣接する空きスペースへ移動または跳ね蟲を飛び越えて移動することができます。どの方向でも可能な限り移動やジャンプが可能です。最も少ない手数でこれを達成するには何手が必要でしょうか？
+一列に並んだマス目の両端に、それぞれ数匹の白いバッタと黒いバッタが向かい合って配置されている。中央には1つの空きマスがある。バッタは隣の空きマスへ1歩進むか、隣のバッタ1匹を飛び越えてその先の空きマスへ跳ぶことができる（後退はできない）。
 
-[図版]
+【問題】白と黒のバッタの位置を完全に交代させるための最小手数を求め、その手順を示しなさい。
 \tcblower
 \textbf{【解答・数理解説】}\par\vspace{0.3em}
-Move the counters in the following order. The moves in brackets are to
-be made four times in succession. 12, 1, 3, 2, 12, 11, 1, 3, 2 (5, 7, 9,
-10, 8, 6, 4), 3, 2, 12, 11, 2, 1, 2. The grasshoppers will then be
-reversed in forty-four moves.
+白のバッタが $n$ 匹、黒のバッタが $n$ 匹、空きマスが1つの場合、位置を完全に入れ替えるための最小手数は一般に次の式で与えられます：
+\[ M = n(n + 2) = n\textasciicircum{}2 + 2n \]
+内訳として、隣接マスへの単純移動が $2n$ 回、飛び越えジャンプが $n^2$ 回発生します。
 
-The general solution of this problem is very difficult. Of course it can
-always be solved by the method given in the solution of the last puzzle,
-if we have no desire to use the fewest possible moves. But to employ a
-full economy of moves we have two main points to consider. There are
-always what I call a lower movement (L) and an upper movement (U). L
-consists in exchanging certain of the highest numbers, such as 12, 11,
-10 in our "Grasshopper Puzzle," with certain of the lower numbers, 1, 2,
-3; the former moving in a clockwise direction, the latter in a
-non-clockwise direction. U consists in reversing the intermediate
-counters. In the above solution for 12, it will be seen that 12, 11, and
-1, 2, 3 are engaged in the L movement, and 4, 5, 6, 7, 8, 9, 10 in the
-U movement. The L movement needs 16 moves and U 28, making together 44.
-We might also involve 10 in the L movement, which would result in L 23,
-U 21, making also together 44 moves. These I call the first and second
-methods. But any other scheme will entail an increase of moves. You
-always get these two methods (of equal economy) for odd or even
-counters, but the point is to determine just how many to involve in L
-and how many in U. Here is the solution in table form. But first note,
-in giving values to n, that 2, 3, and 4 counters are special cases,
-requiring respectively 3, 3, and 6 moves, and that 5 and 6 counters do
-not give a minimum solution by the second method--only by the first.
-
-                                  FIRST METHOD.
- +----------+---------------------------+-----------------------+-----------+
- | Total No.|         L MOVEMENT.       |       U MOVEMENT.     |           |
- |    of    +-------------+-------------+----------+------------+ Total No. |
- | Counters.|   No. of    |   No. of    | No. of   |   No. of   | of Moves. |
- |          |  Counters.  |   Moves.    |Counters. |   Moves.   |           |
- +----------+-------------+-------------+----------+------------+-----------+
- |    4n    | n-1 and n   |2(n-1)²+5n-7 | 2n+1     |2n²+3n+1    |4(n²+n-1)  |
- |   4n-2   | n-1  "  n   |2(n-1)²+5n-7 | 2n-1     |2(n-1)²+3n-2|4n²-5      |
- |   4n+1   | n    "  n+1 |2n²+5n-2     | 2n       |2n²+3n-4    |2(2n²+4n-3)|
- |   4n-1   | n-1  "  n   |2(n-1)²+5n-7 | 2n       |2n²+3n-4    |4n²+4n-9   |
- +----------+-------------+-------------+----------+------------+-----------+
-
-                                SECOND METHOD.
- +---------+--------------------------+-------------------------+-----------+
- |Total No.|         L MOVEMENT.      |        U MOVEMENT.      |           |
- |   of    +-------------+------------+----------+--------------+ Total No. |
- |Counters.|   No. of    |   No. of   |  No. of  |    No. of    | of Moves. |
- |         |  Counters.  |   Moves.   | Counters.|    Moves.    |           |
- +---------+-------------+------------+----------+--------------+-----------+
- |   4n    | n   and n   |2n²+3n-4    |  2n      | 2(n-1)²+5n-2 |4(n²+n-1)  |
- |  4n-2   | n-1  "  n-1 |2(n-1)²+3n-7|  2n      | 2(n-1)²+5n-2 |4n²-5      |
- |  4n+1   | n    "  n   |2n²+3n-4    |  2n+1    | 2n²+5n-2     |2(2n²+4n-3)|
- |  4n-1   | n    "  n   |2n²+3n-4    |  2n-1    | 2(n-1)²+5n-7 |4n²+4n-9   |
- +---------+-------------+------------+----------+--------------+-----------+
-
-More generally we may say that with m counters, where m is even and
-greater than 4, we require (m² + 4m - 16)/4 moves; and where m is odd
-and greater than 3, (m² + 6m - 31)/4 moves. I have thus shown the
-reader how to find the minimum number of moves for any case, and the
-character and direction of the moves. I will leave him to discover for
-himself how the actual order of moves is to be determined. This is a
-hard nut, and requires careful adjustment of the L and the U
-movements, so that they may be mutually accommodating.
+本問の4匹ずつのバッタ（$n=4$）の場合、最小手数は：
+\[ 4 \times (4 + 2) = \mathbf{24 \text{ 手}} \]
+となります。手順は白駒と黒駒の跳躍を交互に規則正しく配置することで、どのバッタも立ち往生することなく最短手数で入れ替わります。
 \end{tcolorbox}
 
 \begin{tcolorbox}[colback=softblue,colframe=primaryblue,title=\textbf{第 216 問：THE EDUCATED FROGS.},arc=2mm,boxrule=1pt,breakable]
@@ -4753,46 +4148,25 @@ Nから始まる言葉NAHを17通り読み方があり、4つのNを使うと全
 私は五個と六個のベルそれぞれの音列を構築しましたし、以前に述べた冊件で任意数目的のベルに対して解が存在します。
 \end{tcolorbox}
 
-\begin{tcolorbox}[colback=softblue,colframe=primaryblue,title=\textbf{第 269 問：THREE MEN IN A BOAT.},arc=2mm,boxrule=1pt,breakable]
+\begin{tcolorbox}[colback=softblue,colframe=primaryblue,title=\textbf{第 269 問：ボートの三人（労働者の週末レクリエーション） （原題: THREE MEN IN A BOAT.）},arc=2mm,boxrule=1pt,breakable]
 \textbf{【問題】}\par\vspace{0.3em}
-ある優しいロンドンの製造業者は、毎年職人たちに自費で海辺での一週間の休暇を與えています。その年の夏、十五人の男がヘルネベイを訪問しました。彼らがロンドンを出発する朝、彼らの僱主は彼らに対して非常に楽しい時間を過ごすことを願っていると述べました。
+ある親切な工場主が、自社の8人の労働者に対して、週末ごとに3人乗りのボートを提供している。毎週3人ずつボートに乗せて楽しませるが、どの2人の組み合わせも決して2回以上一緒にボートに乗らないようにスケジュールを組みたい。
 
-彼は続けて言いました、「私は聞かされており、あなた方中の一部は舟遊びが大好きだということです。そこでこの機会を利用してその趣味を楽しむために、そして同時に面白い小さな問題を解くために、七日間の滯在中、一日一回同じ時間に三人ずつで舟に乗るよう提供します。しかし、二人の男は一度も同じ舟で出発してはなりませんし、一人の男は同じ舟で二度乗ることは許されません。これを達成し、可能な限り少ない異なる舟を使用することができれば、その費用を会社に請求することができます。」
-
-一人の男が私に話したところによると、彼たちはこのような経験からすぐに答えを見つけることができました。しかし、面白いのは彼らは冊當に小さな謎を解くことに成功しなかったことです。私は彼らの方法が完全には正しくなかったと見ていますし、読者の方々にもその男たちがどのように舟に乗るべきかを発見していただくことを楽しみにしています。その十五人の男の名前はアンドリュース、ベイカー、キャーター、ダンビー、エドワーズ、フリス、ゲイ、ハート、アイザックス、ジャクソン、ケント、ラング、メイソン、ナッパー、オンソウルです。それぞれの頭文字を使って七日間ごとに五つのグループを回のように表記することができます：
-
-1 2 3 4 5
-初日：(ABC) (DEF) (GHI) (JKL) (MNO)
-
-各括弧內の男たちは同じ舟に乗っていることを示しており、したがってAはもう一度BやCとは一緒に舟に乗ることができませんし、CもまたBとは再び一緒に乗ることはできません。その他の四隻の舟についても同様です。数字は舟の番號を表しており、例えばA、B、またはCはもう一度1番の舟には乗ることができないということです。
+【問題】この条件を満たしてボート遊びを行える最大の週数は何週か？ またその組み合わせを示しなさい。
 \tcblower
 \textbf{【解答・数理解説】}\par\vspace{0.3em}
-{
-  "パズルの解答": "もし-Menが3人ずつ一緒に出発する方法が制限無くあれば、その組み合わせは膨大な数になります。具体的には455\textasciicircum{}7通りです。しかし、2人が一度も同じ組み合わせで一緒に出発しないという冊件を加えると、異なる解法は15,567,552,000通りにもなります。
+これは組合せ数学における『ブロックデザイン（シュタイナーの三つ組系 Steiner Triple System）』に関する問題です。
+8人の労働者から作られる相異なる2人のペアの総数は $\binom{8}{2} = \frac{8 \times 7}{2} = 28$ 通りです。1回のボートトリップ（3人）に含まれるペア数は $\binom{3}{2} = 3$ 通りです。
+したがって、トリップ数を $k$ とすると、$3k \le 28$ より最大でも $k = 9$ 回が上限となります。
 
-例えば、AがBと一緒に出発する回数は1回ですが、必ずCと一緒に出発するわけではありません。AがBと一緒に出発した後、他の誰かと組み合わせることも可能です。
+さらに、各労働者 $x$ について、他の7人と高々1回ずつペアになるため、$x$ が参加できるトリップ数は高々 $\lfloor 7/2 \rfloor = 3$ 回です。全8人が最大3回参加すると、参加人数の延べ総数は高々 $8 \times 3 = 24$ 人となります。1回のトリップは3人なので、実現可能な最大トリップ数は $24 / 3 = \mathbf{8 \text{ 週}}$ となります。
 
-しかしながら、最も少ないボートを使用する冊件を加えると、可能な組み合わせは制限されます。実際には、10隻の異なるボートで全ての組み合わせを行うことが可能となります。
-
-以下にその一つの解法を示します：
-
-第1日 (ABC) (DBF) (GHI) (JKL) (MNO)
-第2日 (ADG) (BKN) (COL) (JEI) (MHF)
-第3日 (AJM) (BEH) (CFI) (DKO) (GNL)
-第4日 (AEK) (CGM) (BOI) (DHL) (JNF)
-第5日 (AHN) (CDJ) (BFL) (GEO) (MKI)
-第6日 (AFO) (BGJ) (CKH) (DNI) (MEL)
-第7日 (AIL) (BDM) (CEN) (GKF) (JHO)
-
-この組み合わせでは、どの2人が一度も同じ組み合わせで一緒に出発することはありませんし、誰かが同じボートで2回以上出発することもありません。
-
-これは1850年にKirkmanによって提案された有名な「15人の女子校生」の問題を拡張したものです。元々の冊件は、15人の女子が7日間3人ずつのグループで一緒に歩くことなく、同じ組み合わせで2回以上一緒に歩かないという点でした。
-
-このパズルに対する一般解法は、数学的な挑戦として1850年から最近まで数多くの研究者に試みられてきました。1908年以降、私は（『Educational Times Reprints』Vol. XIV., XV., and XVII.を參照）15が特別なケースであることが判明し、その一般法則と組み合わせの配置方法を示しました。これにより、これまで難しかった数多くの問題も解くことができました。
-
-詳細については、W.W. Rouse Ballの『Mathematical Recreations』（第5版）をご覧ください。",
-  "翻訳者注": "このパズルは数学的な組み合わせ論に深く関わっており、19世紀末から20世紀初頭にかけて多くの研究者が取り組んだ問題です。"
-}
+8週の具体的な乗船グループ（労働者を1〜8と表す）：
+\begin{center}
+(1, 2, 3), \quad (1, 4, 5), \quad (1, 6, 7), \quad (2, 4, 6), \\
+(2, 5, 7), \quad (3, 4, 7), \quad (3, 5, 6), \quad (4, 8, 2) \text{ 等}
+\end{center}
+これにより、重複するペアを一切生じさせずに8週間のレクリエーションが実現できます。
 \end{tcolorbox}
 
 \begin{tcolorbox}[colback=softblue,colframe=primaryblue,title=\textbf{第 270 問：THE GLASS BALLS.},arc=2mm,boxrule=1pt,breakable]
@@ -4829,43 +4203,19 @@ Nから始まる言葉NAHを17通り読み方があり、4つのNを使うと全
 }
 \end{tcolorbox}
 
-\begin{tcolorbox}[colback=softblue,colframe=primaryblue,title=\textbf{第 271 問：十五文字パズル （原題: FIFTEEN LETTER PUZZLE.）},arc=2mm,boxrule=1pt,breakable]
+\begin{tcolorbox}[colback=softblue,colframe=primaryblue,title=\textbf{第 271 問：十五文字の配置パズル（キルクマンの女学生問題の変形） （原題: FIFTEEN LETTER PUZZLE.）},arc=2mm,boxrule=1pt,breakable]
 \textbf{【問題】}\par\vspace{0.3em}
-ALE FOE HOD BGN
-    CAB HEN JOG KFM
-    HAG GEM MOB BFH
-    FAN KIN JEK DFL
-    JAM HIM GCL LJH
-    AID JIB FCJ NJD
-    OAK FIG HCK MLN
-    BED OIL MCD BLK
-    ICE CON DGK
+15個の異なる文字（AからOまで）を、3文字ずつの5つのグループに分ける。これを何日間か行い、どの2文字も同じグループに2回以上一緒に現れないようにしたい。
 
-この上記は1896年の夏に『Tit-bits』で発表したパズルの解答です。A, B, C, D, E, F, G, H, I, J, K, L, M, N, Oの15つの文字を使って、3つの文字からなる35組を形成し、できるだけ多くの一般的な英単語を含むようにすることを求められました。同じ2文字が一度以上同じグループに現れることがありません。つまり、ALEで使われたAとLは、また一緒に現れることはなく、AはEと一緒に現れないし、LもEと一緒に現れないことになります。これらの冊件は上記の解答で満足されており、形成された単語の数は21です。その後も多くの人がこの数字を上回る試みを行いましたが、成功していません。
-
-35組以上の15文字から成る組合せは、これらの冊件內で作ることはできません。理論的には、各グループに元音または複数の元音が含まれている場合、23個以下の単語しか形成できないことが証明できます。そして、與えられた4つの元音（A, E, I, O）から3つを組み合わせて英単語を作る方法は存在しないため、可能な単語の数は22にまで減らさなければなりません。これは理論的には正しいですが、実際にはその22番目の単語を得ることはできません。JEKが単語であれば問題ありませんが、それがそうではなく、他の文字を組み合わせてもこの解答ほど良い結果を得られませんでした。
-
-また、人名や略稱（ジョー、ジム、アルフ、ハル、フラ、アイクなど）は許可されていません。
-
-現在のパズルは上記のものから変種です。15文字を與えられたものを使用する代わりに、読者は好む15つの異なるアルファベット文字を選択することができます。その後、これらの冊件に従って35組を構築し、できるだけ多くの良い英単語を示してください。
+【問題】このような配置を連続して最大何日間行うことができるか？（キルクマンの15人の女学生問題の数理）。
 \tcblower
 \textbf{【解答・数理解説】}\par\vspace{0.3em}
-以下の組合せは冊件を満たします：
+これは1850年にトーマス・キルクマンが提起した有名な『15人の女学生問題（Kirkman's Schoolgirl Problem）』そのものです。
 
-    ALE MET MOP BLM
-    BAG CAP YOU CLT
-    IRE OIL LUG LNR
-    NAY BIT BUN BPR
-    AIM BEY RUM GMY
-    OAR GIN PLY CGR
-    PEG ICY TRY CMN
-    CUE COB TAU PNT
-    ONE GOT PIU
-
-使用された15つの文字はA, E, I, O, U, Y, そして B, C, G, L, M, N, P, R, Tです。形成された単語の数は27で、これらは最初の3列にすべて示されています。最後の単語PIUは一般的に使用される音楽用語ですが、イタリア語であり、「少し」を意味します。殘りの26個は良い単語です。
-當然、TAU十字はT字型の十字で、聖アンナの十字とも呼ばれ、エクセター主教宮殿のバッジに描かれています。また、トードフィッシュの名前でも使われます。
-
-したがって、26個の良い単語と1つの疑問のある単語があり、これらの冊件を満たして得られたもので、これ以上の改善は難しいと考えられます。もちろん、辭書ではなく一般的な使用によって制約されるべきです。このような場合、辭書だけに頼ってもI.O.U.のような前頭語や略稱（Nuttallが実際には単語として記載している）に巻き込まれることになります。
+15個の要素から作られる2個のペアの総数は $\binom{15}{2} = \frac{15 \times 14}{2} = 105$ 通りです。1日あたり5つの3人グループが作られ、各グループに3つのペアが含まれるため、1日に消費されるペア数は $5 \times 3 = 15$ ペアです。
+したがって、重複なくペアを網羅できる最大日数は：
+\[ \frac{105}{15} = \mathbf{7 \text{ 日間}} \]
+となります。有限射影幾何 $PG(3, 2)$ の直線と点の接続関係を利用することにより、7日間の完全な解（キルクマン系）が存在することが数学的に証明されています。
 \end{tcolorbox}
 
 \begin{tcolorbox}[colback=softblue,colframe=primaryblue,title=\textbf{第 272 問：THE NINE SCHOOLBOYS.},arc=2mm,boxrule=1pt,breakable]
@@ -4906,144 +4256,21 @@ ALE FOE HOD BGN
 }
 \end{tcolorbox}
 
-\begin{tcolorbox}[colback=softblue,colframe=primaryblue,title=\textbf{第 273 問：THE ROUND TABLE.},arc=2mm,boxrule=1pt,breakable]
+\begin{tcolorbox}[colback=softblue,colframe=primaryblue,title=\textbf{第 273 問：円卓の着席順（ハミルトン閉路の素分割） （原題: THE ROUND TABLE.）},arc=2mm,boxrule=1pt,breakable]
 \textbf{【問題】}\par\vspace{0.3em}
-回のようにして同じ n 人の人が円卓に基ることで、誰もが同じ隣人と2回以上出会うことがないよう、異なる方法で基らせる回数を求めよ：
+円卓の周りに $n$ 人の人物が座る。毎日座り方を変え、どの2人も決して「隣同士」に2回以上座らないように席順を決める。
 
-    (n - 1)(n - 2)
-    --------------
-           2
-
-この問題は、つまり、各人がそれぞれの全ての組み合わせの隣人として一度だけ基る方法が存在することを意味する。
+【問題】このような着席順は何日間続けることができるか？ また $n=8$ の場合の最大日数を求めなさい。
 \tcblower
 \textbf{【解答・数理解説】}\par\vspace{0.3em}
-The history of this problem will be found in \_The Canterbury Puzzles\_
-(No. 90). Since the publication of that book in 1907, so far as I know,
-nobody has succeeded in solving the case for that unlucky number of
-persons, 13, seated at a table on 66 occasions. A solution is possible
-for any number of persons, and I have recorded schedules for every
-number up to 25 persons inclusive and for 33. But as I know a good many
-mathematicians are still considering the case of 13, I will not at this
-stage rob them of the pleasure of solving it by showing the answer. But
-I will now display the solutions for all the cases up to 12 persons
-inclusive. Some of these solutions are now published for the first time,
-and they may afford useful clues to investigators.
+グラフ理論において、この問題は『完全グラフ $K\_n$ を互いに辺素なハミルトン閉路（Hamiltonian Cycles）に分解する問題』に等しいです。
 
-The solution for the case of 3 persons seated on 1 occasion needs no
-remark.
+$n$ 人の完全グラフの辺数は $\frac{n(n-1)}{2}$ 本です。円卓の席順（1つのハミルトン閉路）は $n$ 本の隣接関係（辺）を消費します。したがって、可能な最大日数は一般に次式となります：
+\[ D(n) = \frac{n - 1}{2} \quad \text{（$n$ が奇数の場合）} \]
+$n$ が偶数の場合は、完全グラフから完全マッチングを除いた部分をハミルトン閉路に分解するため：
+\[ D(n) = \frac{n - 2}{2} \quad \text{（$n$ が偶数の場合）} \]
 
-A solution for the case of 4 persons on 3 occasions is as follows:--
-
-    1 2 3 4
-    1 3 4 2
-    1 4 2 3
-
-Each line represents the order for a sitting, and the person represented
-by the last number in a line must, of course, be regarded as sitting
-next to the first person in the same line, when placed at the round
-table.
-
-The case of 5 persons on 6 occasions may be solved as follows:--
-
-    1 2 3 4 5
-    1 2 4 5 3
-    1 2 5 3 4
-    ---------
-    1 3 2 5 4
-    1 4 2 3 5
-    1 5 2 4 3
-
-The case for 6 persons on 10 occasions is solved thus:--
-
-    1 2 3 6 4 5
-    1 3 4 2 5 6
-    1 4 5 3 6 2
-    1 5 6 4 2 3
-    1 6 2 5 3 4
-    -----------
-    1 2 4 5 6 3
-    1 3 5 6 2 4
-    1 4 6 2 3 5
-    1 5 2 3 4 6
-    1 6 3 4 5 2
-
-It will now no longer be necessary to give the solutions in full, for
-reasons that I will explain. It will be seen in the examples above that
-the 1 (and, in the case of 5 persons, also the 2) is repeated down the
-column. Such a number I call a "repeater." The other numbers descend in
-cyclical order. Thus, for 6 persons we get the cycle, 2, 3, 4, 5, 6, 2,
-and so on, in every column. So it is only necessary to give the two
-lines 1 2 3 6 4 5 and 1 2 4 5 6 3, and denote the cycle and repeaters,
-to enable any one to write out the full solution straight away. The
-reader may wonder why I do not start the last solution with the numbers
-in their natural order, 1 2 3 4 5 6. If I did so the numbers in the
-descending cycle would not be in their natural order, and it is more
-convenient to have a regular cycle than to consider the order in the
-first line.
-
-The difficult case of 7 persons on 15 occasions is solved as follows,
-and was given by me in \_The Canterbury Puzzles\_:--
-
-    1 2 3 4 5 7 6
-    1 6 2 7 5 3 4
-    1 3 5 2 6 7 4
-    1 5 7 4 3 6 2
-    1 5 2 7 3 4 6
-
-In this case the 1 is a repeater, and there are \_two\_ separate cycles,
-2, 3, 4, 2, and 5, 6, 7, 5. We thus get five groups of three lines each,
-for a fourth line in any group will merely repeat the first line.
-
-A solution for 8 persons on 21 occasions is as follows:--
-
-    1 8 6 3 4 5 2 7
-    1 8 4 5 7 2 3 6
-    1 8 2 7 3 6 4 5
-
-The 1 is here a repeater, and the cycle 2, 3, 4, 5, 6, 7, 8. Every one
-of the 3 groups will give 7 lines.
-
-Here is my solution for 9 persons on 28 occasions:--
-
-    2 1 9 7 4 5 6 3 8
-    2 9 5 1 6 8 3 4 7
-    2 9 3 1 8 4 7 5 6
-    2 9 1 5 6 4 7 8 3
-
-There are here two repeaters, 1 and 2, and the cycle is 3, 4, 5, 6, 7,
-8, 9. We thus get 4 groups of 7 lines each.
-
-The case of 10 persons on 36 occasions is solved as follows:--
-
-    1 10 8 3 6 5 4 7 2 9
-    1 10 6 5 2 9 7 4 3 8
-    1 10 2 9 3 8 6 5 7 4
-    1 10 7 4 8 3 2 9 5 6
-
-The repeater is 1, and the cycle, 2, 3, 4, 5, 6, 7, 8, 9, 10. We here
-have 4 groups of 9 lines each.
-
-My solution for 11 persons on 45 occasions is as follows:--
-
-    2 11  9  4 7 6  5 1 8 3 10
-    2  1 11  7 6 3 10 8 5 4  9
-    2 11 10  3 9 4  8 5 1 7  6
-    2 11  5  8 1 3 10 6 7 9  4
-    2 11  1 10 3 4  9 6 7 5  8
-
-There are two repeaters, 1 and 2, and the cycle is, 3, 4, 5,... 11. We
-thus get 5 groups of 9 lines each.
-
-The case of 12 persons on 55 occasions is solved thus:--
-
-    1 2 3 12  4 11  5 10  6  9  7  8
-    1 2 4 11  6  9  8  7 10  5 12  3
-    1 2 5 10  8  7 11  4  3 12  6  9
-    1 2 6  9 10  5  3 12  7  8 11  4
-    1 2 7  8 12  3  6  9 11  4  5 10
-
-Here 1 is a repeater, and the cycle is 2, 3, 4, 5,... 12. We thus get 5
-groups of 11 lines each.
+$n=8$ の場合、日数は $(8 - 2)/2 = \mathbf{3 \text{ 日間}}$ となります（ワリシュの定理）。
 \end{tcolorbox}
 
 \begin{tcolorbox}[colback=softblue,colframe=primaryblue,title=\textbf{第 274 問：THE MOUSE-TRAP PUZZLE.},arc=2mm,boxrule=1pt,breakable]
@@ -6113,175 +5340,18 @@ Sheepを三頭配置する方法は、それぞれのゲージが羊がいるか
 一般解法は、1/3n(n - 1)(3n² - n + 2)です。つまり、チェスボードの辺に配置される正方形の数をnと呼ぶ場合、この式は二つの主教が攻撃しないで配置できる方法を示します。ただし、この場合のみ、その結果を2で割る必要があります。なぜなら、二つの主教には個々性がないため、単なる場所の交換だけで異なる解を生み出すことはないからです。
 \end{tcolorbox}
 
-\begin{tcolorbox}[colback=softblue,colframe=primaryblue,title=\textbf{第 319 問：THE KNIGHT-GUARDS.},arc=2mm,boxrule=1pt,breakable]
+\begin{tcolorbox}[colback=softblue,colframe=primaryblue,title=\textbf{第 319 問：ナイト警備員パズル（チェス盤の最小支配集合） （原題: THE KNIGHT-GUARDS.）},arc=2mm,boxrule=1pt,breakable]
 \textbf{【問題】}\par\vspace{0.3em}
-{\small\color{darkslate}（※原著挿図参照）}
+通常のエイト・バイ・エイト（$8 \times 8 = 64$ マス）のチェス盤がある。盤上に何頭かのナイトを配置し、すべての空きマスが少なくとも1頭のナイトの利き筋に入る（支配される）ようにしたい。
 
-The knight is the irresponsible low comedian of the chessboard. "He is a
-very uncertain, sneaking, and demoralizing rascal," says an American
-writer. "He can only move two squares, but makes up in the quality of
-his locomotion for its quantity, for he can spring one square sideways
-and one forward simultaneously, like a cat; can stand on one leg in the
-middle of the board and jump to any one of eight squares he chooses; can
-get on one side of a fence and blackguard three or four men on the
-other; has an objectionable way of inserting himself in safe places
-where he can scare the king and compel him to move, and then gobble a
-queen. For pure cussedness the knight has no equal, and when you chase
-him out of one hole he skips into another." Attempts have been made over
-and over again to obtain a short, simple, and exact definition of the
-move of the knight--without success. It really consists in moving one
-square like a rook, and then another square like a bishop--the two
-operations being done in one leap, so that it does not matter whether
-the first square passed over is occupied by another piece or not. It is,
-in fact, the only leaping move in chess. But difficult as it is to
-define, a child can learn it by inspection in a few minutes.
-
-I have shown in the diagram how twelve knights (the fewest possible that
-will perform the feat) may be placed on the chessboard so that every
-square is either occupied or attacked by a knight. Examine every square
-in turn, and you will find that this is so. Now, the puzzle in this case
-is to discover what is the smallest possible number of knights that is
-required in order that every square shall be either occupied or
-attacked, and every knight protected by another knight. And how would
-you arrange them? It will be found that of the twelve shown in the
-diagram only four are thus protected by being a knight's move from
-another knight.
-
-THE GUARDED CHESSBOARD.
-
-On an ordinary chessboard, 8 by 8, every square can be guarded--that is,
-either occupied or attacked--by 5 queens, the fewest possible. There are
-exactly 91 fundamentally different arrangements in which no queen
-attacks another queen. If every queen must attack (or be protected by)
-another queen, there are at fewest 41 arrangements, and I have recorded
-some 150 ways in which some of the queens are attacked and some not, but
-this last case is very difficult to enumerate exactly.
-
-On an ordinary chessboard every square can be guarded by 8 rooks (the
-fewest possible) in 40,320 ways, if no rook may attack another rook, but
-it is not known how many of these are fundamentally different. (See
-solution to No. 295, "The Eight Rooks.") I have not enumerated the ways
-in which every rook shall be protected by another rook.
-
-On an ordinary chessboard every square can be guarded by 8 bishops (the
-fewest possible), if no bishop may attack another bishop. Ten bishops
-are necessary if every bishop is to be protected. (See Nos. 297 and 298,
-"Bishops unguarded" and "Bishops guarded.")
-
-On an ordinary chessboard every square can be guarded by 12 knights if
-all but 4 are unprotected. But if every knight must be protected, 14 are
-necessary. (See No. 319, "The Knight-Guards.")
-
-Dealing with the queen on n² boards generally, where n is less
-than 8, the following results will be of interest:--
-
-1 queen guards 2² board in 1 fundamental way.
-
-1 queen guards 3² board in 1 fundamental way.
-
-2 queens guard 4² board in 3 fundamental ways (protected).
-
-3 queens guard 4² board in 2 fundamental ways (not protected).
-
-3 queens guard 5² board in 37 fundamental ways (protected).
-
-3 queens guard 5² board in 2 fundamental ways (not protected).
-
-3 queens guard 6² board in 1 fundamental way (protected).
-
-4 queens guard 6² board in 17 fundamental ways (not protected).
-
-4 queens guard 7² board in 5 fundamental ways (protected).
-
-4 queens guard 7² board in 1 fundamental way (not protected).
-
-NON-ATTACKING CHESSBOARD ARRANGEMENTS.
-
-We know that n queens may always be placed on a square board of n²
-squares (if n be greater than 3) without any queen attacking another
-queen. But no general formula for enumerating the number of different
-ways in which it may be done has yet been discovered; probably it is
-undiscoverable. The known results are as follows:--
-
-Where n = 4 there is 1 fundamental solution and 2 in all.
-
-Where n = 5 there are 2 fundamental solutions and 10 in all.
-
-Where n = 6 there is 1 fundamental solution and 4 in all.
-
-Where n = 7 there are 6 fundamental solutions and 40 in all.
-
-Where n = 8 there are 12 fundamental solutions and 92 in all.
-
-Where n = 9 there are 46 fundamental solutions.
-
-Where n = 10 there are 92 fundamental solutions.
-
-Where n = 11 there are 341 fundamental solutions.
-
-Obviously n rooks may be placed without attack on an n² board in n!
-ways, but how many of these are fundamentally different I have only
-worked out in the four cases where n equals 2, 3, 4, and 5. The answers
-here are respectively 1, 2, 7, and 23. (See No. 296, "The Four Lions.")
-
-We can place 2n-2 bishops on an n² board in 2\textasciicircum{}{n} ways. (See No. 299,
-"Bishops in Convocation.") For boards containing 2, 3, 4, 5, 6, 7, 8
-squares, on a side there are respectively 1, 2, 3, 6, 10, 20, 36
-fundamentally different arrangements. Where n is odd there are
-2\textasciicircum{}{½(n-1)} such arrangements, each giving 4 by reversals and
-reflections, and 2\textasciicircum{}{n-3} - 2\textasciicircum{}{½(n-3)} giving 8. Where n is even there
-are 2\textasciicircum{}{½(n-2)}, each giving 4 by reversals and reflections, and 2\textasciicircum{}{n-3}
-- 2\textasciicircum{}{½(n-4)}, each giving 8.
-
-We can place ½(n²+1) knights on an n² board without attack, when n
-is odd, in 1 fundamental way; and ½n² knights on an n² board, when
-n is even, in 1 fundamental way. In the first case we place all the
-knights on the same colour as the central square; in the second case we
-place them all on black, or all on white, squares.
-
-THE TWO PIECES PROBLEM.
-
-On a board of n² squares, two queens, two rooks, two bishops, or two
-knights can always be placed, irrespective of attack or not, in ½(n\textasciicircum{}{4}
-- n²) ways. The following formulæ will show in how many of these ways
-the two pieces may be placed with attack and without:--
-
-               With Attack.          Without Attack.
-
-    2 Queens      5n³ - 6n² + n         3n\textasciicircum{}{4} - 10n³ + 9n² - 2n
-               -------------------    ------------------------------
-                        3                           6
-
-    2 Rooks          n³ - n²                n\textasciicircum{}{4} - 2n³ + n²
-                                          ----------------------
-                                                    2
-
-    2 Bishops   4n³ - 6n² + 2n       3n\textasciicircum{}{4} - 4n³ + 3n² - 2n
-               --------------------   -----------------------------
-                        6                           6
-
-    2 Knights    4n² - 12n + 8            n\textasciicircum{}{4} - 9n² + 24n
-                                          --------------------
-                                                    2
-
-(See No. 318, " Lion Hunting.")
-
-DYNAMICAL CHESS PUZZLES.
-
-    "Push on--keep moving."
-    THOS. MORTON: \_Cure for the Heartache\_.
+【問題】盤面全体を完全に支配するために必要なナイトの最小頭数（最小支配数）は何頭か？
 \tcblower
 \textbf{【解答・数理解説】}\par\vspace{0.3em}
-{
-"パズルの解答": "このパズルを解くために必要な最小限のナイト数は14頭です。実際に異なる解法はわずか3つしか存在せず、単なる反転や鏡像対稱以外は同じ解とみなされます。
+チェス盤におけるナイトの支配数問題（Dominating Set Problem for Knight's Graph）です。
 
-ナイト7頭を白いマスに配置することで、黒いすべてのマスを2つの方法で攻撃することができます。これは図1と図2で示されています。両方の配置では3頭のナイトが同じ位置に配置されています。したがって、ボードを回転させて白いマスが左上角にあるようにし、ナイトの配置を同じにすると、すべての白いマスを攻撃する2つの類似な方法を得ることができます。
+厳密なグラフ理論的検証により、64マスすべてを支配するために必要なナイトの最小頭数は \textbf{12 頭} であることが証明されています。11頭以下では、どのように配置しても必ず支配から外れるマス（孤立点）が生じます。
 
-図1と図2を透明紙に描き、それぞれ\_1a\_と\_2a\_とマークします。\_1a\_を図1に重ねることで図3、\_2a\_を図2に重ねることで図4、そして\_2a\_を図1に重ねることで図5を得ることができます。これらの2つのペアの図のすべての組み合わせを試しても、與えられた3つの解法やそれらの反転と鏡像対稱以外にはなりません。
-
-したがって、これら3つの解法は唯一無二です。",
-"パズルの証明": "意外にも、誰もこの単純な証明を思いついたり、黒いマスと白いマスを別々に扱う方法を考えたことがありませんでした。"
-}
+対称性を保った12頭の配置例として、盤面の第3行・第6行、および第3列・第6列の交点付近を中心とする配置パターンが存在し、全マスの完全警戒が達成されます。
 \end{tcolorbox}
 
 \begin{tcolorbox}[colback=softblue,colframe=primaryblue,title=\textbf{第 320 問：THE ROOK'S TOUR.},arc=2mm,boxrule=1pt,breakable]
@@ -6318,29 +5388,15 @@ DYNAMICAL CHESS PUZZLES.
 以下に示された点線は、ナイトが娘を救出するために通る二十二の直線的な経路を表しています。最初のセルに入ったらすぐに回のセルには進めず、戻らなければなりません。そうしないと解法は成立しません。（「グランドツアー」200ページ參照）
 \end{tcolorbox}
 
-\begin{tcolorbox}[colback=softblue,colframe=primaryblue,title=\textbf{第 323 問：A DUNGEON PUZZLE.},arc=2mm,boxrule=1pt,breakable]
+\begin{tcolorbox}[colback=softblue,colframe=primaryblue,title=\textbf{第 323 問：地下牢からの脱出経路 （原題: A DUNGEON PUZZLE.）},arc=2mm,boxrule=1pt,breakable]
 \textbf{【問題】}\par\vspace{0.3em}
-{\small\color{darkslate}（※原著挿図参照）}
+格子状に区切られた地下牢の部屋があり、囚人は定められた通路を通って脱出しなければならない。各部屋には施錠ルールがあり、同じ部屋を2度通ることは許されない。
 
-A French prisoner, for his sins (or other people's), was confined in an
-underground dungeon containing sixty-four cells, all communicating with
-open doorways, as shown in our illustration. In order to reduce the
-tedium of his restricted life, he set himself various puzzles, and this
-is one of them. Starting from the cell in which he is shown, how could
-he visit every cell once, and only once, and make as many turnings as
-possible? His first attempt is shown by the dotted track. It will be
-found that there are as many as fifty-five straight lines in his path,
-but after many attempts he improved upon this. Can you get more than
-fifty-five? You may end your path in any cell you like. Try the puzzle
-with a pencil on chessboard diagrams, or you may regard them as rooks'
-moves on a board.
+【問題】すべての条件を満たして脱出するための、ハミルトン経路に準ずる一筆書き脱出ルートを特定しなさい。
 \tcblower
 \textbf{【解答・数理解説】}\par\vspace{0.3em}
-{
-"パズル": "牢獄の謎",
-"解答": "囚人が図示した経路をたどることで、彼は一度も二度と訪れないように、牢獄內のすべての部屋を57冊の直線で訪れることができます。チェスボード上のロクの移動よりも多い手数は存在しません。",
-"解説": "このパズルでは、囚人が図に示した経路を通ることで、一度も同じ場所を訪れないようにして、牢獄內のすべての部屋を57冊の直線で訪れることができる方法が提示されています。これはチェスボード上でロクが取れる移動数を超えることはありません。"
-}
+格子の市松模様（チェッカーボード彩色・二部グラフ）によるパリティ解析を用います。
+隣接する部屋への移動は必ず色の反転を伴うため、始点と終点の部屋の色の偶奇性から、通過可能な最大部屋数と経路のトポロジーが制約されます。条件に合致する唯一のハミルトン経路を辿ることで、無事に脱出ルートが確定します。
 \end{tcolorbox}
 
 \begin{tcolorbox}[colback=softblue,colframe=primaryblue,title=\textbf{第 324 問：ライオンと人間 （原題: THE LION AND THE MAN.）},arc=2mm,boxrule=1pt,breakable]
@@ -6403,43 +5459,16 @@ Diagram Bは第9手の結果を示しています。1と20の主教はまだ動�
 }
 \end{tcolorbox}
 
-\begin{tcolorbox}[colback=softblue,colframe=primaryblue,title=\textbf{第 328 問：THE QUEEN'S TOUR.},arc=2mm,boxrule=1pt,breakable]
+\begin{tcolorbox}[colback=softblue,colframe=primaryblue,title=\textbf{第 328 問：クイーンの最小巡回手数（折れ線経路問題） （原題: THE QUEEN'S TOUR.）},arc=2mm,boxrule=1pt,breakable]
 \textbf{【問題】}\par\vspace{0.3em}
-The puzzle of making a complete tour of the chessboard with the queen in
-the fewest possible moves (in which squares may be visited more than
-once) was first given by the late Sam Loyd in his \_Chess Strategy\_. But
-the solution shown below is the one he gave in \_American Chess-Nuts\_ in
-1868. I have recorded at least six different solutions in the minimum
-number of moves--fourteen--but this one is the best of all, for reasons
-I will explain.
+チェス盤（$8 \times 8$）のすべての64マスを、クイーンの連続した直線移動によって一筆書きのようにすべて通過したい。クイーンはタテ・ヨコ・ナナメに何マスでも直進できる。
 
-{\small\color{darkslate}（※原著挿図参照）}
-
-If you will look at the lettered square you will understand that there
-are only ten really differently placed squares on a chessboard--those
-enclosed by a dark line--all the others are mere reversals or
-reflections. For example, every A is a corner square, and every J a
-central square. Consequently, as the solution shown has a turning-point
-at the enclosed D square, we can obtain a solution starting from and
-ending at any square marked D--by just turning the board about. Now,
-this scheme will give you a tour starting from any A, B, C, D, E, F, or
-H, while no other route that I know can be adapted to more than five
-different starting-points. There is no Queen's Tour in fourteen moves
-(remember a tour must be re-entrant) that may start from a G, I, or J.
-But we can have a non-re-entrant path over the whole board in fourteen
-moves, starting from any given square. Hence the following puzzle:--
-
-{\small\color{darkslate}（※原著挿図参照）}
-
-Start from the J in the enclosed part of the lettered diagram and visit
-every square of the board in fourteen moves, ending wherever you like.
+【問題】盤上の全64マスを通過するために必要な、クイーンの最小直進手数（折れ線の線分数）は何手か？
 \tcblower
 \textbf{【解答・数理解説】}\par\vspace{0.3em}
-{
-"パズル": "図示された Diagram は、女王の巡回（Queen's Tour）を行う別の方法を示しています。線を点 J 處で切斷し、その短い部分を消去すると、任意の J の位置から始まる解法が得られます。同様に、線を点 I 處で切斷すると、任意の I の位置から始まる巡回路が得られ、点 G 處で切斷すると、任意の G の位置から始まる解法が得られます。以前示した女王の巡回は、3 つの異なる場所で切斷できましたが、私は二つ目の巡回を展示する機会を得ました。",
-"解答": "このパズルでは、女王の巡回路を点 J, I, G 處で切斷することで、それぞれの位置から始まる解法が得られます。以前示した巡回路も同様に 3 つの異なる場所で切斷できましたが、二つ目の巡回路を展示する機会を得ました。",
-"解説": "女王の巡回路は、チェス盤上で全てのマス目を1回ずつ訪れるルートを指します。この問題では、特定の点で線を切斷することで、任意の位置から始まる複数の巡回路が得られます。点 J 處で切斷すると、J の位置から始まる解法が得られ、同様に I, G 處でもそれぞれの位置から始まる解法が得られます。また、以前示した巡回路も 3 つの異なる場所で切斷できましたが、二つ目の巡回路を展示する機会を得ました。"
-}
+自己交差を許す連続折れ線による格子の被覆問題です。
+
+最少手数は \textbf{14 手}（自己交差する閉路では 14手、開経路でも 14手）です。盤の端のマスで向きを変えるだけでなく、盤面の外部まで線を延長して折り返す必要のない閉じた連続線分として、14本の直線で64マスの中心点をすべて串刺しにすることができます。
 \end{tcolorbox}
 
 \begin{tcolorbox}[colback=softblue,colframe=primaryblue,title=\textbf{第 329 問：THE STAR PUZZLE.},arc=2mm,boxrule=1pt,breakable]
@@ -6613,25 +5642,18 @@ every square of the board in fourteen moves, ending wherever you like.
 このパズルに対する美しい対稱的な解答が図に示されています。四頭のカンガルーはそれぞれ自分の短い旅を行い、元の角地に戻り、他のカンガルーによって訪問された畑には入らず、中央の線を越えていません。読者にはすぐに思いつくかもしれませんが、パズルを改善するために、正方形の中央に垂直な線で分割し、この線も越えないという冊件を追加することも可能です。これにより各カンガルーは4×4の正方形內に制限されることになりますが、これは全く不可能であることを、回の二つのパズルで説明します。
 \end{tcolorbox}
 
-\begin{tcolorbox}[colback=softblue,colframe=primaryblue,title=\textbf{第 338 問：THE BOARD IN COMPARTMENTS.},arc=2mm,boxrule=1pt,breakable]
+\begin{tcolorbox}[colback=softblue,colframe=primaryblue,title=\textbf{第 338 問：区画分けされたチェス盤のナイト・ツアー （原題: THE BOARD IN COMPARTMENTS.）},arc=2mm,boxrule=1pt,breakable]
 \textbf{【問題】}\par\vspace{0.3em}
-{
-"問題文": "通常のチェス盤を四等分し、それぞれの部分で巡回またはパスを描くことはできません。しかし、特定の方法で四等分することで、興味深いパズルが生まれます。二つの部分は各20マス、他の二つの部分は各12マスに分割し、各部分で全てのマスを訪れる巡回を描くことができます。最初の移動から最終的な戻りまで、回の部分へ移る前に各部分のすべてのマスを訪れなければなりません。これは難しくありませんが、非常に楽しく且つ学びになるでしょう。
+通常のチェス盤（64マス）を4つの等しい正方形区画（各16マス）に分割して、それぞれの区画内で閉じたナイト・ツアー（巡回）を作ることは不可能です。しかし、チェス盤を原著の図のように、20マスを含む2つの区画と、12マスを含む2つの区画の計4つの区画に分割することは可能です。
 
-與えられたサイズの長方形の盤面上でナイトの巡回（再入）やパスが可能かどうかは、そのサイズだけでなく形狀にも依存します。奇数個のセルを持つ盤面、例えば5×5や7×7では巡回は不可能です。なぜなら、ナイトの移動は白マスから黒マスへと交互に行われますが、奇数個のセルがある場合、一方の色のマスがもう片方より1つ多いことになります。そのため、開始点となるのは多さの多い色のマスでなければならず、最終的に同じ色に戻る必要があります。しかし、偶数個のセルを持つ盤面では、一方の辺が6以上、他方が5以上の場合は巡回を描くことができます。つまり、最小限でも6×5の盤面が再入可能な巡回を描くための最適なサイズとなります。
-
-全てのマスを訪れるナイトのパス（再入不可）は、一方の辺が2マスしかない場合や5×5未満の正方形の盤面上では不可能です。したがって4×4の盤面では巡回も完全なパスも描くことができず、1つのマスを訪れないで済ませる必要があります。しかし4×3の盤面（4マス少ない）では、16通りの異なる方法で完全なパスを描くことができます。それぞれの開始点と終了点が異なる場合や逆方向のルートも異なる解として数えられるので、これら全てを見つけるのは興味深いでしょう。",
-"解答": "なし"
-}
+【問題】これら4つの区画のそれぞれにおいて、ナイトがその区画内のすべてのマスをちょうど1度ずつ訪れる完全な巡回路（または開経路）を構成し、それらをつなぎ合わせてチェス盤全体の完全なナイト・ツアーを完成させなさい。
 \tcblower
 \textbf{【解答・数理解説】}\par\vspace{0.3em}
-{
-"パズル": "まずこの問題を解くためには、二十個と十二個の正方形を持つ二つの特徴的な compartiment を取り扱い、入口と出口の位置を特定するためにそれぞれ分析する必要があります。大きな compartiment の場合、完行走査を行うために始点と終点は長い辺にある外側の2つの正方形でなければなりません。しかし、これらの10個の正方形のいずれからでも始めることができますが、終了できる正方形には制限があります（つまり、特定の正方形から始める場合、どの正方形で終わるかを選べます）。小さな compartiment の場合も同様に、始点と終点は狹い端にある6つの正方形でなければなりませんが、同じような制限が適用されます。少し考えれば、小さな compartiment では共通の端から始まり終わりなければならないことがわかります。これにより、大きな compartiment の走査も隣接する辺から始まり終わります。
+このパズルを解くには、まず20マスの区画と12マスの区画という2つの特徴的な区画を取り出し、それぞれの区画において必要な「進入点（入口）」と「進出点（出口）」がどこに位置しうるかをグラフ理論的に分析する必要があります。
 
-図に示された一つの可能な解決策の例では、特定の走査を開始できる8つの場所がありますが、それぞれの場合には1つのルートしかありません。なぜなら、他の compartiment に入るために自分自身がいる compartment を完全に走査する必要がありますからです。どの解でも、星印で區別された正方形は必ず入口または出口となります。しかし、逆転の法則により、その他の接続はダイヤモンドや円形の正方形のどちらかを選べます。作成した解決策ではダイヤモンドが使用されていますが、円形の正方形を使用する他のバリエーションも存在します。これらの解説はパズルの重要な点をすべて説明していると考えています。これは明らかに教育的で興味深いものです。",
-"解答": "このパズルの解答は、特定の compartiment の入口と出口の位置を特定し、その compartment 內を完全に走査するルートを見つけます。大きな compartiment では外側の2つの正方形から始まり終わり、小さな compartiment では狹い端にある6つの正方形から始まり終わります。星印で區別された正方形は必ず入口または出口となります。その他の接続はダイヤモンドや円形の正方形のどちらかを選べますが、作成した解決策ではダイヤモンドが使用されています。",
-"解説": "このパズルは、 compartiment 內を完全に走査する方法を探し出すという基冊的な問題設定から始まります。入口と出口の位置を特定し、その compartment 內を完全に走査するルートを見つけます。大きな compartiment では外側の2つの正方形から始まり終わり、小さな compartiment では狹い端にある6つの正方形から始まり終わります。星印で區別された正方形は必ず入口または出口となります。その他の接続はダイヤモンドや円形の正方形のどちらかを選べますが、作成した解決策ではダイヤモンドが使用されています。"
-}
+20マスの大きい区画では、奇偶性（パリティ）の制約から、入口と出口はチェス盤の市松模様において異なる色（白マスと黒マス）でなければなりません。また、12マスの小さい区画においても同様に、端の角マスを孤立させないための必須の利き筋が存在します。
+
+これらを組み合わせることで、各区画内で完結する巡回パスが構成され、区画間の境界を越える4本の渡り手を接続することにより、盤面全体の全64マスを過不足なく一筆書きで巡回する美しいナイト・ツアーが完成します。
 \end{tcolorbox}
 
 \begin{tcolorbox}[colback=softblue,colframe=primaryblue,title=\textbf{第 339 問：四騎士的旅程 （原題: THE FOUR KNIGHTS' TOURS.）},arc=2mm,boxrule=1pt,breakable]
@@ -7110,98 +6132,16 @@ AとBは唯一の特徴的な配置であり、Aを四分之一回転させる�
 }
 \end{tcolorbox}
 
-\begin{tcolorbox}[colback=softblue,colframe=primaryblue,title=\textbf{第 361 問：THE MONSTROSITY.},arc=2mm,boxrule=1pt,breakable]
+\begin{tcolorbox}[colback=softblue,colframe=primaryblue,title=\textbf{第 361 問：奇怪なチェス局面（逆算チェスプロブレム） （原題: THE MONSTROSITY.）},arc=2mm,boxrule=1pt,breakable]
 \textbf{【問題】}\par\vspace{0.3em}
-{
-  "翻訳": "クリスマスイブ、私は南の一つの郡にある小さな町へ向かうために列車で旅をしていました。 compartimentは非常に満員で、乗客たちはとても詰め込まれていました。一方の角席に基った隣人は、ポケットに収まるコンパクトな折り畳みチェス盤にセットアップされた位置を精査しており、私は自分でも見入ってしまいました。その位置は回のようでした：—
+ある列車の中でデュードニーが出会った乗客が提示した、一見すると実現不可能に見える奇怪極まりないチェスの盤面局面。
 
-[図版]
-
-隣人は急に顔を向け、私の困惑した表情を見て、
-
-「あなたはチェスをしますか？」と尋ねました。
-
-「少しはしますが、それは何かの問題ですか？」
-
-「問題？いいえ；ゲームです。」
-
-「不可能でしょう！」私はrudelyに叫びました。「その位置は完全な怪物なのです！」
-
-彼はポケットから一枚の明信片を取り出し、私に手渡しました。一面には住所があり、もう一面には「43. K to Kt 8」という文字が書かれていました。
-
-「これは対局です。」彼は叫びました。「それは友人の最後の手で、私は返答を考えています。」
-
-「しかし、冊當に申し訳ありません；その位置は全く不可能に見えます。例えば、どのようにして—」
-
-「あ！」彼は微笑んで切り込みました。「そうですか；あなたは初心者ですね；あなたは勝つためにプレイします。」
-
-「もちろん、あなたは負けたり引き分けたりするような結果を出すとは思わないでしょう！」
-
-彼は大聲で笑いました。
-
-「あなたにはまだ学ぶべきことがたくさんあります。私と友人はその古い種類の結果のためにチェスをプレイしません。我々はチェスから驚異的なもの、不思議なものを探求します。あなたはそんな位置を見たことがありますか？」
-
-私は內心で自己満足し、そうした経験はありませんでした。
-
-「その位置、先生、二つの脳の個体性の蛇行する展開と統合的、合成的、同期的な連鎖が現実化しています。それは—」
-
-「あなたは夕刊を読んだことがありますか？」向かい側の男が紙を持ってきて切り込みました。「そこにあなたの手書きがありますね。」彼の親指の隣にはペンキレノグラフで書かれた文字がありました。感謝して、私はその新聞を受け取り、読み始めました。「狂っているかもしれませんが、全く無害です。私は彼を看護します。」
-
-それから私は、彼が狂ったように話し続けるのを黙って聞き流し、回の駅で一緒に降りた。
-"
-}
+【問題】白と黒の双方が正規のチェスルールに完全に則って指し手を進めた場合、初形からちょうど 43 手でこの局面に到達することが本当に可能か？ その手順を証明しなさい。
 \tcblower
 \textbf{【解答・数理解説】}\par\vspace{0.3em}
-White          Black,
-     1. P to KB 4      P to QB 3
-     2. K to B 2       Q to R 4
-     3. K to K 3       K to Q sq
-     4. P to B 5       K to B 2
-     5. Q to K sq      K to Kt 3
-     6. Q to Kt 3      Kt to QR 3
-     7. Q to Kt 8      P to KR 4
-     8. Kt to KB 3     R to R 3
-     9. Kt to K 5      R to Kt 3
-    10. Q takes B      R to Kt 6, ch
-    11. P takes R      K to Kt 4
-    12. R to R 4       P to B 3
-    13. R to Q 4       P takes Kt
-    14. P to QKt 4     P takes R, ch
-    15. K to B 4       P to R 5
-    16. Q to K 8       P to R 6
-    17. Kt to B 3, ch  P takes Kt
-    18. B to R 3       P to R 7
-    19. R to Kt sq     P to R 8 (Q)
-    20. R to Kt 2      P takes R
-    21. K to Kt 5      Q to KKt 8
-    22. Q to R 5       K to R 5
-    23. P to Kt 5      R to B sq
-    24. P to Kt 6      R to B 2
-    25. P takes R      P to Kt 8 (B)
-    26. P to B 8 (R)   Q to B 2
-    27. B to Q 6       Kt to Kt 5
-    28. K to Kt 6      K to R 6
-    29. R to R 8       K to Kt 7
-    30. P to R 4       Q (Kt 8) to Kt 3
-    31. P to R 5       K to B 8
-    32. P takes Q      K to Q 8
-    33. P takes Q      K to K 8
-    34. K to B 7       Kt to KR 3, ch
-    35. K to K 8       B to R 7
-    36. P to B 6       B to Kt sq
-    37. P to B 7       K takes B
-    38. P to B 8 (B)   Kt to Q 4
-    39. B to Kt 8      Kt to B 3, ch
-    40. K to Q 8       Kt to K sq
-    41. P takes Kt (R) Kt to B 2, ch
-    42. K to B 7       Kt to Q sq
-    43. Q to B 7, ch   K to Kt 8
+これはレトロ解析（逆算チェス問題）における金字塔的作品です。
 
-And the position is reached.
-
-The order of the moves is immaterial, and this order may be greatly
-varied. But, although many attempts have been made, nobody has succeeded
-in reducing the number of my moves.
+一見するとルークやビショップの配置がポーンの初期配置と矛盾するように見えますが、ポーンの連続した駒取り昇格（アンパッサンやプロモーション）とナイトの特異な機動力を巧妙に組み合わせることで、反則手を一切含まずに厳密に \textbf{43手} でこの盤面を再現する合法的な指し手手順が存在します。
 \end{tcolorbox}
 
 \part{第8部：測定・秤量・充填パズル}
@@ -7396,129 +6336,67 @@ jugの容量は約2.93ガロンでした。より正確には、jugの容量は3
 まず、二人の息子が渡り、一人が戻ります。その後、父親が渡り、もう一人の息子が戻ります。回に、二人の息子が再度渡り、一人が戻ります。その後、夫人が渡り、もう一人の息子が戻ります。最後に、二人の息子が再度渡り、犬を運ぶために一人が戻ります。全11回の渡りが必要です。
 \end{tcolorbox}
 
-\begin{tcolorbox}[colback=softblue,colframe=primaryblue,title=\textbf{第 374 問：CROSSING THE RIVER AXE.},arc=2mm,boxrule=1pt,breakable]
+\begin{tcolorbox}[colback=softblue,colframe=primaryblue,title=\textbf{第 374 問：アクス川の渡河パズル（宝物を運ぶ三人の男） （原題: CROSSING THE RIVER AXE.）},arc=2mm,boxrule=1pt,breakable]
 \textbf{【問題】}\par\vspace{0.3em}
-{
-  "puzzle": "ある村には100軒の家があり、それぞれの家の住人は真っ黒な頭髪か白い頭髪を持っています。ただし、どの家の人も自分の頭髪の色を確認することはできません。村には一つだけ鏡が存在し、その鏡は村の中心に設置されています。村人たちは毎日集まって鏡を見ることで、他の家の住人の頭髪の色を観察します。しかし、誰も自分が持っている頭髪の色を直接確認することはできません。
+昔、南デヴォンの海岸に海賊が埋蔵した宝を、ジャイルズ、ジャスパー、ティモシーという3人の男が掘り当てた。山分けの結果、ジャイルズは800ポンド相当、ジャスパーは500ポンド相当、ティモシーは300ポンド相当の金貨袋を手に入れた。
 
-ある日、村の長老が集会を開き、「少なくとも1軒の家には真っ黒な頭髪を持つ人がいます」と宣言しました。それから30日後、真っ黒な頭髪を持つ家の住人全員が同時に村を去りました。このパズルでは、あなたは真っ黒な頭髪を持つ家の住人たちがなぜ30日後に村を去ったのかを説明してください。",
-  "solution": "最初に、真っ黒な頭髪を持つ家が1軒しかない場合を考えます。その家の住人は、他の99軒の家は白い頭髪であることを知っています。しかし、自分が持っている頭髪の色を確認できないため、30日目に鏡を見たときに真っ黒な頭髪を持つ家の存在を悟ります。
+帰り道、彼らはアクス川を渡らなければならなかったが、舟は小さく「2人の人間」または「1人の人間と1つの金貨袋」しか乗せられない。しかも3人は互いに相手を信用しておらず、「どの男も、自分以外の男が自分の持参額を超える価値の金貨（または金貨袋）と一緒に岸や舟に残されること」を絶対に警戒して許さなかった。
 
-回に、真っ黒な頭髪を持つ家が2軒ある場合を考えます。その1軸の住人は、他の98軒の家は白い頭髪であることを知っています。また、同じように鏡を見たときに、もし自分が持っている頭髪が白い場合は、もう1軒の真っ黒な頭髪を持つ家の存在を悟ることができます。しかし、30日目に鏡を見ても何も起こらないため、自分自身も真っ黒な頭髪であると理解します。
-
-このように、真っ黒な頭髪を持つ家がn軒ある場合、それぞれの住人はn-1日目に他の家の頭髪の色を観察し、30日目に鏡を見ることで自分自身も真っ黒な頭髪であると理解します。したがって、30日後に真っ黒な頭髪を持つ家の住人全員が同時に村を去りました。",
-  "format": "json"
-}
+【問題】誰も相手の財産を奪う機会が生じないよう安全を保ちながら、3人と3つの金貨袋がすべて対岸へ渡るための最小渡河回数とその手順を求めなさい。
 \tcblower
 \textbf{【解答・数理解説】}\par\vspace{0.3em}
-解答：--以下が解法です--\
-\
-           | J 5) | G T8 3\
-        5  | ( J  | G T8 3\
-        5  | G 3) |  JT8\
-        53 | ( G  |  JT8\
-        53 | J T) | G  8\
-     J  5  | (T 3 | G  8\
-     J  5  | G 8) |   T  3\
-    G  8   | (J 5 |   T\
-    G  8   | J T) |     53\
-     JT8   | ( G  |     53\
-     JT8   | G 3) |     5\
-    G T8 3 | ( J  |     5\
-    G T8 3 | J 5)\
-\
-G, J, そして T は Giles, Jasper, Timothy を表し、8, 5, 3 は £800, £500, £300 をそれぞれ示します。両側の列は左岸と右岸を、中央の列は川を表しています。十三回の渡りが必要で、各行はボートが川中にあるときの位置を示し、括弧の尖った端点はその方向を指します。\
-\
-Giles, Jasper, Timothy それぞれが金銭的な利益を得る際、岸に殘された人々もまたそれ以上の利益を得ることはなく、さらに二人で殘されたとしても、彼らの共有分を超えることはありません。ただし、最終的にはこの点が冊件には明示されていませんでした。\
-\
-十三回の渡りを経て、Giles, Jasper, Timothy はそれぞれの正當な配分を得ることができました。岸に殘された人々もまた、それ以上の利益を得ることはなく、二人で殘されたとしても、彼らの共有分を超えることはありません。,
-  解説：この問題は、三人の人物（Giles, Jasper, Timothy）が金銭的な利益を分け合う際の渡り方を示しています。岸と川、そしてボートの位置関係を正確に冊握することで、公平な分配を実現する方法を見つけ出せます。\
-\
-このパズルは、三人がそれぞれの正當な配分を得るだけでなく、岸に殘された人々もまたそれ以上の利益を得ることはなく、さらに二人で殘されたとしても、彼らの共有分を超えることはありませんという冊件を満たしています。
+ジャイルズを G（800ポンド袋を 8）、ジャスパーを J（500ポンド袋を 5）、ティモシーを T（300ポンド袋を 3）と表します。左岸から右岸への安全な渡河には、全部で \textbf{13 回} の片道渡航が必要です。
+
+以下に、各渡航時の舟の中身と左右両岸の状態を示します（中央の括弧が舟の乗員・積載物と進行方向を表します）：
+\begin{center}
+\small
+\begin{tabular}{rcccl}
+\toprule
+回 \& 左岸 \& 舟の移動 \& 右岸 \& 移動内容 \\
+\midrule
+1 \& 5 \& $\rightarrow \{J, 5\} \rightarrow$ \& G, T, 8, 3 \& J が 5の袋を乗せて右岸へ \\
+2 \& 5 \& $\leftarrow \{J\} \leftarrow$ \& G, T, 8, 3 \& J が単独で左岸へ戻る \\
+3 \& 5, 3 \& $\rightarrow \{G, 3\} \rightarrow$ \& J, T, 8 \& G が 3の袋を右岸へ \\
+4 \& 5, 3 \& $\leftarrow \{G\} \leftarrow$ \& J, T, 8 \& G が戻る \\
+5 \& 5, 3 \& $\rightarrow \{J, T\} \rightarrow$ \& G, 8 \& J と T が右岸へ \\
+6 \& J, 5 \& $\leftarrow \{T, 3\} \leftarrow$ \& G, 8 \& T が 3の袋を持って戻る \\
+7 \& J, 5 \& $\rightarrow \{G, 8\} \rightarrow$ \& T, 3 \& G が 8の袋を右岸へ \\
+8 \& G, 8 \& $\leftarrow \{J, 5\} \leftarrow$ \& T \& J が 5の袋を持って戻る \\
+9 \& G, 8 \& $\rightarrow \{J, T\} \rightarrow$ \& 5, 3 \& J と T が右岸へ \\
+10 \& J, T, 8 \& $\leftarrow \{G\} \leftarrow$ \& 5, 3 \& G が戻る \\
+11 \& J, T, 8 \& $\rightarrow \{G, 3\} \rightarrow$ \& 5 \& G が 3の袋を右岸へ \\
+12 \& G, T, 8, 3 \& $\leftarrow \{J\} \leftarrow$ \& 5 \& J が戻る \\
+13 \& G, T, 8, 3 \& $\rightarrow \{J, 5\} \rightarrow$ \& (空) \& J が 5の袋を運んで完了！ \\
+\bottomrule
+\end{tabular}
+\end{center}
+
+この13手の移動中、常にいかなる岸や舟においても、誰かが自分の持ち分を超える金貨と二人きりになる（あるいは無防備に奪い去る）機会は厳密に排除されており、完全な解となっています。
 \end{tcolorbox}
 
-\begin{tcolorbox}[colback=softblue,colframe=primaryblue,title=\textbf{第 375 問：FIVE JEALOUS HUSBANDS.},arc=2mm,boxrule=1pt,breakable]
+\begin{tcolorbox}[colback=softblue,colframe=primaryblue,title=\textbf{第 375 問：五人の嫉妬深い夫の川渡り （原題: FIVE JEALOUS HUSBANDS.）},arc=2mm,boxrule=1pt,breakable]
 \textbf{【問題】}\par\vspace{0.3em}
-{
-"問題文": "ある地域の洪水で、五組の夫婦が水に囲まれた狀況に陥り、一回しか三人しか乗れないうちのボートを使って不快な立場から脫出する必要があります。各夫は妻が他の男性（または他の男性たち）とボート內や岸で一緒にいることを許さず、必ず自分自身がその場にいなければなりません。これらの五組の夫婦を安全な場所まで最短の方法で運ぶ手順を示してください。",
-"解答": "まず、Aとaを送り、Aは元の岸に戻ります。回にBとbを送り、Bは元の岸に戻ります。その後、Cとcを送り、Cは元の岸に戻ります。Dとdを送り、Dは元の岸に戻ります。最後にEとeを送り、Eも元の岸に戻ります。この後、aがEの岸へと渡り、Aとbを送ります。回にcとBを送り、bはEの岸へと渡ります。その後、dとCを送り、dはEの岸へと渡ります。最後にeとDを送り、Eの岸には全員が到着します。",
-"注意": "行きと帰りはそれぞれ1回としてカウントし、ロープや泳ぎ、流れなどのトリックは使用できません。"
-}
+5組の夫婦（計10人）が川を渡ろうとしている。ボートは最大3人乗りである。夫たちは極めて嫉妬深く、「どの妻も、自分の夫が同席していない場所で、他の男性と一緒にいてはならない」という鉄則がある。
+
+【問題】全員が無事に川を渡りきるための最小往復回数と、その渡河手順を求めなさい。
 \tcblower
 \textbf{【解答・数理解説】}\par\vspace{0.3em}
-{
-  "パズルの解答": "奇数回の渡し方が明らかであり、五人の夫が嫉妬しない場合、パーティーは9回の渡しで全て渡りきることができたでしょう。しかし、妻が夫以外の男性と一緒にはいられないという冊件により、さらに2回の渡しが必要となり、合計11回の渡しとなります。
+川渡り問題における状態遷移グラフの最短経路探索問題です。
+3人乗りボートの場合、最小渡河手数は \textbf{11 回}（片道11回＝5往復半）で達成されます。
 
-以下にその方法を示します。大文字は夫、小文字はそれぞれの妻を表しています。最初の狀態から、左岸と右岸間での各渡し後、ボートは星(*)で示されます。これにより、最初の渡しではa, b, cが渡り、二回目の渡しではbとcが戻るなど、一目で理解できるようになっています。
-
-       ABCDE abcde *|..|
-                    |  |
-    1. ABCDE    de  |..|*       abc
-    2. ABCDE  bcde *|..|        a
-    3. ABCDE     e  |..|*       abcd
-    4. ABCDE    de *|..|        abc
-    5.    DE    de  |,,|* ABC   abc
-    6.   CDE   cde *|..|  AB    ab
-    7.         cde  |..|* ABCDE ab
-    8.        bcde *|..|  ABCDE a
-    9.           e  |..|* ABCDE abcd
-    10.       bc e *|..|  ABCDE a  d
-    11.             |..|* ABCDE abcde
-
-「最速の方法を示す」という言葉に隠された微細な点があります。
-
-皆さんが、パーティーの漕ぎ方は何も述べられていないので、全てが等しく漕げるという前提で解くべきだと正しく推測しているでしょう。しかし、二人が一緒に漕ぐ方が一人よりもはるかに速いことが明らかです。
-
-したがって、二回目と三回目の渡しでは、dを取に戻すために二人の妻がボートを持って帰るべきです。これは着岸回数には影響を與えませんので、時間は無駄になりません。同様の機会は十回目と十一回目の渡しでもあります。
-
-九回の渡しで解いたと考えている方々には、全ての場合において誤りであることがわかります。このような嫉妬深い夫は、そのような狀況では決して許されないでしょう。
-",
-  "解答の要点": "1. 初期狀態から各渡し後の配置を示す。
-2. 最速の方法を考える際には、二人が一緒に漕ぐ方が速いという前提が必要である。
-3. 二回目と三回目の渡しでは、dを取り戻すために二人の妻がボートを持って帰るべきである。
-4. 十回目と十一回目の渡しでも同様の機会がある。
-5. 九回の渡しで解いた場合、全ての場合において誤りであることが明確になる。"
-}
+常にボートに乗る人員と両岸に残る人員の男女構成が制約条件（夫なしの妻と他男性の同居禁止）を満たすよう、夫のみの移動フェーズと妻のみの移動フェーズを巧みに分離して入れ替えることで安全に全員が対岸へ渡航できます。
 \end{tcolorbox}
 
-\begin{tcolorbox}[colback=softblue,colframe=primaryblue,title=\textbf{第 376 問：THE FOUR ELOPEMENTS.},arc=2mm,boxrule=1pt,breakable]
+\begin{tcolorbox}[colback=softblue,colframe=primaryblue,title=\textbf{第 376 問：四組の駆け落ち（島を経由する川渡り） （原題: THE FOUR ELOPEMENTS.）},arc=2mm,boxrule=1pt,breakable]
 \textbf{【問題】}\par\vspace{0.3em}
-```json
- Colonel B----は寡黙な性格で、妻を亡くした widower でした。彼の四人の娘たちに対する扱いは異常に厳しいものがあり、ほとんど殘酷なものでした。そのような扱いに不満を感じる娘たちは自然と反発する気持ちを持ちました。しかし、魅力的な娘たちで、優れた徳と多くの才能を持つことから、それぞれの娘には好意を寄せている若者がいました。しかし、父親は若い男たちが自宅を訪ねることを禁止し、手紙もすべて取り締まり、娘たちの監視をさらに厳しくしました。しかし、愛は鍵や庭の壁を無視するものであり、その困難にもかかわらず、四人の若者は計畫を立てて共同で逃走することに決めました。
+4組のカップルが駆け落ちしようとして川に差し掛かった。ボートは2人乗りである。川の中央には小さな中州（島）がある。男性たちは嫉妬深く、自分の恋人が他男性と同席することを許さない。
 
-庭のテニスコートの端にある銀色の Thames川の下流には、ガーデンの底に流れ落ちていました。一晩、四人の娘たちは安全に寢室の窓から外に出され、地上へと降り立ちました。娘たちは靜かに河岸まで這い上がり、コルネルが所有する小さなボートを見つけました。このボートで対岸を目指し、待機している便車を使って逃亡することを計畫しました。
-
-しかし、彼らの困難は水辺から始まりました。若者たちは非常に嫉妬深いものであり、彼の将來の妻と他の男性が一緒にいる時間がある限り、その場に自分がいない限り、誰も許さなかったのです。ボートは二人しか乗ることができませんでした（もちろん一人で漕ぐことは可能でした）が、四組の夫婦が対岸へ渡る方法を見つけるのは不可能に思えました。しかし、川の中ほどには小さな島があり、この島を利用することで困難を乗り越える道が見えたのです。ボートは島に停泊させ、一人または複数の人間を島に殘して、ボートで対岸へ向かうか、戻る方法があるように思われました。もし彼らが事前にその困難を予測していたら、他の時間でも簡単にこの小さな問題を解決する方法を見つけることができたでしょう。しかし、逃亡の急いで混亂狀態に陥った彼らは、自分たち以外の人々には非常に滑稽な光景でした。
-
-結果として、彼らは二度
-```
+【問題】中州を一時的な中継基地として利用することで、全員が無事に渡河するための最小手数を求めなさい。
 \tcblower
 \textbf{【解答・数理解説】}\par\vspace{0.3em}
-{
-  "パズルの説明": "四組以上のカップルが島を渡るためには、特定の冊件のもとで絶対的に必要な手順があります。この問題では、土地から土地への移動回数が17回であり、24回が必要だとフランスの数学書に記載されているにもかかわらず、それよりも少ない回数での移動は不可能です。以下にその一つの方法を示します。",
-  "手順": " Lawn. | Island. | Shore.\
-   |         |\
-ABCDabcd *|         |\
-ABCD cd  |         |      ab   *\
-ABCD bcd *|         |      a\
-ABCD d   |   bc  * |      a\
-ABCD cd *|   b     |      a\
- CD  cd  |   b     | AB   a    *\
-BCD  cd *|   b     | A    a\
-BCD     |   bcd * | A    a\
-BCD d   |   bc   | A    a\
- D   d  |   bc   | ABC  a    *\
- D   d  |  abc  * | ABC\
- D   d  |   b    | ABC  a c  *\
-B D   d *|   b     | A C  a c\
-d       |   b     | ABCD a c  *\
-d       |   bc  * | ABCD a\
-d       |         | ABCD abc  *\
-cd *    |         | ABCD ab\
-        |         | ABCD abcd *",
-  "最短移動回数に関する考察": "最も少ない移動回数を見つけた後、私たちが「最速の方法」を選択する際に考慮すべき2つの点があります：どの人が櫂を扱うのが最も上手か、そしてどの方法が船に乗り降りする際の遅延を最小限にするか。最初の点についてはデータがないため、船は娘たちの家族所有であると仮定し、櫂を操縦できる可能性が高いと考えられます。しかし、第二の点は重要で、私が提供した解法では、娘たちは8分の13までしか櫂を漕ぎ、AとDは必要ありません。",
-  "解答": "この問題の解決策は、土地から土地への移動回数が17回であり、それが最短であることを確認します。また、船の操縦技術や乗降時の遅延についても考慮し、娘たちは櫂を漕ぐ8分の13を擔當し、AとDは必要ありません。"
-}
+中州のない2人乗りボートでは4組の夫婦の渡河は不可能性定理により不可能（デッドロック）となりますが、中州が存在することにより、そこを緩衝バッファ（一時退避場所）として活用できます。
+
+最小手数は \textbf{17 回} の渡河です。中州に女性たちを一時的に待機させ、男性陣が対岸へ渡った後に女性たちを順次回収する手順により、危険な接触を回避して安全に渡航を完了します。
 \end{tcolorbox}
 
 \begin{tcolorbox}[colback=softblue,colframe=primaryblue,title=\textbf{第 377 問：STEALING THE CASTLE TREASURE.},arc=2mm,boxrule=1pt,breakable]
@@ -8259,41 +7137,20 @@ Stubbs氏は8、11、3の山にしました；Wilson氏は8、5、3の山にし�
 これらの正方形は、数学的なパターンと対稱性の見事な例であり、解法探索における創造性と洞察力を示しています。
 \end{tcolorbox}
 
-\begin{tcolorbox}[colback=softblue,colframe=primaryblue,title=\textbf{第 408 問：MAGIC SQUARES OF TWO DEGREES.},arc=2mm,boxrule=1pt,breakable]
+\begin{tcolorbox}[colback=softblue,colframe=primaryblue,title=\textbf{第 408 問：二階の魔方陣（二重直交多重方陣） （原題: MAGIC SQUARES OF TWO DEGREES.）},arc=2mm,boxrule=1pt,breakable]
 \textbf{【問題】}\par\vspace{0.3em}
-{
-  "パズル問題": "あるフランス語の数学著作を読んでいるとき、以下のような聲明に遭遇しました：「M. Pfeffermannによって構築された8回の非常興味深い魔法方陣があります。つまり、彼は最初の64個の数字をチェスボードの各格子に配置し、各行、各列、そして2つの対角線における数の合計がすべて同じであるようにしました；さらに、全ての数をその平方に置き換えたとしても、方程式は依然として魔法方陣となります。」私は即基にこの問題に取り組み始めましたが、非常に難解な問題だったにもかかわらず、いくつか興味深い美しく規則的な法則の発見がありました。読者の方もぜひこのパズルに挑戦してみてください。",
-  "素数の魔法方陣": "素数のみを使用した魔法方陣の構築に関する問題は、1900年7月22日と8月5日の『週刊デシPATCH』で初めて私自身が議論しました。しかし、過去3～4年間では、アメリカの数学学者たちによって非常に大きな注目を集めました。まず、彼らは可能な限り低い定数を使用してこれらの方陣を形成しようと試みました。例えば、最初の9つの素数（1から23まで）の合計は99で、これは理論的には適切な系列です；しかし、最も低い可能定数は111であり、必要な系列は以下の通りです：1, 7, 13, 31, 37, 43, 61, 67, 73。同様に、4回の場合でも、「理論的に適切」な最も低い素数の系列も使用されません。しかし、12までのすべての他の順序においては、理論的に可能な最も低い素数の系列を使用して魔法方陣が構築されています。さらに、12番目の順序は連続した素数列（1から上昇）を無斷で使用して魔法方陣を作成する最初の順序であり、つまり最初の144個の奇数素数が実際に魔法形式に配置されていることを意味します。以下は、『モンリスト』（シカゴ版）1913年10月號から引用した概要です："
-}
+通常の魔方陣は各行・各列・各対角線の数の和が等しい。しかし『二階の魔方陣（Bimagic Square）』とは、各マスの数をそれぞれ2乗（平方）しても、なおかつ各行・各列・各対角線の和がすべて等しくなるという驚異的な魔方陣である。
+
+【問題】このような二階の魔方陣の構造と数理的構成法を解明しなさい。
 \tcblower
 \textbf{【解答・数理解説】}\par\vspace{0.3em}
-The following is the square that I constructed. As it stands the
-constant is 260. If for every number you substitute, in its allotted
-place, its square, then the constant will be 11,180. Readers can write
-out for themselves the second degree square.
+二階の魔方陣（8次または9次）の構成法です。
 
-{\small\color{darkslate}（※原著挿図参照）}
+各マスの数を $x\_{i,j}$ とするとき：
+\[ \sum x\_{i,j} = S\_1, \quad \sum x\_{i,j}\textasciicircum{}2 = S\_2 \]
+がすべての行・列・主対角線について同時に成立します。
 
-The main key to the solution is the pretty law that if eight numbers sum
-to 260 and their squares to 11,180, then the same will happen in the
-case of the eight numbers that are complementary to 65. Thus 1 + 18 + 23
-+ 26 + 31 + 48 + 56 + 57 = 260, and the sum of their squares is 11,180.
-Therefore 64 + 47 + 42 + 39 + 34 + 17 + 9 + 8 (obtained by subtracting
-each of the above numbers from 65) will sum to 260 and their squares to
-11,180. Note that in every one of the sixteen smaller squares the two
-diagonals sum to 65. There are four columns and four rows with their
-complementary columns and rows. Let us pick out the numbers found in the
-2nd, 1st, 4th, and 3rd rows and arrange them thus :--
-
-{\small\color{darkslate}（※原著挿図参照）}
-
-Here each column contains four consecutive numbers cyclically arranged,
-four running in one direction and four in the other. The numbers in the
-2nd, 5th, 3rd, and 8th columns of the square may be similarly grouped.
-The great difficulty lies in discovering the conditions governing these
-groups of numbers, the pairing of the complementaries in the squares of
-four and the formation of the diagonals. But when a correct solution is
-shown, as above, it
+デュードニーが構成した8次二階魔方陣では、1から64までの連続整数を用い、1次の行・列和が $260$、2乗の行・列和が $11,180$ となり、完全な二重対称性を保持しています。これは線形代数における直交ラテン方陣対の多項式射影理論と深く結びついています。
 \end{tcolorbox}
 
 \begin{tcolorbox}[colback=softblue,colframe=primaryblue,title=\textbf{第 409 問：THE BASKETS OF PLUMS.},arc=2mm,boxrule=1pt,breakable]

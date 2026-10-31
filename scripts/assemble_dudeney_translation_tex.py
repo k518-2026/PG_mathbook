@@ -15,30 +15,33 @@ def clean_for_latex(text):
     t = re.sub(r'\[Illustration:?[^\]]*\]', r'\n\n{\\small\\color{darkslate}（※原著挿図参照）}\n\n', t)
     t = re.sub(r'\[Illustration\]', r'\n\n{\\small\\color{darkslate}（※原著挿図参照）}\n\n', t)
 
-    # Clean chess pieces Unicode glyphs that may not exist in HaranoAji
+    # Clean chess pieces Unicode glyphs
     t = t.replace('♞', 'N').replace('♘', 'N')
     t = t.replace('♚', 'K').replace('♔', 'K')
     t = t.replace('♛', 'Q').replace('♕', 'Q')
     t = t.replace('♜', 'R').replace('♖', 'R')
-    t = t.replace('♝', 'B').replace('B', 'B')
+    t = t.replace('♝', 'B').replace('♗', 'B')
     t = t.replace('♟', 'P').replace('♙', 'P')
 
     # Remove literal \n or \\n that cause TeX control sequence errors
     t = t.replace('\\n', '\n')
     t = t.replace(r'\n', '\n')
 
-    # Remove Markdown bold/italic syntax that LLMs sometimes generate
+    # Remove Markdown bold/italic syntax
     t = re.sub(r'\*\*(.*?)\*\*', r'\\textbf{\1}', t)
     t = re.sub(r'\*(.*?)\*', r'\\textit{\1}', t)
 
-    # Escape special TeX chars safely
+    # Escape TeX special chars safely outside math
     t = t.replace('&', r'\&')
     t = t.replace('%', r'\%')
-    t = t.replace('$', r'\$')
     t = t.replace('#', r'\#')
     t = t.replace('_', r'\_')
-    t = t.replace('^', r'\textasciicircum{}')
-    t = t.replace('~', r'\textasciitilde{}')
+
+    # Safe escaping for ^ and ~ outside math mode
+    parts = t.split('$')
+    for i in range(0, len(parts), 2):
+        parts[i] = parts[i].replace('^', r'\textasciicircum{}').replace('~', r'\textasciitilde{}')
+    t = '$'.join(parts)
 
     # Clean multiple blank lines
     t = re.sub(r'\n{3,}', '\n\n', t)
