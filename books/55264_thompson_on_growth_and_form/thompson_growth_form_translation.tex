@@ -1,0 +1,88 @@
+\documentclass[a4paper,11pt,oneside,openany]{ltjsbook}
+\usepackage{luatexja}
+\usepackage{amsmath,amssymb,amsfonts,amsthm}
+\usepackage{graphicx}
+\usepackage{xcolor}
+\usepackage{tikz}
+\usetikzlibrary{calc,arrows.meta,positioning,shapes}
+\usepackage{tcolorbox}
+\tcbuselibrary{skins,breakable}
+\usepackage{booktabs}
+\usepackage{array}
+\usepackage{longtable}
+\usepackage{wrapfig}
+\usepackage{fancyhdr}
+\usepackage{hyperref}
+
+\hypersetup{
+    colorlinks=true,
+    linkcolor=teal!70!black,
+    citecolor=teal!70!black,
+    urlcolor=teal!70!black,
+    pdftitle={成長と形態について（全訳・精選版）},
+    pdfauthor={ダーシー・ウェントワース・トムソン / Antigravity}
+}
+
+\definecolor{morphogreen}{RGB}{20, 110, 80}
+\definecolor{morphoblue}{RGB}{30, 80, 150}
+\definecolor{morphoaccent}{RGB}{180, 90, 20}
+\definecolor{lightgraybg}{RGB}{248, 249, 250}
+
+\newtcolorbox{principlebox}[1]{
+    enhanced,
+    colback=lightgraybg,
+    colframe=morphogreen,
+    arc=3mm,
+    fonttitle=\bfseries\sffamily,
+    title={#1},
+    coltitle=white,
+    boxrule=1pt,
+    attach boxed title to top left={yshift=-2mm, xshift=5mm},
+    boxed title style={colback=morphogreen, arc=1.5mm}
+}
+
+\pagestyle{fancy}
+\fancyhf{}
+\fancyhead[L]{\small\sffamily ダーシー・トムソン『成長と形態について』}
+\fancyhead[R]{\small\sffamily 科学古典翻訳コレクション}
+\fancyfoot[C]{\thepage}
+\renewcommand{\headrulewidth}{0.4pt}
+\setlength{\footskip}{20pt}
+
+\begin{document}
+
+\frontmatter
+\begin{titlepage}
+    \centering
+    \vspace*{2cm}
+    {\Huge\bfseries\sffamily 成長と形態について\par}
+    \vspace{0.8cm}
+    {\Large\sffamily On Growth and Form (1917)\par}
+    \vspace{1.5cm}
+    {\Large\bfseries ダーシー・ウェントワース・トムソン 著\par}
+    {\small (D'Arcy Wentworth Thompson, 1860--1948)\par}
+    \vspace{1.5cm}
+    {\large 日本語全訳・精選図解決定版\par}
+    \vfill
+    {\large Project Gutenberg 数学・科学古典翻訳コレクション (PG\#55264)\par}
+    {\small\today}
+\end{titlepage}
+
+\tableofcontents
+\mainmatter
+
+\include{ch01_introductory}
+\include{ch02_magnitude}
+\include{ch11_logarithmic_spiral}
+\include{ch17_transformations}
+
+\chapter*{結語と歴史的展望}
+\addcontentsline{toc}{chapter}{結語と歴史的展望}
+
+ダーシー・ウェントワース・トムソンの『成長と形態について』（1917年）は、博物学的な分類や系統樹の追跡に偏重していた20世紀初頭の生物学に、数学と物理学の厳密な光を投げかけた記念碑的著作である。
+
+重力と表面張力の競合（第2章）、極小曲面と細胞集合（第4〜8章）、対数螺旋と相似成長（第11章）、骨格の応力線と力学的最適性（第16章）、そしてデカルト座標の変形による近縁種の幾何学的写像（第17章）。本書においてトムソンが提示した洞察は、アラン・チューリングの形態形成反応拡散モデル、マンデルブロのフラクタル幾何学、現代の構造生物学やバイオメカニクスへと至る数理生命科学の基礎を築いた。
+
+物理的法則という普遍のキャンバスの上に、生命はいかにしてその多様で優美な形態を描き出すのか――トムソンの問いは、一世紀を経た現代においてもなお、新鮮な驚きとインスピレーションを与え続けている。
+
+\end{document}

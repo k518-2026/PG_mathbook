@@ -1,0 +1,238 @@
+\documentclass[a4paper,11pt,oneside,openany]{ltjsbook}
+\usepackage{luatexja}
+\usepackage{amsmath,amssymb,amsfonts,amsthm}
+\usepackage{graphicx}
+\usepackage{xcolor}
+\usepackage{tikz}
+\usetikzlibrary{calc,arrows.meta,positioning,shapes,decorations.pathmorphing,backgrounds}
+\usepackage{tcolorbox}
+\tcbuselibrary{skins,breakable}
+\usepackage{booktabs}
+\usepackage{array}
+\usepackage{longtable}
+\usepackage{wrapfig}
+\usepackage{fancyhdr}
+\usepackage{hyperref}
+
+\hypersetup{
+    colorlinks=true,
+    linkcolor=teal!70!black,
+    citecolor=teal!70!black,
+    urlcolor=teal!70!black,
+    pdftitle={ダーシー・トムソン『成長と形態について』解説と要点},
+    pdfauthor={D'Arcy Wentworth Thompson / Antigravity}
+}
+
+\definecolor{morphogreen}{RGB}{20, 110, 80}
+\definecolor{morphoblue}{RGB}{30, 80, 150}
+\definecolor{morphoaccent}{RGB}{180, 90, 20}
+\definecolor{lightgraybg}{RGB}{248, 249, 250}
+
+\newtcolorbox{principlebox}[1]{
+    enhanced,
+    colback=lightgraybg,
+    colframe=morphogreen,
+    arc=3mm,
+    fonttitle=\bfseries\sffamily,
+    title={#1},
+    coltitle=white,
+    boxrule=1pt,
+    attach boxed title to top left={yshift=-2mm, xshift=5mm},
+    boxed title style={colback=morphogreen, arc=1.5mm}
+}
+
+\pagestyle{fancy}
+\fancyhf{}
+\fancyhead[L]{\small\sffamily ダーシー・トムソン『成長と形態について』}
+\fancyhead[R]{\small\sffamily 幾何学と物理法則が紡ぐ生命のかたち}
+\fancyfoot[C]{\thepage}
+\renewcommand{\headrulewidth}{0.4pt}
+
+\begin{document}
+
+\frontmatter
+\begin{titlepage}
+    \centering
+    \vspace*{2cm}
+    {\Huge\bfseries\sffamily 成長と形態について\par}
+    \vspace{0.8cm}
+    {\Large\sffamily --- 物理法則と幾何学が織りなす生命の造形美 ---\par}
+    \vspace{0.5cm}
+    {\large On Growth and Form (1917)\par}
+    \vspace{2cm}
+    {\Large\bfseries ダーシー・ウェントワース・トムソン\par}
+    {\small (D'Arcy Wentworth Thompson, 1860--1948)\par}
+    \vspace{1cm}
+    {\large 日本語解説・要約・精選図解版\par}
+    \vfill
+    {\large Project Gutenberg 数学・科学古典翻訳コレクション\par}
+    {\small\today}
+\end{titlepage}
+
+\tableofcontents
+\mainmatter
+
+\chapter{生命の形態と物理法則（序論）}
+
+ダーシー・ウェントワース・トムソン（D'Arcy Wentworth Thompson）の名著『成長と形態について』（\textit{On Growth and Form}, 1917）は、数理生物学、形態形成論（モルフォロジー）、バイオメカニクスの歴史における不滅の金字塔である。
+
+トムソン以前の生物学は、19世紀の進化論（ダーウィニズム）の影響のもと、あらゆる生物形態の差異を「自然淘汰による適応」「祖先からの系統樹」のみによって説明しようとする傾向が極めて強かった。これに対しトムソンは、カントの「真の科学は数学を適用できる度合いに比例して存在する」という言葉を掲げ、生物の形態とは**「作用した物理的・力学的力（重力、表面張力、粘性、水圧、拡散、浸透圧）が物質に刻み込んだ痕跡（ダイアグラム）」**であるという画期的な視座を確立した。
+
+\begin{principlebox}{トムソンの根本原理}
+生物の「形態（Form）」とは、成長の過程において物質に作用した「力（Forces）」の力学的ダイアグラムである。適応や淘汰を議論する前に、まず物理的・幾何学的な必然性によってどのような形態が可能であるかを解明しなければならない。
+\end{principlebox}
+
+\section{数学と生物学の架橋}
+有機的生命体であっても、無機物質を支配するニュートン力学、流体力学、熱力学、弾性力学、表面張力の物理法則から免れることはできない。本書においてトムソンは以下のような劇的な問いを投げかけ、幾何学と力学によって明快な回答を与えていく：
+\begin{itemize}
+    \item なぜ巨人は存在できず、なぜ昆虫はビルから落ちても無傷なのか？（第2章：大きさの物理学・2乗3乗則）
+    \item なぜオウムガイの殻やアンモナイトは美しい対数螺旋を描くのか？（第11章：対数螺旋の等角性）
+    \item なぜ細胞や気泡の集合体は120度の角（プラトーの法則）で交わるのか？（第4〜8章：表面張力と極小曲面）
+    \item ある魚の骨格形状から別の近縁種の骨格へ、直交座標を歪めるだけで幾何学的に写像できるのはなぜか？（第17章：変形理論／座標変換論）
+\end{itemize}
+
+\chapter{大きさの物理学 --- 2乗3乗則とスケール効果}
+
+第2章「大きさについて（On Magnitude）」において、トムソンはガリレオ・ガリレイの『新科学対話』に端を発する**スケール則（Scaling Law）**を生物学全般に適用した。
+
+\section{幾何学的相似と力学的限界}
+長さを $L$ とするとき、幾何学的に相似な立体において、表面積 $S$ と体積 $V$（および質量 $M$）は以下の関係に従う：
+\begin{align}
+    S &\propto L^2 \\
+    V &\propto L^3 \quad (\text{密度が一定ならば } M \propto L^3)
+\end{align}
+
+この単純な幾何学的比率の差異が、巨大生物の骨格構造、熱放散、呼吸系、運動能力に絶対的な制約を課す。
+
+\begin{center}
+\begin{tikzpicture}[scale=1.1]
+    % Small cube
+    \draw[thick, fill=morphogreen!20] (0,0) rectangle (1.2,1.2);
+    \draw[thick, fill=morphogreen!30] (1.2,0) -- (1.8,0.5) -- (1.8,1.7) -- (1.2,1.2) -- cycle;
+    \draw[thick, fill=morphogreen!10] (0,1.2) -- (0.6,1.7) -- (1.8,1.7) -- (1.2,1.2) -- cycle;
+    \node at (0.9,-0.4) {長さ $L=1$};
+    \node at (0.9,-0.8) {\small 面積 $S=6$};
+    \node at (0.9,-1.2) {\small 体積 $V=1$};
+
+    % Arrow
+    \draw[->, very thick, morphoaccent] (2.3, 0.8) -- (3.3, 0.8) node[midway, above] {\footnotesize 2倍拡大 ($k=2$)};
+
+    % Large cube
+    \begin{scope}[shift={(3.8, -0.3)}]
+        \draw[thick, fill=morphoblue!20] (0,0) rectangle (2.4,2.4);
+        \draw[thick, fill=morphoblue!30] (2.4,0) -- (3.6,1.0) -- (3.6,3.4) -- (2.4,2.4) -- cycle;
+        \draw[thick, fill=morphoblue!10] (0,2.4) -- (1.2,3.4) -- (3.6,3.4) -- (2.4,2.4) -- cycle;
+        \node at (1.8,-0.4) {長さ $L=2$};
+        \node at (1.8,-0.8) {\small 面積 $S=24$ (\textbf{$4$倍})};
+        \node at (1.8,-1.2) {\small 体積 $V=8$ (\textbf{$8$倍})};
+    \end{scope}
+\end{tikzpicture}
+\end{center}
+
+\section{重力支配の世界と表面張力支配の世界}
+生物が経験する物理環境は、その身体の絶対的な大きさによって劇的に逆転する：
+\begin{itemize}
+    \item **巨大生物（ゾウ、クジラ、人間）**：
+    体積と質量（$L^3$）が支配的であり、**重力（Gravity）**が形態を決定づける。身体を支える脚の断面積は $L^2$ にしか比例しないため、相似な形のまま巨大化すると骨の受ける応力（圧力 $\sigma = M/A \propto L^3/L^2 = L$）が増大し、自重で圧挫してしまう。そのため、巨獣ほど脚は太く、柱のように直立しなければならない。
+    \item **微小生物（昆虫、原生動物、細菌）**：
+    質量が無視できるほど小さくなり、重力よりも**表面張力（Surface Tension）**や粘性抵抗が圧倒的な支配力を持つ。昆虫は水滴に囚われれば溺死の危機に瀕し、水面張力で水上を容易に歩行できる。
+\end{itemize}
+
+\chapter{対数螺旋と相似成長}
+
+第11章「対数螺旋（The Logarithmic Spiral）」は本書の白眉の一つである。オウムガイの殻、アンモナイトの化石、巻き貝、雄羊の角、ヒマワリの種子の配列に現れる幾何学的数理が分析される。
+
+\section{アルキメデス螺旋と対数螺旋の決定的な違い}
+\begin{itemize}
+    \item **アルキメデス螺旋 ($r = a + b\theta$)**：
+    紐を一様な速度で巻き取る軌跡であり、隣り合う螺旋の間隔が一定である。これは成長ではなく、一様な蓄積を示す。
+    \item **対数螺旋 ($r = a e^{b\theta}$ または $r = a^{\theta}$)**：
+    任意の動径ベクトルと接線とのなす角 $\alpha$（挟角）が常に一定であるため、**等角螺旋（Equiangular Spiral）**と呼ばれる。
+\end{itemize}
+
+\begin{center}
+\begin{tikzpicture}[scale=1.2]
+    \draw[->, thick, gray] (-2.5,0) -- (3,0) node[right] {$x$};
+    \draw[->, thick, gray] (0,-2.5) -- (0,2.5) node[above] {$y$};
+    
+    % Logarithmic spiral
+    \draw[domain=0:14.5, variable=\t, samples=200, line width=1.5pt, morphoblue] 
+        plot ({0.12*exp(0.22*\t)*cos(\t r)}, {0.12*exp(0.22*\t)*sin(\t r)});
+        
+    % Radius vector
+    \draw[thick, dashed, morphoaccent] (0,0) -- ({0.12*exp(0.22*10)*cos(10 r)}, {0.12*exp(0.22*10)*sin(10 r)}) node[midway, above left] {$r$};
+    
+    % Constant angle demonstration
+    \node at (1.5,1.8) [morphoblue, font=\bfseries] {$r = a e^{b\theta}$};
+    \node at (-1.8,-1.8) [align=left, font=\footnotesize] {幾何学的自己相似性\\(Gnomonic Growth)\\成長しても形態が変わらない};
+\end{tikzpicture}
+\end{center}
+
+生物の硬組織（殻や骨、角）は、一度形成されると内部から変形・脱皮することができない。古い殻の外縁に新しい房を一様に相似拡大しながら付け足していくとき、**「形態全体の幾何学的相似比を崩さずに成長できる唯一の曲線」**が対数螺旋なのである。
+
+\chapter{座標変換による形態の変形理論}
+
+本書の最も著名なクライマックスが、第17章「変形の理論、あるいは近縁形態の比較（On the Theory of Transformations, or the Comparison of Related Forms）」である。
+
+\section{デカルト座標の歪みと系統的進化}
+トムソンは、ある生物種の輪郭や骨格を直交座標系 $(x, y)$ 上に描き、近縁な別の生物種と比較したとき、その形態の差が**「座標系全体の平滑な数学的変換（アフィン変換、剪断、非線形写像）」**によって見事に説明できることを示した。
+
+\begin{principlebox}{形態変換の数理的意義}
+複雑な生物の進化や形態多様化は、各部分が個別に無秩序に変異したのではなく、個体全体に作用する物理的成長力場（不均一なテンソル場）の連続的な歪みとして捉えることができる。
+\end{principlebox}
+
+\begin{center}
+\begin{tikzpicture}[scale=0.9]
+    % Grid 1: Orthogonal
+    \draw[step=0.6, gray!40, very thin] (0,0) grid (3,3);
+    \draw[thick, morphoblue] (0,0) rectangle (3,3);
+    \draw[very thick, morphogreen] (0.5,1.5) .. controls (1.0,2.5) and (2.0,2.5) .. (2.5,1.5) .. controls (2.0,0.5) and (1.0,0.5) .. cycle;
+    \node at (1.5, -0.5) {種A（標準直交系）};
+
+    % Arrow
+    \draw[->, very thick, morphoaccent] (3.5, 1.5) -- (4.8, 1.5) node[midway, above] {\footnotesize 幾何学的写像};
+
+    % Grid 2: Sheared & non-linear
+    \begin{scope}[shift={(5.5, 0)}]
+        \foreach \x in {0, 0.6, 1.2, 1.8, 2.4, 3.0} {
+            \draw[gray!40, very thin] (\x + \x*0.2, 0) -- (\x + 0.5 + \x*0.1, 3);
+        }
+        \foreach \y in {0, 0.6, 1.2, 1.8, 2.4, 3.0} {
+            \draw[gray!40, very thin] (0 + \y*0.15, \y) -- (3.6 + \y*0.15, \y);
+        }
+        \draw[thick, morphoblue] (0,0) -- (3.6,0) -- (4.05,3) -- (0.45,3) -- cycle;
+        % Transformed ellipse
+        \draw[very thick, morphogreen] (0.8,1.5) .. controls (1.5,2.6) and (2.8,2.4) .. (3.1,1.5) .. controls (2.4,0.4) and (1.3,0.6) .. cycle;
+        \node at (2.0, -0.5) {種B（剪断・拡大変換系）};
+    \end{scope}
+\end{tikzpicture}
+\end{center}
+
+トムソンはタイ科の魚（\textit{Diodon}）とマンボウ（\textit{Mola mola}）、ヒヒの頭骨とチンパンジー・ヒトの頭骨などを比較し、微小な遺伝子変異の集積という還元主義的解釈に対し、成長速度の空間的勾配（成長場）という全体論的かつ数理的な力学モデルを提示した。
+
+\chapter{各章の構成と本書の遺産}
+
+『成長と形態について』全17章の概略は以下の通りである：
+
+\begin{enumerate}
+    \item **第1章 序説 (Introductory)**：力学・物理学・数学による生命形態の解明という方法論的宣言。
+    \item **第2章 大きさについて (On Magnitude)**：2乗3乗則、重力と表面張力の競合、巨人と昆虫の力学。
+    \item **第3章 成長の速度 (The Rate of Growth)**：時間に対する成長曲線の数理的定式化。
+    \item **第4章 細胞の内部形態と構造 (On the Internal Form and Structure of the Cell)**：原形質流動、ブラウン運動、浸透圧。
+    \item **第5章 細胞の形態 (The Forms of Cells)**：表面張力と極小曲面、単細胞生物の幾何学。
+    \item **第6章 吸着に関する注記 (A Note on Adsorption)**：界面現象と化学物理的吸着。
+    \item **第7〜8章 組織または細胞凝集体の形態 (The Forms of Tissues or Cell-Aggregates)**：蜂の巣の六角柱構造、泡の幾何学、プラトーの境界条件（120度接合）。
+    \item **第9章 凝縮物・骨片・骨片骨格 (On Concretions, Spicules, and Spicular Skeletons)**：放散虫や海綿の幾何学的骨格。
+    \item **第10章 測地線に関する補記 (A Parenthetic Note on Geodetics)**：曲面上の最短経路と骨格走行。
+    \item **第11章 対数螺旋 (The Logarithmic Spiral)**：オウムガイ、アンモナイト、巻き貝の自己相似成長の数理。
+    \item **第12章 有孔虫の螺旋殻 (The Spiral Shells of the Foraminifera)**：微小生物の多室構造と成長則。
+    \item **第13章 角・歯・牙の形状および捻転に関する注記 (The Shapes of Horns, and of Teeth or Tusks)**：3次元空間における螺旋捻転。
+    \item **第14章 葉序 (On Leaf-Arrangement, or Phyllotaxis)**：ヒマワリの種子や松ぼっくりに見られるフィボナッチ数列と黄金角。
+    \item **第15章 卵および他の幾何学的構造の形状 (On the Shapes of Eggs)**：卵管の流体圧と弾性薄膜による形態決定。
+    \item **第16章 形態と機械的効率 (On Form and Mechanical Efficiency)**：脊椎動物の大腿骨海綿骨の主応力線（トラベクラ構造）とフェアバーン・クレーンの工学的一致。
+    \item **第17章 変形の理論、あるいは近縁形態の比較 (On the Theory of Transformations)**：デカルト座標の歪みによる頭骨・魚類・甲殻類の系統的形態変化の幾何学。
+\end{enumerate}
+
+本書の精神は、アラン・チューリングの反応拡散波（チューリング・パターン）、ブノワ・マンデルブロのフラクタル幾何学、現代のバイオメカニクスや計算形態形成学（コンピュテーショナル・モルフォロジー）へと脈々と受け継がれている。
+
+\end{document}
