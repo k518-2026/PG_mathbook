@@ -1,0 +1,121 @@
+[
+  {
+    "number": "CHAPTER I",
+    "title": "INTRODUCTORY",
+    "char_count": 28909,
+    "start_pos": 31676,
+    "end_pos": 60585
+  },
+  {
+    "number": "CHAPTER II",
+    "title": "ON MAGNITUDE",
+    "char_count": 66580,
+    "start_pos": 60585,
+    "end_pos": 127165
+  },
+  {
+    "number": "CHAPTER III",
+    "title": "THE RATE OF GROWTH",
+    "char_count": 185087,
+    "start_pos": 127165,
+    "end_pos": 312252
+  },
+  {
+    "number": "CHAPTER IV",
+    "title": "ON THE INTERNAL FORM AND STRUCTURE OF THE CELL",
+    "char_count": 84457,
+    "start_pos": 312252,
+    "end_pos": 396709
+  },
+  {
+    "number": "CHAPTER V",
+    "title": "THE FORMS OF CELLS",
+    "char_count": 153474,
+    "start_pos": 396709,
+    "end_pos": 550183
+  },
+  {
+    "number": "CHAPTER VI",
+    "title": "A NOTE ON ADSORPTION",
+    "char_count": 31494,
+    "start_pos": 550183,
+    "end_pos": 581677
+  },
+  {
+    "number": "CHAPTER VII",
+    "title": "THE FORMS OF TISSUES OR CELL-AGGREGATES",
+    "char_count": 97113,
+    "start_pos": 581677,
+    "end_pos": 678790
+  },
+  {
+    "number": "CHAPTER VIII",
+    "title": "THE FORMS OF TISSUES OR CELL-AGGREGATES (_continued_)",
+    "char_count": 113073,
+    "start_pos": 678790,
+    "end_pos": 791863
+  },
+  {
+    "number": "CHAPTER IX",
+    "title": "ON CONCRETIONS, SPICULES, AND SPICULAR SKELETONS",
+    "char_count": 136839,
+    "start_pos": 791863,
+    "end_pos": 928702
+  },
+  {
+    "number": "CHAPTER X",
+    "title": "A PARENTHETIC NOTE ON GEODETICS",
+    "char_count": 10032,
+    "start_pos": 928702,
+    "end_pos": 938734
+  },
+  {
+    "number": "CHAPTER XI",
+    "title": "THE LOGARITHMIC SPIRAL",
+    "char_count": 164243,
+    "start_pos": 938734,
+    "end_pos": 1102977
+  },
+  {
+    "number": "CHAPTER XII",
+    "title": "THE SPIRAL SHELLS OF THE FORAMINIFERA",
+    "char_count": 42760,
+    "start_pos": 1102977,
+    "end_pos": 1145737
+  },
+  {
+    "number": "CHAPTER XIII",
+    "title": "THE SHAPES OF HORNS, AND OF TEETH OR TUSKS: WITH A NOTE ON TORSION",
+    "char_count": 46283,
+    "start_pos": 1145737,
+    "end_pos": 1192020
+  },
+  {
+    "number": "CHAPTER XIV",
+    "title": "ON LEAF-ARRANGEMENT, OR PHYLLOTAXIS",
+    "char_count": 32007,
+    "start_pos": 1192020,
+    "end_pos": 1224027
+  },
+  {
+    "number": "CHAPTER XV",
+    "title": "ON THE SHAPES OF EGGS, AND OF CERTAIN OTHER HOLLOW STRUCTURES",
+    "char_count": 37154,
+    "start_pos": 1224027,
+    "end_pos": 1261181
+  },
+  {
+    "number": "CHAPTER XVI",
+    "title": "ON FORM AND MECHANICAL EFFICIENCY",
+    "char_count": 92929,
+    "start_pos": 1261181,
+    "end_pos": 1354110
+  },
+  {
+    "number": "CHAPTER XVII",
+    "title": "ON THE THEORY OF TRANSFORMATIONS, OR THE COMPARISON OF RELATED",
+    "char_count": 334827,
+    "start_pos": 1354110,
+    "end_pos": 1688937
+  }
+]

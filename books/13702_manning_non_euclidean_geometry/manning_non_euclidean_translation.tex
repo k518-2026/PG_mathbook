@@ -1,0 +1,71 @@
+\documentclass[a4paper,11pt,openany]{ltjsbook}
+\usepackage{luatexja}
+\usepackage{luatexja-fontspec}
+\usepackage{amsmath,amssymb,amsfonts,amsthm}
+\usepackage{graphicx}
+\usepackage{geometry}
+\geometry{top=24mm,bottom=24mm,left=24mm,right=24mm,footskip=10mm}
+\usepackage{tcolorbox}
+\tcbuselibrary{skins,breakable}
+\usepackage{hyperref}
+\usepackage{enumitem}
+\usepackage{booktabs}
+\usepackage{fancyhdr}
+
+\definecolor{geomblue}{RGB}{20, 50, 90}
+\definecolor{goldaccent}{RGB}{180, 130, 20}
+\definecolor{softblue}{RGB}{245, 248, 252}
+
+\hypersetup{
+    colorlinks=true,
+    linkcolor=geomblue,
+    citecolor=goldaccent,
+    urlcolor=geomblue
+}
+
+\pagestyle{fancy}
+\fancyhf{}
+\fancyhead[LE,RO]{\thepage}
+\fancyhead[LO]{\nouppercase{\rightmark}}
+\fancyhead[RE]{\nouppercase{\leftmark}}
+\renewcommand{\headrulewidth}{0.4pt}
+
+\title{\Huge\textbf{非ユークリッド幾何学}\\[4mm]
+\huge\textbf{公理から拡がる双曲・楕円幾何学の体系}\\[6mm]
+\Large\textbf{全訳・数理解説版}\\[5mm]
+\large ヘンリー・パーカー・マニング 著（Henry Parker Manning, 1901）\\[2mm]
+\normalsize Project Gutenberg eBook \#13702: \textit{Non-Euclidean Geometry}}
+
+\author{\textbf{数理文献翻訳プロジェクト} 編訳}
+\date{2026年11月 決定版}
+
+\begin{document}
+
+\maketitle
+
+\frontmatter
+\tableofcontents
+
+\include{trans_preface}
+\include{trans_intro}
+
+\mainmatter
+
+\include{trans_pangeometry}
+\include{trans_hyperbolic}
+\include{trans_elliptic}
+\include{trans_analytic}
+\include{trans_historical}
+
+\backmatter
+
+\chapter*{解題：マニングの幾何学体系と現代数学への架橋}
+\addcontentsline{toc}{chapter}{解題：マニングの幾何学体系と現代数学への架橋}
+
+1901年にブラウン大学の助教授ヘンリー・パーカー・マニングによって著された『非ユークリッド幾何学』は、ボヤイ、ロバチェフスキー、リーマン、クラインらの難解を極めた原著論文の精髄を、大学初年級から学べるように公理的・解析的に再構築した歴史的教育名著である。
+
+本書の特筆すべき価値は、ユークリッドの第5公準（平行線公準）を否定したときに開かれる2つの世界――**双曲幾何学（鋭角仮説）**と**楕円幾何学（鈍角仮説）**――を、サッケーリ四角形という共通の土台（**汎幾何学：Pangeometry**）から統一的かつ厳密に演繹している点にある。
+
+特に、双曲幾何学における限界線（ホロサイクル）と限界面（ホロスフィア）の導入、そしてホロスフィア上でユークリッド幾何学が厳密に成立するというボヤイの定理からの双曲三角法の導出は、近代幾何学の白眉である。さらに楕円幾何学において、クリフォードの平行線（至る所等距離な非共面直線）を二重回転面の直紋構造として鮮やかに示した幾何学的直観は、現代のリーマン幾何学やゲージ理論、相対性理論を志す読者にとっても尽きない知見と霊感を与え続けている。
+
+\end{document}

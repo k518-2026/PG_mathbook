@@ -605,6 +605,46 @@
       "language": "ja",
       "created_at": "2026-10-30T21:28:39.965895",
       "status": "完成"
+    },
+    {
+      "gutenberg_id": 13702,
+      "original_title": "Non-Euclidean Geometry",
+      "original_author": "Henry Parker Manning",
+      "japanese_title": "非ユークリッド幾何学 ― 公理から拡がる双曲・楕円幾何学の体系（全訳・数理解説版）",
+      "author": "ヘンリー・パーカー・マニング",
+      "category": "幾何学・公理論",
+      "description": "1901年にヘンリー・パーカー・マニングが著した非ユークリッド幾何学の金字塔。ユークリッド第5公準の否定から導かれるサッケーリ四角形、ガウスの面積欠度定理、ロバチェフスキーの平行角関数、ホロサイクル、ボヤイの定理、クリフォードの平行線（至る所等距離な非共面直線）を全56定理・80図版完全収録で網羅。",
+      "chapters_count": 5,
+      "pages": 34,
+      "tex_file": "books/13702_manning_non_euclidean_geometry/manning_non_euclidean_translation.tex",
+      "pdf_file": "books/13702_manning_non_euclidean_geometry/manning_non_euclidean_translation.pdf",
+      "book_dir": "books/13702_manning_non_euclidean_geometry",
+      "compiler": "lualatex",
+      "model_used": "hybrid-expert",
+      "gutenberg_url": "https://www.gutenberg.org/ebooks/13702",
+      "language": "ja",
+      "created_at": "2026-11-03",
+      "status": "completed"
+    },
+    {
+      "gutenberg_id": 13702,
+      "original_title": "Non-Euclidean Geometry (Introductory Reader)",
+      "original_author": "Henry Parker Manning",
+      "japanese_title": "大人のための非ユークリッド幾何学入門 ― 曲率・平行線・高次元への扉（TikZ図解講義録）",
+      "author": "ヘンリー・パーカー・マニング / プロジェクト編",
+      "category": "幾何学入門・図解講義",
+      "description": "サッケーリ四角形の上辺角、ポアンカレ円板模型、平行角関数Pi(x)、球面幾何と楕円幾何、クリフォードの平行線と二重回転面（クリフォード・トーラス）を、美しいTikZベクトル図解で直感的に解き明かす大人向け入門書。",
+      "chapters_count": 3,
+      "pages": 9,
+      "tex_file": "books/13702_manning_non_euclidean_geometry/manning_non_euclidean_intro.tex",
+      "pdf_file": "books/13702_manning_non_euclidean_geometry/manning_non_euclidean_intro.pdf",
+      "book_dir": "books/13702_manning_non_euclidean_geometry",
+      "compiler": "lualatex",
+      "model_used": "hybrid-expert",
+      "gutenberg_url": "https://www.gutenberg.org/ebooks/13702",
+      "language": "ja",
+      "created_at": "2026-11-03",
+      "status": "completed"
     }
   ]
 }

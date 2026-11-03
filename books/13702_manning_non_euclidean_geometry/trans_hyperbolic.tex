@@ -1,0 +1,179 @@
+\chapter{双曲幾何学（ロバチェフスキー・ボヤイの幾何学）}
+
+我々はいま、\textbf{鋭角仮説}の世界に足を踏み入れる。同一平面上において、1本の直線に垂直な2本の直線は、それらの共通垂線から遠ざかるにつれて双方の側で発散（離反）する。三角形の内角の和は常に2直角（180度）より小さく、前章で導かれたすべての命題はいかなる制限もなく全平面において成立する。
+
+\section{平行線}
+
+直線 $AB$ の外にある任意の点 $P$ から $AB$ に垂線 $PC$ を下ろし、$P$ を通って直線 $AB$ と交わる直線 $PD$ を考える。
+
+\begin{figure}[htbp]
+\centering
+\includegraphics[width=80mm]{fig28.png}
+\caption{ロバチェフスキーの平行線と極限光線}
+\end{figure}
+
+交点 $D$ が $AB$ 上を右方へと限りなく遠ざかるとき、直線 $PD$ はある極限の位置 $PE$ に限りなく近づく。この極限直線 $PE$ を、点 $P$ において方向 $CB$ に\textbf{平行（parallel）}であるという。直線 $PE$ が垂線 $PC$ となす角 $\alpha = \angle CPE$ は、垂線の長さ $p = PC$ のみに依存する関数であり、これを\textbf{ロバチェフスキーの平行角関数 $\Pi(p)$} と記す。
+
+反対側（左方）へ向かってもまったく対称に別の平行線 $PE'$ が存在し、この2本の平行線に挟まれた無数の直線は直線 $AB$ と一切交わらない（非交差線・超平行線）。
+
+\begin{tcolorbox}[colback=white,colframe=blue!75!black,title=\textbf{定理 1}]
+\emph{直線は、その上のすべての点において平行性を保つ。}
+\end{tcolorbox}
+
+\begin{figure}[htbp]
+\centering
+\includegraphics[width=80mm]{fig29.png}
+\caption{平行性の推移と保持}
+\end{figure}
+
+\begin{tcolorbox}[colback=white,colframe=blue!75!black,title=\textbf{定理 2（平行の相互性）}]
+\emph{1本の直線が他の直線に平行であるならば、第2の直線もまた第1の直線に平行である。}
+\end{tcolorbox}
+
+\begin{figure}[htbp]
+\centering
+\includegraphics[width=80mm]{fig30.png}
+\caption{平行関係の対称性の証明}
+\end{figure}
+
+\begin{tcolorbox}[colback=white,colframe=blue!75!black,title=\textbf{定理 3（平行の推移性）}]
+\emph{同一の方向に向かって第3の直線に平行な2本の直線は、互いに平行である。}
+\end{tcolorbox}
+
+\begin{figure}[htbp]
+\centering
+\includegraphics[width=80mm]{fig31.png}
+\caption{平行線の推移律}
+\end{figure}
+
+\begin{tcolorbox}[colback=white,colframe=blue!75!black,title=\textbf{定理 4（平行線の漸近接近性）}]
+\emph{平行な2直線は、平行の方向に向かって進むにつれて連続的に互いに接近し、その間の距離は限りなくゼロに近づく。}
+\end{tcolorbox}
+
+\begin{figure}[htbp]
+\centering
+\includegraphics[width=80mm]{fig32.png}
+\caption{平行線の漸近接近と距離の減少}
+\end{figure}
+
+\begin{tcolorbox}[colback=white,colframe=blue!75!black,title=\textbf{定理 5（平行角の単調性）}]
+\emph{垂線の長さ $p$ が $0$ から $\infty$ へと増大するにつれて、平行角 $\Pi(p)$ は $90^\circ$（$\pi/2$）から $0$ へと単調に連続的に減少する。}
+\[
+\lim_{p \to 0} \Pi(p) = \frac{\pi}{2}, \quad \lim_{p \to \infty} \Pi(p) = 0
+\]
+\end{tcolorbox}
+
+\begin{tcolorbox}[colback=white,colframe=blue!75!black,title=\textbf{定理 6}]
+\emph{三角形の各辺の垂直二等分線は、それらが交わらない場合、同一直線に垂直であるか、あるいは平行の方向において互いに平行となる。}
+\end{tcolorbox}
+
+\begin{tcolorbox}[colback=white,colframe=blue!75!black,title=\textbf{定理 7（共通垂線の一意性）}]
+\emph{交わらず、かつ平行でもない2直線（超平行線）は、唯一の共通垂線を持ち、その共通垂線において最短距離に達し、両側に向かって無限に発散する。}
+\end{tcolorbox}
+
+\begin{figure}[htbp]
+\centering
+\includegraphics[width=80mm]{fig35.png}
+\caption{超平行線の唯一の共通垂線}
+\end{figure}
+
+\begin{tcolorbox}[colback=white,colframe=blue!75!black,title=\textbf{定理 8}]
+\emph{三角形の3辺の垂直二等分線が交わらないとき、それらは同一の直線に垂直であるか、あるいは同一の無限遠点において互いに漸近平行となる。}
+\end{tcolorbox}
+
+\begin{tcolorbox}[colback=white,colframe=blue!75!black,title=\textbf{定理 9}]
+\emph{空間において、ある平面に垂直であり、かつその平面外の直線に平行な直線を引くことができる。}
+\end{tcolorbox}
+
+\section{限界線（ホロサイクル）と等距離曲線}
+
+同一直線に平行な直線の束（平行線束）のすべてと直角に交わる直交軌跡を\textbf{限界線（極限円・ホロサイクル：boundary-curve / horocycle）}と呼ぶ。空間において平行線束に直交する曲面を\textbf{限界面（ホロスフィア：boundary-surface / horosphere）}と呼ぶ。
+
+\begin{figure}[htbp]
+\centering
+\includegraphics[width=80mm]{fig38.png}
+\caption{限界線（ホロサイクル）と平行軸}
+\end{figure}
+
+\begin{tcolorbox}[colback=white,colframe=blue!75!black,title=\textbf{定理 1}]
+\emph{限界線の軸のいずれか1本に平行な直線は、すべてその限界線の軸となり得る。}
+\end{tcolorbox}
+
+\begin{tcolorbox}[colback=white,colframe=blue!75!black,title=\textbf{定理 2（ホロサイクル弧の指数比）}]
+\emph{共通の平行軸を持つ2本の同心限界線が、2本の軸によって切り取られる弧の比は、軸に沿って測った2本の限界線間の距離 $x$ のみの指数関数となる。}
+\[
+\frac{s'}{s} = e^{-x/k}
+\]
+\end{tcolorbox}
+
+\begin{figure}[htbp]
+\centering
+\includegraphics[width=80mm]{fig40.png}
+\caption{軸間距離と限界線弧の指数関数的縮小}
+\end{figure}
+
+\begin{tcolorbox}[colback=white,colframe=blue!75!black,title=\textbf{定理 3}]
+\emph{共通の軸を持つ2本の限界線と2本の軸によって囲まれる面積は、切り取られる弧の長さの差に比例する。}
+\end{tcolorbox}
+
+\begin{figure}[htbp]
+\centering
+\includegraphics[width=60mm]{fig48.png}
+\caption{限界線で囲まれる扇形領域の面積}
+\end{figure}
+
+\begin{tcolorbox}[colback=white,colframe=blue!75!black,title=\textbf{定理 4}]
+\emph{限界線（ホロサイクル）は、円の半径が無限大となった極限における曲線である。}
+\end{tcolorbox}
+
+\begin{tcolorbox}[colback=white,colframe=blue!75!black,title=\textbf{定理 5}]
+\emph{限界面（ホロスフィア）の軸に平行な任意の直線は、すべてその限界面の法線軸である。}
+\end{tcolorbox}
+
+\begin{tcolorbox}[colback=white,colframe=blue!75!black,title=\textbf{定理 6（ボヤイの偉大な定理：ホロスフィア上のユークリッド幾何学）}]
+\emph{限界面（ホロスフィア）上において成り立つ幾何学は、通常の平面ユークリッド幾何学と完全に一致する。}
+\end{tcolorbox}
+
+\section{双曲三角法の諸公式}
+
+\begin{figure}[htbp]
+\centering
+\includegraphics[width=80mm]{fig53.png}
+\caption{直角三角形とホロスフィアを用いた双曲三角法の導出}
+\end{figure}
+
+ホロスフィア上の幾何学がユークリッド幾何学と一致するというボヤイの発見を用いることで、双曲直角三角形 $\triangle ABC$（$\angle C = 90^\circ$）の辺と角を結ぶ厳密な三角法公式が完全に代数的に導出される：
+
+\begin{enumerate}[label=\textbf{\arabic*.}]
+\item \textbf{平行角と辺の長さの関係（ロバチェフスキーの公式）}：
+\[
+\sin \Pi(a) = \frac{1}{\cosh a}, \quad \tan \Pi(a) = \frac{1}{\sinh a}, \quad \cos \Pi(a) = \tanh a
+\]
+あるいは等価的に、
+\[
+\tan\left(\frac{1}{2}\Pi(a)\right) = e^{-a}
+\]
+
+\item \textbf{直角三角形における関係式}：
+\[
+\cosh c = \cosh a \cosh b
+\]
+\[
+\sinh a = \sinh c \sin A, \quad \sinh b = \sinh c \sin B
+\]
+\[
+\tanh a = \tanh c \cos B, \quad \tanh b = \tanh c \cos A
+\]
+\[
+\cos A = \cosh a \sin B, \quad \cos B = \cosh b \sin A
+\]
+
+\item \textbf{一般の三角形における余弦定理・正弦定理}：
+\[
+\frac{\sinh a}{\sin A} = \frac{\sinh b}{\sin B} = \frac{\sinh c}{\sin C}
+\]
+\[
+\cosh c = \cosh a \cosh b - \sinh a \sinh b \cos C
+\]
+\end{enumerate}
+これらの公式は、球面三角法の公式において辺の長さを純虚数 $ia, ib, ic$ に置き換えたもの（$\cosh x = \cos(ix), \sinh x = -i\sin(ix)$）と完全に数学的に一致する。

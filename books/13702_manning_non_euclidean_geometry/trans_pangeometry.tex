@@ -1,0 +1,313 @@
+\chapter{汎幾何学（Pangeometry）}
+
+\section{重ね合わせの原理のみに依存する命題}
+
+\begin{tcolorbox}[colback=white,colframe=blue!75!black,title=\textbf{定理 1}]
+\emph{1本の直線が他の直線と交わるとき、生じる隣接角の和は2直角（180度）に等しい。}
+\end{tcolorbox}
+
+\begin{tcolorbox}[colback=white,colframe=blue!75!black,title=\textbf{定理 2}]
+\emph{2本の直線が交差するとき、対頂角は互いに等しい。}
+\end{tcolorbox}
+
+\begin{tcolorbox}[colback=white,colframe=blue!75!black,title=\textbf{定理 3}]
+\emph{2つの三角形において、1辺とその両端の角（ASA）、あるいは2辺とその挟む角（SAS）がそれぞれ等しいならば、これらの三角形は合同（等しい）である。}
+\end{tcolorbox}
+
+\begin{tcolorbox}[colback=white,colframe=blue!75!black,title=\textbf{定理 4}]
+\emph{二等辺三角形において、等しい辺に対する対角は互いに等しい。}
+\end{tcolorbox}
+\textbf{【証明方針】} 頂角の二等分線を引き、定理 3（SAS）を適用する。
+
+\begin{tcolorbox}[colback=white,colframe=blue!75!black,title=\textbf{定理 5}]
+\emph{三角形の各辺の垂直二等分線は、そのうちの2本が交わるならば必ず1点で交わり、その交点は三角形の3つの頂点を通る外接円の中心となる。}
+\end{tcolorbox}
+
+\begin{figure}[htbp]
+\centering
+\includegraphics[width=40mm]{fig01.png}
+\caption{外接円の中心と垂直二等分線の交点}
+\end{figure}
+
+\textbf{【証明】} 辺 $AB$ の中垂線 $FO$ と辺 $AC$ の中垂線 $EO$ が点 $O$ で交わると仮定する。定理 3 より $\triangle AFO \equiv \triangle BFO$ であるから $AO = BO$ である。同様に $\triangle AEO \equiv \triangle CEO$ より $AO = CO$ となる。したがって $BO = CO$ となり、$\triangle BCO$ は二等辺三角形である。頂角 $\angle BOC$ の二等分線 $OD$ を引けば、二等辺三角形の性質より $OD$ は底辺 $BC$ の垂直二等分線となる。ゆえに3本の中垂線はすべて点 $O$ で交わる。
+
+\begin{tcolorbox}[colback=white,colframe=blue!75!black,title=\textbf{定理 6}]
+\emph{円において、中心角を二等分する半径は、その中心角に対する弦に垂直であり、かつその弦を二等分する。}
+\end{tcolorbox}
+
+\begin{tcolorbox}[colback=white,colframe=blue!75!black,title=\textbf{定理 7}]
+\emph{円の中心角は、それらが切り取る弧の長さに比例し、弧の長さによって測定することができる。}
+\end{tcolorbox}
+
+\begin{tcolorbox}[colback=white,colframe=blue!75!black,title=\textbf{定理 8}]
+\emph{直線の外にある任意の点から、その直線に対して垂線を引くことができる。}
+\end{tcolorbox}
+
+\begin{figure}[htbp]
+\centering
+\includegraphics[width=25mm]{fig02.png}
+\caption{点から直線への垂線の作図}
+\end{figure}
+
+\textbf{【証明】} 直線 $AB$ を折り目として平面を自身に重ね合わせたとき、点 $P$ が移る位置を $P'$ とする。このとき線分 $PP'$ は折り目である直線 $AB$ と垂直に交わる。
+
+\begin{tcolorbox}[colback=white,colframe=blue!75!black,title=\textbf{定理 9}]
+\emph{直線に対する垂線上の点から引かれた斜線が、垂線の足から等しい距離にある点を切るとき、それらの斜線は互いに等しく、直線および垂線とそれぞれ等しい角をなす。}
+\end{tcolorbox}
+
+\begin{figure}[htbp]
+\centering
+\includegraphics[width=50mm]{fig03.png}
+\caption{等距離にある斜線の合同性}
+\end{figure}
+
+\begin{tcolorbox}[colback=white,colframe=blue!75!black,title=\textbf{定理 10}]
+\emph{同一平面上の2直線が第3の直線と等しい角で交わるとき（すなわち同位角が等しいとき）、双方の直線に同時に垂直な直線を引くことができる。}
+\end{tcolorbox}
+
+\textbf{【証明】} $\angle FMB = \angle MND$ とし、線分 $MN$ の中点 $H$ を通って直線 $CD$ に垂線 $LK$ を下ろす。このとき $\triangle LMH$ と $\triangle KNH$ は定理 3 により合同となるから、$\angle MLH = \angle NKH = 90^\circ$ となり、$LK$ は直線 $AB$ にも垂直となる。
+
+\begin{tcolorbox}[colback=white,colframe=blue!75!black,title=\textbf{定理 11（サッケーリの基本定理 I）}]
+\emph{平面上において、ある直線から同じ側に2本の等しい垂線を立てるとき、それらの上端を結ぶ直線は垂線と等しい角をなし、かつ2本の垂線の中間に立てられた第3の垂線によって直角に二等分される。}
+\end{tcolorbox}
+
+\begin{figure}[htbp]
+\centering
+\includegraphics[width=40mm]{fig04.png}
+\caption{サッケーリ四角形の上辺角と中垂線}
+\end{figure}
+
+\textbf{【証明】} 直線 $AB$ に垂直な等しい2本の垂線 $AC, BD$ を考える。線分 $AB$ の中点 $H$ に垂線 $HK$ を立てる。全体を中垂線 $HK$ を折り目として折り返すと、底辺の半分 $HA$ は $HB$ に、垂線 $AC$ は $BD$ に完全に重なり合う（$AC = BD$ であるため）。したがって点 $C$ は点 $D$ に重なり、線分 $CK$ は $DK$ に重なり、角 $\angle C$ は角 $\angle D$ に重なる。ゆえに $\angle C = \angle D$ であり、$HK$ は上辺 $CD$ にも垂直であり、かつ $CD$ を二等分する。
+
+\begin{tcolorbox}[colback=white,colframe=blue!75!black,title=\textbf{定理 12（サッケーリの基本定理 II）}]
+\emph{前命題と同様に2本の等しい垂線とその中垂線が与えられたとき、この中垂線と直角に交わる任意の直線は、先の2本の垂線と交わる限りにおいて、それらの垂線から等しい長さを切り取り、等しい角をなす。}
+\end{tcolorbox}
+
+\begin{figure}[htbp]
+\centering
+\includegraphics[width=40mm]{fig05.png}
+\caption{中垂線に直交する直線による等長切断}
+\end{figure}
+
+\textbf{【系】} 前の2つの命題は、角 $\angle A$ と $\angle B$ が等しい鋭角または等しい鈍角である場合にも、まったく同様に成り立つ。
+
+\section{制限された図形において成り立つ命題}
+
+以下の諸命題は、少なくとも線分の長さがある一定の限界を超えないような「制限された図形」において普遍的に成り立つ。
+
+\begin{tcolorbox}[colback=white,colframe=blue!75!black,title=\textbf{定理 1（外角定理）}]
+\emph{三角形の外角は、それと隣り合わない（対向する）いずれの内角よりも大きい。}
+\end{tcolorbox}
+\textbf{【証明方針】} ユークリッド第1巻命題16と同様に、対辺の中点を結んで延長し、二等辺三角形の合同によって証明される。
+
+\begin{tcolorbox}[colback=white,colframe=blue!75!black,title=\textbf{定理 2}]
+\emph{三角形の2つの角が等しいならば、それらの対辺も等しく、その三角形は二等辺三角形である。}
+\end{tcolorbox}
+
+\begin{figure}[htbp]
+\centering
+\includegraphics[width=40mm]{fig07.png}
+\caption{等角対等辺の証明}
+\end{figure}
+
+\begin{tcolorbox}[colback=white,colframe=blue!75!black,title=\textbf{定理 3}]
+\emph{不等辺三角形において、より大きな角に対する対辺は、より小さな角に対する対辺よりも長い（大角対大辺）。また逆に、より長い辺に対する対角は、より短い辺に対する対角よりも大きい（大辺対大角）。}
+\end{tcolorbox}
+
+\begin{tcolorbox}[colback=white,colframe=blue!75!black,title=\textbf{定理 4}]
+\emph{2つの三角形において、2辺がそれぞれ等しく、その挟む角が異なるならば、より大きな角に対する対辺は他方の対辺よりも長い。}
+\end{tcolorbox}
+
+\begin{tcolorbox}[colback=white,colframe=blue!75!black,title=\textbf{定理 5（三角不等式）}]
+\emph{平面上の任意の点から線分の両端に引いた2直線の長さの和は、その線分の長さよりも常に大きい。}
+\end{tcolorbox}
+
+\begin{tcolorbox}[colback=white,colframe=blue!75!black,title=\textbf{定理 6}]
+\emph{任意の点から直線に対して引くことができる垂線は、制限された領域においてちょうど1本に限られる。}
+\end{tcolorbox}
+
+\begin{figure}[htbp]
+\centering
+\includegraphics[width=30mm]{fig08.png}
+\caption{点から直線への垂線の一意性}
+\end{figure}
+
+\begin{tcolorbox}[colback=white,colframe=blue!75!black,title=\textbf{定理 7}]
+\emph{任意の点から直線に下ろした垂線は、その点からその直線上に引くことができるすべての線分の中で最短である。}
+\end{tcolorbox}
+
+\begin{tcolorbox}[colback=white,colframe=blue!75!black,title=\textbf{定理 8}]
+\emph{垂線上の点から直線上に引かれた斜線が、垂線の足から異なる距離にある点を切るとき、より遠い点を切る斜線の方が長く、直線となす角はより小さく、垂線となす角はより大きい。}
+\end{tcolorbox}
+
+\begin{tcolorbox}[colback=white,colframe=blue!75!black,title=\textbf{定理 9}]
+\emph{線分の中点に立てられた垂直二等分線上の任意の点は、その線分の両端から等距離にある。また、両端から等距離にある任意の点は、この垂直二等分線上にある。}
+\end{tcolorbox}
+
+\begin{tcolorbox}[colback=white,colframe=blue!75!black,title=\textbf{定理 10（3辺合同：SSS）}]
+\emph{2つの三角形において、3辺がそれぞれ互いに等しいならば、それらの三角形は合同（等しい）である。}
+\end{tcolorbox}
+
+\begin{tcolorbox}[colback=white,colframe=blue!75!black,title=\textbf{定理 11}]
+\emph{同一平面上において、ある直線に立てられた2本の垂線の長さが等しくないとき、それらの上端を結ぶ直線は、長い方の垂線側において鋭角をなし、短い方の垂線側において鈍角をなす。}
+\end{tcolorbox}
+
+\begin{figure}[htbp]
+\centering
+\includegraphics[width=25mm]{fig09.png}
+\caption{不等長垂線の上辺角}
+\end{figure}
+
+\begin{tcolorbox}[colback=white,colframe=blue!75!black,title=\textbf{定理 12}]
+\emph{上端を結ぶ直線と2本の垂線とのなす角 $\angle C$ と $\angle D$ が等しいならば2本の垂線は等長であり、一方が他方より大きいならば、より大きな角をなす垂線の方が短い。}
+\end{tcolorbox}
+
+\begin{figure}[htbp]
+\centering
+\includegraphics[width=40mm]{fig06.png}
+\caption{上辺角の大小関係と垂線の長さ}
+\end{figure}
+
+\begin{tcolorbox}[colback=white,colframe=blue!75!black,title=\textbf{定理 13}]
+\emph{同一平面上の直線 $AB$ に垂直な2本の直線において、直線 $AB$ から等距離にある点は、中垂線からも等距離にある。}
+\end{tcolorbox}
+
+\begin{figure}[htbp]
+\centering
+\includegraphics[width=30mm]{fig10.png}
+\caption{中垂線からの等距離性}
+\end{figure}
+
+\begin{tcolorbox}[colback=white,colframe=blue!75!black,title=\textbf{定理 14}]
+\emph{1本の直線が、交わる2直線の交点においてその双方に垂直であるならば、その直線は2直線が決定する平面全体に垂直である。}
+\end{tcolorbox}
+
+\begin{tcolorbox}[colback=white,colframe=blue!75!black,title=\textbf{定理 15}]
+\emph{2つの平面が垂直であるとき、一方の平面内で交線に垂直に引かれた直線は、他方の平面全体に垂直である。}
+\end{tcolorbox}
+
+\begin{tcolorbox}[colback=white,colframe=blue!75!black,title=\textbf{定理 16}]
+\emph{1本の直線がある平面に垂直であるならば、その直線を含む任意の平面は、その平面に垂直である。}
+\end{tcolorbox}
+
+\begin{tcolorbox}[colback=white,colframe=blue!75!black,title=\textbf{定理 17}]
+\emph{1つの平面が、交わる2つの平面の双方に垂直であるならば、その平面は2つの平面の交線にも垂直である。}
+\end{tcolorbox}
+
+\section{3つの仮説}
+
+等しい2本の垂線の上端における角は、少なくとも制限された図形においては、直角、鋭角、または鈍角のいずれかである。我々はこれら3つの場合を、それぞれ\textbf{直角仮説（hypothesis of the right angle）}、\textbf{鋭角仮説（hypothesis of the acute angle）}、\textbf{鈍角仮説（hypothesis of the obtuse angle）}と呼んで区別する。
+
+\begin{tcolorbox}[colback=white,colframe=blue!75!black,title=\textbf{定理 1}]
+\emph{等しい2本の垂線の上端を結ぶ線分（上辺）は、直角仮説・鋭角仮説・鈍角仮説のそれぞれにおいて、底辺（垂線の足を結ぶ線分）と「等しい」「より長い」「より短い」。}
+\end{tcolorbox}
+
+\begin{figure}[htbp]
+\centering
+\includegraphics[width=35mm]{fig11.png}
+\caption{サッケーリ四角形の上辺と底辺の長さの比較}
+\end{figure}
+
+\textbf{【証明】} 直線 $AB$ に立てられた等しい垂線を $AC, BD$ とし、底辺 $AB$ の中点 $H$ に中垂線 $HK$ を立てる。このとき $HA$ と $KC$ はともに $HK$ に垂直であり、上辺角 $\angle C$ が底角 $\angle A$（$=90^\circ$）と「等しいか」「より小さいか」「より大きいか」に応じて、上辺の半分 $KC$ は底辺の半分 $HA$ と「等しいか」「より長いか」「より短いか」が決まる（第2節定理12）。したがって、全長 $CD = 2KC$ は、3つの仮説においてそれぞれ $AB = 2HA$ と等しいか、より長いか、より短い。
+\textbf{【逆もまた真なり】} 上辺 $CD$ が底辺 $AB$ と「等しいか」「より長いか」「より短いか」に応じて、上辺角はそれぞれ直角、鋭角、鈍角となる。
+
+\begin{tcolorbox}[colback=white,colframe=blue!75!black,title=\textbf{定理 2（直角仮説の全域的一貫性）}]
+\emph{直角仮説が平面上の制限された領域内のたった1つの四角形で成り立つならば、それはすべての四角形について、そして平面全体にわたって成立する。}
+\end{tcolorbox}
+
+\begin{figure}[htbp]
+\centering
+\includegraphics[width=75mm]{fig12.png}
+\caption{長方形による平面充填と直角仮説の拡張}
+\end{figure}
+
+\textbf{【証明】} 1つの四角形の内角がすべて直角（長方形）であるならば、前定理の系によりその対辺は互いに等しい。この長方形を縦横に並べて貼り合わせることにより、任意の大きさの長方形を平面全体にわたって構成することができる。したがって、直角仮説は部分的に成り立つだけでなく、もし1箇所でも成り立てば、全平面において必然的にユークリッド幾何学が成立する。
+
+\begin{tcolorbox}[colback=white,colframe=blue!75!black,title=\textbf{定理 3（鋭角・鈍角仮説の一貫性）}]
+\emph{鋭角仮説あるいは鈍角仮説が平面の制限された領域内でたった1度でも成り立つならば、その同一の仮説が、その領域内のすべての図形において例外なく成立する。}
+\end{tcolorbox}
+
+\begin{figure}[htbp]
+\centering
+\includegraphics[width=35mm]{fig13.png}
+\caption{垂線の連続的変動による仮説の普遍性}
+\end{figure}
+
+\begin{tcolorbox}[colback=white,colframe=blue!75!black,title=\textbf{定理 4（三角形の内角の和）}]
+\emph{三角形の内角の和は、直角仮説・鋭角仮説・鈍角仮説のそれぞれにおいて、2直角（180度）に「等しい」「2直角より小さい」「2直角より大きい」。}
+\end{tcolorbox}
+
+\begin{figure}[htbp]
+\centering
+\includegraphics[width=80mm]{fig14.png}
+\caption{直角三角形の倍化と内角の和の検証}
+\end{figure}
+
+\textbf{【証明】} 任意の直角三角形 $\triangle ABD$（$\angle B = 90^\circ$）に対し、$A$ において $AB$ に垂直かつ $BD$ と等しい線分 $AC$ を立て、点 $C, D$ を結ぶとサッケーリ四角形 $ABDC$ が得られる。対角線 $AD$ を引くと $\triangle ABD \equiv \triangle DCA$ である。したがって、
+\[
+\angle BAD + \angle BDA = \angle CDA + \angle BDA = \angle BDC
+\]
+となる。サッケーリ四角形の上辺角 $\angle BDC$ は3つの仮説においてそれぞれ直角、鋭角、鈍角であるから、直角三角形の2つの鋭角の和は1直角と等しいか、1直角未満か、1直角超となる。任意の三角形は垂線によって2つの直角三角形に分割できるため、三角形の内角の和 $\Sigma = A + B + C$ は、3つの仮説に応じてそれぞれ2直角と等しいか、小さく（欠度）、あるいは大きくなる（過剰）。
+
+\begin{tcolorbox}[colback=white,colframe=blue!75!black,title=\textbf{定理 5（多角形の過剰量・欠度の加法性）}]
+\emph{任意の多角形の過剰量（excess）または欠度（deficiency）は、それを分割して得られる任意の三角形分割における個々の三角形の過剰量または欠度の総和に厳密に等しい。}
+\end{tcolorbox}
+
+\begin{figure}[htbp]
+\centering
+\includegraphics[width=30mm]{fig15.png}
+\caption{多角形の三角形分割と内角和の加法性}
+\end{figure}
+
+\begin{tcolorbox}[colback=white,colframe=blue!75!black,title=\textbf{定理 6}]
+\emph{多角形の過剰量（または欠度）の符号は、空間全体において「常にゼロ（ユークリッド）」「常に負（双曲）」「常に正（楕円）」のいずれか1つに統一される。}
+\end{tcolorbox}
+
+\begin{tcolorbox}[colback=white,colframe=blue!75!black,title=\textbf{定理 7（局所極限としてのユークリッド幾何学）}]
+\emph{三角形の辺を微小にしていくとき、その面積は無制限に減少し、内角の和の極限は2直角（180度）に限りなく近づく。}
+\end{tcolorbox}
+
+\begin{figure}[htbp]
+\centering
+\includegraphics[width=50mm]{fig17.png}
+\caption{微小領域におけるユークリッド極限}
+\end{figure}
+
+\begin{tcolorbox}[colback=white,colframe=blue!75!black,title=\textbf{定理 8（欠度・過剰量と面積の等価性）}]
+\emph{同一の欠度（または過剰量）を有する2つの三角形は、互いに完全に等しい面積を持つ。}
+\end{tcolorbox}
+
+\begin{figure}[htbp]
+\centering
+\includegraphics[width=40mm]{fig18.png}
+\caption{共通角と欠度の同一性による面積の合同証明}
+\end{figure}
+
+\begin{tcolorbox}[colback=white,colframe=blue!75!black,title=\textbf{定理 9（ガウスの面積比例定理）}]
+\emph{非ユークリッド幾何学において、任意の2つの三角形の面積の比は、それらの欠度（または過剰量）の比に完全に比例する。}
+\[
+\text{Area}(\triangle ABC) = k^2 \cdot |\pi - (A + B + C)|
+\]
+\end{tcolorbox}
+
+\begin{figure}[htbp]
+\centering
+\includegraphics[width=40mm]{fig20.png}
+\caption{三角形の均等細分による面積比例の証明}
+\end{figure}
+
+\textbf{【証明】} 1つの頂点から対辺の分割点へ直線を引くことにより、三角形を等しい欠度（または過剰量）を持つ $n$ 個の小三角形に分割できる。定理 8 よりこれら小三角形の面積はすべて等しい。したがって、2つの三角形の欠度の比が有理数 $m:n$ である場合、それらの面積比も完全に $m:n$ となる。無理数比の場合も極限論（デデキント切断）により厳密に成立する。
+
+\begin{tcolorbox}[colback=white,colframe=blue!75!black,title=\textbf{定理 10}]
+\emph{一定の鋭角を持つ直角三角形において、辺の長さを無限小に近づけるとき、対辺と斜辺の比、および隣辺と斜辺の比の極限は、初等三角法の正弦（$\sin$）および余弦（$\cos$）にそれぞれ一致する。}
+\end{tcolorbox}
+
+\begin{tcolorbox}[colback=white,colframe=blue!75!black,title=\textbf{定理 11（球面幾何学の普遍性）}]
+\emph{球面幾何学は3つの仮説のいずれにおいても完全に同一であり、球面三角法の諸公式は通常の初等球面三角法と寸分違わず成立する。}
+\end{tcolorbox}
+
+\begin{figure}[htbp]
+\centering
+\includegraphics[width=40mm]{fig27.png}
+\caption{球面上での大円角と中心角の同一性}
+\end{figure}
