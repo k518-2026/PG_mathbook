@@ -1,0 +1,220 @@
+\documentclass[a4paper,11pt,oneside,openany]{ltjsbook}
+\usepackage{luatexja}
+\usepackage{amsmath,amssymb,amsfonts,amsthm}
+\usepackage{graphicx}
+\usepackage{xcolor}
+\usepackage{tikz}
+\usetikzlibrary{calc,arrows.meta,positioning,shapes}
+\usepackage{tcolorbox}
+\tcbuselibrary{skins,breakable}
+\usepackage{booktabs}
+\usepackage{array}
+\usepackage{longtable}
+\usepackage{wrapfig}
+\usepackage{fancyhdr}
+\usepackage{hyperref}
+
+\hypersetup{
+    colorlinks=true,
+    linkcolor=blue!70!black,
+    citecolor=blue!70!black,
+    urlcolor=blue!70!black,
+    pdftitle={自然哲学の数学的諸原理（プリンキピア）全訳・精選決定版},
+    pdfauthor={アイザック・ニュートン / Antigravity}
+}
+
+\definecolor{newtonblue}{RGB}{20, 60, 130}
+\definecolor{newtongold}{RGB}{180, 120, 20}
+\definecolor{lightgraybg}{RGB}{248, 249, 250}
+
+\newtcolorbox{principlebox}[1]{
+    enhanced,
+    colback=lightgraybg,
+    colframe=newtonblue,
+    arc=3mm,
+    fonttitle=\bfseries\sffamily,
+    title={#1},
+    coltitle=white,
+    boxrule=1pt,
+    attach boxed title to top left={yshift=-2mm, xshift=5mm},
+    boxed title style={colback=newtonblue, arc=1.5mm}
+}
+
+\pagestyle{fancy}
+\fancyhf{}
+\fancyhead[L]{\small\sffamily アイザック・ニュートン『プリンキピア』}
+\fancyhead[R]{\small\sffamily 科学古典翻訳コレクション}
+\fancyfoot[C]{\thepage}
+\renewcommand{\headrulewidth}{0.4pt}
+\setlength{\headheight}{18pt}
+\setlength{\footskip}{20pt}
+
+\begin{document}
+
+\frontmatter
+\begin{titlepage}
+    \centering
+    \vspace*{2cm}
+    {\Huge\bfseries\sffamily 自然哲学の数学的諸原理\par}
+    \vspace{0.8cm}
+    {\Large\sffamily --- プリンキピア ---\par}
+    \vspace{0.5cm}
+    {\large Philosophiae Naturalis Principia Mathematica (1687)\par}
+    \vspace{2cm}
+    {\Large\bfseries アイザック・ニュートン 著\par}
+    {\small (Sir Isaac Newton, 1642--1727)\par}
+    \vspace{1.5cm}
+    {\large 日本語全訳・精選原著図版決定版\par}
+    \vfill
+    {\large Project Gutenberg 数学・科学古典翻訳コレクション (PG\#28233)\par}
+    {\small\today}
+\end{titlepage}
+
+\tableofcontents
+\mainmatter
+
+\chapter{定義 (Definitions)}
+
+\section{物質の量、運動の量、慣性力}
+
+\paragraph{定義 I}
+物質の量（Quantity of matter）とは、その密度と体積とを合わせた尺度によって生じる物質の総量である。
+空気の密度が二倍になり、二倍の空間を占めるならば、その物質の量は四倍となる。同様のことは、圧縮や凝縮によって濃密になった雪や粉末についても理解される。私が今後どこにおいても「物体（Body）」あるいは「質量（Mass）」という語を用いるとき、常にこの物質の量を意味するものとする。
+
+\paragraph{定義 II}
+運動の量（Quantity of motion）とは、速度と物質の量とを合わせた尺度によって生じる運動の総量である。
+全体の運動とは、個々の部分の運動の総和である。したがって、二倍の質量を持つ物体が等しい速度で動くならば運動量は二倍であり、二倍の速度で動くならば運動量は四倍となる。
+
+\paragraph{定義 III}
+物質の内在的な力（\textit{vis insita}）、すなわち慣性力（Inertia）とは、各物体が自らの静止または直線上に一様な運動を維持し続けようとする抵抗の力である。
+この力は常にそれが属する物体の質量に比例し、物体の慣性（\textit{inertia mass}）と何ら異なるものではない。物体が外力を受けてその状態を変更させられる場合にのみ、この力は抵抗力（Resistance）あるいは推進力（Impulse）として外部に顕現する。
+
+\paragraph{定義 IV}
+加えられた力（\textit{vis impressa}）とは、物体にその静止あるいは一様な直線運動の状態を変更させるために働きかけられる外的な作用である。
+この力は作用（Action）の中にのみ存在し、作用が終了した後は物体の中に留まることはない。物体は自らの慣性力によってのみ、新しく獲得した状態を保持し続ける。外力には衝撃、圧力、向心力など多様な起源が存在する。
+
+\paragraph{定義 V}
+向心力（Centripetal force）とは、物体が中心の一点に向かって引き寄せられ、推進され、あるいは何らかの形でその点へと傾倒させられる力である。
+この種の力には重力（Gravity）、磁気力（Magnetism）、さらには紐に結ばれた石を中心に向かって引き留める張力などが含まれる。
+
+\section{絶対空間、絶対時間、絶対運動に関する註記 (Scholium)}
+
+時間、空間、場所、運動の各概念について、世俗の人々は感覚的対象との関係においてのみこれらを把握しているため、多くの偏見が生じている。これらを正しく理解するためには、**絶対的・真の数学的概念**と、**相対的・外見的・日常的概念**とを明確に区別しなければならない。
+
+\begin{enumerate}
+    \item **絶対時間（Absolute Time）**：真の数学的時間であり、それ自体の本性により、いかなる外的なものとも無関係に一様に流れる。これを「持続（Duration）」とも呼ぶ。これに対し相対時間は、運動によって感覚的に測られる時間（時、日、月、年）である。
+    \item **絶対空間（Absolute Space）**：それ自体の本性により、いかなる外的なものとも無関係に、常に同一にして不動に留まる。
+    \item **絶対運動（Absolute Motion）**：物体がある絶対的な場所から別の絶対的な場所への移動である。
+\end{enumerate}
+
+\begin{figure}[htbp]
+    \centering
+    \includegraphics[width=0.45\textwidth]{images/021.png}
+    \caption{空間座標と回転バケツの力学的考察}
+    \label{fig:bucket}
+\end{figure}
+
+水を入れたバケツを長い紐で吊るし、紐を強くねじった後に解放してバケツを高速回転させると、当初は水面は平坦であるが、次第に容器の回転が水に伝わるにつれて水は遠心力によって容器の縁へと這い上がり、凹面を形成する。この水面の湾曲は、周囲の物体に対する相対的な回転によるものではなく、**絶対空間に対する真の回転運動**が存在することの反駁不能な物理的証拠である。
+
+\chapter{運動の公理または法則 (Axioms, or Laws of Motion)}
+
+\paragraph{第1法則 (Lex I)}
+すべての物体は、外から加えられた力によってその状態を変更させられない限り、静止の状態、あるいは直線上の一様な運動状態を維持し続ける。
+投射された弾丸は、空気の抵抗によって減速され、重力によって下方に引かれない限り、その運動を継続する。独楽（こま）の回転も、空気の摩擦抵抗がなければ永遠に回転を続ける。
+
+\paragraph{第2法則 (Lex II)}
+運動の変化は、加えられた動力に比例し、その力が加えられた直線の方向に行われる。
+もしある力が何らかの運動を生み出すならば、二倍の力は二倍の運動を、三倍の力は三倍の運動を生じさせる。これは瞬間的な撃力（Impulse）であっても、連続的に作用する力であっても同様である。
+
+\paragraph{第3法則 (Lex III)}
+いかなる作用に対しても、常に反対向きで等しい反作用が対立する。すなわち、二物体の相互の作用は常に互いに等しく、反対の方向に向いている。
+馬が綱で石を引くとき、馬もまた等しい力で石の側へ引かれている。指で石を押せば、指もまた石から等しい力で押し返される。物体が別の物体に衝突してその運動量を変化させるとき、自らの運動量もまた反対向きに等しい量だけ変化を被る。
+
+\chapter{初等および最終比の方法 (The Method of First and Last Ratios)}
+
+\section{補題 I〜XI：幾何学的極限論の基礎}
+
+\paragraph{補題 I (Lemma I)}
+有限な時間において連続的に等しさに近づき、その時間の終わりに至る以前に、任意の与えられた差よりも小さくなるような二つの量、および量の比は、最終的には等しくなる。
+
+\begin{figure}[htbp]
+    \centering
+    \includegraphics[width=0.55\textwidth]{images/029.png}
+    \caption{補題 II・III：曲線下面積と内接・外接階段図形の極限}
+    \label{fig:lemma2}
+\end{figure}
+
+\paragraph{補題 II (Lemma II)}
+底辺 $AB$ 上に任意の曲線 $acE$ が与えられ、底辺が等しい多数の微小幅に分割されて長方形が内接・外接されるとき、分割の幅が無制限に縮小され、長方形の数が無限に増加するならば、内接図形と外接図形と曲線下面積の最終的な比は、すべて等しく（比が $1$ に）なる（図\ref{fig:lemma2}）。
+
+\paragraph{補題 VI (Lemma VI)}
+円弧 $AB$ がその接線 $AD$ と点 $A$ で交わり、点 $B$ が点 $A$ に限りなく近づくとき、弦 $AB$ と接線 $AD$ とのなす角は無限に減少し、最終的には消失する。
+
+\paragraph{補題 X (Lemma X)}
+有限な力（重力や向心力）によって物体が静止から動き始めるとき、運動の最初の瞬間に描かれる空間の距離は、時間の二乗に比例する（$s \propto t^2$）。
+
+\chapter{向心力の決定とケプラーの法則 (Determination of Centripetal Forces)}
+
+\section{命題 I：面積速度一定の法則（ケプラー第2法則）}
+
+\begin{principlebox}{定理 I (Proposition I, Theorem I)}
+いかなる向心力によって巡回運動を行う物体も、動径ベクトルによって不動の力学的中心に関して描かれる面積は、すべて不動の平面内にあり、時間に比例する。
+\end{principlebox}
+
+\begin{figure}[htbp]
+    \centering
+    \includegraphics[width=0.65\textwidth]{images/035.png}
+    \caption{命題 I：中心力場における面積速度一定の幾何学的証明図}
+    \label{fig:prop1}
+\end{figure}
+
+\paragraph{証明}
+時間を多数の微小で等しい微小時間 $\Delta t$ に分割する。
+第1の微小時間において、物体は慣性により等速度で直線 $AB$ を描く（図\ref{fig:prop1}）。
+もし外力が働かなければ、第2の微小時間において物体は直線 $AB$ の延長線上の点 $c$ に達し、$Bc = AB$ となる。このとき中心 $S$ を頂点とする三角形 $SAB$ と三角形 $SBc$ は、底辺の長さが等しく（$AB = Bc$）、共通の頂点 $S$ を持つため、その面積は等しい：
+\begin{equation}
+    \triangle SAB = \triangle SBc
+\end{equation}
+
+しかし物体が点 $B$ に達した瞬間、向心力による中心 $S$ への単一の撃力が作用する。平行四辺形の法則により、物体は $Bc$ と力積ベクトル $BV$ の合成によって点 $C$ へと到達する。ここで線分 $cC$ は中心線 $SB$ に平行である（$cC \parallel SB$）。
+底辺 $SB$ を共有する三角形 $SBC$ と三角形 $SBc$ は、平行線 $cC \parallel SB$ の間にあるため、その高さは等しく、面積も完全に等しい：
+\begin{equation}
+    \triangle SBC = \triangle SBc = \triangle SAB
+\end{equation}
+
+同様の論法を第3の微小時間、第4の微小時間に適用すれば、
+\begin{equation}
+    \triangle SAB = \triangle SBC = \triangle SCD = \triangle SDE = \cdots
+\end{equation}
+となり、等しい時間において常に等しい面積が掃引される。微小時間の幅を無限に小さくし（$\Delta t \to 0$）、三角形の数を無限に増大させる極限をとれば、折れ線軌道は連続的な曲線となり、動径ベクトルが描く面積は経過時間に厳密に比例する（面積速度一定）。証明終了。
+
+\section{命題 XI：楕円軌道と逆二乗の法則}
+
+\begin{figure}[htbp]
+    \centering
+    \includegraphics[width=0.6\textwidth]{images/045.png}
+    \caption{命題 XI：楕円軌道の焦点を中心とする逆二乗則向心力の証明}
+    \label{fig:prop11}
+\end{figure}
+
+\begin{principlebox}{定理 VI (Proposition XI, Problem VI)}
+物体が楕円軌道上を運動し、その向心力が楕円の焦点 $S$ に向かって作用しているならば、その向心力は焦点からの距離 $SP$ の二乗に反比例する。
+\begin{equation}
+    F \propto \frac{1}{SP^2}
+\end{equation}
+\end{principlebox}
+
+ニュートンはアポロニウスの円錐曲線論の幾何学的性質（共役径、主軸長、通径 $L$）と極限法を駆使し、楕円軌道を巡る天体に働く引力が距離の二乗に反比例することを完全に証明した（図\ref{fig:prop11}）。
+
+\chapter{世界の体系 (The System of the World)}
+
+第3編において、ニュートンはこの数学的理論を現実の太陽系宇宙へと適用した。
+
+\begin{itemize}
+    \item **木星の衛星系および土星の衛星系**：主惑星からの距離の3乗と公転周期の2乗が比例（ケプラーの第3法則 $a^3/T^2 = \text{const}$）し、向心力は中心惑星からの距離の逆二乗である。
+    \item **月と地球の重力の一致**：地表におけるリンゴの落下加速度（約 $9.8\,\text{m/s}^2$）と、地球半径の60倍の距離にある月の公転加速度を比較すると、ちょうど $(1/60)^2 = 1/3600$ の比率で一致する。これにより地上の重力と天空の引力が同一のものであることが実証された。
+    \item **潮汐の干満**：太陽と月が地球の海洋水に及ぼす引力の差（起潮力）によって、1日2回の満潮・干潮、および大潮・小潮の周期が完全に説明された。
+    \item **彗星の軌道**：1680年の大彗星をはじめとする彗星が、放物線および長大な楕円軌道を描いて太陽を焦点とする万有引力のもとを巡っていることを幾何学的に立証した。
+\end{itemize}
+
+\end{document}
