@@ -19,7 +19,7 @@ def generate_html():
     groups = {}
     order = []
     for b in books:
-        gid = b.get("gutenberg_id", "")
+        gid = str(b.get("gutenberg_id", ""))
         base_id = gid.split("-")[0]
         if base_id not in groups:
             groups[base_id] = {
@@ -58,8 +58,8 @@ def generate_html():
         sections_html = ""
 
         if len(b_list) >= 2:
-            full_trans = next((b for b in b_list if "-intro" not in b.get("gutenberg_id", "")), b_list[0])
-            intro_book = next((b for b in b_list if "-intro" in b.get("gutenberg_id", "")), b_list[1])
+            full_trans = next((b for b in b_list if "-intro" not in str(b.get("gutenberg_id", "")) and "intro" not in b.get("pdf_file", "")), b_list[0])
+            intro_book = next((b for b in b_list if "-intro" in str(b.get("gutenberg_id", "")) or "intro" in b.get("pdf_file", "")), b_list[1] if len(b_list) > 1 else b_list[0])
 
             sections_html = f"""
         <div class="edition-grid">
