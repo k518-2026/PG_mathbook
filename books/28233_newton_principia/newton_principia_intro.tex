@@ -1,222 +1,802 @@
-\documentclass[a4paper,11pt,oneside,openany]{ltjsbook}
+\documentclass[a4paper,11pt,openany]{ltjsbook}
 \usepackage{luatexja}
 \usepackage{amsmath,amssymb,amsfonts,amsthm}
-\usepackage{graphicx}
-\usepackage{xcolor}
+\usepackage{geometry}
+\geometry{top=24mm,bottom=24mm,left=24mm,right=24mm,footskip=10mm}
 \usepackage{tikz}
-\usetikzlibrary{calc,arrows.meta,positioning,shapes,decorations.pathmorphing,backgrounds}
+\usetikzlibrary{shapes,arrows,positioning,calc,patterns,backgrounds,decorations.pathmorphing,angles,quotes,intersections}
 \usepackage{tcolorbox}
 \tcbuselibrary{skins,breakable}
-\usepackage{booktabs}
-\usepackage{array}
-\usepackage{longtable}
-\usepackage{wrapfig}
-\usepackage{fancyhdr}
 \usepackage{hyperref}
+\usepackage{enumitem}
+\usepackage{booktabs}
+\usepackage{fancyhdr}
+\usepackage{adjustbox}
+
+% --------------------------------------------------
+% カラー設計
+% --------------------------------------------------
+\definecolor{primaryblue}{RGB}{20, 50, 100}
+\definecolor{secondaryblue}{RGB}{50, 100, 160}
+\definecolor{darkslate}{RGB}{30, 45, 60}
+\definecolor{softblue}{RGB}{240, 245, 252}
+\definecolor{warmgold}{RGB}{180, 130, 20}
+\definecolor{softamber}{RGB}{254, 250, 240}
+\definecolor{accentgreen}{RGB}{34, 139, 34}
+\definecolor{softgreen}{RGB}{240, 249, 240}
+\definecolor{crimson}{RGB}{160, 30, 30}
+\definecolor{softrose}{RGB}{253, 242, 242}
+\definecolor{deepnavy}{RGB}{10, 25, 60}
 
 \hypersetup{
     colorlinks=true,
-    linkcolor=blue!70!black,
-    citecolor=blue!70!black,
-    urlcolor=blue!70!black,
+    linkcolor=primaryblue,
+    citecolor=accentgreen,
+    urlcolor=primaryblue,
     pdftitle={大人のためのプリンキピア入門 —— 幾何学で読み解く万有引力と微積分の原点},
-    pdfauthor={アイザック・ニュートン / Antigravity}
+    pdfauthor={アイザック・ニュートン / Antigravity 数理科学シリーズ}
 }
 
-\definecolor{newtonblue}{RGB}{20, 60, 130}
-\definecolor{newtongold}{RGB}{180, 120, 20}
-\definecolor{newtongreen}{RGB}{30, 120, 60}
-\definecolor{lightgraybg}{RGB}{248, 249, 250}
-
-\newtcolorbox{principlebox}[1]{
+% --------------------------------------------------
+% 装飾ボックス環境
+% --------------------------------------------------
+\newtcolorbox{lecturebox}[1][]{
     enhanced,
-    colback=lightgraybg,
-    colframe=newtonblue,
-    arc=3mm,
-    fonttitle=\bfseries\sffamily,
-    title={#1},
-    coltitle=white,
+    breakable,
+    colback=softamber,
+    colframe=warmgold,
+    fonttitle=\bfseries\gtfamily,
+    title={大人の学び直し・深掘り講義},
+    sharp corners,
+    boxrule=1.2pt,
+    left=12pt, right=12pt, top=10pt, bottom=10pt,
+    #1
+}
+
+\newtcolorbox{theorembox}[2][]{
+    enhanced,
+    breakable,
+    colback=softblue,
+    colframe=primaryblue,
+    fonttitle=\bfseries\gtfamily,
+    title={#2},
+    sharp corners,
+    boxrule=1.2pt,
+    left=12pt, right=12pt, top=10pt, bottom=10pt,
+    #1
+}
+
+\newtcolorbox{proofbox}[1][]{
+    enhanced,
+    breakable,
+    colback=white,
+    colframe=secondaryblue!70!black,
+    fonttitle=\bfseries\gtfamily,
+    title={幾何学的ステップ解説（高校数学で読み解く証明）},
+    sharp corners,
+    boxrule=0.8pt,
+    left=10pt, right=10pt, top=8pt, bottom=8pt,
+    #1
+}
+
+\newtcolorbox{reflectionbox}[1][]{
+    enhanced,
+    breakable,
+    colback=softgreen,
+    colframe=accentgreen,
+    fonttitle=\bfseries\gtfamily,
+    title={思索と現代的展望},
+    sharp corners,
     boxrule=1pt,
-    attach boxed title to top left={yshift=-2mm, xshift=5mm},
-    boxed title style={colback=newtonblue, arc=1.5mm}
+    left=10pt, right=10pt, top=8pt, bottom=8pt,
+    #1
 }
 
 \pagestyle{fancy}
 \fancyhf{}
-\fancyhead[L]{\small\sffamily アイザック・ニュートン『プリンキピア』入門}
-\fancyhead[R]{\small\sffamily 幾何学で読み解く万有引力と微積分の原点}
-\fancyfoot[C]{\thepage}
+\fancyhead[LE,RO]{\thepage}
+\fancyhead[LO]{\rightmark}
+\fancyhead[RE]{\leftmark}
 \renewcommand{\headrulewidth}{0.4pt}
-\setlength{\headheight}{18pt}
-\setlength{\footskip}{20pt}
 
 \begin{document}
 
-\frontmatter
+% ==================================================
+% タイトルページ
+% ==================================================
 \begin{titlepage}
-    \centering
-    \vspace*{2cm}
-    {\Huge\bfseries\sffamily 大人のためのプリンキピア入門\par}
-    \vspace{0.8cm}
-    {\Large\sffamily --- 幾何学で読み解く万有引力と微積分の原点 ---\par}
-    \vspace{0.5cm}
-    {\large Philosophiae Naturalis Principia Mathematica (1687)\par}
-    \vspace{2cm}
-    {\Large\bfseries アイザック・ニュートン\par}
-    {\small (Sir Isaac Newton, 1642--1727)\par}
-    \vspace{1.5cm}
-    {\large 日本語解説・TikZ幾何学作図講義録\par}
-    \vfill
-    {\large Project Gutenberg 数学・科学古典翻訳コレクション (PG\#28233)\par}
-    {\small\today}
+\begin{center}
+\vspace*{1.5cm}
+{\Large\gtfamily\bfseries 知の遺産を高校数学で味わい直す最高峰シリーズ}\\[1.0cm]
+{\Huge\gtfamily\bfseries 大人のためのプリンキピア入門}\\[0.4cm]
+{\LARGE\gtfamily\bfseries —— 幾何学で読み解く万有引力と微積分の原点}\\[0.8cm]
+{\large\textit{A Masterclass in Newton's Mathematical Principles for Adult Learners}}\\[2.0cm]
+
+\begin{tcolorbox}[colback=white,colframe=primaryblue,width=0.88\textwidth,arc=3mm,boxrule=1.2pt]
+\centering\vspace{0.4cm}
+{\Large\gtfamily\bfseries アイザック・ニュートン}\\[0.2cm]
+{\large （Sir Isaac Newton, 1642--1727）}\\[0.3cm]
+\rule{0.6\textwidth}{0.6pt}\\[0.3cm]
+{\small 『自然哲学の数学的諸原理（\textit{Philosophiae Naturalis Principia Mathematica}）』}\\[0.15cm]
+{\small （1687年ラテン語初版・Project Gutenberg \#28233 底本）}\\[0.3cm]
+\vspace{0.2cm}
+\end{tcolorbox}
+
+\vfill
+{\large\gtfamily\bfseries Antigravity 数理科学エディトリアル}\\[0.3cm]
+{\normalsize 幾何学作図・高校数学の比率論・極限の直観・TikZ完全図解}\\[0.8cm]
+{\large 2026年 決定版}
+\end{center}
 \end{titlepage}
 
 \tableofcontents
-\mainmatter
 
-\chapter{近代科学の夜明けと『プリンキピア』の衝撃}
+% ==================================================
+% 第1章：知の革命とニュートンの幾何学作法
+% ==================================================
+\chapter{知の革命とニュートンの幾何学作法}
 
-1687年7月、英国王立協会の若き天文学者エドモンド・ハレーの私費出版援助により、人類の知的歴史を永遠に変える一冊の書物が世に出た。それがアイザック・ニュートン（Isaac Newton）の不朽の主著『自然哲学の数学的諸原理（\textit{Philosophiae Naturalis Principia Mathematica}）』、通称\textbf{『プリンキピア』}である。
+\section{なぜニュートンは微積分記号を使わなかったのか？}
 
-本書が成し遂げた最大の偉業は、\textbf{「地上のリンゴの落下」と「天空の月や惑星の公転」が、まったく同一の物理法則（万有引力の逆二乗則とニュートンの運動方程式）によって寸分の狂いもなく支配されていること}を数学的に証明した点にある。アリストテレス以来の「地上の不完全な世界」と「天上の完全な世界」という二元論的宇宙観はここに完全に打ち砕かれ、近代物理学という普遍的認識の体系が誕生した。
+1687年7月、英国王立協会の若き天文学者エドモンド・ハレー（Edmond Halley）の私費援助と献身的な校閲により、人類の歴史を根底から変革した一冊の書物がロンドンで刊行されました。それがアイザック・ニュートンによる『自然哲学の数学的諸原理（\textit{Philosophiae Naturalis Principia Mathematica}）』、通称\textbf{『プリンキピア』}です。
 
-\section{なぜニュートンは「微積分記号」を使わなかったのか？}
-今日、われわれはニュートンの運動方程式をライプニッツ流の微分方程式：
+現代のわれわれが物理学を学ぶとき、ニュートンの運動方程式はライプニッツ流の微分記号を用いて次のように教えられます：
 \begin{equation}
-    m \frac{d^2 \mathbf{r}}{dt^2} = - \frac{G M m}{r^2} \frac{\mathbf{r}}{r}
+\mathbf{F} = m \frac{d^2 \mathbf{r}}{dt^2}
 \end{equation}
-として学び、解析的に微分・積分を計算してケプラーの法則を導出する。
+そして、微積分の方程式を変数分離や積分計算によって解くことで、ケプラーの法則を代数的に導出するのが標準的な現代の講義です。
 
-しかし驚くべきことに、ニュートン自身が書いた『プリンキピア』の本文には、現代的な微積分の記号（$dy/dx$ や $\int$）は一行たりとも現れない。ニュートンは自身が発明した「流率法（Fluxions）」を背景に用いながらも、同時代の自然哲学者・天文学者たちに反論の余地のない絶対的な確信を与えるため、\textbf{古代ギリシャ以来の伝統である厳密なユークリッド幾何学の論証形式（定義・公理・補題・命題・幾何学的作図）}を用いて全体系を書き下ろしたのである。
+しかし、驚くべきことに、ニュートン自身が著した『プリンキピア』の全316ページ（ラテン語初版）のどこをめくっても、$dy/dx$ や $\int$ といった\textbf{現代的な微積分の記号は一行たりとも現れません}。
 
-『プリンキピア』を読む醍醐味は、微分方程式の代数計算の背後にある、\textbf{「幾何学的直観と極限の美学」}をその原初の息吹とともに追体験することにある。
+ニュートンはすでに1665年から1666年にかけて「流率法（Fluxions）」と呼ばれる独自の微積分理論を完成させていました。それにもかかわらず、なぜ彼は主著『プリンキピア』をすべて\textbf{ユークリッド流の純粋幾何学（三角形、円錐曲線、比と比例）}だけで書き下ろしたのでしょうか？
 
-\chapter{運動の基本概念と三法則}
+\begin{lecturebox}
+\textbf{幾何学という「普遍言語」の選択}\\
+当時のヨーロッパ数学界において、微分や無限小という新しい代数的技法は「無限小とはゼロなのか、非ゼロなのか？」という論理的批判に常に晒されていました。もしニュートンが自作の未公開微積分記号で宇宙の体系を論述すれば、同時代の碩学たち（クリスティアン・ホイヘンスやゴットフリート・ライプニッツら）から「代数計算のトリックであり、自然の幾何学的実在を論証していない」と反論される危険がありました。
 
-『プリンキピア』の冒頭「定義」および「公理または運動の法則」において、ニュートンは現代力学の土台となる諸概念を定義した。
+そこでニュートンは、古代ギリシャのエウクレイデス（ユークリッド）やアルキメデス、アポロニオスが確立した\textbf{「誰一人として疑い得ない厳密な幾何学的証明」}の形式を採用したのです。彼は幾何学的な図形の中に時間の経過と極限操作を埋め込み、「動く幾何学」として近代微積分の本質を読者の眼前に現前させました。
+\end{lecturebox}
 
-\section{運動の三法則 (Axiomata sive Leges Motus)}
+本書の目的は、難解とされる『プリンキピア』の原著の証明を、\textbf{「高校までに学ぶ初等幾何学（三角形の相似、等積変形、三平方の定理、円錐曲線）」}と\textbf{「極限の直観（lim）」}だけで完全に解き明かすことです。数式の暗記から解放され、300年前のニュートンが宇宙を見つめたときの感動的な幾何学的美学を、豊富なTikZ図解とともに追体験していきましょう。
 
-\begin{principlebox}{第1法則：慣性の法則 (Lex I)}
-すべての物体は、外力が加えられてその状態を変えられない限り、静止の状態、あるいは直線上の一様な運動状態を維持し続ける。
-\end{principlebox}
+% ==================================================
+% 第2章：運動の基本定義と三法則
+% ==================================================
+\chapter{運動の定義と三法則の幾何学的解釈}
 
-\begin{principlebox}{第2法則：運動の法則 (Lex II)}
-運動の変化（運動量の時間変化）は、加えられた動力（力）に比例し、その力が加えられた直線の方向に行われる。
-\begin{equation}
-    \Delta (m\mathbf{v}) \propto \mathbf{F} \Delta t \quad \Longrightarrow \quad \mathbf{F} = m \frac{d\mathbf{v}}{dt} = m\mathbf{a}
-\end{equation}
-\end{principlebox}
+\section{ニュートンが定めた物理の基本量}
 
-\begin{principlebox}{第3法則：作用・反作用の法則 (Lex III)}
-いかなる作用に対しても、常に反対向きで等しい反作用が対立する。すなわち、二物体の相互の作用は常に互いに等しく、反対の方向に向いている。
-\end{principlebox}
+ニュートンは『プリンキピア』の冒頭において、自然界を論じるための基礎用語を「定義（Definitiones I--VIII）」として厳密に整備しました。
 
-\chapter{幾何学的極限法 --- 初等および最終比の方法}
+\begin{theorembox}{定義 I 〜 IV：質量、運動量、慣性力、外力}
+\begin{itemize}[leftmargin=1.5em]
+    \item \textbf{定義 I（物質の量 / 質量 $m$）}:
+    物質の量とは、その密度と体積の積から生じる尺度である。
+    \item \textbf{定義 II（運動の量 / 運動量 $\mathbf{p}$）}:
+    運動の量とは、速度と物質の量の積から生じる尺度である（$\mathbf{p} = m \mathbf{v}$）。
+    \item \textbf{定義 III（慣性力 / \textit{Vis Insita}）}:
+    物質に本来備わっている力であり、すべての物体が静止または直線等速運動の状態を維持し続けようとする抵抗の力である。
+    \item \textbf{定義 IV（加えられた力 / 外力 $\mathbf{F}$）}:
+    静止または直線等速運動の状態を変えるために、物体に加えられる作用である。
+\end{itemize}
+\end{theorembox}
 
-第1編第1節「初等および最終比の方法（\textit{De methodo rationum primarum et ultimarum}）」において、ニュートンは微積分の幾何学的基礎となる\textbf{「補題（Lemma）」}の群を展開した。
+ここで注目すべきは、ニュートンが「質量（物質の量）」と「重さ（重量）」を明確に区別した最初の科学者である点です。重さは引力によって場所に依存して変化しますが、物質の量（質量）は地球上でも月面でも不変です。
 
-\begin{center}
-\begin{tikzpicture}[scale=1.2]
-    % Axes
-    \draw[->, thick, gray] (-0.5,0) -- (6,0) node[right] {$x$};
-    \draw[->, thick, gray] (0,-0.5) -- (0,4) node[above] {$y$};
+\section{運動の三法則（Axiomata sive Leges Motus）}
 
-    % Smooth curve
-    \draw[domain=0.5:5.5, variable=\t, line width=1.5pt, newtonblue] 
-        plot ({\t}, {0.1*(\t-1)^2 + 0.4*\t + 0.5}) node[right] {曲線 $y=f(x)$};
+続いてニュートンは、自然界のすべての力学現象を司る「公理または運動の法則」を3つ提示しました。
 
-    % Step rectangles (Riemann sum / ultimate ratio)
-    \foreach \x/\h in {1/1.0, 2/1.5, 3/2.2, 4/3.1} {
-        \draw[thick, fill=newtongold!20] (\x, 0) rectangle (\x+1, \h);
-    }
-    
-    \node at (3, -0.6) {微小幅 $\Delta x \to 0$ の極限において内接・外接階段図形は曲線下面積に一致する};
-    \node at (2.5, 3.5) [newtonblue, font=\bfseries] {補題 I〜IV：初等および最終比の原理};
-\end{tikzpicture}
-\end{center}
-
-ニュートンは無限小という神秘的な実体ではなく、「比が限りなく近づく最終の極限値（Ultimate Ratio）」という厳密な概念によって、アルキメデスの取り尽くし法を近代的な極限論へと止揚した。
-
-\chapter{ケプラーの第2法則（面積速度一定）の幾何学的証明}
-
-『プリンキピア』第1編の真骨頂が、\textbf{命題1（定理1）}である。ニュートンは「ある一点に向かう力（向心力）」のみが作用する質点の運動軌跡が、その点に関して\textbf{等しい時間に等しい面積を描く（面積速度一定）}ことを、驚くほど平易な幾何学作図によって証明した。
-
-\begin{center}
-\begin{tikzpicture}[scale=1.1]
-    % Center of force S
-    \coordinate (S) at (0,0);
-    \node at (S) [below left] {\textbf{中心 $S$}};
-    \fill[newtongold] (S) circle (3pt);
-
-    % Points A, B, C, c, etc.
-    \coordinate (A) at (1, 4.5);
-    \coordinate (B) at (3.5, 4.0);
-    % Inertial continuation point c: B + (B - A)
-    \coordinate (c) at ($(B) + (B) - (A)$);
-    % Impulsive force toward S along BS: vector from B toward S
-    \coordinate (force) at ($(S)!0.28!(B) - (B)$);
-    % Actual next point C = c + force
-    \coordinate (C) at ($(c) + (force)$);
-
-    % Draw orbital path A -> B -> C
-    \draw[very thick, newtonblue] (A) -- (B) -- (C);
-    \fill[newtonblue] (A) circle (2.5pt) node[above] {$A$};
-    \fill[newtonblue] (B) circle (2.5pt) node[above right] {$B$};
-    \fill[newtonblue] (C) circle (2.5pt) node[right] {$C$};
-
-    % Inertial path B -> c (dashed)
-    \draw[thick, dashed, gray] (B) -- (c);
-    \fill[gray] (c) circle (2pt) node[above right] {$c$ (慣性継続点)};
-
-    % Impulse line c -> C parallel to SB
-    \draw[thick, dashed, newtongreen] (c) -- (C);
-    \draw[->, very thick, red!80!black] (B) -- ($(B) + (force)$) node[midway, left] {\footnotesize 向心撃力};
-
-    % Triangles to center S
-    \draw[thick, fill=newtonblue!10] (S) -- (A) -- (B) -- cycle;
-    \draw[thick, fill=newtongold!15] (S) -- (B) -- (C) -- cycle;
-    \draw[thick, dashed, gray!60] (S) -- (c);
-
-    \node at (1.5, 2.8) {\small 面積 $SAB$};
-    \node at (4.0, 2.5) {\small 面積 $SBC$};
-\end{tikzpicture}
-\end{center}
-
-\begin{principlebox}{ニュートンの幾何学的証明の論理ステップ}
-\begin{enumerate}
-    \item \textbf{慣性運動の直進（力のない場合）}:
-    物体が時間 $\Delta t$ で $A$ から $B$ へ進む。もし力が働かなければ、次の時間 $\Delta t$ で等速度のまま直線 $AB$ の延長上の点 $c$ へ進む（$Bc = AB$）。このとき、底辺が等しく高さが共通であるため、三角形 $SAB$ の面積と三角形 $SBc$ の面積は完全に等しい：
+\begin{theorembox}{運動の三法則}
+\begin{enumerate}[leftmargin=1.5em]
+    \item \textbf{第1法則（慣性の法則）}:
+    すべての物体は、外力によって状態を変えることを強制されない限り、静止状態または直線等速運動の状態を維持し続ける。
+    \item \textbf{第2法則（運動の変化の法則）}:
+    運動の変化（運動量の変化）は、加えられた力に比例し、その力が加えられた直線の方向に沿って生じる。
     \begin{equation}
-        \triangle SAB = \triangle SBc
+    \Delta \mathbf{p} \propto \mathbf{F} \Delta t
     \end{equation}
-    \item \textbf{向心力による撃力（中心 $S$ への引き寄せ）}:
-    点 $B$ に達した瞬間、中心 $S$ へ向かう撃力積 $\mathbf{I}$ が瞬間的に加わる。平行四辺形の法則により、質点の次の到達点 $C$ は、線分 $cC$ が中心引線 $SB$ に平行になるように決定される（$cC \parallel SB$）。
-    \item \textbf{等積変形（平行線と三角形の高さ）}:
-    直線 $SB$ を共通の底辺とみると、平行線 $cC \parallel SB$ の上に頂点 $c$ と $C$ が存在するため、三角形 $SBC$ の高さと三角形 $SBc$ の高さは完全に等しい！
+    \item \textbf{第3法則（作用・反作用の法則）}:
+    作用には常に等しく、かつ反対向きの反作用が対立する。すなわち、二つの物体の相互作用は、常に互いに等しく反対方向に向かう。
+\end{enumerate}
+\end{theorembox}
+
+\section{力の合成則と平行四辺形の幾何学}
+
+ニュートンは第2法則の直後の「系1（Corol. I）」において、複数の力が作用するときの合成則を平行四辺形の対角線として証明しました。
+
+\begin{center}
+\begin{tikzpicture}[scale=1.4]
+    % 座標の定義
+    \coordinate (A) at (0, 0);
+    \coordinate (B) at (4, 0);
+    \coordinate (C) at (1.5, 2.5);
+    \coordinate (D) at ($(B)+(C)-(A)$);
+
+    % 平行四辺形の描画
+    \draw[thick, primaryblue, -{Stealth[length=3mm]}] (A) -- (B) node[midway, below=3pt] {力 $\mathbf{F}_1$ による変位 $AB$};
+    \draw[thick, crimson, -{Stealth[length=3mm]}] (A) -- (C) node[midway, above left] {力 $\mathbf{F}_2$ による変位 $AC$};
+    \draw[dashed, gray] (B) -- (D);
+    \draw[dashed, gray] (C) -- (D);
+    \draw[very thick, warmgold, -{Stealth[length=3.5mm]}] (A) -- (D) node[midway, above=6pt, sloped] {\textbf{合力による真の変位 $AD$}};
+
+    % 点のラベル
+    \filldraw[primaryblue] (A) circle (2pt) node[below left] {$A$ (質点)};
+    \filldraw[primaryblue] (B) circle (2pt) node[below right] {$B$};
+    \filldraw[crimson] (C) circle (2pt) node[above left] {$C$};
+    \filldraw[warmgold] (D) circle (2pt) node[above right] {$D$};
+\end{tikzpicture}
+\end{center}
+
+質点が時間 $\Delta t$ の間に、力 $\mathbf{F}_1$ 単独ならば $A$ から $B$ へ達し、力 $\mathbf{F}_2$ 単独ならば $A$ から $C$ へ達するとき、二つの力が同時に働くならば、質点は平行四辺形 $ABDC$ の対角線 $AD$ を進みます。この高校数学の「ベクトルの加法」が、すべての天体運動解析の幾何学的基盤となるのです。
+
+% ==================================================
+% 第3章：幾何学的極限法（補題 I 〜 XI）
+% ==================================================
+\chapter{幾何学的極限法 —— 「初等比および最終比」の極意}
+
+\section{アルキメデスの取り尽くし法を動的に昇華する}
+
+『プリンキピア』第1編の第1節は、「初等および最終比の方法（\textit{De methodo rationum primarum et ultimarum}）」と題された11個の「補題（Lemma）」から始まります。これこそが、ニュートンがライプニッツに先駆けて直観していた\textbf{幾何学的微積分学}の核心です。
+
+現代の高校数学で学ぶ「区分求積法（長方形の短冊の和による面積計算）」を、ニュートンは次のような美しい幾何学的作図で論証しました（補題 II・III）。
+
+\begin{center}
+\begin{tikzpicture}[scale=1.3]
+    % 座標軸
+    \draw[->, thick] (-0.5, 0) -- (6.5, 0) node[right] {$x$};
+    \draw[->, thick] (0, -0.5) -- (0, 4.5) node[above] {$y$};
+
+    % 曲線 y = f(x)
+    \draw[very thick, primaryblue, domain=0.8:5.8, samples=100] plot (\x, {0.12*\x*\x + 0.4}) node[right] {曲線 $y = f(x)$};
+
+    % 等分割の点
+    \coordinate (A) at (1, 0);
+    \coordinate (B) at (2, 0);
+    \coordinate (C) at (3, 0);
+    \coordinate (D) at (4, 0);
+    \coordinate (E) at (5, 0);
+
+    % 外接長方形
+    \fill[softrose, opacity=0.6] (1, 0) rectangle (2, {0.12*4 + 0.4});
+    \fill[softrose, opacity=0.6] (2, 0) rectangle (3, {0.12*9 + 0.4});
+    \fill[softrose, opacity=0.6] (3, 0) rectangle (4, {0.12*16 + 0.4});
+    \fill[softrose, opacity=0.6] (4, 0) rectangle (5, {0.12*25 + 0.4});
+
+    % 内接長方形
+    \fill[softblue, opacity=0.7] (1, 0) rectangle (2, {0.12*1 + 0.4});
+    \fill[softblue, opacity=0.7] (2, 0) rectangle (3, {0.12*4 + 0.4});
+    \fill[softblue, opacity=0.7] (3, 0) rectangle (4, {0.12*9 + 0.4});
+    \fill[softblue, opacity=0.7] (4, 0) rectangle (5, {0.12*16 + 0.4});
+
+    % 輪郭線
+    \draw[thick, crimson] (1, 0) rectangle (2, {0.12*4 + 0.4});
+    \draw[thick, crimson] (2, 0) rectangle (3, {0.12*9 + 0.4});
+    \draw[thick, crimson] (3, 0) rectangle (4, {0.12*16 + 0.4});
+    \draw[thick, crimson] (4, 0) rectangle (5, {0.12*25 + 0.4});
+
+    \draw[thick, secondaryblue] (1, 0) rectangle (2, {0.12*1 + 0.4});
+    \draw[thick, secondaryblue] (2, 0) rectangle (3, {0.12*4 + 0.4});
+    \draw[thick, secondaryblue] (3, 0) rectangle (4, {0.12*9 + 0.4});
+    \draw[thick, secondaryblue] (4, 0) rectangle (5, {0.12*16 + 0.4});
+
+    % 目盛りラベル
+    \node[below] at (1, 0) {$a$};
+    \node[below] at (2, 0) {$x_1$};
+    \node[below] at (3, 0) {$x_2$};
+    \node[below] at (4, 0) {$x_3$};
+    \node[below] at (5, 0) {$b$};
+
+    % 差分の長方形
+    \draw[ultra thick, warmgold] (4, {0.12*16 + 0.4}) rectangle (5, {0.12*25 + 0.4});
+    \node[above right, warmgold] at (5, {0.12*20 + 0.4}) {差の合計 $=$ 最大長方形};
+\end{tikzpicture}
+\end{center}
+
+\begin{proofbox}
+\textbf{補題 II・III の幾何学的証明：}\\
+区間 $[a, b]$ を幅 $\Delta x$ の $n$ 個の短冊に等分割します。
+\begin{enumerate}
+    \item 曲線の「外側」に接する長方形の面積の総和を $S_{\text{outer}}$、曲線の「内側」に含まれる長方形の面積の総和を $S_{\text{inner}}$ とします。
+    \item 両者の差（ピンク色の余白部分）を水平方向に左から右へずらして寄せ集めると、驚くべきことに\textbf{「幅 $\Delta x$、高さが最大長方形の高さ（$f(b) - f(a)$）」をもつ単一の長方形}と完全に一致します：
+    \begin{equation}
+    S_{\text{outer}} - S_{\text{inner}} = \Delta x \times [f(b) - f(a)]
+    \end{equation}
+    \item 短冊の幅を無限に細かくする極限（$\Delta x \to 0$）をとると、右辺は明らかにゼロに収束します：
+    \begin{equation}
+    \lim_{\Delta x \to 0} (S_{\text{outer}} - S_{\text{inner}}) = 0
+    \end{equation}
+    したがって、外接和と内接和は挟み撃ちの原理によって同一の確定した値（曲線下の真の面積）へと最終比において一致します。\QED
+\end{enumerate}
+\end{proofbox}
+
+\section{弦と弧と接線の最終等価性（補題 VI 〜 VIII）}
+
+ニュートン幾何学のもう一つの強力な武器が、\textbf{「極限において、円弧とその弦、および接線の長さの比は 1 に等しくなる」}という定理です。
+
+\begin{center}
+\begin{tikzpicture}[scale=1.5]
+    % 円弧
+    \draw[thick, gray!50] (0, 0) circle (3);
+    \draw[very thick, primaryblue] (0:3) arc (0:45:3) node[midway, right=2pt] {弧 $AB$};
+
+    % 点
+    \coordinate (O) at (0, 0);
+    \coordinate (A) at (3, 0);
+    \coordinate (B) at (45:3);
+
+    % 接線
+    \draw[thick, crimson] (3, -0.5) -- (3, 3) node[above] {接線 $AD$};
+    \coordinate (D) at (3, {3*tan(45)});
+    \draw[dashed, gray] (O) -- (D);
+    \draw[thick, warmgold] (A) -- (B) node[midway, left=2pt] {弦 $AB$};
+
+    % 点の描画
+    \filldraw[primaryblue] (A) circle (2pt) node[below right] {$A$};
+    \filldraw[primaryblue] (B) circle (2pt) node[above left] {$B$};
+    \filldraw[crimson] (D) circle (2pt) node[above right] {$D$};
+    \filldraw (O) circle (1.5pt) node[below left] {$O$ (中心)};
+
+    % 角度
+    \draw[->] (0.7, 0) arc (0:45:0.7) node[midway, right] {$\theta$};
+\end{tikzpicture}
+\end{center}
+
+高校数学で学ぶ三角関数の極限公式：
+\begin{equation}
+\lim_{\theta \to 0} \frac{\sin \theta}{\theta} = 1, \quad \lim_{\theta \to 0} \frac{\tan \theta}{\theta} = 1
+\end{equation}
+は、幾何学的には\textbf{「$\lim_{B \to A} \frac{\text{弦 } AB}{\text{弧 } AB} = 1$ かつ $\lim_{B \to A} \frac{\text{接線 } AD}{\text{弧 } AB} = 1$」}を意味します。ニュートンはこの幾何学的性質を用いて、滑らかな曲線を微視的な直線の折れ線として大胆に近似・解析したのです。
+
+% ==================================================
+% 第4章：ケプラー第2法則の完全幾何学的証明
+% ==================================================
+\chapter{ケプラー第2法則（面積速度一定）の幾何学的証明}
+
+\section{『プリンキピア』第1編 命題1（定理1）の衝撃}
+
+ニュートンの偉大さを最も純粋に体験できるのが、第1編の\textbf{命題1（Proposition I, Theorem I）}です。
+ケプラーが天体観測データ（ティコ・ブラーエの精密記録）から帰納的に発見した「惑星は太陽を中心として等しい時間に等しい面積を描く（面積速度一定の法則）」を、ニュートンは\textbf{「中心力（向心力）のみを受ける物体の必然的幾何学帰結」}として、驚くほど単純な「三角形の等積変形」だけで完全に演繹しました。
+
+\begin{theorembox}{第1編 命題1 定理1}
+物体が任意の固定点に向かう中心力に引き寄せられながら運動するとき、その物体が固定点を中心として動径によって掃引する面積は、運動の行われる不動の平面内にあり、時間に比例する（単位時間あたりの掃引面積は常に一定である）。
+\end{theorembox}
+
+\section{高校数学で完璧にわかる4つの論理ステップ}
+
+この証明には、三平方の定理すら不要です。用いるのは\textbf{「底辺が等しく高さが共通な二つの三角形は面積が等しい」}という中学校で習う知識だけです！
+
+\begin{center}
+\begin{tikzpicture}[scale=1.5]
+    % 中心 S
+    \coordinate (S) at (0, 0);
+
+    % 時間 dt ごとの点
+    \coordinate (A) at (1.5, 3.5);
+    \coordinate (B) at (3.5, 3.2);
+    
+    % 力がない場合の直進点 c (Bc = AB)
+    \coordinate (c) at ($(B) + ($(B)-(A)$)$);
+
+    % 向心力による引寄せベクトル (B から S への方向)
+    \coordinate (F_dir) at ($(S)-(B)$);
+    % 引寄せ変位 cC は SB に平行
+    \coordinate (C) at ($(c) + 0.45*(F_dir)$);
+
+    % さらに次のステップ
+    \coordinate (d) at ($(C) + ($(C)-(B)$)$);
+    \coordinate (D) at ($(d) + 0.42*($(S)-(C)$)$);
+
+    % 動径線（中心 S から各点へ）
+    \draw[thick, gray!70] (S) -- (A);
+    \draw[thick, primaryblue] (S) -- (B);
+    \draw[thick, crimson] (S) -- (C);
+    \draw[thick, gray!70] (S) -- (D);
+
+    % 軌道線
+    \draw[very thick, primaryblue] (A) -- (B);
+    \draw[very thick, crimson] (B) -- (C);
+    \draw[very thick, gray!70] (C) -- (D);
+
+    % 慣性直進線と撃力変位線
+    \draw[dashed, warmgold, thick] (B) -- (c) node[midway, above right] {力のない直進 ($Bc=AB$)};
+    \draw[dashed, darkslate, thick, -{Stealth[length=2.5mm]}] (c) -- (C) node[midway, right] {中心 $S$ への引き寄せ ($cC \parallel SB$)};
+
+    % 面積のハッチング（色塗り）
+    \fill[softblue, opacity=0.4] (S) -- (A) -- (B) -- cycle;
+    \fill[softrose, opacity=0.4] (S) -- (B) -- (C) -- cycle;
+    \fill[softamber, opacity=0.25] (S) -- (B) -- (c) -- cycle;
+
+    % 点の描画
+    \filldraw[deepnavy] (S) circle (2.5pt) node[below left] {\textbf{$S$（太陽・引力中心）}};
+    \filldraw[primaryblue] (A) circle (2pt) node[above left] {$A$};
+    \filldraw[primaryblue] (B) circle (2pt) node[above=2pt] {$B$};
+    \filldraw[warmgold] (c) circle (2pt) node[above right] {$c$};
+    \filldraw[crimson] (C) circle (2pt) node[right] {$C$};
+    \filldraw[gray] (D) circle (1.5pt) node[right] {$D$};
+
+    % ラベル
+    \node[primaryblue] at (2.2, 2.0) {$\triangle SAB$};
+    \node[crimson] at (3.2, 1.8) {$\triangle SBC$};
+\end{tikzpicture}
+\end{center}
+
+\begin{proofbox}
+ニュートンの証明の全ステップ：
+\begin{enumerate}[leftmargin=1.8em]
+    \item \textbf{ステップ1：力がない場合の等速度直進運動}\\
+    時間 $\Delta t$ の間に物体が $A$ から $B$ へ進んだとします。もし点 $B$ において何の外力も働かなければ（第1法則・慣性）、物体は等速度のまま次の時間 $\Delta t$ の間に直線 $AB$ の延長上の点 $c$ へ達します。\\
+    当然、$Bc = AB$ です。
+    
+    \item \textbf{ステップ2：慣性三角形の等積性}\\
+    三角形 $\triangle SAB$ と三角形 $\triangle SBc$ を比較します。\\
+    底辺をそれぞれ $AB$ と $Bc$ と見なすと、$AB = Bc$ であり、頂点はいずれも太陽 $S$ で共通ですから、二つの三角形の高さは完全に一致します。したがって：
+    \begin{equation}
+    \text{面積}(\triangle SAB) = \text{面積}(\triangle SBc)
+    \end{equation}
+
+    \item \textbf{ステップ3：中心力（撃力）の加算と等積変形}\\
+    実際には、点 $B$ に達した瞬間に、中心 $S$ へ向かう引力積（瞬間的な撃力）が加わります。平行四辺形の法則により、質点の真の到達点 $C$ は、線分 $cC$ が中心線 $SB$ と平行になるように決定されます（$cC \parallel SB$）。
+    
+    ここで、三角形 $\triangle SBC$ と三角形 $\triangle SBc$ に着目してください！\\
+    線分 $SB$ を共通の「底辺」と見なすと、平行線 $cC \parallel SB$ の上に頂点 $c$ と頂点 $C$ が並んでいます。\\
+    平行線の性質により、\textbf{「共通底辺 $SB$ に対する頂点 $C$ の高さと頂点 $c$ の高さは寸分違わず等しい」}のです！\\
     したがって：
     \begin{equation}
-        \triangle SBC = \triangle SBc
+    \text{面積}(\triangle SBC) = \text{面積}(\triangle SBc)
     \end{equation}
-    \item \textbf{面積の等値と極限}:
-    (1) と (2) より、直ちに以下が導かれる：
+
+    \item \textbf{ステップ4：面積速度一定の成立と極限}\\
+    式(4.2)と式(4.3)を連立すると、驚くべき等式が導かれます：
     \begin{equation}
-        \triangle SAB = \triangle SBC
+    \text{面積}(\triangle SAB) = \text{面積}(\triangle SBC)
     \end{equation}
-    時間の刻み $\Delta t \to 0$ の極限をとれば、離散的な折れ線軌道は滑らかな連続曲線となり、\textbf{「動径が単位時間に掃引する面積は常に一定（面積速度一定）」}であることが完全に証明される。
+    全く同様の議論により、次の時間 $\Delta t$ で描かれる三角形 $\triangle SCD$ の面積もこれと等しくなります。\\
+    時間の刻み幅を極限 $\Delta t \to 0$ へと縮めれば、離散的な折れ線軌道は滑らかな連続曲線となり、\textbf{「単位時間に動径が掃引する面積は軌道のいかなる場所でも厳密に一定である」}ことが証明されました。\QED
 \end{enumerate}
-\end{principlebox}
+\end{proofbox}
 
-この幾何学的論証の鮮やかさは、代数的な外積計算（$\mathbf{r} \times \mathbf{F} = \mathbf{0} \implies \frac{d}{dt}(\mathbf{r} \times \mathbf{p}) = \mathbf{0}$）よりもはるかに直観的であり、300年を経た今日でも物理学・数学教育の最高峰の模範とされている。
+\begin{reflectionbox}
+\textbf{ニュートンの幾何学的思考の美}\\
+現代の物理学教育では、角運動量保存則 $\mathbf{L} = \mathbf{r} \times m\mathbf{v} = \text{const}$ から面積速度一定を導くのが通例です。しかし、ベクトルの外積という抽象代数を持ち出すまでもなく、ニュートンの「底辺が等しく、平行線の間にある三角形は面積が等しい」という証明は、小学生・中学生でも視覚的に理解できるほど本質的で透明です。
+\end{reflectionbox}
 
-\chapter{万有引力と天界・地上の統一}
+% ==================================================
+% 第5章：楕円軌道と万有引力の逆二乗則
+% ==================================================
+\chapter{楕円軌道と逆二乗則の幾何学的演繹}
 
-ニュートンは続いて、楕円軌道を描く惑星に作用する向心力が\textbf{「太陽からの距離の二乗に反比例する（逆二乗則 $F \propto 1/r^2$）」}ことを幾何学的に演繹した（命題11）。
+\section{ケプラーの第1法則から逆二乗則を導く（命題11）}
 
-さらに第3編「世界の体系（\textit{De mundi systemate}）」において、木星の衛星系、土星の衛星系、地球の月、太陽を巡る6大惑星の軌道半径と周期（ケプラーの第3法則 $T^2 \propto a^3$）を丹念に比較し、すべての天体相互に働く力は共通の万有引力：
+ケプラーの第1法則は「惑星は太陽を一つの焦点とする楕円軌道を描く」というものです。ニュートンは『プリンキピア』第1編 命題11（問題6）において、\textbf{「楕円軌道を描く向心力は、太陽からの距離の二乗に反比例する（$F \propto 1/r^2$）」}ことを幾何学的に完全に証明しました。
+
+この証明の鍵を握るのが、ニュートンが考案した\textbf{「向心力の幾何学的尺度」}です。
+
+\begin{center}
+\begin{tikzpicture}[scale=1.6]
+    % 楕円の描画 (長半径 a=3, 短半径 b=2)
+    \draw[thick, primaryblue] (0, 0) ellipse (3 and 2);
+
+    % 焦点 S, H (c = sqrt(9-4) = sqrt(5) approx 2.236)
+    \coordinate (S) at (-2.236, 0);
+    \coordinate (H) at (2.236, 0);
+
+    % 楕円上の点 P
+    \coordinate (P) at (-1.2, 1.833);
+    % 微小時間後の点 Q
+    \coordinate (Q) at (-1.8, 1.6);
+
+    % 接線 PR
+    \coordinate (R) at (-2.3, 2.3);
+
+    % 点 Q から接線 PR への垂線 QR、動径 SP への平行線
+    \coordinate (T) at ($(P)!0.4!(S)$);
+
+    % 線の描画
+    \draw[very thick, crimson] (S) -- (P) node[midway, below left] {動径 $SP = r$};
+    \draw[thick, gray] (H) -- (P);
+    \draw[thick, warmgold] (P) -- (R) node[above] {接線};
+    \draw[dashed, darkslate] (Q) -- (P);
+
+    % 向心力による落下変位 QR
+    \draw[thick, crimson, -{Stealth}] (R) -- (Q) node[midway, left] {$QR \propto F \Delta t^2$};
+
+    % 点のプロット
+    \filldraw[deepnavy] (S) circle (2.5pt) node[below] {$S$ (太陽・焦点)};
+    \filldraw[gray] (H) circle (2pt) node[below] {$H$ (もう一つの焦点)};
+    \filldraw[primaryblue] (P) circle (2pt) node[above right] {$P$ (現在位置)};
+    \filldraw[primaryblue] (Q) circle (2pt) node[left] {$Q$ (微小時間後)};
+    \filldraw[warmgold] (R) circle (1.5pt) node[above] {$R$};
+\end{tikzpicture}
+\end{center}
+
+\begin{lecturebox}
+\textbf{ニュートンの幾何学的力尺度公式}\\
+質点が微小時間 $\Delta t$ の間に接線方向へ直進しようとする変位を $PR$ とし、向心力によって軌道上へと引き戻される変位を $QR$ とします。
+運動の第2法則（自由落下公式 $s = \frac{1}{2} a t^2$）より、微小変位 $QR$ は向心力 $F$ と時間の二乗の積に比例します：
 \begin{equation}
-    F = G \frac{m_1 m_2}{r^2}
+QR \propto F \times (\Delta t)^2
 \end{equation}
-であることを確立した。さらに地球の自転による偏平率（赤道膨張）、月の引力による潮汐の干満、彗星の放物線・双曲線軌道の数理解析に至るまで、全宇宙の現象をひとつの統一数理のもとに束ね上げたのである。
+一方、ケプラーの第2法則（面積速度一定）により、掃引面積 $\text{Area}(\triangle SPQ)$ は時間 $\Delta t$ に比例します。点 $Q$ から動径 $SP$ に下ろした垂線の足を $T$ とすると、三角形の面積は $\frac{1}{2} SP \times QT$ ですから：
+\begin{equation}
+\Delta t \propto SP \times QT
+\end{equation}
+式(5.1)と式(5.2)を組み合わせると、向心力 $F$ の幾何学的尺度が直ちに得られます：
+\begin{equation}
+F \propto \lim_{Q \to P} \frac{QR}{(SP)^2 \times QT^2} = \frac{1}{SP^2} \times \lim_{Q \to P} \frac{QR}{QT^2}
+\end{equation}
+驚くべきことに、向心力はすでに $1/SP^2 = 1/r^2$ を外側に括り出しています！\\
+あとは、\textbf{「幾何学的極限比 $\lim_{Q \to P} \frac{QR}{QT^2}$ が楕円軌道全体において一定値（定数）になるか？」}を調べるだけでよいのです。
+\end{lecturebox}
+
+\section{アポロニオスの円錐曲線幾何学による解決}
+
+ニュートンは古代ギリシャのアポロニオスが著した『円錐曲線論』の性質（楕円の主径、副径、通径 $L$ の関係式）を鮮やかに適用しました。
+
+\begin{proofbox}
+楕円の半長軸を $a$、半短軸を $b$、通径（焦点を通る弦の長さの半分）を $L = \frac{2b^2}{a}$ とします。楕円の幾何学的共役直径の性質により、点 $Q$ が点 $P$ に無限に近づく極限において、常に次の相似関係が成り立ちます：
+\begin{equation}
+\lim_{Q \to P} \frac{QT^2}{QR} = L = \frac{2b^2}{a} \quad (\text{一定値})
+\end{equation}
+したがって、式(5.3)にこれを代入すれば：
+\begin{equation}
+F \propto \frac{1}{SP^2} \times \frac{1}{L} \propto \frac{1}{r^2}
+\end{equation}
+惑星を太陽に向かって引き寄せている力は、\textbf{「太陽からの距離の二乗に反比例する」}ことが、ユークリッド幾何学とアポロニオス幾何学の純粋な結合によって完全に証明されたのです！\QED
+\end{proofbox}
+
+% ==================================================
+% 第6章：地球・月・リンゴの重力統一検証
+% ==================================================
+\chapter{地球・月・リンゴの重力統一検証}
+
+\section{「月は地球に向かって毎秒何ミリ落下しているか？」}
+
+ニュートンが人類史に打ち立てた最大の偉業は、「地上のリンゴを落とす重力」と「天空の月を軌道に繋ぎ止める引力」が、全く同一の物理法則（逆二乗則）に従う同一の力であることを数値的・幾何学的に立証したことです（第3編 命題4）。
+
+この思考実験を、高校物理の公式（円運動の加速度 $a = v^2/r = r\omega^2$）を用いて追体験してみましょう。
+
+\begin{center}
+\begin{tikzpicture}[scale=1.4]
+    % 地球
+    \filldraw[primaryblue!20] (0, 0) circle (0.8);
+    \draw[thick, primaryblue] (0, 0) circle (0.8);
+    \node at (0, 0) {\textbf{地球}};
+    \node[below] at (0, -0.8) {半径 $R$};
+
+    % 月の軌道
+    \draw[dashed, secondaryblue] (0, 0) circle (4);
+    
+    % 月の位置
+    \coordinate (M) at (45:4);
+    \filldraw[warmgold] (M) circle (3pt) node[above right] {\textbf{月 (Moon)}};
+
+    % 接線方向の直進と落下
+    \coordinate (M_tangent) at ($(M) + (-0.8, 0.8)$);
+    \draw[thick, gray, -{Stealth}] (M) -- (M_tangent) node[above] {慣性による直進};
+    \draw[very thick, crimson, -{Stealth}] (M_tangent) -- (40:4) node[midway, right] {地球への「落下」};
+
+    % 距離の表示
+    \draw[<->, thick, darkslate] (0, 0) -- (M) node[midway, fill=white] {距離 $r \approx 60R$};
+\end{tikzpicture}
+\end{center}
+
+\begin{theorembox}{ニュートンの月落とし計算（Moon-test）}
+\begin{enumerate}[leftmargin=1.8em]
+    \item \textbf{地表におけるリンゴの落下加速度}:\\
+    ガリレオの落体の法則により、地球表面（地球中心から距離 $R$）において、リンゴは最初の1秒間に約 $4.9\,\text{m}$ 落下します：
+    \begin{equation}
+    g \approx 9.8\,\text{m/s}^2 \implies s_{\text{apple}} = \frac{1}{2} g t^2 = 4.9\,\text{m}
+    \end{equation}
+
+    \item \textbf{月の公転半径と公転周期}:\\
+    天文学の観測から、月までの距離は地球半径の約60倍であることが分かっていました：
+    \begin{equation}
+    r_{\text{moon}} \approx 60 R
+    \end{equation}
+    また、月の公転周期は $T \approx 27.32\,\text{日} \approx 2.36 \times 10^6\,\text{秒}$ です。
+
+    \item \textbf{逆二乗則が正しければ、月における引力加速度はどうなるか？}:\\
+    引力が距離の二乗に反比例するならば、月における地球引力加速度 $a_{\text{moon}}$ は地表の重力の $\frac{1}{60^2} = \frac{1}{3600}$ に弱まっているはずです：
+    \begin{equation}
+    a_{\text{moon}} = \frac{g}{60^2} = \frac{9.8}{3600} \approx 0.00272\,\text{m/s}^2
+    \end{equation}
+    この加速度のもとで、月が1秒間に地球中心に向かって「落下」する距離 $s_{\text{moon}}$ は：
+    \begin{equation}
+    s_{\text{moon}} = \frac{1}{2} a_{\text{moon}} (1\,\text{s})^2 \approx \frac{4.9\,\text{m}}{3600} \approx 1.36\,\text{mm}
+    \end{equation}
+
+    \item \textbf{円運動の幾何学から月の実際の落下量を計算する}:\\
+    月が半径 $r$ の円軌道を速さ $v = 2\pi r / T$ で公転するとき、1秒間に直進する接線変位から円周軌道上へ戻るための幾何学的落下変位は：
+    \begin{equation}
+    s = \frac{v^2}{2r} = \frac{2\pi^2 r}{T^2}
+    \end{equation}
+    実測値 $r \approx 3.84 \times 10^8\,\text{m}$ と $T \approx 2.36 \times 10^6\,\text{s}$ を代入すると：
+    \begin{equation}
+    s \approx \frac{2 \times (3.1416)^2 \times 3.84 \times 10^8}{(2.36 \times 10^6)^2} \approx 0.00136\,\text{m} = \mathbf{1.36\,\text{mm}}
+    \end{equation}
+\end{enumerate}
+\end{theorembox}
+
+式(6.4)の理論予測値（$1.36\,\text{mm}$）と、式(6.6)の天体観測値（$1.36\,\text{mm}$）は見事に一致しました！
+アリストテレス以来2000年間信じられてきた「地上の不完全な世界」と「天上の神聖な世界」という二元論はここに完全に崩壊し、\textbf{「天界の月も、木から落ちるリンゴとまったく同じ力で地球へと引き寄せられ続けている」}という宇宙の普遍的統一認識が確立されたのです。
+
+% ==================================================
+% 第7章：球殻定理 —— なぜ天体を「質点」とみなせるのか？
+% ==================================================
+\chapter{球殻定理 —— 天体を「一点」とみなせる奇跡}
+
+\section{ニュートンを20年間悩ませた数学的難関}
+
+万有引力の逆二乗則を提唱したとき、ニュートンは深刻な数学的疑念に直面しました。
+月と地球の間の引力を計算するとき、われわれは地球の全質量が「地球の中心の一点」に集中しているものとして距離 $r$ を計算しました。
+
+しかし、実際の地球は半径数千キロメートルもある巨大な球体です。月の近くにある地表面の土砂は月を強く引き、地球の裏側にある土砂は遠くから弱く引き、それらは様々な角度から斜めに引っ張り合っています。
+\textbf{「球体のすべての微小部分が及ぼす無数の引力を足し合わせたとき、それは本当に『球の中心に全質量が集まった単一の質点』と同じ引力になるのだろうか？」}
+
+もしこれが成り立たなければ、逆二乗則は巨大な天体に対して破綻してしまいます。ニュートンはこの証明に苦しみ、それが『プリンキピア』出版が遅れた一因とも言われています。そして彼は第1編 命題70〜74において、この難問を純粋な幾何学作図によって完全に証明したのです（\textbf{球殻定理}）。
+
+\section{球殻の内部では重力が完全にゼロになる（命題70）}
+
+まずニュートンは、中空の一様な球殻の内部に置かれた質点には、\textbf{あらゆる場所で引力が完全に相殺してゼロになる}ことを証明しました。
+
+\begin{center}
+\begin{tikzpicture}[scale=1.6]
+    % 球殻の断面
+    \draw[very thick, primaryblue] (0, 0) circle (2.5);
+
+    % 内部の点 P (中心からずれた任意の位置)
+    \coordinate (P) at (0.8, 0.4);
+
+    % 対頂角をなす細い円錐（立体角）の直線
+    \draw[thick, crimson] ($(P) + (-2.0, 1.0)$) -- ($(P) + (2.0, -1.0)$);
+    \draw[thick, crimson] ($(P) + (-2.2, 0.7)$) -- ($(P) + (2.2, -0.7)$);
+
+    % 球殻との交点
+    \coordinate (A1) at (-1.15, 1.4);
+    \coordinate (A2) at (-1.35, 1.15);
+    \coordinate (B1) at (2.42, -0.4);
+    \coordinate (B2) at (2.47, -0.15);
+
+    % 微小面要素の描画
+    \draw[ultra thick, warmgold] (A1) -- (A2) node[midway, left] {微小面積 $dS_1$};
+    \draw[ultra thick, accentgreen] (B1) -- (B2) node[midway, right] {微小面積 $dS_2$};
+
+    % 点 P
+    \filldraw[deepnavy] (P) circle (2.5pt) node[below] {$P$ (内部の質点)};
+    
+    % 距離の表示
+    \draw[<->, dashed] (P) -- ($(A1)!0.5!(A2)$) node[midway, above left] {$r_1$};
+    \draw[<->, dashed] (P) -- ($(B1)!0.5!(B2)$) node[midway, below right] {$r_2$};
+\end{tikzpicture}
+\end{center}
+
+\begin{proofbox}
+\textbf{高校数学の相似と逆二乗則の相殺：}
+\begin{enumerate}
+    \item 点 $P$ を頂点とする微小な対頂立体角（細い円錐）を考えます。この円錐が球殻の表面を切り取る微小な面積をそれぞれ $dS_1, dS_2$ とし、点 $P$ からの距離を $r_1, r_2$ とします。
+    \item 幾何学的な相似比の性質により、切り取られる面積は距離の二乗に比例します：
+    \begin{equation}
+    dS_1 \propto r_1^2, \quad dS_2 \propto r_2^2 \implies \frac{dS_1}{dS_2} = \frac{r_1^2}{r_2^2}
+    \end{equation}
+    \item 球殻が一様な密度をもつならば、それぞれの小片の質量 $dm_1, dm_2$ も面積に比例するため、質量の比は $\frac{dm_1}{dm_2} = \frac{r_1^2}{r_2^2}$ です。
+    \item ここで、万有引力の逆二乗則を適用します！\\
+    小片 $dm_1$ が点 $P$ の物体を引き寄せる引力 $dF_1$ と、小片 $dm_2$ が引き寄せる引力 $dF_2$ の大きさは：
+    \begin{equation}
+    dF_1 = G \frac{m \cdot dm_1}{r_1^2} \propto \frac{r_1^2}{r_1^2} = 1
+    \end{equation}
+    \begin{equation}
+    dF_2 = G \frac{m \cdot dm_2}{r_2^2} \propto \frac{r_2^2}{r_2^2} = 1
+    \end{equation}
+    なんと、\textbf{「距離が遠くなって弱まる効果（$1/r^2$）」と「面積が広がって質量が増える効果（$r^2$）」が完全に打ち消し合い、両者の引力は完全に等しくなります（$dF_1 = dF_2$）}！
+    \item 二つの力は対頂角として正反対の方向を向いているため、完全に相殺して合力はゼロになります。全球殻にわたってすべての立体角を足し合わせれば、内部のいかなる位置においても引力の合力は厳密にゼロになります。\QED
+\end{enumerate}
+\end{proofbox}
+
+\section{外部の物体に対しては「中心の質点」として振る舞う（命題71）}
+
+同様の精緻な幾何学積分により、ニュートンは\textbf{「一様な球殻の外部にある質点に対しては、球殻の全質量がその幾何学的中心に集まった質点と全く同じ引力を及ぼす」}ことを証明しました。
+球体は無数の同心球殻の集まりと見なせるため、地球や太陽のような巨大な天体であっても、外部の惑星や月に対しては「中心の一点にある質点」として扱ってよいことが数学的に完全に保証されたのです。
+
+% ==================================================
+% 第8章：潮汐と彗星 —— 宇宙力学の実証
+% ==================================================
+\chapter{潮汐と彗星 —— 宇宙力学の壮大な実証}
+
+\section{なぜ海は「1日2回」満潮になるのか？（起潮力の幾何学）}
+
+ニュートン以前、潮の満ち引き（潮汐）の真の原因は謎に包まれていました。ガリレオすら「地球の自転と公転による海水の揺れ」という誤った遠心力モデルを主張していました。
+ニュートンは万有引力を用いて、潮汐の真のメカニズムを世界で初めて解明しました（第3編 命題24）。
+
+多くの大人が抱く素朴な疑問は、\textbf{「月が真上にあるときに満潮になるのは引力で引っ張られるから分かる。しかし、なぜ地球の真反対（月と反対側）でも同時に満潮になるのか？」}という点です。
+
+\begin{center}
+\begin{tikzpicture}[scale=1.5]
+    % 地球中心
+    \coordinate (O) at (0, 0);
+
+    % 月の方向 (右側)
+    \coordinate (Moon) at (6, 0);
+
+    % 潮汐変形した地球（楕円）
+    \draw[very thick, primaryblue, fill=softblue!50] (0, 0) ellipse (2.2 and 1.5);
+    % 本来の球形地球
+    \draw[dashed, darkslate, thick] (0, 0) circle (1.5);
+
+    % 点 A (月直下), B (月反対), C, D (直角方向)
+    \coordinate (A) at (2.2, 0);
+    \coordinate (B) at (-2.2, 0);
+    \coordinate (C) at (0, 1.5);
+    \coordinate (D) at (0, -1.5);
+
+    % 引力ベクトル（月へ向かう）
+    \draw[ultra thick, crimson, -{Stealth}] (A) -- ($(A) + (1.2, 0)$) node[above] {大引力 $\mathbf{F}_A$};
+    \draw[thick, primaryblue, -{Stealth}] (O) -- ($(O) + (0.8, 0)$) node[above] {中心引力 $\mathbf{F}_O$};
+    \draw[thick, secondaryblue, -{Stealth}] (B) -- ($(B) + (0.4, 0)$) node[above] {小引力 $\mathbf{F}_B$};
+
+    % 相対的な起潮力ベクトル（地球中心基準）
+    \draw[ultra thick, warmgold, -{Stealth[length=3mm]}] (A) -- ($(A) + (0.5, 0)$) node[below right] {外向き起潮力};
+    \draw[ultra thick, warmgold, -{Stealth[length=3mm]}] (B) -- ($(B) + (-0.5, 0)$) node[below left] {外向き起潮力};
+
+    % 点のプロット
+    \filldraw (O) circle (2pt) node[below] {地球中心 $O$};
+    \filldraw[primaryblue] (A) circle (2pt) node[above left] {$A$ (正潮)};
+    \filldraw[primaryblue] (B) circle (2pt) node[above right] {$B$ (背潮)};
+    
+    % 月
+    \filldraw[warmgold] (Moon) circle (5pt) node[above] {\textbf{月 (Moon)}};
+    \draw[->, thick, warmgold] (Moon) -- ($(Moon)+(-0.8, 0)$);
+\end{tikzpicture}
+\end{center}
+
+\begin{lecturebox}
+\textbf{起潮力（引力の差）の幾何学的解釈：}\\
+月は地球全体を引っ張っていますが、その強さは距離の二乗に反比例するため、場所によって異なります。
+\begin{itemize}[leftmargin=1.5em]
+    \item \textbf{月に近い側（点 $A$）}: 地球中心 $O$ よりも引力が強いため、海水は地球中心から見て「月に向かって引っ張り上げられ」ます。
+    \item \textbf{地球の中心（点 $O$）}: 地球の固体全体は、平均的な引力加速度 $\mathbf{F}_O$ で月に向かって自由落下しています。
+    \item \textbf{月から遠い側（点 $B$）}: 月からの引力 $\mathbf{F}_B$ は地球中心よりも弱くなります。その結果、地球中心が月に向かって強く引かれるため、\textbf{地球中心を基準とする相対座標系で見ると、海水は「取り残されて外側へ膨らむ（潮が満ちる）」}ことになります！
+\end{itemize}
+地球の直径を $2R$、月までの距離を $D$ とすると、起潮力の大きさは逆二乗則の微分（引き算）から、\textbf{「距離の三乗に反比例する」}ことが導かれます：
+\begin{equation}
+\Delta F \approx \frac{d}{dD}\left(\frac{G M}{D^2}\right) \times 2R = \frac{2 G M R}{D^3}
+\end{equation}
+これにより、太陽は質量こそ巨大ですが月より遥かに遠いため、地球に及ぼす起潮力は月の半分程度（約 $46\%$）となり、月の引力こそが潮汐の主役であることが完璧に証明されたのです。
+\end{lecturebox}
+
+\section{1680年大彗星の幾何学的軌道決定（命題41・42）}
+
+『プリンキピア』第3編のクライマックスを飾るのが、1680年に夜空を巨大な尾で照らした「キルヒの大彗星」の軌道計算です。
+当時、彗星は気象現象（大気の燃焼）や一直線に宇宙を飛び去る不吉の兆候と考えられていました。ニュートンは彗星も惑星と同じく太陽の万有引力に支配され、\textbf{「太陽を焦点とする放物線または極めて細長い楕円軌道」}を描いていることを幾何学的に立証しました。
+
+3回の地上天体観測（赤経・赤緯・観測時刻）のみから、地球の公転運動を補正し、空間内の真の彗星放物線軌道を幾何学的に作図・決定するニュートンのアルゴリズムは、天体力学史上最も壮麗な幾何学の金字塔と称えられています。
+
+% ==================================================
+% 第9章：総括 —— 『プリンキピア』が現代の私たちに語りかけるもの
+% ==================================================
+\chapter{総括 —— 現代の私たちにとっての『プリンキピア』}
+
+\section{神の設計図から自然法則の普遍性へ}
+
+『プリンキピア』の末尾に置かれた有名な「一般注釈（Scholium Generale）」において、ニュートンは近代科学の基本姿勢を象徴する不朽の名言を残しました：
+\begin{center}
+{\Large\textit{Hypotheses non fingo.}}\\[0.2cm]
+\textbf{「我は仮説を作らず。」}
+\end{center}
+
+デカルトのように「空間は見えない微小粒子の渦（エーテル）で満たされており、その渦が天体を押し流している」といった思弁的な空想（仮説）を弄することをニュートンは拒絶しました。
+「引力がいかなる原因によって生じるか、遠隔作用の背後にある哲学的実体は何か」という問いに対し、ニュートンは次のように宣言したのです：
+\begin{quote}
+「重力が現実に存在し、われわれが説明した法則に従って作用し、天体と海のすべての運動を十全に説明するということ、それだけで十分である。」
+\end{quote}
+
+科学の目的とは、目に見えない神秘的・形而上学的な原因を妄想することではなく、\textbf{観測可能な諸現象の間に成り立つ「客観的な数学的関係」を厳密に定式化し、自然の振る舞いを予言することにある}という近代科学の方法論がここに確立しました。
+
+\begin{reflectionbox}
+\textbf{大人の学び直しの到達点}\\
+私たちは学生時代、物理や数学を「試験のために公式を暗記し、数値を代入する退屈な作業」として受け取ってしまいがちでした。しかし、原著『プリンキピア』の幾何学的世界に立ち戻ったとき、そこにあるのは無機質な数式ではなく、\textbf{「三角形の等積変形」「平行線と相似」「極限の直観」という初等幾何学の道具だけを使って、宇宙の広大な法則を次々と白日の下に晒していく人間の理性の圧倒的な躍動}です。
+
+リンゴの落下から月の公転、海の潮汐、彗星の運行までを一つの原理（万有引力の逆二乗則）で結びつけたニュートンの『プリンキピア』は、300年を経た現代の私たちにとっても、知性の持つ最高の歓喜と美しさを教えてくれる不滅の古典なのです。
+\end{reflectionbox}
 
 \end{document}
