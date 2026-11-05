@@ -695,7 +695,7 @@
       "category": "物理数学・古典力学・天体力学",
       "description": "アイザック・ニュートンによる不朽の主著『自然哲学の数学的諸原理（プリンキピア）』のラテン語初版（1687年版、PG#28233）全訳決定版。定義・公理・三法則、第1編（物体の運動・全14節）、第2編（抵抗媒体中の運動・全9節）、第3編（世界の体系・全42命題、月の摂動論、潮汐論、歳差運動、1680年大彗星の幾何学軌道決定、一般注釈）のすべてを網羅し、原著全186枚の幾何学図版とともに全1,388ページで完全収録。",
       "chapters_count": 29,
-      "pages": 1388,
+      "pages": 1381,
       "tex_file": "books/28233_newton_principia/newton_principia_translation.tex",
       "pdf_file": "books/28233_newton_principia/newton_principia_translation.pdf",
       "book_dir": "books/28233_newton_principia",
