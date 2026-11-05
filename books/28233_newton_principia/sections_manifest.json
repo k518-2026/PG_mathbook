@@ -1,0 +1,263 @@
+[
+  {
+    "id": "frontmatter",
+    "title": "献辞・第1版序文・エドモンド・ハレーによる賛詩",
+    "latin_title": "Dedicatio, Praefatio ad Lectorem, Carmen E. Hallei",
+    "book": 0,
+    "section": 0,
+    "line_start": 250,
+    "line_end": 526
+  },
+  {
+    "id": "definitions",
+    "title": "定義および絶対空間・絶対時間に関する注記",
+    "latin_title": "Definitiones & Scholium (De Spatio & Tempore)",
+    "book": 0,
+    "section": 1,
+    "line_start": 527,
+    "line_end": 930
+  },
+  {
+    "id": "axioms",
+    "title": "運動の公理または法則、系、および注記",
+    "latin_title": "Axiomata sive Leges Motus, Corollaria & Scholium",
+    "book": 0,
+    "section": 2,
+    "line_start": 931,
+    "line_end": 1465
+  },
+  {
+    "id": "book1_sec01",
+    "title": "第1編 第1節：初等比および最終比の方法（補題I〜XI）",
+    "latin_title": "Liber I, Sectio I: De Methodo Rationum primarum & ultimarum",
+    "book": 1,
+    "section": 1,
+    "line_start": 1466,
+    "line_end": 1876
+  },
+  {
+    "id": "book1_sec02",
+    "title": "第1編 第2節：向心力の決定（命題I〜X）",
+    "latin_title": "Liber I, Sectio II: De Inventione Virium Centripetarum",
+    "book": 1,
+    "section": 2,
+    "line_start": 1877,
+    "line_end": 2395
+  },
+  {
+    "id": "book1_sec03",
+    "title": "第1編 第3節：偏心円錐曲線における物体の運動（命題XI〜XVII）",
+    "latin_title": "Liber I, Sectio III: De motu Corporum in Conicis Sectionibus excentricis",
+    "book": 1,
+    "section": 3,
+    "line_start": 2396,
+    "line_end": 2802
+  },
+  {
+    "id": "book1_sec04",
+    "title": "第1編 第4節：焦点が与えられたときの楕円・放物線・双曲線軌道の決定（命題XVIII〜XXI）",
+    "latin_title": "Liber I, Sectio IV: De Inventione Orbium Ellipticorum",
+    "book": 1,
+    "section": 4,
+    "line_start": 2803,
+    "line_end": 3125
+  },
+  {
+    "id": "book1_sec05",
+    "title": "第1編 第5節：焦点がいずれも与えられないときの軌道の決定（命題XXII〜XXXI）",
+    "latin_title": "Liber I, Sectio V: Inventio orbium ubi umbilicus neuter datur",
+    "book": 1,
+    "section": 5,
+    "line_start": 3126,
+    "line_end": 4401
+  },
+  {
+    "id": "book1_sec06",
+    "title": "第1編 第6節：与えられた軌道における運動の決定（命題XXX〜XXXI）",
+    "latin_title": "Liber I, Sectio VI: De inventione motuum in Orbibus datis",
+    "book": 1,
+    "section": 6,
+    "line_start": 4402,
+    "line_end": 4791
+  },
+  {
+    "id": "book1_sec07",
+    "title": "第1編 第7節：物体の直線的な上昇および下降（命題XXXII〜XXXIX）",
+    "latin_title": "Liber I, Sectio VII: De Corporum Ascensu & Descensu Rectilineo",
+    "book": 1,
+    "section": 7,
+    "line_start": 4792,
+    "line_end": 5206
+  },
+  {
+    "id": "book1_sec08",
+    "title": "第1編 第8節：任意の向心力によって巡る物体の軌道の決定（命題XL〜XLII）",
+    "latin_title": "Liber I, Sectio VIII: De Inventione Orbium",
+    "book": 1,
+    "section": 8,
+    "line_start": 5207,
+    "line_end": 5423
+  },
+  {
+    "id": "book1_sec09",
+    "title": "第1編 第9節：運動する軌道における物体の運動と近点移動（命題XLIII〜XLV）",
+    "latin_title": "Liber I, Sectio IX: De Motu Corporum in Orbibus mobilibus",
+    "book": 1,
+    "section": 9,
+    "line_start": 5424,
+    "line_end": 5875
+  },
+  {
+    "id": "book1_sec10",
+    "title": "第1編 第10節：与えられた曲面上の運動および振子の運動（命題XLVI〜LVI）",
+    "latin_title": "Liber I, Sectio X: De Motu Corporum in Superficiebus datis",
+    "book": 1,
+    "section": 10,
+    "line_start": 5876,
+    "line_end": 6489
+  },
+  {
+    "id": "book1_sec11",
+    "title": "第1編 第11節：相互に向心力で引き合う球体の運動（二体・多体問題、命題LVII〜LXIX）",
+    "latin_title": "Liber I, Sectio XI: De Motu Corporum Sphaericorum",
+    "book": 1,
+    "section": 11,
+    "line_start": 6490,
+    "line_end": 7581
+  },
+  {
+    "id": "book1_sec12",
+    "title": "第1編 第12節：球体の引力（殻定理、命題LXX〜LXXXIV）",
+    "latin_title": "Liber I, Sectio XII: De Corporum Sphaericorum Viribus attractivis",
+    "book": 1,
+    "section": 12,
+    "line_start": 7582,
+    "line_end": 8368
+  },
+  {
+    "id": "book1_sec13",
+    "title": "第1編 第13節：非球形物体の引力（命題LXXXV〜XCIII）",
+    "latin_title": "Liber I, Sectio XIII: De Corporum etiam non Sphaericorum viribus attractivis",
+    "book": 1,
+    "section": 13,
+    "line_start": 8369,
+    "line_end": 8869
+  },
+  {
+    "id": "book1_sec14",
+    "title": "第1編 第14節：向心力に向かって引き寄せられる極微小体の運動（光学・屈折への適用、命題XCIV〜XCVIII）",
+    "latin_title": "Liber I, Sectio XIV: De motu corporum minimorum",
+    "book": 1,
+    "section": 14,
+    "line_start": 8870,
+    "line_end": 9208
+  },
+  {
+    "id": "book2_sec01",
+    "title": "第2編 第1節：速度に比例する抵抗を受ける物体の運動（命題I〜IV）",
+    "latin_title": "Liber II, Sectio I: De Motu corporum quibus resistitur in ratione velocitatis",
+    "book": 2,
+    "section": 1,
+    "line_start": 9209,
+    "line_end": 9552
+  },
+  {
+    "id": "book2_sec02",
+    "title": "第2編 第2節：速度の二乗に比例する抵抗を受ける物体の運動（命題V〜XIV）",
+    "latin_title": "Liber II, Sectio II: De motu corporum quibus resistitur in duplicata ratione velocitatis",
+    "book": 2,
+    "section": 2,
+    "line_start": 9553,
+    "line_end": 10530
+  },
+  {
+    "id": "book2_sec03",
+    "title": "第2編 第3節：速度とその二乗の和に比例する抵抗を受ける運動（命題XV〜XVI）",
+    "latin_title": "Liber II, Sectio III: De motu corporum quae resistuntur partim in ratione velocitatis",
+    "book": 2,
+    "section": 3,
+    "line_start": 10531,
+    "line_end": 10842
+  },
+  {
+    "id": "book2_sec04",
+    "title": "第2編 第4節：抵抗媒体中の物体の円運動および螺旋運動（命題XVII〜XVIII）",
+    "latin_title": "Liber II, Sectio IV: De Corporum circulari Motu in Mediis resistentibus",
+    "book": 2,
+    "section": 4,
+    "line_start": 10843,
+    "line_end": 11103
+  },
+  {
+    "id": "book2_sec05",
+    "title": "第2編 第5節：流体の密度と圧力、および静水力学（命題XIX〜XXIII）",
+    "latin_title": "Liber II, Sectio V: De Densitate & compressione Fluidorum",
+    "book": 2,
+    "section": 5,
+    "line_start": 11104,
+    "line_end": 11605
+  },
+  {
+    "id": "book2_sec06",
+    "title": "第2編 第6節：振子の運動と抵抗（命題XXIV〜XXXI）",
+    "latin_title": "Liber II, Sectio VI: De Motu & resistentia Corporum Funependulorum",
+    "book": 2,
+    "section": 6,
+    "line_start": 11606,
+    "line_end": 12112
+  },
+  {
+    "id": "book2_sec07",
+    "title": "第2編 第7節：流体の運動と投射体の抵抗（命題XXXII〜XL）",
+    "latin_title": "Liber II, Sectio VII: De Motu Fluidorum & resistentia Projectilium",
+    "book": 2,
+    "section": 7,
+    "line_start": 12113,
+    "line_end": 13470
+  },
+  {
+    "id": "book2_sec08",
+    "title": "第2編 第8節：流体内を伝播する運動（波動・音速の理論、命題XLI〜L）",
+    "latin_title": "Liber II, Sectio VIII: De Motu per Fluida propagato",
+    "book": 2,
+    "section": 8,
+    "line_start": 13471,
+    "line_end": 14114
+  },
+  {
+    "id": "book2_sec09",
+    "title": "第2編 第9節：流体の渦運動（デカルト渦動説の批判的論駁、命題LI〜LIII）",
+    "latin_title": "Liber II, Sectio IX: De motu Circulari Fluidorum",
+    "book": 2,
+    "section": 9,
+    "line_start": 14115,
+    "line_end": 14575
+  },
+  {
+    "id": "book3_rules_phenomena",
+    "title": "第3編 哲学における推理の規則および太陽系現象（仮説I〜IX）",
+    "latin_title": "Liber III: Regulae Philosophandi & Hypotheses",
+    "book": 3,
+    "section": 0,
+    "line_start": 14576,
+    "line_end": 14738
+  },
+  {
+    "id": "book3_prop01_24",
+    "title": "第3編 万有引力の確立、惑星・月・潮汐の理論（命題I〜XXIV）",
+    "latin_title": "Liber III: Proposito I - XXIV (Gravitas universalis, Luna, Aestus maris)",
+    "book": 3,
+    "section": 1,
+    "line_start": 14739,
+    "line_end": 16000
+  },
+  {
+    "id": "book3_prop25_42",
+    "title": "第3編 月の摂動論、分点歳差、および彗星の幾何学軌道論（命題XXV〜XLII）",
+    "latin_title": "Liber III: Propositio XXV - XLII (Theoria Lunae, Praecessio Aequinoctiorum, Cometae)",
+    "book": 3,
+    "section": 2,
+    "line_start": 16001,
+    "line_end": 18550
+  }
+]
