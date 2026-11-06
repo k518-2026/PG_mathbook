@@ -543,13 +543,13 @@
     \draw[->, line width=1.6pt, primaryblue] (IN) -- (A)
         node[midway, above=6pt, align=center] {\small ① 初めて進む通路\\[-1pt]\footnotesize （1本線の印）};
 
-    % Path 2: A -> DEAD (Forward straight exploration: clean and elevated above line)
+    % Path 2: A -> DEAD (Forward straight exploration: clean two-line label centered)
     \draw[->, line width=1.6pt, darkslate] (A) -- (DEAD)
-        node[midway, above=4pt] {\small ② 未踏路を直進探索（1本線）};
+        node[midway, above=5pt, align=center] {\small ② 未踏路を直進探索\\[-1pt]\footnotesize （1本線）};
 
     % Path 3: DEAD -> A (High upward curving backtrack: completely clear of Path 2!)
-    \draw[->, line width=1.6pt, accentcrimson, dashed] (DEAD) to[bend right=58]
-        node[midway, above=6pt, accentcrimson] {\textbf{\small ③ 行き止まり！ 2本目で封鎖して後退}} (A);
+    \draw[->, line width=1.6pt, accentcrimson, dashed] (DEAD.north) to[bend right=48]
+        node[midway, above=6pt, accentcrimson] {\textbf{\small ③ 行き止まり！ 2本目で封鎖して後退}} (A.north);
 
     % Path 4: A -> B (Downward to unexplored path, clean single line on the right)
     \draw[->, line width=1.6pt, primaryblue] (A) -- (B)
