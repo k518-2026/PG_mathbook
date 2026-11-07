@@ -860,6 +860,151 @@ $|z|<1$ のとき、$1+z+z^2+\cdots=\dfrac{1}{1-z}$。たとえば $z=\frac12$ �
 \end{itemize}
 \end{pointbox}
 
+\section{補充 第4章を例題で確かめる}
+
+ここまでの定義と定理を、具体的な数列で使ってみます。極限の定義（$\varepsilon$ と $N$）は、数列の「収まり方」を測る道具です。
+
+\subsection*{例題1：$\varepsilon$ から $N$ を求める表}
+
+$a_n=\dfrac{3n+2}{n+1}=3-\dfrac{1}{n+1}$ の極限は $3$。$|a_n-3|=\dfrac1{n+1}<\varepsilon$ となる $n$ を求めます。
+
+\begin{center}
+\begin{tabular}{rrr}
+\toprule
+$\varepsilon$ & 必要な条件 & 十分な $N$\\
+\midrule
+$0.1$ & $n+1>10$ & $N=9$\\
+$0.01$ & $n+1>100$ & $N=99$\\
+$0.001$ & $n+1>1000$ & $N=999$\\
+\bottomrule
+\end{tabular}
+\end{center}
+
+\begin{figure}[htbp]
+\centering
+\begin{tikzpicture}
+\begin{axis}[width=10cm, height=5.6cm, xlabel={$n$}, ylabel={$a_n$}, xmin=0, xmax=30, ymin=1.4, ymax=3.2, grid=major]
+ \addplot[only marks, mark=*, mark size=1.5pt, color=primaryblue, samples at={1,...,30}] {3-1/(x+1)};
+ \addplot[dashed, crimson, domain=0:30] {3};
+ \addplot[draw=none, fill=softrose, fill opacity=0.6] coordinates {(0,2.9)(30,2.9)(30,3.1)(0,3.1)} \closedcycle;
+\end{axis}
+\end{tikzpicture}
+\caption{$a_n=3-\frac1{n+1}$。$\varepsilon=0.1$ の帯（ピンク）には、$n\ge10$ のすべての項が入る。}
+\end{figure}
+
+\subsection*{例題2：漸化式で $\sqrt2$ に近づく}
+
+$a_1=1,\ a_{n+1}=\dfrac12\left(a_n+\dfrac2{a_n}\right)$ で作った数列は、$\sqrt2$ に急速に近づきます。
+
+\begin{center}
+\begin{tabular}{rr}
+\toprule
+$n$ & $a_n$\\
+\midrule
+1 & 1.000000\\
+2 & 1.500000\\
+3 & 1.416667\\
+4 & 1.414216\\
+5 & 1.414214\\
+\bottomrule
+\end{tabular}
+\end{center}
+
+$\sqrt2=1.41421356\ldots$ と比べると、4項目で小数第5位まで一致します。誤差が毎回、ほぼ2乗で小さくなる速い収束です。
+
+\begin{figure}[htbp]
+\centering
+\begin{tikzpicture}
+\begin{axis}[width=10cm, height=5.6cm, xlabel={$n$}, ylabel={$a_n$}, xmin=0.5, xmax=6, ymin=0.9, ymax=1.6, grid=major]
+ \addplot[thick, primaryblue, mark=*] coordinates {(1,1)(2,1.5)(3,1.416667)(4,1.414216)(5,1.414214)};
+ \addplot[dashed, crimson, domain=0.5:6] {1.414214};
+\end{axis}
+\end{tikzpicture}
+\caption{$\sqrt2$ への近づき方。1項目から2項目で大きく動き、以降は急速に収束する。}
+\end{figure}
+
+\subsection*{例題3：$a^n/n!$ は $0$ に近づく}
+
+階乗 $n!$ は、どんな指数関数 $a^n$ よりも速く増えます。そのため $\dfrac{3^n}{n!}$ は、途中で増えても、最終的に $0$ に近づきます。
+
+\begin{center}
+\begin{tabular}{rr}
+\toprule
+$n$ & $3^n/n!$\\
+\midrule
+1 & 3.0000\\
+2 & 4.5000\\
+3 & 4.5000\\
+4 & 3.3750\\
+6 & 1.0125\\
+10 & 0.0163\\
+\bottomrule
+\end{tabular}
+\end{center}
+
+\begin{figure}[htbp]
+\centering
+\begin{tikzpicture}
+\begin{axis}[width=10cm, height=5.6cm, xlabel={$n$}, ylabel={$3^n/n!$}, xmin=0, xmax=12, ymin=0, ymax=5, grid=major]
+ \addplot[only marks, mark=*, mark size=1.6pt, color=primaryblue] coordinates {(1,3)(2,4.5)(3,4.5)(4,3.375)(5,2.025)(6,1.0125)(7,0.4339)(8,0.1627)(9,0.0542)(10,0.0163)(11,0.0044)(12,0.0011)};
+\end{axis}
+\end{tikzpicture}
+\caption{$3^n/n!$ は、$n=2,3$ で最大の $4.5$ をとったあと、急速に $0$ へ向かう。}
+\end{figure}
+
+\subsection*{例題4：$0.999\ldots=1$ を極限で考える}
+
+$0.9,\ 0.99,\ 0.999,\ldots$ は、$a_n=1-10^{-n}$ という数列です。$|a_n-1|=10^{-n}\to0$ なので、極限は $1$。無限小数 $0.999\ldots$ は、この数列の極限として定義されるので、$1$ に等しくなります。
+
+\begin{figure}[htbp]
+\centering
+\begin{tikzpicture}
+ \draw[ax] (-0.3,0)--(10.8,0);
+ \foreach \xa/\lab in {0/0.9,5/0.95,10/1.0} {\draw (\xa,0.1)--(\xa,-0.1); \node[below] at (\xa,-0.1) {\lab};}
+ \fill[crimson] (0,0) circle (0.07); \node[above, font=\scriptsize] at (0,0.1) {0.9};
+ \fill[crimson] (9,0) circle (0.07); \node[above, font=\scriptsize] at (9,0.1) {0.99};
+ \fill[crimson] (9.9,0) circle (0.07); \node[above, font=\scriptsize] at (10.1,0.5) {0.999};
+\end{tikzpicture}
+\caption{$0.9$ から $1.0$ までの数直線（横軸は $(v-0.9)\times100$ の目盛り）。$0.9,\,0.99,\,0.999,\ldots$ は、$1$ に限りなく近づく。}
+\end{figure}
+
+\subsection*{例題5：部分列とボルツァーノ・ワイエルシュトラスの定理}
+
+\textbf{有界な数列は、必ず収束する部分列をもつ}（ボルツァーノ・ワイエルシュトラスの定理）。$a_n=(-1)^n\left(1+\frac1n\right)$ は、偶数番は $1$ に、奇数番は $-1$ に近づく2つの部分列に分かれます。
+
+\begin{figure}[htbp]
+\centering
+\begin{tikzpicture}
+\begin{axis}[width=10cm, height=5.6cm, xlabel={$n$}, ylabel={$a_n$}, xmin=0, xmax=30, ymin=-2.3, ymax=2.3, grid=major]
+ \addplot[only marks, mark=*, mark size=1.5pt, color=primaryblue, samples at={2,4,...,30}] {1+1/x};
+ \addplot[only marks, mark=square*, mark size=1.5pt, color=crimson, samples at={1,3,...,29}] {-(1+1/x)};
+ \addplot[dashed, gray, domain=0:30] {1};
+ \addplot[dashed, gray, domain=0:30] {-1};
+\end{axis}
+\end{tikzpicture}
+\caption{偶数番（青）は $1$ に、奇数番（赤）は $-1$ に近づく。数列全体は収束しないが、2つの部分列はそれぞれ収束する。}
+\end{figure}
+
+\subsection*{例題6：極限の計算練習}
+
+\begin{center}
+\renewcommand{\arraystretch}{1.5}
+\begin{tabular}{ll}
+\toprule
+数列 & 極限と考え方\\
+\midrule
+$\dfrac{n^2+1}{2n^2+3n}$ & $\dfrac12$（分子分母を $n^2$ で割る）\\
+$\sqrt{n+1}-\sqrt n$ & $0$（有理化：$\dfrac{1}{\sqrt{n+1}+\sqrt n}$）\\
+$\left(1+\dfrac{2}{n}\right)^n$ & $\ee^2\approx7.389$\\
+$\dfrac{n}{2^n}$ & $0$（指数が勝つ）\\
+\bottomrule
+\end{tabular}
+\end{center}
+
+\begin{examplebox}{$\sqrt{n+1}-\sqrt n$ の確かめ}
+$n=100$：$\sqrt{101}-\sqrt{100}=10.0499-10=0.0499$。$n=10000$：$100.005-100=0.0050$。確かに $0$ に近づきます（$\frac{1}{2\sqrt n}$ ほど）。
+\end{examplebox}
+
 %==========================================================
 \chapter{連続変数の関数の極限・連続関数と不連続関数}
 \markboth{第5章}{関数の極限と連続}
@@ -1192,6 +1337,159 @@ $\dfrac1{\sqrt{1-x^2}}$ & $\arcsin x$\\
 \item 積分の計算は、原始関数を見つける技術（部分分数・置換・倍角）。
 \end{itemize}
 \end{pointbox}
+
+\section{補充 第6章を例題で確かめる}
+
+\subsection*{例題1：接線で近似する（一次近似）}
+
+$f(x)=\sqrt x$ の $x=4$ での微分は $f'(4)=\dfrac1{2\sqrt4}=\dfrac14$。接線 $y=2+\frac14(x-4)$ を使うと、$\sqrt{4.1}\approx2+\frac14(0.1)=2.025$。実際の値は $2.02485$ で、誤差は $0.00015$ ほどです。
+
+\begin{figure}[htbp]
+\centering
+\begin{tikzpicture}
+\begin{axis}[width=9.5cm, height=5.8cm, xlabel={$x$}, ylabel={$y$}, xmin=2, xmax=7, ymin=1.2, ymax=2.8, grid=major, legend pos=south east, legend style={font=\footnotesize}]
+ \addplot[thick, primaryblue, domain=2:7, samples=60] {sqrt(x)};
+ \addplot[thick, crimson, dashed, domain=2:7] {2+0.25*(x-4)};
+ \addplot[only marks, mark=*, color=black] coordinates {(4,2)};
+ \legend{$\sqrt x$,接線}
+\end{axis}
+\end{tikzpicture}
+\caption{$\sqrt x$ と、$x=4$ での接線。接点の近くでは、曲線と接線がほぼ重なる。}
+\end{figure}
+
+\begin{center}
+\begin{tabular}{rrr}
+\toprule
+$x$ & $\sqrt x$ & 接線の値\\
+\midrule
+4.1 & 2.02485 & 2.02500\\
+4.5 & 2.12132 & 2.12500\\
+5.0 & 2.23607 & 2.25000\\
+\bottomrule
+\end{tabular}
+\end{center}
+
+\subsection*{例題2：最小の材料で缶を作る}
+
+体積 $1000\ \mathrm{cm^3}$ の円柱形の缶で、表面積を最小にするには。半径 $r$、高さ $h=\dfrac{1000}{\pi r^2}$。表面積は
+
+\[
+S(r)=2\pi r^2+2\pi rh=2\pi r^2+\frac{2000}{r}.
+\]
+
+$S'(r)=4\pi r-\dfrac{2000}{r^2}=0$ より $r^3=\dfrac{500}{\pi}$、$r=\sqrt[3]{159.15}\approx5.42$ cm。このとき $h=\dfrac{1000}{\pi\cdot29.37}\approx10.84$ cm（直径とほぼ等しい）。$S\approx553.6\ \mathrm{cm^2}$。
+
+\begin{figure}[htbp]
+\centering
+\begin{tikzpicture}
+\begin{axis}[width=9.5cm, height=5.8cm, xlabel={半径 $r$ [cm]}, ylabel={表面積 $S$ [cm$^2$]}, xmin=2, xmax=10, ymin=500, ymax=900, grid=major]
+ \addplot[thick, primaryblue, domain=2:10, samples=80] {2*3.14159*x^2+2000/x};
+ \addplot[only marks, mark=*, color=crimson] coordinates {(5.42,553.6)};
+ \node[crimson, font=\footnotesize, anchor=south west] at (axis cs:5.8,560) {最小：$r\approx5.42$};
+\end{axis}
+\end{tikzpicture}
+\caption{缶の表面積と半径の関係。$r\approx5.42$ cm で最小（約 $553.6\ \mathrm{cm^2}$）。}
+\end{figure}
+
+\subsection*{例題3：関数の増減表からグラフの形を知る}
+
+$f(x)=x^3-3x$。$f'(x)=3x^2-3=3(x-1)(x+1)$、$f''(x)=6x$。
+
+\begin{center}
+\begin{tabular}{c|ccccc}
+\toprule
+$x$ & $-2$ & $-1$ & $0$ & $1$ & $2$\\
+\midrule
+$f(x)$ & $-2$ & $2$ & $0$ & $-2$ & $2$\\
+$f'(x)$ & $+$ & $0$ & $-$ & $0$ & $+$\\
+増減 & 増加 & 極大 & 減少 & 極小 & 増加\\
+\bottomrule
+\end{tabular}
+\end{center}
+
+\begin{figure}[htbp]
+\centering
+\begin{tikzpicture}
+\begin{axis}[width=9.5cm, height=6cm, xlabel={$x$}, ylabel={$f(x)$}, xmin=-2.3, xmax=2.3, ymin=-3, ymax=3, grid=major]
+ \addplot[thick, primaryblue, domain=-2.2:2.2, samples=80] {x^3-3*x};
+ \addplot[only marks, mark=*, color=crimson] coordinates {(-1,2)(1,-2)};
+ \addplot[only marks, mark=square*, color=accentgreen] coordinates {(0,0)};
+\end{axis}
+\end{tikzpicture}
+\caption{$x^3-3x$ のグラフ。極大 $(-1,2)$、極小 $(1,-2)$、変曲点 $(0,0)$（$f''$ の符号が変わる点）。}
+\end{figure}
+
+\subsection*{例題4：微積分学の基本定理を図で見る}
+
+関数 $f(t)=t$ について、面積関数 $A(x)=\displaystyle\int_0^xt\,\dd t=\dfrac{x^2}{2}$。この $A$ を微分すると $A'(x)=x=f(x)$、つまり、\textbf{面積の増える速さは、その場所の高さに等しい}。
+
+\begin{figure}[htbp]
+\centering
+\begin{tikzpicture}
+\begin{axis}[width=5.8cm, height=5cm, title={$f(t)=t$ と面積}, xmin=0, xmax=4, ymin=0, ymax=4, grid=major, every axis title/.style={font=\footnotesize}]
+ \addplot[thick, primaryblue, domain=0:4] {x};
+ \addplot[draw=none, fill=softblue, fill opacity=0.7, domain=0:3] {x} \closedcycle;
+ \node[font=\scriptsize] at (axis cs:2,0.7) {$A(3)=4.5$};
+\end{axis}
+\begin{axis}[xshift=6.6cm, width=5.8cm, height=5cm, title={$A(x)=x^2/2$}, xmin=0, xmax=4, ymin=0, ymax=8.5, grid=major, every axis title/.style={font=\footnotesize}]
+ \addplot[thick, crimson, domain=0:4, samples=40] {x^2/2};
+ \addplot[only marks, mark=*, color=black] coordinates {(3,4.5)};
+\end{axis}
+\end{tikzpicture}
+\caption{左：$f(t)=t$ の $0$ から $3$ までの面積は $4.5$。右：面積関数 $A(x)$。$x=3$ での傾きは $3=f(3)$。}
+\end{figure}
+
+\subsection*{例題5：置換積分}
+
+$\displaystyle\int2x\cos(x^2)\,\dd x$ で、$u=x^2$ とおくと $\dd u=2x\,\dd x$。$\displaystyle\int\cos u\,\dd u=\sin u+C=\sin(x^2)+C$。
+
+\begin{examplebox}{検算（微分して戻す）}
+$\dfrac{\dd}{\dd x}\sin(x^2)=\cos(x^2)\cdot2x$ ✓。
+\end{examplebox}
+
+\subsection*{例題6：部分分数による積分}
+
+$\dfrac1{x^2-1}=\dfrac12\left(\dfrac1{x-1}-\dfrac1{x+1}\right)$ なので、$\displaystyle\int\frac{\dd x}{x^2-1}=\frac12\log\left|\frac{x-1}{x+1}\right|+C$。
+
+\begin{examplebox}{確かめ}
+通分すると $\dfrac12\cdot\dfrac{(x+1)-(x-1)}{(x-1)(x+1)}=\dfrac12\cdot\dfrac{2}{x^2-1}=\dfrac1{x^2-1}$ ✓。
+\end{examplebox}
+
+\subsection*{例題7：2曲線ではさまれる面積}
+
+$y=x$ と $y=x^2$ で囲まれる部分（$0\le x\le1$）の面積は、
+
+\[
+\int_0^1(x-x^2)\,\dd x=\frac12-\frac13=\frac16.
+\]
+
+\begin{figure}[htbp]
+\centering
+\begin{tikzpicture}
+\begin{axis}[width=8cm, height=6cm, xlabel={$x$}, ylabel={$y$}, xmin=0, xmax=1.1, ymin=0, ymax=1.1, grid=major]
+ \addplot[thick, primaryblue, domain=0:1, samples=40, name path=A] {x};
+ \addplot[thick, crimson, domain=0:1, samples=40, name path=B] {x^2};
+ \addplot[fill=softamber, fill opacity=0.7] fill between[of=A and B];
+ \node[font=\small] at (axis cs:0.55,0.3) {面積 $\frac16$};
+\end{axis}
+\end{tikzpicture}
+\caption{$y=x$ と $y=x^2$ で囲まれる部分の面積は $\frac16\approx0.1667$。}
+\end{figure}
+
+\subsection*{例題8：曲線の長さ}
+
+曲線 $y=x^{3/2}$ の $0\le x\le1$ の長さは、$\displaystyle\int_0^1\sqrt{1+\tfrac94x}\,\dd x=\dfrac{8}{27}\left[\left(1+\tfrac94x\right)^{3/2}\right]_0^1=\dfrac8{27}\left(\left(\tfrac{13}4\right)^{3/2}-1\right)\approx1.440$。直線距離 $\sqrt2\approx1.414$ より、わずかに長い値です。
+
+\begin{figure}[htbp]
+\centering
+\begin{tikzpicture}
+\begin{axis}[width=8cm, height=6cm, xlabel={$x$}, ylabel={$y$}, xmin=0, xmax=1.1, ymin=0, ymax=1.1, grid=major]
+ \addplot[thick, primaryblue, domain=0:1, samples=40] {x^1.5};
+ \addplot[dashed, gray, domain=0:1] {x};
+\end{axis}
+\end{tikzpicture}
+\caption{$y=x^{3/2}$（青）と、両端を結ぶ線分（点線、長さ $\sqrt2\approx1.414$）。曲線の長さは約 $1.440$。}
+\end{figure}
 
 %==========================================================
 \chapter{微分積分学の補足的な定理}
