@@ -1116,10 +1116,10 @@ $x$＝傘、$m$＝雨を防ぐ、$y$＝軽い。前提1は「どの $x$ も $m'$
 \begin{figure}[htbp]
 \centering
 \begin{tikzpicture}[node distance=6mm]
- \node[wbox, text width=3.4cm] (a) {会話文};
- \node[wbox, text width=3.4cm, right=10mm of a] (b) {「すべて」「ない」\\「いくつか」に印};
- \node[wbox, text width=3.4cm, right=10mm of b] (c) {$x, y, m$ を決めて\\前提を2つ作る};
- \node[gbox, text width=3.4cm, right=10mm of c] (d) {盤面で結論};
+ \node[wbox, text width=3.0cm] (a) {会話文};
+ \node[wbox, text width=3.0cm, right=5mm of a] (b) {「すべて」「ない」\\「いくつか」に印};
+ \node[wbox, text width=3.0cm, right=5mm of b] (c) {$x, y, m$ を決めて\\前提を2つ作る};
+ \node[gbox, text width=3.0cm, right=5mm of c] (d) {盤面で結論};
  \draw[ax] (a)--(b); \draw[ax] (b)--(c); \draw[ax] (c)--(d);
 \end{tikzpicture}
 \caption{会話文から前提を取り出す手順。文の中心的な性質を3つに絞るのがコツ。}
