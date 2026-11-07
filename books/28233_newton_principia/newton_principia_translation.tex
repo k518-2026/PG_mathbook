@@ -93,6 +93,27 @@
     left=3mm, right=3mm, top=2mm, bottom=2mm
 }
 
+% --- 原著TeXのマクロ定義（本文で使われているのに欠けていたもの。自動で取り込み）---
+\usepackage{wasysym}
+\providecommand\sectpage[1]{
+\vspace{\baselineskip}\hrule\newpage\hrule\vspace{\baselineskip}
+\begin{center}{\LARGE \gesperrt{SECT}{6}.\hspace{12pt}#1}\end{center}}
+\providecommand\pagelines{\newpage\hrule\vspace{0.2em}\hrule\vspace{\baselineskip}}
+\providecommand\opit[1]{\operatorname{\textit{#1}}}
+\providecommand\propnopage[1]{
+\begin{center}{\large #1}\end{center}}
+\providecommand\QEFup{\hspace{6pt}Q.~E.~F.\quad}
+\providecommand\QEFit{\hspace{6pt}\textit{Q.~E.~F.}\quad}
+\providecommand\que{q;}
+% --- ここまで ---
+% --- 補助定義（図版が無い場合の代替表示ほか）---
+\makeatletter
+\@ifundefined{PGoldincludegraphics}{%
+  \let\PGoldincludegraphics\includegraphics
+  \renewcommand{\includegraphics}[2][]{\IfFileExists{#2}{\PGoldincludegraphics[#1]{#2}}{\fbox{\parbox{0.6\linewidth}{\centering\small 〔図：原著の図版は本書に収録されていません〕}}}}%
+}{}
+\makeatother
+% --- 補助定義ここまで ---
 \begin{document}
 
 % --------------------------------------------------
@@ -2635,7 +2656,7 @@ SP \times QT\) は与えられた時間に描かれる面積に比例し、こ�
 
 $$\textbf{ Nam }$$ これらの直線はすでに半軸が短いものであり、これらは距離と直線の幾何的平均に比例します。この比を直線の半分の比と逆方向に組み合わせると、距離の半分の比が得られます。
 
-\textbf{Corol. 5.} 在同一或等同的図形中，或者即使在直線条数相等的不同図形中，物体的速度与従中心垂降到切線的垂直線成反比。
+\textbf{Corol. 5.} 在同一或等同的図形中，あるいは即使在直線条数相等的不同図形中，物体的速度与従中心垂降到切線的垂直線成反比。
 
 \textbf{Corol. 6.} 在抛物線上，速度与距离的一半成反比。
 
@@ -2841,7 +2862,7 @@ $$SP + PH$$ が与えられる。もし物体の速度が十分に大きいの�
 \pngright{070b.png}{620}{948}{-24}
 %Illustration
 
-設 $S$ を umbilicus（中心）、$P$ を punctum（点）とし、$TR$ を軌道を描くための接線とする。点 $P$ について中心を置き、半径 $PS$ の円を $FG$ とする。 umbilicus $S$ から接線 $TR$ に垂直な線 $ST$ を引き、これを延長して $V$ 点まで引き、$TV = ST$ となるようにする。同様の方法で、他に点 $p$ が与えられた場合、円 $fg$ を描くことができる；または接線 $tr$ が与えられた場合、点 $v$ を求めることができる。次に、直線 $IF$ を引いて、二つの円 $FG$, $fg$ と接するようにする。もし与定点，軌道将〜を通してこれ両个点，并在特定的直線上相切。
+設 $S$ を umbilicus（中心）、$P$ を punctum（点）とし、$TR$ を軌道を描くための接線とする。点 $P$ について中心を置き、半径 $PS$ の円を $FG$ とする。 umbilicus $S$ から接線 $TR$ に垂直な線 $ST$ を引き、これを延長して $V$ 点まで引き、$TV = ST$ となるようにする。同様の方法で、他に点 $p$ が与えられた場合、円 $fg$ を描くことができる；または接線 $tr$ が与えられた場合、点 $v$ を求めることができる。次に、直線 $IF$ を引いて、二つの円 $FG$, $fg$ と接するようにする。もし与定点，軌道将〜を通してこれ両個点，并在特定的直線上相切。
 
 \pngright{070b.png}{620}{948}{-24}
 %Illustration
@@ -3390,7 +3411,7 @@ $$DG, DE,$$ これら中で前者 $$DG$$ は直線 $$AB$$ に平行であり、$
 \text{在与与定的比例関系中。したがって，与定了 } PQ および PS および, したがって比例 } PR \text{ に対する } PT \text{ 与定。} \qquad \blacksquare
 \]
 
-\textit{\textbf{Case 2.}}\, 要是設 \( PR \) 与 \( PT \) 在与定的比例関系中，〜を通して类似逆推的推理，那么可以得出 \( DE \times DF \) に対する \( DG \times DH \) 的比例為与定比例，したがって点 \( D \)（〜によれば引理 XVIII.）将接触〜を通して点 \( A \), \( B \), \( P \), \( C \) 的円錐曲線。 \qquad \blacksquare
+\textit{\textbf{Case 2.}}\, 要是設 \( PR \) 与 \( PT \) 在与定的比例関系中，〜を通して类似逆推的推理，那できる得出 \( DE \times DF \) に対する \( DG \times DH \) 的比例為与定比例，したがって点 \( D \)（〜によれば引理 XVIII.）将接触〜を通して点 \( A \), \( B \), \( P \), \( C \) 的円錐曲線。 \qquad \blacksquare
 
 \textit{\textbf{Corollary 1.}}\, したがって，もし従 \( BC \) 切割 \( PQ \) 得到点 \( r \)，かつ在 \( PT \) 上取点 \(\ldots\)
 
@@ -4841,7 +4862,7 @@ Cc \text{を落下させ，} \quad \text{そして間隙に物体} K \text{を�
 
 直線 \( CD \) と \( cd \) を引いて，図形 \( DES \) の境界に接します。点 \( D \) と \( d \) でこれらを結びます。点 \( S \) から \( AS \) 上の点 \( T \) まで直線 \( SD \)，\( SK \)，および \( Sk \) を引きます。さらに，直線 \( Dd \) を引いて \( AS \) と交わる点 \( T \) で接し，垂線 \( SY \) を引きましょう。
 
-\textbf{1.} 假設図形 \( DES \) 是一个円或双曲線。直径 \( AS \) 的中点為 \( O \)，則有
+\textbf{1.} 假設図形 \( DES \) 是一つの円或双曲線。直径 \( AS \) 的中点為 \( O \)，則有
 \[
 SO = \frac{1}{2} AC.
 \]
@@ -5074,13 +5095,13 @@ SK \times Kk = SY \times Dd, \quad \frac{1}{2}SK \times Kk = \frac{1}{2}SY \time
 \[
 \textbf{証明}
 
-\quad 完成矩形后，〜によれば相似三角形和比例関系，可以得出：
+\quad 完成矩形后，〜によれば相似三角形和比例関系，できる得出：
 
 \[
-\frac{DR}{DF} = \frac{\text{向心力在点 } D \text{ 的値}}{\text{另一个力在点 } D \text{ 的値}}
+\frac{DR}{DF} = \frac{\text{向心力在点 } D \text{ 的値}}{\text{另一つの力在点 } D \text{ 的値}}
 \]
 
-したがって，〜を通して調整 \( DR \) 使得其与 \( DF \) 成比例，可以确保両个物体在点 \( D \) 処獲得相同的速度。進一步地，〜を通して従面積 \( ABFD \) 中减去一个相等的面積，可以找到另一物体下落的点 \( A \)，使得該物体在点 \( D \) 時具有与第一个物体相同的速度。
+したがって，〜を通して調整 \( DR \) 使得其与 \( DF \) 成比例，できる确保両個物体在点 \( D \) 処獲得相同的速度。進一步地，〜を通して従面積 \( ABFD \) 中减去一つの相等的面積，できる找到另一物体下落的点 \( A \)，使得該物体在点 \( D \) 時具有与第一つの物体相同的速度。
 
 \pngright{132.png}{5cm}{4cm}{0pt}
 \[
@@ -5494,9 +5515,9 @@ Z \text{ は楕円面積 } ABFD \text{ の半径の平方に対する比であ�
 与已知之向心力 $PDRQ$ 及物体最初所受之向心力定律，并且定曲線 $BFGg$ 和 $ALMm$ 通過問題 XXVIII 的构造及 \textit{Corol.\ 1.} 而獲得。于是，由已知角 $CIT$ 与生成線段 $IK$ 及 $KN$ 之比，由此而得問題 XXVIII 之构造以及出量 $Q$，并与曲線 $abzv$ 和 $dcxw$ 一同的量。因此，在任意時間 $Dbve$ 完成之后，与定物体之高度 $Ce$ 或 $Ck$、面積 $Dcwe$ 及等于扇形 $XCy$ 之部分区域，角度 $XCy$ 以及物体将在其中転向的位置 $k$。
 \end{center}
 
-\textbf{命題 XLI} 〜を通して上述方法，可以确定任意時間点上物体的軌道和位置。具体而言，在与定的時間段内，可以〜を通して已知向心力定律和初始条件来精确地計算出物体在特定時刻的高度、速度および所経過的路径。
+\textbf{命題 XLI} 〜を通して上述方法，できる确定任意時間点上物体的軌道和位置。具体而言，在与定的時間段内，できる〜を通して已知向心力定律和初始条件来精确地計算出物体在特定時刻的高度、速度および所経過的路径。
 
-\textbf{命題 XLII} 此外，〜を通して上述方法還可以确定物体在任意時間点上的运動状態，包括其位置、速度及其軌迹。これ些結果是〜を通して対問題 XXVIII 的构造和相関比例関系的応用来得出的。
+\textbf{命題 XLII} 此外，〜を通して上述方法還できる确定物体在任意時間点上的运動状態，包括其位置、速度及其軌迹。これ些結果是〜を通して対問題 XXVIII 的构造和相関比例関系的応用来得出的。
 
 以上即為第8節的内容，詳細地闡述了如何利用向心力定律および几何构造来确定物体在特定時刻的位置和軌道。
 
@@ -6573,7 +6594,7 @@ $$
 
 \textbf{証明：} 重力加速度随物体接近地球中心而減少之事実により、より高い位置にある振り子は比較的工作 slower の速度を経験する。しかしながら、等時性の条件下においては、すべての振り子が同じ時間内に同じ振幅を完成し、従ってその周期は等しいものとなる。
 
-\textbf{補足：} これ一結論対于理解地球内部結构和地表重力分布具有重要意義。〜を通して観察不同高度鐘振り子的振動特性，可以推断出地球的質量分布情况。
+\textbf{補足：} これ一結論対于理解地球内部結构和地表重力分布具有重要意義。〜を通して観察不同高度鐘振り子的振動特性，できる推断出地球的質量分布情况。
 
 \textbf{第1編 第10節：与えられた曲面上の運動および振子の運動（命題XLVI〜LVI）}
 
@@ -7453,7 +7474,7 @@ corpore illo maximo; praesertim si proportionis hujus inaequalitas major sit qua
 
 \textbf{訳文}
 
-3. 由此可知，当該系的部分在楕円軌道或円軌道上运動而無顕著的摂動動時，もしこれ些部分受到同一吸引力作用并趨向其他物体，則それら要么几乎不受力地被吸引，要么等量且近乎平行線的方向被吸引。
+3. 由此可知，当該系的部分在楕円軌道或円軌道上运動而無顕著的摂動動時，もしこれ些部分受到同一吸引力作用并趨向其他物体，則それら要几乎不受力地被吸引，要等量且近乎平行線的方向被吸引。
 
 \textbf{命題 LXVI.} 三つの体が互いに向心力をもって引きつけ合い、かつ二体の吸引力が距離の二乗反比例であるとき、
 
@@ -7505,9 +7526,9 @@ QL = \frac{2}{1} QK^{1/2}QP
 \textbf{Vis altera est}
 \]
 
-\textbf{attractionis }$LM$, \textit{quae} quoniam tendit a $P$ ad $S$, superaddita vi priori coincidet cum ipsa, \& sic faciet ut areae etiamnum temporibus proportionales describantur per Corol.\ 3. Theor.\ XXI\@.
+\textbf{attractionis }$LM$, \textit{quae} quoniam tendit a $P$ ad $S$, superaddita vi priori coincidet cum ipsa, & sic faciet ut areae etiamnum temporibus proportionales describantur per Corol.\ 3. Theor.\ XXI\@.
 
-At quoniam non est quadrato distantiae $PS$ reciproce proportionalis, componet ea cum vi priori vim ab hac proportione aberrantem, idque eo magis quo major est proportio hujus vis ad vim priorem, ceteris paribus. Proinde cum (per Corol.\ 1. Prob.\ VIII. \& Corol.\ 2. Theor.\ XXI.) vis qua Ellipsis circa umbilicum $S$ describitur tendere debeat ad umbilicum illum, \& esse quadrato.
+At quoniam non est quadrato distantiae $PS$ reciproce proportionalis, componet ea cum vi priori vim ab hac proportione aberrantem, idque eo magis quo major est proportio hujus vis ad vim priorem, ceteris paribus. Proinde cum (per Corol.\ 1. Prob.\ VIII. & Corol.\ 2. Theor.\ XXI.) vis qua Ellipsis circa umbilicum $S$ describitur tendere debeat ad umbilicum illum, & esse quadrato.
 
 $$PS$$の距離に反比例する向心力があるとします。この力がその比率から逸脱すると、球体$$PAB$$は中心点を$$S$$とする楕円形から逸れます。この逸れは、比率からの逸脱量によってより大きくなります。また、他の条件が等しいとき、第2力$$LM$$に対する第1力の比も同様に大きいです。
 
@@ -7568,7 +7589,7 @@ $$\textbf{さらに、その力は半径ベクトル} PS \textbf{の平方に対
 
 \textit{命題1.} このことから容易にわかるのは、もし球体 \( P \), \( Q \), \( R \) など多数の小さな球体が最大の球体 \( S \) の周りを回転している場合、内部の球体 \( P \) の運動は外部の球体 \( Q \), \( R \) 等からの引き力によって最小限に攪乱され、最大の球体 \( S \) が他の球体から等しく加速されるとき、すなわち力の比において等しいとき、内部の球体 \( P \) の運動はほとんど変化しないということです。\QED
 
-attrahitur \& agitatur at{\que} c{\ae}teri a se mutuo.
+attrahitur & agitatur at{\que} c{\ae}teri a se mutuo.
 
 \textbf{補則2.} 確実に、三体 \( S \), \( P \), \( Q \) からなる系において、二つの体間の相互な向心力が第三の体に対して反比例するとき、体 \( P \) は半径 \( PS \) 上の面積を体 \( S \) に近い接合点 \( A \) と対立点 \( B \) の間に素早く描き、その次に四分之一円弧 \( C \), \( D \) の間で遅く描きます。なぜなら、体 \( P \) が体 \( S \) に対して力を受け、体 \( S \) が体 \( P \) に対して力を与えない場合、体 \( P \) が直線 \( PS \) 上に作用しない力を受けると、その運動の描画速度は加速または遅延します。
 
@@ -7595,9 +7616,9 @@ attrahitur \& agitatur at{\que} c{\ae}teri a se mutuo.
 \textbf{パート 50/102}
 
 【ラテン語テキスト】
-quam in Conjunctione \& Oppositione. Nam corpora
+quam in Conjunctione & Oppositione. Nam corpora
 velociora minus deflectunt a recto tramite. Et pr{\ae}terea vis $NM$,
-in Conjunctione \& Oppositione, contraria est vi qua corpus $S$
+in Conjunctione & Oppositione, contraria est vi qua corpus $S$
 trahit corpus $P$, adeoque vim illam minuit; corpus autem $P$ minus
 deflectet a recto tramite, ubi minus urgetur in corpus $S$.
 
@@ -7619,7 +7640,7 @@ F \propto \frac{1}{SP^2}
 
 \textbf{パート52/102}
 
-\&周期的時間の平方比は明らかに、向心力$KL$の作用により減少することを示します。したがって、半径$SP$が変わらざるを得ない場合、周期的時間は増加し、その増加は向心力によって減少する比率の半分で与えられます。また、半径が増加または減少すると、周期的時間がより著しく増加したり、あるいはより少ない時間を必要とすることになります。
+&周期的時間の平方比は明らかに、向心力$KL$の作用により減少することを示します。したがって、半径$SP$が変わらざるを得ない場合、周期的時間は増加し、その増加は向心力によって減少する比率の半分で与えられます。また、半径が増加または減少すると、周期的時間がより著しく増加したり、あるいはより少ない時間を必要とすることになります。
 
 \textbf{補則6.命題IV}
 
@@ -7633,15 +7654,15 @@ F \propto \frac{1}{SP^2}
 
 \textit{補則7.} 以上より，体 \( P \) によって描かれた楕円軌道上の軸線又は極点線に関して角度運動についても同様の結論が得られます。
 
-progreditur \& regreditur per vices, sed magis tamen progreditur,
-\& in singulis corporis revolutionibus per excessum progressionis
+progreditur & regreditur per vices, sed magis tamen progreditur,
+& in singulis corporis revolutionibus per excessum progressionis
 fertur in consequentia. Nam vis qua corpus \( P \) urgetur
 in corpus \( S \), ubi vis \( MN \) evanuit, componitur
-ex vi \( LM \) \& vi centripeta qua corpus \( S \) trahit corpus \( P \). Vis prior \( LM \), si augeatur distantia \( PS \), augetur in eadem fere ratione cum hac distantia,
-\& vis posterior decrescit in duplicata illa ratione, adeoque
+ex vi \( LM \) & vi centripeta qua corpus \( S \) trahit corpus \( P \). Vis prior \( LM \), si augeatur distantia \( PS \), augetur in eadem fere ratione cum hac distantia,
+& vis posterior decrescit in duplicata illa ratione, adeoque
 summa harum virium decrescit in minore quam duplicata
 ratione distantiae \( PS \),
-\& propterea, per Corol.\ 1. Prop.\
+& propterea, per Corol.\ 1. Prop.\
 
 \textbf{訳文}
 
@@ -7668,7 +7689,7 @@ F_{PS} - F_{KL} = F
 であり、この \( F \) は接合点と四分点の間で極大の運動を決定する。
 
 \[
-KL, 冲合時においては LM のほぼ二倍となるため, 全ての軌道周期中, \(LM\) に於いての増加は \(KL\) によって移転され, この種の増加は各軌道運行後次第に発生する. 然而, 上述之結論及其前一結論更易于通過构想包含两个天体 \(S\), \(P\) 和多个天体 \(Q\), \(Q\), \(Q\) 之内的系統来理解, 在此系統中, 這些天体位于円周 \(QE\) 上并相互環回. このような力の作用により, 天体 \(S\) の運動は減少し, 従ってその距離の増加は平方に比例するものを超える.
+KL, 冲合時においては LM のほぼ二倍となるため, 全ての軌道周期中, \(LM\) に於いての増加は \(KL\) によって移転され, この種の増加は各軌道運行後次第に発生する. 然而, 上述之結論及其前一結論更易于通過构想包含二つの天体 \(S\), \(P\) 和多個天体 \(Q\), \(Q\), \(Q\) 之内的系統来理解, 在此系統中, 這些天体位于円周 \(QE\) 上并相互環回. このような力の作用により, 天体 \(S\) の運動は減少し, 従ってその距離の増加は平方に比例するものを超える.
 
 \textbf{推論 8.} 当然，在冲合時，軌道進動或退行的振り子動
 \]
@@ -7859,14 +7880,14 @@ $$KL$$が交点（Syzygiis）において球体$$S$$の向心力によって減�
 \textbf{証明終了}
 
 \[
-P \& S \text{ revolvitur.}
+P & S \text{ revolvitur.}
 \]
 
 \textbf{補則14.} しかし、球体 \( Q \) が遠くにあるとき、力 \( NM \), \( ML \) はそれぞれ力 \( QK \) と比率 \( PS \) に対する \( QS \) の立方の逆数に近似して与えられます。これらの力 \( NM \), \( ML \) は前節で述べたすべての誤差や結果の原因です。球体 \( S \) および \( P \) の系が固定されているとき、これらのすべての効果は、球体 \( Q \) の絶対的な力 \( QS \) の直接比率と、球体 \( S \) および \( P \) の系の比率から成る合成比率に近似して与えられます。
 
 \textbf{第1編 第11節：相互に向心力で引き合う球体の運動（二体・多体問題、命題LVII〜LXIX）}
 
-\textit{三等比反比例} $QS$ である。したがって、球体 $S$ \& $P$ が遠い球体 $Q$ の周りを回転するとき、力 $NM$, $ML$ およびその効果は（命題IVの補則2, 6による）、周期時間の二等比反比例に相対する。そして、もし球体 $Q$ の大きさがその向心力に対する絶対的な大きさと比例しているなら、力 $NM$, $ML$ 及びその効果は遠い球体 $Q$ から球体 $S$ を見たときの直径の表在する立方に直接比例し、逆もまた然りである。これらの比は上記の比と同一であり、それらを合成した比と同一である。
+\textit{三等比反比例} $QS$ である。したがって、球体 $S$ & $P$ が遠い球体 $Q$ の周りを回転するとき、力 $NM$, $ML$ およびその効果は（命題IVの補則2, 6による）、周期時間の二等比反比例に相対する。そして、もし球体 $Q$ の大きさがその向心力に対する絶対的な大きさと比例しているなら、力 $NM$, $ML$ 及びその効果は遠い球体 $Q$ から球体 $S$ を見たときの直径の表在する立方に直接比例し、逆もまた然りである。これらの比は上記の比と同一であり、それらを合成した比と同一である。
 
 
 \par\begin{center}
@@ -7905,7 +7926,7 @@ $$P$$conjunctim. これらのものは体$$P$$の線形誤差である；従っ�
 体$$P$$の各回転において，角度誤差は近似して平方時間回転の比である。
 
 \[
-\textbf{ut quadratum temporis periodici corporis } P \textbf{ directe \& quadratum temporis periodici corporis } S \textbf{ inverse. Et inde motus medius }
+\textbf{ut quadratum temporis periodici corporis } P \textbf{ directe & quadratum temporis periodici corporis } S \textbf{ inverse. Et inde motus medius }
 \]
 
 \begin{center}
@@ -7913,7 +7934,7 @@ $$P$$conjunctim. これらのものは体$$P$$の線形誤差である；従っ�
 \end{center}
 
 \[
-\textbf{Augis erit in data ratione ad motum medium Nodorum; \& motus uterque erit ut tempus periodicum corporis } P \textbf{ directe \& quadratum temporis periodici corporis } S \textbf{ inverse. Augendo vel minuendo Excentricitatem \& Inclinationem Orbis } PAB \textbf{ non mutantur motus Augis \& Nodorum sensibiliter, nisi ubi eadem sunt nimis magnae.}
+\textbf{Augis erit in data ratione ad motum medium Nodorum; & motus uterque erit ut tempus periodicum corporis } P \textbf{ directe & quadratum temporis periodici corporis } S \textbf{ inverse. Augendo vel minuendo Excentricitatem & Inclinationem Orbis } PAB \textbf{ non mutantur motus Augis & Nodorum sensibiliter, nisi ubi eadem sunt nimis magnae.}
 \]
 
 \[
@@ -8236,17 +8257,17 @@ circa 共通の中心点静止するところ、正確な楕円軌道。
 \textbf{パート 94/102}
 
 【ラテン語テキスト】
-gravitatis corporis maximi \& intimi; ille Orbit{\ae} secund{\ae}, in
+gravitatis corporis maximi & intimi; ille Orbit{\ae} secund{\ae}, in
 communi centro gravitatis corporum duorum intimorum; iste
-terti{\ae}, in communi centro gravitatis trium interiorum \& sic deinceps)
-quam si corpus intimum quiescat \& statuatur communis
+terti{\ae}, in communi centro gravitatis trium interiorum & sic deinceps)
+quam si corpus intimum quiescat & statuatur communis
 umbilicus orbitarum Omnium.
 
 \condpagelarge{Prop.\ LXIX\@. Theor.\ XXIX.}
 
-\textit{In Systemate corporum plurium $A$, $B$, $C$, $D$ \&c.\ si corpus aliquod
-$A$ trahit c{\ae}tera omnia $B$, $C$, $D$ \&c.\ viribus acceleratricibus qu{\ae}
-sunt reciproce ut quadrata distantiarum a trahente; \& corpus aliud
+\textit{In Systemate corporum plurium $A$, $B$, $C$, $D$ &c.\ si corpus aliquod
+$A$ trahit c{\ae}tera omnia $B$, $C$, $D$ &c.\ viribus acceleratricibus qu{\ae}
+sunt reciproce ut quadrata distantiarum a trahente; & corpus aliud
 
 【日本語LaTeX形式翻訳】
 
@@ -8256,7 +8277,7 @@ sunt reciproce ut quadrata distantiarum a trahente; \& corpus aliud
 
 \textbf{理論XXIX}
 
-多数の球体系 $A$, $B$, $C$, $D$ \&c.において、ある球体 $A$ が他のすべての球体 $B$, $C$, $D$ \&c.を引き寄せ、その力は引く距離の四平方に反比例する加速的力を有すると仮定する。このとき、最大または最も近接した球体に対する軌道の第二種は、二つの内部球体の共同重心において形成される。第三種の軌道は三つの内部球体の共同重心において形成され、そのような類推により、より多くの球体に対してはさらに複雑な軌道が形成される。
+多数の球体系 $A$, $B$, $C$, $D$ &c.において、ある球体 $A$ が他のすべての球体 $B$, $C$, $D$ &c.を引き寄せ、その力は引く距離の四平方に反比例する加速的力を有すると仮定する。このとき、最大または最も近接した球体に対する軌道の第二種は、二つの内部球体の共同重心において形成される。第三種の軌道は三つの内部球体の共同重心において形成され、そのような類推により、より多くの球体に対してはさらに複雑な軌道が形成される。
 
 \textbf{注}：図版198（\pngright{198.png}{400pt}{300pt}{-50pt}）はここに配置されます。
 
@@ -8303,7 +8324,7 @@ F_{BA} : F_{AB} = m_A : m_B
 
 \textbf{パート 98/102}
 
-$A$, $B$, $C$, $D$ \&c. は，それぞれ独立に観察すると，他のすべての物体は，その引く向心力が各々の距離から逆比例または直接比例であるような力を有するものとして引き寄せられる。これらの力は，引く物体からの距離によって定義される共通の法則に従って定義される。したがって，これら物体の力は，その物体自体のものと等しい。
+$A$, $B$, $C$, $D$ &c. は，それぞれ独立に観察すると，他のすべての物体は，その引く向心力が各々の距離から逆比例または直接比例であるような力を有するものとして引き寄せられる。これらの力は，引く物体からの距離によって定義される共通の法則に従って定義される。したがって，これら物体の力は，その物体自体のものと等しい。
 
 \textit{命題 3.} 在楕円系中的物体系中，若各物体之間的引力按距离的平方反比規律减弱，かつより小さな物体囲回より大き的物体位于共同焦点処，則これ些物体的絶対力与各自的物体相等。
 
@@ -8402,11 +8423,11 @@ impellentis. 同じ意味で、私は「 impulsus （推力）」という語を
 \]
 
 \[
-\text{粒子} \, P, \, p \, \text{から線} \, PHK, \, PIL, \, phk, \, pil \, \text{を引くと、最大円} \, AHB, \, ahb \, \text{の等しい弧} \, HK, \, hk \, \& \, HL, \, hl \, \text{が減少します。}
+\text{粒子} \, P, \, p \, \text{から線} \, PHK, \, PIL, \, phk, \, pil \, \text{を引くと、最大円} \, AHB, \, ahb \, \text{の等しい弧} \, HK, \, hk \, & \, HL, \, hl \, \text{が減少します。}
 \]
 
 \[
-\text{これらの線} \, HK, \, hk \, \& \, HL, \, hl \, \text{に対して、垂線} \, SD, \, sd \, \text{を引いて} \, PL, \, pl \, \text{と交点} \, F, \, f \, \text{を取る。}
+\text{これらの線} \, HK, \, hk \, & \, HL, \, hl \, \text{に対して、垂線} \, SD, \, sd \, \text{を引いて} \, PL, \, pl \, \text{と交点} \, F, \, f \, \text{を取る。}
 \]
 
 \[
@@ -8437,7 +8458,7 @@ impellentis. 同じ意味で、私は「 impulsus （推力）」という語を
 \textbf{半円} akb \textbf{を直径} ab \textbf{を中心に弧} ih \textbf{によって描く円の面積との比です。そして、}
 \]
 \[
-\textbf{これらの円面上で体積} P \& p \textbf{に垂直な線方向に引き寄せられる力は（仮定により）、}
+\textbf{これらの円面上で体積} P & p \textbf{に垂直な線方向に引き寄せられる力は（仮定により）、}
 \]
 \[
 \textbf{それぞれの円面がその距離からなる正方形に比するように、すなわち、}
@@ -8454,7 +8475,7 @@ pf \times ps \text{ ad } PF \times PS.
 \]
 これらの力は、法則のコロラリ2により分解された結果力を沿って中心に向かう直線 \( PS, ps \) に作用します。すなわち、三角形 \( PIQ \) と \( PSF \)、および \( piq \) と \( psf \) が相似であるため、
 \[
-PS \text{ ad } PF \quad \& \quad ps \text{ ad } pf.
+PS \text{ ad } PF \quad & \quad ps \text{ ad } pf.
 \]
 したがって、粒子 \( P \) の引力 \( S \) 方向に対する引力と粒子 \( p \) の引力 \( s \) 方向に対する引力は、
 \[
@@ -8687,7 +8708,7 @@ F \propto \frac{1}{r^2}
 
 \textbf{【ラテン語テキスト】}
 densiorem versus centrum, vel subduct{\ae} relinquant tenuiorem;
-& h{\ae}, per Theor.\ XXXV, trahent Sph{\ae}ras alias quotcun{\que} concentricas $GH$, $IK$, $LM$, \&c.\ singul{\ae} singulas, viribus
+& h{\ae}, per Theor.\ XXXV, trahent Sph{\ae}ras alias quotcun{\que} concentricas $GH$, $IK$, $LM$, &c.\ singul{\ae} singulas, viribus
 reciproce proportionalibus quadrato distanti{\ae} $SP$. Et componendo
 vel dividendo, summa virium illarum omnium, vel excessus
 aliquarum supra alias, hoc est, vis qua Sph{\ae}ra tota ex concentricis
@@ -8841,7 +8862,7 @@ omnem a centro distantiam sint undi\que similares; & vis attractiva puncti cujus
 
 Demonstratur ex Propositione pr\aecedente, eodem modo quo Propositio LXXV. ex Propositione LXXV. demonstrata fuit.
 
-\textit{Corol.} Quae superius in Propositionibus X. \& LXIV. de motu corporum circa centra Conicarum Sectionum demonstrata sunt,
+\textit{Corol.} Quae superius in Propositionibus X. & LXIV. de motu corporum circa centra Conicarum Sectionum demonstrata sunt,
 
 \textbf{第1編 第12節：球体の引力（殻定理、命題LXX〜LXXXIV）}
 
@@ -9427,15 +9448,15 @@ v : \text{面積 } BDLIB = \text{定数}
 
 非球形物体の引力について、距離から $A$ と $B$ の関係が与えられたとき、加速引力はそれぞれの物体に対して以下のようになります。
 
-$$ A \& B : \text{加速引力} = \frac{A \, \text{立方}}{A \, \text{平方}} \quad \& \quad \frac{B \, \text{立方}}{B \, \text{平方}} $$
+$$ A & B : \text{加速引力} = \frac{A \, \text{立方}}{A \, \text{平方}} \quad & \quad \frac{B \, \text{立方}}{B \, \text{平方}} $$
 
 すなわち、物体の側面である $A$ と $B$ の立方比です。もし個々の力が吸引される粒子からの距離の立方に比例して減少する場合、全体的な加速引力は以下のようになります。
 
-$$ A \& B : \text{加速引力} = \frac{A \, \text{立方}}{A \, \text{立方}} \quad \& \quad \frac{B \, \text{立方}}{B \, \text{立方}} $$
+$$ A & B : \text{加速引力} = \frac{A \, \text{立方}}{A \, \text{立方}} \quad & \quad \frac{B \, \text{立方}}{B \, \text{立方}} $$
 
 すなわち、等しいです。もし個々の力が吸引される粒子からの距離の四倍に比例して減少する場合、全体的な引力は以下のようになります。
 
-$$ A \& B : \text{引力} = \frac{A \, \text{立方}}{A \, \text{平方平方}} \quad \& \quad \frac{B \, \text{立方}}{B \, \text{平方平方}} $$
+$$ A & B : \text{引力} = \frac{A \, \text{立方}}{A \, \text{平方平方}} \quad & \quad \frac{B \, \text{立方}}{B \, \text{平方平方}} $$
 
 すなわち、物体の側面である $A$ と $B$ の平方比の逆数です。
 
@@ -9523,7 +9544,7 @@ A \times AZ, \quad B \times BZ
 \textbf{命題 LXXXVI.} 由此，被吸引物体 \( Z \) 的运動与假設吸引物体 \( RSTV \) 為球形時之运動相同。故若吸引物体處於靜止或等速直線運動狀態，則被吸引物體將在以吸引物体的重力中心為焦點的橢圓上運動。
 \]
 
-\textbf{命理 XLVI.} 若有多个物体由等質部分組成，各部分的力量
+\textbf{命理 XLVI.} 若有多個物体由等質部分組成，各部分的力量
 
 
 
@@ -9571,7 +9592,7 @@ A \times AZ, \quad B \times BZ
 以上より、非球形物体の引力は円周上に引かれた面積と高さの積に比例することが示されました。
 
 \[
-\textbf{比例}PE \& AE, Ee \& cE\)は直角三角形の面積$PE \times cE$または$PE \times Ff$に等しいです。したがって、環が物体$P$を点$A$に向けて引き力を持つとき、その引力は比例します：
+\textbf{比例}PE & AE, Ee & cE\)は直角三角形の面積$PE \times cE$または$PE \times Ff$に等しいです。したがって、環が物体$P$を点$A$に向けて引き力を持つとき、その引力は比例します：
 \[
 PE \times Ff \quad \text{および} \quad \frac{AP \times FK}{PE}
 \]
@@ -9752,7 +9773,7 @@ Ff \times AP \times FK,
 
 また、同様の理由により、無数の同心球形楕円面上の部分線分も互いに等しい引力を及ぼします。
 
-\& これらが共有軸を持つ場合、空間 \(DPF\) と \(EGCB\) は粒子に分割され、すべての粒子は等しく物体 \(P\) を反対方向へ引き寄せます。したがって、円錐セグメント \(EGCB\) と円錐線分 \(DPF\) の力は等しく、互いに相殺します。また、物質全体が内球形体 \(PCBM\) 内部にある場合の力を考慮すると、物体 \(P\) は単なる内球形体 \(PCBM\) から引き寄せられます。したがって（命題 LXXII の補則 3）、その引力は物体 \(A\) が全体の球形体 \(AGOD\) から引き寄せられる力に比例し、距離 \(PS\) に対する距離
+& これらが共有軸を持つ場合、空間 \(DPF\) と \(EGCB\) は粒子に分割され、すべての粒子は等しく物体 \(P\) を反対方向へ引き寄せます。したがって、円錐セグメント \(EGCB\) と円錐線分 \(DPF\) の力は等しく、互いに相殺します。また、物質全体が内球形体 \(PCBM\) 内部にある場合の力を考慮すると、物体 \(P\) は単なる内球形体 \(PCBM\) から引き寄せられます。したがって（命題 LXXII の補則 3）、その引力は物体 \(A\) が全体の球形体 \(AGOD\) から引き寄せられる力に比例し、距離 \(PS\) に対する距離
 
 \[
 \frac{PS}{SA}
@@ -9785,7 +9806,7 @@ Ff \times AP \times FK,
 \textbf{証明終了}
 
 \[
-\textbf{1.} \quad \text{案。} \, LGGl \, \text{が平面で、その平面に終止する固体を考えてみましょう。} \, I \, \text{に向かって} \, solidum \, \text{が} \, J \, \text{に落ちているとします。} \, mHM, \, nIN \, \&c. \, \text{は平面} \, GL \, \text{に対して平行な無数の直線です。} \, C \, \text{が固体外にある物体である場合、} \, CGHI \, \text{をこれらの無数の平面に垂直に引きます。} \, \text{そして、固体上の各点から} \, C \, \text{への引力は距離の} \, n \, \text{次方根比例で減少します。} \, (n \, \text{は3より小さい自然数}) \, \text{であるとします。}
+\textbf{1.} \quad \text{案。} \, LGGl \, \text{が平面で、その平面に終止する固体を考えてみましょう。} \, I \, \text{に向かって} \, solidum \, \text{が} \, J \, \text{に落ちているとします。} \, mHM, \, nIN \, &c. \, \text{は平面} \, GL \, \text{に対して平行な無数の直線です。} \, C \, \text{が固体外にある物体である場合、} \, CGHI \, \text{をこれらの無数の平面に垂直に引きます。} \, \text{そして、固体上の各点から} \, C \, \text{への引力は距離の} \, n \, \text{次方根比例で減少します。} \, (n \, \text{は3より小さい自然数}) \, \text{であるとします。}
 \]
 
 \[
@@ -9832,7 +9853,7 @@ F \propto \frac{1}{r^n}
 ある物体が与えられた平面に対して垂直に引き寄せられるとき、
 
 $$
-\textbf{vis attractiva corporis totius decrescet quamproxime in ratione potestatis, cujus latus sit distantia illa perexigua, \& Index ternario minor quam Index potestatis prioris.}
+\textbf{vis attractiva corporis totius decrescet quamproxime in ratione potestatis, cujus latus sit distantia illa perexigua, & Index ternario minor quam Index potestatis prioris.}
 $$
 
 $$
@@ -9852,7 +9873,7 @@ $$
 \textbf{級数収束の場合。} 例えば、角度を任意に与えた基底 \(A\) の上に順次接続された長さ \(B\) が適用され、その比が各基底 \(A^{\frac{m}{n}}\) と等しいとするとき、基底 \(A\) 上に順次接続された物体が吸引されるか放逐されるかする曲線の運動力を求めることを考える。私は基底を最小限の部分 \(O\) で増加させ、順次接続された \(\overline{A + O}^{\frac{m}{n}}\) を無限級数に分解し、
 
 \[
-A^{\frac{m}{n}} + \frac{m}{n} OA^{\frac{m - n}{n}} + \frac{mm - mn}{2nn} O^2 A^{\frac{m - 2n}{n}} \&c.
+A^{\frac{m}{n}} + \frac{m}{n} OA^{\frac{m - n}{n}} + \frac{mm - mn}{2nn} O^2 A^{\frac{m - 2n}{n}} &c.
 \]
 
 と表します。ここで、\(\overline{A + O}\) は基底 \(A\) 上に最小限の部分 \(O\) を加えた長さを示しています。
@@ -10026,11 +10047,11 @@ Tv.
 \includegraphics[width=1293pt,height=640pt,trim=-24 0 0 0]{238.png}
 \end{center}
 
-次のように考えます。平面 $Aa$、$Bb$、$Cc$ \&c. 上を描く極微小体がパラボラ形の弧 $HP$、$PQ$ を描くとします。\pngcent{238.png}{1293}{640}
+次のように考えます。平面 $Aa$、$Bb$、$Cc$ &c. 上を描く極微小体がパラボラ形の弧 $HP$、$PQ$ を描くとします。\pngcent{238.png}{1293}{640}
 
 向心力に向かって引き寄せられる極微小体の運動（光学・屈折への適用、命題XCIV〜XCVIII）
 
-$$QR, \&c.$$ そして、入射線 $$GH$$ が平面最初の $$Aa$$ に対してなす角を $$\textbf{AQ}$$ とする。すなわち、入射角は円の半径に対する正弦と同一であり、この正弦が入射正弦と出射正弦（平面 $$Dd$$）との比に等しい空間 $$DdeE$$ の比である。そして、既に出射正弦を半径とし等しくしたとき、出射角は直角となり、従って出射線は平面 $$Dd$$ と一致する。
+$$QR, &c.$$ そして、入射線 $$GH$$ が平面最初の $$Aa$$ に対してなす角を $$\textbf{AQ}$$ とする。すなわち、入射角は円の半径に対する正弦と同一であり、この正弦が入射正弦と出射正弦（平面 $$Dd$$）との比に等しい空間 $$DdeE$$ の比である。そして、既に出射正弦を半径とし等しくしたとき、出射角は直角となり、従って出射線は平面 $$Dd$$ と一致する。
 
 物体がこの平面 $$Dd$$ 上の点 $$R$$ に達すると、出射線が同様の平面と一致することから明らかに、物体は平面 $$Ee$$ 方向には進めないことがわかる。しかし、
 
@@ -10041,7 +10062,7 @@ $$QR, \&c.$$ そして、入射線 $$GH$$ が平面最初の $$Aa$$ に対して
 
 
 
-\textbf{これには、極微小体が一直線 $Rd$ から進むことができません。}これは、常に直進方向から媒質に引き寄せられたり押し出されたりするためです。その結果、平面 $Cc$, $Dd$ の間で放物線弧 $QRq$ を描きながら反転します。この放物線の頂点（Galilaeiによる証明によれば）は主に点 $R$ にあります；平面 $Cc$ において同じ角度で点 $q$ に、かつ先に点 $Q$ に切ります。その後、弧 $qp$, $ph$ \&c. を通って、前の弧 $QP$, $PH$ と相似かつ等しい角度で他の平面を切ります；そして先に点 $P$, $H$ \&c. に切ります。最後には直線 $Rd$ から再び進み出ます。\(\pngright{放物線弧}{4in}{3in}\)
+\textbf{これには、極微小体が一直線 $Rd$ から進むことができません。}これは、常に直進方向から媒質に引き寄せられたり押し出されたりするためです。その結果、平面 $Cc$, $Dd$ の間で放物線弧 $QRq$ を描きながら反転します。この放物線の頂点（Galilaeiによる証明によれば）は主に点 $R$ にあります；平面 $Cc$ において同じ角度で点 $q$ に、かつ先に点 $Q$ に切ります。その後、弧 $qp$, $ph$ &c. を通って、前の弧 $QP$, $PH$ と相似かつ等しい角度で他の平面を切ります；そして先に点 $P$, $H$ &c. に切ります。最後には直線 $Rd$ から再び進み出ます。\(\pngright{放物線弧}{4in}{3in}\)
 
 \textbf{同様に、極微小体は} $h$ において入射角 \(\theta\) で平面 \(Aa\), \(Bb\), \(Cc\), \(Dd\), \(Ee\) に沿って無限に小さくするとき、これらの間隔を増加させ、引力または推進力が与えられた法則に従って継続的になるようにします。そして、出射角は常に入射角と等しくなります。
 
@@ -10064,7 +10085,7 @@ ut invenit \textbf{Snellius}, & per consequens secundum datam Sinuum rationem, u
 \textbf{LaTeX形式}
 
 
-ut \textbf{Snellius} invenit, \& per consequens secundum datam Sinuum rationem, ut \textbf{Cartesius} exposuit. Nam Lucem successive propagari \& spatio quasi decem minutorum primorum a Sole ad Terram venire, jam constat per Phaenomena Satellitum \textbf{Jovis}, Observationibus diversorum Astronomorum confirmata. Radii autem in aere existentes (uti dudum \textbf{Grimaldus}, luce per foramen in tenebrosum cubiculum admissa, invenit, \& ipse quoque expertus sum) in transitu suo prope corporum vel opacorum vel perspicuorum angulos (quales sunt nummorum
+ut \textbf{Snellius} invenit, & per consequens secundum datam Sinuum rationem, ut \textbf{Cartesius} exposuit. Nam Lucem successive propagari & spatio quasi decem minutorum primorum a Sole ad Terram venire, jam constat per Phaenomena Satellitum \textbf{Jovis}, Observationibus diversorum Astronomorum confirmata. Radii autem in aere existentes (uti dudum \textbf{Grimaldus}, luce per foramen in tenebrosum cubiculum admissa, invenit, & ipse quoque expertus sum) in transitu suo prope corporum vel opacorum vel perspicuorum angulos (quales sunt nummorum
 
 
 \textbf{説明}
@@ -10136,7 +10157,7 @@ incrementa linearum
 $PD$, $QD$, at{\que} adeo line{\ae}
 ips{\ae} $PD$, $QD$, incrementis
 istis genit{\ae}, ut sinus incidenti{\ae}
-\& emergenti{\ae} ad invicem: \& contra.
+& emergenti{\ae} ad invicem: & contra.
 
 \condpagelarge{命題XCVIII. 問題XLVIII.}
 
@@ -10379,7 +10400,7 @@ $\blacksquare$
 
 \medskip
 
-$Ak$, $Kl$, $Lm$, $Mn$, \&c.\ は等しい速度の増加を同じ時間に生じたものとする。すると、$Ak$, $Al$, $Am$, $An$, \&c.\ は等しい速度と等しく、従って（仮定により）
+$Ak$, $Kl$, $Lm$, $Mn$, &c.\ は等しい速度の増加を同じ時間に生じたものとする。すると、$Ak$, $Al$, $Am$, $An$, &c.\ は等しい速度と等しく、従って（仮定により）
 
 \begin{center}
 \includegraphics[width=1237pt,height=1014pt,keepaspectratio]{247.png}
@@ -10390,7 +10411,7 @@ $Ak$, $Kl$, $Lm$, $Mn$, \&c.\ は等しい速度の増加を同じ時間に生�
 物体の抵抗が最初の各時間における等しいものであるとすると、$AC$ は $AK$ に等しく、または $ABHC$ は $ABkK$ に等しくなり、重力の力から物体の抵抗を引くと、
 
 \begin{center}
-$ABHC$, $KkHC$, $LlHC$, $NnHC$, \&c.
+$ABHC$, $KkHC$, $LlHC$, $NnHC$, &c.
 \end{center}
 
 が絶対的な力を保持し、物体は最初の各時間におけるこれらの絶対的な力により運動する。
@@ -10401,7 +10422,7 @@ $ABHC$, $KkHC$, $LlHC$, $NnHC$, \&c.
 
 \medskip
 
-物体が速度に比例する抵抗を受けるとき、その物体は等しい時間間隔で等しい距離を進む。すなわち、$AB$, $BC$, $CD$, $DE$, \&c.\ は等しいとします。
+物体が速度に比例する抵抗を受けるとき、その物体は等しい時間間隔で等しい距離を進む。すなわち、$AB$, $BC$, $CD$, $DE$, &c.\ は等しいとします。
 
 \begin{center}
 \includegraphics[width=1237pt,height=1014pt,keepaspectratio]{247.png}
@@ -10412,7 +10433,7 @@ $ABHC$, $KkHC$, $LlHC$, $NnHC$, \&c.
 物体が最初の時間間隔で進む距離 $AB$ から、重力の力と抵抗を引くと、
 
 \begin{center}
-$AC$, $KC$, $LC$, $NC$, \&c.
+$AC$, $KC$, $LC$, $NC$, &c.
 \end{center}
 
 が絶対的な力を保持し、物体は最初の各時間間隔でこれらの絶対的な力により等しい距離を進む。
@@ -10423,7 +10444,7 @@ $AC$, $KC$, $LC$, $NC$, \&c.
 
 \medskip
 
-物体が速度に比例する抵抗を受けるとき、その物体は等しい時間間隔で等しい面積の速度を描く。すなわち、$AB$, $BC$, $CD$, $DE$, \&c.\ は等しいとします。
+物体が速度に比例する抵抗を受けるとき、その物体は等しい時間間隔で等しい面積の速度を描く。すなわち、$AB$, $BC$, $CD$, $DE$, &c.\ は等しいとします。
 
 \begin{center}
 \includegraphics[width=1237pt,height=1014pt,keepaspectratio]{247.png}
@@ -10434,7 +10455,7 @@ $AC$, $KC$, $LC$, $NC$, \&c.
 物体が最初の時間間隔で描く面積 $AB$ から、重力の力と抵抗を引くと、
 
 \begin{center}
-$AC$, $KC$, $LC$, $NC$, \&c.
+$AC$, $KC$, $LC$, $NC$, &c.
 \end{center}
 
 が絶対的な力を保持し、物体は最初の各時間間隔でこれらの絶対的な力により等しい面積の速度を描く。
@@ -10445,7 +10466,7 @@ $AC$, $KC$, $LC$, $NC$, \&c.
 
 \medskip
 
-物体が速度に比例する抵抗を受けるとき、その物体は等しい時間間隔で等しい円錐曲線を描く。すなわち、$AB$, $BC$, $CD$, $DE$, \&c.\ は等しいとします。
+物体が速度に比例する抵抗を受けるとき、その物体は等しい時間間隔で等しい円錐曲線を描く。すなわち、$AB$, $BC$, $CD$, $DE$, &c.\ は等しいとします。
 
 \begin{center}
 \includegraphics[width=1237pt,height=1014pt,keepaspectratio]{247.png}
@@ -10456,7 +10477,7 @@ $AC$, $KC$, $LC$, $NC$, \&c.
 物体が最初の時間間隔で描く円錐曲線 $AB$ から、重力の力と抵抗を引くと、
 
 \begin{center}
-$AC$, $KC$, $LC$, $NC$, \&c.
+$AC$, $KC$, $LC$, $NC$, &c.
 \end{center}
 
 が絶対的な力を保持し、物体は最初の各時間間隔でこれらの絶対的な力により等しい円錐曲線を描く。
@@ -10508,7 +10529,7 @@ $AC$, $KC$, $LC$, $NC$, \&c.
 \textit{命題IV} の証明において、等しい面積 \(BAKq\), \(qKLr\), \(rLMs\), \(sMNt\) 等の総和を計算する必要がある。
 
 \[
-\textbf{areae } Bkq, Blr, Bms, Bnt \&c. spatiis totis descriptis analogae; necnon areae ABqK, ABrL, ABsM, ABtN \&c. temporibus.
+\textbf{areae } Bkq, Blr, Bms, Bnt &c. spatiis totis descriptis analogae; necnon areae ABqK, ABrL, ABsM, ABtN &c. temporibus.
 \]
 したがって、物体は任意の時間 $ABrL$ において空間 $Blr$ を描き、時間 $LrtN$ の間に空間 $rlnt$ を描く。
 
@@ -10569,7 +10590,7 @@ x(t) = x_0 + \frac{v_0}{k} \ln(1 + kt)
 以上により、Projectileの運動が定義された。
 
 \[
-\text{設} DA : AC = \text{媒質の運動による抵抗} (\text{初速度から起算}) : \text{重力} ; \text{または (これらは等価である)} \text{設} DA \& DP \text{に引いた直角三角形の面積} : AC \& CP \text{に引いた直角三角形の面積} = \text{運動開始時の総抵抗} : \text{重力} .
+\text{設} DA : AC = \text{媒質の運動による抵抗} (\text{初速度から起算}) : \text{重力} ; \text{または (これらは等価である)} \text{設} DA & DP \text{に引いた直角三角形の面積} : AC & CP \text{に引いた直角三角形の面積} = \text{運動開始時の総抵抗} : \text{重力} .
 \]
 
 任意の双曲線 $GTBS$ を描き、垂直線 $DG$, $AB$ が点 $G$ と $B$ で交わる。平行四辺形 $DGKC$ を完成し、その辺 $GK$ が $AB$ と点 $Q$ で交わる。線分 $N$ を $QB$ に対する比として定め、$DC : CP$ となるようにする。また、双曲線の点 $T$ における垂直線 $RT$, 直線 $GK$, $DP$ が点 $t$ で交わる。
@@ -10619,21 +10640,21 @@ Rr = RV - Vr = \frac{DR \times QB - tGT}{N}
 
 \textbf{直線DPに沿って物体が初速度で発射されるとき、抵抗が速度に比例する場合、その軌道はパラボラとなる。}
 
-\& 直線DPに沿って物体が点Dから発射され、速度$V$を持つとします。このとき、抵抗が速度に比例すると仮定し、初速$V$での直線DPの方向における物体の軌道はパラボラとなります。
+& 直線DPに沿って物体が点Dから発射され、速度$V$を持つとします。このとき、抵抗が速度に比例すると仮定し、初速$V$での直線DPの方向における物体の軌道はパラボラとなります。
 
-\& ここで、点Dから直線DPを引いた場合、抵抗が速度に比例する条件下で物体が点Dから直線DRを描く軌道と比較します。つまり、均匀な抵抗がある状況では、物体は点Dから直線DPを描き、無抵抗の空間ではパラボラを描きます。
+& ここで、点Dから直線DPを引いた場合、抵抗が速度に比例する条件下で物体が点Dから直線DRを描く軌道と比較します。つまり、均匀な抵抗がある状況では、物体は点Dから直線DPを描き、無抵抗の空間ではパラボラを描きます。
 
-\& 今、このパラボラの焦点Fを考えます。点Dから発射された物体が直線DPに沿って初速$V$で発射されるとします。このとき、パラボラの軸は直線DPであり、その焦点Fは直線DP上にあります。
+& 今、このパラボラの焦点Fを考えます。点Dから発射された物体が直線DPに沿って初速$V$で発射されるとします。このとき、パラボラの軸は直線DPであり、その焦点Fは直線DP上にあります。
 
-\& ここで、直線DPにおけるパラボラの幅（最長弦）を考慮します。この幅は初速$V$での物体の運動開始時に$\frac{DV^2}{Vr}$となります。ここで、$Vr = \frac{tGT}{N} = \frac{DR \times Tt}{2N}$ です。
+& ここで、直線DPにおけるパラボラの幅（最長弦）を考慮します。この幅は初速$V$での物体の運動開始時に$\frac{DV^2}{Vr}$となります。ここで、$Vr = \frac{tGT}{N} = \frac{DR \times Tt}{2N}$ です。
 
-\& また、直線DPを引いた場合、その直線はパラボラの軸と一致します。この直線DPが物体の軌道を描くためには、物体は点Dから直線DRを描き、無抵抗空間ではパラボラを描きます。
+& また、直線DPを引いた場合、その直線はパラボラの軸と一致します。この直線DPが物体の軌道を描くためには、物体は点Dから直線DRを描き、無抵抗空間ではパラボラを描きます。
 
-\& 以上より、直線DPに沿って初速$V$で発射された物体の軌道は、抵抗が速度に比例する条件下ではパラボラとなります。
+& 以上より、直線DPに沿って初速$V$で発射された物体の軌道は、抵抗が速度に比例する条件下ではパラボラとなります。
 
-\textbf{Hyperbolam }$GTB$\textbf{ tangeret in }$G$, \textbf{parallela est ipsi }$DK$, ideo{\que} $\textbf{Tt}$ \textbf{est} $\frac{\textbf{CK} \times \textbf{DR}}{\textbf{DC}}$, \& $\textbf{N}$ \textbf{erat} $\frac{\textbf{QB} \times \textbf{DC}}{\textbf{CP}}$. Et propterea $\textbf{Vr}$ \textbf{est} $\frac{\textbf{DRq.} \times \textbf{CK} \times \textbf{CP}}{2\textbf{CDq.} \times \textbf{QB}}$,
-id est (ob proportionales $\textbf{DR}$ \& $\textbf{DC}$, $\textbf{DV}$ \& $\textbf{DP}$) $\frac{\textbf{DVq.} \times \textbf{CK} \times \textbf{CP}}{2\textbf{DPq.} \times \textbf{QB}}$, \& latus rectum $\frac{\textbf{DV}^{\textit{quad.}}}{\textbf{Vr}}$ prodit
-$\frac{2\textbf{DPq.} \times \textbf{QB}}{\textbf{CK} \times \textbf{CP}}$, id est (ob proportionales $\textbf{QB}$ \& $\textbf{CK}$, $\textbf{DA}$ \& $\textbf{AC}$)
+\textbf{Hyperbolam }$GTB$\textbf{ tangeret in }$G$, \textbf{parallela est ipsi }$DK$, ideo{\que} $\textbf{Tt}$ \textbf{est} $\frac{\textbf{CK} \times \textbf{DR}}{\textbf{DC}}$, & $\textbf{N}$ \textbf{erat} $\frac{\textbf{QB} \times \textbf{DC}}{\textbf{CP}}$. Et propterea $\textbf{Vr}$ \textbf{est} $\frac{\textbf{DRq.} \times \textbf{CK} \times \textbf{CP}}{2\textbf{CDq.} \times \textbf{QB}}$,
+id est (ob proportionales $\textbf{DR}$ & $\textbf{DC}$, $\textbf{DV}$ & $\textbf{DP}$) $\frac{\textbf{DVq.} \times \textbf{CK} \times \textbf{CP}}{2\textbf{DPq.} \times \textbf{QB}}$, & latus rectum $\frac{\textbf{DV}^{\textit{quad.}}}{\textbf{Vr}}$ prodit
+$\frac{2\textbf{DPq.} \times \textbf{QB}}{\textbf{CK} \times \textbf{CP}}$, id est (ob proportionales $\textbf{QB}$ & $\textbf{CK}$, $\textbf{DA}$ & $\textbf{AC}$)
 $\frac{2\textbf{DPq.} \times \textbf{DA}}{\textbf{AC} \times \textbf{CP}}$, adeo{\que} ad $2\textbf{DP}$ ut $\textbf{DP} \times \textbf{DA}$ ad $PC \times AC$; hoc
 
 \textbf{証明}\QED
@@ -10655,7 +10676,7 @@ CP \times AC = DP \times DA
 
  punctum \textbf{A}. そしてその結果、曲線 \textbf{DraF} が与えられます。
 
-\textit{\textbf{補題3.}}\wsp{}逆に、もし曲線 \textbf{DraF} が与えられた場合、物体の速度 \& 媒質の抵抗は各点 $r$ で与えられる。なぜなら、与えられた比 $CP \times AC$ に対する $DP \times DA$ の比から、運動開始時の媒質の抵抗とパラボラの水平軸が与えられ、その結果、運動開始時の速度も与えられます。次に、接線の長さ $rL$ から、それに比例する速度と、任意点 $r$ での速度に対する比例する抵抗も与えられます。
+\textit{\textbf{補題3.}}\wsp{}逆に、もし曲線 \textbf{DraF} が与えられた場合、物体の速度 & 媒質の抵抗は各点 $r$ で与えられる。なぜなら、与えられた比 $CP \times AC$ に対する $DP \times DA$ の比から、運動開始時の媒質の抵抗とパラボラの水平軸が与えられ、その結果、運動開始時の速度も与えられます。次に、接線の長さ $rL$ から、それに比例する速度と、任意点 $r$ での速度に対する比例する抵抗も与えられます。
 
 \textit{\textbf{補題4.}}\wsp{}また、接線の長さ $2DP$ が水平軸に対してある比を有する場合、
 
@@ -10768,9 +10789,9 @@ corpora resistuntur in duplicata ratione velocitatum。より速い物体に作�
 以上を証明した。
 
 \textbf{これにより、これらの軌跡は速度で描かれる空間と似た級数の関係にあることが推論される。}
-したがって、初速 $AK$ が線分 $AB$ によって表され、次速 $KL$ が線分 $Kk$ によって表され、最初の時間内に描かれた長さが弧 $AKkB$ で与えられた場合、すべての後の速度は連続する線分 $Ll$, $Mm$, \&c. によって表され、描かれた長さは面積 $Kl$, $Lm$, \&c. によって与えられ、全体的な時間が各部分の総和 $AM$ で表される場合、全体的な描かれた長さは各部分の総和で表されます。
+したがって、初速 $AK$ が線分 $AB$ によって表され、次速 $KL$ が線分 $Kk$ によって表され、最初の時間内に描かれた長さが弧 $AKkB$ で与えられた場合、すべての後の速度は連続する線分 $Ll$, $Mm$, &c. によって表され、描かれた長さは面積 $Kl$, $Lm$, &c. によって与えられ、全体的な時間が各部分の総和 $AM$ で表される場合、全体的な描かれた長さは各部分の総和で表されます。
 
-\textbf{AMmB.} いま、時間 \( AM \) を次のように分割するものとする：\( AK \), \( KL \), \( LM \), \&c., 使得 \( CA \), \( CK \), \( CL \), \( CM \), \&c. 成為等比数列，那么これ些部分也将成等比数列，かつ速度 \( AB \), \( Kk \), \( Ll \), \( Mm \), \&c. 将成相反的等比数列，而描述的距离 \( Ak \), \( Kl \), \( Lm \), \&c. 則相等。$\blacksquare$
+\textbf{AMmB.} いま、時間 \( AM \) を次のように分割するものとする：\( AK \), \( KL \), \( LM \), &c., 使得 \( CA \), \( CK \), \( CL \), \( CM \), &c. 成為等比数列，那これ些部分也将成等比数列，かつ速度 \( AB \), \( Kk \), \( Ll \), \( Mm \), &c. 将成相反的等比数列，而描述的距离 \( Ak \), \( Kl \), \( Lm \), &c. 則相等。$\blacksquare$
 
 \textit{Corol.\,1.} すなわち、もし時間が漸近線の部分 \( AD \) で表されるならば、速度は最初の時間点において直交に適用された \( AB \) で表され、最後の時間点においては直交に適用された矢量で表される。
 
@@ -10977,7 +10998,7 @@ densiore descriptum augeri debet in比率に増加するべきである。実際
 
 速度が増加または減少する \( A \), \( B \), \( C \) などに対し、その瞬間的動量または速度変化率を \( a \), \( b \), \( c \) などとします。矩形 \( AB \) の瞬間的動量は \( Ab + aB \) であり、三角形 \( ABC \) の瞬間的動量は \( ABc + AbC + aBC \) です。また、\( A^2 \), \( A^3 \), \( A^4 \), \( A^{\frac{1}{2}} \), \( A^{\frac{3}{2}} \), \( A^{\frac{1}{3}} \), \( A^{\frac{2}{3}} \), \( \frac{1}{A} \), \( \frac{1}{A^2} \), および \( \frac{1}{A^{\frac{1}{2}}} \) の瞬間的動量は \( 2Aa \), \( 3aA^2 \), \( 4aA^3 \), \( \frac{1}{2}aA^{-\frac{1}{2}} \), \( \frac{3}{2}aA^{\frac{1}{2}} \), \( \frac{1}{3}aA^{-\frac{2}{3}} \), \( \frac{2}{3}aA^{\frac{1}{3}} \), \( -aA^{-2} \), および \( -2aA^{-3} \) です。
 
-\& \(\frac{-1}{2}aA^{-\frac{3}{2}}\) である。
+& \(\frac{-1}{2}aA^{-\frac{3}{2}}\) である。
 一般に、\(A^{\frac{n}{m}}\) の位相が \(n/m\) であるとき、その運動量は \(\frac{n}{m} aA^{\frac{n-m}{m}}\) となる。
 また、生成詞 \(A \text{quad.} \times B\) の運動量は \(2aAB + A^2 b\)；生成詞 \(A^3 B^4 C^2\) の運動量は \(3aA^2 B^4 C^2 + 4A^3 bB^3 C^2 + 2A^3 B^4 Cc\)；生成詞 \(\frac{A^3}{B^2}\) もしくは \(A^3 B^{-2}\) の運動量は \(3aA^2 B^{-2} - 2A^3 bB^{-3}\) となる。その他の場合も同様である。
 実際、次の証明により示される。
@@ -10987,16 +11008,16 @@ densiore descriptum augeri debet in比率に増加するべきである。実際
 \pngright{260.png}{4cm}{3cm}{(a)}
 
 \[
-\textbf{命題 V. } \quad \text{もし直角三角形の辺} A \& B \text{に欠けた半刻度の動量} \frac{1}{2}a \& \frac{1}{2}b \text{が存在する場合、}
+\textbf{命題 V. } \quad \text{もし直角三角形の辺} A & B \text{に欠けた半刻度の動量} \frac{1}{2}a & \frac{1}{2}b \text{が存在する場合、}
 \]
 \[
-A - \frac{1}{2}a \text{と} B - \frac{1}{2}b \text{の積は} AB - \frac{1}{2}aB - \frac{1}{2}Ab + \frac{1}{4}ab; \& \text{まず辺} A \& B \text{が他の半刻度の動量に増加した場合、}
+A - \frac{1}{2}a \text{と} B - \frac{1}{2}b \text{の積は} AB - \frac{1}{2}aB - \frac{1}{2}Ab + \frac{1}{4}ab; & \text{まず辺} A & B \text{が他の半刻度の動量に増加した場合、}
 \]
 \[
 A + \frac{1}{2}a \text{と} B + \frac{1}{2}b \text{の積は} AB + \frac{1}{2}aB + \frac{1}{2}Ab + \frac{1}{4}ab. \text{この長方形から先に得た長方形を引くと、}
 \]
 \[
-\text{余剰量} aB + Ab \text{が残ります。したがって、辺} A \& B \text{の全増分} a \& b \text{によって生成された長方形の増分は} aB + Ab. \quad \Box
+\text{余剰量} aB + Ab \text{が残ります。したがって、辺} A & B \text{の全増分} a & b \text{によって生成された長方形の増分は} aB + Ab. \quad \Box
 \]
 
 \textbf{2. 案例}\wsp{}$AB$ を $G$ と等しくし、直角三角形 $ABC$ や $GC$ の動量を計算すると、
@@ -11005,11 +11026,11 @@ A + \frac{1}{2}a \text{と} B + \frac{1}{2}b \text{の積は} AB + \frac{1}{2}aB
 \]
 
 \[
-\textbf{(第2編 第2節 命題V)}\ \textbf{（条件1）}\ gC + Gc = aBC + AbC + ABc. \textbf{（此乃若以} AB \& aB + Ab \textbf{代換} G \& g, 則有} aBC + AbC + ABc.
+\textbf{(第2編 第2節 命題V)}\ \textbf{（条件1）}\ gC + Gc = aBC + AbC + ABc. \textbf{（此乃若以} AB & aB + Ab \textbf{代換} G & g, 則有} aBC + AbC + ABc.
 \]
 また、三角形の底辺に対する面積比は等しいです。$\blacksquare$
 
-\textit{\textbf{(条件3)}}\wsp{}令 $A$, $B$, $C$ 皆等しくし, \& 同じ $A^2$, 即即矩形 $AB$ 的動量 $aB + Ab = 2aA$. 而且, 同様地, $A^3$, 即体積 $ABC$ 的動量 $aBC + AbC + ABc = 3aA^2$. 按此論理輯, 動量的等級 $A^n$ 為 $naA^{n - 1}$. $\blacksquare$
+\textit{\textbf{(条件3)}}\wsp{}令 $A$, $B$, $C$ 皆等しくし, & 同じ $A^2$, 即即矩形 $AB$ 的動量 $aB + Ab = 2aA$. そのうえ, 同様地, $A^3$, 即体積 $ABC$ 的動量 $aBC + AbC + ABc = 3aA^2$. 按此論理輯, 動量的等級 $A^n$ 為 $naA^{n - 1}$. $\blacksquare$
 
 \textit{\textbf{(条件4)}}\wsp{}由此可知，当 $\frac{1}{A}$ 在 $A$ 中時動量為 1. 故其自身的動量乘積為 \textbf{（此処原文未完）}.
 
@@ -11037,7 +11058,7 @@ A + \frac{1}{2}a \text{と} B + \frac{1}{2}b \text{の積は} AB + \frac{1}{2}aB
 \]
 
 \[
-\textbf{導入} \, A^m \text{ に至る道は } m A^{m-1} + n B^{n-1}; \text{ すなわち、指標の指数 } m \& n \text{ が整数または分数であり、正または負である場合も同様です。また、複数の指標の比は等しいです。}
+\textbf{導入} \, A^m \text{ に至る道は } m A^{m-1} + n B^{n-1}; \text{ すなわち、指標の指数 } m & n \text{ が整数または分数であり、正または負である場合も同様です。また、複数の指標の比は等しいです。}
 \]
 \[
 \textbf{命題} \, \textit{1.}\wsp{} \text{したがって、連続する比例項において、与えられた項を除く他の項のモーメントは、その他の項を与えられた間隔数で乗じたものと等しい。}
@@ -11048,11 +11069,11 @@ A + \frac{1}{2}a \text{と} B + \frac{1}{2}b \text{の積は} AB + \frac{1}{2}aB
 
 \textbf{2.} そして，四つの比例之中項が与えられたとき、極端の動量は同じ極端に等しい。
 
-\textit{Corol.\,\textbf{2.}}\hspace*{\fontdimen2\the\textfont2} 而且，もし在四个比例中插入両个中項，則両端的動量将与これ些端点相等。これ一点同様适用于与定直角三角形的辺。
+\textit{Corol.\,\textbf{2.}}\hspace*{\fontdimen2\the\textfont2} そのうえ，もし在四個比例中插入両個中項，則両端的動量将与これ些端点相等。これ一点同様适用于与定直角三角形的辺。
 
 \textbf{3.} および，もし与出両平方数之和或差，則両辺的動量将与其辺成反比。
 
-\textit{Corol.\,\textbf{3.}}\hspace*{\fontdimen2\the\textfont2} もし与出両个平方数之和或差，則これ両辺的動量将与其辺成反比。
+\textit{Corol.\,\textbf{3.}}\hspace*{\fontdimen2\the\textfont2} もし与出両個平方数之和或差，則これ両辺的動量将与其辺成反比。
 
 \textit{Scholium.}\hspace*{\fontdimen2\the\textfont2} 附注：在与最卓越的几何学家 \textbf{G. G. リーブニッツ} 十年通信期間，我告知他我已経掌握了确定极大値和极小値的方法および導出
 
@@ -11062,7 +11083,7 @@ A + \frac{1}{2}a \text{と} B + \frac{1}{2}b \text{の積は} AB + \frac{1}{2}aB
 
 \pngright{scholium.png}{300pt}{150pt}{(0, 0)}
 
-\textbf{Tangentia, et similia peragendi, quae in terminis surdis \& ac in rationalibus procedunt, Data aequatione quotque fluentes quantitates involvente, fluxiones invenire, \& vice versa} という命題において、聾者や盲者のための語句と有理数における論述を含め、文字の順序を入れ替えてこの主張を覆い隠すことは、有名な先生が彼等にこのような方法に遭遇し、彼の方法は私からわずかに修正されており、主として文法や記号の形式においてのみ異なることを明らかにしました。彼の基礎はこの補題の中に含まれています。
+\textbf{Tangentia, et similia peragendi, quae in terminis surdis & ac in rationalibus procedunt, Data aequatione quotque fluentes quantitates involvente, fluxiones invenire, & vice versa} という命題において、聾者や盲者のための語句と有理数における論述を含め、文字の順序を入れ替えてこの主張を覆い隠すことは、有名な先生が彼等にこのような方法に遭遇し、彼の方法は私からわずかに修正されており、主として文法や記号の形式においてのみ異なることを明らかにしました。彼の基礎はこの補題の中に含まれています。
 
 \textbf{Prop.\ VIII. Theor.\ VI.}
 
@@ -11200,19 +11221,19 @@ est \ AD \times AK.
 \text{従って、等しい比から} LKN \text{は} DTV \text{に} 2AP \times KN \times CK \text{は} \frac{1}{2}AC^3 \text{に比例します；}
 \]
 \[
-\text{すなわち、} CKN \& \frac{1}{4}AC^3 \text{が等しいとき、} AP \text{は} AC \text{に比例します；}
+\text{すなわち、} CKN & \frac{1}{4}AC^3 \text{が等しいとき、} AP \text{は} AC \text{に比例します；}
 \]
 \[
 \text{これは落ちる物体の速度} \textbf{と} \text{最大速度} \textbf{との比} \text{に相当します。}
 \]
 \[
-\text{したがって、図形} ABKN \& AVD \text{の面積} LKN \& DTV \text{は速度に比例するので、}
+\text{したがって、図形} ABKN & AVD \text{の面積} LKN & DTV \text{は速度に比例するので、}
 \]
 \[
 \text{これらの面積全体は同時に生成された空間全体と等しい比を持ちます；}
 \]
 \[
-\text{したがって、最初から生成された面積} ABKN \& AVD \text{は最初から描かれた全距離と等しい比を持ちます。} \qquad \blacksquare
+\text{したがって、最初から生成された面積} ABKN & AVD \text{は最初から描かれた全距離と等しい比を持ちます。} \qquad \blacksquare
 \]
 
 \textbf{補則2.} また、上昇中に描かれる距離についても同様の結論が成り立ちます。すなわち、そのすべての距離は、速度 \( AC \) で等しい時間に描かれた距離 \( ABnk \) に対して、面積 \( ABnk \) はセクター \( ADt \) に比例します。
@@ -11226,7 +11247,7 @@ est \ AD \times AK.
 \textit{\textbf{補題5.}}\hspace*{1em}したがって、物体が抵抗のある媒質で落下し、速度 \( AP \) を得るのに要する時間は、同一時間内に抵抗のない空間で最大速度 \( AC \) を得るのに要する時間に対して比を成す。
 
 \[
-\text{ut Sector } ADT \text{ ad triangulum } ADC: \& \text{ tempus, quo velocitatem } Ap \text{ in Medio resistente ascendendo possit amittere, ad tempus } quo velocitatem eandem in spatio non resistente ascendendo posset amittere, ut arcus } At \text{ ad ejus Tangentem } Ap.
+\text{ut Sector } ADT \text{ ad triangulum } ADC: & \text{ tempus, quo velocitatem } Ap \text{ in Medio resistente ascendendo possit amittere, ad tempus } quo velocitatem eandem in spatio non resistente ascendendo posset amittere, ut arcus } At \text{ ad ejus Tangentem } Ap.
 \]
 
 \textbf{命題VI.} 速度の二乗に比例する抵抗を受ける物体の運動において、物体が抵抗のある空間で上昇する時間を与えられた時間とすると、その比は扇形 \( ADT \) に対する三角形 \( ADC \) の比と同じである。また、物体が同様な速度で抵抗がない空間で上昇する時間を与えたとき、その比も同じである。
@@ -11234,7 +11255,7 @@ est \ AD \times AK.
 \textit{命題VIの推論6.} よって、与えられた時間から移動距離は求められる。無限に下降する物体について、推論2と3により最大速度が与えられるので、そこから与えられた時間において半分の速度で移動できる距離も求められ、その時間も求められる。
 
 \[
-\text{Corol.\fsp{}6.}\wsp{}Hinc ex dato tempore datur spatium ascensu vel descensu descriptum. Nam corporis in infinitum descendentis datur velocitas maxima, per Corol.\ 2.\ \& 3.\ Theor.\ VI, Lib.\ II. inde{\que} datur \& spatium quod semisse velocitatis illius dato tempore describi potest, \& tempus quo corpus velocitatem illam in
+\text{Corol.\fsp{}6.}\wsp{}Hinc ex dato tempore datur spatium ascensu vel descensu descriptum. Nam corporis in infinitum descendentis datur velocitas maxima, per Corol.\ 2.\ & 3.\ Theor.\ VI, Lib.\ II. inde{\que} datur & spatium quod semisse velocitatis illius dato tempore describi potest, & tempus quo corpus velocitatem illam in
 \]
 
 \[
@@ -11248,7 +11269,7 @@ est \ AD \times AK.
 
 \condpagelarge{\textbf{命題X.} \textbf{証明III.}}
 
-\textit{\textbf{Tendat uniformis vis gravitatis directe ad planum Horizontis, sitque resistentia ut medii densitas \& quadratum velocitatis conjunctim:}}
+\textit{\textbf{Tendat uniformis vis gravitatis directe ad planum Horizontis, sitque resistentia ut medii densitas & quadratum velocitatis conjunctim:}}
 \[
 \text{均質な重力の力が水平面に直接指向し、抵抗は媒質の密度と速度の二乗の積に等しいとする：}
 \]
@@ -11354,7 +11375,7 @@ est \ AD \times AK.
 同様の論理により、$fg$ は時間の平方に比例し、等しい時間間隔において $FG$ と等しくなる。また、物体が退行するときの衝撃量は $\frac{hf}{fg}$ に比例する。そして、物体が退行するときの衝撃量と進行するときの抵抗量は運動開始時に等しい比で測定され、したがって、$\frac{hf}{fg}$ および $\frac{HF}{FG}$ も同じ比で測定される。従って、$fg$ および $FG$ が等しいとき、$hf$ および $HF$ も等しくなる。これにより、$CF$ と $CH$（または $Ch$）および $Cf$ は算術級数に属し、したがって $HF$ は半差となる。
 
 \[
-\textbf{これらの} Cf \& CF; そして、先に述べた抵抗は}
+\textbf{これらの} Cf & CF; そして、先に述べた抵抗は}
 \]
 \[
 \frac{HF}{FG} \textbf{と等しく、つまり} \frac{Cf - CF}{FG} \textbf{と等しい。}
@@ -11399,7 +11420,7 @@ est \ AD \times AK.
 \pngcent{fg_ratio.png}{10cm}{5cm}{}
 
 \[
-kl + \sqrt{FG} \times kl \& FG + kl \textbf{は等しい。} これを以下のように書き換える。
+kl + \sqrt{FG} \times kl & FG + kl \textbf{は等しい。} これを以下のように書き換える。
 \]
 \[
 \frac{FK - Kl}{FK + Kl} \textbf{を} \frac{Cf - CF}{CF} \textbf{とする; }
@@ -11410,7 +11431,7 @@ kl + \sqrt{FG} \times kl \& FG + kl \textbf{は等しい。} これを以下の�
 \[
 \textbf{結果として} \frac{FG - kl}{CF \times FG + kl} \textbf{となる。}
 
-\textit{命題 2.}\wsp{}従って, $2HF$ \& $Cf - CF$ が等しいとき, そして $FG$ \& $kl$ (等比の関係にある)を $2FG$ と組み合わせると,
+\textit{命題 2.}\wsp{}従って, $2HF$ & $Cf - CF$ が等しいとき, そして $FG$ & $kl$ (等比の関係にある)を $2FG$ と組み合わせると,
 \[
 2HF \textbf{は} CF \textbf{に対して} FG - kl \textbf{は} 2FG \textbf{に対して等しい;} 
 \]
@@ -11536,10 +11557,10 @@ kl = -\frac{nnoo}{2e^3} + \frac{anno^3}{2e^5}
 しかし、同じ物体が点 $\mathrm{A}$ から直線 $\mathrm{AK}$ と垂直な方向へと出発した場合、$OB$ もしくは $a$ は中心 $\mathrm{O}$ の両側に反対方向へ移動する必要があり、従ってその符号も変更され、$-a$ が +$a$ として書き換わる。これにより中間密度は
 
 \begin{equation}
-\textbf{如上所述，もし同一物体従点 \( A \) 沿着与直線 \( AK \) 垂直的方向离开，則 \( OB \) 或 \( a \) 需要向中心 \( O \) 的相反方向移動，したがって其符号也需要改変為 \(-a\)。由此可以得出中密度：}
+\textbf{如上所述，もし同一物体従点 \( A \) 沿着与直線 \( AK \) 垂直的方向离开，則 \( OB \) 或 \( a \) 需要向中心 \( O \) 的相反方向移動，したがって其符号也需要改変為 \(-a\)。由此できる得出中密度：}
 \end{equation}
 
-\textbf{如上所述，もし同一物体従点 \( A \) 沿着与直線 \( AK \) 垂直的方向离开，則 \( OB \) 或 \( a \) 需要向中心 \( O \) 的相反方向移動，したがって其符号也需要改変為 \(-a\)。由此可以得出中密度：}
+\textbf{如上所述，もし同一物体従点 \( A \) 沿着与直線 \( AK \) 垂直的方向离开，則 \( OB \) 或 \( a \) 需要向中心 \( O \) 的相反方向移動，したがって其符号也需要改変為 \(-a\)。由此できる得出中密度：}
 
 \[
 C = -\frac{OB}{OK}
@@ -11593,12 +11614,12 @@ c - \frac{m}{n}a + \frac{m}{n}o - \frac{b^2}{a - o}.
 \]
 この項 $\frac{b^2}{a - o}$ を収束する級数に分解すると、次のようになります：
 \[
-\frac{b^2}{a} + \frac{b^2}{a^2}o + \frac{b^2}{a^3}oo + \frac{b^3}{a^4}o^3 \text{\&c.}
+\frac{b^2}{a} + \frac{b^2}{a^2}o + \frac{b^2}{a^3}oo + \frac{b^3}{a^4}o^3 \text{&c.}
 \]
 したがって、$GD$ は次の式で表されます：
 \[
 c - \frac{m}{n}a - \frac{b^2}{a} + \frac{m}{n}o
-- \frac{b^2}{a^2}o - \frac{b^2}{a^3}o^2 - \frac{b^3}{a^4}o^3 \text{\&c.}
+- \frac{b^2}{a^2}o - \frac{b^2}{a^3}o^2 - \frac{b^3}{a^4}o^3 \text{&c.}
 \]
 この級数の第2項 $\frac{m}{n}o - \frac{b^2}{a^2}o$ を $Qo$ とし、第3項に符号を変えて $\frac{b^2}{a^3}o^2$ を $Ro^2$ と、さらに第4項も符号を変えて $\frac{b^2}{a^4}o^3$ を $So^3$ とします。これらの係数は次のようになります：
 \[
@@ -11606,10 +11627,10 @@ c - \frac{m}{n}a - \frac{b^2}{a} + \frac{m}{n}o
 \]
 
 \[
-\frac{b^2}{a^3} \& \frac{b^2}{a^4} \text{を書き換えるべきです},
+\frac{b^2}{a^3} & \frac{b^2}{a^4} \text{を書き換えるべきです},
 \]
 % -----File: 276.png---
-上部の規則において、$Q$, $R$ \& $S$ はそれぞれ $\frac{b^2}{a^3}$, $\frac{b^2}{a^4}$ に置き換えるべきです。これにより、中間密度は
+上部の規則において、$Q$, $R$ & $S$ はそれぞれ $\frac{b^2}{a^3}$, $\frac{b^2}{a^4}$ に置き換えるべきです。これにより、中間密度は
 \[
 \frac{\frac{b^2}{a^4}}{\frac{b^2}{a^3}\sqrt{1 - \frac{m^2}{n^2} - \frac{2mb^2}{na^2} + \frac{b^4}{a^4}}}
 \]
@@ -11619,7 +11640,7 @@ c - \frac{m}{n}a - \frac{b^2}{a} + \frac{m}{n}o
 \]
 と表されます。もし $VZ$ に $VY$ を等しい長さで取ると、$\frac{1}{XY}$ となります。
 
-なぜなら $a^2$ \& $\frac{m^2}{n^2}a^2 - \frac{2mb^2}{n} + \frac{b^4}{a^2}$ はそれぞれ $XZ$ \& $ZY$ の平方であるからです。また、抵抗は
+なぜなら $a^2$ & $\frac{m^2}{n^2}a^2 - \frac{2mb^2}{n} + \frac{b^4}{a^2}$ はそれぞれ $XZ$ & $ZY$ の平方であるからです。また、抵抗は
 \[
 XY \text{に対する重力の比}
 \]
@@ -11642,11 +11663,11 @@ XY \text{に対する重力の比}
 
 Resolvatur terminus ille \(\frac{bb}{A - O^n}\) in seriam infinitam
 \[
-\frac{bb}{A^n} + \frac{nbbO}{A^{n+1}} + \frac{nn + n}{2A^{n+2}} bbO^2 + \frac{n^3 + 3nn + 2n}{6A^{n+3}} bbO^3 \&c.
+\frac{bb}{A^n} + \frac{nbbO}{A^{n+1}} + \frac{nn + n}{2A^{n+2}} bbO^2 + \frac{n^3 + 3nn + 2n}{6A^{n+3}} bbO^3 &c.
 \]
 ac fiet \(GD\) \(\textbf{等しく}\)
 \[
-C - \frac{d}{e} A - \frac{bb}{A^n} + \frac{d}{e} O - \frac{nbb}{A^{n+1}} O - \frac{nn + n}{2A^{n+2}} bbO^2 - \frac{n^3 + 3nn + 2n}{6A^{n+3}} bbO^3 \&c.
+C - \frac{d}{e} A - \frac{bb}{A^n} + \frac{d}{e} O - \frac{nbb}{A^{n+1}} O - \frac{nn + n}{2A^{n+2}} bbO^2 - \frac{n^3 + 3nn + 2n}{6A^{n+3}} bbO^3 &c.
 \]
 Hujus seriei terminus secundus \(\frac{d}{e} O - \frac{nbb}{A^{n+1}} O\) usurpandus est pro \(Qo\),
 tertius \(\frac{nn + n}{2A^{n+2}} bbO^2\) pro \(Ro^2\),
@@ -11711,7 +11732,7 @@ XY : \frac{3nn + 3n}{n + 2} VG
 \rho_G = \frac{1}{GT}
 \]
 
-\& 速度は \(\surd \frac{GTq}{GV}\) に比例し、抵抗は重力の力を \(GT\) に対して \(\frac{3nn + 3n}{n + 2} GV\) に比例します。
+& 速度は \(\surd \frac{GTq}{GV}\) に比例し、抵抗は重力の力を \(GT\) に対して \(\frac{3nn + 3n}{n + 2} GV\) に比例します。
 
 したがって、物体が点 \(A\) から直線 \(AH\) 上に投げ出され、双曲線 \(AGK\) を描き、\(AH\) の延長が漸近線 \(NX\) と交わる点 \(H\)、そして \(AI\) の延長がもう一つの漸近線 \(MX\) と交わる点 \(I\) に達する場合、
 
@@ -11726,9 +11747,9 @@ NAH, \text{manebunt longitudines } AH, AI, HX.
 \]
 ideo si longitūdēs illāe in aliquo casu inveniantur, hyperbola deinceps ex dato quovis angulo $NAH$ expedite determinari potest.
 
-\textbf{規則2.} \textit{Si servetur tum angulus } $NAH$, \textit{tum medium densitas in } $A$, \& mutetur velocitās quacum corpus projicitur; \textbf{manebit} longitūdō $AH$, \textbf{et} mutabitur $AI$ in duplicata ratione velocitatis reciproce.
+\textbf{規則2.} \textit{Si servetur tum angulus } $NAH$, \textit{tum medium densitas in } $A$, & mutetur velocitās quacum corpus projicitur; \textbf{manebit} longitūdō $AH$, \textbf{et} mutabitur $AI$ in duplicata ratione velocitatis reciproce.
 
-\textbf{規則3.} \textit{Si tam angulus } $NAH$ \textit{quam corporis velocitās in } $A$, gravitas \textbf{et} acceleratrix servētur, \& proportionēs resistentiae in $A$ ad
+\textbf{規則3.} \textit{Si tam angulus } $NAH$ \textit{quam corporis velocitās in } $A$, gravitas \textbf{et} acceleratrix servētur, & proportionēs resistentiae in $A$ ad
 
 \[
 \textbf{規則4.} \textit{mutabitur ut eamdem sit cum ratione velocitatis reciproce.}
@@ -11948,7 +11969,7 @@ CD. \textbf{ipsius} \frac{1}{GD} \textbf{decrementum}, quod (per hujus Lem.\ II.
 実際、速度の減少量は抵抗に比例しており、これは仮定により、二つの量の合計に比例します。その一つは速度に比例し、もう一つは速度の平方に比例するからです。したがって、\( \frac{1}{GD} \) の減少量もこれらの量の合計に比例します。
 
 \[
-\frac{1}{GD} \& \frac{CG}{GDq.}, \textbf{quarum prior est ipsa } \frac{1}{GD}, \textbf{\& posterior } \frac{CG}{GDq.} \textbf{ est ut } \frac{1}{GDq.}. \textbf{ Proinde } \frac{1}{GD}, \textbf{ ob analogum decrementum, } \textbf{est ut velocitas. Et si quantitas } GD \textbf{ ipsi } \frac{1}{GD} \textbf{ reciproce proportionalis quantitate data } CG \textbf{ augeatur, summa } CD, \textbf{ tempore } ABED \textbf{ uniformiter crescente, crescet in progressione Geometrica.}
+\frac{1}{GD} & \frac{CG}{GDq.}, \textbf{quarum prior est ipsa } \frac{1}{GD}, \textbf{& posterior } \frac{CG}{GDq.} \textbf{ est ut } \frac{1}{GDq.}. \textbf{ Proinde } \frac{1}{GD}, \textbf{ ob analogum decrementum, } \textbf{est ut velocitas. Et si quantitas } GD \textbf{ ipsi } \frac{1}{GD} \textbf{ reciproce proportionalis quantitate data } CG \textbf{ augeatur, summa } CD, \textbf{ tempore } ABED \textbf{ uniformiter crescente, crescet in progressione Geometrica.}
 \]
 
 \textit{\textbf{Corol.\fsp{}1.}}\wsp{}したがって、与えられた点 $A$, $G$ において、時間 $ABED$ を双曲線形面積 $ABED$ で表すならば、速度は $GD$ の逆数 $\frac{1}{GD}$ で表されることが可能となる。
@@ -11978,14 +11999,14 @@ CD. \textbf{ipsius} \frac{1}{GD} \textbf{decrementum}, quod (per hujus Lem.\ II.
 この訳文は以下のLaTeX形式に適応しています：
 
 
-抵抗 \& 時間 conjunctim, id est directe ut summa duarum
+抵抗 & 時間 conjunctim, id est directe ut summa duarum
 quantitatum, quarum una est velocitas, altera ut velocitatis
-quadratum, \& inverse ut velocitas; adeoque directe ut summa dearum
+quadratum, & inverse ut velocitas; adeoque directe ut summa dearum
 quantitatum, quarum una datur, altera est ut velocitas.
 Igitur decrementum tam velocitatis quam line{\ae} $GD$, est ut quantitas
-data \& quantitas decrescens conjunctim, \& propter analoga
+data & quantitas decrescens conjunctim, & propter analoga
 decrementa, analog{\ae} semper erunt quantitates decrescentes: nimirum
-velocitas \& linea $GD$. $\blacksquare$
+velocitas & linea $GD$. $\blacksquare$
 
 \textit{Corol.\,1.}\wsp{}Igitur si velocitas exponatur per longitudinem $GD$,
 
@@ -12008,7 +12029,7 @@ velocitas \& linea $GD$. $\blacksquare$
 
 \textbf{例1.}まず、物体が上昇していると仮定し、中心を \( D \) とするとき、\ldots
 
-\& 任意の半径 \( DB \) 上に四分円 \( BETF \) を描き、半径 \( DB \) の端点 \( B \) から無限遠方に至る平行線 \( BAP \) を引き、半径 \( DF \) と平行な位置に点 \( A \) を定めます。また、速度の比例因子としてセグメント \( AP \) を選びます。
+& 任意の半径 \( DB \) 上に四分円 \( BETF \) を描き、半径 \( DB \) の端点 \( B \) から無限遠方に至る平行線 \( BAP \) を引き、半径 \( DF \) と平行な位置に点 \( A \) を定めます。また、速度の比例因子としてセグメント \( AP \) を選びます。
 そして、抵抗の一部が速度とその二乗の比であるとするとき、全体の抵抗は \( P \) 点において \( AP^2 + 2PAB \) の比で与えられます。
 半径 \( DA \) と半径 \( DP \) が円を交わる点 \( E \) および \( T \) を結び、重力 \( DA^2 \) の比を定義し、重力を抵抗 \( P \) 点における比 \( AP^2 + 2PAB \) に比例するものとするとき、
 
@@ -12210,7 +12231,7 @@ $$\frac{AP \times BD \times m}{AB}$$ に等しくなります；従って（与�
 \]
 
 \[
-\frac{\textbf{V} \times \textbf{DA}}{\textbf{DE}} \propto \textbf{AP}; \text{ したがって、}\, \textbf{V} \& \textbf{AP} \,\text{が最小のとき、}
+\frac{\textbf{V} \times \textbf{DA}}{\textbf{DE}} \propto \textbf{AP}; \text{ したがって、}\, \textbf{V} & \textbf{AP} \,\text{が最小のとき、}
 \]
 これらは等しい比を成す。
 
@@ -12222,7 +12243,7 @@ $$\frac{AP \times BD \times m}{AB}$$ に等しくなります；従って（与�
 
 ここで、下り降りや上昇の始点または終点で描かれた空間が両方とも中間において等しくなるとき、これらは等しい比を成す。したがって、そのときこれらの面積は互いに
 \[
-\frac{\textbf{BD} \times \textbf{V}^2}{4\textbf{AB}} \quad \text{および}\quad \textbf{DET} \& \textbf{AKNb} の差
+\frac{\textbf{BD} \times \textbf{V}^2}{4\textbf{AB}} \quad \text{および}\quad \textbf{DET} & \textbf{AKNb} の差
 \]
 と等しい。これらの比は類似の増加を伴うため、任意の等しい時間においてこれらは互いにその面積と等しい。
 
@@ -12367,13 +12388,13 @@ PQ \times \sqrt{SP}
 
 また、\(PQ\) に対する \(Rr\) の比は \(SQ\) に対する \(\frac{1}{2}VQ\) の比であるから、\(\frac{Rr}{PQq. \times SP}\) は \(\frac{\frac{1}{2}VQ}{PQ \times SP \times SQ}\) と等しくなり、さらにこれは \(\frac{\frac{1}{2}OS}{OP \times SPq.}\) となる。ここで \(P\) および \(Q\) の点は考慮される。
 
-coeuntibus, \textbf{$SP$} \& \textbf{$SQ$} coincidunt; \& ob similia triangula \textbf{$PVQ$}, \textbf{$PSO$}, fit \textbf{$PQ$} ad \(\frac{1}{2}VQ\) ut \textbf{$OP$} ad \(\frac{1}{2}OS\). Est igitur \(\frac{OS}{OP \times SP}\) ut
-resistentia, id est in ratione densitatis Medii in \(P\) \& ratione
+coeuntibus, \textbf{$SP$} & \textbf{$SQ$} coincidunt; & ob similia triangula \textbf{$PVQ$}, \textbf{$PSO$}, fit \textbf{$PQ$} ad \(\frac{1}{2}VQ\) ut \textbf{$OP$} ad \(\frac{1}{2}OS\). Est igitur \(\frac{OS}{OP \times SP}\) ut
+resistentia, id est in ratione densitatis Medii in \(P\) & ratione
 duplicata velocitatis conjunctim. Auferatur duplicata ratio velocitatis,
-nempe ratio \(\frac{1}{SP}\), \& manebit Medii densitas in \(P\) ut
+nempe ratio \(\frac{1}{SP}\), & manebit Medii densitas in \(P\) ut
 \(\frac{OS}{OP \times SP}\).
 
-Detur Spiralis, \& ob datam rationem \textbf{$OS$} ad \textbf{$OP$}, densitas
+Detur Spiralis, & ob datam rationem \textbf{$OS$} ad \textbf{$OP$}, densitas
 Medii in \(P\) erit ut \(\frac{1}{SP}\). In Medio igitur cujus densitas
 est reciproce ut distantia a centro \(SP\), corpus gyrari potest in hac
 
@@ -12392,11 +12413,11 @@ Spirali.
 \textit{推論 3.}\wsp{}点 \( P \)における抵抗力は、中心指向力に対してその比として \( \frac{1}{2}OS \) に比例する。これらの力は直線と同様に比例するためである。
 
 \[
-Rr \& TQ \text{ または } \frac{\frac{1}{2}VQ \times PQ}{SQ} \& \frac{PQq.}{SP} \text{ が同時に生成される}
+Rr & TQ \text{ または } \frac{\frac{1}{2}VQ \times PQ}{SQ} & \frac{PQq.}{SP} \text{ が同時に生成される}
 \]
 すなわち，
 \[
-\frac{1}{2}VQ \& PQ, \text{ または } \frac{1}{2}OS \& OP.
+\frac{1}{2}VQ & PQ, \text{ または } \frac{1}{2}OS & OP.
 \]
  Spiralisの与えられたとき，抵抗する力に対する向心力の比は与えられ，逆に，その比が与えられたとき， Spiralisも与えられる。
 
@@ -12423,9 +12444,9 @@ Rr \& TQ \text{ または } \frac{\frac{1}{2}VQ \times PQ}{SQ} \& \frac{PQq.}{SP
 
 物体が密度が位置から逆比例する媒質内を任意の曲線 \( AEB \) で回転するとき、その時間は物体が中心から離れる距離の逆数の比に相当します。
 
-\textbf{その中心に近づき、}そして円周上の点$AS$が同じ角度で点$B$を通過し、かつその速度が点$A$での初速度と互いに反比例する半径の比率（すなわち$BS$は$AS$と$CS$の中間比）であるとき、その物体は無数の類似した回転$BFC$, $CGD$, \&c. を行い、そして交点で円周上の放射$AS$を連続的に比例する部分$AS$, $BS$, $CS$, $DS$ \&c. に区別する。
+\textbf{その中心に近づき、}そして円周上の点$AS$が同じ角度で点$B$を通過し、かつその速度が点$A$での初速度と互いに反比例する半径の比率（すなわち$BS$は$AS$と$CS$の中間比）であるとき、その物体は無数の類似した回転$BFC$, $CGD$, &c. を行い、そして交点で円周上の放射$AS$を連続的に比例する部分$AS$, $BS$, $CS$, $DS$ &c. に区別する。
 
-しかしながら、これらの回転の時間は円周$AEB$, $BFC$, $CGD$ \&c. の周長と直接比例し、そして速度は反比例である。
+しかしながら、これらの回転の時間は円周$AEB$, $BFC$, $CGD$ &c. の周長と直接比例し、そして速度は反比例である。
 
 \textbf{命題 XVII. 定理 4.}
 
@@ -12437,7 +12458,7 @@ Rr \& TQ \text{ または } \frac{\frac{1}{2}VQ \times PQ}{SQ} \& \frac{PQq.}{SP
 
 \textbf{命題 XVII. 補遺 8.}
 
-これらの事実から、さらに次のように結論を引き出すことが可能です。密度が一定であるか、またはその他の任意の法則に従う抵抗媒体中の物体の運動についても同様です。中心 \( S \) から半径が連続的に比例する \( SA, SB, SC \&c. \) の円周上を描く場合、これらの円周間で回転数の比は、当該媒体の密度がこれらの円周間で平均的なものであるとき、その他の媒体における同様な回転数の比に近似されます。
+これらの事実から、さらに次のように結論を引き出すことが可能です。密度が一定であるか、またはその他の任意の法則に従う抵抗媒体中の物体の運動についても同様です。中心 \( S \) から半径が連続的に比例する \( SA, SB, SC &c. \) の円周上を描く場合、これらの円周間で回転数の比は、当該媒体の密度がこれらの円周間で平均的なものであるとき、その他の媒体における同様な回転数の比に近似されます。
 
 \[
 \textbf{訳文}
@@ -12448,7 +12469,7 @@ Rr \& TQ \text{ または } \frac{\frac{1}{2}VQ \times PQ}{SQ} \& \frac{PQq.}{SP
 \textbf{証明}
 \]
 
-中心 \( S \) から半径 \( SA, SB, SC \&c. \) の円周上を描く場合、これらの円周間で物体が回転する回数の比は、当該媒体の密度がこれらの円周間で平均的なものであるとき、その他の媒体における同様な回転数の比に近似されます。
+中心 \( S \) から半径 \( SA, SB, SC &c. \) の円周上を描く場合、これらの円周間で物体が回転する回数の比は、当該媒体の密度がこれらの円周間で平均的なものであるとき、その他の媒体における同様な回転数の比に近似されます。
 
 \[
 \textbf{補足}
@@ -12547,9 +12568,9 @@ suppleatur.
 \pngright{299.png}{756}{888}{-24}
 %Illustration
 
-\textbf{1.} 在球形容器 \(ABC\) 中，流体従四面均匀地被圧縮：我説没有任何一部分会因これ种圧力而移動。なぜならもし某部分 \(D\) 移動了，那么所有与中心等距离的类似部分必須同時に以相同的方式移動；これ是なぜなら所有的圧力是相似且相等的，除了由該圧力引起的运動外，任何其他运動都被假定為不存在。しかし，これ些部分不可能都移動。
+\textbf{1.} 在球形容器 \(ABC\) 中，流体従四面均匀地被圧縮：我説ないどんな一部分会因これ种圧力而移動。なぜならもし某部分 \(D\) 移動了，那所有与中心等距离的类似部分必須同時に以相同的方式移動；これ是なぜなら所有的圧力是相似且相等的，除了由該圧力引起的运動外，どんな其他运動都被假定為不存在。しかし，これ些部分不可能都移動。
 
-\textbf{証明：} 假設某部分 \(D\) 移動了。〜により流体従四面均匀圧縮，所有与中心等距离的部分必須以相同的方式移動。したがって，もし \(D\) 向某个方向移動，則与其等距离的其他部分也必須向相同的方向移動。しかしながら，これ种假設会導致矛盾，なぜならもし所有これ些部分都移動，那么それら之間的相対位置将発生変化，これ違反了流体均匀圧縮的条件。
+\textbf{証明：} 假設某部分 \(D\) 移動了。〜により流体従四面均匀圧縮，所有与中心等距离的部分必須以相同的方式移動。したがって，もし \(D\) 向某個方向移動，則与其等距离的其他部分也必須向相同的方向移動。しかしながら，これ种假設会導致矛盾，なぜならもし所有これ些部分都移動，那それら之間的相対位置将発生変化，これ違反了流体均匀圧縮的条件。
 
 \textbf{2.} 由此可知，在静水中，深度相同的各点具有相等的圧力。なぜならもし某一点受到比其他点更大的圧力，則該点的一部分会向圧力より小さな方向移動，従而破坏均匀性。したがって，所有与中心等距离的部分必須以相同的方式移動，これ表明在静水中，深度相同的各点具有相等的圧力。
 
@@ -12557,9 +12578,9 @@ suppleatur.
 静水中において、ある一点 \( P \) の圧力が他の一点 \( Q \) の圧力より大きいと仮定すると、上記の論証により、中心から等距離にある点は同様な移動を行うこととなる。これにより、点 \( P \) および点 \( Q \) 間の相対的位置が変化し、結果として均一性が破綻する。したがって、同じ深さにあるすべての点には等しい圧力が作用しなければならない。
 \end{proof}
 
-\textbf{3.} 在静水中，各点的圧力与其深度成正比。なぜならもし某点的深度比較深，則該点受到的圧力より大き；反之亦然。これ可以〜を通して考慮流体柱的重量来証明：流体柱越長（即深度越大），其重量越大，従而対底部的圧力也越大。
+\textbf{3.} 在静水中，各点的圧力与其深度成正比。なぜならもし某点的深度比較深，則該点受到的圧力より大き；反之亦然。これできる〜を通して考慮流体柱的重量来証明：流体柱越長（即深度越大），其重量越大，従而対底部的圧力也越大。
 
-\textbf{証明：} 考慮一个高度為 \(h\) 的流体柱，其底面積為 \(A\)。該流体柱的体積為 \(Ah\)，質量為 \(\rho Ah\)（其中 \(\rho\) 為流体密度）。したがって，該流体柱対底部的圧力為 \(\rho Ahg\)（\(g\) 為重力加速度），即圧力与深度成正比。
+\textbf{証明：} 考慮一つの高度為 \(h\) 的流体柱，其底面積為 \(A\)。該流体柱的体積為 \(Ah\)，質量為 \(\rho Ah\)（其中 \(\rho\) 為流体密度）。したがって，該流体柱対底部的圧力為 \(\rho Ahg\)（\(g\) 為重力加速度），即圧力与深度成正比。
 
 \textbf{4.} 在静水中，各点的圧强与其深度成正比。なぜなら圧强定義為単位面積上的圧力。〜によれば上述論証，各点的圧力与其深度成正比，したがって各点的圧强也与其深度成正比。
 
@@ -12626,7 +12647,7 @@ suppleatur.
 
 \textbf{すべてのもの。} よって、最高層の表面 $AE$ は単純な自己重力による力で押さえつけられます。そして、最高層全体と次層の表面 $BFK$（命題XIXにより）も同様に押さえつけられます。さらに、次層の表面 $BFK$ も自己重力による力で押さえつけられ、この力を前の力を加えると二倍の圧力が生じます。
 
-この二倍の圧力 \& さらに自己重力による力、すなわち三倍の圧力により、第三層の表面 $CGL$ は押し付けられます。同様に、四倍の圧力と自己重力による力、つまり五倍の圧力により、第五層の表面も押し付けられます。このようにして、各々の表面にはそれぞれの圧力によって押し付けられます。
+この二倍の圧力 & さらに自己重力による力、すなわち三倍の圧力により、第三層の表面 $CGL$ は押し付けられます。同様に、四倍の圧力と自己重力による力、つまり五倍の圧力により、第五層の表面も押し付けられます。このようにして、各々の表面にはそれぞれの圧力によって押し付けられます。
 
 流体の密度と圧力、および静水力学に関する命題XIXからXXIIIまでを証明します。
 
@@ -12656,7 +12677,7 @@ suppleatur.
 \textbf{終}
 
 \[
-\textbf{ut \& ubi Fluidum sursum rarius est, deorsum densius.} \qquad \text{\QED}
+\textbf{ut & ubi Fluidum sursum rarius est, deorsum densius.} \qquad \text{\QED}
 \]
 
 \textbf{命題1.}\wsp{}したがって、液体の上面は稀薄であり、下面は密度が高い。すなわち、液体の底板は全体の液体に覆われている質量によって直接押し圧されず、その一部のみを支持し、それが命題で説明されている通りである。残りの質量は液体の弓形形状により支えられている。
@@ -12768,7 +12789,7 @@ suppleatur.
 
 これらの命題は、流体の密度と圧力、および静水力学に関する重要な原理を述べています。
 
-\& その質量が水の質量に勝ち越すか、あるいは負けるかする差異が明らかである。しかしながら、物体は重くなることなく下降せず、また重くなることのある物体も、それによって上昇することもない。ただし、実際的な質量により全体の質量が増加しても、比較的見れば一般には水に浮かばないままである。これらの状況についての証明は似ている。
+& その質量が水の質量に勝ち越すか、あるいは負けるかする差異が明らかである。しかしながら、物体は重くなることなく下降せず、また重くなることのある物体も、それによって上昇することもない。ただし、実際的な質量により全体の質量が増加しても、比較的見れば一般には水に浮かばないままである。これらの状況についての証明は似ている。
 
 \textbf{補則7.} その重さが示された物体は、他のどの中心指向力においても同様の性質を有する。
 
@@ -12846,7 +12867,7 @@ suppleatur.
 
 各点における重力が等級的に減少するという仮定により、各段階の重力は直線 \( AH \)，\( BI \)，および \( CK \) に沿って連続的に引き延ばされる。これらの直線は平面 \( ATV \) 上で一定の圧力を生じるため、それぞれが高さ \( AB \)，\( BC \)，および \( CD \) まで達するときの圧力 \( AH \)，\( BI \)，および \( CK \) は、点 \( A \)，\( B \)，および \( C \) の重力に対する比例である。
 
-流体の粒子は無限に及んで圧力を受けるため、粒子 \( A \) はすべての \( AH, BI, CK, DL \) の圧力を受け、粒子 \( B \) は最初の \( AH \) を除いてすべての圧力を受ける。粒子 \( C \) は最初の二つの \( AH, BI \) を除いてすべての圧力を受ける。これにより、粒子 \( A \) の密度 \( AH \) は粒子 \( B \) の密度 \( BI \) に比して、すべての \( AH + BI + CK + DL \) の総和（無限大まで）に対して、すべての \( BI + CK + DL, \&c. \) の総和に対して比が成り立つ。また、粒子 \( B \) の密度 \( BI \) は粒子 \( C \) の密度 \( CK \) に比して、すべての \( BI + CK + DL, \&c. \) の総和に対して、すべての \( CK + DL, \&c. \) の総和に対して比が成り立つ。
+流体の粒子は無限に及んで圧力を受けるため、粒子 \( A \) はすべての \( AH, BI, CK, DL \) の圧力を受け、粒子 \( B \) は最初の \( AH \) を除いてすべての圧力を受ける。粒子 \( C \) は最初の二つの \( AH, BI \) を除いてすべての圧力を受ける。これにより、粒子 \( A \) の密度 \( AH \) は粒子 \( B \) の密度 \( BI \) に比して、すべての \( AH + BI + CK + DL \) の総和（無限大まで）に対して、すべての \( BI + CK + DL, &c. \) の総和に対して比が成り立つ。また、粒子 \( B \) の密度 \( BI \) は粒子 \( C \) の密度 \( CK \) に比して、すべての \( BI + CK + DL, &c. \) の総和に対して、すべての \( CK + DL, &c. \) の総和に対して比が成り立つ。
 
 \textbf{よって、}これらの密度\textit{$AH$、$BI$、$CK$ など}はその差分に比例し、さらにこの Lem.\ I の定理により連続的に比例します。したがって、密度\textit{$AH$、$BI$、$CK$ など}の総和が連続的に比例することになります。よって、位置\textit{A、B、C}での密度が\textit{$AH$、$BI$、$CK$ など}であるなら、これらも連続的に比例します。
 
@@ -12880,7 +12901,7 @@ SA, SD, SQ
 
 流体の密度と圧力、および静水力学（命題XIX〜XXIII）【第28段落】
 
-$YmtZ$, $XhmY$ も同様に等しい \& 直線 $SX$, $SY$, $SZ$ は $AH$, $EM$, $QT$ であり、これらも連続比に属するものでなければなりません。そして直線 $SA$, $SE$, $SQ$ が連続比に属する他の任意の順序を有する場合でも、直線 $AH$, $EM$, $QT$ は連続比の面積双曲線により同じ順序を得ます。
+$YmtZ$, $XhmY$ も同様に等しい & 直線 $SX$, $SY$, $SZ$ は $AH$, $EM$, $QT$ であり、これらも連続比に属するものでなければなりません。そして直線 $SA$, $SE$, $SQ$ が連続比に属する他の任意の順序を有する場合でも、直線 $AH$, $EM$, $QT$ は連続比の面積双曲線により同じ順序を得ます。
 
 \textbf{命題XXII.} \textit{理論XVI.}
 
@@ -12928,19 +12949,19 @@ $YmtZ$, $XhmY$ も同様に等しい \& 直線 $SX$, $SY$, $SZ$ は $AH$, $EM$, 
 実際、双曲線の性質から \( SA \) に対する \( AH \) や \( St \) の比は \( th \) に対する \( Aa \) の比であり、従って \(\frac{AH \times th}{SA}\) は \( Aa \) に等しい。
 
 \[
-\text{同様の議論により、}\frac{BI \times ui}{SB} = Bb, Cc, \&c. です。}
+\text{同様の議論により、}\frac{BI \times ui}{SB} = Bb, Cc, &c. です。}
 \]
 \[
-\text{ここで、}Aa, Bb, Cc, \&c.\ は連続的に比例していますので、差分}
+\text{ここで、}Aa, Bb, Cc, &c.\ は連続的に比例していますので、差分}
 \]
 \[
-Aa - Bb, Bb - Cc, \&c.
+Aa - Bb, Bb - Cc, &c.
 \]
 \[
 \text{も比例します。したがって、これらの差分の積}
 \]
 \[
-tp, uq, \&c.\ は比例し、また、これらの差分の総和}
+tp, uq, &c.\ は比例し、また、これらの差分の総和}
 \]
 \[
 Aa - Cc \text{または} Aa - Dd
@@ -12982,16 +13003,16 @@ FN = \frac{Aa - Ff}{Aa - Cc} \cdot thnz.
 \[
 \frac{SA \textbf{ cub.}}{SAq.}, \frac{SA \textbf{ cub.}}{SBq.}, \frac{SA \textbf{ cub.}}{SCq.}
 \]
-を算術級数としてとるとき、密度 \( AH \), \( BI \), \( CK \), \&c.\ は幾何級数となる。また、質量が距離の四倍比で減少し、距離の立方の逆比例（すなわち
+を算術級数としてとるとき、密度 \( AH \), \( BI \), \( CK \), &c.\ は幾何級数となる。また、質量が距離の四倍比で減少し、距離の立方の逆比例（すなわち
 \[
 \frac{SA \textbf{ qq.}}{SA \textbf{ cub.}}, \frac{SA \textbf{ qq.}}{SB \textbf{ cub.}}, \frac{SA \textbf{ qq.}}{SC \textbf{ cub.}}
 \]
-を算術級数としてとるとき、密度 \( AH \), \( BI \), \( CK \), \&c.\ は幾何級数となる。そして無限にまでこの論証を延長することができる。さらに、流体の各部分の質量が全ての距離において
+を算術級数としてとるとき、密度 \( AH \), \( BI \), \( CK \), &c.\ は幾何級数となる。そして無限にまでこの論証を延長することができる。さらに、流体の各部分の質量が全ての距離において
 
 \[
 \frac{SA \textbf{ cub.}}{SAq.}, \frac{SA \textbf{ cub.}}{SBq.}, \frac{SA \textbf{ cub.}}{SCq.}
 \]
-を算術級数としてとるとき、密度 \( AH \), \( BI \), \( CK \), \&c.\ は幾何級数となる。そして無限にまでこの論証を延長することができる。
+を算術級数としてとるとき、密度 \( AH \), \( BI \), \( CK \), &c.\ は幾何級数となる。そして無限にまでこの論証を延長することができる。
 
 \[
 \text{同様に、距離が等差数列で増加するとき、}
@@ -13370,7 +13391,7 @@ $$\textbf{力、速度、および残りの弧} CD, Od \textbf{は常に} CD, OB
 \oscillationes\ 在 Cycloide \est\ Isochron\ae{.}
 
 Nam si corpora duo a centris suspensionum aequaliter distantia,
-oscillando describant arcus inaequales, \& velocitates in arcuum
+oscillando describant arcus inaequales, & velocitates in arcuum
 partibus correspondentibus sint ad invicem ut arcus toti; resistentiae
 velocitatibus proportionales erunt etiam ad invicem ut idem
 arcus. Proinde si viribus motricibus a gravitate oriundis, quae sint
@@ -13414,7 +13435,7 @@ velocitatum incrementa vel decrementa sint ut hae differentiae vel
 
 \textbf{証明終了}
 
-在下降軌迹中，由上升過程中阻力所縮短的時間。但振子的周期時間，無論是短暫還是長久，似乎〜を通して中間介質的运動而略有変化。なぜなら緩慢减速的物体受到的阻力略小于其速度的比例，加速的物体則比匀速运動的物体受到更大的阻力：これ是なぜなら介質在物体以一定速度獲得并行進到同一区域時，在前一种情况下作用更大，在后一种情况下作用比較小；したがって，它与移動中的物体更一致或不那么一致。故而在下降中振り子動的
+在下降軌迹中，由上升過程中阻力所縮短的時間。但振子的周期時間，無論是短暫還是長久，似乎〜を通して中間介質的运動而略有変化。なぜなら緩慢减速的物体受到的阻力略小于其速度的比例，加速的物体則比匀速运動的物体受到更大的阻力：これ是なぜなら介質在物体以一定速度獲得并行進到同一区域時，在前一种情况下作用更大，在后一种情况下作用比較小；したがって，它与移動中的物体更一致或不那一致。故而在下降中振り子動的
 
 \[
 \textbf{pendula}
@@ -13476,7 +13497,7 @@ $BC$ を下降したときに描かれた弧、$Ca$ を上昇したときに描�
 
 なぜなら、落下中に点 \( Z \), \( B \), \( D \), \( a \) に引き寄せられる力はそれぞれ弧 \( CZ \), \( CB \), \( CD \), \( Ca \) に対応し、これらの力はそれぞれ面積 \( PINM \), \( PIEQ \), \( PI\Gamma \), \( PITC \) に対応するとき、各弧とその対応する力を表す面積を定義すると、点 \( D \) から最小距離 \( Dd \) を描く間隔は平行四辺形 \( RGgr \) の面積として表される。
 
-\& \( rg \)を\( h \)に引いて、\( GHhg \), \& \( RGgr \)が円弧面積\( IGH \), \( PIGR \)の contemporanea arearum decrementaとします。また、
+& \( rg \)を\( h \)に引いて、\( GHhg \), & \( RGgr \)が円弧面積\( IGH \), \( PIGR \)の contemporanea arearum decrementaとします。また、
 \[ \frac{OR}{OQ} IEF - IGH \]
 は\( GHhg - \frac{Rr}{OQ} IEF \),
 すなわち
@@ -13513,7 +13534,7 @@ $BC$ を下降したときに描かれた弧、$Ca$ を上昇したときに描�
 この式を用いて、与えられた時間における粒子の速度増加量を求めることができる。
 
 $$
-\textbf{ut velocitas \& incrementum velocitatis conjunctim, id est ut spatium data temporis particula descriptum \& } V - R \textbf{ conjunctim; atque adeo, si momentum spatii detur, ut } V - R; \textbf{id est, si pro vi } V \textbf{ scribatur ejus exponens } PIGR, \& resistentia } R \textbf{ exponatur per aliam aliquam aream } Z, \textbf{ut } PIGR - Z.
+\textbf{ut velocitas & incrementum velocitatis conjunctim, id est ut spatium data temporis particula descriptum & } V - R \textbf{ conjunctim; atque adeo, si momentum spatii detur, ut } V - R; \textbf{id est, si pro vi } V \textbf{ scribatur ejus exponens } PIGR, & resistentia } R \textbf{ exponatur per aliam aliquam aream } Z, \textbf{ut } PIGR - Z.
 $$
 
 したがって、領域 $PIGR$ は与えられた動量の減少に伴い一様に減少し、領域 $Y$ は比率 $PIGR - Y$ で増加し、領域 $Z$ は比率 $PIGR - Z$ で増加します。したがって、領域 $Y$ と $Z$ が同時に始まり、初期において等しい場合、これらの領域は加算によって
@@ -13522,7 +13543,7 @@ $$
 $$
 ます。
 
-{\ae}qualium momentorum pergent esse {\ae}quales, \& {\ae}qualibus itidem momentis subinde decrescentes simul evanescent. Et vicissim, si simul incipiunt \& simul evanescunt, {\ae}qualia habebunt momenta \& semper erunt {\ae}quales: id adeo quia si resistentia $Z$ augeatur, velocitas una cum arcu illo $Ca$, qui in ascensu corporis describitur, diminuetur; \& puncto in quo motus omnis una cum resistentia cessat propius accedente ad punctum $C$, resistentia citius evanescet quam area $Y$. Et contrarium eveniet ubi resistentia diminuitur.
+{\ae}qualium momentorum pergent esse {\ae}quales, & {\ae}qualibus itidem momentis subinde decrescentes simul evanescent. Et vicissim, si simul incipiunt & simul evanescunt, {\ae}qualia habebunt momenta & semper erunt {\ae}quales: id adeo quia si resistentia $Z$ augeatur, velocitas una cum arcu illo $Ca$, qui in ascensu corporis describitur, diminuetur; & puncto in quo motus omnis una cum resistentia cessat propius accedente ad punctum $C$, resistentia citius evanescet quam area $Y$. Et contrarium eveniet ubi resistentia diminuitur.
 
 Jam vero area $Z$ incipit desinitque ubi resistentia nulla est, hoc \textbf{は}、抵抗が存在しない点で面積 $Z$ が始まり、その終了するとき、抵抗のない点においてです。
 
@@ -13831,7 +13852,7 @@ $$\frac{3}{4}Aa$$ は振子の長さに対する比である。
 この部分は以下のようになります。
 
 \[
-\textbf{これにより、抵抗の量は} \frac{\mathrm{d}}{\mathrm{dt}}(aB) \& \textbf{抵抗と連続的に比例する。したがって} aB \& \textbf{抵抗との積} \textbf{は} Aa \& \textbf{抵抗と連続的に比例するので、} Aa \textbf{は抵抗に比例する。}
+\textbf{これにより、抵抗の量は} \frac{\mathrm{d}}{\mathrm{dt}}(aB) & \textbf{抵抗と連続的に比例する。したがって} aB & \textbf{抵抗との積} \textbf{は} Aa & \textbf{抵抗と連続的に比例するので、} Aa \textbf{は抵抗に比例する。}
 \]
 \(\blacksquare\)
 
@@ -14089,12 +14110,12 @@ F \propto v^2 : d^2 \times \rho
 
 \end{center}\par
 
-\textbf{densitatem proportionalia, \& inter partes illas similiter posita,
+\textbf{densitatem proportionalia, & inter partes illas similiter posita,
 secundum lineas similiter positas utcunque projiciantur; vires autem
 motrices, quibus particul{\ae} Fluidorum se mutuo agitant, sint
-ut corporum projectorum diametri inverse, \& quadrata velocitatum
+ut corporum projectorum diametri inverse, & quadrata velocitatum
 directe: corpora illa temporibus proportionalibus similes
-excitabunt motus in Fluidis, \& spatia similia ac diametris suis proportionalia
+excitabunt motus in Fluidis, & spatia similia ac diametris suis proportionalia
 describent.}
 
 \textbf{Corol.\fsp{}2.}\wsp{}\textbf{よって、同一流体中で高速に投射される物体は、その速度の二倍近似で抵抗を受ける。} なぜなら、力は、
@@ -14111,7 +14132,7 @@ F \propto \frac{d^2 v^2}{dt^2},
 
 \textbf{このようにして}、流体$A$と$B$の粒子間の相互作用力が$T$と$V$であるとき、流体$C$の粒子間の相互作用力も同様に$T$と$V$とみなすことができます。
 
-流体に全く抵抗されないものとする。そして、質量が等しい四体 \( D, E, F, G \) がこれらの中心点 \( A, B, C \) を通って動くとき、前二体 \( D \& E \) は初めの二つの軌道 \( A \& B \) 上を動き、後二体 \( F \& G \) は第三の軌道 \( C \) 上を動くとする。また、物体 \( D \) の速度と物体 \( E \) の速度との比、および物体 \( F \) の速度と物体 \( G \) の速度との比は、力 \( T \) と力 \( V \) の半分の比に等しいとする。すると、物体 \( D \) の抵抗は物体 \( E \) の抵抗に対して、物体 \( F \) の抵抗は物体 \( G \) の抵抗に対して、速度の平方の比に相当する。従って、物体 \( D \) の抵抗は
+流体に全く抵抗されないものとする。そして、質量が等しい四体 \( D, E, F, G \) がこれらの中心点 \( A, B, C \) を通って動くとき、前二体 \( D & E \) は初めの二つの軌道 \( A & B \) 上を動き、後二体 \( F & G \) は第三の軌道 \( C \) 上を動くとする。また、物体 \( D \) の速度と物体 \( E \) の速度との比、および物体 \( F \) の速度と物体 \( G \) の速度との比は、力 \( T \) と力 \( V \) の半分の比に等しいとする。すると、物体 \( D \) の抵抗は物体 \( E \) の抵抗に対して、物体 \( F \) の抵抗は物体 \( G \) の抵抗に対して、速度の平方の比に相当する。従って、物体 \( D \) の抵抗は
 
 \[
 \textbf{物体}~D \textbf{の抵抗} : \textbf{物体}~E \textbf{の抵抗} = v_D^2 : v_E^2
@@ -14295,7 +14316,7 @@ F_{\text{抵抗}} \propto v^2
 
 粒子が互いに接触する点での力の大きさは、粒子間の速度により決定される。粒子が互いに離れて互いに引き去る力を想像し、これらの粒子が表面に近づくにつれてその力は無限大になる一方で、粒子から表面を離れるときには瞬時にゼロとなる。また、系が縮小され、粒子同士が互いに接触する点での力を阻むものがない限り、粒子間の速度によりその力の大きさが決定されるとする。
 
-\textbf{接する場合：} \& 特定の運動間の相互作用は、近傍で互いに接触しているものと同等です。これらは互いに滑らかであるかのように移動し、互いに衝突した場合は、前節で述べた力を用いて互いに反射します、これもまた弾性体同様です。従って、これらの運動は両方の場合において同一であり、ただし近傍で互いに接触しない粒子間の微小な距離差が影響を与える限りを除きます。これらの距離差は粒子間の距離を無限大まで小さくすることができ、したがって、前二節で示された通りです。
+\textbf{接する場合：} & 特定の運動間の相互作用は、近傍で互いに接触しているものと同等です。これらは互いに滑らかであるかのように移動し、互いに衝突した場合は、前節で述べた力を用いて互いに反射します、これもまた弾性体同様です。従って、これらの運動は両方の場合において同一であり、ただし近傍で互いに接触しない粒子間の微小な距離差が影響を与える限りを除きます。これらの距離差は粒子間の距離を無限大まで小さくすることができ、したがって、前二節で示された通りです。
 
 \[
 \textbf{特に、各部分が接しない場合においても、これらの力により空間は無限に減少します。したがって、接する部分においても、ただし特定の差異が与えられた任意の差異よりも小さいものである限り、同じことが成り立ちます。}
@@ -14355,7 +14376,7 @@ F_{\text{抵抗}} \propto v^2
 
 したがって、球体$ABKI$の中心を$C$、半径を$CA$とする図を表します。
 
-\& 物体が流体に直交して衝突する場合、物体は球形のものとして考えます。媒介物である流体の速度が与えられたとき、その速度は直線 \( AC \) と平行です。ここで \( FB \) をそのような直線とします。半径 \( CB \) に等しい長さ \( LB \) を取って、球面上の点 \( B \) で接する直線 \( BD \) を引きます。直線 \( AC \) および \( BD \) 上に垂直線 \( BE \) と \( DL \) を引き、媒介物が直線 \( FB \) の斜め方向に球体を点 \( B \) で衝突させる場合、その力は球体を軸 \( ACI \) まわりに回転する円筒 \( ONGQ \) の垂直方向での衝突と等価となります。すなわち、\( LD \) に対する \( LB \) の比または \( BE \) に対する \( BC \) の比です。また、この力の効果は物体を動かすためにどの程度働くかについても述べます。
+& 物体が流体に直交して衝突する場合、物体は球形のものとして考えます。媒介物である流体の速度が与えられたとき、その速度は直線 \( AC \) と平行です。ここで \( FB \) をそのような直線とします。半径 \( CB \) に等しい長さ \( LB \) を取って、球面上の点 \( B \) で接する直線 \( BD \) を引きます。直線 \( AC \) および \( BD \) 上に垂直線 \( BE \) と \( DL \) を引き、媒介物が直線 \( FB \) の斜め方向に球体を点 \( B \) で衝突させる場合、その力は球体を軸 \( ACI \) まわりに回転する円筒 \( ONGQ \) の垂直方向での衝突と等価となります。すなわち、\( LD \) に対する \( LB \) の比または \( BE \) に対する \( BC \) の比です。また、この力の効果は物体を動かすためにどの程度働くかについても述べます。
 
 流体の運動と投射体の抵抗に関する命題XXXIIからXLまでの証明において、球が角度 $\angle FB$ または $\angle AC$ で衝突した場合、その効果は球が直線 $BC$ で直接衝突するときの効果に比例し、比例定数は $BE : BC$ である。これらの理由を組み合わせることにより、角度 $\angle FB$ で斜めに衝突した粒子が球を動かす効果は、同じ粒子が直線 $BC$ で垂直に衝突したときの効果と同様に球を動かす効果に対して、$BE^2 : BC^2$ の比となる。よって、円柱が角度 $\angle FB$ で斜めに衝突した粒子によって動かされる効果は、同じ粒子が直線 $BC$ で垂直に衝突したときの効果と同様に円柱を動かす効果に対して、$BE^2 : BC^2$ の比となる。
 
@@ -14535,7 +14556,7 @@ Ct \textbf{が} 自身の運動の一部を失い、その比率は} Ct : CR \te
 
 \textit{\textbf{命題 XXXII.}}} \textbf{証明終了}\QED
 
-\textit{\textbf{1.\hspace{0.5em}}}\textbf{もし物体の初速度が与えられたとします。その初速度から、物体が長さ} Ct \textbf{を描くとき、} Ct \textbf{が失う運動の部分はどのように計算できるかがわかります。\& そして、}
+\textit{\textbf{1.\hspace{0.5em}}}\textbf{もし物体の初速度が与えられたとします。その初速度から、物体が長さ} Ct \textbf{を描くとき、} Ct \textbf{が失う運動の部分はどのように計算できるかがわかります。& そして、}
 \textbf{抵抗が重力の力を} その失われた運動の部分} : \textbf{同一時間に重力によって生成される運動} \textbf{とし、}
 \textbf{したがって、抵抗} : \textbf{重力の比はどのように求められるかがわかります。}\QED
 
@@ -14559,7 +14580,7 @@ Ct \textbf{が} 自身の運動の一部を失い、その比率は} Ct : CR \te
 
 
 neque omnino nulla, sed mediocrem aliquam rationem teneat:
-resistentia pariter, inter limites in constructione Problematis \& Corollario
+resistentia pariter, inter limites in constructione Problematis & Corollario
 superiore positos, mediocrem rationem tenebit.
 
 \textit{補則4.}\wsp{}速度の二乗に比例するほどやや遅い物体が抵抗を受けます：このことから、長さ$CZ$を失う物体の運動の一部は、その運動全体に対して$CT$と$CR$の比率と同じになります。
@@ -14649,7 +14670,7 @@ $$V$$は、物体が落下した高さ$$S$$から上昇するとします；そ�
 
 さらに、もし水沿水平方向従管中流出；
 
-% 翻译結束，此処無需添加更多内容。
+% 翻訳結束，此処無需添加更多内容。
 
 \textbf{なぜなら、容器の底は完全であり、水が流出しない場合と同じ圧力で全域から迫られるため、容器は全体の水の重さを支える。流出が阻害されない限り、そのような圧力は存在する。しかし、水が流出する側面からは、もし水が流出しなければ受けたすべての圧力を支えただろう。}
 
@@ -15153,7 +15174,7 @@ v = v'
 ニュートンの『自然哲学の数学的諸原理』第2編 第7節：流体の運動と投射体の抵抗（命題XXXII〜XL）の一部を、指定されたルールに従って日本語LaTeX形式で翻訳します。
 
 \[
-\textbf{pondere unciarum Romanarum } 26\frac{1}{4} \textbf{ suspendi filo eodem, sic ut inter centrum Globi \& punctum suspensionis intervallum esset pedum } 10\frac{1}{2}, \textbf{ \& numerabam oscillationes quibus data motus pars amitteretur. Tabularum subsequentium prior exhibet numerum}
+\textbf{pondere unciarum Romanarum } 26\frac{1}{4} \textbf{ suspendi filo eodem, sic ut inter centrum Globi & punctum suspensionis intervallum esset pedum } 10\frac{1}{2}, \textbf{ & numerabam oscillationes quibus data motus pars amitteretur. Tabularum subsequentium prior exhibet numerum}
 \]
 \[
 \begin{array}{lccccccc}
@@ -15441,7 +15462,7 @@ F \propto v^3
 
 水に対する活発性は約13または14分の1である：すなわち、銀の活発性は水の密度に対してその比である。私が少し大きい球形 pendulum を用いた場合、直径が大体半分または三分之二の指に相当するものとすると、活発性のある銀の抵抗は約12または10分の1の水の抵抗と同じ比率を示した。
 
-しかし、前記の実験の方が信頼されるべきである。これは、最後の容器が浸かる球体に対して過度に狭かったためである。球体を拡大すれば、容器も拡大すべきである。私はこのような実験をより大きな容器で行った\&
+しかし、前記の実験の方が信頼されるべきである。これは、最後の容器が浸かる球体に対して過度に狭かったためである。球体を拡大すれば、容器も拡大すべきである。私はこのような実験をより大きな容器で行った&
 
 \begin{center}
 \pngright{pendulum}{3cm}{2.5cm}{-10pt}
@@ -15479,7 +15500,7 @@ F \propto v^3
 
 これまでに、振動する懸垂重りの実験を用いてきました。これは、その運動がより容易かつ正確に観察し測定できるためです。また、円周上を回転させ、再び円周に戻る懸垂重りの運動は、均一であるからこそ、その速度に対する抵抗を探求するのに適していると考え、これらの運動も考慮に入れるようになりました。つまり、懸垂重りを12周回転させるようにすることで、二つの円の大きさを観察し、それらを記録しました。
 
-\textbf{最初の回転と最後の回転において描かれた。そして、由此可得，物体在初始時刻与最終時刻的速度。然后説，当物体以中等速度描述十二个中等円周時，它会失去これ些速度之差；由此得知，阻力使得該物体在経過十二个中等円周的過程中可以失去これ些速度之差；虽然これ种类型的実験試試不十分准确，但与前文所述結果大致相符。}
+\textbf{最初の回転と最後の回転において描かれた。そして、由此可得，物体在初始時刻与最終時刻的速度。然后説，当物体以中等速度描述十二個中等円周時，它会失去これ些速度之差；由此得知，阻力使得該物体在経過十二個中等円周的過程中できる失去これ些速度之差；虽然これ种类型的実験試試不十分准确，但与前文所述結果大致相符。}
 
 \textbf{最后，当当代最被接受的哲学家的意見}
 
@@ -15574,7 +15595,7 @@ A : B = 78 : 77.
 
 \end{center}\par
 
-もし粒子 \(a\), \(b\), \(c\), \(d\), \(e\) が一直線上に配置されている場合、圧力は直線の方向から \(a\) から \(e\) へと直接伝搬することができます。しかし、粒子 \(e\) は斜め位置にある粒子 \(f\) \& \(g\) を斜めに押し寄せますが、これらの粒子 \(f\) \& \(g\) は圧力を受け取るためには支えが必要です。
+もし粒子 \(a\), \(b\), \(c\), \(d\), \(e\) が一直線上に配置されている場合、圧力は直線の方向から \(a\) から \(e\) へと直接伝搬することができます。しかし、粒子 \(e\) は斜め位置にある粒子 \(f\) & \(g\) を斜めに押し寄せますが、これらの粒子 \(f\) & \(g\) は圧力を受け取るためには支えが必要です。
 
 \textbf{第2編 第8節：流体内を伝播する運動（波動・音速の理論、命題XLI〜L）}
 
@@ -15700,7 +15721,7 @@ $A$から$PQ$への流れは連続的な下降によって近接した谷へと�
 
 さらに、点 \( de \), \( fg \), \( hi \), \( kl \), などと表す直線は、孔 \( BC \) から伝播した最も密集した部分を示します。そして、そこでは媒質が他の空間よりも密度が高いことが知られています。
 
-\textbf{ここから反対方向の} \( KL \) および \( NO \) の線分に対して、その拡張はこれらの間隔 \( KL \) および \( NO \) が置かれた位置において、脈動間隔が稀疏な部分より密な部分へと常に希薄になるように進展します。そして、このようにして密な領域から稀疏な領域へと移行するとき、その運動は両方の領域を共有します。また、なぜなら脉動的运動起源于持続松弛比較密集的部分向比較稀疏的部分，所以当脉冲在静止不動的空間 \( KL \) および \( NO \) 中伝播時，它応当従これ些位置向両側放松；かつこれ些脉冲将以相同的速度従各个方向拡展到空間 \( KL \)，\( NO \) 中，従而直接伝播。
+\textbf{ここから反対方向の} \( KL \) および \( NO \) の線分に対して、その拡張はこれらの間隔 \( KL \) および \( NO \) が置かれた位置において、脈動間隔が稀疏な部分より密な部分へと常に希薄になるように進展します。そして、このようにして密な領域から稀疏な領域へと移行するとき、その運動は両方の領域を共有します。また、なぜなら脉動的运動起源于持続松弛比較密集的部分向比較稀疏的部分，したがって当脉冲在静止不動的空間 \( KL \) および \( NO \) 中伝播時，它応当従これ些位置向両側放松；かつこれ些脉冲将以相同的速度従各個方向拡展到空間 \( KL \)，\( NO \) 中，従而直接伝播。
 
 \textbf{訳文}
 
@@ -15712,7 +15733,7 @@ $A$から$PQ$への流れは連続的な下降によって近接した谷へと�
 
 \(\pngright{figura8_3}{5cm}{4cm}{(a)}\)
 
-\section*{\textbf{命題 XLIII \& 定理 XXXIII}}
+\section*{\textbf{命題 XLIII & 定理 XXXIII}}
 
 \textbf{すべての物体は、弾性媒質内では振動運動を直線的に伝播させ、非弾性媒質内では円運動を引き起こす。}
 
@@ -15751,7 +15772,7 @@ $A$から$PQ$への流れは連続的な下降によって近接した谷へと�
 
 \textbf{後方から離れる。}これは、任意の媒質中で投射体が投げ出されたときと同じ状況である。媒質は投射体に対して屈服するが、無限に移動しない。代わりに、媒質は円周を描きながら投射体が後方から離れた空間へと進む。したがって、振動体が任意の部分へ移動するたびに、媒質はその周りを円周を描いて進み、かつ振動体が元の位置に戻るたびに、媒質はその位置から再び退ける。
 
-\textbf{そして、}尽管振動体不是堅固的，而是以各种方式柔靭的，只要其大小保持不変，〜により它的振動不能在任何地方圧迫媒質而不使它在其他地方松弛。
+\textbf{そして、}尽管振動体ではない堅固的，而是以各种方式柔靭的，只要其大小保持不変，〜により它的振動不能在どんな地方圧迫媒質而不使它在其他地方松弛。
 
 
 
@@ -15961,7 +15982,7 @@ vel 直線的に下降しますが、昇降は円周を通じてより正確に�
 
 \textbf{証明}
 
-$AB$, $BC$, $CD$, \&c. を連続する波間隔とし、$ABC$ を波の伝播から点$A$へ向かって点$B$までの移動領域とする。また、静止している流体中の点$E$, $F$, $G$を直線$AC$上に等距離に配置し、それぞれ$Ee$, $Ff$, $Gg$ をその間隔とする。
+$AB$, $BC$, $CD$, &c. を連続する波間隔とし、$ABC$ を波の伝播から点$A$へ向かって点$B$までの移動領域とする。また、静止している流体中の点$E$, $F$, $G$を直線$AC$上に等距離に配置し、それぞれ$Ee$, $Ff$, $Gg$ をその間隔とする。
 
 
 \par\begin{center}
@@ -15973,11 +15994,11 @@ $AB$, $BC$, $CD$, \&c. を連続する波間隔とし、$ABC$ を波の伝播か
 
 \textbf{第8節：流体内を伝播する運動（波動・音速の理論、命題XLI〜L）}
 
-{\ae}qualia per brevissima per qu{\ae} puncta illa motu reciproco singulis vibrationibus eunt \& redeunt; $\epsilon$, $\varphi$, $\gamma$ loca qu{\ae}vis intermedia eorundem punctorum; & $EF$, $FG$ lineolas Physicas seu Medii partes lineares punctis illis interjectas, & successively translatae in loca $\epsilon\varphi$, $\varphi\gamma$ \& $ef$, $fg$. Rect{\ae} $Ee$ {\ae}qualis ducatur recta $PS$. Bisecetur eadem in $O$, centroque $O$ \& intervallo $OP$ describatur circulus $SIPi$. Per hujus circumferentiam totam cum partibus suis exponatur.
+{\ae}qualia per brevissima per qu{\ae} puncta illa motu reciproco singulis vibrationibus eunt & redeunt; $\epsilon$, $\varphi$, $\gamma$ loca qu{\ae}vis intermedia eorundem punctorum; & $EF$, $FG$ lineolas Physicas seu Medii partes lineares punctis illis interjectas, & successively translatae in loca $\epsilon\varphi$, $\varphi\gamma$ & $ef$, $fg$. Rect{\ae} $Ee$ {\ae}qualis ducatur recta $PS$. Bisecetur eadem in $O$, centroque $O$ & intervallo $OP$ describatur circulus $SIPi$. Per hujus circumferentiam totam cum partibus suis exponatur.
 
 \textbf{訳文}
 
-極めて短い時間内に、流体中の各点は互いに反復的な運動を遂げて往復する。$\epsilon$, $\varphi$, $\gamma$ はこれらの点の任意の中間位置である；そして $EF$, $FG$ は物理的または流体の部分であり、これらは点間に挿入され、それぞれ $\epsilon\varphi$, $\varphi\gamma$ \& $ef$, $fg$ の位置に移動する。直線 $Ee$ が等しい長さで直線 $PS$ と平行に引かれる。この直線は点 $O$ で二等分され、中心 $O$ および半径 $OP$ を用いて円 $SIPi$ を描く。この円周全体とともにその各部分を展開する。
+極めて短い時間内に、流体中の各点は互いに反復的な運動を遂げて往復する。$\epsilon$, $\varphi$, $\gamma$ はこれらの点の任意の中間位置である；そして $EF$, $FG$ は物理的または流体の部分であり、これらは点間に挿入され、それぞれ $\epsilon\varphi$, $\varphi\gamma$ & $ef$, $fg$ の位置に移動する。直線 $Ee$ が等しい長さで直線 $PS$ と平行に引かれる。この直線は点 $O$ で二等分され、中心 $O$ および半径 $OP$ を用いて円 $SIPi$ を描く。この円周全体とともにその各部分を展開する。
 
 
 \par\begin{center}
@@ -16053,7 +16074,7 @@ Vとすると、点Fの部分EGの拡張は、入射時に$V-IM$に対して$V$�
 \]
 
 \[
-\textbf{vis Elastic}\ae\ puncti }{\epsilon} \textbf{ supra vim elasticam puncti }{\gamma}, \textbf{ est vis qua interjecta Medii lineola }{\epsilon\gamma} \textbf{ acceleratur; \& propterea vis acceleratrix lineolae Physic{\ae}} {\epsilon\gamma} \textbf{ est ut ipsius distantia a Medio vibrationis loco }{\Omega}. \textbf{ Proinde tempus (per Prop.\ XXXVIII. Lib.\ I.) recte exponitur per arcum }{PI}; \& Medii pars linearis }{\epsilon\gamma} \textbf{ lege pr{\ae}scripta movetur, id est lege oscillantis Penduli: estque par ratio partium omnium linearium ex quibus Medium totum componitur.}
+\textbf{vis Elastic}\ae\ puncti }{\epsilon} \textbf{ supra vim elasticam puncti }{\gamma}, \textbf{ est vis qua interjecta Medii lineola }{\epsilon\gamma} \textbf{ acceleratur; & propterea vis acceleratrix lineolae Physic{\ae}} {\epsilon\gamma} \textbf{ est ut ipsius distantia a Medio vibrationis loco }{\Omega}. \textbf{ Proinde tempus (per Prop.\ XXXVIII. Lib.\ I.) recte exponitur per arcum }{PI}; & Medii pars linearis }{\epsilon\gamma} \textbf{ lege pr{\ae}scripta movetur, id est lege oscillantis Penduli: estque par ratio partium omnium linearium ex quibus Medium totum componitur.}
 \]
 
 \textit{Corol.}\wsp{}したがって、波動伝播する拍動数は一定であることが明らかとなる。
@@ -16216,7 +16237,7 @@ Vibrationの時間において。その時間を等しくする距離が与え�
 
 このようにして、流体内で音が伝播する速度とその特性を推定することができます。
 
-\& 活性銀の比重は1対11617です。したがって、活性銀の高さが30 Digitに等しいとき、均一な空気の高さは、その重力で私たちの空気を圧縮できる高さであるため、その高さは348500 Digitまたは英尺29042となります。この高さは、先述した問題の構築において我々が名付けた $A$ の高さと同一です。半径29042英尺の円周は182476英尺です。そして、 Pendulum が39\frac{1}{5} Digitの長さを持つとき、短時間の2秒間で往復する振動を実行します。したがって、Pendulum の長さは英尺29042またはDigit348500となります。
+& 活性銀の比重は1対11617です。したがって、活性銀の高さが30 Digitに等しいとき、均一な空気の高さは、その重力で私たちの空気を圧縮できる高さであるため、その高さは348500 Digitまたは英尺29042となります。この高さは、先述した問題の構築において我々が名付けた $A$ の高さと同一です。半径29042英尺の円周は182476英尺です。そして、 Pendulum が39\frac{1}{5} Digitの長さを持つとき、短時間の2秒間で往復する振動を実行します。したがって、Pendulum の長さは英尺29042またはDigit348500となります。
 
 長時間にわたる振動は，$188\frac{4}{7}$秒で完了するべきである。したがって，音が伝播する時間は182476フィートであり，その結果，5分の1秒では968フィートとなる。
 
@@ -16386,7 +16407,7 @@ Vibrationの時間において。その時間を等しくする距離が与え�
 \begin{itemize}
     \item \textit{summa linearum}：直線的動径の合計
     \item \textit{Medium uniformiter fluidum}：均質な流体
-    \item \textit{orbium numerus augeatur \& latitudo minuatur in infinitum}：球体の数を無限大に増加させ、半径を無限小に縮小させる
+    \item \textit{orbium numerus augeatur & latitudo minuatur in infinitum}：球体の数を無限大に増加させ、半径を無限小に縮小させる
     \item \textit{areae Hyperbolicae his summis Analogae}：円錐曲線 \(AaQ\)，\(BbQ\)，\(CcQ\)，\(DdQ\)，\(EeQ\) などの面積
     \item \textit{tempora motibus angularibus reciproce proportionalia erunt etiam his areis reciproce proportionalia}：角運動時間は逆比例する
     \item \textit{(per notas Curvarum quadraturas)}：（曲線の quadratura による符号付け）
@@ -16406,7 +16427,7 @@ Vibrationの時間において。その時間を等しくする距離が与え�
 
 在静止的円柱体内。
 
-\textbf{補則5.} よって、外円柱体和流体均処于静止状態時，若内円柱体均匀旋転，則流体会獲得円周运動，并逐漸伝播至整个流体中；直到流体各部分〜によれば第四補則所定義的条件獲得動量之前，其動量不会停止增長。
+\textbf{補則5.} よって、外円柱体和流体均処于静止状態時，若内円柱体均匀旋転，則流体会獲得円周运動，并逐漸伝播至整個流体中；直到流体各部分〜によれば第四補則所定義的条件獲得動量之前，其動量不会停止增長。
 
 \textbf{補則6.} 〜により流体試図進一步拡展其動量，除非外円柱体被强力阻止，否則它也会在外円柱体周囲旋転，かつ其运動速度会持続增加直至某一時刻。
 
@@ -16454,7 +16475,7 @@ Vibrationの時間において。その時間を等しくする距離が与え�
 
 この部分では、ニュートンはデカルトの渦運動理論を批判的に論駁しています。デカルトは流体が円錐形の渦を形成すると主張していましたが、ニュートンはその仮説に対して反論し、流体の各部分が中心からの距離に比例する周期を持つことを示唆しています。
 
-\& 接近する面において作用されるもの。もし凹面より凸面よりもいずれか一方の部分で作用が大きいならば、強力な作用は惑星の速度を加速または減速させる。作用方向によっては運動の同一領域へ向けるか反対方向へ向けるかにより異なる。したがって、各惑星が自らの運動において均一に perseveret するためには、双方の部分で作用が等しくなり、互いに対極的な領域で発生しなければならない。ゆえに、これらの作用は接続する面であり、それらの相互移動は
+& 接近する面において作用されるもの。もし凹面より凸面よりもいずれか一方の部分で作用が大きいならば、強力な作用は惑星の速度を加速または減速させる。作用方向によっては運動の同一領域へ向けるか反対方向へ向けるかにより異なる。したがって、各惑星が自らの運動において均一に perseveret するためには、双方の部分で作用が等しくなり、互いに対極的な領域で発生しなければならない。ゆえに、これらの作用は接続する面であり、それらの相互移動は
 
 \[
 \textbf{ inverse ut superficies, hoc est}
@@ -16464,7 +16485,7 @@ Vibrationの時間において。その時間を等しくする距離が与え�
 
 \textbf{逆に、面積から中心までの距離の平方に反比例する。しかし、角速度の変位は、これらの距離に対する直線的な応用と等しいか、あるいはこれらが直接的にそして距離反比例的に；すなわち（理由を結びつけると）、距離の立方反比例である。}
 
-したがって、無限長な直線 \( SABCDEQ \) 上の各部分 \( SA, SB, SC, SD, SE, \&c. \) に対して、それぞれの垂線 \( Aa, Bb, Cc, Dd, Ee, \&c. \) を引き、これら各々が距離の逆立方比に比例するとき、その総距離は、すなわち全体の角速度は、対応する直線の総和と等しい。
+したがって、無限長な直線 \( SABCDEQ \) 上の各部分 \( SA, SB, SC, SD, SE, &c. \) に対して、それぞれの垂線 \( Aa, Bb, Cc, Dd, Ee, &c. \) を引き、これら各々が距離の逆立方比に比例するとき、その総距離は、すなわち全体の角速度は、対応する直線の総和と等しい。
 
 \textbf{第9節：流体の渦運動（デカルト渦動説の批判的論駁、命題LI〜LIII）}
 
@@ -16542,7 +16563,7 @@ r
 \textit{推論 2.} もし静止流体中に中心軸を中心に無限大で等速回転する球体が与えられた場合、流体には渦動運動が生じ、その運動は無限遠方にまで徐々に拡散します。各流体部分の速度が加速する前に、各部分の周期時間は中心から球までの距離の平方と等しくなることがありません。
 
 \[
-\textbf{sunt reciproce ut quadrata distantiarum a centro globi, \& velocitates
+\textbf{sunt reciproce ut quadrata distantiarum a centro globi, & velocitates
 absolut{\ae} reciproce ut eadem quadrata applicata ad distantias
 ab axe.}
 \]
@@ -16552,9 +16573,9 @@ ab axe.}
 \]
 
 \[
-\textbf{Corol.\fsp{}2.}\wsp{}Si globus in fluido quiescente similari \& infinito circa
+\textbf{Corol.\fsp{}2.}\wsp{}Si globus in fluido quiescente similari & infinito circa
 axem positione datum uniformi cum motu revolvatur, communicabitur
-motus fluido in morem Vorticis, \& motus iste paulatim propagabitur
+motus fluido in morem Vorticis, & motus iste paulatim propagabitur
 in infinitum; neque prius cessabit in singulis fluidi partibus
 accelerari, quam tempora periodica singularum partium sint
 ut quadrata distantiarum a centro globi.
@@ -16596,12 +16617,12 @@ ut quadrata distantiarum a centro globi.
 
 \textbf{コロラリオ} \textit{7.} もしこの流体が球形の容器内で閉じ込められた場合、球体は互いに位置関係を保ちつつ動くことになります。
 
-在中心処進行均匀旋転的渦旋，若球体与容器囲回同一軸線以相同部分進行旋転，則それら的周期時間応当是半径的平方。流体各部分不会在其运動中保持不変，除非其周期時間是相対于漩渦中心距离的平方。除此之外，任何其他构成漩渦的方式都是不可能持久存在的。
+在中心処進行均匀旋転的渦旋，若球体与容器囲回同一軸線以相同部分進行旋転，則それら的周期時間応当是半径的平方。流体各部分不会在其运動中保持不変，除非其周期時間是相対于漩渦中心距离的平方。除此之外，どんな其他构成漩渦的方式都是不可能持久存在的。
 
 \textbf{補遺 8.} 若容器包含流体且球体維持此运動，かつ相対于任意与定軸線進行額外的普遍角运動，
 
 $$
-\textit{si vas, fluidum inclusum \& globus servent hunc motum, et motu praeterea communi angulari circa axem quemvis datum}
+\textit{si vas, fluidum inclusum & globus servent hunc motum, et motu praeterea communi angulari circa axem quemvis datum}
 $$
 
 則それら将保持これ种状態。
@@ -16647,13 +16668,13 @@ $$
 これらすべてにおいて、流体の材質について密度と粘性が均一であるとする。このような流体では、同じ速度で動く同一の球が、流体内のどの位置でも常に等しい距離を保ち、等しい時間間隔で類似かつ等しい運動を伝播させることが可能となる。実際、材質はその運動によって自己の運動を試みるが、
 
 \[
-\textbf{vas \& globus in se invicem agent mediante fluido, neque motus suos in se mutuò per fluidum propagare prius cessabunt, quam eorum temporum periodica aequantur inter se, & Systema totum ad instar corporis unius solidi simul revolvatur.}
+\textbf{vas & globus in se invicem agent mediante fluido, neque motus suos in se mutuò per fluidum propagare prius cessabunt, quam eorum temporum periodica aequantur inter se, & Systema totum ad instar corporis unius solidi simul revolvatur.}
 \]
 
 \[
 \textbf{Scholium.}
 
-\textbf{In his omnibus suppono fluidum ex materia quoad densitatem \& fluiditatem uniformi constare. Tale est in quo globus idem eodem cum motu, in eodem temporis intervallo, motus similes \& aequales, ad aequales semper a se distantias, ubivis in fluido constitutus, propagare possit. Conatur quidem materia per motum suum}
+\textbf{In his omnibus suppono fluidum ex materia quoad densitatem & fluiditatem uniformi constare. Tale est in quo globus idem eodem cum motu, in eodem temporis intervallo, motus similes & aequales, ad aequales semper a se distantias, ubivis in fluido constitutus, propagare possit. Conatur quidem materia per motum suum}
 \]
 
 流体の渦運動について、デカルトの説を批判的に論駁する【第2編 第9節】では、以下のように訳します。
@@ -16662,9 +16683,9 @@ $$
 
 \textbf{注：} ここでは、原文の論証を日本語に翻訳し、LaTeX構文を使用して形式化しました。ただし、画像の配置は指定されていないため、具体的な位置については適宜調整してください。
 
-cohērebit \& segnior erit, adeō quē motum tardiùs recipiet \& longiūs propagabit quam pro ratione superius assignata. Si figura vāsis non sit sphērica, movebuntur particulae in lineis non circularibus sed conformibus eidem vāsi figurae, \& tempora periodica erunt ut quadrata mediocrium distantiarum a centro quamproxime.
+cohērebit & segnior erit, adeō quē motum tardiùs recipiet & longiūs propagabit quam pro ratione superius assignata. Si figura vāsis non sit sphērica, movebuntur particulae in lineis non circularibus sed conformibus eidem vāsi figurae, & tempora periodica erunt ut quadrata mediocrium distantiarum a centro quamproxime.
 
-In partibus inter centrum \& circumferentiam, ubi latiora sunt spatia, tardiores erunt motus, ubi angustiora velociores; neque tamen particulae velociores petent circumferentiam. Arcus enim describent minus curvos, \& conatus recedendi a centro non minus diminuitur.
+In partibus inter centrum & circumferentiam, ubi latiora sunt spatia, tardiores erunt motus, ubi angustiora velociores; neque tamen particulae velociores petent circumferentiam. Arcus enim describent minus curvos, & conatus recedendi a centro non minus diminuitur.
 
 この翻訳は以下のようになります：
 
@@ -17042,8 +17063,8 @@ $$C$$ は天文学の法に従って；しかし力学の法によれば、$$A$$
 \therefore \textbf{太陽の日周運動の観測速度} \textit{(in principio Virginis)} > \textbf{太陽の日周運動の観測速度} \textit{(minutorum primorum septuaginta)}
 \]
 
-\&初めの pisciumより四十分の八秒小さいが、それでも（経験によれば）この太陽の運動は、魚座の初めよりも処女座の初めよりも大きい。従って、地球は処女座の初めよりも魚座の初めよりも速い速度で回転する。  
-\&したがって、渦動説は天体運動を解明するためにではなく、混乱させるために天文現象と完全に矛盾している。自由空間においてこのような運動が渦がない状態でどのように進行するかは、第一書籍から理解できるし、完全には『充満した宇宙の系』の中で教えられる。
+&初めの pisciumより四十分の八秒小さいが、それでも（経験によれば）この太陽の運動は、魚座の初めよりも処女座の初めよりも大きい。従って、地球は処女座の初めよりも魚座の初めよりも速い速度で回転する。  
+&したがって、渦動説は天体運動を解明するためにではなく、混乱させるために天文現象と完全に矛盾している。自由空間においてこのような運動が渦がない状態でどのように進行するかは、第一書籍から理解できるし、完全には『充満した宇宙の系』の中で教えられる。
 
 
 \section*{\textbf{DE}}
@@ -17106,7 +17127,7 @@ Hypoth.\textbf{V}\@.\wsp{}\textit{\textbf{木星外惑星は、太陽から引�
 
 観測によって確認されるところです。これらの木星外惑星の軌道は、同心円から著しく異なりませんし、それらの運動はこれらの円周上で一様であることが観察されています。その周期は各惑星からの距離の比に比例します。
 
-\textbf{ところが、周期は半径の対数的な三倍関係に一致していると天文学者は主張します。}\& \textit{フラムステディウス}は、マイクロメーターを使用し、衛星の日食を精密に測定した人物で、私に手紙を送り、また私と数字を共有することで、その三倍関係がいかに精密に得られるかを示しました。これは感覚で捉えることが可能であるほど正確です。\textit{フラムステディウス}は次のように述べています。
+\textbf{ところが、周期は半径の対数的な三倍関係に一致していると天文学者は主張します。}& \textit{フラムステディウス}は、マイクロメーターを使用し、衛星の日食を精密に測定した人物で、私に手紙を送り、また私と数字を共有することで、その三倍関係がいかに精密に得られるかを示しました。これは感覚で捉えることが可能であるほど正確です。\textit{フラムステディウス}は次のように述べています。
 
 \[
 \textbf{1日 18時間 }28分 \frac{3}{5}
@@ -17364,7 +17385,7 @@ r \approx 60
 
 \textbf{注}： Tycho の観測値は太陽と月の屈折を過大評価しており、これは視差を四分の一から五分の一程度増加させた。
 
-月の軌道誤差は、これこそが大約十二分の一または十分の五分の一の全視差である。この誤差を修正し、距離は大約61地球半径となることが得られる。ほぼ他の者によって指定されたものと一致する。私たちは平均的な距離を六十个半径として仮定し、固定星に対する月の周期が27日7時間43分であるとする（天文学者により定められた通り）、そして地球の周囲をパリの測定による123,249,600フィートで回るとする。もし月が全ての運動から取り除かれ、その力を制限されることなく放たれるとするならば、
+月の軌道誤差は、これこそが大約十二分の一または十分の五分の一の全視差である。この誤差を修正し、距離は大約61地球半径となることが得られる。ほぼ他の者によって指定されたものと一致する。私たちは平均的な距離を六十個半径として仮定し、固定星に対する月の周期が27日7時間43分であるとする（天文学者により定められた通り）、そして地球の周囲をパリの測定による123,249,600フィートで回るとする。もし月が全ての運動から取り除かれ、その力を制限されることなく放たれるとするならば、
 
 \[
 \textbf{Lunā motu omni privātā, ac dimittitī ut urgente vi illa}
@@ -17378,7 +17399,7 @@ r \approx 60
 
 \pngright{399.png}{5cm}{4cm}{}
 
-pedes Parisienses \(60 \times 60 \times 15\frac{1}{12}\), そして秒単位の一分間の距離は \(15\frac{1}{12}\) ペディスである。しかしながら、我々の地域においては、物体が落下する速度は秒単位の一分間の時間内にpedes Parisienses \(15\frac{1}{12}\)を描くことから、\textit{Hugenius}が実験と計算により示したように、 pendulorum experimentis \& computo inde inito。よって、月がその軌道で保持される力は、我々が重力と呼ぶものと同じである。なぜなら、もし重力をそれとは異なるものとするならば、物体が両方の力の作用により地球に向かって落下する速度は二倍になり、また秒単位の一分間の距離を落下するときには
+pedes Parisienses \(60 \times 60 \times 15\frac{1}{12}\), そして秒単位の一分間の距離は \(15\frac{1}{12}\) ペディスである。しかしながら、我々の地域においては、物体が落下する速度は秒単位の一分間の時間内にpedes Parisienses \(15\frac{1}{12}\)を描くことから、\textit{Hugenius}が実験と計算により示したように、 pendulorum experimentis & computo inde inito。よって、月がその軌道で保持される力は、我々が重力と呼ぶものと同じである。なぜなら、もし重力をそれとは異なるものとするならば、物体が両方の力の作用により地球に向かって落下する速度は二倍になり、また秒単位の一分間の距離を落下するときには
 
 
 
@@ -17696,7 +17717,7 @@ F \propto \frac{1}{r^2}
 \pngright{406.png}{2.5cm}{1.8cm}{-1pt}
 \end{center}
 
-expertus sum quod septuplo Solis aestivi calore aqua ebullit. Dubium verò non est quin materia Mercurii ad calorem accommodetur, \& propterea densior sit hac nostra; cum materia omnis densior ad operationes Naturales obeundas majorem calorem requirat.
+expertus sum quod septuplo Solis aestivi calore aqua ebullit. Dubium verò non est quin materia Mercurii ad calorem accommodetur, & propterea densior sit hac nostra; cum materia omnis densior ad operationes Naturales obeundas majorem calorem requirat.
 
 \textbf{命題 IX.} 地表から惑星の表面へ向かって重力は距離に反比例する。
 
@@ -17925,7 +17946,7 @@ g(R) = G \frac{M_{\text{地球}}(R)}{R^2} \approx 5 - 6 \times g(\infty)
 
 
 
-\textbf{ menstruus est; hujus facies eadem ulteriorem umbilicum orbis ipsius semper respiciet, \& propterea pro situ umbilici illius deviabit hinc inde a Terra. Hae est libratio in longitudinem. Nam libratio in latitudinem orta est ex inclinatione axis Lunaris ad planum orbis. Porrò hae ita se habere, ex Ph{\ae}nomenis manifestum est.}
+\textbf{ menstruus est; hujus facies eadem ulteriorem umbilicum orbis ipsius semper respiciet, & propterea pro situ umbilici illius deviabit hinc inde a Terra. Hae est libratio in longitudinem. Nam libratio in latitudinem orta est ex inclinatione axis Lunaris ad planum orbis. Porrò hae ita se habere, ex Ph{\ae}nomenis manifestum est.}
 
 \textbf{Prop.\ XVIII. Theor.\ XVII.}
 
@@ -18064,7 +18085,7 @@ $$100 : 101:$$ 重力が点 $Q$ における地球に及ぼす影響は、中心
 
 異なる斜面で流れる水の管 \(ACQqca\) の中での物体の重さは等しい。また、各部分の重さは全体に対する比率に比例し、同様にすべての斜面においても同じ関係が成り立つ。
 
-adeoque etiam \textbf{ae}quantur inter se; erunt pondera \textbf{ae}qualium \& in cruribus similiter sitarum partium reciproce ut crura, id est reciproce ut 692 ad 689. Et par est ratio homogeneorum \& \textbf{ae}qualium quorumvis \& in canalis cruribus similiter sitorum corporum. Horum
+adeoque etiam \textbf{ae}quantur inter se; erunt pondera \textbf{ae}qualium & in cruribus similiter sitarum partium reciproce ut crura, id est reciproce ut 692 ad 689. Et par est ratio homogeneorum & \textbf{ae}qualium quorumvis & in canalis cruribus similiter sitorum corporum. Horum
 
 \pngright{413.png}{5cm}{3cm}{-2pt}
 \[
@@ -18097,15 +18118,15 @@ pondera、他の地域において地球表面全域を経由して中心から�
 すなわち、33915対689、3633対689、456対689となります。
 
 \[
-13780000, \& propterea gravitates tot\underline{\ae} in his locis erunt ad invicem ut 13813915, 13783633, 13780456, \& 13780000.
+13780000, & propterea gravitates tot\underline{\ae} in his locis erunt ad invicem ut 13813915, 13783633, 13780456, & 13780000.
 \]
 \[
 Quare cum longitudines Pendulorum \underline{\ae}qualibus temporibus oscillantium sint ut gravitates,
-\& \textbf{ローティー・パリジウム}の単位 penduli singulis minutis secundis oscillantis sit pedum trium Parisiensium
-\& \frac{17}{24} partium digiti;
+& \textbf{ローティー・パリジウム}の単位 penduli singulis minutis secundis oscillantis sit pedum trium Parisiensium
+& \frac{17}{24} partium digiti;
 \]
 \[
-longitudines Pendulorum in Insul\underline{a} \textbf{ゴーレー}, in ill\underline{a} \textbf{カイエンヌ}, \& sub \textit{\AE}クエトロ, minutis singulis secundis oscillantium superabuntur a longitudine Penduli Parisiensis excessibus.
+longitudines Pendulorum in Insul\underline{a} \textbf{ゴーレー}, in ill\underline{a} \textbf{カイエンヌ}, & sub \textit{\AE}クエトロ, minutis singulis secundis oscillantium superabuntur a longitudine Penduli Parisiensis excessibus.
 \]
 
 この翻訳では、以下の点に注意しました：
@@ -18227,7 +18248,7 @@ longitudines Pendulorum in Insul\underline{a} \textbf{ゴーレー}, in ill\unde
 これらの比から、木星または土星の内部衛星の nods の平均運動も求めることができます。不等運動が存在する場合、その影響を考慮に入れる必要があります。天文計算においては、この不等性はロスタファレス（Prostapheresis）法に従って扱われることが多いです。
 
 \[
-\textbf{Sed hae inaequalitates in calculo astronomico ad Prostapheresin Lunae referri solet, \& cum ea confundi.}
+\textbf{Sed hae inaequalitates in calculo astronomico ad Prostapheresin Lunae referri solet, & cum ea confundi.}
 \]
 
 これらの不等性は、天文計算において月のロスタファレス法に従って扱われることが多く、その結果が混同されることがあります。
@@ -18355,8 +18376,8 @@ composite力により、太陽と月の引力が作用し、その結果、潮�
 \pngright{419.png}{1259}{1023}{-24}
 
 \textbf{地球中心から測定した}高度 \textbf{CK}, \textbf{Ck};
-\& 軸 \textbf{Hh}, \textbf{Kk} 上で描かれる楕円の最短高度;
-\& その後、この楕円の軸が長い方 \textbf{Hh} を中心軸として回転させて
+& 軸 \textbf{Hh}, \textbf{Kk} 上で描かれる楕円の最短高度;
+& その後、この楕円の軸が長い方 \textbf{Hh} を中心軸として回転させて
 \textbf{球体} \textbf{HPKhpk} を描くと、これが海面を表す図形となる。
 これは近似的に、そして \textbf{CF}, \textbf{Cf}, \textbf{CD}, \textbf{Cd} は
 \textbf{F}, \textbf{f}, \textbf{D}, \textbf{d} の各点における海の高度を表す。
@@ -18587,19 +18608,19 @@ $$\begin{aligned}
 \label{wasp434}\pngright{422.png}{1488}{795}{-24}
 %Illustration
 
-$Q$ を太陽、$S$ を地球、$P$ を月とし、$PADB$ を月の軌道とする。$QP$ 上に $QK$ を取る使得 $QK = QS$；さらに $QL$ は $QK$ に対する比が $QK : QP \& PS$ の二倍比となるようにとる。そして $PS$ に対して平行な線を引き、これを $L$ とする。
+$Q$ を太陽、$S$ を地球、$P$ を月とし、$PADB$ を月の軌道とする。$QP$ 上に $QK$ を取る使得 $QK = QS$；さらに $QL$ は $QK$ に対する比が $QK : QP & PS$ の二倍比となるようにとる。そして $PS$ に対して平行な線を引き、これを $L$ とする。
 
 \[
-LM; \& \text{si} \quad \text{Terrae gravitas acceleratrix in Solem exponatur} \quad \text{per distantiam} \quad QS \quad \text{vel} \quad QK,
+LM; & \text{si} \quad \text{Terrae gravitas acceleratrix in Solem exponatur} \quad \text{per distantiam} \quad QS \quad \text{vel} \quad QK,
 \]
 erit \(QL\) Terrae gravitas acceleratrix in Solem. Ea componitur ex partibus \(QM\), \(LM\),
-quarum \(LM\) \& ipsius \(QM\) pars \(SM\) perturbat motum Lunae, ut
+quarum \(LM\) & ipsius \(QM\) pars \(SM\) perturbat motum Lunae, ut
 \textbf{第1巻}の命題LXVIとその推論において説明した通りです。
 
 \[
-\text{Quatenus Terra} \& \text{Luna circum commune gravitatis centrum revolvuntur},
+\text{Quatenus Terra} & \text{Luna circum commune gravitatis centrum revolvuntur},
 \]
-perturbabitur motus Terrae circa centrum illud a viribus consimilibus; sed summas tam virium quam motuum referre licet ad Lunam, \& summas virium per lineas ipsis analogas \(SM\)。
+perturbabitur motus Terrae circa centrum illud a viribus consimilibus; sed summas tam virium quam motuum referre licet ad Lunam, & summas virium per lineas ipsis analogas \(SM\)。
 
 \pngright{423.png}{10cm}{5cm}{(a)}
 
@@ -18631,7 +18652,7 @@ $$ML$$を表す。$$ML$$の力（中程度の量において）は、月が地�
 \[
 A, \text{各時間の瞬間} \textbf{における} 加速度}, \text{は} EL, \text{すなわち} \frac{3PK \times SK}{SP}
 \]
-です。ここで、時間は月の平均運動によって測定されます（または、ほぼ同じ結果を得るために角度 \( CSP \) で測定します）。また、弧 \( AC \) を四分之一単位に分割し、等しい部分 \( Pp \&c. \) として表します。各部分に対する等しい時間の長さを表すために、直線 \( CG \) を \( CS \) に対して垂直に引き、垂線 \( pk \) 上で点 \( F \) \& \( f \) を定めます。すると、
+です。ここで、時間は月の平均運動によって測定されます（または、ほぼ同じ結果を得るために角度 \( CSP \) で測定します）。また、弧 \( AC \) を四分之一単位に分割し、等しい部分 \( Pp &c. \) として表します。各部分に対する等しい時間の長さを表すために、直線 \( CG \) を \( CS \) に対して垂直に引き、垂線 \( pk \) 上で点 \( F \) & \( f \) を定めます。すると、
 \[
 Kk \text{は} PK \text{に対する比として}
 \]
@@ -18641,7 +18662,7 @@ Kk \text{は} PK \text{に対する比として}
 この部分は、月が地球から距離 \( SP \) の位置で一定の周期 \( CADBC \)（約27日7時間43分）を要して回転する場合、その運動に及ぼされる総力 \( EL \) と、その総力を通じて月が地球に及ぼす加速度 \( \textbf{EL} \) の関係について述べています。
 
 \[
-Pp \, ad \, Sp, \, hoc \, est \, in \, data \, ratione, \, adeoque \, FK \times Kk \, seu \, area \, FKkf \, ut \, \frac{3PK \times SK}{SP} \, id \, est \, ut \, EL; \& composite, \, area \, tota \, GCKF \, ut
+Pp \, ad \, Sp, \, hoc \, est \, in \, data \, ratione, \, adeoque \, FK \times Kk \, seu \, area \, FKkf \, ut \, \frac{3PK \times SK}{SP} \, id \, est \, ut \, EL; & composite, \, area \, tota \, GCKF \, ut
 \]
 
 総面積 \( GCKF \) は、時間 \( CP \) 内に月に対して地球から及ぼされる総力 \( EL \) の合計と比例します。
@@ -18682,13 +18703,13 @@ Pp \, ad \, Sp, \, hoc \, est \, in \, data \, ratione, \, adeoque \, FK \times 
 \frac{1}{2}CS\textbf{, そして同時に速度も等しく} \textbf{ lunaris } \textbf{ in suo orbe movetur } \textbf{ velocitati} \textbf{ acquireret.} \textbf{ 此事は学説第4命題から明らかです。}
 \]
 \[
-\textbf{ しかし, 当垂直線 } Kd \textbf{ 従点 } S \textbf{ 下降到 } EL \textbf{ 的三分之一, かつ下降到 } SP \textbf{ 或者 } ML \textbf{ 的一半時(即八分之一円),} \textbf{ 力 } EL \textbf{ 在八分之一円中最大, 将超過力 } ML \textbf{ 之比為3:2, したがって它将与月球在地球静止的情况下回行一周所需的速度之比相同。}
+\textbf{ しかし, 当垂直線 } Kd \textbf{ 従点 } S \textbf{ 下降到 } EL \textbf{ 的三分之一, かつ下降到 } SP \textbf{ あるいは } ML \textbf{ 的一半時(即八分之一円),} \textbf{ 力 } EL \textbf{ 在八分之一円中最大, 将超過力 } ML \textbf{ 之比為3:2, したがって它将与月球在地球静止的情况下回行一周所需的速度之比相同。}
 \]
 \[
-\textbf{ 此時, 力 } EL \textbf{ 応当是力 } ML \textbf{ 的100倍, 也就是} \frac{2}{3} \times 17872\frac{1}{2} \textbf{ 或者約11915。したがって, 在時間 } CS \textbf{ 中生成的速度応当是}
+\textbf{ 此時, 力 } EL \textbf{ 応当是力 } ML \textbf{ 的100倍, 也就是} \frac{2}{3} \times 17872\frac{1}{2} \textbf{ あるいは約11915。したがって, 在時間 } CS \textbf{ 中生成的速度応当是}
 \]
 \[
-\textbf{ 月球回行一周所需速度的} \frac{3}{200} \times 17872\frac{1}{2} \textbf{ 或者約246.5。}
+\textbf{ 月球回行一周所需速度的} \frac{3}{200} \times 17872\frac{1}{2} \textbf{ あるいは約246.5。}
 \]
 
 \[
@@ -18714,7 +18735,7 @@ Pp \, ad \, Sp, \, hoc \, est \, in \, data \, ratione, \, adeoque \, FK \times 
 したがって、月が地球から引いた半径で単位時間ごとに描く面積は、近似して以下の数の総和に等しいです。
 
 \[
-219\frac{46}{100} \& \text{月の位置が四分之一周から近接四分之一周までの正弦倍角の sinus versi duplicata, 半径が 1 の円における距離から四分之一周まで. この関係は, 八分の角度での変動が中程度の大きさを持つとき, そのような状況で sinus が同じ比率で増加または減少することを示しています.}
+219\frac{46}{100} & \text{月の位置が四分之一周から近接四分之一周までの正弦倍角の sinus versi duplicata, 半径が 1 の円における距離から四分之一周まで. この関係は, 八分の角度での変動が中程度の大きさを持つとき, そのような状況で sinus が同じ比率で増加または減少することを示しています.}
 \]
 
 \textbf{命題 XXVII. 問題 VII.}
@@ -18784,7 +18805,7 @@ F \propto 1/r^2
 178725N \text{ in } AS^2 + 1000 CS^2 \times AS. \text{ すなわち、地球の引力加速度が太陽に対して 178725 とすると、}
 \]
 \[
-\text{中程度の力} ML, \text{ は平方に比例し} PS \text{ または} SK \& \text{月を地球へ引き寄せます。この力は 1000 となります。また、}
+\text{中程度の力} ML, \text{ は平方に比例し} PS \text{ または} SK & \text{月を地球へ引き寄せます。この力は 1000 となります。また、}
 \]
 \[
 \text{日食や満月時における中程度の力} SM \text{は 3000 になります。これらの力から、}
@@ -18793,7 +18814,7 @@ F \propto 1/r^2
 \text{中程度の力} ML \text{を引くと、月が日食や満月時に地球から引き離される力} 2000 \text{（先に述べた} 2PK) \text{となります。}
 \]
 \[
-\text{また、月が日食や満月時における速度} A \& B \text{は、その速度} C \& D \text{に対して} CS, \text{に対する} AS \text{と円弧のモーメント}
+\text{また、月が日食や満月時における速度} A & B \text{は、その速度} C & D \text{に対して} CS, \text{に対する} AS \text{と円弧のモーメント}
 \]
 
 \textbf{地球に引かれた場合、月の軌道在合点における運動量の平方根を四等分する円弧と、交点における運動量の平方根を四等分する円弧との比は} \(11073CS\) に対して \(10973AS\) である。
@@ -18816,7 +18837,7 @@ DBCA, \text{ 其中心 } S \text{ に地球を配置し、長軸 } DC \text{ を
 そして、この楕円平面囲回地球以角速度旋転時，我ら考慮其軌迹応当在完全無角動量的平面上描描出来：
 
 \[
-\text{Cum autem planum Ellipseos hujus motu angulari circa Terram revolvatur, \& Trajectoria, cujus Curvaturam consideramus, describi debet in plano quod motu omni angulari omnino destituitur: consideranda}
+\text{Cum autem planum Ellipseos hujus motu angulari circa Terram revolvatur, & Trajectoria, cujus Curvaturam consideramus, describi debet in plano quod motu omni angulari omnino destituitur: consideranda}
 \]
 
 即，当此楕円平面囲回地球以角速度旋転時，我ら考慮其軌迹応当在完全無角動量的平面上描描出来：したがって需要進一步考慮。
@@ -19007,7 +19028,7 @@ $m$を円周$Nn$に通じて惑星の節点$N$, $n$を通る直線とする。�
 
 \pngcent{月の運動.png}{6cm}{4cm}
 
-\& 月の運動が進む方向から退く方向へ変化する。これにより、ノードは月が二分点間を通過するたびに進展し、特に近接二分点に向かって旋回する。他の場合では退行し、進行超過量を超えて各月には前進方向へと戻る。
+& 月の運動が進む方向から退く方向へ変化する。これにより、ノードは月が二分点間を通過するたびに進展し、特に近接二分点に向かって旋回する。他の場合では退行し、進行超過量を超えて各月には前進方向へと戻る。
 
 \textit{補則1.} ここで、与えられた弧$PM$の端点$P$と$M$から二分点線$Qq$に垂直な線$PK$, $Mk$を下ろし、さらにこれらをノード線まで延長するとします。
 
@@ -19034,7 +19055,7 @@ $PH$は直角三角形$PD \times AZ$の平方根に比例する、
 \pngright{435.png}{10cm}{7cm}{}
 
 \[
-PK \times PH = Kk \times PD \times AZ, \quad PK \times PH \times AZ = Kk \times PD \times AZ \textbf{ qu.} id est ut area PDdM, \& AZ \textbf{ qu.} conjunctim.
+PK \times PH = Kk \times PD \times AZ, \quad PK \times PH \times AZ = Kk \times PD \times AZ \textbf{ qu.} id est ut area PDdM, & AZ \textbf{ qu.} conjunctim.
 \]
 
 \textit{Corol.\fsp{}2.}\wsp{}任意の交点位置において、月の合点における中庸時運動は満点における月の時運動の半分に等しいため、それは $16'' \, 35''' \, 16'''\, 36''''$ に比例し、すなわち $AZ \textbf{ qu.}$ に比例する。なぜなら、もし月が合点から半円 $QAq$ を等速で移動した場合、総和
@@ -19046,7 +19067,7 @@ PK \times PH = Kk \times PD \times AZ, \quad PK \times PH \times AZ = Kk \times 
 となる。
 
 omnibus $\textbf{areis}$ $PDdM$, そのとき月が点$Q$から点$M$へ移動する間に,
-$\textbf{area}$ $QMdE$ は円の接線$QE$で終了される面積に等しい; \& そのとき月が点$n$を通過すると, その総和は線分$PD$によって描かれる全体の$\textbf{area}$ $EQAn$となる; その後、月が点$n$から点$q$へ移動する間に, 線分$PD$は円外に落ち, $\textbf{aream}$ $nqe$は接線$qe$で終了される面積を描く; すなわち, 前の面積から$\textbf{aequalis}$である面積$QEN$を引いたものは半円$NQAn$となる。したがって、月が半円を描く間に総和されたすべての$\textbf{arearum}$ $PDdM$は,
+$\textbf{area}$ $QMdE$ は円の接線$QE$で終了される面積に等しい; & そのとき月が点$n$を通過すると, その総和は線分$PD$によって描かれる全体の$\textbf{area}$ $EQAn$となる; その後、月が点$n$から点$q$へ移動する間に, 線分$PD$は円外に落ち, $\textbf{aream}$ $nqe$は接線$qe$で終了される面積を描く; すなわち, 前の面積から$\textbf{aequalis}$である面積$QEN$を引いたものは半円$NQAn$となる。したがって、月が半円を描く間に総和されたすべての$\textbf{arearum}$ $PDdM$は,
 
 \[
 \sum \textbf{arearum} \, PDdM = \frac{1}{2} \pi r^2
@@ -19074,7 +19095,7 @@ $\textbf{area}$ $QMdE$ は円の接線$QE$で終了される面積に等しい; 
 \]
 また、ノードの運動時間は常に $AZ$ の平方と面積 $PDdM$ の積に比例するため、満欠点における月のノードの運動時間も同様に
 \[
-AZ \opit{\text{qu.}} \quad \& \quad \text{面積} \, PDdM \propto.
+AZ \opit{\text{qu.}} \quad & \quad \text{面積} \, PDdM \propto.
 \]
 
 
@@ -19171,16 +19192,16 @@ TQ \text{は} r \text{において：向心力} 3IT \text{または} 3PK \text{�
 
 この比は、月が地球 \( T \) に至る角度を描く角が等しいことを示しています。
 
-\& したがって、ノドゥムの運動は円と楕円において等しいと考えることができます。この関係は、もし \( fg \) が \( ce \) に対して \( fY \) が \( cY \) に対して等しくなる場合に成り立ちます、すなわち \( fg \) が \( \frac{ce \times fY}{cY} \) であるときです。しかし、相似の三角形 \( fgp \) と \( cep \) の関係から、\( fg \) は \( ce \) に対して \( fp \) が \( cp \) に対して等しくなります；したがって、実際 \( fg \) は \( \frac{ce \times fp}{cp} \) と等しいことになります。したがって、実際の \( fg \) は以前の \( fg \) に比して、ノドゥムの運動において楕円における運動は円における運動に対して、この比率 \( fg \) や \( \frac{ce \times fp}{cp} \) と以前の \( fg \) の比率となります。
+& したがって、ノドゥムの運動は円と楕円において等しいと考えることができます。この関係は、もし \( fg \) が \( ce \) に対して \( fY \) が \( cY \) に対して等しくなる場合に成り立ちます、すなわち \( fg \) が \( \frac{ce \times fY}{cY} \) であるときです。しかし、相似の三角形 \( fgp \) と \( cep \) の関係から、\( fg \) は \( ce \) に対して \( fp \) が \( cp \) に対して等しくなります；したがって、実際 \( fg \) は \( \frac{ce \times fp}{cp} \) と等しいことになります。したがって、実際の \( fg \) は以前の \( fg \) に比して、ノドゥムの運動において楕円における運動は円における運動に対して、この比率 \( fg \) や \( \frac{ce \times fp}{cp} \) と以前の \( fg \) の比率となります。
 
 \[
 \textbf{すなわち} \frac{ce \times fY}{cY}, \textbf{即ち} ut \, fp \times cY \textbf{は} cp \times fY \textbf{に比例し},
 \]
 \[
-\textbf{すなわち} fp \textbf{は} fy \& cy \textbf{は} cp;
+\textbf{すなわち} fp \textbf{は} fy & cy \textbf{は} cp;
 \]
 \[
-\textbf{すなわち} もし pb が TN と平行で FP との交点を b とするとき, Fb \textbf{は} FY \& FY \textbf{は} FP に比例し,
+\textbf{すなわち} もし pb が TN と平行で FP との交点を b とするとき, Fb \textbf{は} FY & FY \textbf{は} FP に比例し,
 \]
 \[
 \textbf{すなわち} Fb \textbf{は} FP \textbf{すなわち} Dp \textbf{は} DP に比例し, よって
@@ -19325,7 +19346,7 @@ TQ \text{は} r \text{において：向心力} 3IT \text{または} 3PK \text{�
 年間の平均運動は、一年間に全時間平均運動の合計である。想像してみて、節点が $N$ で回転し、各時間ごとに元の位置に戻るとして、
 
 \[
-\textbf{動径} \, AZ \propto \textbf{距角} \, \theta \quad \& \quad \textbf{運動} \, \textbf{微小} \propto \textbf{余角} \, \theta,
+\textbf{動径} \, AZ \propto \textbf{距角} \, \theta \quad & \quad \textbf{運動} \, \textbf{微小} \propto \textbf{余角} \, \theta,
 \]
 
 したがって、時間平均の運動は、
@@ -19337,7 +19358,7 @@ TQ \text{は} r \text{において：向心力} 3IT \text{または} 3PK \text{�
 すなわち、距角 $\theta$ から合点までの距離の平方と、半径の平方との比に等しい。
 
 \[
-\text{すなわち} \quad \textbf{動径} \, AZ \propto (\textbf{距角} \, \theta)^2 \quad \& \quad \frac{\textbf{動径}^2}{\textbf{半径}^2}.
+\text{すなわち} \quad \textbf{動径} \, AZ \propto (\textbf{距角} \, \theta)^2 \quad & \quad \frac{\textbf{動径}^2}{\textbf{半径}^2}.
 \]
 
 月は自己の力により、恒星に対して常に同じ位置を保つ。しかし、太陽 \( S \) は地球の運動により、ノードから進み、一年間の視座標上の均一な軌道を完成する。ここで、\( Aa \) を与えられた最小弧とし、恒星 \( T \) から常に引き出される直線 \( TS \) の交点が円 \( NAn \) との交点で与えられた最短時間内に描かれるものとする。そして、中庸の運動時間は \( AZq \) となる。すなわち、\( AZ \) と \( ZY \) の比例関係から、直角三角形 \( AZ \) と \( ZY \) の面積 \( AZYa \) に等しい。すべての中庸の運動時間の合計は、
@@ -19393,7 +19414,7 @@ TQ \text{は} r \text{において：向心力} 3IT \text{または} 3PK \text{�
 
 この関係は、仮説によれば、ノドゥムは各時間単位で前へ戻されることがあり、その結果、太陽が一年を完全に通過すると、最初からどの位置に戻るかを決定します。しかし、ノドゥムの運動により、太陽はノドゥムに戻る速度が速くなるため、計算上考慮する必要があります。
 
-jam est abbreviatio temporis. カムソル anno toto conficiat 360 gradus, \& Nodus motu maximo eodem tempore conficeret 39 \textit{gr.} \(38\minute.\) \(5\second.\) \(39\third.\) seu \(39\decimals{6349}\) gradus; \& motus mediocris Nodi
+jam est abbreviatio temporis. カムソル anno toto conficiat 360 gradus, & Nodus motu maximo eodem tempore conficeret 39 \textit{gr.} \(38\minute.\) \(5\second.\) \(39\third.\) seu \(39\decimals{6349}\) gradus; & motus mediocris Nodi
 \pngright{442.png}{10cm}{7cm}{-1cm}
 in loco quovis $N$ sit ad ipsius motum mediocrem in Quadraturis suis, ut $AZq.$ ad $ATq.$ erit motus Solis ad motum Nodi in $N$, ut 360 $ATq.$ ad \(39\decimals{6349}\) $AZq.$; id est ut \textbf{\(9\decimals{0829032}\)} $ATq.$ ad $AZq$.
 Unde si circuli totius circumferentia $NAn$ dividatur in particulas aequales $Aa$, tempus quo Sol percurrat particulam $Aa$, si circulus
@@ -19664,7 +19685,7 @@ $$ = BEq. + 2EC \times BH = 2EC \times AB + 2EC \times BH = 2EC \times AH $$
 $$ Hh \propto GH \times Gg = GH \times GE $$
 
 \[
-\text{すなわち}\quad \frac{GH}{GE} \times GE = \text{または}\quad \frac{GH}{GE} \times AH, \quad \text{すなわち}\quad AH \& \sin \angle AEG \text{の積}.
+\text{すなわち}\quad \frac{GH}{GE} \times GE = \text{または}\quad \frac{GH}{GE} \times AH, \quad \text{すなわち}\quad AH & \sin \angle AEG \text{の積}.
 \]
 従って、もし$AH$が任意の場合において傾斜角の正弦である場合、それは正弦の増分と同様に増加します。これは上位命題3のコロラリウムによります。したがって、その正弦は常に等しくなり続けます。
 
@@ -19700,7 +19721,7 @@ $$224 \times 7 \times 2080 \text{ に対する } 110000$$
 月の軌道が太陽周りの円錐曲線である場合、その傾斜角の変化は最大となります。すなわち、月の節点が syzygy（対日点）で回転するときには、月の位置を考慮に入れずにその傾斜角は変化しません。しかし、節点が quadrature（四分点）に存在する場合、月が syzygy で回転しているときよりも、月が quadrature で回転しているときに傾斜角が大きくなります。これは $2$ 分 $44$ 秒の差異があります。これは前命題の第四補則で示しました。そしてこの差異は、quadrature のときの月の軌道上の位置における傾斜角の変化 $1$ 分 $22$ 秒に等しいです。
 
 \[
-\textbf{ut 2965 ad 100, \& inde Variatio illa } BD \textbf{ prodibit } 16\textbf{minute.} 24\textbf{second}.
+\textbf{ut 2965 ad 100, & inde Variatio illa } BD \textbf{ prodibit } 16\textbf{minute.} 24\textbf{second}.
 
 \]
 
@@ -19807,7 +19828,7 @@ F_{\text{重力}} : 2F_{\text{重力}} = 1 : 12868200
 月が海に及ぼす力を求めるためには、その力が太陽の力に対する比から得られることを確認する必要があります。この比は、これらの力によって引き起こされる海の運動の比から求めることができます。春分点と秋分点の交換時期および対立時期において、アヴォン川の入口付近、ブリストルより南第三の石碑まで、夏と秋の間に水位が上昇する全体的な量を考慮に入れます。
 
 \[
-\textbf{パリの足一本} \& 11\textbf{指} = 85200 \textbf{尺} : 44221
+\textbf{パリの足一本} & 11\textbf{指} = 85200 \textbf{尺} : 44221
 \]
 
 \observante{Samuele Sturmio}は、その大きさが約45フィートで、四平方では25フィートです。前後の高さは、最初の総力と最後の総力から生じます。したがって、太陽と月が赤道を通過し、地球から中程度に離れている場合、力を$S$と$L$とします。そして、月は四平方において、春分と秋分の時期には赤道から約23度半の傾斜で回転し、赤道から傾斜して光る力は海への移動力が小さくなります。これは（私の感覚では）、余弦補角の二乗比例に近いです。
@@ -19829,7 +19850,7 @@ $$\frac{841}{1000} L$$ 為解，且在冲日前后両行星之力的総和為 \(
 $$L + S$$ 与 \(\frac{841}{1000} L - S\) 的比値為 45 : 25 或 9 : 5，従而
 $$5L + 5S = \frac{7569}{1000} L - 9S$$，
 且
-$$14S = \frac{2569}{1000} L$$。したがって，\(L\) 与 \(S\) 的比値為 14000 : 2569 或者説是 \(5\frac{7}{15}\) : 1。
+$$14S = \frac{2569}{1000} L$$。したがって，\(L\) 与 \(S\) 的比値為 14000 : 2569 あるいは説是 \(5\frac{7}{15}\) : 1。
 在普利茅斯港（〜によれば薩謬尔·科尔普雷斯的観測）的潮汐海面高度，在中等深度時，比較平均水位高出約十六英尺六英寸。
 
 月の潮汐高さについて、春と秋には満弦や新弦の位置で太陽からの潮汐高さが約7または8フィートを上回ることがあります。もし中程度の余分な高さが春と秋に7.5フィートである場合、満弦や新弦の位置では潮汐高さは19.75フィートとなり、四分点では12.25フィートとなります。したがって、$L + S$ は $841/1000 L - S$ に比例し、$19\frac{3}{4}$ は $12\frac{1}{4}$ に比例します。さらに、$L$ は $S$ に対して734対100、すなわち7.33対1の比率となります。
@@ -19843,8 +19864,8 @@ Donec aliquid certius ex Observationibus accuratius institutis constiterit, usur
 
 unde cum vis Solis sit ad vim gravitatis ut 1 ad 12868200, vis Lunae erit ad vim gravitatis ut 1 ad 2031821.
 
-\textbf{Corol.\fsp{}1.}\wsp{}igitur cum aqua vi Solis agitata ad altitudinem pedis unius \& undecim digitorum ascendat, eadem vi Lunae ascendet ad altitudinem pedum duodecim.
-Tanta autem vis ad omnes maris motus excitandos abunde sufficit, \& quantitati motuum probe respondet.
+\textbf{Corol.\fsp{}1.}\wsp{}igitur cum aqua vi Solis agitata ad altitudinem pedis unius & undecim digitorum ascendat, eadem vi Lunae ascendet ad altitudinem pedum duodecim.
+Tanta autem vis ad omnes maris motus excitandos abunde sufficit, & quantitati motuum probe respondet.
 
 月の東から西へ広がる海域において、太平洋や大西洋およびエチオピア海の一部では、赤道を越えて太陽潮汐の影響を受け、水位は6フィート、9フィート、12フィート乃至15フィートほど上昇することがよくあります。しかし、太平洋はより深い海域であり広大であるため、その潮の高さは大西洋やエチオピア海よりも大きいとされています。実際、満潮が発生するときには、東から西にかけての海洋の幅が90度以上あることが必要です。一方で、エチオピア海において赤道内では水位の上昇はそれほど大きくないことが確認されています。\(\pngright{tide_heights.png}{15cm}{8cm}\)
 
@@ -19856,9 +19877,9 @@ Tanta autem vis ad omnes maris motus excitandos abunde sufficit, \& quantitati m
 
 このようにして、海沿岸に近い地域では潮汐の効果が顕著となる一方で、遠く離れた島嶼ではその効果は微弱なものとなる。
 
-\& 力が放散され、流入と流出は通常より大きいとされています。例えば、イギリスのプルマス港やチェプストウ橋周辺；ノルマンディーの聖ミヒール山とアーブランコワ（俗にオランジェ）市周辺；インド東部のカンバヤムとペグ周辺です。これらの場所では、大海が大きな速度で流入し、流出すると、沿岸は数万メートルの範囲でしばしば浸水したり乾燥したりします。流入と流出の力は、水位が30、40乃至50メートル以上上昇または下降するまでにその勢力を失うことはありません。そして、長方形湾の比例如しくなります。
+& 力が放散され、流入と流出は通常より大きいとされています。例えば、イギリスのプルマス港やチェプストウ橋周辺；ノルマンディーの聖ミヒール山とアーブランコワ（俗にオランジェ）市周辺；インド東部のカンバヤムとペグ周辺です。これらの場所では、大海が大きな速度で流入し、流出すると、沿岸は数万メートルの範囲でしばしば浸水したり乾燥したりします。流入と流出の力は、水位が30、40乃至50メートル以上上昇または下降するまでにその勢力を失うことはありません。そして、長方形湾の比例如しくなります。
 
-\& このような港や海峡では、潮流が強力な流れと反復により増幅される。しかし、降下した潮は深いそして開けた海に注ぎ込むことで、勢いなく上昇し、再び下降することができる。これらの潮の高さは太陽と月の引力によって比例する。
+& このような港や海峡では、潮流が強力な流れと反復により増幅される。しかし、降下した潮は深いそして開けた海に注ぎ込むことで、勢いなく上昇し、再び下降することができる。これらの潮の高さは太陽と月の引力によって比例する。
 
 \textbf{補則2.} 潮流を引き起こす月の引力は、 Pendulum 実験や静力学実験における力に比べて遥かに小さいことを理解している。
 
@@ -19933,7 +19954,7 @@ $$\textbf{34}$$ に至るまで。太陽の密度は地球の密度に対して 
 
 この証明は、地球に対する引力が非常に小さいため、常に地球を向いている面が月の軌道の中心から見ればすぐに引き戻されることなく、また地球に戻ることもないことを示す。
 
-\textbf{太陽は地球の中心に垂直方向から作用し、} \& 地球全体の外側にある点 \( P \), \( A \), \( P' \), \( E \) が、近似して球面を描いた点群より高い位置にあるため、各個体は平面 \( QR \) から遠ざかる方向に作用しようとします。これらの個体のそれぞれが同じ距離から平面 \( QR \) に存在する場合、その全効果は地球を円周運動させる力として考えられます。
+\textbf{太陽は地球の中心に垂直方向から作用し、} & 地球全体の外側にある点 \( P \), \( A \), \( P' \), \( E \) が、近似して球面を描いた点群より高い位置にあるため、各個体は平面 \( QR \) から遠ざかる方向に作用しようとします。これらの個体のそれぞれが同じ距離から平面 \( QR \) に存在する場合、その全効果は地球を円周運動させる力として考えられます。
 
 \[
 \text{全個体の合力} = \text{各個体の効果}
@@ -20034,7 +20055,7 @@ $$\textbf{34}$$ に至るまで。太陽の密度は地球の密度に対して 
 
 \end{center}\par
 
-月が回転すると、環の運動は内球体の運動（第2補題による）に比例し、すなわち \(4143 : 474721 \& 1000000 : 925275\) の比で、つまり \(4143 : 439248\) である。したがって、環の運動は環と内球体の総運動に比例し、すなわち \(4143 : 443991\) である。
+月が回転すると、環の運動は内球体の運動（第2補題による）に比例し、すなわち \(4143 : 474721 & 1000000 : 925275\) の比で、つまり \(4143 : 439248\) である。したがって、環の運動は環と内球体の総運動に比例し、すなわち \(4143 : 443991\) である。
 
 もし環が内球体に追随し、その等分点（或いは赤道点）の回帰運動と共に運動する場合、残存する環の運動は以前の運動に対して \(4143 : 443391\) の比となる。したがって、赤道点の運動はこの比率で減少する。
 
@@ -20097,11 +20118,11 @@ F \propto 1/r^2
 
 月の摂動論、分点歳差、および彗星の幾何学軌道論（命題XXV〜XLII）
 
-\& つねな材料から構成される場合。そして同じものを無数の円錐曲線、特に同心で類似した楕円形に区分するとき、$APEp$, $BQbq$, $CRcr$, $DSds$ などとし、その直径が幾何学的な進行順序を持つものとする。これらは相似な図形であるため、太陽の力と月の力により等速で回転する赤道点を制御する点もまた、これらの他の図形を個別に観察したときにも同じ赤道点で等速に回転することになる。そして
+& つねな材料から構成される場合。そして同じものを無数の円錐曲線、特に同心で類似した楕円形に区分するとき、$APEp$, $BQbq$, $CRcr$, $DSds$ などとし、その直径が幾何学的な進行順序を持つものとする。これらは相似な図形であるため、太陽の力と月の力により等速で回転する赤道点を制御する点もまた、これらの他の図形を個別に観察したときにも同じ赤道点で等速に回転することになる。そして
 各図形 $AQEq$, $BRbr$, $CScs$ などの円の運動の比は、
 
 \[
-\textbf{ AQEq, BRbr, CScs, \&c. }
+\textbf{ AQEq, BRbr, CScs, &c. }
 \]
 
 これらがそのような図形であるから、等しいものである。
@@ -20293,7 +20314,7 @@ deberent a Sole nostro, quam Planet{\ae}, qui hic sunt, illustrantur
 a Stellis fixis.
 
 H{\ae}c disputavimus non considerando obscurationem Cometarum
-per fumum illum maxime copiosum \& crassum, quo caput
+per fumum illum maxime copiosum & crassum, quo caput
 circundatur, quasi per nubem obtuse semper lucens. Nam quanto
 obscurius redditur corpus per hunc fumum, tanto propius ad
 Solem accedat necesse est, ut copia lucis a se reflexa Planetas {\ae}muletur.
@@ -20343,7 +20364,7 @@ $$\text{Id quod etiam ex diametro capitis micrometro mensurata colligitur:}$$
 $$\text{quippe quam Hevelius reperit Aug. 6. esse tantum } 6\minute.\ 5\second \text{ inclusa coma, at Sept. 2. esse } 9\minute.\ 7\second.$$
 $$\text{Caput igitur initio longe minus appareuit quam in fine motus,}$$
 $$\text{at initio tamen in vicinia Solis longe lucidius extitit quam circa finem, ut refert idem Hevelius. Proinde totum hoc tempore, ob recessum ipsius a Sole, quoad lumen decrevit, non obstante accessu ad Terram.}$$
-$$\text{Cometa Anni 1618 circa medium Mensis Decembris, \& iste Anni 1680 circa finem ejusdem}.$$
+$$\text{Cometa Anni 1618 circa medium Mensis Decembris, & iste Anni 1680 circa finem ejusdem}.$$
 
 この翻訳では、太字や斜体は適切に使用し、数式も標準のLaTeX記法で表現しています。文脈を考慮して、原文の意味を忠実に再現しています。
 
@@ -20362,7 +20383,7 @@ $$\text{Cometa Anni 1618 circa medium Mensis Decembris, \& iste Anni 1680 circa 
 
 \textit{\textbf{補則2.}}\wsp{}以上より、彗星はなぜか太陽周辺を頻繁に訪れることがわかる。もしこれらの天体が土星以遠の領域で観測された場合、彼らはしばしば太陽の反対側に現れることになるだろう。その理由は、地球よりも近い天体がこれらの部分を通過し、そして太陽が他の天体を遮蔽するからである。しかし、彗星に関する歴史を探検すると、4倍または5倍以上の頻度でそれらが発見されていることが判明した。
 
-在太陽半球，即與我們所在的地球半球相對的太陽半球，幾乎可以肯定存在許多彗星，這些彗星被太陽光照射。確實，
+在太陽半球，即與我們所在的地球半球相對的太陽半球，幾乎できる肯定存在許多彗星，這些彗星被太陽光照射。確實，
 在向我們地區下降時，它們不發射尾翼，也不足十分明亮，以致於裸眼尚不能提前觀測到，而只能比木星更接近太陽。しかし，在繞太陽描述的空間中，與地球面向太陽的一側相距稍遠的部分，這些部分中的大部分在太陽光下更加明亮。
 
 \textbf{補則3.} したがって，天體阻力顯然不存在。
@@ -20439,18 +20460,18 @@ $$\text{Cometa Anni 1618 circa medium Mensis Decembris, \& iste Anni 1680 circa 
 次に、任意に垂直線 \(\mathrm{RS}\) を引き、この直線が所求曲線に順次接続されるとき、その長さを求めることを目的とする．すなわち、\(\mathrm{HI}\), \(\mathrm{IK}\), \(\mathrm{KL}\), \(\mathrm{LM}\) 等の間隔を単位とし、\(\mathrm{AH} = a\), \(- \mathrm{HS} = p\), \(\frac{1}{2}p\) 乘以 \(- \mathrm{IS} = q\), \(\frac{1}{3}q\) 乘以 \(+ \mathrm{SK}\) と定める．
 
 \[
-r, \frac{1}{4}r \text{ から } + SL = s, \frac{1}{5}s \text{ まで } + SM = t; \text{ そして } ME \text{ に対して負の符号を } HS, IS, \&c. \text{ の項に付加し、}
+r, \frac{1}{4}r \text{ から } + SL = s, \frac{1}{5}s \text{ まで } + SM = t; \text{ そして } ME \text{ に対して負の符号を } HS, IS, &c. \text{ の項に付加し、}
 \]
 \[
-\text{点 S に対する反時計回り方向の部分に存在する項には正の符号を } SK, SL, \&c. \text{ の項に付加します。そして符号が適切に確認された場合、} RS = a + bp + cq + dr + es + ft \&c.
+\text{点 S に対する反時計回り方向の部分に存在する項には正の符号を } SK, SL, &c. \text{ の項に付加します。そして符号が適切に確認された場合、} RS = a + bp + cq + dr + es + ft &c.
 \]
 
-\textbf{案 2.} \quad \textit{もし点 H, I, K, L, \&c. の間隔 HI, IK, \&c. が不等である場合、}
+\textbf{案 2.} \quad \textit{もし点 H, I, K, L, &c. の間隔 HI, IK, &c. が不等である場合、}
 \[
-\text{直線 AH, BI, CK, \&c. の垂直を収集します。}
+\text{直線 AH, BI, CK, &c. の垂直を収集します。}
 \]
 
-\textbf{最初の差分を直線間隔} \( b \), \( 2b \), \( 3b \), \( 4b \), \( 5b \) で区切ります；二重差分を二倍間隔 \( c \), \( 2c \), \( 3c \), \( 4c \), \&c. で区切ります；三重差分を三倍間隔 \( d \), \( 2d \), \( 3d \), \&c. で区切ります；四重差分を四倍間隔 \( e \), \( 2e \), \&c. で区切ります。そして如此して以降。すなわち、\( b = \frac{AH - BI}{HI} \), \( 2b = \frac{BI - CK}{IK} \), \( 3b = \frac{CK - DL}{KL} \) などとします。次に、\( c = \frac{b - 2b}{HK} \), \( 2c = \frac{2b - 3b}{IL} \), \( 3c = \frac{3b - 4b}{KM} \) などとします。差分を発見した後、\( AH = a \), \( - HS = p \) と定め、さらに \( p \) を \( - IS \) で割ります。
+\textbf{最初の差分を直線間隔} \( b \), \( 2b \), \( 3b \), \( 4b \), \( 5b \) で区切ります；二重差分を二倍間隔 \( c \), \( 2c \), \( 3c \), \( 4c \), &c. で区切ります；三重差分を三倍間隔 \( d \), \( 2d \), \( 3d \), &c. で区切ります；四重差分を四倍間隔 \( e \), \( 2e \), &c. で区切ります。そして如此して以降。すなわち、\( b = \frac{AH - BI}{HI} \), \( 2b = \frac{BI - CK}{IK} \), \( 3b = \frac{CK - DL}{KL} \) などとします。次に、\( c = \frac{b - 2b}{HK} \), \( 2c = \frac{2b - 3b}{IL} \), \( 3c = \frac{3b - 4b}{KM} \) などとします。差分を発見した後、\( AH = a \), \( - HS = p \) と定め、さらに \( p \) を \( - IS \) で割ります。
 
 \pngright{差分の図}{6cm}{4cm}{(0,0)}
 
@@ -20458,7 +20479,7 @@ r, \frac{1}{4}r \text{ から } + SL = s, \frac{1}{5}s \text{ まで } + SM = t;
 
 \textbf{訳文}
 
-$$ q, q \text{ in } + SK = r, r \text{ in } + SL = s; s \text{ in } + SM = t; $$ とすると、垂線の最後の直前を $ME$ とするとき、$$ RS = a + bp + cq + dr + es + ft, \&c. $$ となる。
+$$ q, q \text{ in } + SK = r, r \text{ in } + SL = s; s \text{ in } + SM = t; $$ とすると、垂線の最後の直前を $ME$ とするとき、$$ RS = a + bp + cq + dr + es + ft, &c. $$ となる。
 
 \textbf{補則}：従って、すべての曲線の面積を求めることができる。なぜなら、ある曲線の平方点のいくつかが求まった場合、
 
@@ -20635,7 +20656,7 @@ $S$ を太陽、$T$, $t$, $\tau$ を地球の三大位置、$TA$, $tB$, $\tau C$
 月が太陽から中間距離である地球にあるとき、その速度で円錐曲線の弧 \(\textbf{T}\tau\) 上の点 \(\textbf{\tau}\) から垂線 \(\textbf{tV}\) を引くことができ、この垂線は弧 \(\textbf{T}\tau\) の弦に垂直である。中間長さ \(\textbf{tB}\) 上の任意の一点を \(\textbf{B}\) とし、そこから太陽 \(\textbf{S}\) 方向に直線 \(\textbf{BE}\) を引き、この直線は弓矢 \(\textbf{tV}\) に対して比として \(\textbf{SB}\) と \(\textbf{St}\) の平方に対する \(\textbf{SB}\) および彗星の経度の接線在観測第二回における半径 \(\textbf{tB}\) の立方の比を持つ。そして点 \(\textbf{E}\) を通って直線 \(\textbf{AEC}\) を引き、この直線の部分 \(\textbf{AE}\) と \(\textbf{EC}\) はそれぞれ直線 \(\textbf{TA}\) および \(\textbf{\tau C}\) 上で終了し、これらは時間 \(\textbf{V}\) の逆数に等しい。
 \]
 
-\& \( W \): 今、点 \( A \), \( B \), \( C \) を通って円周を引き、その中心を \( i \) で二等分し、弦 \( AC \) の中点 \( I \) を得る。次に、隠れた線 \( Si \) が弦 \( AC \) と交わる点 \( \lambda \) を取って、平行四辺形 \( iI\lambda\mu \) を完成する。点 \( I \sigma \) を定め、その長さを \( 3I\lambda \) とする。また、太陽 \( S \) から隠れた線 \( \sigma\xi \) を引き、その長さを \( 3S\sigma + 3i\lambda \) とする。既に使用した文字 \( A \), \( E \), \( C \), \( I \) を消去し、点 \( B \) から点 \( \xi \) 方向に隠れた線 \( BE \) を引き、その長さが先の \( BE \) の二倍比で \( BS \) と \( S\mu + \frac{1}{3}i\lambda \) の差に比例するように定める。点 \( E \) から再度、
+& \( W \): 今、点 \( A \), \( B \), \( C \) を通って円周を引き、その中心を \( i \) で二等分し、弦 \( AC \) の中点 \( I \) を得る。次に、隠れた線 \( Si \) が弦 \( AC \) と交わる点 \( \lambda \) を取って、平行四辺形 \( iI\lambda\mu \) を完成する。点 \( I \sigma \) を定め、その長さを \( 3I\lambda \) とする。また、太陽 \( S \) から隠れた線 \( \sigma\xi \) を引き、その長さを \( 3S\sigma + 3i\lambda \) とする。既に使用した文字 \( A \), \( E \), \( C \), \( I \) を消去し、点 \( B \) から点 \( \xi \) 方向に隠れた線 \( BE \) を引き、その長さが先の \( BE \) の二倍比で \( BS \) と \( S\mu + \frac{1}{3}i\lambda \) の差に比例するように定める。点 \( E \) から再度、
 
 \pngright{477.png}{5cm}{3cm}{(a)}
 
@@ -20655,10 +20676,10 @@ $\textbf{AC}$ の中点 $\textbf{I}$ を通って，直線 $\textbf{AM}$, $\text
 
 地球から太陽までの中等距離（すなわち大円周の半径）に対する半分の比率 \( \textbf{in dimidiata ratione mediocris distanti{\ae} Telluris a Sole (seu semidiametri orbis magni)} \) と、直線 \( OD \) 上の距離 \( r \) との関係において、点 \( G \) を直線 \( NP \) に等しい位置に取ります。すなわち、点 \( G \) と \( P \) は直線 \( NC \) に対して同じ方向にあるとします。
 
-同様の方法で、点 \( B \) から点 \( E, A, C, G \) を求めた場合、任意に選んだ他の点 \( b \& \beta \) からも新しい点 \( e, a, c, g \& \epsilon, \alpha, \kappa, \gamma \) を求めることが可能です。次に、直線 \( GCg\gamma \) 上の点 \( G, g, \gamma \) を通る円周 \( Gg\gamma \) が直線 \( \tau C \) と交わる点 \( Z \) を取ると、点 \( Z \) は所定の軌道となります。
+同様の方法で、点 \( B \) から点 \( E, A, C, G \) を求めた場合、任意に選んだ他の点 \( b & \beta \) からも新しい点 \( e, a, c, g & \epsilon, \alpha, \kappa, \gamma \) を求めることが可能です。次に、直線 \( GCg\gamma \) 上の点 \( G, g, \gamma \) を通る円周 \( Gg\gamma \) が直線 \( \tau C \) と交わる点 \( Z \) を取ると、点 \( Z \) は所定の軌道となります。
 
 \[
-\textbf{Eadem methodo qua puncta } E, A, C, G, \textbf{ ex assumpto puncto } B \textbf{ inventa sunt, inveniantur ex assumptis utcunque punctis aliis } b \& \beta \textbf{ puncta nova } e, a, c, g \& \epsilon, \alpha, \kappa, \gamma.
+\textbf{Eadem methodo qua puncta } E, A, C, G, \textbf{ ex assumpto puncto } B \textbf{ inventa sunt, inveniantur ex assumptis utcunque punctis aliis } b & \beta \textbf{ puncta nova } e, a, c, g & \epsilon, \alpha, \kappa, \gamma.
 \]
 
 次に、直線 \( GCg\gamma \) 上の点 \( G, g, \gamma \) を通る円周 \( Gg\gamma \) が直線 \( \tau C \) と交わる点 \( Z \) を取ると、
@@ -21066,9 +21087,9 @@ ac prius.
 注：`$\textit{\libra}$` と `$\textit{\scorpio}$` は星座のラテン語表記を日本語に置き換え、`$\textsuperscript{A}$` は脚注の表示方法として使用しました。また、 `\textbf{}` で太字を表現しています。
 
 \begin{center}
-\textbf{したがって，11月的観測結果および随后三个月中的観測結果与彗星回太阳在これ一抛物線軌道上的运動相符，因而証明了これ是該彗星的真実軌道。なぜなら観測位置与〜によれば誤差和図形方法定義軌道時計算的位置之間的差异，可以很容易地由誤差引起。}
+\textbf{したがって，11月的観測結果および随后三個月中的観測結果与彗星回太阳在これ一抛物線軌道上的运動相符，因而証明了これ是該彗星的真実軌道。なぜなら観測位置与〜によれば誤差和図形方法定義軌道時計算的位置之間的差异，できる很容易地由誤差引起。}
 
-其他方面，彗星所描描的軌道および它在各个位置投下的真実尾巴，在附図中如下所示。
+其他方面，彗星所描描的軌道および它在各個位置投下的真実尾巴，在附図中如下所示。
 \end{center}
 
 
@@ -21125,7 +21146,7 @@ ac prius.
 この彗星の軌道が描き終わり、その他の現象も観察した後で、
 
 
-Orbem jam descriptum spectanti \& reliqua Comet{\ae} hujus Ph{\ae}nomena.
+Orbem jam descriptum spectanti & reliqua Comet{\ae} hujus Ph{\ae}nomena.
 
 確かに、彗星の体は固体で、堅固かつ固定されたものであり、惑星と同様に堅牢であることが容易に理解できます。なぜなら、もし彗星がただの地球蒸気や太陽蒸気、惑星蒸気の集合体であるとするならば、彗星は現在の軌道上での太陽近接時に即座に消滅するはずです。太陽の熱は放射線密度と等価であり、これは距離の逆数に比例し、すなわち太陽から離れる距離の平方に反比例します。したがって、彗星が太陽から距離 \( \text{Dec.~8} \) で近日点を通過していたとき、その距離は地球から太陽までの距離に対して約 \( 6 : 1000 \) の関係にあるとすると、その当時の彗星周囲の太陽の熱は以下のようになります。
 
@@ -21374,9 +21395,9 @@ p \propto \frac{1}{r^2}
 
 \textbf{彗星の尾は、頭からゆっくりとした運動によって拡散された蒸気の柱であり、その運動は彗星が太陽に近づく初期に獲得したものを共有します。これらの尾は頭と共に空気中を移動し続けます。}
 
-spatia caelestia vi resistendi destitui; utpote in quibus non solum solida Planetarum \& Cometarum corpora, sed etiam rarissimi caudarum vapores motus suos velocissimos liberrime peragunt ac diutissime conservant.
+spatia caelestia vi resistendi destitui; utpote in quibus non solum solida Planetarum & Cometarum corpora, sed etiam rarissimi caudarum vapores motus suos velocissimos liberrime peragunt ac diutissime conservant.
 
-Ascensum caudarum ex Atmosphaeris capitum \& progressum in partes a Sole aversas \textit{Keplerus} ascribit actioni radiorum lucis materiam caudae secum rapientium. Et auram longe tenuissimam in spatiis liberrimis actioni radiorum cedere, non est a ratione prorsus alienum, non obstante quod substantiae crassae, impeditissimis in regionibus,
+Ascensum caudarum ex Atmosphaeris capitum & progressum in partes a Sole aversas \textit{Keplerus} ascribit actioni radiorum lucis materiam caudae secum rapientium. Et auram longe tenuissimam in spatiis liberrimis actioni radiorum cedere, non est a ratione prorsus alienum, non obstante quod substantiae crassae, impeditissimis in regionibus,
 
 \pngright{494.png}{300pt}{200pt}{(a)}
 
@@ -21455,7 +21476,7 @@ F \propto 1/r^2
 
 これらの論証は、彗星尾の運動とその大気環境との相互作用を理解する上で重要であり、彗星の軌道や太陽系の大気構造についても深い洞察を提供する。
 
-misceri rationi consentaneum videtur. Nam quemadmodum Maria ad constitutionem Terrae hujus omnino requiruntur, idque ut ex iis per calorem Solis vapores copiose satis excitentur, qui vel in nubes coacti decidant in pluviis, \& terram omnem ad procreationem vegetabilium irrigent \& nutriant; vel in frigidis montium verticibus condensati (ut aliqui cum ratione philosophantur) decurrant in fontes \& flumina: sic ad conservationem marium \& humorum in Planetis Cometae requiri videntur; ex quorum exhalationibus \& vaporibus condensatis, quicquid liquoris per vegetationem \& putrefactionem
+misceri rationi consentaneum videtur. Nam quemadmodum Maria ad constitutionem Terrae hujus omnino requiruntur, idque ut ex iis per calorem Solis vapores copiose satis excitentur, qui vel in nubes coacti decidant in pluviis, & terram omnem ad procreationem vegetabilium irrigent & nutriant; vel in frigidis montium verticibus condensati (ut aliqui cum ratione philosophantur) decurrant in fontes & flumina: sic ad conservationem marium & humorum in Planetis Cometae requiri videntur; ex quorum exhalationibus & vaporibus condensatis, quicquid liquoris per vegetationem & putrefactionem
 
 \textbf{生成}されるべきである。すなわち、地球の形成に必要なマリアが要求されるように、太陽熱による蒸気の大量発生が求められ、その蒸気が雲となって降雨となり、すべての土地を植物の生育と養分供給のために潤すか、または寒冷な山頂で凝結して泉や川へ流れ込むかのように、月や彗星の水や液状物質の保存にも似たような過程が必要である。これらの発散した蒸気や凝結された蒸気から、植物の生育と腐敗によって生成されるすべての液体が得られるべきである。
 
@@ -21608,9 +21629,9 @@ D. ストーラーは、彼の記述が12月に到着したと述べています
 \textit{作業 1.} 前述した方法で幾何学的に求めた彗星軌道の位置を仮定し、観測によって三つの場所を選択します。
 \end{center}
 
-accuratissimis definita, \& ab invicem quam maxime distantia; sitque \( A \) tempus inter primam \& secundam, ac \( B \) tempus inter secundam ac tertiam. Cometam autem in eorum aliquo in Perigaeo versari convenit, vel saltem non longe a Perigaeo abesse. Ex his locis apparentibus inveniantur per operationes Trigonometricas loca tria vera Cometae in assumpto illo plano Trajectori.
+accuratissimis definita, & ab invicem quam maxime distantia; sitque \( A \) tempus inter primam & secundam, ac \( B \) tempus inter secundam ac tertiam. Cometam autem in eorum aliquo in Perigaeo versari convenit, vel saltem non longe a Perigaeo abesse. Ex his locis apparentibus inveniantur per operationes Trigonometricas loca tria vera Cometae in assumpto illo plano Trajectori.
 
-Deinde per loca illa inventa, circa centrum Solis ceu umbilicum, per operationes Arithmeticas, ope Prop.\ XXI. Lib.\ I. institutas, describatur Sectio Conica: \& ejus are\ae, radiis a Sole ad loca inventa ductis
+Deinde per loca illa inventa, circa centrum Solis ceu umbilicum, per operationes Arithmeticas, ope Prop.\ XXI. Lib.\ I. institutas, describatur Sectio Conica: & ejus are\ae, radiis a Sole ad loca inventa ductis
 
 \textbf{終焉して，$D$ と $E$ を仮定する。すなわち，$D$ は最初の観測点と第二の観測点間の面積であり，$E$ は第二の観測点と第三の観測点間の面積である。} \textbf{次に，$T$ を全時間とする。この時間において，彗星の速度が第I書の第XVI命題により求められた値で，全体として $D + E$ の面積を描くべきである。}
 
@@ -21636,9 +21657,9 @@ Deinde per loca illa inventa, circa centrum Solis ceu umbilicum, per operationes
 
 ここで、$C : A = 1 : B$, $G : D = 1 : E$, $g : d = 1 : e$, $\gamma : \delta = 1 : \epsilon$ と置く。また、最初の観測と第三観測間の真実の時間を $S$ とする。そして、正負符号が観察によって確認された条件下で、数値 $m$ と $n$ を求めることを考える。この条件は $G - C = mG - mg + nG - n\gamma$ である。
 
-\& \( T - S \)は\( mT - mt + nT - n\tau \)と等しい。そして、初めの操作において、\( I \)が軌道平面に対する黄道面の傾きを表し、\( K \)が二次節点間の経度を示すとき、真の軌道平面に対する黄道面の傾きは\( I + nQ \)、真の二次節点の経度は\( K + mP \)となる。そして最後に、初めの操作、二番目の操作、三番目の操作において、\( R \), \( r \), \( \rho \)が軌道上の直線距離を表し、それぞれの直線距離に対応する横断距離は\( \frac{1}{L} \), \( \frac{1}{l} \), \( \frac{1}{\lambda} \)とするとき、真の直線距離は\( R + mr - mR + n\rho - nR \)となる。
+& \( T - S \)は\( mT - mt + nT - n\tau \)と等しい。そして、初めの操作において、\( I \)が軌道平面に対する黄道面の傾きを表し、\( K \)が二次節点間の経度を示すとき、真の軌道平面に対する黄道面の傾きは\( I + nQ \)、真の二次節点の経度は\( K + mP \)となる。そして最後に、初めの操作、二番目の操作、三番目の操作において、\( R \), \( r \), \( \rho \)が軌道上の直線距離を表し、それぞれの直線距離に対応する横断距離は\( \frac{1}{L} \), \( \frac{1}{l} \), \( \frac{1}{\lambda} \)とするとき、真の直線距離は\( R + mr - mR + n\rho - nR \)となる。
 
-\& $\frac{1}{L + ml - mL + n\lambda - nL}$ は、彗星が描く軌道の横径を表す。
+& $\frac{1}{L + ml - mL + n\lambda - nL}$ は、彗星が描く軌道の横径を表す。
 
 しかしながら、横径が与えられた場合、彗星の周期的時間も与えられる。
 
