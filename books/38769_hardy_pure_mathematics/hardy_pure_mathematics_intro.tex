@@ -37,15 +37,15 @@
 
 \newtcolorbox{examplebox}[1]{
     colback=softgreen, colframe=accentgreen, coltitle=white, fonttitle=\bfseries,
-    title=#1, arc=3mm, boxrule=1pt, left=4mm,right=4mm,top=3mm,bottom=3mm, breakable
+    title={#1}, arc=3mm, boxrule=1pt, left=4mm,right=4mm,top=3mm,bottom=3mm, breakable
 }
 \newtcolorbox{pointbox}[1]{
     colback=softamber, colframe=warmamber, coltitle=darkslate, fonttitle=\bfseries,
-    title=#1, arc=2mm, boxrule=1pt, left=3mm,right=3mm,top=2mm,bottom=2mm, breakable
+    title={#1}, arc=2mm, boxrule=1pt, left=3mm,right=3mm,top=2mm,bottom=2mm, breakable
 }
 \newtcolorbox{notebox}[1]{
     colback=softrose, colframe=crimson, coltitle=white, fonttitle=\bfseries,
-    title=#1, arc=2mm, boxrule=1pt, left=3mm,right=3mm,top=2mm,bottom=2mm, breakable
+    title={#1}, arc=2mm, boxrule=1pt, left=3mm,right=3mm,top=2mm,bottom=2mm, breakable
 }
 
 \tikzset{
@@ -66,8 +66,9 @@
 \fancyhead[RE]{\nouppercase{\leftmark}}
 \renewcommand{\headrulewidth}{0.4pt}
 
-\hypersetup{pdftitle={古典で学び直すハーディ純粋数学教程入門 —— 10章を図で読む}}
+\hypersetup{pdftitle={古典で学び直すハーディ純粋数学教程入門 —— 節ごとに読む実数・極限・微積分・級数・指数関数}}
 \newcommand{\dd}{\mathrm{d}}
+\newcommand{\ee}{\mathrm{e}}
 
 \begin{document}
 
@@ -77,15 +78,15 @@
 {\Large\bfseries プロジェクト・グーテンベルク古典数学入門シリーズ}\\[0.8cm]
 \rule{\textwidth}{1.5pt}\\[0.4cm]
 {\Huge\bfseries 古典で学び直す\\ハーディ純粋数学教程入門}\\[0.4cm]
-{\Large\bfseries —— 実数・極限・微積分・指数関数を図で読む ——}\\[0.4cm]
+{\Large\bfseries —— 実数・極限・微積分・級数・指数関数を\\原著の節の順に読む ——}\\[0.4cm]
 \rule{\textwidth}{1.5pt}\\[1.5cm]
 {\large 原著：ゴッドフレイ・ハロルド・ハーディ\\
 \textit{A Course of Pure Mathematics}}\\[2.0cm]
 {\Large\bfseries 著：教育情報分析研究会}\\[2.5cm]
 \vfill
-{\large 2026年11月 全面改訂版}\\[0.5cm]
-{\footnotesize 本書は Project Gutenberg のパブリックドメイン（eBook \#38769）の翻訳（全10章）の章立てに沿って、\\
-中学校・高等学校の数学の知識で読み進められるように書き下ろした入門書です。}
+{\large 2026年11月 改訂第2版（原著の節ごとに対応）}\\[0.5cm]
+{\footnotesize 本書は Project Gutenberg のパブリックドメイン（eBook \#38769）の翻訳（全10章・約230節）の章立てと節の順に沿って、\\
+高等学校の数学の知識で読み進められるように書き下ろした入門書です。}
 \end{center}
 \end{titlepage}
 
@@ -94,27 +95,35 @@
 \mainmatter
 
 %==========================================================
-\chapter*{はじめに：「厳密さ」という考え方}
-\addcontentsline{toc}{chapter}{はじめに：「厳密さ」という考え方}
+\chapter*{はじめに：この本の読み方}
+\addcontentsline{toc}{chapter}{はじめに：この本の読み方}
 \markboth{はじめに}{はじめに}
 %==========================================================
 
-ハーディ（1877〜1947）の『純粋数学教程』は、大学で解析学を学ぶ人のための、20世紀初めの教科書です。微積分の基礎を、「なんとなく」ではなく、実数・極限・連続の定義から、きちんと組み立てます。本書は、翻訳版の10章に1対1で沿って、各章の考え方を図で整理します。大学レベルの内容ですが、必要なのは、高校の数学（関数のグラフ、数列、微分積分の基本）だけです。
+ハーディ（1877〜1947）の『純粋数学教程』は、大学1年の解析学の教科書として20世紀初めに書かれ、長く読まれてきました。翻訳版は約380ページ、全10章、節の数は200を超えます。内容は、微積分を「なんとなく」ではなく、実数・極限・連続の定義から、一歩ずつ組み立てるものです。
+
+本書は、その翻訳版の\textbf{章と節の順}に沿って、各節の中心の考えを、高等学校の数学の言葉で説明します。節の番号は、翻訳版（原著）の節の番号 \S\ に対応させてあります。原著の例題や証明そのものは載せず、同じ考え方の別の数値例や図で説明します。
 
 \begin{figure}[htbp]
 \centering
 \begin{tikzpicture}[node distance=3mm]
- \node[fbox, text width=2.7cm] (a) {第1〜3章\\実数・関数・複素数};
- \node[fbox, text width=2.7cm, right=of a] (b) {第4〜5章\\極限と連続};
- \node[fbox, text width=2.7cm, right=of b] (c) {第6〜7章\\微分と積分};
- \node[fbox, text width=2.7cm, right=of c] (d) {第8〜10章\\級数・指数・対数};
- \draw[ax] (a)--(b); \draw[ax] (b)--(c); \draw[ax] (c)--(d);
+ \node[fbox, text width=2.6cm] (a) {第1章\\実変数\\{\scriptsize §1〜19}};
+ \node[fbox, text width=2.6cm, right=of a] (b) {第2章\\実変数の関数\\{\scriptsize §20〜35}};
+ \node[fbox, text width=2.6cm, right=of b] (c) {第3章\\複素数\\{\scriptsize §36〜51}};
+ \node[fbox, text width=2.6cm, right=of c] (d) {第4章\\数列の極限\\{\scriptsize §52〜88}};
+ \node[fbox, text width=2.6cm, below=5mm of a] (e) {第5章\\関数の極限・連続\\{\scriptsize §89〜107}};
+ \node[abox, text width=2.6cm, right=of e] (f) {第6章\\導関数と積分\\{\scriptsize §108〜148}};
+ \node[abox, text width=2.6cm, right=of f] (g) {第7章\\補足的な定理\\{\scriptsize §149〜167}};
+ \node[abox, text width=2.6cm, right=of g] (h) {第8章\\級数・無限積分\\{\scriptsize §168〜196}};
+ \node[gbox, text width=2.6cm, below=5mm of e] (i) {第9章\\対数・指数関数\\{\scriptsize §197〜216}};
+ \node[gbox, text width=2.6cm, right=of i] (j) {第10章\\一般理論\\{\scriptsize §217〜235}};
+ \draw[ax] (d.south) -- ++(0,-0.15) -| (e.north);
 \end{tikzpicture}
-\caption{本書の構成。土台（数）から、極限、微積分、そして級数・指数関数へ。}
+\caption{本書の構成。節の範囲は翻訳版の節番号の目安。}
 \end{figure}
 
 \begin{notebox}{事実・推測・未確認の区別}
-本書の数値は、筆者が計算して確かめたものです。ハーディ自身の定理の証明は載せません。翻訳版は小型モデルによる訳であり、細部は原著との照合が必要です。
+翻訳版は小型の言語モデルによる訳で、節の見出しや番号に、乱れがあります（見出しの抜けや重複など）。本書は、見出しが読み取れる節を中心に、翻訳版の本文の構成に沿って書きました。数値例（計算）は、筆者が確かめたものです。ハーディ自身の定理の証明は載せていません。
 \end{notebox}
 
 %==========================================================
@@ -122,38 +131,191 @@
 \markboth{第1章}{実変数}
 %==========================================================
 
-数直線上の点は、小数で表せます。$\sqrt2=1.41421356\ldots$ は、有理数（分数）では表せない数です。ハーディは、実数を、有理数の「切り口」（デデキントの切断）として定義します。
+第1章は、解析学の土台である「数」を扱います。有理数から出発して、無理数、実数、そして数直線上の点の集まり（点集合）の性質までを、約19の節で述べます。
+
+\section{§1 有理数}
+
+分数 $r=p/q$（$p,q$ は整数、$q\ne0$）で表せる数を\textbf{有理数}といいます。$p/(-q)=(-p)/q$ のように、同じ数に複数の書き方があり、$r+s,\ r-s,\ rs,\ r/s\ (s\ne0)$ はまた有理数になります。ハーディは、読者がこれらの計算には慣れていると仮定して、すぐに「有理数をどう並べるか」という話題に入ります。
+
+たとえば、正の有理数は、次のように数え上げることができます。分子と分母の和が $2,3,4,\ldots$ のものを順に並べるのです。
+
+\begin{figure}[htbp]
+\centering
+\begin{tikzpicture}[scale=0.9]
+ \foreach \sm in {2,3,4,5} {
+  \foreach \nu in {1,...,\numexpr\sm-1\relax} {
+   \pgfmathtruncatemacro{\de}{\sm-\nu}
+   \node[wbox, minimum width=0.9cm] at ({\nu*1.2},{-\sm*0.9+1.8}) {$\frac{\nu}{\de}$};
+  }
+  \node[left, font=\footnotesize] at (0.4,{-\sm*0.9+1.8}) {和 \sm};
+ }
+ \node[font=\footnotesize, text width=6cm] at (8.5,-1) {上から順に読むと、\\すべての正の有理数を\\1列に並べられる（重複あり）};
+\end{tikzpicture}
+\caption{正の有理数の数え上げ。分子と分母の和が同じものを1行にまとめ、行を上から順に読む。}
+\end{figure}
+
+終わりのある小数が表す有理数は、分母が $2$ と $5$ だけを素因数にもつもの（例：$\frac38=0.375$、$\frac{7}{20}=0.35$）です。
+
+\section{§2 有理数の直線上での表現}
+
+直線上に原点 $A_0$ と単位の点 $A_1$ を決め、有理数 $r$ を、$A_0$ からの符号つきの長さ $r$ の点 $A_r$ で表します。こうして、有理数が、直線上の点に対応します。
+
+\begin{figure}[htbp]
+\centering
+\begin{tikzpicture}
+ \draw[ax] (-4.4,0)--(4.8,0);
+ \foreach \xa/\lab in {-4/-2,-2/-1,0/0,2/1,4/2} {\draw (\xa,0.1)--(\xa,-0.1); \node[below, font=\small] at (\xa,-0.1) {\lab};}
+ \foreach \xa/\lab in {-3/{-\frac32},1/{\frac12},3/{\frac32}} {\fill[primaryblue] (\xa,0) circle (0.07); \node[above, font=\small] at (\xa,0.1) {$\lab$};}
+\end{tikzpicture}
+\caption{有理数の直線上での表現。原点を $0$、単位の点を $1$ とする。}
+\end{figure}
+
+ハーディは、この幾何学的な表現は「解析の厳密な議論が、図に依存している」という意味ではなく、あくまで理解を助ける図示にすぎない、と注意しています。
+
+\section{§3〜§7 無理数と実数の定義}
+
+直線上には、有理数を表す点以外にも、点がたくさんあります。たとえば、1辺 $1$ の正方形の対角線の長さ $\sqrt2$ は、有理数では表せません。
+
+\begin{figure}[htbp]
+\centering
+\begin{tikzpicture}[scale=1.4]
+ \draw[thick, primaryblue, fill=softblue] (0,0) rectangle (1,1);
+ \draw[thick, crimson] (0,0)--(1,1) node[midway, above left, font=\small] {$\sqrt2$};
+ \node[below, font=\small] at (0.5,0) {1}; \node[left, font=\small] at (0,0.5) {1};
+ \draw[->, thick, accentgreen] (1.4,0.5)--(2.0,0.5);
+ \draw[ax] (2.2,0)--(5,0);
+ \draw (2.5,0.1)--(2.5,-0.1); \node[below, font=\small] at (2.5,-0.1) {0};
+ \draw (3.5,0.1)--(3.5,-0.1); \node[below, font=\small] at (3.5,-0.1) {1};
+ \draw[crimson, thick, domain=0:60, samples=2] (2.5,0.5) arc (180:45:1.0);
+ \fill[crimson] (3.914,0) circle (0.05); \node[below, font=\small] at (3.914,-0.1) {$\sqrt2$};
+\end{tikzpicture}
+\caption{対角線を直線上に写して、$\sqrt2$ の点を作る（概念図）。この点に有理数は対応しない。}
+\end{figure}
+
+そこでハーディは、直線上のすべての点（有理点だけでなく）を数と見なすために、\textbf{切断}という考え方を使います。有理数全体を、2つの組 $L$（下の組）と $R$（上の組）に分けます。条件は、(1) どの有理数も、どちらか一方にだけ入る、(2) どちらの組も空でない、(3) $L$ のどの数も、$R$ のどの数より小さい、というものです。
 
 \begin{figure}[htbp]
 \centering
 \begin{tikzpicture}
  \draw[ax] (-0.3,0)--(10.3,0);
- \foreach \xa/\lab in {0/1,10/2} {\draw (\xa,0.1)--(\xa,-0.1); \node[below] at (\xa,-0.1) {\lab};}
- \draw[thick, primaryblue, fill=softblue] (0,0.5) rectangle (4.14,0.9);
- \draw[thick, warmamber, fill=softamber] (4.14,0.5) rectangle (10,0.9);
- \draw[crimson, thick] (4.14,0.2)--(4.14,1.2);
- \node[above, font=\footnotesize] at (2.1,0.95) {$A$：$x^2<2$ の有理数};
- \node[above, font=\footnotesize] at (7.1,0.95) {$B$：$x^2>2$ の有理数};
- \node[below, font=\footnotesize, crimson] at (4.14,-0.3) {切り口 $=\sqrt2$};
+ \draw[thick, primaryblue, fill=softblue] (0,0.4) rectangle (4.15,0.8);
+ \draw[thick, warmamber, fill=softamber] (4.15,0.4) rectangle (10,0.8);
+ \draw[crimson, thick] (4.15,0.1)--(4.15,1.0);
+ \node[font=\small] at (2.07,0.6) {$L$};
+ \node[font=\small] at (7.07,0.6) {$R$};
+ \node[below, font=\small, crimson] at (4.15,-0.1) {切断が定める数};
 \end{tikzpicture}
-\caption{$\sqrt2$ を、有理数の2つの組 $A,B$ の切り口として定義する。切り口にあたる有理数はない。}
+\caption{切断。有理数全体を、左の組 $L$ と右の組 $R$ に分ける。}
 \end{figure}
+
+切断には3通りの場合があります。
+
+\begin{center}
+\begin{tabular}{lp{8.5cm}}
+\toprule
+場合 & 内容\\
+\midrule
+$L$ に最大の数がある & その数が、切断の定める有理数\\
+$R$ に最小の数がある & その数が、切断の定める有理数\\
+どちらもない & 新しい数（無理数）。たとえば $L=\{x:x^2<2\}$ とその補集合\\
+\bottomrule
+\end{tabular}
+\end{center}
+
+有理数による切断をすべて集めたものが\textbf{実数}です。実数には、足し算・掛け算・大小が定義され、有理数のときと同じ規則が成り立ちます。
+
+\begin{pointbox}{実数の定義のポイント}
+有理数の「切り口」をすべて集めると、直線にすき間がなくなる。この性質を\textbf{連続性}という。
+\end{pointbox}
+
+\section{§8〜§13 代数的な数・無理数の例}
+
+実数の中でも、整数係数の方程式の解になる数を\textbf{代数的な数}といいます。$\sqrt2$（$x^2-2=0$）や、$\sqrt[3]{2}$（$x^3-2=0$）が例です。方程式の解にならない数は\textbf{超越数}と呼ばれます（円周率 $\pi$ や $e$ が代表例で、それぞれの超越性の証明は難しい）。
 
 \begin{figure}[htbp]
 \centering
-\begin{tikzpicture}[x=3.2cm]
- \foreach \l/\r/\yy in {1/2/0, 1.4/1.5/0.8, 1.41/1.42/1.6, 1.414/1.415/2.4} {
-   \draw[thick, primaryblue, fill=softblue] (\l-1,\yy) rectangle (\r-1,\yy+0.35);
-   \node[right, font=\footnotesize] at (1.05,\yy+0.17) {[\l,\ \r]};
- }
- \draw[crimson, dashed] (0.41421,-0.1)--(0.41421,2.9);
+\begin{tikzpicture}
+ \draw[thick, primaryblue, fill=softblue] (0,0) ellipse (5 and 2.4);
+ \draw[thick, accentgreen, fill=softgreen] (-1.4,-0.1) ellipse (2.6 and 1.6);
+ \draw[thick, warmamber, fill=softamber] (-2.2,-0.3) ellipse (1.2 and 0.9);
+ \node[font=\small] at (-2.2,-0.3) {有理数};
+ \node[font=\small] at (-0.4,0.5) {代数的な無理数};
+ \node[font=\small] at (2.8,0.3) {超越数};
+ \node[font=\small] at (0,1.9) {実数};
 \end{tikzpicture}
-\caption{$\sqrt2$ を挟む区間を、どんどん狭めていく。（横軸は $x-1$。$1.41^2=1.9881<2<1.42^2=2.0164$ などで確認できる）}
+\caption{実数の分類。代数的な数（有理数を含む）と超越数に分かれる。}
 \end{figure}
 
-\begin{pointbox}{この章のポイント}
+\begin{examplebox}{例：$\sqrt2$ は有理数でない（背理法）}
+$\sqrt2=p/q$（既約分数）とすると $p^2=2q^2$。$p^2$ が偶数なので $p$ も偶数、$p=2k$ とおくと $q^2=2k^2$ となり、$q$ も偶数。既約分数という仮定に反する。
+\end{examplebox}
+
+\section{§14 二次の根号に関する定理}
+
+$\sqrt a+\sqrt b$ のような式（二次の根号）が、有理数になる場合は限られます。たとえば、$\sqrt2+\sqrt3$ は無理数です。
+
+\begin{examplebox}{例}
+$x=\sqrt2+\sqrt3$ とすると、$x^2=5+2\sqrt6$、$(x^2-5)^2=24$ から $x^4-10x^2+1=0$。この方程式の有理数解は $\pm1$ だけで、$x=\sqrt2+\sqrt3\approx3.146$ はそのどちらでもないので、無理数です。
+\end{examplebox}
+
+\section{§15〜§16 連続体と連続変数}
+
+すべての実数（有理数・無理数）を点で表した直線を、\textbf{連続体}といいます。変数 $x$ が、実数の範囲のどの値でもとれるとき、$x$ を\textbf{連続変数}といいます。
+
+\section{§17 区間}
+
+2つの実数 $a<b$ に対して、$a$ と $b$ のあいだの実数の集まりを\textbf{区間}といいます。端点を含むかどうかで、閉区間 $[a,b]$ と開区間 $(a,b)$ を区別します。
+
+\begin{figure}[htbp]
+\centering
+\begin{tikzpicture}
+ \draw[ax] (-0.5,0)--(10.5,0);
+ \draw[very thick, primaryblue] (1,0.7)--(4,0.7); \fill[primaryblue] (1,0.7) circle (0.1); \fill[primaryblue] (4,0.7) circle (0.1);
+ \node[above, font=\small] at (2.5,0.8) {閉区間 $[a,b]$};
+ \draw[very thick, warmamber] (6,0.7)--(9,0.7); \draw[warmamber, fill=white, thick] (6,0.7) circle (0.1); \draw[warmamber, fill=white, thick] (9,0.7) circle (0.1);
+ \node[above, font=\small] at (7.5,0.8) {開区間 $(a,b)$};
+\end{tikzpicture}
+\caption{閉区間（端点を含む、塗りつぶしの点）と開区間（端点を含まない、白抜きの点）。}
+\end{figure}
+
+\section{§18〜§19 集積点とワイエルシュトラスの定理}
+
+点の集まり $S$ に対して、「その点のどんなに近くにも、$S$ の点が無限に多くある」ような点を、$S$ の\textbf{集積点}といいます。
+
+\begin{examplebox}{例}
+$S=\left\{1,\frac12,\frac13,\frac14,\ldots\right\}$ の集積点は $0$ だけ。$0$ は $S$ の要素ではありませんが、$0$ のどんなに近くにも $S$ の点があります。
+\end{examplebox}
+
+\begin{figure}[htbp]
+\centering
+\begin{tikzpicture}[x=9cm]
+ \draw[ax] (-0.05,0)--(1.08,0);
+ \foreach \nn in {1,...,12} {\fill[primaryblue] ({1/\nn},0) circle (0.04);}
+ \draw (0,0.05)--(0,-0.05); \node[below, font=\small] at (0,-0.1) {0};
+ \draw (1,0.05)--(1,-0.05); \node[below, font=\small] at (1,-0.1) {1};
+ \node[above, font=\small, crimson] at (0,0.1) {集積点};
+\end{tikzpicture}
+\caption{点列 $1,\frac12,\frac13,\ldots$ は、$0$ のまわりに集まっていく。}
+\end{figure}
+
+\textbf{ワイエルシュトラスの定理}は、「有界な区間の中に、無限に多くの点があれば、少なくとも1つの集積点がある」というものです。解析学の多くの結果が、この定理に頼っています。
+
+\begin{figure}[htbp]
+\centering
+\begin{tikzpicture}
+ \foreach \lv/\l/\r in {0/0/8, 1/4/8, 2/4/6, 3/5/6, 4/5/5.5} {
+   \draw[thick, primaryblue, fill=softblue] (\l,-\lv*0.7) rectangle (\r,-\lv*0.7+0.4);
+   \node[right, font=\footnotesize] at (8.2,-\lv*0.7+0.2) {区間 \lv};
+ }
+ \node[font=\footnotesize, text width=7cm] at (3,-3.7) {無限に多くの点を含む側の半分を選び続ける。\\区間はどんどん狭まり、1点（集積点）に絞られる};
+\end{tikzpicture}
+\caption{ワイエルシュトラスの定理の考え方。区間を半分に分け、無限に多くの点を含む側を選ぶことをくり返す（二分法）。}
+\end{figure}
+
+\begin{pointbox}{第1章のまとめ}
 \begin{itemize}[leftmargin=1.5em]
-\item 実数は、有理数の切り口（または区間の入れ子）として厳密に定義できる。
+\item 有理数 $\to$ 切断 $\to$ 実数。実数は直線の「すき間のない」表現。
+\item 区間・集積点・ワイエルシュトラスの定理が、後の極限の議論の準備になる。
 \end{itemize}
 \end{pointbox}
 
@@ -162,29 +324,138 @@
 \markboth{第2章}{実変数の関数}
 %==========================================================
 
-関数は、変数 $x$ の値を決めると $y$ が決まる対応です。定義される範囲（定義域）と、値のとる範囲（値域）に注意します。
+第2章は、関数の概念と、いろいろな種類の関数を整理します。約16の節で、関数、グラフ、極座標、多項式・有理関数・代数関数・超越関数、2変数の関数と曲線・曲面までを扱います。
+
+\section{§20 変数と関数}
+
+変数 $x$ が、ある範囲の実数値をとるとき、$x$ の値ごとに $y$ の値が1つ（または複数）決まるなら、$y$ は $x$ の\textbf{関数}です。$x$ のとれる範囲を\textbf{定義域}、$y$ のとる値の範囲を\textbf{値域}といいます。
+
+\begin{figure}[htbp]
+\centering
+\begin{tikzpicture}[node distance=10mm]
+ \node[wbox, text width=2.2cm] (a) {定義域\\{\small $x$ の範囲}};
+ \node[abox, text width=2.2cm, right=of a] (f) {規則 $f$};
+ \node[gbox, text width=2.2cm, right=of f] (b) {値域\\{\small $y$ の範囲}};
+ \draw[ax] (a)--(f); \draw[ax] (f)--(b);
+\end{tikzpicture}
+\caption{関数は、定義域の値を、値域の値に対応させる規則。}
+\end{figure}
+
+\begin{examplebox}{例}
+$y=\sqrt{4-x^2}$ の定義域は $-2\le x\le2$（根号の中が負にならない範囲）、値域は $0\le y\le2$。グラフは、半径2の上半円。
+\end{examplebox}
+
+\section{§21 関数のグラフ}
+
+$x$ と $y$ の対応を、平面上の点 $(x,y)$ で表したものがグラフです。グラフの形で、関数の性質（増減・最大最小・対称性）が一目で分かります。
 
 \begin{figure}[htbp]
 \centering
 \begin{tikzpicture}
-\begin{axis}[width=5.8cm, height=5cm, title={$y=\lfloor x\rfloor$（階段関数）}, xlabel={$x$}, xmin=-2, xmax=3, ymin=-2.5, ymax=3, grid=major, every axis title/.style={font=\footnotesize}]
- \foreach \k in {-2,-1,0,1,2} {
-   \addplot[thick, primaryblue] coordinates {(\k,\k)(\k+1,\k)};
-   \addplot[only marks, mark=*, mark size=1.5pt, color=primaryblue] coordinates {(\k,\k)};
-   \addplot[only marks, mark=o, mark size=1.5pt, color=primaryblue] coordinates {(\k+1,\k)};
- }
+\begin{axis}[width=5.2cm, height=4.6cm, title={偶関数 $x^2$}, xmin=-2, xmax=2, ymin=-0.3, ymax=4.3, grid=major, every axis title/.style={font=\footnotesize}]
+ \addplot[thick, primaryblue, domain=-2:2, samples=40] {x^2};
 \end{axis}
-\begin{axis}[xshift=6.6cm, width=5.8cm, height=5cm, title={$y=1/x$（$x\ne0$）}, xlabel={$x$}, xmin=-3, xmax=3, ymin=-4, ymax=4, grid=major, every axis title/.style={font=\footnotesize}]
- \addplot[thick, crimson, domain=0.25:3, samples=60] {1/x};
- \addplot[thick, crimson, domain=-3:-0.25, samples=60] {1/x};
+\begin{axis}[xshift=5.6cm, width=5.2cm, height=4.6cm, title={奇関数 $x^3$}, xmin=-2, xmax=2, ymin=-4, ymax=4, grid=major, every axis title/.style={font=\footnotesize}]
+ \addplot[thick, crimson, domain=-1.6:1.6, samples=40] {x^3};
+\end{axis}
+\begin{axis}[xshift=11.2cm, width=5.2cm, height=4.6cm, title={周期関数 $\sin x$}, xmin=0, xmax=6.3, ymin=-1.3, ymax=1.3, grid=major, every axis title/.style={font=\footnotesize}]
+ \addplot[thick, accentgreen, domain=0:6.28, samples=60] {sin(deg(x))};
 \end{axis}
 \end{tikzpicture}
-\caption{左：床関数（$x$ 以下の最大の整数）。整数点で値が飛ぶ。右：$1/x$ は $x=0$ で定義されない。}
+\caption{グラフから分かる性質。偶関数は $y$ 軸対称、奇関数は原点対称、周期関数は同じ形のくり返し。}
 \end{figure}
 
-\begin{pointbox}{この章のポイント}
+\section{§22 極座標}
+
+平面上の点 $P$ を、原点からの距離 $r$ と、$x$ 軸からの角 $\theta$ で表す方法が\textbf{極座標}です。直交座標との関係は、$x=r\cos\theta,\ y=r\sin\theta$。
+
+\begin{figure}[htbp]
+\centering
+\begin{tikzpicture}[scale=1.1]
+ \draw[->] (-0.3,0)--(4.2,0) node[right] {$x$}; \draw[->] (0,-0.3)--(0,3.4) node[above] {$y$};
+ \coordinate (P) at (3,2);
+ \fill[crimson] (P) circle (0.07) node[above right] {$P(r,\theta)$};
+ \draw[thick, primaryblue] (0,0)--(P) node[midway, above left, font=\small] {$r$};
+ \draw[dashed] (P)--(3,0) node[below, font=\small] {$x=r\cos\theta$};
+ \draw[dashed] (P)--(0,2) node[left, font=\small] {$y=r\sin\theta$};
+ \draw (0.7,0) arc (0:33.7:0.7); \node[font=\small] at (1.0,0.25) {$\theta$};
+\end{tikzpicture}
+\caption{極座標 $(r,\theta)$ と直交座標 $(x,y)$ の関係。}
+\end{figure}
+
+\begin{examplebox}{例}
+直交座標 $(3,2)$ の点は、$r=\sqrt{3^2+2^2}=\sqrt{13}\approx3.606$、$\theta=\arctan\frac23\approx33.7^\circ$。
+\end{examplebox}
+
+\section{§23〜§24 多項式と有理関数}
+
+$a_0+a_1x+a_2x^2+\cdots+a_nx^n$ の形の関数を\textbf{多項式}（整関数）といいます。2つの多項式の比 $P(x)/Q(x)$ を\textbf{有理関数}といい、$Q(x)=0$ となる点は、定義域から除かれます。
+
+\begin{figure}[htbp]
+\centering
+\begin{tikzpicture}
+\begin{axis}[width=7.6cm, height=5.2cm, title={多項式 $x^3-3x$}, xmin=-2.2, xmax=2.2, ymin=-3, ymax=3, grid=major, every axis title/.style={font=\footnotesize}]
+ \addplot[thick, primaryblue, domain=-2.1:2.1, samples=60] {x^3-3*x};
+\end{axis}
+\begin{axis}[xshift=8.2cm, width=7.6cm, height=5.2cm, title={有理関数 $\dfrac{x}{x^2-1}$}, xmin=-3, xmax=3, ymin=-4, ymax=4, grid=major, every axis title/.style={font=\footnotesize}]
+ \addplot[thick, crimson, domain=-3:-1.15, samples=40] {x/(x^2-1)};
+ \addplot[thick, crimson, domain=-0.85:0.85, samples=40] {x/(x^2-1)};
+ \addplot[thick, crimson, domain=1.15:3, samples=40] {x/(x^2-1)};
+\end{axis}
+\end{tikzpicture}
+\caption{多項式は切れ目のない曲線。有理関数は、分母が0になる点（$x=\pm1$）で途切れる。}
+\end{figure}
+
+\section{§25〜§27 代数関数（陽関数・陰関数）}
+
+多項式や有理関数に、根号（累乗根）を加えた関数を、\textbf{陽な代数関数}といいます。たとえば、$y=\sqrt{x}$ や $y=\sqrt[3]{x^2+1}$。さらに、$x$ と $y$ の多項式の関係式 $F(x,y)=0$ で、$y$ を $x$ の関数として定めるとき、\textbf{陰関数}（陰な代数関数）といいます。
+
+\begin{figure}[htbp]
+\centering
+\begin{tikzpicture}
+\begin{axis}[width=8cm, height=6.4cm, axis equal image, title={陰関数 $x^2+y^2=1$（円）}, xmin=-1.5, xmax=1.5, ymin=-1.5, ymax=1.5, grid=major, every axis title/.style={font=\footnotesize}]
+ \addplot[thick, primaryblue, domain=0:360, samples=80, variable=\tt] ({cos(\tt)},{sin(\tt)});
+\end{axis}
+\end{tikzpicture}
+\caption{$x^2+y^2=1$ は、$y=\pm\sqrt{1-x^2}$ の2つの陽な関数をまとめた形。1つの $x$ に2つの $y$ が対応する。}
+\end{figure}
+
+\section{§28〜§30 超越関数}
+
+代数関数でない関数を、\textbf{超越関数}といいます。代表は、三角関数（$\sin x,\cos x,\tan x$）、指数関数 $a^x$、対数関数 $\log x$、そしてそれらの逆関数です。これらの定義は、第IX・X章で、厳密に与えられます。
+
+\begin{figure}[htbp]
+\centering
+\begin{tikzpicture}
+\begin{axis}[width=10cm, height=5.8cm, xmin=-2, xmax=4, ymin=-2, ymax=6, grid=major, legend pos=north west, legend style={font=\footnotesize}]
+ \addplot[thick, primaryblue, domain=-2:1.8, samples=50] {2^x};
+ \addplot[thick, crimson, domain=0.1:4, samples=60] {ln(x)};
+ \addplot[thick, accentgreen, domain=-2:4, samples=80] {sin(deg(x))};
+ \legend{$2^x$,$\ln x$,$\sin x$}
+\end{axis}
+\end{tikzpicture}
+\caption{代表的な超越関数。指数関数（青）、対数関数（赤）、正弦関数（緑）。}
+\end{figure}
+
+\section{§31〜§33 2変数の関数・平面上の曲線・空間の軌跡}
+
+$z=f(x,y)$ のように、2つの変数に依存する関数は、3次元空間の曲面で表せます。また、$x$ と $y$ の関係式が、平面上の\textbf{曲線}を定めます。3次元空間では、2つの関係式が、1つの曲線（軌跡）を定めます。
+
+\begin{figure}[htbp]
+\centering
+\begin{tikzpicture}
+\begin{axis}[width=10cm, height=7cm, view={50}{28}, xlabel={$x$}, ylabel={$y$}, zlabel={$z$}, colormap/viridis, title={$z=x^2+y^2$（回転放物面）}, every axis title/.style={font=\footnotesize}]
+ \addplot3[surf, domain=-1.5:1.5, y domain=-1.5:1.5, samples=18, opacity=0.9] {x^2+y^2};
+\end{axis}
+\end{tikzpicture}
+\caption{2変数関数 $z=x^2+y^2$ の曲面。$(x,y)$ ごとに高さ $z$ が決まる。}
+\end{figure}
+
+\begin{pointbox}{第2章のまとめ}
 \begin{itemize}[leftmargin=1.5em]
-\item 関数には、定義域がある。値が飛ぶ関数や、定義されない点のある関数もある。
+\item 関数は、定義域から値域への対応。グラフ・極座標で図示できる。
+\item 多項式 $\subset$ 有理関数 $\subset$ 代数関数、それ以外が超越関数。
+\item 2変数の関数は曲面、関係式は曲線を定める。
 \end{itemize}
 \end{pointbox}
 
@@ -193,77 +464,542 @@
 \markboth{第3章}{複素数}
 %==========================================================
 
-複素数 $z=a+bi$ は、平面上の点 $(a,b)$ です。大きさ（絶対値）は $|z|=\sqrt{a^2+b^2}$。たとえば $z=3+4i$ なら $|z|=5$。
+第3章は、複素数を、「平面上の移動」として導入します。約16の節で、移動の足し算と掛け算、複素数の定義、絶対値と偏角、ド・モアブルの定理、代数方程式の根を扱います。
+
+\section{§36 移動の足し算}
+
+ハーディは、複素数を、方程式 $x^2+1=0$ の「謎の解」としてではなく、平面上の\textbf{移動}として説明します。直線上の移動 $[x]$ は、「右へ $x$ だけ進む」こと。2つの移動を続けて行うと、その和になります。
 
 \begin{figure}[htbp]
 \centering
 \begin{tikzpicture}[scale=1.0]
- \draw[->] (-0.5,0)--(5.5,0) node[right] {実軸}; \draw[->] (0,-0.5)--(0,4.6) node[above] {虚軸};
- \draw[thick, primaryblue, ->] (0,0)--(1,2) node[above left, font=\small] {$1+2i$};
- \draw[thick, accentgreen, ->] (0,0)--(3,1) node[below right, font=\small] {$3+i$};
- \draw[thick, crimson, ->] (0,0)--(4,3) node[above right, font=\small] {$4+3i$};
- \draw[dashed] (1,2)--(4,3)--(3,1);
+ \draw[ax] (-0.5,0)--(8,0);
+ \draw[->, thick, primaryblue] (0,0.5)--(3,0.5) node[midway, above, font=\small] {$[3]$};
+ \draw[->, thick, accentgreen] (3,0.5)--(5,0.5) node[midway, above, font=\small] {$[2]$};
+ \draw[->, thick, crimson] (0,-0.5)--(5,-0.5) node[midway, below, font=\small] {$[3]+[2]=[5]$};
 \end{tikzpicture}
-\caption{複素数の足し算は、平行四辺形の対角線。$(1+2i)+(3+i)=4+3i$。}
+\caption{1次元の移動の足し算。続けて動けば、動いた量の合計になる。}
 \end{figure}
 
-\begin{pointbox}{この章のポイント}
+\section{§37〜§38 移動の掛け算と回転}
+
+ハーディの鍵になる考えは、「移動を掛ける」操作です。$[x]$ に $[-1]$ を掛けると、方向が反対になります（$180^\circ$ 回転）。では、$90^\circ$ 回転する操作を2回行うと、$180^\circ$ 回転になります。つまり「2回で $[-1]$ になる操作」があれば、それが $\sqrt{-1}$ にあたります。
+
+\begin{figure}[htbp]
+\centering
+\begin{tikzpicture}[scale=1.5]
+ \draw[->] (-1.4,0)--(1.6,0); \draw[->] (0,-1.4)--(0,1.6);
+ \draw[thick, primaryblue, ->] (0,0)--(1,0) node[right, font=\small] {$[1]$};
+ \draw[thick, accentgreen, ->] (0,0)--(0,1) node[above right, font=\small] {$[i]$};
+ \draw[thick, crimson, ->] (0,0)--(-1,0) node[left, font=\small] {$[-1]$};
+ \draw[->, dashed] (0.6,0.05) arc (0:85:0.6);
+ \draw[->, dashed] (-0.05,0.6) arc (90:175:0.6);
+ \node[font=\scriptsize] at (0.55,0.45) {$90^\circ$}; \node[font=\scriptsize] at (-0.55,0.45) {$90^\circ$};
+\end{tikzpicture}
+\caption{$90^\circ$ の回転を2回行うと $180^\circ$。この回転が $i$、2回で $i^2=-1$。}
+\end{figure}
+
+\section{§39〜§40 複素数の定義}
+
+平面上の移動 $[x,y]$（右へ $x$、上へ $y$）を、複素数 $x+iy$ と書きます。足し算は成分ごとの和、掛け算は、「長さを掛け、角を足す」ことで定義されます。
+
+\begin{figure}[htbp]
+\centering
+\begin{tikzpicture}[scale=1.0]
+ \draw[->] (-0.5,0)--(6,0) node[right] {実軸}; \draw[->] (0,-0.5)--(0,4.5) node[above] {虚軸};
+ \draw[thick, primaryblue, ->] (0,0)--(4,3) node[above right, font=\small] {$z=4+3i$};
+ \draw[dashed] (4,3)--(4,0) node[below, font=\small] {$x=4$};
+ \draw[dashed] (4,3)--(0,3) node[left, font=\small] {$y=3$};
+\end{tikzpicture}
+\caption{複素数 $x+iy$ は、平面上の点 $(x,y)$。}
+\end{figure}
+
+掛け算は、$(a+bi)(c+di)=(ac-bd)+(ad+bc)i$。
+
+\begin{examplebox}{確かめ}
+$(1+2i)(3+i)=3+i+6i+2i^2=3+7i-2=1+7i$。長さで確かめると、$|1+2i|=\sqrt5$、$|3+i|=\sqrt{10}$、$|1+7i|=\sqrt{50}=\sqrt5\cdot\sqrt{10}$ ✓。
+\end{examplebox}
+
+\section{§41〜§44 絶対値と偏角}
+
+複素数 $z=x+iy$ の\textbf{絶対値}（長さ）は $|z|=\sqrt{x^2+y^2}$、\textbf{偏角}（実軸からの角）は $\arg z=\theta$。極形式では、$z=r(\cos\theta+i\sin\theta)$、ただし $r=|z|$。
+
+\begin{figure}[htbp]
+\centering
+\begin{tikzpicture}[scale=1.2]
+ \draw[->] (-0.4,0)--(4.4,0); \draw[->] (0,-0.4)--(0,3.6);
+ \draw[thick, primaryblue, ->] (0,0)--(3,2.2) node[above right, font=\small] {$z$};
+ \draw (0.8,0) arc (0:36:0.8); \node[font=\small] at (1.1,0.25) {$\theta$};
+ \node[font=\small, primaryblue] at (1.2,1.4) {$r=|z|$};
+\end{tikzpicture}
+\caption{絶対値 $r$ と偏角 $\theta$。$z=r(\cos\theta+i\sin\theta)$。}
+\end{figure}
+
+2つの複素数の積では、絶対値は掛け合わされ、偏角は足し合わされます。
+
+\[
+|z_1z_2|=|z_1||z_2|,\qquad\arg(z_1z_2)=\arg z_1+\arg z_2.
+\]
+
+\begin{figure}[htbp]
+\centering
+\begin{tikzpicture}[scale=1.5]
+ \draw[->] (-0.3,0)--(2.6,0); \draw[->] (0,-0.3)--(0,2.6);
+ \draw[thick, primaryblue, ->] (0,0)--(1.2,0.6) node[right, font=\small] {$z_1=1.2+0.6i$};
+ \draw[thick, accentgreen, ->] (0,0)--(0.6,1.2) node[above, font=\small] {$z_2=0.6+1.2i$};
+ \draw[thick, crimson, ->] (0,0)--(0,1.8) node[above right, font=\small] {$z_1z_2=1.8i$};
+\end{tikzpicture}
+\caption{$z_1z_2$：$(1.2+0.6i)(0.6+1.2i)=0.72+1.44i+0.36i-0.72=1.8i$。偏角は $26.6^\circ+63.4^\circ=90^\circ$。}
+\end{figure}
+
+\section{§45〜§46 ド・モアブルの定理}
+
+偏角を足すということを、$n$ 回くり返すと、次の公式が得られます（\textbf{ド・モアブルの定理}）。
+
+\[
+\bigl(\cos\theta+i\sin\theta\bigr)^n=\cos n\theta+i\sin n\theta.
+\]
+
+\begin{examplebox}{例：$(\cos30^\circ+i\sin30^\circ)^3$}
+$\cos90^\circ+i\sin90^\circ=i$。実際、$\cos30^\circ+i\sin30^\circ=\frac{\sqrt3}{2}+\frac12i$ を3乗すると $i$ になります。
+\end{examplebox}
+
+\begin{figure}[htbp]
+\centering
+\begin{tikzpicture}[scale=2.0]
+ \draw[gray] (0,0) circle (1);
+ \draw[->] (-1.3,0)--(1.4,0); \draw[->] (0,-1.3)--(0,1.4);
+ \foreach \k in {1,2,3} {
+   \fill[primaryblue] ({30*\k}:1) circle (0.03);
+   \node[font=\scriptsize] at ({30*\k}:1.2) {$z^\k$};
+ }
+ \draw[->, thick, crimson] (0.25,0.01) arc (0:28:0.25);
+\end{tikzpicture}
+\caption{$z=\cos30^\circ+i\sin30^\circ$ の累乗 $z,z^2,z^3$ は、単位円上を $30^\circ$ ずつ回る。}
+\end{figure}
+
+\section{§47〜§51 $1$ の累乗根と代数方程式}
+
+$z^n=1$ の解は、単位円周上を $n$ 等分する $n$ 個の点です（$1$ の $n$ 乗根）。
+
+\begin{figure}[htbp]
+\centering
+\begin{tikzpicture}[scale=1.5]
+ \foreach \nn/\xo in {3/0, 5/3.6, 6/7.2} {
+  \begin{scope}[xshift=\xo cm]
+   \draw[gray] (0,0) circle (1);
+   \foreach \k in {0,...,\numexpr\nn-1\relax} {
+     \fill[crimson] ({360/\nn*\k}:1) circle (0.04);
+   }
+   \draw[primaryblue] (1,0) \foreach \k in {1,...,\nn} {-- ({360/\nn*\k}:1)};
+   \node[font=\footnotesize] at (0,-1.4) {$z^\nn=1$};
+  \end{scope}
+ }
+\end{tikzpicture}
+\caption{$1$ の3乗根・5乗根・6乗根。単位円周を等分し、正多角形の頂点になる。}
+\end{figure}
+
+\begin{center}
+\begin{tabular}{lp{9cm}}
+\toprule
+方程式 & 解\\
+\midrule
+$z^2=1$ & $1,\ -1$\\
+$z^3=1$ & $1,\ -\frac12\pm\frac{\sqrt3}{2}i$\\
+$z^4=1$ & $1,\ i,\ -1,\ -i$\\
+\bottomrule
+\end{tabular}
+\end{center}
+
+ハーディはさらに、代数方程式の根についての基本定理（$n$ 次方程式は、複素数の範囲に、重複を含めて $n$ 個の根をもつ）に触れ、実係数の多項式の根が、共役な複素数の組で現れることなどを述べます。
+
+\begin{pointbox}{第3章のまとめ}
 \begin{itemize}[leftmargin=1.5em]
-\item 複素数は平面上の点。足し算は、ベクトルの和。
+\item 複素数は、平面上の移動。足し算は和、掛け算は「長さ×長さ、角度＋角度」。
+\item ド・モアブルの定理：$(\cos\theta+i\sin\theta)^n=\cos n\theta+i\sin n\theta$。
+\item $z^n=1$ の解は、単位円を $n$ 等分する点。
 \end{itemize}
 \end{pointbox}
 
 %==========================================================
-\chapter{正の整数変数の関数の極限}
+\chapter{正整数変数の関数の極限}
 \markboth{第4章}{数列の極限}
 %==========================================================
 
-数列 $a_n=\dfrac1n$ は、$n$ が大きくなると $0$ に近づきます。「近づく」を厳密にいうと、「どんな小さな正の数 $\varepsilon$ に対しても、十分大きな $N$ があって、$n>N$ ならば $|a_n-0|<\varepsilon$」。
+第4章は、解析学の中心である\textbf{極限}を、数列（正の整数 $n$ の関数）で定義します。約37の節で、有限・無限の集合、極限の定義、振動、極限の基本定理、単調な数列、$\left(1+\frac1n\right)^n$ の極限、コーシーの収束条件、複素数列、等比数列を扱います。
+
+\section{§52〜§55 有限と無限の集合、命題の「十分大きい $n$」}
+
+自然数 $n$ に対して、命題 $P(n)$ が「十分大きいすべての $n$」で成り立つ、とは、ある $N$ があって、$n>N$ のすべてについて成り立つことです。命題が「無数の $n$」で成り立つ、とは、どんな $N$ に対しても、それより大きい $n$ で成り立つものがある、ということです。
+
+\begin{center}
+\begin{tabular}{lp{8cm}}
+\toprule
+言い方 & 意味\\
+\midrule
+十分大きい $n$ で成り立つ & ある $N$ 以降のすべての $n$ で成り立つ\\
+無数の $n$ で成り立つ & どれだけ大きな $N$ をとっても、それより大きい $n$ で成り立つものがある\\
+\bottomrule
+\end{tabular}
+\end{center}
+
+\begin{figure}[htbp]
+\centering
+\begin{tikzpicture}[x=0.5cm]
+ \foreach \nn in {1,...,18} {
+   \ifnum\nn>8 \fill[accentgreen] (\nn,0) circle (0.14); \else \fill[crimson] (\nn,0) circle (0.14); \fi
+   \node[below, font=\tiny] at (\nn,-0.2) {\nn};
+ }
+ \draw[dashed] (8.5,-0.4)--(8.5,0.8) node[above, font=\small] {$N=8$};
+ \node[above, font=\footnotesize, accentgreen] at (14,0.3) {$n>N$ で成り立つ};
+ \node[above, font=\footnotesize, crimson] at (4,0.3) {成り立たない（有限個）};
+\end{tikzpicture}
+\caption{「十分大きい $n$ で成り立つ」とは、有限個の例外を除いて成り立つこと。}
+\end{figure}
+
+\section{§56〜§57 $n\to\infty$ のときの関数の振る舞い}
+
+$n$ を限りなく大きくしたときの $\phi(n)$ の振る舞いには、4つの型があります。
+
+\begin{center}
+\begin{tabular}{lp{7cm}l}
+\toprule
+型 & 意味 & 例\\
+\midrule
+正の無限大 & いくらでも大きくなる & $n^2$\\
+負の無限大 & いくらでも小さくなる & $-n$\\
+有限の極限 & ある数 $\ell$ に近づく & $1/n\to0$\\
+振動 & どれにも近づかない & $(-1)^n$\\
+\bottomrule
+\end{tabular}
+\end{center}
 
 \begin{figure}[htbp]
 \centering
 \begin{tikzpicture}
-\begin{axis}[width=10cm, height=5.5cm, xlabel={$n$}, ylabel={$a_n=1/n$}, xmin=0, xmax=30, ymin=-0.05, ymax=1.1, grid=major]
- \addplot[only marks, mark=*, mark size=1.5pt, color=primaryblue, samples at={1,...,30}] {1/x};
- \addplot[draw=none, fill=softrose, fill opacity=0.6] coordinates {(0,-0.1)(30,-0.1)(30,0.1)(0,0.1)} \closedcycle;
- \draw[dashed, crimson] (axis cs:10,-0.05)--(axis cs:10,1.1);
- \node[crimson, font=\footnotesize, anchor=south west] at (axis cs:10.4,0.4) {$N=10$};
+\begin{axis}[width=5.2cm, height=4.2cm, title={$n^2\to\infty$}, xmin=0, xmax=8, ymin=0, ymax=70, every axis title/.style={font=\footnotesize}]
+ \addplot[only marks, mark=*, mark size=1.4pt, color=primaryblue, samples at={1,...,8}] {x^2};
+\end{axis}
+\begin{axis}[xshift=5.6cm, width=5.2cm, height=4.2cm, title={$1/n\to0$}, xmin=0, xmax=8, ymin=0, ymax=1.1, every axis title/.style={font=\footnotesize}]
+ \addplot[only marks, mark=*, mark size=1.4pt, color=accentgreen, samples at={1,...,8}] {1/x};
+\end{axis}
+\begin{axis}[xshift=11.2cm, width=5.2cm, height=4.2cm, title={$(-1)^n$（振動）}, xmin=0, xmax=8, ymin=-1.5, ymax=1.5, every axis title/.style={font=\footnotesize}]
+ \addplot[only marks, mark=*, mark size=1.4pt, color=crimson, samples at={1,...,8}] {(-1)^x};
 \end{axis}
 \end{tikzpicture}
-\caption{$\varepsilon=0.1$ のとき、$n>10$ なら $1/n<0.1$。ピンクの帯の中に、$n>10$ のすべての点が入る。}
+\caption{$n\to\infty$ での3つの振る舞い。発散、収束、振動。}
 \end{figure}
 
-もう1つの例は、$\left(1+\frac1n\right)^n$。$n=1$ で $2$、$n=10$ で $2.594$、$n=100$ で $2.705$、$n=1000$ で $2.717$。極限は $e=2.71828\ldots$ です。
+\section{§58〜§61 極限の定義}
 
-\begin{pointbox}{この章のポイント}
+$\phi(n)\to\ell$（$n\to\infty$）とは、\textbf{どんな小さな正の数 $\varepsilon$ に対しても}、ある $N$ があって、$n>N$ のすべての $n$ で $|\phi(n)-\ell|<\varepsilon$ となる、ことです。
+
+\begin{figure}[htbp]
+\centering
+\begin{tikzpicture}
+\begin{axis}[width=10cm, height=5.6cm, xlabel={$n$}, ylabel={$\phi(n)$}, xmin=0, xmax=25, ymin=0, ymax=2.2, grid=major]
+ \addplot[only marks, mark=*, mark size=1.5pt, color=primaryblue, samples at={1,...,25}] {1+(-1)^x/x};
+ \addplot[draw=none, fill=softrose, fill opacity=0.6] coordinates {(0,0.9)(25,0.9)(25,1.1)(0,1.1)} \closedcycle;
+ \addplot[dashed, crimson, domain=0:25] {1};
+ \draw[dashed] (axis cs:10,0) -- (axis cs:10,2.2);
+\end{axis}
+\end{tikzpicture}
+\caption{$\phi(n)=1+(-1)^n/n$ は $1$ に収束する。$\varepsilon=0.1$（ピンクの帯）に対し、$n>10$ のすべての点が帯に入る。}
+\end{figure}
+
+\begin{examplebox}{例：$\varepsilon$ から $N$ を求める}
+$\phi(n)=\dfrac{2n+1}{n}=2+\dfrac1n$ の極限は $2$。$|\phi(n)-2|=\frac1n<\varepsilon$ となるには、$n>\frac1\varepsilon$。たとえば $\varepsilon=0.01$ なら $N=100$ とすればよい。
+\end{examplebox}
+
+\section{§62 振動する関数}
+
+極限が存在しない数列でも、一定の範囲を行き来する場合があります。$(-1)^n$ は $1$ と $-1$ を交互にとり、どちらの値にも近づき続けません（\textbf{有限の振動}）。$(-1)^nn$ は、符号を変えながら大きくなります（\textbf{無限の振動}）。
+
+\section{§63〜§69 極限に関する一般定理}
+
+極限の定義から、次の性質が導かれます。$a_n\to a,\ b_n\to b$ のとき、
+
+\[
+a_n+b_n\to a+b,\qquad a_nb_n\to ab,\qquad\frac{a_n}{b_n}\to\frac ab\ (b\ne0).
+\]
+
+\begin{figure}[htbp]
+\centering
+\begin{tikzpicture}[node distance=8mm]
+ \node[fbox, text width=3.4cm] (a) {$a_n\to a$\\$b_n\to b$};
+ \node[gbox, text width=3.4cm, right=22mm of a, yshift=9mm] (s) {$a_n+b_n\to a+b$};
+ \node[gbox, text width=3.4cm, right=22mm of a] (p) {$a_nb_n\to ab$};
+ \node[gbox, text width=3.4cm, right=22mm of a, yshift=-9mm] (q) {$a_n/b_n\to a/b$};
+ \draw[ax] (a)--(s); \draw[ax] (a)--(p); \draw[ax] (a)--(q);
+\end{tikzpicture}
+\caption{極限の四則演算。極限をとる操作は、和・積・商と交換できる。}
+\end{figure}
+
+\begin{examplebox}{例}
+$\dfrac{3n^2+5n}{2n^2-1}=\dfrac{3+5/n}{2-1/n^2}\to\dfrac32$。$n=100$ で $\frac{30500}{19999}\approx1.5251$、$n=1000$ で $\approx1.5025$。
+\end{examplebox}
+
+\section{§70〜§72 単調に増加する数列（有界なら収束）}
+
+\textbf{重要な定理}：増加し続け、しかも上に限界がある数列は、必ず収束する。ワイエルシュトラスの定理（第1章）が、この結果の土台です。
+
+\begin{figure}[htbp]
+\centering
+\begin{tikzpicture}
+\begin{axis}[width=9.5cm, height=5.6cm, xlabel={$n$}, ylabel={$a_n$}, xmin=0, xmax=15, ymin=0, ymax=2.3, grid=major]
+ \addplot[only marks, mark=*, mark size=1.5pt, color=primaryblue, samples at={1,...,15}] {2-1/2^(x-1)};
+ \addplot[dashed, crimson, domain=0:15] {2};
+ \node[crimson, font=\footnotesize, anchor=south west] at (axis cs:7,2.02) {上限 $2$};
+\end{axis}
+\end{tikzpicture}
+\caption{$a_n=2-2^{1-n}$。増加し、上限 $2$ を超えない。ゆえに収束し、極限は $2$。}
+\end{figure}
+
+\section{§73 $\left(1+\dfrac1n\right)^n$ の極限}
+
+$a_n=\left(1+\frac1n\right)^n$ は増加し、上に有界（$3$ 未満）であることが示せます。ゆえに収束し、その極限を $e$ と呼びます。
+
+\begin{center}
+\begin{tabular}{rr}
+\toprule
+$n$ & $(1+1/n)^n$\\
+\midrule
+1 & 2.00000\\
+10 & 2.59374\\
+100 & 2.70481\\
+1000 & 2.71692\\
+10000 & 2.71815\\
+\bottomrule
+\end{tabular}
+\end{center}
+
+\begin{figure}[htbp]
+\centering
+\begin{tikzpicture}
+\begin{axis}[width=10cm, height=5.6cm, xlabel={$n$（対数目盛）}, ylabel={$(1+1/n)^n$}, xmode=log, xmin=1, xmax=10000, ymin=1.9, ymax=2.9, grid=major]
+ \addplot[thick, primaryblue, domain=1:10000, samples=60] {(1+1/x)^x};
+ \addplot[dashed, crimson, domain=1:10000] {2.71828};
+\end{axis}
+\end{tikzpicture}
+\caption{$(1+1/n)^n$ は、$e=2.71828\ldots$ に下から近づく。}
+\end{figure}
+
+\section{§74〜§80 コーシーの収束条件と、いろいろな数列の極限}
+
+収束する数列では、$n$ が大きくなると、項どうしの間隔が小さくなります。逆に、「項どうしの間隔が、どんな $\varepsilon$ よりも、いずれ小さくなる」数列（\textbf{コーシー列}）は、必ず収束します。これが\textbf{コーシーの収束条件}で、極限の値を知らなくても、収束を示せる強力な道具です。
+
+\begin{figure}[htbp]
+\centering
+\begin{tikzpicture}
+\begin{axis}[width=10cm, height=5.6cm, xlabel={$n$}, ylabel={$a_n$}, xmin=0, xmax=20, ymin=0, ymax=1.2, grid=major]
+ \addplot[only marks, mark=*, mark size=1.5pt, color=primaryblue, samples at={1,...,20}] {1-(-0.7)^x};
+ \addplot[draw=none, fill=softamber, fill opacity=0.6] coordinates {(10,0.85)(20,0.85)(20,1.15)(10,1.15)} \closedcycle;
+\end{axis}
+\end{tikzpicture}
+\caption{コーシー列。$n$ が十分大きくなると、すべての項が狭い帯（黄）の中に入る。}
+\end{figure}
+
+\begin{center}
+\begin{tabular}{lcl}
+\toprule
+数列 & 極限 & 備考\\
+\midrule
+$\dfrac1{n^k}$（$k>0$） & $0$ & \\
+$n^{1/n}$ & $1$ & $n=1000$ で約 $1.0070$\\
+$a^n$（$|a|<1$） & $0$ & 等比数列\\
+$\dfrac{n!}{n^n}$ & $0$ & \\
+\bottomrule
+\end{tabular}
+\end{center}
+
+\section{§81〜§84 有界な関数の上極限・下極限}
+
+極限をもたない（振動する）数列でも、有界であれば、「大きいほうの極限」（上極限）と「小さいほうの極限」（下極限）が定義できます。
+
+\begin{figure}[htbp]
+\centering
+\begin{tikzpicture}
+\begin{axis}[width=10cm, height=5.6cm, xlabel={$n$}, ylabel={$a_n$}, xmin=0, xmax=40, ymin=-0.2, ymax=2.2, grid=major]
+ \addplot[only marks, mark=*, mark size=1.3pt, color=primaryblue, samples at={1,...,40}] {1+(-1)^x*(1-1/x)};
+ \addplot[dashed, crimson, domain=0:40] {2};
+ \addplot[dashed, accentgreen, domain=0:40] {0};
+ \node[crimson, font=\footnotesize, anchor=south west] at (axis cs:28,2.02) {上極限 $2$};
+ \node[accentgreen, font=\footnotesize, anchor=north west] at (axis cs:28,-0.02) {下極限 $0$};
+\end{axis}
+\end{tikzpicture}
+\caption{$a_n=1+(-1)^n(1-1/n)$ は、偶数番で $2$ に近づき、奇数番で $0$ に近づく。上極限 $2$、下極限 $0$。}
+\end{figure}
+
+\section{§85〜§88 複素数列と等比数列}
+
+複素数の列 $z_n=x_n+iy_n$ が $z$ に収束するとは、$|z_n-z|\to0$ のこと。実部・虚部がそれぞれ収束することと同じです。等比数列 $z^n$ は、$|z|<1$ なら $0$ に収束し、$|z|>1$ なら発散します。
+
+\begin{figure}[htbp]
+\centering
+\begin{tikzpicture}[scale=2.2]
+ \draw[->] (-0.2,0)--(1.2,0); \draw[->] (0,-0.8)--(0,1.0);
+ \foreach \k in {0,...,14} {
+  \pgfmathsetmacro{\rr}{0.85^\k}
+  \pgfmathsetmacro{\aa}{35*\k}
+  \fill[primaryblue] ({\rr*cos(\aa)},{\rr*sin(\aa)}) circle (0.025);
+ }
+ \node[font=\footnotesize] at (0.8,0.9) {$z=0.85(\cos35^\circ+i\sin35^\circ)$};
+\end{tikzpicture}
+\caption{$|z|<1$ のときの $z^n$（$n=0,\ldots,14$）。らせん状に原点へ近づく。}
+\end{figure}
+
+\begin{examplebox}{等比級数}
+$|z|<1$ のとき、$1+z+z^2+\cdots=\dfrac{1}{1-z}$。たとえば $z=\frac12$ で $2$、$z=-\frac12$ で $\frac23$。
+\end{examplebox}
+
+\begin{pointbox}{第4章のまとめ}
 \begin{itemize}[leftmargin=1.5em]
-\item 極限：どんな $\varepsilon$ の帯にも、$n$ が十分大きければ入る。
+\item 極限は「どんな $\varepsilon$ にも、十分大きい $n$ で帯に入る」で定義する。
+\item 増加で有界なら収束（$e$ は、その例）。コーシー列も収束する。
+\item 上極限・下極限は、振動する数列にも定義できる。
 \end{itemize}
 \end{pointbox}
 
 %==========================================================
-\chapter{連続変数の関数の極限・連続性}
+\chapter{連続変数の関数の極限・連続関数と不連続関数}
 \markboth{第5章}{関数の極限と連続}
 %==========================================================
 
-関数 $f(x)=2x+1$ が $x=1$ で連続であるとは、$f(1)=3$ のまわりの、どんな小さな範囲（$\varepsilon$）に対しても、$x=1$ のまわりに、十分小さな範囲（$\delta$）があって、その範囲の $x$ なら $f(x)$ が $3\pm\varepsilon$ に収まる、ということです。
+第5章は、数列の極限の考えを、連続変数 $x$ の関数へ広げます。約19の節で、$x\to\infty$ や $x\to a$ の極限、連続・不連続、連続関数の基本性質、区間での振動を扱います。
+
+\section{§89〜§92 $x\to\infty$ の極限と、$x\to a$ の極限}
+
+$x$ が限りなく大きくなるとき、$f(x)$ がある値に近づくことを、$f(x)\to\ell\ (x\to\infty)$ と書きます。また、$x$ が $a$ に近づくときの極限は、「$a$ に十分近い（ただし $a$ 自身は除く）すべての $x$ に対して、$|f(x)-\ell|<\varepsilon$」という条件で定義されます。
 
 \begin{figure}[htbp]
 \centering
 \begin{tikzpicture}
-\begin{axis}[width=9cm, height=6cm, xlabel={$x$}, ylabel={$y$}, xmin=0.6, xmax=1.4, ymin=2.5, ymax=3.5, grid=major]
- \addplot[thick, primaryblue, domain=0.6:1.4] {2*x+1};
- \addplot[draw=none, fill=softamber, fill opacity=0.5] coordinates {(0.6,2.8)(1.4,2.8)(1.4,3.2)(0.6,3.2)} \closedcycle;
- \addplot[draw=none, fill=softgreen, fill opacity=0.6] coordinates {(0.9,2.5)(1.1,2.5)(1.1,3.5)(0.9,3.5)} \closedcycle;
- \addplot[only marks, mark=*, color=crimson] coordinates {(1,3)};
+\begin{axis}[width=5.8cm, height=4.8cm, title={$x\to\infty$：$\frac{2x+1}{x}\to2$}, xmin=0.5, xmax=10, ymin=1.5, ymax=4, grid=major, every axis title/.style={font=\footnotesize}]
+ \addplot[thick, primaryblue, domain=0.5:10, samples=40] {(2*x+1)/x};
+ \addplot[dashed, crimson, domain=0.5:10] {2};
+\end{axis}
+\begin{axis}[xshift=6.6cm, width=5.8cm, height=4.8cm, title={$x\to1$：$\frac{x^2-1}{x-1}\to2$}, xmin=0, xmax=2, ymin=0, ymax=4, grid=major, every axis title/.style={font=\footnotesize}]
+ \addplot[thick, primaryblue, domain=0:0.98, samples=20] {x+1};
+ \addplot[thick, primaryblue, domain=1.02:2, samples=20] {x+1};
+ \draw[crimson, fill=white, thick] (axis cs:1,2) circle (2pt);
 \end{axis}
 \end{tikzpicture}
-\caption{$\varepsilon=0.2$（黄の横帯 $2.8<y<3.2$）に対して、$\delta=0.1$（緑の縦帯 $0.9<x<1.1$）をとれば、その範囲の曲線は黄の帯に収まる。}
+\caption{左：$x\to\infty$ の極限。右：$x=1$ で定義されない関数でも、$x\to1$ の極限は存在しうる（白抜きの点）。}
 \end{figure}
 
-\begin{pointbox}{この章のポイント}
+\begin{examplebox}{確かめ}
+$x\ne1$ では $\dfrac{x^2-1}{x-1}=x+1$。$x=0.9$ で $1.9$、$x=0.99$ で $1.99$、$x=1.01$ で $2.01$。$x\to1$ で $2$ に近づきます。
+\end{examplebox}
+
+\section{§93〜§96 無限大・振動}
+
+$x\to a$ で、$f(x)$ がいくらでも大きくなる（$f(x)\to\infty$）場合や、どこにも近づかない（$\sin\frac1x$ のような）場合があります。
+
+\begin{figure}[htbp]
+\centering
+\begin{tikzpicture}
+\begin{axis}[width=5.8cm, height=4.8cm, title={$1/x^2\to\infty$ $(x\to0)$}, xmin=-1, xmax=1, ymin=0, ymax=20, every axis title/.style={font=\footnotesize}]
+ \addplot[thick, primaryblue, domain=-1:-0.22, samples=40] {1/x^2};
+ \addplot[thick, primaryblue, domain=0.22:1, samples=40] {1/x^2};
+\end{axis}
+\begin{axis}[xshift=6.6cm, width=5.8cm, height=4.8cm, title={$\sin(1/x)$ は振動}, xmin=0.02, xmax=0.4, ymin=-1.3, ymax=1.3, every axis title/.style={font=\footnotesize}]
+ \addplot[thick, crimson, domain=0.02:0.4, samples=400] {sin(deg(1/x))};
+\end{axis}
+\end{tikzpicture}
+\caption{左：$x\to0$ で無限大に発散。右：$x\to0$ で、振動して極限をもたない。}
+\end{figure}
+
+\section{§97 極限の計算例}
+
+数列の極限の定理（和・積・商）は、関数の極限にもそのまま成り立ちます。
+
+\begin{examplebox}{例：$\displaystyle\lim_{x\to0}\frac{\sin x}{x}=1$}
+$x=0.1$（ラジアン）で $\frac{\sin0.1}{0.1}=0.99833$、$x=0.01$ で $0.99998$。$x\to0$ で $1$ に近づきます。
+\end{examplebox}
+
+\begin{figure}[htbp]
+\centering
+\begin{tikzpicture}
+\begin{axis}[width=9.5cm, height=5.4cm, xlabel={$x$}, ylabel={$\sin x/x$}, xmin=-10, xmax=10, ymin=-0.4, ymax=1.2, grid=major]
+ \addplot[thick, primaryblue, domain=-10:10, samples=200] {sin(deg(x))/x};
+\end{axis}
+\end{tikzpicture}
+\caption{$\sin x/x$ のグラフ。$x=0$ では定義されないが、極限は $1$。}
+\end{figure}
+
+\section{§98〜§100 連続関数}
+
+関数 $f$ が点 $a$ で\textbf{連続}であるとは、$\displaystyle\lim_{x\to a}f(x)=f(a)$ が成り立つことです。つまり、極限があって、それが関数値と等しい。グラフが、$a$ のところで途切れていない、ということです。
+
+\begin{figure}[htbp]
+\centering
+\begin{tikzpicture}
+\begin{axis}[width=5.2cm, height=4.4cm, title={連続}, xmin=-2, xmax=2, ymin=-0.5, ymax=4.5, every axis title/.style={font=\footnotesize}]
+ \addplot[thick, primaryblue, domain=-2:2, samples=40] {x^2};
+\end{axis}
+\begin{axis}[xshift=5.7cm, width=5.2cm, height=4.4cm, title={飛びのある不連続}, xmin=-2, xmax=2, ymin=-1.5, ymax=2.5, every axis title/.style={font=\footnotesize}]
+ \addplot[thick, crimson, domain=-2:0, samples=2] {-1};
+ \addplot[thick, crimson, domain=0:2, samples=2] {1};
+\end{axis}
+\begin{axis}[xshift=11.4cm, width=5.2cm, height=4.4cm, title={点だけ異なる不連続}, xmin=-2, xmax=2, ymin=-0.5, ymax=4.5, every axis title/.style={font=\footnotesize}]
+ \addplot[thick, accentgreen, domain=-2:2, samples=40] {x^2};
+ \addplot[only marks, mark=*, color=accentgreen] coordinates {(0,2)};
+ \draw[accentgreen, fill=white, thick] (axis cs:0,0) circle (2pt);
+\end{axis}
+\end{tikzpicture}
+\caption{連続な関数（左）と、2種類の不連続。値が飛ぶ（中）、1点だけ値が違う（右）。}
+\end{figure}
+
+\begin{pointbox}{連続関数の基本性質}
+連続な関数の和・差・積・商（分母が0でない点）・合成は、また連続。多項式・$\sin x$・$e^x$ はすべての点で連続。
+\end{pointbox}
+
+\section{§101〜§102 連続関数の基本定理：中間値の定理}
+
+\textbf{中間値の定理}：区間 $[a,b]$ で連続な関数 $f$ について、$f(a)<0<f(b)$ なら、$a$ と $b$ の間に、$f(c)=0$ となる $c$ がある。
+
+\begin{figure}[htbp]
+\centering
+\begin{tikzpicture}
+\begin{axis}[width=9.5cm, height=5.6cm, xlabel={$x$}, ylabel={$f(x)$}, xmin=0, xmax=2.2, ymin=-2, ymax=4, grid=major]
+ \addplot[thick, primaryblue, domain=0:2.2, samples=60] {x^3+x-1};
+ \addplot[only marks, mark=*, color=crimson] coordinates {(0.6823,0)};
+ \node[crimson, font=\footnotesize, anchor=north west] at (axis cs:0.72,-0.1) {$c\approx0.682$};
+\end{axis}
+\end{tikzpicture}
+\caption{$f(x)=x^3+x-1$。$f(0)=-1<0<f(1)=1$ なので、$0$ と $1$ の間に解がある（$c\approx0.6823$）。}
+\end{figure}
+
+\begin{examplebox}{二分法で $c$ を探す}
+$f(0.5)=-0.375<0$、$f(0.75)=0.172>0$ なので、$c\in(0.5,0.75)$。$f(0.625)=-0.131<0$ から $c\in(0.625,0.75)$。区間の幅が半分ずつになり、$c\approx0.68$ に絞られます。
+\end{examplebox}
+
+\section{§103〜§107 区間での振動と、有界性・最大値}
+
+閉区間で連続な関数には、重要な性質があります。(1) 有界である。(2) 最大値と最小値をとる。(3) 一様連続である（$\delta$ が、場所によらずに選べる）。
+
+\begin{figure}[htbp]
+\centering
+\begin{tikzpicture}
+\begin{axis}[width=9.5cm, height=5.6cm, xlabel={$x$}, xmin=0, xmax=3.2, ymin=-1.5, ymax=2.5, grid=major]
+ \addplot[thick, primaryblue, domain=0:3, samples=80] {sin(deg(2*x))+0.5*x-0.6};
+ \addplot[only marks, mark=*, color=crimson] coordinates {(0.8,1.4)};
+ \node[crimson, font=\footnotesize, anchor=south] at (axis cs:0.8,1.45) {最大};
+ \addplot[only marks, mark=*, color=accentgreen] coordinates {(2.4,-0.4)};
+ \node[accentgreen, font=\footnotesize, anchor=north] at (axis cs:2.4,-0.45) {最小};
+\end{axis}
+\end{tikzpicture}
+\caption{閉区間 $[0,3]$ で連続な関数は、最大値と最小値をとる（図は目安の位置）。}
+\end{figure}
+
+\begin{notebox}{注意：開区間では成り立たない}
+開区間 $(0,1)$ で $f(x)=1/x$ は連続ですが、有界ではありません（$x\to0$ で無限大）。最大値・最小値の存在には、閉区間という条件が必要です。
+\end{notebox}
+
+\begin{pointbox}{第5章のまとめ}
 \begin{itemize}[leftmargin=1.5em]
-\item 連続性：$\varepsilon$ に対して、必ず $\delta$ が見つかる。
+\item 関数の極限は、$\varepsilon$–$\delta$ で定義する。連続とは、極限が関数値に一致すること。
+\item 連続関数は、中間値の定理・最大値の存在・一様連続性をもつ。
 \end{itemize}
 \end{pointbox}
 
@@ -272,38 +1008,188 @@
 \markboth{第6章}{導関数と積分}
 %==========================================================
 
-導関数は、$\dfrac{f(x+h)-f(x)}{h}$ の $h\to0$ の極限、積分は、面積を細かい長方形で近似した極限です。$\int_0^1x^2\,\dd x=\dfrac13$ を、長方形の和で確かめましょう。
+第6章は、微分と積分を、極限の言葉で定義し直します。約41の節で、導関数、微分の規則、陰関数、高階の微分、最大・最小、平均値の定理、積分、多項式・有理関数・三角関数の積分を扱います。
 
-\begin{center}
-\begin{tabular}{rrr}
-\toprule
-長方形の本数 $n$ & 左端の和（下から） & 右端の和（上から）\\
-\midrule
-10 & 0.285 & 0.385\\
-100 & 0.32835 & 0.33835\\
-真の値 & \multicolumn{2}{c}{$0.3333\ldots$}\\
-\bottomrule
-\end{tabular}
-\end{center}
+\section{§108〜§110 導関数の定義と幾何学的意味}
 
-$n=10$ の左端の和は $\frac{1}{1000}(0^2+1^2+\cdots+9^2)=\frac{285}{1000}$、右端の和は $\frac{1}{1000}(1^2+\cdots+10^2)=\frac{385}{1000}$。
+関数 $f$ の点 $x$ での\textbf{導関数}は、
+
+\[
+f'(x)=\lim_{h\to0}\frac{f(x+h)-f(x)}{h}.
+\]
+
+幾何学的には、グラフの接線の傾きです。割線の傾きの極限として、接線が定まります。
 
 \begin{figure}[htbp]
 \centering
 \begin{tikzpicture}
-\begin{axis}[width=9.5cm, height=6cm, xlabel={$x$}, ylabel={$y=x^2$}, xmin=0, xmax=1.1, ymin=0, ymax=1.1, grid=major]
- \addplot[thick, primaryblue, domain=0:1, samples=40] {x^2};
- \foreach \k in {0,...,9} {
-   \addplot[draw=crimson, fill=softrose, fill opacity=0.5] coordinates {(\k/10,0)(\k/10+0.1,0)(\k/10+0.1,{(\k/10+0.1)^2})(\k/10,{(\k/10+0.1)^2})} \closedcycle;
+\begin{axis}[width=9.5cm, height=6cm, xlabel={$x$}, ylabel={$y$}, xmin=0, xmax=3.2, ymin=0, ymax=9.5, grid=major]
+ \addplot[thick, primaryblue, domain=0:3.1, samples=50] {x^2};
+ \addplot[dashed, crimson, domain=0.5:3] {1+4*(x-1)};
+ \addplot[dashed, crimson, domain=0.5:3] {1+3*(x-1)};
+ \addplot[thick, accentgreen, domain=0.3:2.6] {1+2*(x-1)};
+ \addplot[only marks, mark=*, color=black] coordinates {(1,1)(3,9)(2,4)};
+\end{axis}
+\end{tikzpicture}
+\caption{$f(x)=x^2$ の $x=1$ での接線（緑、傾き2）と、割線（赤の破線、傾き4と3）。$h$ を小さくすると傾きは $2+h$ から $2$ に近づく。}
+\end{figure}
+
+\begin{examplebox}{定義から $x^2$ の導関数を求める}
+$\dfrac{(x+h)^2-x^2}{h}=\dfrac{2xh+h^2}{h}=2x+h\to2x\ (h\to0)$。
+\end{examplebox}
+
+\section{§111〜§115 微分の規則}
+
+和・積・商・合成関数の微分の規則が、極限の定理から導かれます。
+
+\begin{center}
+\renewcommand{\arraystretch}{1.5}
+\begin{tabular}{ll}
+\toprule
+関数 & 導関数\\
+\midrule
+$f+g$ & $f'+g'$\\
+$fg$ & $f'g+fg'$\\
+$f/g$ & $\dfrac{f'g-fg'}{g^2}$\\
+$f(g(x))$ & $f'(g(x))\,g'(x)$\\
+\bottomrule
+\end{tabular}
+\end{center}
+
+\begin{examplebox}{例}
+$y=x^2\sin x$ の導関数は $2x\sin x+x^2\cos x$。$x=\pi/2$ で、$2\cdot\frac\pi2\cdot1+0=\pi\approx3.14$。
+\end{examplebox}
+
+\section{§116〜§118 標準形式：初等関数の導関数}
+
+\begin{center}
+\renewcommand{\arraystretch}{1.4}
+\begin{tabular}{ll}
+\toprule
+$f(x)$ & $f'(x)$\\
+\midrule
+$x^n$ & $nx^{n-1}$\\
+$\sin x$ & $\cos x$\\
+$\cos x$ & $-\sin x$\\
+$\ee^x$ & $\ee^x$\\
+$\log x$ & $1/x$\\
+\bottomrule
+\end{tabular}
+\end{center}
+
+\begin{figure}[htbp]
+\centering
+\begin{tikzpicture}
+\begin{axis}[width=10cm, height=5.6cm, xlabel={$x$}, xmin=0, xmax=6.3, ymin=-1.3, ymax=1.3, grid=major, legend pos=south west, legend style={font=\footnotesize}]
+ \addplot[thick, primaryblue, domain=0:6.28, samples=80] {sin(deg(x))};
+ \addplot[thick, crimson, dashed, domain=0:6.28, samples=80] {cos(deg(x))};
+ \legend{$f=\sin x$,$f'=\cos x$}
+\end{axis}
+\end{tikzpicture}
+\caption{$\sin x$ とその導関数 $\cos x$。$\sin x$ の山で、$\cos x$ は $0$ を横切る。}
+\end{figure}
+
+\section{§119〜§120 高階導関数と陰関数の微分}
+
+導関数をもう一度微分したものが、2階導関数 $f''$。陰関数 $F(x,y)=0$ では、両辺を $x$ で微分して、$y'$ を求めます。
+
+\begin{examplebox}{例：円 $x^2+y^2=25$ の接線の傾き}
+両辺を $x$ で微分：$2x+2yy'=0$、$y'=-x/y$。点 $(3,4)$ で傾き $-\frac34$。接線は $y-4=-\frac34(x-3)$。
+\end{examplebox}
+
+\begin{figure}[htbp]
+\centering
+\begin{tikzpicture}
+\begin{axis}[width=8cm, height=7cm, axis equal image, xlabel={$x$}, ylabel={$y$}, xmin=-6, xmax=6, ymin=-6, ymax=6, grid=major]
+ \addplot[thick, primaryblue, domain=0:360, samples=100, variable=\tt] ({5*cos(\tt)},{5*sin(\tt)});
+ \addplot[thick, crimson, domain=-0.5:7] {4-0.75*(x-3)};
+ \addplot[only marks, mark=*, color=black] coordinates {(3,4)};
+\end{axis}
+\end{tikzpicture}
+\caption{円 $x^2+y^2=25$ の点 $(3,4)$ での接線。傾きは $-3/4$。}
+\end{figure}
+
+\section{§121〜§125 最大値・最小値}
+
+$f'(c)=0$ となる点 $c$ は、最大・最小の候補です。2階導関数 $f''(c)$ の符号で判定します。
+
+\begin{figure}[htbp]
+\centering
+\begin{tikzpicture}
+\begin{axis}[width=9.5cm, height=5.6cm, xlabel={$x$}, xmin=-0.5, xmax=4.5, ymin=-2, ymax=4, grid=major]
+ \addplot[thick, primaryblue, domain=-0.5:4.5, samples=60] {x^3/3-2*x^2+3*x+1};
+ \addplot[only marks, mark=*, color=crimson] coordinates {(1,2.333)(3,1)};
+ \node[crimson, font=\footnotesize, anchor=south] at (axis cs:1,2.4) {極大};
+ \node[crimson, font=\footnotesize, anchor=north] at (axis cs:3,0.9) {極小};
+\end{axis}
+\end{tikzpicture}
+\caption{$f(x)=\frac{x^3}{3}-2x^2+3x+1$。$f'(x)=x^2-4x+3=(x-1)(x-3)$ より、$x=1$ で極大 $f=\frac73$、$x=3$ で極小 $f=1$。}
+\end{figure}
+
+\section{§126 平均値の定理}
+
+弦と平行な接線が、2点の間に存在する（第7章でも触れる）。この定理から、「$f'>0$ の区間で $f$ は増加」などが、厳密に導かれます。
+
+\section{§127〜§128 積分の定義}
+
+積分 $\displaystyle\int_a^bf(x)\,\dd x$ は、区間を細かく分けて、長方形の面積の和（上からと下から）で挟んで定義します。
+
+\begin{figure}[htbp]
+\centering
+\begin{tikzpicture}
+\begin{axis}[width=5.6cm, height=4.8cm, title={4分割（下からの和）}, xmin=0, xmax=2, ymin=0, ymax=4.3, every axis title/.style={font=\footnotesize}]
+ \addplot[thick, primaryblue, domain=0:2, samples=40] {x^2};
+ \foreach \k in {0,...,3} {
+  \addplot[draw=accentgreen, fill=softgreen, fill opacity=0.6] coordinates {(\k*0.5,0)(\k*0.5+0.5,0)(\k*0.5+0.5,{(\k*0.5)^2})(\k*0.5,{(\k*0.5)^2})} \closedcycle;
+ }
+\end{axis}
+\begin{axis}[xshift=6.2cm, width=5.6cm, height=4.8cm, title={4分割（上からの和）}, xmin=0, xmax=2, ymin=0, ymax=4.3, every axis title/.style={font=\footnotesize}]
+ \addplot[thick, primaryblue, domain=0:2, samples=40] {x^2};
+ \foreach \k in {0,...,3} {
+  \addplot[draw=crimson, fill=softrose, fill opacity=0.6] coordinates {(\k*0.5,0)(\k*0.5+0.5,0)(\k*0.5+0.5,{(\k*0.5+0.5)^2})(\k*0.5,{(\k*0.5+0.5)^2})} \closedcycle;
  }
 \end{axis}
 \end{tikzpicture}
-\caption{$y=x^2$ の下の面積を、右端の高さの10本の長方形で上から近似（合計 $0.385$）。本数を増やすと $1/3$ に近づく。}
+\caption{$\int_0^2x^2\dd x$ を、4本の長方形で下から・上から挟む。下からの和 $=\frac12(0+0.25+1+2.25)=1.75$、上からの和 $=\frac12(0.25+1+2.25+4)=3.75$。真の値は $\frac83\approx2.667$。}
 \end{figure}
 
-\begin{pointbox}{この章のポイント}
+\section{§129〜§139 微積分学の基本定理と、積分の計算}
+
+\textbf{基本定理}：$F'(x)=f(x)$ のとき、$\displaystyle\int_a^bf(x)\,\dd x=F(b)-F(a)$。つまり、積分の計算は、微分の逆演算（原始関数を見つけること）に帰着します。
+
+\begin{center}
+\begin{tabular}{ll}
+\toprule
+積分する関数 & 原始関数\\
+\midrule
+$x^n$ $(n\ne-1)$ & $\dfrac{x^{n+1}}{n+1}$\\
+$\dfrac1x$ & $\log x$\\
+$\dfrac1{1+x^2}$ & $\arctan x$\\
+$\dfrac1{\sqrt{1-x^2}}$ & $\arcsin x$\\
+\bottomrule
+\end{tabular}
+\end{center}
+
+\begin{figure}[htbp]
+\centering
+\begin{tikzpicture}
+\begin{axis}[width=9.5cm, height=5.6cm, xlabel={$x$}, xmin=-3, xmax=3, ymin=-1.8, ymax=1.2, grid=major]
+ \addplot[thick, primaryblue, domain=-3:3, samples=60] {1/(1+x^2)};
+ \addplot[thick, crimson, domain=-3:3, samples=60] {atan(x)*3.14159/180};
+\end{axis}
+\end{tikzpicture}
+\caption{$\frac1{1+x^2}$（青）と、その原始関数 $\arctan x$（赤）。青の面積が、赤の増加量になる。$\int_0^1\frac{dx}{1+x^2}=\arctan1=\frac\pi4\approx0.785$。}
+\end{figure}
+
+\section{§140〜§148 有理関数・三角関数・無理関数の積分}
+
+分数関数は、部分分数に分けて積分します。三角関数の積分は、倍角の公式などで簡単な形に直します。$\dfrac{1}{x(x+1)}=\dfrac1x-\dfrac1{x+1}$ なので、$\displaystyle\int\frac{\dd x}{x(x+1)}=\log\frac{x}{x+1}+C$。
+
+\begin{pointbox}{第6章のまとめ}
 \begin{itemize}[leftmargin=1.5em]
-\item 積分は、上からの和と下からの和で挟んで定義する。
+\item 導関数は、割線の傾きの極限。積分は、長方形の和の極限。
+\item 微積分学の基本定理が、2つを結ぶ。
+\item 積分の計算は、原始関数を見つける技術（部分分数・置換・倍角）。
 \end{itemize}
 \end{pointbox}
 
@@ -312,51 +1198,251 @@ $n=10$ の左端の和は $\frac{1}{1000}(0^2+1^2+\cdots+9^2)=\frac{285}{1000}$�
 \markboth{第7章}{補足的な定理}
 %==========================================================
 
-\textbf{平均値の定理}：なめらかな曲線の2点を結ぶ弦と平行な接線が、2点のあいだに必ず1本ある。$f(x)=x^2$ を $[0,2]$ で考えると、弦の傾きは $\frac{4-0}{2-0}=2$。接線の傾き $2x=2$ から $c=1$。
+第7章は、微積分を応用するための、さらにいくつかの定理を扱います。約19の節で、テイラーの定理、不定形の極限、多変数の微分、全微分、定積分の定義と計算、面積・体積・弧長への応用を見ます。
+
+\section{§149 テイラーの定理とその応用}
+
+関数 $f$ が何回でも微分できるとき、点 $a$ のまわりで、
+
+\[
+f(x)=f(a)+f'(a)(x-a)+\frac{f''(a)}{2!}(x-a)^2+\cdots+\frac{f^{(n)}(a)}{n!}(x-a)^n+R_n.
+\]
+
+右辺の多項式部分で、関数を近似できます（$R_n$ は誤差）。
 
 \begin{figure}[htbp]
 \centering
 \begin{tikzpicture}
-\begin{axis}[width=8.5cm, height=6cm, xlabel={$x$}, ylabel={$y$}, xmin=-0.3, xmax=2.5, ymin=-0.5, ymax=4.5, grid=major]
- \addplot[thick, primaryblue, domain=0:2.3, samples=40] {x^2};
- \addplot[dashed, crimson, domain=0:2] {2*x};
- \addplot[thick, accentgreen, domain=0.2:2.2] {1+2*(x-1)};
- \addplot[only marks, mark=*, color=black] coordinates {(0,0)(2,4)(1,1)};
- \node[font=\footnotesize, anchor=south east] at (axis cs:1,1) {$c=1$};
+\begin{axis}[width=10cm, height=6cm, xlabel={$x$}, xmin=-4, xmax=4, ymin=-2, ymax=2, grid=major, legend pos=south east, legend style={font=\footnotesize}]
+ \addplot[thick, primaryblue, domain=-4:4, samples=100] {sin(deg(x))};
+ \addplot[thick, crimson, dashed, domain=-2.2:2.2, samples=50] {x};
+ \addplot[thick, accentgreen, dashed, domain=-3.2:3.2, samples=60] {x-x^3/6};
+ \addplot[thick, warmamber, dashed, domain=-3.8:3.8, samples=80] {x-x^3/6+x^5/120};
+ \legend{$\sin x$,$x$,$x-\frac{x^3}{6}$,$x-\frac{x^3}{6}+\frac{x^5}{120}$}
 \end{axis}
 \end{tikzpicture}
-\caption{平均値の定理。弦（赤）と平行な接線（緑）が $x=1$ にある。}
+\caption{$\sin x$ のテイラー展開（$a=0$）。次数を上げるほど、近似が良くなる範囲が広がる。}
 \end{figure}
 
-\begin{pointbox}{この章のポイント}
+\begin{center}
+\begin{tabular}{rrr}
+\toprule
+$x$ & $\sin x$ & $x-\frac{x^3}{6}$\\
+\midrule
+0.5 & 0.47943 & 0.47917\\
+1.0 & 0.84147 & 0.83333\\
+\bottomrule
+\end{tabular}
+\end{center}
+
+\section{§150〜§152 不定形の極限（ロピタルの考え方）}
+
+$\dfrac{f(x)}{g(x)}$ で、$x\to a$ のとき分子・分母がともに $0$ となる場合（$\frac00$ の不定形）の極限は、テイラー展開で調べられます。
+
+\begin{examplebox}{例：$\displaystyle\lim_{x\to0}\frac{1-\cos x}{x^2}$}
+$1-\cos x=\frac{x^2}{2}-\frac{x^4}{24}+\cdots$ なので、$\dfrac{1-\cos x}{x^2}\to\dfrac12$。$x=0.1$ で $0.49958$。
+\end{examplebox}
+
+\section{§153〜§154 2変数関数の微分と平均値の定理}
+
+2変数関数 $z=f(x,y)$ では、$y$ を固定して $x$ で微分したものが偏導関数 $\partial z/\partial x$。2つの偏導関数を使って、$f(x+h,y+k)-f(x,y)\approx f_xh+f_yk$ と近似できます。
+
+\begin{figure}[htbp]
+\centering
+\begin{tikzpicture}
+\begin{axis}[width=9cm, height=6.4cm, view={50}{28}, xlabel={$x$}, ylabel={$y$}, zlabel={$z$}, colormap/viridis, title={$z=xy$}, every axis title/.style={font=\footnotesize}]
+ \addplot3[surf, domain=-1:1, y domain=-1:1, samples=16, opacity=0.9] {x*y};
+\end{axis}
+\end{tikzpicture}
+\caption{$z=xy$ の曲面。$y$ を固定して $x$ 方向に切ると直線、$z_x=y$。}
+\end{figure}
+
+\begin{examplebox}{全微分の見積もり}
+$z=x^2y$、$(x,y)=(2,3)$ から $(2.1,3.2)$ へ。$z_x=2xy=12$、$z_y=x^2=4$。見積もり $12(0.1)+4(0.2)=2.0$。実際の増加は $2.1^2\cdot3.2-12=14.112-12=2.112$。
+\end{examplebox}
+
+\section{§155〜§158 微分と、微小量}
+
+関数 $y=f(x)$ の\textbf{微分} $\dd y=f'(x)\,\dd x$ は、$x$ の小さな変化 $\dd x$ に対する $y$ の変化の、一次の近似です。
+
+\begin{figure}[htbp]
+\centering
+\begin{tikzpicture}
+\begin{axis}[width=9cm, height=6cm, xlabel={$x$}, ylabel={$y$}, xmin=0.5, xmax=2.5, ymin=0, ymax=6.5, grid=major]
+ \addplot[thick, primaryblue, domain=0.5:2.5, samples=50] {x^2};
+ \addplot[thick, crimson, domain=1:2.2] {1+2*(x-1)};
+ \addplot[dashed] coordinates {(1,1)(2,1)(2,4)};
+ \addplot[dashed, crimson] coordinates {(2,1)(2,3)};
+ \addplot[only marks, mark=*] coordinates {(1,1)(2,4)(2,3)};
+ \node[font=\footnotesize, anchor=north] at (axis cs:1.5,1) {$\dd x=1$};
+ \node[font=\footnotesize, crimson, anchor=west] at (axis cs:2.03,2) {$\dd y=2$};
+\end{axis}
+\end{tikzpicture}
+\caption{$\dd x$ が大きいと、接線で見積もった $\dd y$（赤）と、実際の変化（$\Delta y=3$）のずれが目立つ。$\dd x$ が小さいほど、ずれは無視できる。}
+\end{figure}
+
+\section{§159〜§161 定積分と、極限としての面積}
+
+定積分は、和の極限として定義されます。$\int_0^1x^2\,\dd x$ を、長方形10本で下から・上から挟むと $0.285$ と $0.385$。100本にすると $0.32835$ と $0.33835$。真の値 $\frac13=0.3333\ldots$ に近づきます。
+
+\section{§162〜§164 テイラーの定理の積分による証明}
+
+誤差 $R_n$ は、積分の形で書けます。$f(x)=f(a)+\int_a^xf'(t)\,\dd t$ をくり返し部分積分して導かれます。
+
+\section{§165〜§167 面積・弧長・体積への応用}
+
+曲線 $y=f(x)$ と $x$ 軸で囲まれる面積は $\int f\,\dd x$、曲線の長さは $\int\sqrt{1+(f')^2}\,\dd x$、$x$ 軸のまわりに回してできる立体の体積は $\pi\int f^2\,\dd x$。
+
+\begin{examplebox}{例：半径 $r$ の球の体積}
+$y=\sqrt{r^2-x^2}$ を $x$ 軸のまわりに回転。体積 $=\pi\int_{-r}^r(r^2-x^2)\,\dd x=\pi\left[r^2x-\frac{x^3}{3}\right]_{-r}^{r}=\frac43\pi r^3$。
+\end{examplebox}
+
+\begin{figure}[htbp]
+\centering
+\begin{tikzpicture}
+\begin{axis}[width=8.5cm, height=5.6cm, axis equal image, xlabel={$x$}, ylabel={$y$}, xmin=-1.3, xmax=1.3, ymin=-1.2, ymax=1.2, grid=major]
+ \addplot[thick, primaryblue, domain=-1:1, samples=80] {sqrt(1-x^2)};
+ \addplot[thick, primaryblue, dashed, domain=-1:1, samples=80] {-sqrt(1-x^2)};
+ \addplot[draw=none, fill=softblue, fill opacity=0.5, domain=-1:1, samples=80] {sqrt(1-x^2)} \closedcycle;
+\end{axis}
+\end{tikzpicture}
+\caption{半円を $x$ 軸のまわりに回すと球ができる。体積 $=\frac43\pi r^3$。（図は $r=1$）}
+\end{figure}
+
+\begin{pointbox}{第7章のまとめ}
 \begin{itemize}[leftmargin=1.5em]
-\item 平均値の定理：弦と平行な接線が、必ず区間の中にある。
+\item テイラーの定理：関数を、多項式で近似する。誤差の評価もできる。
+\item 偏微分・全微分：多変数の変化を、一次近似で捉える。
+\item 積分：面積・弧長・体積を、和の極限で求める。
 \end{itemize}
 \end{pointbox}
 
 %==========================================================
 \chapter{無限級数と無限積分の収束}
-\markboth{第8章}{収束}
+\markboth{第8章}{級数と無限積分の収束}
 %==========================================================
 
-無限に足しても有限の値になる級数と、ならない級数があります。$\displaystyle\sum_{n=1}^\infty\frac1{n^2}=\frac{\pi^2}{6}\approx1.6449$ は収束し、$\displaystyle\sum\frac1n$ は発散します。
+第8章は、無限級数の収束・発散を判定する方法を、系統的に述べます。約29の節で、正項級数の判定法、コーシー・ダランベールの判定法、積分判定法、無限積分、絶対収束と条件収束、アーベルとディリクレの判定法、級数の積を扱います。
+
+\section{§168〜§170 正項級数と比較判定法}
+
+各項が正の級数 $\sum a_n$ は、部分和が上に有界なら収束し、そうでなければ発散します。\textbf{比較判定法}は、収束がわかっている級数と項ごとに比べる方法です。
 
 \begin{figure}[htbp]
 \centering
 \begin{tikzpicture}
-\begin{axis}[width=10cm, height=5.5cm, xlabel={足した項の数 $n$}, ylabel={部分和}, xmode=log, xmin=1, xmax=1000, ymin=0, ymax=8, grid=major, legend pos=north west, legend style={font=\footnotesize}]
- \addplot[thick, primaryblue, mark=*] coordinates {(1,1)(2,1.25)(5,1.4636)(10,1.5498)(100,1.6350)(1000,1.6439)};
- \addplot[thick, crimson, mark=square*] coordinates {(1,1)(10,2.929)(100,5.187)(1000,7.485)};
- \addplot[dashed, gray, domain=1:1000] {1.6449};
- \legend{$\sum1/n^2$（収束）,$\sum1/n$（発散）}
+\begin{axis}[width=10cm, height=5.6cm, xlabel={$n$}, ylabel={項}, xmin=0, xmax=12, ymin=0, ymax=1.1, grid=major, legend style={font=\footnotesize}]
+ \addplot[only marks, mark=*, mark size=1.6pt, color=primaryblue, samples at={1,...,12}] {1/x^2};
+ \addplot[only marks, mark=square*, mark size=1.6pt, color=crimson, samples at={1,...,12}] {1/(x^2+x)};
+ \legend{$1/n^2$（収束）,$1/(n^2+n)$（より小さい）}
 \end{axis}
 \end{tikzpicture}
-\caption{2つの級数の部分和。$\sum1/n^2$ は $1.6449$ に頭打ち、$\sum1/n$ は対数的に増え続ける。}
+\caption{各項が、収束する級数 $\sum1/n^2$ の項以下なら、$\sum\frac{1}{n^2+n}$ も収束する。実際、$\sum\frac1{n(n+1)}=1$。}
 \end{figure}
 
-\begin{pointbox}{この章のポイント}
+\begin{examplebox}{確かめ}
+$\frac{1}{n(n+1)}=\frac1n-\frac1{n+1}$ なので、部分和は $1-\frac1{N+1}$。$N\to\infty$ で $1$ に収束します。
+\end{examplebox}
+
+\section{§171〜§172 コーシーとダランベールの判定法}
+
 \begin{itemize}[leftmargin=1.5em]
-\item 収束・発散は、部分和が一定の値に近づくかどうかで決まる。
+\item \textbf{ダランベールの比判定}：隣り合う項の比 $a_{n+1}/a_n$ が $r$ に近づくとき、$r$ が $1$ より小さければ収束し、$1$ より大きければ発散する。
+\item \textbf{コーシーの根判定}：$n$ 乗根 $a_n^{1/n}$ が $r$ に近づくとき、$r$ が $1$ より小さければ収束し、$1$ より大きければ発散する。
+\end{itemize}
+
+\begin{examplebox}{例：$n/2^n$ の和}
+比：$\dfrac{(n+1)/2^{n+1}}{n/2^n}=\dfrac{n+1}{2n}\to\dfrac12<1$。収束。和は $2$。
+\end{examplebox}
+
+\begin{figure}[htbp]
+\centering
+\begin{tikzpicture}
+\begin{axis}[width=9.5cm, height=5.4cm, xlabel={$n$}, ylabel={部分和}, xmin=0, xmax=20, ymin=0, ymax=2.3, grid=major]
+ \addplot[thick, primaryblue, mark=*, mark size=1.4pt, samples at={1,...,20}] {2-(x+2)/2^x};
+ \addplot[dashed, crimson, domain=0:20] {2};
+\end{axis}
+\end{tikzpicture}
+\caption{$\sum n/2^n$ の部分和 $2-\frac{N+2}{2^N}$ は、$2$ に収束する。}
+\end{figure}
+
+\section{§173〜§177 アーベルの判定法と対数的な尺度}
+
+比判定が $r=1$ で決着しないとき（$\sum1/n$ と $\sum1/n^2$ はどちらも比が $1$ に近づく）、より細かい判定法（ラーベの判定法や対数判定法）が必要です。
+
+\section{§178〜§181 積分判定法と無限積分}
+
+$f$ が正で減少するとき、$\sum f(n)$ と $\int_1^\infty f(x)\,\dd x$ は、同時に収束・発散します。
+
+\begin{figure}[htbp]
+\centering
+\begin{tikzpicture}
+\begin{axis}[width=9.5cm, height=5.6cm, xlabel={$x$}, xmin=1, xmax=7, ymin=0, ymax=1.1, grid=major]
+ \addplot[thick, primaryblue, domain=1:7, samples=60] {1/x^2};
+ \foreach \k in {1,...,5} {
+  \addplot[draw=crimson, fill=softrose, fill opacity=0.5] coordinates {(\k,0)(\k+1,0)(\k+1,{1/\k^2})(\k,{1/\k^2})} \closedcycle;
+ }
+\end{axis}
+\end{tikzpicture}
+\caption{$\sum1/n^2$ と $\int_1^\infty x^{-2}\dd x=1$ の比較。長方形（赤）の面積の和は、曲線の下の面積より大きい。}
+\end{figure}
+
+\begin{center}
+\begin{tabular}{lll}
+\toprule
+積分 & 値 & 収束／発散\\
+\midrule
+$\displaystyle\int_1^\infty\frac{\dd x}{x^2}$ & $1$ & 収束\\
+$\displaystyle\int_1^\infty\frac{\dd x}{x}$ & $\infty$ & 発散\\
+$\displaystyle\int_0^1\frac{\dd x}{\sqrt x}$ & $2$ & 収束（無限積分の一種）\\
+\bottomrule
+\end{tabular}
+\end{center}
+
+\section{§182〜§185 絶対収束}
+
+$\sum|a_n|$ が収束するとき、$\sum a_n$ は\textbf{絶対収束}するといいます。絶対収束する級数は、項の順序を入れ替えても和が変わりません（ディリクレの定理）。
+
+\section{§186〜§188 条件収束級数}
+
+$\sum|a_n|$ は発散するが、$\sum a_n$ は収束する級数を、\textbf{条件収束}といいます。例は、$1-\frac12+\frac13-\frac14+\cdots=\log2$。
+
+\begin{figure}[htbp]
+\centering
+\begin{tikzpicture}
+\begin{axis}[width=10cm, height=5.6cm, xlabel={項数 $n$}, ylabel={部分和}, xmin=0, xmax=11, ymin=0.45, ymax=1.05, grid=major]
+ \addplot[thick, primaryblue, mark=*, mark size=1.4pt] coordinates {(1,1)(2,0.5)(3,0.8333)(4,0.5833)(5,0.7833)(6,0.6167)(7,0.7595)(8,0.6345)(9,0.7456)(10,0.6456)};
+ \addplot[dashed, crimson, domain=0:11] {0.6931};
+\end{axis}
+\end{tikzpicture}
+\caption{交代調和級数 $1-\frac12+\frac13-\cdots$ の部分和 $S_1,\ldots,S_{10}$。上下に振れながら、$\log2\approx0.6931$（点線）に近づく（値は筆者が計算）。}
+\end{figure}
+
+\section{§189〜§194 アーベルとディリクレの判定法}
+
+交代する符号をもつ級数や、$\sum a_nb_n$ の形の級数の収束を判定する方法です。$a_n$ が単調に $0$ に近づき、$\sum b_n$ の部分和が有界なら、$\sum a_nb_n$ は収束します（ディリクレの判定法）。
+
+\section{§195〜§196 級数の積}
+
+2つの級数の積を、各項の積を並べ替えて作ったものを、級数の積といいます。両方が絶対収束するなら、積の級数も収束し、その和は、和の積に等しくなります。
+
+\begin{figure}[htbp]
+\centering
+\begin{tikzpicture}[scale=0.9]
+ \foreach \ia in {0,...,3} {\foreach \ja in {0,...,3} {
+   \node[wbox, minimum width=0.9cm] at ({\ia*1.2},{-\ja*0.8}) {\scriptsize $a_{\ia}b_{\ja}$};
+ }}
+ \foreach \dg in {0,...,3} {\draw[crimson, thick, dashed] ({\dg*1.2+0.5},0.4)--(-0.6,{-\dg*0.8-0.4});}
+ \node[font=\footnotesize, align=center] at (7,-1.4) {赤い斜めの線ごとに足す：\\$c_n=a_0b_n+a_1b_{n-1}+\cdots+a_nb_0$};
+\end{tikzpicture}
+\caption{級数の積。$a_ib_j$ を、$i+j=n$ の対角線ごとにまとめて足すと、積の級数の第 $n$ 項になる。}
+\end{figure}
+
+\begin{pointbox}{第8章のまとめ}
+\begin{itemize}[leftmargin=1.5em]
+\item 正項級数：比較・比・根・積分判定法。
+\item 絶対収束なら、順序を入れ替えても和は同じ。条件収束は、順序で和が変わりうる。
+\item 級数の積は、対角線ごとにまとめる。
 \end{itemize}
 \end{pointbox}
 
@@ -365,19 +1451,61 @@ $n=10$ の左端の和は $\frac{1}{1000}(0^2+1^2+\cdots+9^2)=\frac{285}{1000}$�
 \markboth{第9章}{対数・指数関数}
 %==========================================================
 
-指数関数 $e^x$ は、級数 $e^x=1+x+\dfrac{x^2}{2!}+\dfrac{x^3}{3!}+\cdots$ で定義できます。$x=1$ とした部分和を調べると、$e$ が現れます。
+第9章は、対数関数と指数関数を、積分を使って厳密に定義します。約20の節で、$\log x$ の定義、関数方程式、$x\to\infty$ や $x\to0$ での振る舞い、指数関数の定義と性質、極限による表現、常用対数、級数展開（対数級数・逆正接級数・二項級数）を扱います。
+
+\section{§197 $\log x$ の定義}
+
+ハーディは、$\log x$ を次の積分で定義します。
+
+\[
+\log x=\int_1^x\frac{\dd t}{t}\qquad(x>0).
+\]
+
+つまり、曲線 $y=1/t$ の、$t=1$ から $t=x$ までの下の面積です。
+
+\begin{figure}[htbp]
+\centering
+\begin{tikzpicture}
+\begin{axis}[width=10cm, height=6cm, xlabel={$t$}, ylabel={$1/t$}, xmin=0.3, xmax=5, ymin=0, ymax=3.4, grid=major]
+ \addplot[thick, primaryblue, domain=0.3:5, samples=80] {1/x};
+ \addplot[draw=none, fill=softblue, fill opacity=0.6, domain=1:3, samples=40] {1/x} \closedcycle;
+ \node[font=\small] at (axis cs:1.9,0.4) {$\log3\approx1.0986$};
+\end{axis}
+\end{tikzpicture}
+\caption{$\log3$ は、$y=1/t$ の $1\le t\le3$ の下の面積（水色）。}
+\end{figure}
+
+\section{§198 $\log x$ の関数方程式}
+
+定義から、$\log(xy)=\log x+\log y$ が導かれます。掛け算を足し算に変える、対数の基本性質です。
+
+\begin{examplebox}{確かめ}
+$\log6=\log2+\log3\approx0.6931+1.0986=1.7918$。実際 $\log6=1.7918$ ✓。
+\end{examplebox}
+
+\begin{figure}[htbp]
+\centering
+\begin{tikzpicture}
+\begin{axis}[width=10cm, height=5.6cm, xlabel={$x$}, ylabel={$\log x$}, xmin=0, xmax=10, ymin=-3, ymax=2.8, grid=major]
+ \addplot[thick, primaryblue, domain=0.06:10, samples=100] {ln(x)};
+ \addplot[only marks, mark=*, color=crimson] coordinates {(2,0.6931)(3,1.0986)(6,1.7918)};
+\end{axis}
+\end{tikzpicture}
+\caption{$y=\log x$ のグラフ。$\log2+\log3=\log6$ なので、点 $x=2,3,6$ の高さには、足し算の関係がある。}
+\end{figure}
+
+\section{§199〜§201 $\log x$ の増え方と、$x\to0$ の振る舞い}
+
+$\log x$ は、$x\to\infty$ で限りなく大きくなりますが、どんな $x^\alpha$（$\alpha>0$）よりもゆっくりです。$\dfrac{\log x}{x^\alpha}\to0$。$x\to+0$ では、$\log x\to-\infty$。
 
 \begin{center}
-\begin{tabular}{rr}
+\begin{tabular}{rrrr}
 \toprule
-項数 & $1+1+\frac1{2!}+\cdots$ の部分和\\
+$x$ & $\log x$ & $\sqrt x$ & $\log x/\sqrt x$\\
 \midrule
-2項 & 2\\
-3項 & 2.5\\
-4項 & 2.6667\\
-5項 & 2.7083\\
-6項 & 2.7167\\
-7項 & 2.7181\\
+$10^2$ & 4.605 & 10 & 0.4605\\
+$10^4$ & 9.210 & 100 & 0.0921\\
+$10^6$ & 13.816 & 1000 & 0.0138\\
 \bottomrule
 \end{tabular}
 \end{center}
@@ -385,19 +1513,112 @@ $n=10$ の左端の和は $\frac{1}{1000}(0^2+1^2+\cdots+9^2)=\frac{285}{1000}$�
 \begin{figure}[htbp]
 \centering
 \begin{tikzpicture}
-\begin{axis}[width=8cm, height=7cm, axis equal image, xlabel={$x$}, ylabel={$y$}, xmin=-3, xmax=4, ymin=-3, ymax=4, grid=major, legend pos=south east, legend style={font=\footnotesize}]
- \addplot[thick, primaryblue, domain=-3:1.35, samples=50] {exp(x)};
- \addplot[thick, crimson, domain=0.05:4, samples=60] {ln(x)};
- \addplot[dashed, gray, domain=-3:4] {x};
- \legend{$y=e^x$,$y=\ln x$,$y=x$}
+\begin{axis}[width=10cm, height=5.6cm, xlabel={$x$（対数目盛）}, ylabel={$\log x/\sqrt x$}, xmode=log, xmin=1, xmax=1000000, ymin=0, ymax=0.9, grid=major]
+ \addplot[thick, primaryblue, domain=1.5:1000000, samples=80] {ln(x)/sqrt(x)};
 \end{axis}
 \end{tikzpicture}
-\caption{$e^x$ と $\ln x$ は、直線 $y=x$ に関して対称（逆関数）。}
+\caption{$\log x/\sqrt x$ は、$x$ が大きくなるとゼロに近づく。対数は、どんな累乗よりも遅く増える。}
 \end{figure}
 
-\begin{pointbox}{この章のポイント}
+\section{§202〜§203 無限大の尺度}
+
+$\log x,\ x,\ x^2,\ \ee^x$ はいずれも $x\to\infty$ で無限大ですが、増える速さの順があります。ハーディは、それを\textbf{対数的な尺度}で整理します。
+
+\begin{figure}[htbp]
+\centering
+\begin{tikzpicture}
+\begin{axis}[width=10cm, height=5.8cm, xlabel={$x$}, ylabel={値（対数目盛）}, xmin=1, xmax=20, ymode=log, ymin=1, ymax=1000000, grid=major, legend pos=north west, legend style={font=\footnotesize}]
+ \addplot[thick, primaryblue, domain=1:20, samples=60] {ln(x)+1};
+ \addplot[thick, accentgreen, domain=1:20, samples=40] {x};
+ \addplot[thick, warmamber, domain=1:20, samples=40] {x^2};
+ \addplot[thick, crimson, domain=1:20, samples=40] {exp(x)};
+ \legend{$\log x+1$,$x$,$x^2$,$\ee^x$}
+\end{axis}
+\end{tikzpicture}
+\caption{増え方の順序：$\log x\ll x\ll x^2\ll\ee^x$。縦軸を対数目盛にすると、指数関数 $\ee^x$ の曲線が最も急になる。}
+\end{figure}
+
+\section{§204〜§207 指数関数の定義と性質}
+
+指数関数 $\ee^x$ は、$\log x$ の逆関数として定義されます。$y=\log x\iff x=\ee^y$。
+
+\begin{figure}[htbp]
+\centering
+\begin{tikzpicture}
+\begin{axis}[width=8.5cm, height=7.5cm, axis equal image, xmin=-3, xmax=4, ymin=-3, ymax=4, grid=major, legend pos=south east, legend style={font=\footnotesize}]
+ \addplot[thick, primaryblue, domain=-3:1.38, samples=60] {exp(x)};
+ \addplot[thick, crimson, domain=0.05:4, samples=60] {ln(x)};
+ \addplot[dashed, gray, domain=-3:4] {x};
+ \legend{$y=\ee^x$,$y=\log x$,$y=x$}
+\end{axis}
+\end{tikzpicture}
+\caption{$\ee^x$ と $\log x$ は、$y=x$ に関して対称。}
+\end{figure}
+
+\begin{pointbox}{指数関数の性質}
+$\ee^{x+y}=\ee^x\ee^y$、$\dfrac{\dd}{\dd x}\ee^x=\ee^x$。$\ee^x$ は、微分しても変わらない関数。
+\end{pointbox}
+
+\section{§208〜§209 極限による表現}
+
+$\ee^x=\displaystyle\lim_{n\to\infty}\left(1+\frac xn\right)^n$、$\log x=\displaystyle\lim_{n\to\infty}n\left(x^{1/n}-1\right)$。
+
+\begin{center}
+\begin{tabular}{rr}
+\toprule
+$n$ & $(1+2/n)^n$（$\ee^2=7.38906$）\\
+\midrule
+1 & 3.00000\\
+10 & 6.19173\\
+100 & 7.24465\\
+1000 & 7.37431\\
+\bottomrule
+\end{tabular}
+\end{center}
+
+\section{§210〜§211 常用対数}
+
+底が $10$ の対数を、常用対数 $\log_{10}$ といいます。$\log_{10}x=\dfrac{\log x}{\log10}$、$\log10\approx2.3026$。たとえば、$\log_{10}2=\frac{0.6931}{2.3026}=0.3010$。
+
+\section{§212〜§216 級数展開}
+
+\begin{center}
+\renewcommand{\arraystretch}{1.5}
+\begin{tabular}{ll}
+\toprule
+関数 & 級数\\
+\midrule
+$\ee^x$ & $1+x+\dfrac{x^2}{2!}+\dfrac{x^3}{3!}+\cdots$\\
+$\log(1+x)$（$|x|<1$） & $x-\dfrac{x^2}{2}+\dfrac{x^3}{3}-\cdots$\\
+$\arctan x$（$|x|\le1$） & $x-\dfrac{x^3}{3}+\dfrac{x^5}{5}-\cdots$\\
+$(1+x)^m$（$|x|<1$） & $1+mx+\dfrac{m(m-1)}{2!}x^2+\cdots$\\
+\bottomrule
+\end{tabular}
+\end{center}
+
+\begin{figure}[htbp]
+\centering
+\begin{tikzpicture}
+\begin{axis}[width=10cm, height=6cm, xlabel={$x$}, xmin=-0.95, xmax=1.1, ymin=-3, ymax=1.5, grid=major, legend pos=south east, legend style={font=\footnotesize}]
+ \addplot[thick, primaryblue, domain=-0.9:1, samples=80] {ln(1+x)};
+ \addplot[thick, crimson, dashed, domain=-0.9:1, samples=50] {x};
+ \addplot[thick, accentgreen, dashed, domain=-0.9:1, samples=50] {x-x^2/2};
+ \addplot[thick, warmamber, dashed, domain=-0.9:1, samples=50] {x-x^2/2+x^3/3};
+ \legend{$\log(1+x)$,$x$,$x-\frac{x^2}{2}$,$x-\frac{x^2}{2}+\frac{x^3}{3}$}
+\end{axis}
+\end{tikzpicture}
+\caption{$\log(1+x)$ と、級数の最初の1項・2項・3項での近似。$x$ が $0$ に近いほど、よく合う。}
+\end{figure}
+
+\begin{examplebox}{$\pi$ の値を級数で求める（ライプニッツ）}
+$\arctan1=\frac\pi4$ から、$\frac\pi4=1-\frac13+\frac15-\frac17+\cdots$。最初の4項で $\frac\pi4\approx0.7238$、$\pi\approx2.895$。収束はゆっくりで、多くの項が必要です。
+\end{examplebox}
+
+\begin{pointbox}{第9章のまとめ}
 \begin{itemize}[leftmargin=1.5em]
-\item $e^x$ は級数で定義でき、$\ln x$ はその逆関数。
+\item $\log x=\int_1^x\frac{\dd t}{t}$ と定義し、指数関数はその逆関数。
+\item 対数は、どんな累乗よりゆっくり増える。指数関数は、どんな累乗よりも速い。
+\item $\ee^x,\ \log(1+x),\ \arctan x$ などは、べき級数に展開できる。
 \end{itemize}
 \end{pointbox}
 
@@ -406,28 +1627,150 @@ $n=10$ の左端の和は $\frac{1}{1000}(0^2+1^2+\cdots+9^2)=\frac{285}{1000}$�
 \markboth{第10章}{一般理論}
 %==========================================================
 
-複素数に指数関数を拡張すると、オイラーの公式 $e^{i\theta}=\cos\theta+i\sin\theta$ が現れます。$\theta=\pi$ とすると、$e^{i\pi}=-1$。指数関数と三角関数が、1つの式で結ばれます。
+最後の第10章は、第9章の対数・指数関数を、複素数へ広げます。約19の節で、複素変数の関数、複素数の対数、指数関数、三角関数（円関数）の定義、双曲線関数、対数と逆三角関数の関係、級数展開を扱います。
+
+\section{§217〜§220 複素変数の関数}
+
+変数 $z=x+iy$ に、複素数の値 $w=f(z)$ を対応させる規則が、\textbf{複素変数の関数}です。$z$ の平面と、$w$ の平面の、2枚の平面のあいだの対応と考えると、見通しがよくなります。
 
 \begin{figure}[htbp]
 \centering
-\begin{tikzpicture}[scale=2.2]
- \draw[->] (-1.3,0)--(1.4,0) node[right] {実軸}; \draw[->] (0,-1.3)--(0,1.4) node[above] {虚軸};
- \draw[gray] (0,0) circle (1);
- \def\th{60}
- \draw[thick, primaryblue, ->] (0,0)--(\th:1);
- \fill[primaryblue] (\th:1) circle (0.025) node[above right, font=\small] {$e^{i\theta}$};
- \draw[dashed] (\th:1)--({cos(\th)},0) node[below, font=\scriptsize] {$\cos\theta$};
- \draw[dashed] (\th:1)--(0,{sin(\th)}) node[left, font=\scriptsize] {$\sin\theta$};
- \draw (0.25,0) arc (0:\th:0.25); \node[font=\scriptsize] at (0.35,0.12) {$\theta$};
- \fill[crimson] (-1,0) circle (0.025) node[below left, font=\small] {$e^{i\pi}=-1$};
+\begin{tikzpicture}[scale=0.9]
+ \begin{scope}
+  \draw[->] (-0.3,0)--(3.2,0) node[right] {$x$}; \draw[->] (0,-0.3)--(0,3.2) node[above] {$y$};
+  \draw[thick, primaryblue, fill=softblue] (0.6,0.6) rectangle (2.4,2.4);
+  \node[font=\small] at (1.5,1.5) {$z$ 平面};
+ \end{scope}
+ \draw[->, thick] (3.8,1.5)--(5.4,1.5) node[midway, above, font=\small] {$w=z^2$};
+ \begin{scope}[xshift=6cm]
+  \draw[->] (-0.3,0)--(3.2,0) node[right] {$u$}; \draw[->] (0,-0.3)--(0,3.2) node[above] {$v$};
+  \draw[thick, crimson, fill=softrose] (0.36,0.72) -- (1.7,0.5) -- (2.8,2.3) -- (1.1,2.6) -- cycle;
+  \node[font=\small] at (1.5,1.5) {$w$ 平面};
+ \end{scope}
 \end{tikzpicture}
-\caption{$e^{i\theta}$ は、単位円上の点。$\theta=\pi$（半周）で $-1$ になる。}
+\caption{複素変数の関数は、$z$ 平面の図形を、$w$ 平面の図形へ写す。（図は模式図）}
 \end{figure}
+
+\section{§221 $\log\zeta$ の値}
+
+複素数 $\zeta=r(\cos\theta+i\sin\theta)$ の対数は、
+
+\[
+\log\zeta=\log r+i\theta\qquad(\theta\ \text{は偏角}).
+\]
+
+偏角は $2\pi$ の整数倍の違いを除いて決まるので、対数は無数の値をもちます（多価性）。
+
+\begin{examplebox}{例}
+$\zeta=-1=1\cdot(\cos\pi+i\sin\pi)$。$\log(-1)=0+i\pi=i\pi$（主値）。ほかに $i\pi+2k\pi i$ も、すべて $-1$ の対数。
+\end{examplebox}
+
+\begin{figure}[htbp]
+\centering
+\begin{tikzpicture}[scale=1.3]
+ \draw[->] (-1.8,0)--(1.8,0) node[right] {実軸}; \draw[->] (0,-1.8)--(0,1.8);
+ \draw[gray] (0,0) circle (1);
+ \fill[crimson] (-1,0) circle (0.05) node[below left, font=\small] {$-1$};
+ \draw[->, thick, primaryblue] (0.35,0.05) arc (0:175:0.35);
+ \node[font=\small, primaryblue] at (0.0,0.55) {$\pi$};
+ \draw[->, dashed, accentgreen] (0.55,-0.05) arc (0:-175:0.55);
+ \node[font=\small, accentgreen] at (0.0,-0.8) {$-\pi$};
+\end{tikzpicture}
+\caption{$-1$ の偏角は、$\pi$ とも $-\pi$ ともとれる。対数の多価性の原因。}
+\end{figure}
+
+\section{§222〜§226 複素数の指数関数}
+
+\[
+\ee^{x+iy}=\ee^x(\cos y+i\sin y).
+\]
+
+$x$ 成分が「大きさ」、$y$ 成分が「回転」を担います。
+
+\begin{figure}[htbp]
+\centering
+\begin{tikzpicture}[scale=0.9]
+ \draw[->] (-3,0)--(3.2,0) node[right] {実軸}; \draw[->] (0,-0.5)--(0,3.5) node[above] {虚軸};
+ \draw[thick, primaryblue, domain=0:1080, samples=250, variable=\tt] plot ({0.25*exp(0.0012*\tt*3)*cos(\tt)}, {0.25*exp(0.0012*\tt*3)*sin(\tt)});
+ \node[font=\footnotesize] at (2.0,3.1) {$\ee^{(0.2+i)t}$ の軌跡};
+\end{tikzpicture}
+\caption{$\ee^{(a+i)t}$（$a>0$）は、らせんを描いて外へ広がる。実部が成長、虚部が回転。}
+\end{figure}
+
+\section{§227〜§228 指数形式での $\sin$ と $\cos$}
+
+\[
+\cos\zeta=\frac{\ee^{i\zeta}+\ee^{-i\zeta}}{2},\qquad\sin\zeta=\frac{\ee^{i\zeta}-\ee^{-i\zeta}}{2i}.
+\]
+
+ここから、オイラーの公式 $\ee^{i\theta}=\cos\theta+i\sin\theta$ が得られます。
+
+\begin{figure}[htbp]
+\centering
+\begin{tikzpicture}[scale=2.0]
+ \draw[->] (-1.4,0)--(1.5,0) node[right] {実軸}; \draw[->] (0,-1.4)--(0,1.5) node[above] {虚軸};
+ \draw[gray] (0,0) circle (1);
+ \foreach \ang/\lab in {0/{$\ee^{0}=1$},90/{$\ee^{i\pi/2}=i$},180/{$\ee^{i\pi}=-1$},270/{$\ee^{3i\pi/2}=-i$}} {
+   \fill[primaryblue] (\ang:1) circle (0.03);
+   \node[font=\scriptsize, align=center] at (\ang:1.35) {\lab};
+ }
+\end{tikzpicture}
+\caption{オイラーの公式。$\ee^{i\theta}$ は、単位円上を $\theta$ だけ回った点。}
+\end{figure}
+
+\section{§229〜§230 双曲線関数}
+
+$\cosh x=\dfrac{\ee^x+\ee^{-x}}{2}$、$\sinh x=\dfrac{\ee^x-\ee^{-x}}{2}$ を、\textbf{双曲線関数}といいます。
+
+\begin{figure}[htbp]
+\centering
+\begin{tikzpicture}
+\begin{axis}[width=9.5cm, height=5.6cm, xlabel={$x$}, xmin=-3, xmax=3, ymin=-5, ymax=6, grid=major, legend pos=north west, legend style={font=\footnotesize}]
+ \addplot[thick, primaryblue, domain=-3:3, samples=60] {(exp(x)+exp(-x))/2};
+ \addplot[thick, crimson, domain=-3:3, samples=60] {(exp(x)-exp(-x))/2};
+ \legend{$\cosh x$,$\sinh x$}
+\end{axis}
+\end{tikzpicture}
+\caption{$\cosh x$（青）と $\sinh x$（赤）。$\cosh^2x-\sinh^2x=1$ を満たす。}
+\end{figure}
+
+\begin{examplebox}{確かめ}
+$x=1$：$\cosh1=\frac{2.71828+0.36788}{2}=1.54308$、$\sinh1=\frac{2.71828-0.36788}{2}=1.17520$。$1.54308^2-1.17520^2=2.38110-1.38110=1.00000$ ✓。
+\end{examplebox}
+
+\section{§231〜§233 対数関数と逆三角関数の関係}
+
+$\arctan x=\dfrac{1}{2i}\log\dfrac{1+ix}{1-ix}$ のように、逆三角関数は、複素数の対数で表せます。三角関数と指数・対数は、複素数の世界では、ひとつの理論の別の顔です。
+
+\section{§234〜§235 対数級数と、まとめ}
+
+$\log(1+z)=z-\dfrac{z^2}{2}+\dfrac{z^3}{3}-\cdots$ は、$|z|<1$ の複素数でも成り立ちます。その収束する範囲は、原点を中心とする、半径1の円の内部（収束円）です。
+
+\begin{figure}[htbp]
+\centering
+\begin{tikzpicture}[scale=1.6]
+ \draw[->] (-1.6,0)--(1.8,0) node[right] {実軸}; \draw[->] (0,-1.4)--(0,1.5);
+ \draw[thick, primaryblue, fill=softblue, fill opacity=0.4] (0,0) circle (1);
+ \fill[crimson] (-1,0) circle (0.04) node[below left, font=\small] {$z=-1$（特異点）};
+ \node[font=\small] at (0,0.4) {収束円};
+ \node[font=\footnotesize] at (0.4,-0.4) {半径 $1$};
+\end{tikzpicture}
+\caption{$\log(1+z)$ のべき級数の収束円。円の内部（$|z|<1$）で収束し、$z=-1$ に特異点がある。}
+\end{figure}
+
+\begin{pointbox}{第10章のまとめ}
+\begin{itemize}[leftmargin=1.5em]
+\item $\ee^{x+iy}=\ee^x(\cos y+i\sin y)$。オイラーの公式で、指数関数と三角関数が結ばれる。
+\item 複素数の対数は多価。逆三角関数は対数で表せる。
+\item べき級数の収束する範囲は、円の内部（収束円）。
+\end{itemize}
+\end{pointbox}
 
 \begin{notebox}{この本の未解決点}
 \begin{itemize}[leftmargin=1.5em]
-\item ハーディの証明は本書では示していません。定理の正確な主張は翻訳版・原著で確かめてください。
-\item 級数の部分和の値は、筆者が計算しました。
+\item 翻訳版には、節の見出しの欠けや番号の乱れがあります。節の範囲（§番号）は目安です。
+\item ハーディの例題と証明は、本書では取り上げていません。翻訳版（原著）で確かめてください。
+\item 翻訳版は小型モデルによる訳で、細部は原著との照合が必要です。
 \end{itemize}
 \end{notebox}
 
