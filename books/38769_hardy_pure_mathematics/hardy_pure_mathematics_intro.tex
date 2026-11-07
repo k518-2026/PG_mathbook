@@ -1691,7 +1691,7 @@ $x$ 成分が「大きさ」、$y$ 成分が「回転」を担います。
 \centering
 \begin{tikzpicture}[scale=0.9]
  \draw[->] (-3,0)--(3.2,0) node[right] {実軸}; \draw[->] (0,-0.5)--(0,3.5) node[above] {虚軸};
- \draw[thick, primaryblue, domain=0:1080, samples=250, variable=\tt] plot ({0.25*exp(0.0012*\tt*3)*cos(\tt)}, {0.25*exp(0.0012*\tt*3)*sin(\tt)});
+ \draw[thick, primaryblue, domain=0:1080, samples=250, variable=\tt] plot ({0.25*exp(0.0025*\tt)*cos(\tt)}, {0.25*exp(0.0025*\tt)*sin(\tt)});
  \node[font=\footnotesize] at (2.0,3.1) {$\ee^{(0.2+i)t}$ の軌跡};
 \end{tikzpicture}
 \caption{$\ee^{(a+i)t}$（$a>0$）は、らせんを描いて外へ広がる。実部が成長、虚部が回転。}
