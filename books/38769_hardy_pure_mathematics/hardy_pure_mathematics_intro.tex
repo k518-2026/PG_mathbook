@@ -1148,6 +1148,124 @@ $f(0.5)=-0.375<0$、$f(0.75)=0.172>0$ なので、$c\in(0.5,0.75)$。$f(0.625)=-
 \end{itemize}
 \end{pointbox}
 
+\section{補充 第5章を例題で確かめる}
+
+連続変数の極限と連続性を、数値と図で確かめます。
+
+\subsection*{例題1：$\dfrac{\sin x}{x}$ は $x\to0$ で $1$ に近づく}
+
+$x=0$ では分母が $0$ なので値は決まりませんが、$0$ の近くでは値が決まります。
+
+\begin{center}
+\begin{tabular}{rr}
+\toprule
+$x$（ラジアン） & $\dfrac{\sin x}{x}$\\
+\midrule
+$1$ & $0.84147$\\
+$0.5$ & $0.95885$\\
+$0.1$ & $0.99833$\\
+$0.01$ & $0.99998$\\
+\bottomrule
+\end{tabular}
+\end{center}
+
+\begin{figure}[htbp]
+\centering
+\begin{tikzpicture}
+\begin{axis}[width=10cm, height=5.6cm, xlabel={$x$}, ylabel={$\sin x/x$}, xmin=-12, xmax=12, ymin=-0.4, ymax=1.2, grid=major]
+ \addplot[thick, primaryblue, domain=-12:-0.02, samples=120] {sin(deg(x))/x};
+ \addplot[thick, primaryblue, domain=0.02:12, samples=120] {sin(deg(x))/x};
+ \addplot[only marks, mark=o, color=crimson] coordinates {(0,1)};
+\end{axis}
+\end{tikzpicture}
+\caption{$\sin x/x$ のグラフ。$x=0$ に穴（白丸）があるが、左右から $1$ に近づく。}
+\end{figure}
+
+\subsection*{例題2：中間値の定理で方程式の解を追いこむ}
+
+$f(x)=x^3-x-1$ は連続で、$f(1)=-1<0$、$f(2)=5>0$。中間値の定理から、$1$ と $2$ のあいだに $f(x)=0$ の解があります。区間を半分ずつ狭めます（二分法）。
+
+\begin{center}
+\begin{tabular}{rrrr}
+\toprule
+区間 & 中点 & 中点での $f$ & 解がある側\\
+\midrule
+$[1,\,2]$ & $1.5$ & $+0.875$ & 左\\
+$[1,\,1.5]$ & $1.25$ & $-0.297$ & 右\\
+$[1.25,\,1.5]$ & $1.375$ & $+0.225$ & 左\\
+$[1.25,\,1.375]$ & $1.3125$ & $-0.052$ & 右\\
+$[1.3125,\,1.375]$ & & & \\
+\bottomrule
+\end{tabular}
+\end{center}
+
+解は約 $1.3247$ です。区間の幅は毎回半分になるので、$10$ 回で $2^{-10}\approx0.001$ まで絞れます。
+
+\begin{figure}[htbp]
+\centering
+\begin{tikzpicture}
+\begin{axis}[width=9.5cm, height=5.8cm, xlabel={$x$}, ylabel={$f(x)$}, xmin=0.5, xmax=2, ymin=-2, ymax=5.5, grid=major]
+ \addplot[thick, primaryblue, domain=0.5:2, samples=60] {x^3-x-1};
+ \addplot[only marks, mark=*, color=crimson] coordinates {(1.3247,0)};
+ \addplot[only marks, mark=square*, color=gray] coordinates {(1,-1)(2,5)};
+\end{axis}
+\end{tikzpicture}
+\caption{$x^3-x-1$ は $x=1$ で負、$x=2$ で正。途切れずにつながっているので、その間のどこかで $0$ を横切る。}
+\end{figure}
+
+\subsection*{例題3：連続でない点の種類}
+
+$f(x)=\dfrac{x^2-1}{x-1}$ は $x\neq1$ では $x+1$ に等しく、$x=1$ では定義されません。$\lim_{x\to1}f(x)=2$ なので、$f(1)=2$ と決めれば連続になります（\textbf{除去できる不連続}）。
+
+これに対し、$x>0$ で $1$、$x<0$ で $-1$ をとる関数（符号関数）は、$0$ で左右の極限が違います（\textbf{跳躍}）。$\dfrac1x$ は $0$ の近くで限りなく大きくなります（\textbf{無限大への発散}）。
+
+\begin{figure}[htbp]
+\centering
+\begin{tikzpicture}
+\begin{axis}[width=4.6cm, height=4.4cm, title={除去できる}, xmin=-1, xmax=3, ymin=-1, ymax=4, every axis title/.style={font=\footnotesize}, grid=major]
+ \addplot[thick, primaryblue, domain=-1:3] {x+1};
+ \addplot[only marks, mark=o, color=crimson] coordinates {(1,2)};
+\end{axis}
+\begin{axis}[xshift=5.2cm, width=4.6cm, height=4.4cm, title={跳躍}, xmin=-2, xmax=2, ymin=-2, ymax=2, every axis title/.style={font=\footnotesize}, grid=major]
+ \addplot[thick, primaryblue, domain=-2:-0.02] {-1};
+ \addplot[thick, primaryblue, domain=0.02:2] {1};
+ \addplot[only marks, mark=o, color=crimson] coordinates {(0,-1)(0,1)};
+\end{axis}
+\begin{axis}[xshift=10.4cm, width=4.6cm, height=4.4cm, title={無限大}, xmin=-2, xmax=2, ymin=-5, ymax=5, every axis title/.style={font=\footnotesize}, grid=major]
+ \addplot[thick, primaryblue, domain=-2:-0.2, samples=40] {1/x};
+ \addplot[thick, primaryblue, domain=0.2:2, samples=40] {1/x};
+\end{axis}
+\end{tikzpicture}
+\caption{不連続の3つの型。左から、穴をふさげば直るもの、左右でずれるもの、限りなく大きくなるもの。}
+\end{figure}
+
+\subsection*{例題4：$x\to\infty$ の極限}
+
+$f(x)=\dfrac{2x+1}{x+3}=2-\dfrac{5}{x+3}$ は、$x$ が大きいほど $2$ に近づきます。
+
+\begin{center}
+\begin{tabular}{rr}
+\toprule
+$x$ & $f(x)$\\
+\midrule
+$10$ & $1.6154$\\
+$100$ & $1.9515$\\
+$1000$ & $1.9950$\\
+\bottomrule
+\end{tabular}
+\end{center}
+
+\begin{figure}[htbp]
+\centering
+\begin{tikzpicture}
+\begin{axis}[width=9.5cm, height=5.6cm, xlabel={$x$}, ylabel={$f(x)$}, xmin=0, xmax=60, ymin=0, ymax=2.4, grid=major]
+ \addplot[thick, primaryblue, domain=0:60, samples=80] {(2*x+1)/(x+3)};
+ \addplot[dashed, crimson, domain=0:60] {2};
+\end{axis}
+\end{tikzpicture}
+\caption{$(2x+1)/(x+3)$ は、直線 $y=2$（点線）に限りなく近づく。}
+\end{figure}
+
 %==========================================================
 \chapter{導関数と積分}
 \markboth{第6章}{導関数と積分}
@@ -1615,6 +1733,124 @@ $y=\sqrt{r^2-x^2}$ を $x$ 軸のまわりに回転。体積 $=\pi\int_{-r}^r(r^
 \end{itemize}
 \end{pointbox}
 
+\section{補充 第7章を例題で確かめる}
+
+\subsection*{例題1：$\ee^x$ をテイラー多項式で近づける}
+
+$\ee^x$ の $x=0$ まわりのテイラー多項式は $1+x+\frac{x^2}{2!}+\cdots+\frac{x^n}{n!}$。$x=1$ を代入すると、次数を上げるほど $\ee=2.71828\ldots$ に近づきます。
+
+\begin{center}
+\begin{tabular}{rr}
+\toprule
+次数 $n$ & $x=1$ での値\\
+\midrule
+1 & $2.00000$\\
+2 & $2.50000$\\
+3 & $2.66667$\\
+4 & $2.70833$\\
+5 & $2.71667$\\
+\bottomrule
+\end{tabular}
+\end{center}
+
+\begin{figure}[htbp]
+\centering
+\begin{tikzpicture}
+\begin{axis}[width=10cm, height=6.2cm, xlabel={$x$}, ylabel={$y$}, xmin=-2, xmax=2.5, ymin=-1, ymax=8, grid=major, legend pos=north west, legend style={font=\footnotesize}]
+ \addplot[very thick, black, domain=-2:2.5, samples=60] {exp(x)};
+ \addplot[thick, primaryblue, dashed, domain=-2:2.5] {1+x};
+ \addplot[thick, crimson, dashed, domain=-2:2.5, samples=60] {1+x+x^2/2};
+ \addplot[thick, accentgreen, dashed, domain=-2:2.5, samples=60] {1+x+x^2/2+x^3/6};
+ \legend{$\ee^x$,1次,2次,3次}
+\end{axis}
+\end{tikzpicture}
+\caption{$\ee^x$（黒）と、1次・2次・3次のテイラー多項式。次数が上がるほど、広い範囲で重なる。}
+\end{figure}
+
+\subsection*{例題2：誤差の見積もり}
+
+$\sin x\approx x-\dfrac{x^3}{6}$ で $x=0.5$ を計算すると、$0.5-0.020833=0.479167$。実際は $\sin0.5=0.479426$ で、誤差は約 $0.00026$ です。次の項 $\dfrac{x^5}{120}=\dfrac{0.03125}{120}\approx0.00026$ と同じ大きさになっており、\textbf{誤差は、最初に切り捨てた項くらいの大きさ}という見積もりが当たっています。
+
+\begin{figure}[htbp]
+\centering
+\begin{tikzpicture}
+\begin{axis}[width=9.5cm, height=5.8cm, xlabel={$x$}, ylabel={$y$}, xmin=-3.5, xmax=3.5, ymin=-2, ymax=2, grid=major, legend pos=south east, legend style={font=\footnotesize}]
+ \addplot[thick, primaryblue, domain=-3.5:3.5, samples=100] {sin(deg(x))};
+ \addplot[thick, crimson, dashed, domain=-3.5:3.5, samples=60] {x-x^3/6};
+ \addplot[thick, accentgreen, dashed, domain=-3.5:3.5, samples=60] {x-x^3/6+x^5/120};
+ \legend{$\sin x$,$x-x^3/6$,$x-x^3/6+x^5/120$}
+\end{axis}
+\end{tikzpicture}
+\caption{$\sin x$ と、3次・5次のテイラー多項式。原点の近くでは区別がつかない。}
+\end{figure}
+
+\subsection*{例題3：不定形の極限}
+
+\begin{itemize}[leftmargin=1.5em]
+\item $\displaystyle\lim_{x\to0}\dfrac{1-\cos x}{x^2}$ は $\dfrac00$ の形。$1-\cos x\approx\dfrac{x^2}{2}$ より、極限は $\dfrac12$。
+\item $\displaystyle\lim_{x\to0}\dfrac{\ee^x-1}{x}=1$（導関数の定義そのもの）。
+\end{itemize}
+
+\begin{center}
+\begin{tabular}{rrr}
+\toprule
+$x$ & $\dfrac{1-\cos x}{x^2}$ & $\dfrac{\ee^x-1}{x}$\\
+\midrule
+$1$ & $0.4597$ & $1.7183$\\
+$0.5$ & $0.4897$ & $1.2974$\\
+$0.1$ & $0.4996$ & $1.0517$\\
+\bottomrule
+\end{tabular}
+\end{center}
+
+\subsection*{例題4：定積分は長方形の和の極限}
+
+$\displaystyle\int_0^1x^2\,\dd x$ を、幅 $\frac1n$ の長方形の和で近づけます。右端の高さをとると、$\dfrac1{n^3}\sum_{k=1}^{n}k^2$。
+
+\begin{center}
+\begin{tabular}{rrr}
+\toprule
+分割数 $n$ & 左端の和 & 右端の和\\
+\midrule
+$4$ & $0.21875$ & $0.46875$\\
+$10$ & $0.285$ & $0.385$\\
+$100$ & $0.32835$ & $0.33835$\\
+\bottomrule
+\end{tabular}
+\end{center}
+
+厳密な値は $\frac13=0.3333\ldots$ で、左端の和と右端の和ではさまれ、$n$ を大きくするとどちらも近づきます。
+
+\begin{figure}[htbp]
+\centering
+\begin{tikzpicture}[scale=4.2]
+ \draw[->] (-0.05,0)--(1.15,0) node[right] {$x$}; \draw[->] (0,-0.05)--(0,1.15) node[above] {$y$};
+ \foreach \k in {0,1,2,3} {
+   \pgfmathsetmacro{\xl}{\k/4}\pgfmathsetmacro{\xr}{(\k+1)/4}\pgfmathsetmacro{\hh}{\xr*\xr}
+   \draw[fill=softblue, draw=primaryblue] (\xl,0) rectangle (\xr,\hh);
+ }
+ \draw[thick, crimson, domain=0:1, samples=40] plot (\x,{\x*\x});
+ \node[font=\small, below] at (1,0) {1};
+\end{tikzpicture}
+\caption{$y=x^2$ の下の面積を、4本の長方形（右端の高さ）で近似する。合計は $0.46875$ で、実際の $\frac13$ より大きい。}
+\end{figure}
+
+\subsection*{例題5：回転体の体積}
+
+$y=x^2$（$0\le x\le1$）を $x$ 軸のまわりに回すと、体積は $\pi\displaystyle\int_0^1x^4\,\dd x=\dfrac{\pi}{5}\approx0.6283$。
+
+\begin{figure}[htbp]
+\centering
+\begin{tikzpicture}
+\begin{axis}[width=8.5cm, height=5.6cm, xlabel={$x$}, xmin=0, xmax=1.15, ymin=-1.2, ymax=1.2, grid=major]
+ \addplot[thick, primaryblue, domain=0:1, samples=40, name path=A] {x^2};
+ \addplot[thick, primaryblue, domain=0:1, samples=40, name path=B] {-x^2};
+ \addplot[fill=softblue, fill opacity=0.7] fill between[of=A and B];
+\end{axis}
+\end{tikzpicture}
+\caption{$y=x^2$ を $x$ 軸のまわりに回してできる立体の断面。体積は $\pi/5$。}
+\end{figure}
+
 %==========================================================
 \chapter{無限級数と無限積分の収束}
 \markboth{第8章}{級数と無限積分の収束}
@@ -1743,6 +1979,130 @@ $\sum|a_n|$ は発散するが、$\sum a_n$ は収束する級数を、\textbf{�
 \item 級数の積は、対角線ごとにまとめる。
 \end{itemize}
 \end{pointbox}
+
+\section{補充 第8章を例題で確かめる}
+
+\subsection*{例題1：収束する級数と発散する級数}
+
+$\sum\dfrac1n$（調和級数）は発散し、$\sum\dfrac1{n^2}$ は収束して $\dfrac{\pi^2}{6}\approx1.6449$ になります。部分和を比べます。
+
+\begin{center}
+\begin{tabular}{rrr}
+\toprule
+$N$ & $\sum_{n=1}^N\frac1n$ & $\sum_{n=1}^N\frac1{n^2}$\\
+\midrule
+$10$ & $2.9290$ & $1.5498$\\
+$100$ & $5.1874$ & $1.6350$\\
+$1000$ & $7.4855$ & $1.6439$\\
+\bottomrule
+\end{tabular}
+\end{center}
+
+\begin{figure}[htbp]
+\centering
+\begin{tikzpicture}
+\begin{axis}[width=10cm, height=5.8cm, xlabel={項数 $N$}, ylabel={部分和}, xmin=0, xmax=11, ymin=0, ymax=3.2, grid=major, legend pos=north west, legend style={font=\footnotesize}]
+ \addplot[only marks, mark=*, mark size=1.6pt, color=crimson] coordinates {(1,1)(2,1.5)(3,1.8333)(4,2.0833)(5,2.2833)(6,2.45)(7,2.5929)(8,2.7179)(9,2.829)(10,2.929)};
+ \addplot[only marks, mark=square*, mark size=1.6pt, color=primaryblue] coordinates {(1,1)(2,1.25)(3,1.3611)(4,1.4236)(5,1.4636)(6,1.4914)(7,1.5118)(8,1.5274)(9,1.5398)(10,1.5498)};
+ \addplot[dashed, gray, domain=0:11] {1.6449};
+ \legend{$\sum 1/n$ （発散）,$\sum 1/n^2$ （収束）}
+\end{axis}
+\end{tikzpicture}
+\caption{部分和の比較。青は $\pi^2/6\approx1.645$（点線）に近づく。赤は上がり続け、頭打ちにならない。}
+\end{figure}
+
+調和級数が発散することは、$1+\frac12+(\frac13+\frac14)+(\frac15+\cdots+\frac18)+\cdots$ と、$\frac12$ 以上の塊を無限に作れることで分かります。
+
+\subsection*{例題2：ダランベールの比判定の使い方}
+
+\begin{center}
+\renewcommand{\arraystretch}{1.5}
+\begin{tabular}{lll}
+\toprule
+級数 & 比 $\dfrac{a_{n+1}}{a_n}$ & 結論\\
+\midrule
+$\displaystyle\sum\dfrac{n}{2^n}$ & $\dfrac{n+1}{2n}\to\dfrac12$ & 収束（和は $2$）\\
+$\displaystyle\sum\dfrac{2^n}{n!}$ & $\dfrac{2}{n+1}\to0$ & 収束\\
+$\displaystyle\sum\dfrac{n!}{n^n}$ & $\left(1+\dfrac1n\right)^{-n}\to\dfrac1\ee$ & 収束\\
+$\displaystyle\sum\dfrac1n$ & $\dfrac{n}{n+1}\to1$ & 判定できない\\
+\bottomrule
+\end{tabular}
+\end{center}
+
+\begin{center}
+\begin{tabular}{rr}
+\toprule
+$n$ & $\left(1+\frac1n\right)^{-n}$\\
+\midrule
+$1$ & $0.5000$\\
+$5$ & $0.4019$\\
+$10$ & $0.3855$\\
+$100$ & $0.3697$\\
+\bottomrule
+\end{tabular}
+\end{center}
+
+$\ee$ の逆数は $0.3679$。比が $1$ より小さい値に近づくので、収束します。比の極限が $1$ のときは、この判定では決まらず、別の方法が要ります。
+
+\subsection*{例題3：交代級数は左右にゆれながら収束する}
+
+$1-\frac12+\frac13-\frac14+\cdots=\log2\approx0.6931$。
+
+\begin{center}
+\begin{tabular}{rr}
+\toprule
+項数 $N$ & 部分和\\
+\midrule
+$1$ & $1.0000$\\
+$2$ & $0.5000$\\
+$3$ & $0.8333$\\
+$4$ & $0.5833$\\
+$5$ & $0.7833$\\
+$6$ & $0.6167$\\
+$7$ & $0.7595$\\
+$8$ & $0.6345$\\
+\bottomrule
+\end{tabular}
+\end{center}
+
+\begin{figure}[htbp]
+\centering
+\begin{tikzpicture}
+\begin{axis}[width=10cm, height=5.6cm, xlabel={項数 $N$}, ylabel={部分和}, xmin=0, xmax=9, ymin=0.4, ymax=1.1, grid=major]
+ \addplot[thick, primaryblue, mark=*, mark size=1.6pt] coordinates {(1,1)(2,0.5)(3,0.8333)(4,0.5833)(5,0.7833)(6,0.6167)(7,0.7595)(8,0.6345)};
+ \addplot[dashed, crimson, domain=0:9] {0.6931};
+\end{axis}
+\end{tikzpicture}
+\caption{交代調和級数の部分和。真の値 $\log2\approx0.6931$（点線）をはさんで、ゆれながら近づく。}
+\end{figure}
+
+\begin{examplebox}{誤差の見積もり}
+交代級数では、$N$ 項で打ち切ったときの誤差は、次の項の大きさ $\frac{1}{N+1}$ 以下です。$N=8$ なら $\frac19=0.111$ 以下。実際の誤差は $0.6931-0.6345=0.0586$ です。
+\end{examplebox}
+
+\subsection*{例題4：積分判定法で上から押さえる}
+
+$n\ge2$ の項 $\frac1{n^2}$ は、$\dfrac1{x^2}$ のグラフの下の面積より小さくなります。
+
+\[
+\sum_{n=2}^{\infty}\frac1{n^2}<\int_1^\infty\frac{\dd x}{x^2}=1.
+\]
+
+したがって $\sum_{n=1}^\infty\frac1{n^2}<2$。厳密な値 $1.6449$ と矛盾しません。
+
+\begin{figure}[htbp]
+\centering
+\begin{tikzpicture}[xscale=1.6, yscale=3.2]
+ \draw[->] (0.8,0)--(6.6,0) node[right] {$x$}; \draw[->] (1,-0.03)--(1,1.1) node[above] {$y$};
+ \foreach \n in {2,3,4,5,6} {
+   \pgfmathsetmacro{\hh}{1/(\n*\n)}\pgfmathtruncatemacro{\nm}{\n-1}
+   \draw[fill=softblue, draw=primaryblue] (\nm,0) rectangle (\n,\hh);
+ }
+ \draw[thick, crimson, domain=1:6.4, samples=60] plot (\x,{1/(\x*\x)});
+ \foreach \n in {1,...,6} {\node[below, font=\scriptsize] at (\n,0) {\n};}
+\end{tikzpicture}
+\caption{青い長方形の面積の合計 $\sum_{n=2}^{6}\frac1{n^2}$ は、曲線 $1/x^2$ の下の面積より小さい。}
+\end{figure}
 
 %==========================================================
 \chapter{実変数の対数関数と指数関数}
@@ -1919,6 +2279,104 @@ $\arctan1=\frac\pi4$ から、$\frac\pi4=1-\frac13+\frac15-\frac17+\cdots$。最
 \item $\ee^x,\ \log(1+x),\ \arctan x$ などは、べき級数に展開できる。
 \end{itemize}
 \end{pointbox}
+
+\section{補充 第9章を例題で確かめる}
+
+\subsection*{例題1：対数の性質で計算する}
+
+$\log2=0.693147$、$\log3=1.098612$ を使うと、$\log6=\log2+\log3=1.791759$、$\log\dfrac32=\log3-\log2=0.405465$、$\log8=3\log2=2.079442$。
+
+\begin{figure}[htbp]
+\centering
+\begin{tikzpicture}
+\begin{axis}[width=9.5cm, height=5.8cm, xlabel={$x$}, ylabel={$\log x$}, xmin=0, xmax=10, ymin=-2.5, ymax=2.6, grid=major]
+ \addplot[thick, primaryblue, domain=0.08:10, samples=100] {ln(x)};
+ \addplot[only marks, mark=*, color=crimson] coordinates {(2,0.6931)(3,1.0986)(6,1.7918)(8,2.0794)};
+\end{axis}
+\end{tikzpicture}
+\caption{$\log x$ のグラフ。$x=2,3,6,8$ の値（赤）。積が和に、冪が定数倍になる。}
+\end{figure}
+
+\subsection*{例題2：$(1+\frac1n)^n$ は $\ee$ に近づく}
+
+\begin{center}
+\begin{tabular}{rr}
+\toprule
+$n$ & $\left(1+\frac1n\right)^n$\\
+\midrule
+$1$ & $2.00000$\\
+$10$ & $2.59374$\\
+$100$ & $2.70481$\\
+$1000$ & $2.71692$\\
+$10000$ & $2.71815$\\
+\bottomrule
+\end{tabular}
+\end{center}
+
+$\ee=2.71828\ldots$ です。年利 $100\%$ のお金を、1年に $n$ 回に分けて利息をつけると、$n$ を限りなく大きくしても、元の $\ee$ 倍までしか増えません。
+
+\begin{figure}[htbp]
+\centering
+\begin{tikzpicture}
+\begin{axis}[width=10cm, height=5.6cm, xlabel={$n$}, ylabel={$(1+1/n)^n$}, xmin=0, xmax=50, ymin=1.8, ymax=3, grid=major]
+ \addplot[thick, primaryblue, domain=1:50, samples=80] {(1+1/x)^x};
+ \addplot[dashed, crimson, domain=0:50] {2.71828};
+\end{axis}
+\end{tikzpicture}
+\caption{$(1+1/n)^n$ は増え続けるが、$\ee\approx2.71828$（点線）を超えない。}
+\end{figure}
+
+\subsection*{例題3：$\log(1+x)$ の級数で近似する}
+
+$\log(1+x)=x-\dfrac{x^2}{2}+\dfrac{x^3}{3}-\cdots$ に $x=0.5$ を入れると、
+
+\begin{center}
+\begin{tabular}{rr}
+\toprule
+項数 & 部分和\\
+\midrule
+$1$ & $0.500000$\\
+$2$ & $0.375000$\\
+$3$ & $0.416667$\\
+$4$ & $0.401042$\\
+$5$ & $0.407292$\\
+\bottomrule
+\end{tabular}
+\end{center}
+
+厳密な値は $\log1.5=0.405465$。交代しながら近づいていきます。
+
+\subsection*{例題4：増え方の速さを比べる}
+
+$\log x$ はゆっくり、$x^2$ は速く、$\ee^x$ はさらに速く増えます。
+
+\begin{center}
+\begin{tabular}{rrrr}
+\toprule
+$x$ & $\log x$ & $x^2$ & $\ee^x$\\
+\midrule
+$10$ & $2.303$ & $100$ & $22026$\\
+$20$ & $2.996$ & $400$ & $4.85\times10^{8}$\\
+\bottomrule
+\end{tabular}
+\end{center}
+
+\begin{figure}[htbp]
+\centering
+\begin{tikzpicture}
+\begin{axis}[width=10cm, height=6cm, xlabel={$x$}, ymode=log, xmin=1.5, xmax=20, ymin=0.3, ymax=1e9, grid=major, legend pos=north west, legend style={font=\footnotesize}]
+ \addplot[thick, primaryblue, domain=1.5:20, samples=60] {ln(x)};
+ \addplot[thick, accentgreen, domain=1.5:20, samples=60] {x^2};
+ \addplot[thick, crimson, domain=1.5:20, samples=60] {exp(x)};
+ \legend{$\log x$,$x^2$,$\ee^x$}
+\end{axis}
+\end{tikzpicture}
+\caption{縦軸を対数目盛にした比較。$\ee^x$ は、$\log x$ や $x^2$ と比べて、すぐに桁が違ってくる。}
+\end{figure}
+
+\subsection*{例題5：常用対数で桁数を知る}
+
+$\log_{10}2=0.30103$。$2^{100}$ の桁数は、$100\times0.30103=30.103$ より、整数部分に $1$ を足して $31$ 桁。実際の $2^{100}=1.2677\times10^{30}$ で、確かに 31 桁です。
 
 %==========================================================
 \chapter{対数関数・指数関数・円関数の一般理論}
