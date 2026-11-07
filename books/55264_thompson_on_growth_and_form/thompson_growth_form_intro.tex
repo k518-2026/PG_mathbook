@@ -1,238 +1,490 @@
-\documentclass[a4paper,11pt,oneside,openany]{ltjsbook}
+\documentclass[a4paper,11pt,openany]{ltjsbook}
 \usepackage{luatexja}
+\usepackage{luatexja-fontspec}
 \usepackage{amsmath,amssymb,amsfonts,amsthm}
-\usepackage{graphicx}
-\usepackage{xcolor}
+\usepackage{geometry}
+\geometry{top=24mm,bottom=24mm,left=24mm,right=24mm,footskip=10mm}
 \usepackage{tikz}
-\usetikzlibrary{calc,arrows.meta,positioning,shapes,decorations.pathmorphing,backgrounds}
+\usetikzlibrary{arrows.meta,calc,positioning,patterns,shapes.geometric,shapes.misc,decorations.pathreplacing,decorations.markings,angles,quotes,intersections,backgrounds,fit}
+\usepackage{pgfplots}
+\pgfplotsset{compat=1.18}
+\usepgfplotslibrary{fillbetween}
 \usepackage{tcolorbox}
 \tcbuselibrary{skins,breakable}
-\usepackage{booktabs}
-\usepackage{array}
-\usepackage{longtable}
-\usepackage{wrapfig}
-\usepackage{fancyhdr}
 \usepackage{hyperref}
+\usepackage{enumitem}
+\usepackage{booktabs}
+\usepackage{fancyhdr}
+
+\definecolor{primaryblue}{RGB}{24, 76, 120}
+\definecolor{softblue}{RGB}{235, 243, 250}
+\definecolor{darkslate}{RGB}{44, 62, 80}
+\definecolor{warmamber}{RGB}{217, 119, 6}
+\definecolor{softamber}{RGB}{254, 243, 199}
+\definecolor{crimson}{RGB}{185, 28, 28}
+\definecolor{softrose}{RGB}{255, 228, 230}
+\definecolor{accentgreen}{RGB}{16, 120, 70}
+\definecolor{softgreen}{RGB}{236, 253, 245}
+\definecolor{gridgray}{RGB}{200, 205, 210}
 
 \hypersetup{
     colorlinks=true,
-    linkcolor=teal!70!black,
-    citecolor=teal!70!black,
-    urlcolor=teal!70!black,
-    pdftitle={ダーシー・トムソン『成長と形態について』解説と要点},
-    pdfauthor={D'Arcy Wentworth Thompson / Antigravity}
+    linkcolor=primaryblue,
+    urlcolor=primaryblue,
+    citecolor=accentgreen,
+    pdfauthor={教育情報分析研究会}
 }
 
-\definecolor{morphogreen}{RGB}{20, 110, 80}
-\definecolor{morphoblue}{RGB}{30, 80, 150}
-\definecolor{morphoaccent}{RGB}{180, 90, 20}
-\definecolor{lightgraybg}{RGB}{248, 249, 250}
+\newtcolorbox{examplebox}[1]{
+    colback=softgreen, colframe=accentgreen, coltitle=white, fonttitle=\bfseries,
+    title=#1, arc=3mm, boxrule=1pt, left=4mm,right=4mm,top=3mm,bottom=3mm, breakable
+}
+\newtcolorbox{pointbox}[1]{
+    colback=softamber, colframe=warmamber, coltitle=darkslate, fonttitle=\bfseries,
+    title=#1, arc=2mm, boxrule=1pt, left=3mm,right=3mm,top=2mm,bottom=2mm, breakable
+}
+\newtcolorbox{notebox}[1]{
+    colback=softrose, colframe=crimson, coltitle=white, fonttitle=\bfseries,
+    title=#1, arc=2mm, boxrule=1pt, left=3mm,right=3mm,top=2mm,bottom=2mm, breakable
+}
 
-\newtcolorbox{principlebox}[1]{
-    enhanced,
-    colback=lightgraybg,
-    colframe=morphogreen,
-    arc=3mm,
-    fonttitle=\bfseries\sffamily,
-    title={#1},
-    coltitle=white,
-    boxrule=1pt,
-    attach boxed title to top left={yshift=-2mm, xshift=5mm},
-    boxed title style={colback=morphogreen, arc=1.5mm}
+\tikzset{
+  >=Stealth,
+  fbox/.style={draw=primaryblue, fill=softblue, rounded corners=3pt, align=center, inner sep=4pt, font=\small},
+  wbox/.style={draw=primaryblue, fill=white, rounded corners=3pt, align=center, inner sep=4pt, font=\small},
+  abox/.style={draw=warmamber, fill=softamber, rounded corners=3pt, align=center, inner sep=4pt, font=\small},
+  gbox/.style={draw=accentgreen, fill=softgreen, rounded corners=3pt, align=center, inner sep=4pt, font=\small},
+  rbox/.style={draw=crimson, fill=softrose, rounded corners=3pt, align=center, inner sep=4pt, font=\small},
+  ax/.style={->, thick, darkslate},
+  lbl/.style={font=\footnotesize, text=darkslate},
 }
 
 \pagestyle{fancy}
 \fancyhf{}
-\fancyhead[L]{\small\sffamily ダーシー・トムソン『成長と形態について』}
-\fancyhead[R]{\small\sffamily 幾何学と物理法則が紡ぐ生命のかたち}
-\fancyfoot[C]{\thepage}
+\fancyhead[LE,RO]{\thepage}
+\fancyhead[LO]{\nouppercase{\rightmark}}
+\fancyhead[RE]{\nouppercase{\leftmark}}
 \renewcommand{\headrulewidth}{0.4pt}
 
+\hypersetup{pdftitle={古典で学び直す『成長と形態について』入門 —— 大きさ・螺旋・変形の数理}}
+
+\newcommand{\dd}{\mathrm{d}}
 \begin{document}
 
-\frontmatter
 \begin{titlepage}
-    \centering
-    \vspace*{2cm}
-    {\Huge\bfseries\sffamily 成長と形態について\par}
-    \vspace{0.8cm}
-    {\Large\sffamily --- 物理法則と幾何学が織りなす生命の造形美 ---\par}
-    \vspace{0.5cm}
-    {\large On Growth and Form (1917)\par}
-    \vspace{2cm}
-    {\Large\bfseries ダーシー・ウェントワース・トムソン\par}
-    {\small (D'Arcy Wentworth Thompson, 1860--1948)\par}
-    \vspace{1cm}
-    {\large 日本語解説・要約・精選図解版\par}
-    \vfill
-    {\large Project Gutenberg 数学・科学古典翻訳コレクション\par}
-    {\small\today}
+\begin{center}
+\vspace*{1.5cm}
+{\Large\bfseries プロジェクト・グーテンベルク古典数学入門シリーズ}\\[0.8cm]
+\rule{\textwidth}{1.5pt}\\[0.4cm]
+{\Huge\bfseries 古典で学び直す\\成長と形態入門}\\[0.4cm]
+{\Large\bfseries —— 大きさ・螺旋・変形の数理 ——}\\[0.4cm]
+\rule{\textwidth}{1.5pt}\\[1.5cm]
+{\large 原著：ダーシー・ウェントワース・トムソン\\
+\textit{On Growth and Form}}\\[2.0cm]
+{\Large\bfseries 著：教育情報分析研究会}\\[2.5cm]
+\vfill
+{\large 2026年11月 全面改訂版}\\[0.5cm]
+{\footnotesize 本書は Project Gutenberg のパブリックドメイン（eBook \#55264）の翻訳（精選4章）の章立てに沿って、\\
+中学校・高等学校の数学の知識で読み進められるように書き下ろした入門書です。}
+\end{center}
 \end{titlepage}
 
+\frontmatter
 \tableofcontents
 \mainmatter
 
-\chapter{生命の形態と物理法則（序論）}
+%==========================================================
+\chapter*{はじめに：生き物の形を数学で読む}
+\addcontentsline{toc}{chapter}{はじめに：生き物の形を数学で読む}
+\markboth{はじめに}{はじめに}
+%==========================================================
 
-ダーシー・ウェントワース・トムソン（D'Arcy Wentworth Thompson）の名著『成長と形態について』（\textit{On Growth and Form}, 1917）は、数理生物学、形態形成論（モルフォロジー）、バイオメカニクスの歴史における不滅の金字塔である。
+貝殻の渦、ハチの巣の六角形、魚と鳥の体の形。生き物の形には、ふしぎなほど数学の姿が見えます。ダーシー・トムソン（1860〜1948）の『成長と形態について』は、「形は、物理の力と数学の法則で説明できる」という立場から、生き物の形を読み解いた古典です。原著は大きな本で、翻訳版には4つの章（序章、大きさ、対数螺旋、変形の理論）と結語が精選されています。この入門書も、その順に進みます。
 
-トムソン以前の生物学は、19世紀の進化論（ダーウィニズム）の影響のもと、あらゆる生物形態の差異を「自然淘汰による適応」「祖先からの系統樹」のみによって説明しようとする傾向が極めて強かった。これに対しトムソンは、カントの「真の科学は数学を適用できる度合いに比例して存在する」という言葉を掲げ、生物の形態とは\textbf{「作用した物理的・力学的力（重力、表面張力、粘性、水圧、拡散、浸透圧）が物質に刻み込んだ痕跡（ダイアグラム）」}であるという画期的な視座を確立した。
+\begin{figure}[htbp]
+\centering
+\begin{tikzpicture}[node distance=5mm]
+ \node[fbox, text width=2.6cm] (a) {1 序章\\{\small 形と力}};
+ \node[fbox, text width=2.6cm, right=of a] (b) {2 大きさ\\{\small 2乗3乗の法則}};
+ \node[fbox, text width=2.6cm, right=of b] (c) {3 対数螺旋\\{\small 同じ形で育つ}};
+ \node[fbox, text width=2.6cm, right=of c] (d) {4 変形の理論\\{\small 座標の格子}};
+ \draw[ax] (a)--(b); \draw[ax] (b)--(c); \draw[ax] (c)--(d);
+\end{tikzpicture}
+\caption{本書の構成。形を、力・大きさ・成長・変形という4つの見方で読む。}
+\end{figure}
 
-\begin{principlebox}{トムソンの根本原理}
-生物の「形態（Form）」とは、成長の過程において物質に作用した「力（Forces）」の力学的ダイアグラムである。適応や淘汰を議論する前に、まず物理的・幾何学的な必然性によってどのような形態が可能であるかを解明しなければならない。
-\end{principlebox}
+\begin{notebox}{事実・推測・未確認の区別}
+トムソンの理論には、後世の研究で修正された部分もあります。本書は、数学的に確かめられる部分（計算、幾何）を中心に述べ、生物学的な主張は「原著の主張」として紹介するにとどめます。
+\end{notebox}
 
-\section{数学と生物学の架橋}
-有機的生命体であっても、無機物質を支配するニュートン力学、流体力学、熱力学、弾性力学、表面張力の物理法則から免れることはできない。本書においてトムソンは以下のような劇的な問いを投げかけ、幾何学と力学によって明快な回答を与えていく：
-\begin{itemize}
-    \item なぜ巨人は存在できず、なぜ昆虫はビルから落ちても無傷なのか？（第2章：大きさの物理学・2乗3乗則）
-    \item なぜオウムガイの殻やアンモナイトは美しい対数螺旋を描くのか？（第11章：対数螺旋の等角性）
-    \item なぜ細胞や気泡の集合体は120度の角（プラトーの法則）で交わるのか？（第4〜8章：表面張力と極小曲面）
-    \item ある魚の骨格形状から別の近縁種の骨格へ、直交座標を歪めるだけで幾何学的に写像できるのはなぜか？（第17章：変形理論／座標変換論）
+%==========================================================
+\chapter{序章：形を説明するということ}
+\markboth{第1章}{序章}
+%==========================================================
+
+\section{形は「できあがった結果」}
+
+トムソンは、生き物の形を「数と形（数学）の言葉」で記述できる、と主張しました。ふつうの生物学は「何から進化したか」を問いますが、トムソンは「どんな力が働いて、その形になったか」を問います。
+
+\begin{figure}[htbp]
+\centering
+\begin{tikzpicture}[node distance=10mm]
+ \node[wbox, text width=3cm] (a) {物理の力\\{\small 表面張力・重力・圧力}};
+ \node[wbox, text width=3cm, right=of a] (b) {数学の法則\\{\small 幾何・比例}};
+ \node[gbox, text width=3cm, right=of b] (c) {生き物の形};
+ \draw[ax] (a)--(b); \draw[ax] (b)--(c);
+\end{tikzpicture}
+\caption{トムソンの見方。力が数学的な形をつくり、それが生き物の形に現れる。}
+\end{figure}
+
+\section{六角形のしきつめ}
+
+同じ大きさの円を、すき間なく詰めようとすると、周りを6つの円が囲む配置が、もっとも密になります。しきつめられた細胞が六角形になる例が、原著で取り上げられます。
+
+\begin{figure}[htbp]
+\centering
+\begin{tikzpicture}[scale=0.7]
+ \foreach \row in {0,...,3} {
+  \foreach \col in {0,...,5} {
+   \pgfmathsetmacro{\xo}{\col*1.732+mod(\row,2)*0.866}
+   \pgfmathsetmacro{\yo}{\row*1.5}
+   \draw[primaryblue, fill=softblue] (\xo,\yo) +(30:1) -- +(90:1) -- +(150:1) -- +(210:1) -- +(270:1) -- +(330:1) -- cycle;
+  }
+ }
+\end{tikzpicture}
+\caption{ハチの巣のような六角形のしきつめ。正三角形・正方形・正六角形だけが、同じ形で平面をすき間なく埋められる。}
+\end{figure}
+
+\begin{pointbox}{なぜ六角形か}
+同じ周の長さなら、六角形は、三角形や四角形より面積が大きい（円に近い）。同じ材料で広い部屋を作れる、ということです。周の長さ6の正三角形・正方形・正六角形の面積を比べてみましょう。正三角形：1辺 $2$、面積 $\sqrt3\approx1.73$。正方形：1辺 $1.5$、面積 $2.25$。正六角形：1辺 $1$、面積 $\frac{3\sqrt3}{2}\approx2.60$。
+\end{pointbox}
+
+\begin{figure}[htbp]
+\centering
+\begin{tikzpicture}
+\begin{axis}[ybar, width=9cm, height=5cm, symbolic x coords={正三角形,正方形,正六角形,円}, xtick=data, ymin=0, ymax=3.3, ylabel={面積（周の長さ6）}, bar width=22pt, nodes near coords, nodes near coords style={font=\footnotesize}]
+ \addplot[fill=softgreen, draw=accentgreen] coordinates {(正三角形,1.73)(正方形,2.25)(正六角形,2.60)(円,2.86)};
+\end{axis}
+\end{tikzpicture}
+\caption{周の長さが同じ（6）ときの面積。辺の数が多いほど大きく、円（半径 $3/\pi$、面積 $9/\pi\approx2.86$）が最大。}
+\end{figure}
+
+\begin{pointbox}{この章のポイント}
+\begin{itemize}[leftmargin=1.5em]
+\item トムソンは「どんな力がその形をつくったか」を問う。
+\item 六角形のしきつめは、材料をむだなく使う形。
 \end{itemize}
+\end{pointbox}
 
-\chapter{大きさの物理学 --- 2乗3乗則とスケール効果}
+%==========================================================
+\chapter{大きさについて}
+\markboth{第2章}{大きさについて}
+%==========================================================
 
-第2章「大きさについて（On Magnitude）」において、トムソンはガリレオ・ガリレイの『新科学対話』に端を発する\textbf{スケール則（Scaling Law）}を生物学全般に適用した。
+\section{2乗3乗の法則}
 
-\section{幾何学的相似と力学的限界}
-長さを $L$ とするとき、幾何学的に相似な立体において、表面積 $S$ と体積 $V$（および質量 $M$）は以下の関係に従う：
-\begin{align}
-    S &\propto L^2 \\
-    V &\propto L^3 \quad (\text{密度が一定ならば } M \propto L^3)
-\end{align}
+ものを同じ形のまま、長さを $k$ 倍にすると、面積は $k^2$ 倍、体積（重さ）は $k^3$ 倍になります。これが、「大きさ」の問題の出発点です。
 
-この単純な幾何学的比率の差異が、巨大生物の骨格構造、熱放散、呼吸系、運動能力に絶対的な制約を課す。
+\begin{figure}[htbp]
+\centering
+\begin{tikzpicture}[x={(1cm,0cm)}, y={(0cm,1cm)}, z={(0.45cm,0.35cm)}]
+ \foreach \s/\xo in {1/0, 2/3, 3/7} {
+  \begin{scope}[xshift=\xo cm]
+   \draw[thick, fill=softblue] (0,0,0) -- (\s,0,0) -- (\s,\s,0) -- (0,\s,0) -- cycle;
+   \draw[thick, fill=softblue!70!white] (0,\s,0) -- (\s,\s,0) -- (\s,\s,\s) -- (0,\s,\s) -- cycle;
+   \draw[thick, fill=softblue!50!white] (\s,0,0) -- (\s,0,\s) -- (\s,\s,\s) -- (\s,\s,0) -- cycle;
+   \node[below, font=\footnotesize] at (\s/2,-0.1) {1辺 \s};
+  \end{scope}
+ }
+\end{tikzpicture}
+\caption{1辺が1, 2, 3の立方体。面積は $1, 4, 9$ 倍、体積は $1, 8, 27$ 倍になる。}
+\end{figure}
 
 \begin{center}
-\begin{tikzpicture}[scale=1.1]
-    % Small cube
-    \draw[thick, fill=morphogreen!20] (0,0) rectangle (1.2,1.2);
-    \draw[thick, fill=morphogreen!30] (1.2,0) -- (1.8,0.5) -- (1.8,1.7) -- (1.2,1.2) -- cycle;
-    \draw[thick, fill=morphogreen!10] (0,1.2) -- (0.6,1.7) -- (1.8,1.7) -- (1.2,1.2) -- cycle;
-    \node at (0.9,-0.4) {長さ $L=1$};
-    \node at (0.9,-0.8) {\small 面積 $S=6$};
-    \node at (0.9,-1.2) {\small 体積 $V=1$};
-
-    % Arrow
-    \draw[->, very thick, morphoaccent] (2.3, 0.8) -- (3.3, 0.8) node[midway, above] {\footnotesize 2倍拡大 ($k=2$)};
-
-    % Large cube
-    \begin{scope}[shift={(3.8, -0.3)}]
-        \draw[thick, fill=morphoblue!20] (0,0) rectangle (2.4,2.4);
-        \draw[thick, fill=morphoblue!30] (2.4,0) -- (3.6,1.0) -- (3.6,3.4) -- (2.4,2.4) -- cycle;
-        \draw[thick, fill=morphoblue!10] (0,2.4) -- (1.2,3.4) -- (3.6,3.4) -- (2.4,2.4) -- cycle;
-        \node at (1.8,-0.4) {長さ $L=2$};
-        \node at (1.8,-0.8) {\small 面積 $S=24$ (\textbf{$4$倍})};
-        \node at (1.8,-1.2) {\small 体積 $V=8$ (\textbf{$8$倍})};
-    \end{scope}
-\end{tikzpicture}
+\begin{tabular}{rrrr}
+\toprule
+1辺 & 表面積 & 体積 & 表面積 $\div$ 体積\\
+\midrule
+1 & 6 & 1 & 6\\
+2 & 24 & 8 & 3\\
+3 & 54 & 27 & 2\\
+4 & 96 & 64 & 1.5\\
+\bottomrule
+\end{tabular}
 \end{center}
 
-\section{重力支配の世界と表面張力支配の世界}
-生物が経験する物理環境は、その身体の絶対的な大きさによって劇的に逆転する：
-\begin{itemize}
-    \item \textbf{巨大生物（ゾウ、クジラ、人間）}：
-    体積と質量（$L^3$）が支配的であり、\textbf{重力（Gravity）}が形態を決定づける。身体を支える脚の断面積は $L^2$ にしか比例しないため、相似な形のまま巨大化すると骨の受ける応力（圧力 $\sigma = M/A \propto L^3/L^2 = L$）が増大し、自重で圧挫してしまう。そのため、巨獣ほど脚は太く、柱のように直立しなければならない。
-    \item \textbf{微小生物（昆虫、原生動物、細菌）}：
-    質量が無視できるほど小さくなり、重力よりも\textbf{表面張力（Surface Tension）}や粘性抵抗が圧倒的な支配力を持つ。昆虫は水滴に囚われれば溺死の危機に瀕し、水面張力で水上を容易に歩行できる。
+\begin{figure}[htbp]
+\centering
+\begin{tikzpicture}
+\begin{axis}[width=9cm, height=5.5cm, xlabel={1辺の長さ $L$}, ylabel={比}, xmin=0, xmax=6, ymin=0, ymax=40, grid=major, legend pos=north west, legend style={font=\footnotesize}]
+ \addplot[thick, primaryblue, domain=0:6, samples=40] {x^2};
+ \addplot[thick, crimson, domain=0:6, samples=40] {x^3/6};
+ \legend{面積 $\propto L^2$,体積 $\propto L^3$（$/6$ で縮尺）}
+\end{axis}
+\end{tikzpicture}
+\caption{面積と体積の増え方。大きくなるほど、体積が面積に比べて急速に増える（体積は見やすいよう $1/6$ にしてある）。}
+\end{figure}
+
+\section{大きな動物は、がっしりしていなければならない}
+
+動物が同じ形のまま2倍の長さになると、体重は8倍、骨の断面積は4倍。つまり、骨にかかる圧力は2倍になります。長さが10倍なら、圧力は10倍。だから、大きな動物ほど、骨を太く作らなければなりません。
+
+\begin{figure}[htbp]
+\centering
+\begin{tikzpicture}
+ \foreach \xo/\h/\w/\t in {0/1.0/0.25/{小}, 3/2.0/0.5/{2倍に拡大（同じ形）}, 7.5/2.0/0.9/{骨を太くした必要な形}} {
+  \begin{scope}[xshift=\xo cm]
+   \draw[thick, fill=softblue] (-\w,0) rectangle (\w,\h);
+   \node[below, font=\footnotesize, text width=3cm, align=center] at (0,-0.1) {\t};
+  \end{scope}
+ }
+\end{tikzpicture}
+\caption{骨の太さのイメージ。同じ形のまま大きくすると骨は相対的に細すぎる。実際の大きな動物は、骨が相対的に太い。（模式図）}
+\end{figure}
+
+トムソンは、ガリレオが同じ点を論じたことに触れています。強さを保つには、長さが2倍なら、太さは $2^{3/2}\approx2.83$ 倍にしなければならない、という関係です。
+
+\begin{examplebox}{確かめ}
+長さを $k$ 倍、太さを $m$ 倍にすると、体重は $k^3$ 倍、骨の断面積は $m^2$ 倍。断面あたりの圧力を同じに保つには $k^3/m^2=1$ ではなく、元の圧力のまま、つまり $k^3=m^2$。したがって $m=k^{3/2}$。$k=2$ で $m=2^{1.5}\approx2.83$。
+\end{examplebox}
+
+\begin{figure}[htbp]
+\centering
+\begin{tikzpicture}
+\begin{axis}[width=9cm, height=5.5cm, xlabel={長さの倍率 $k$}, ylabel={骨の太さの倍率 $m$}, xmin=1, xmax=10, ymin=1, ymax=32, grid=major, legend pos=north west, legend style={font=\footnotesize}]
+ \addplot[thick, primaryblue, domain=1:10, samples=40] {x};
+ \addplot[thick, crimson, domain=1:10, samples=40] {x^1.5};
+ \legend{同じ形のまま,強さを保つ形 $m=k^{3/2}$}
+\end{axis}
+\end{tikzpicture}
+\caption{骨の太さの倍率。長さが10倍の動物は、骨を約31.6倍太くしなければならない（$10^{1.5}\approx31.6$）。}
+\end{figure}
+
+\section{小さな生き物の世界}
+
+逆に、小さな生き物は、体の大きさに比べて、表面積が大きくなります。だから、水の表面張力や空気の抵抗が、とても大切になります。小さな虫が、水に落ちると、なかなか抜け出せないのは、そのためです。
+
+\begin{pointbox}{この章のポイント}
+\begin{itemize}[leftmargin=1.5em]
+\item 長さ $k$ 倍で、面積は $k^2$ 倍、体積は $k^3$ 倍。
+\item 大きな動物は、骨を相対的に太くする必要がある。
+\item 小さな生き物は、表面の力の影響を強く受ける。
 \end{itemize}
+\end{pointbox}
 
-\chapter{対数螺旋と相似成長}
+%==========================================================
+\chapter{対数螺旋}
+\markboth{第3章}{対数螺旋}
+%==========================================================
 
-第11章「対数螺旋（The Logarithmic Spiral）」は本書の白眉の一つである。オウムガイの殻、アンモナイトの化石、巻き貝、雄羊の角、ヒマワリの種子の配列に現れる幾何学的数理が分析される。
+\section{同じ形のまま成長する曲線}
 
-\section{アルキメデス螺旋と対数螺旋の決定的な違い}
-\begin{itemize}
-    \item \textbf{アルキメデス螺旋 ($r = a + b\theta$)}：
-    紐を一様な速度で巻き取る軌跡であり、隣り合う螺旋の間隔が一定である。これは成長ではなく、一様な蓄積を示す。
-    \item \textbf{対数螺旋 ($r = a e^{b\theta}$ または $r = a^{\theta}$)}：
-    任意の動径ベクトルと接線とのなす角 $\alpha$（挟角）が常に一定であるため、\textbf{等角螺旋（Equiangular Spiral）}と呼ばれる。
+オウムガイの殻は、大きくなっても、形が変わりません。この性質をもつ曲線が、\textbf{対数螺旋}です。極座標で、
+
+\[
+r=a\,e^{b\theta}.
+\]
+
+角度 $\theta$ が一定量増えるごとに、半径 $r$ が一定の\textbf{倍率}で増えます。
+
+\begin{figure}[htbp]
+\centering
+\begin{tikzpicture}[scale=0.95]
+ \draw[gridgray] (-3.4,0)--(3.8,0); \draw[gridgray] (0,-3.4)--(0,3.6);
+ \draw[thick, primaryblue, domain=0:900, samples=250, smooth, variable=\tt] plot ({0.08*exp(0.0036*\tt)*cos(\tt)}, {0.08*exp(0.0036*\tt)*sin(\tt)});
+ \node[font=\footnotesize] at (1.6,-3.1) {$r=a\,e^{b\theta}$（2.5回転ぶん）};
+\end{tikzpicture}
+\caption{対数螺旋。1回転ごとに、半径が一定の倍率で大きくなる。中心から外へ向かって、間隔がだんだん広がる。}
+\end{figure}
+
+アルキメデスの螺旋（間隔が一定）との違いは、1回転ごとの間隔が広がっていくことです。
+
+\section{等角螺旋：半径と接線の角度が一定}
+
+対数螺旋は、「等角螺旋」とも呼ばれます。中心から曲線上の点へ引いた直線と、その点での接線との角度が、どこでも同じだからです。この角度を $\alpha$ とすると、$\tan\alpha=1/b$ という関係があります。
+
+\begin{figure}[htbp]
+\centering
+\begin{tikzpicture}[scale=1.0]
+ \draw[thick, primaryblue, domain=0:700, samples=200, smooth, variable=\tt] plot ({0.12*exp(0.004*\tt)*cos(\tt)}, {0.12*exp(0.004*\tt)*sin(\tt)});
+ \foreach \ang in {90, 270, 450, 630} {
+  \pgfmathsetmacro{\rr}{0.12*exp(0.004*\ang)}
+  \coordinate (P) at ({\rr*cos(\ang)},{\rr*sin(\ang)});
+  \draw[crimson, thick] (0,0) -- (P);
+  \draw[accentgreen, thick] ($(P)-({0.5*cos(\ang+77.1)},{0.5*sin(\ang+77.1)})$) -- ($(P)+({0.6*cos(\ang+77.1)},{0.6*sin(\ang+77.1)})$);
+  \fill[crimson] (P) circle (0.05);
+ }
+\end{tikzpicture}
+\caption{半径（赤）と接線（緑）のなす角は、どの点でも同じ。この図の螺旋は $b\approx0.23$（1ラジアンあたり）で、なす角は $\arctan(1/b)\approx77^\circ$。}
+\end{figure}
+
+\begin{notebox}{確かめ}
+$r=ae^{b\theta}$ のとき、$\dfrac{\dd r}{\dd\theta}=br$。半径方向と接線方向のなす角 $\psi$ は $\tan\psi=\dfrac{r}{\dd r/\dd\theta}=\dfrac1b$ で、$\theta$ によらず一定です（$\theta$ はラジアン）。図の螺旋は $r=0.12e^{0.004t}$（$t$ は度）で、$b=0.004\times57.3\approx0.23$、$\psi=\arctan(1/0.23)\approx77^\circ$ です。
+\end{notebox}
+
+\section{なぜ成長に向いているのか：グノモン}
+
+貝は、すでにある殻の口に、新しい部分を足していきます。足す部分の形が、いつも同じ型（\textbf{グノモン}）であれば、全体の形は相似のまま大きくなります。正方形に、L字型を足すと、またの正方形ができる、という例が、その簡単な例です。
+
+\begin{figure}[htbp]
+\centering
+\begin{tikzpicture}[scale=0.8]
+ \draw[thick, fill=softblue] (0,0) rectangle (2,2);
+ \draw[thick, fill=softamber] (2,0) rectangle (3,2);
+ \draw[thick, fill=softamber] (0,2) rectangle (3,3);
+ \node at (1,1) {$n^2$}; \node[font=\small, align=center] at (4.6,1.5) {$+(2n+1)$の\\L字};
+ \draw[->] (3.4,1.5)--(3.1,1.5);
+ \node[font=\small] at (1.5,-0.5) {$n=2$：$4+5=9=3^2$};
+\end{tikzpicture}
+\caption{グノモン。正方形に、L字型（グノモン）を足すと、より大きな正方形になる。相似を保って成長するしくみの簡単な例。}
+\end{figure}
+
+\section{黄金螺旋との関係}
+
+黄金比 $\varphi=\dfrac{1+\sqrt5}{2}\approx1.618$ の長方形（長辺：短辺 $=\varphi:1$）から、短辺を1辺とする正方形を切り取ると、残りも同じ比の長方形になります。この操作をくり返し、各正方形に4分の1円を描くと、対数螺旋にほぼ重なる曲線ができます。
+
+\begin{figure}[htbp]
+\centering
+\begin{tikzpicture}[scale=0.55]
+ % 辺 1,1,2,3,5,8 のフィボナッチ正方形
+ \draw[thick, fill=softblue] (0,0) rectangle (1,1);
+ \draw[thick, fill=softamber] (1,0) rectangle (2,1);
+ \draw[thick, fill=softgreen] (0,1) rectangle (2,3);
+ \draw[thick, fill=softrose] (2,0) rectangle (5,3);
+ \draw[thick, fill=softblue] (0,-5) rectangle (5,0);
+ \draw[thick, fill=softamber] (-8,-5) rectangle (0,3);
+ \node[font=\small] at (0.5,0.5) {1}; \node[font=\small] at (1.5,0.5) {1}; \node[font=\small] at (1,2) {2};
+ \node[font=\small] at (3.5,1.5) {3}; \node[font=\small] at (2.5,-2.5) {5}; \node[font=\small] at (-4,-1) {8};
+\end{tikzpicture}
+\caption{辺が $1,1,2,3,5,8$ の正方形のしきつめ。各正方形に4分の1円を描いてつなぐと、渦巻きに近い曲線ができる（本図は正方形の配置のみ）。}
+\end{figure}
+
+隣り合う項の比 $\frac{8}{5}=1.6,\ \frac{13}{8}=1.625,\ \frac{21}{13}\approx1.615$ は、黄金比に近づきます。
+
+\begin{figure}[htbp]
+\centering
+\begin{tikzpicture}
+\begin{axis}[width=9cm, height=5.5cm, xlabel={$n$}, ylabel={$F_{n+1}/F_n$}, xmin=1, xmax=12, ymin=1, ymax=2.1, grid=major]
+ \addplot[thick, primaryblue, mark=*] coordinates {(1,1)(2,2)(3,1.5)(4,1.6667)(5,1.6)(6,1.625)(7,1.6154)(8,1.619)(9,1.6176)(10,1.6182)(11,1.6180)};
+ \addplot[dashed, crimson, domain=1:12] {1.618034};
+\end{axis}
+\end{tikzpicture}
+\caption{フィボナッチ数の隣どうしの比は、黄金比 $1.618\ldots$ に近づく。}
+\end{figure}
+
+\begin{pointbox}{この章のポイント}
+\begin{itemize}[leftmargin=1.5em]
+\item 対数螺旋 $r=ae^{b\theta}$：回るたびに半径が一定倍。
+\item 同じ形で成長するしくみ：グノモン。
+\item 黄金比の長方形から作る渦は、対数螺旋に近い。
 \end{itemize}
+\end{pointbox}
 
-\begin{center}
-\begin{tikzpicture}[scale=1.2]
-    \draw[->, thick, gray] (-2.5,0) -- (3,0) node[right] {$x$};
-    \draw[->, thick, gray] (0,-2.5) -- (0,2.5) node[above] {$y$};
-    
-    % Logarithmic spiral
-    \draw[domain=0:14.5, variable=\t, samples=200, line width=1.5pt, morphoblue] 
-        plot ({0.12*exp(0.22*\t)*cos(\t r)}, {0.12*exp(0.22*\t)*sin(\t r)});
-        
-    % Radius vector
-    \draw[thick, dashed, morphoaccent] (0,0) -- ({0.12*exp(0.22*10)*cos(10 r)}, {0.12*exp(0.22*10)*sin(10 r)}) node[midway, above left] {$r$};
-    
-    % Constant angle demonstration
-    \node at (1.5,1.8) [morphoblue, font=\bfseries] {$r = a e^{b\theta}$};
-    \node at (-1.8,-1.8) [align=left, font=\footnotesize] {幾何学的自己相似性\\(Gnomonic Growth)\\成長しても形態が変わらない};
+%==========================================================
+\chapter{変形の理論（座標の変換）}
+\markboth{第4章}{変形の理論}
+%==========================================================
+
+\section{格子を歪めて、形を比べる}
+
+トムソンの最も有名なアイデアが、「座標の格子を歪めると、似た形の生き物が、互いに変換できる」という見方です。1つの生き物の形を方眼紙に描き、方眼紙を引き伸ばしたり、ねじったりすると、別の種類の形になる、というものです。
+
+\begin{figure}[htbp]
+\centering
+\begin{tikzpicture}[scale=0.8]
+ % 元の格子と図形
+ \begin{scope}
+  \foreach \xa in {0,1,...,5} {\draw[gridgray] (\xa,0)--(\xa,3);}
+  \foreach \ya in {0,1,2,3} {\draw[gridgray] (0,\ya)--(5,\ya);}
+  \draw[thick, primaryblue, domain=0:360, samples=60, variable=\tt] plot ({2.5+1.8*cos(\tt)}, {1.5+0.8*sin(\tt)});
+  \node[font=\footnotesize] at (2.5,-0.5) {元の形};
+ \end{scope}
+ % 横に伸ばす
+ \begin{scope}[xshift=6.3cm]
+  \foreach \xa in {0,1,...,5} {\draw[gridgray] (\xa*1.5-1.25,0)--(\xa*1.5-1.25,3);}
+  \foreach \ya in {0,1,2,3} {\draw[gridgray] (-1.25,\ya)--(6.25,\ya);}
+  \draw[thick, crimson, domain=0:360, samples=60, variable=\tt] plot ({2.5+2.7*cos(\tt)}, {1.5+0.8*sin(\tt)});
+  \node[font=\footnotesize] at (2.5,-0.5) {横に1.5倍に伸ばす};
+ \end{scope}
 \end{tikzpicture}
-\end{center}
+\caption{格子を横方向に1.5倍に伸ばすと、楕円も同じ比率で横長になる。形は、格子と一緒に変形する。}
+\end{figure}
 
-生物の硬組織（殻や骨、角）は、一度形成されると内部から変形・脱皮することができない。古い殻の外縁に新しい房を一様に相似拡大しながら付け足していくとき、\textbf{「形態全体の幾何学的相似比を崩さずに成長できる唯一の曲線」}が対数螺旋なのである。
+\section{傾ける（せん断）と、曲げる}
 
-\chapter{座標変換による形態の変形理論}
+格子を傾けると（せん断）、形も傾きます。さらに、格子を曲げる（座標が曲線になる）と、形も曲がります。
 
-本書の最も著名なクライマックスが、第17章「変形の理論、あるいは近縁形態の比較（On the Theory of Transformations, or the Comparison of Related Forms）」である。
-
-\section{デカルト座標の歪みと系統的進化}
-トムソンは、ある生物種の輪郭や骨格を直交座標系 $(x, y)$ 上に描き、近縁な別の生物種と比較したとき、その形態の差が\textbf{「座標系全体の平滑な数学的変換（アフィン変換、剪断、非線形写像）」}によって見事に説明できることを示した。
-
-\begin{principlebox}{形態変換の数理的意義}
-複雑な生物の進化や形態多様化は、各部分が個別に無秩序に変異したのではなく、個体全体に作用する物理的成長力場（不均一なテンソル場）の連続的な歪みとして捉えることができる。
-\end{principlebox}
-
-\begin{center}
-\begin{tikzpicture}[scale=0.9]
-    % Grid 1: Orthogonal
-    \draw[step=0.6, gray!40, very thin] (0,0) grid (3,3);
-    \draw[thick, morphoblue] (0,0) rectangle (3,3);
-    \draw[very thick, morphogreen] (0.5,1.5) .. controls (1.0,2.5) and (2.0,2.5) .. (2.5,1.5) .. controls (2.0,0.5) and (1.0,0.5) .. cycle;
-    \node at (1.5, -0.5) {種A（標準直交系）};
-
-    % Arrow
-    \draw[->, very thick, morphoaccent] (3.5, 1.5) -- (4.8, 1.5) node[midway, above] {\footnotesize 幾何学的写像};
-
-    % Grid 2: Sheared & non-linear
-    \begin{scope}[shift={(5.5, 0)}]
-        \foreach \x in {0, 0.6, 1.2, 1.8, 2.4, 3.0} {
-            \draw[gray!40, very thin] (\x + \x*0.2, 0) -- (\x + 0.5 + \x*0.1, 3);
-        }
-        \foreach \y in {0, 0.6, 1.2, 1.8, 2.4, 3.0} {
-            \draw[gray!40, very thin] (0 + \y*0.15, \y) -- (3.6 + \y*0.15, \y);
-        }
-        \draw[thick, morphoblue] (0,0) -- (3.6,0) -- (4.05,3) -- (0.45,3) -- cycle;
-        % Transformed ellipse
-        \draw[very thick, morphogreen] (0.8,1.5) .. controls (1.5,2.6) and (2.8,2.4) .. (3.1,1.5) .. controls (2.4,0.4) and (1.3,0.6) .. cycle;
-        \node at (2.0, -0.5) {種B（剪断・拡大変換系）};
-    \end{scope}
+\begin{figure}[htbp]
+\centering
+\begin{tikzpicture}[scale=0.75]
+ \begin{scope}
+  \foreach \xa in {0,1,...,5} {\draw[gridgray] (\xa+0.0,0)--(\xa+1.2,3);}
+  \foreach \ya in {0,1,2,3} {\draw[gridgray] (\ya*0.4,\ya)--(5+\ya*0.4,\ya);}
+  \draw[thick, crimson, domain=0:360, samples=60, variable=\tt] plot ({2.5+0.4*(1.5+0.8*sin(\tt))+1.8*cos(\tt)}, {1.5+0.8*sin(\tt)});
+  \node[font=\footnotesize] at (3,-0.5) {傾ける（せん断）};
+ \end{scope}
+ \begin{scope}[xshift=7.5cm]
+  \foreach \xa in {0,1,...,5} {\draw[gridgray, domain=0:3, samples=20, variable=\yy] plot ({\xa}, {\yy+0.08*(\xa-2.5)*(\xa-2.5)});}
+  \foreach \ya in {0,1,2,3} {\draw[gridgray, domain=0:5, samples=20, variable=\xx] plot ({\xx}, {\ya+0.08*(\xx-2.5)*(\xx-2.5)});}
+  \draw[thick, crimson, domain=0:360, samples=60, variable=\tt] plot ({2.5+1.8*cos(\tt)}, {1.5+0.8*sin(\tt)+0.08*(1.8*cos(\tt))*(1.8*cos(\tt))});
+  \node[font=\footnotesize] at (2.5,-0.5) {曲げる（放物線状）};
+ \end{scope}
 \end{tikzpicture}
-\end{center}
+\caption{せん断（左）と曲げ（右）。格子の変形に合わせて、中の形が変形する。曲げでは、$y\mapsto y+0.08(x-2.5)^2$ という変換を使った。}
+\end{figure}
 
-トムソンはタイ科の魚（\textit{Diodon}）とマンボウ（\textit{Mola mola}）、ヒヒの頭骨とチンパンジー・ヒトの頭骨などを比較し、微小な遺伝子変異の集積という還元主義的解釈に対し、成長速度の空間的勾配（成長場）という全体論的かつ数理的な力学モデルを提示した。
+\section{生き物のあいだの変換}
 
-\chapter{各章の構成と本書の遺産}
+トムソンは、魚の種類のあいだの形の違いを、格子の変形で表しました。2種類の近い魚の一方を方眼紙に描いて、方眼紙を歪めると、もう一方の魚の輪郭に重なる、という具合です（原著の図では、実際の魚の図が使われています。本書では、原著の図は再現せず、変換の考え方を単純な図形で示しました）。
 
-『成長と形態について』全17章の概略は以下の通りである：
+\begin{figure}[htbp]
+\centering
+\begin{tikzpicture}[node distance=10mm]
+ \node[wbox, text width=3cm] (a) {種Aの形\\{\small 方眼紙に描く}};
+ \node[abox, text width=3cm, right=of a] (b) {方眼紙を\\変形する\\{\small 伸ばす・傾ける\\ 曲げる}};
+ \node[gbox, text width=3cm, right=of b] (c) {種Bの形に\\近づく};
+ \draw[ax] (a)--(b); \draw[ax] (b)--(c);
+\end{tikzpicture}
+\caption{トムソンの変換の考え方。近縁な種は、少数のパラメータ（伸ばし方・曲げ方）で結びつけられる、という見方。}
+\end{figure}
 
-\begin{enumerate}
-    \item \textbf{第1章 序説 (Introductory)}：力学・物理学・数学による生命形態の解明という方法論的宣言。
-    \item \textbf{第2章 大きさについて (On Magnitude)}：2乗3乗則、重力と表面張力の競合、巨人と昆虫の力学。
-    \item \textbf{第3章 成長の速度 (The Rate of Growth)}：時間に対する成長曲線の数理的定式化。
-    \item \textbf{第4章 細胞の内部形態と構造 (On the Internal Form and Structure of the Cell)}：原形質流動、ブラウン運動、浸透圧。
-    \item \textbf{第5章 細胞の形態 (The Forms of Cells)}：表面張力と極小曲面、単細胞生物の幾何学。
-    \item \textbf{第6章 吸着に関する注記 (A Note on Adsorption)}：界面現象と化学物理的吸着。
-    \item \textbf{第7〜8章 組織または細胞凝集体の形態 (The Forms of Tissues or Cell-Aggregates)}：蜂の巣の六角柱構造、泡の幾何学、プラトーの境界条件（120度接合）。
-    \item \textbf{第9章 凝縮物・骨片・骨片骨格 (On Concretions, Spicules, and Spicular Skeletons)}：放散虫や海綿の幾何学的骨格。
-    \item \textbf{第10章 測地線に関する補記 (A Parenthetic Note on Geodetics)}：曲面上の最短経路と骨格走行。
-    \item \textbf{第11章 対数螺旋 (The Logarithmic Spiral)}：オウムガイ、アンモナイト、巻き貝の自己相似成長の数理。
-    \item \textbf{第12章 有孔虫の螺旋殻 (The Spiral Shells of the Foraminifera)}：微小生物の多室構造と成長則。
-    \item \textbf{第13章 角・歯・牙の形状および捻転に関する注記 (The Shapes of Horns, and of Teeth or Tusks)}：3次元空間における螺旋捻転。
-    \item \textbf{第14章 葉序 (On Leaf-Arrangement, or Phyllotaxis)}：ヒマワリの種子や松ぼっくりに見られるフィボナッチ数列と黄金角。
-    \item \textbf{第15章 卵および他の幾何学的構造の形状 (On the Shapes of Eggs)}：卵管の流体圧と弾性薄膜による形態決定。
-    \item \textbf{第16章 形態と機械的効率 (On Form and Mechanical Efficiency)}：脊椎動物の大腿骨海綿骨の主応力線（トラベクラ構造）とフェアバーン・クレーンの工学的一致。
-    \item \textbf{第17章 変形の理論、あるいは近縁形態の比較 (On the Theory of Transformations)}：デカルト座標の歪みによる頭骨・魚類・甲殻類の系統的形態変化の幾何学。
-\end{enumerate}
+\begin{notebox}{原著の主張と本書の立場}
+「近い種の形が、単純な座標変換で結べる」というのは、トムソンの重要な観察ですが、すべての生き物に当てはまるわけではありません。この考え方は、のちの形態計測学（形の数量化）の出発点の1つとされますが、その経緯は専門書で確かめてください。
+\end{notebox}
 
-本書の精神は、アラン・チューリングの反応拡散波（チューリング・パターン）、ブノワ・マンデルブロのフラクタル幾何学、現代のバイオメカニクスや計算形態形成学（コンピュテーショナル・モルフォロジー）へと脈々と受け継がれている。
+\begin{pointbox}{この章のポイント}
+\begin{itemize}[leftmargin=1.5em]
+\item 格子を伸ばす・傾ける・曲げると、中の形も変形する。
+\item 近い種の形の違いを、座標の変換で表す。
+\end{itemize}
+\end{pointbox}
+
+%==========================================================
+\chapter*{結語：トムソンが残したもの}
+\addcontentsline{toc}{chapter}{結語：トムソンが残したもの}
+\markboth{結語}{結語}
+%==========================================================
+
+\begin{figure}[htbp]
+\centering
+\begin{tikzpicture}[x=0.9cm]
+ \draw[ax] (0,0)--(13,0);
+ \node[wbox] at (1.6,1.0) {1860\\生まれる};
+ \node[wbox] at (6.2,1.0) {1917\\初版};
+ \node[wbox] at (10,1.0) {1948\\没};
+ \foreach \xa in {1.6,6.2,10} {\draw (\xa,0.1)--(\xa,-0.1);}
+\end{tikzpicture}
+\caption{トムソンの生涯と初版の年（年号は本書の翻訳版の記述による）。}
+\end{figure}
+
+『成長と形態について』は、生物学に数学と物理の見方を持ち込んだ本として、のちの時代に大きな影響を与えたとされます。形を測り、比べ、説明するという方法は、今も生物学や工学の中で生きています。
+
+\begin{notebox}{この本の未解決点}
+\begin{itemize}[leftmargin=1.5em]
+\item 翻訳版は4章の精選版で、原著全体（約20章）は扱っていません。
+\item 魚の変換など、原著の図は本書では再現していません。
+\item 刊行の経緯（初版1917年、増補版）は、本書の筆者が確認していない部分があります。
+\end{itemize}
+\end{notebox}
 
 \end{document}
