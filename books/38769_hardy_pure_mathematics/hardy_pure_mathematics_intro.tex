@@ -4,859 +4,431 @@
 \usepackage{amsmath,amssymb,amsfonts,amsthm}
 \usepackage{geometry}
 \geometry{top=24mm,bottom=24mm,left=24mm,right=24mm,footskip=10mm}
+\usepackage{tikz}
+\usetikzlibrary{arrows.meta,calc,positioning,patterns,shapes.geometric,shapes.misc,decorations.pathreplacing,decorations.markings,angles,quotes,intersections,backgrounds,fit}
+\usepackage{pgfplots}
+\pgfplotsset{compat=1.18}
+\usepgfplotslibrary{fillbetween}
 \usepackage{tcolorbox}
 \tcbuselibrary{skins,breakable}
 \usepackage{hyperref}
+\usepackage{enumitem}
+\usepackage{booktabs}
 \usepackage{fancyhdr}
-\usepackage{tikz}
-\usetikzlibrary{arrows.meta,calc,positioning,shapes.geometric}
 
-\definecolor{primaryblue}{RGB}{20, 60, 110}
-\definecolor{softblue}{RGB}{238, 244, 252}
-\definecolor{darkslate}{RGB}{35, 45, 60}
-\definecolor{accentcrimson}{RGB}{160, 30, 45}
+\definecolor{primaryblue}{RGB}{24, 76, 120}
+\definecolor{softblue}{RGB}{235, 243, 250}
+\definecolor{darkslate}{RGB}{44, 62, 80}
+\definecolor{warmamber}{RGB}{217, 119, 6}
+\definecolor{softamber}{RGB}{254, 243, 199}
+\definecolor{crimson}{RGB}{185, 28, 28}
+\definecolor{softrose}{RGB}{255, 228, 230}
+\definecolor{accentgreen}{RGB}{16, 120, 70}
+\definecolor{softgreen}{RGB}{236, 253, 245}
+\definecolor{gridgray}{RGB}{200, 205, 210}
 
 \hypersetup{
     colorlinks=true,
     linkcolor=primaryblue,
-    citecolor=darkslate,
-    pdftitle={古典で学び直すハーディ純粋数学教程入門},
+    urlcolor=primaryblue,
+    citecolor=accentgreen,
     pdfauthor={教育情報分析研究会}
+}
+
+\newtcolorbox{examplebox}[1]{
+    colback=softgreen, colframe=accentgreen, coltitle=white, fonttitle=\bfseries,
+    title=#1, arc=3mm, boxrule=1pt, left=4mm,right=4mm,top=3mm,bottom=3mm, breakable
+}
+\newtcolorbox{pointbox}[1]{
+    colback=softamber, colframe=warmamber, coltitle=darkslate, fonttitle=\bfseries,
+    title=#1, arc=2mm, boxrule=1pt, left=3mm,right=3mm,top=2mm,bottom=2mm, breakable
+}
+\newtcolorbox{notebox}[1]{
+    colback=softrose, colframe=crimson, coltitle=white, fonttitle=\bfseries,
+    title=#1, arc=2mm, boxrule=1pt, left=3mm,right=3mm,top=2mm,bottom=2mm, breakable
+}
+
+\tikzset{
+  >=Stealth,
+  fbox/.style={draw=primaryblue, fill=softblue, rounded corners=3pt, align=center, inner sep=4pt, font=\small},
+  wbox/.style={draw=primaryblue, fill=white, rounded corners=3pt, align=center, inner sep=4pt, font=\small},
+  abox/.style={draw=warmamber, fill=softamber, rounded corners=3pt, align=center, inner sep=4pt, font=\small},
+  gbox/.style={draw=accentgreen, fill=softgreen, rounded corners=3pt, align=center, inner sep=4pt, font=\small},
+  rbox/.style={draw=crimson, fill=softrose, rounded corners=3pt, align=center, inner sep=4pt, font=\small},
+  ax/.style={->, thick, darkslate},
+  lbl/.style={font=\footnotesize, text=darkslate},
 }
 
 \pagestyle{fancy}
 \fancyhf{}
 \fancyhead[LE,RO]{\thepage}
-\fancyhead[RE]{\leftmark}
-\fancyhead[LO]{\rightmark}
-\setlength{\headheight}{17.5pt}
+\fancyhead[LO]{\nouppercase{\rightmark}}
+\fancyhead[RE]{\nouppercase{\leftmark}}
 \renewcommand{\headrulewidth}{0.4pt}
 
-\title{
-    {\huge\bfseries\gtfamily 古典で学び直すハーディ純粋数学教程入門}\\[14pt]
-    {\large 底本：\textit{A Course of Pure Mathematics} (Project Gutenberg eBook No. 38769)}\\[6pt]
-    {\normalsize 実数論・関数・極限・微積分・複素関数論の厳密な基礎概念}
-}
-\author{\textbf{教育情報分析研究会} 編著}
-\date{2026年10月}
-
-\providecommand{\Item}[1]{\par\noindent\textbf{#1}\ }
-\providecommand{\DELTA}{\Delta}
-
-\providecommand{\Mu}{\mathrm{M}}
-\providecommand{\Seg}[1]{\overline{#1}}
+\hypersetup{pdftitle={古典で学び直すハーディ純粋数学教程入門 —— 10章を図で読む}}
+\newcommand{\dd}{\mathrm{d}}
 
 \begin{document}
-\maketitle
+
+\begin{titlepage}
+\begin{center}
+\vspace*{1.5cm}
+{\Large\bfseries プロジェクト・グーテンベルク古典数学入門シリーズ}\\[0.8cm]
+\rule{\textwidth}{1.5pt}\\[0.4cm]
+{\Huge\bfseries 古典で学び直す\\ハーディ純粋数学教程入門}\\[0.4cm]
+{\Large\bfseries —— 実数・極限・微積分・指数関数を図で読む ——}\\[0.4cm]
+\rule{\textwidth}{1.5pt}\\[1.5cm]
+{\large 原著：ゴッドフレイ・ハロルド・ハーディ\\
+\textit{A Course of Pure Mathematics}}\\[2.0cm]
+{\Large\bfseries 著：教育情報分析研究会}\\[2.5cm]
+\vfill
+{\large 2026年11月 全面改訂版}\\[0.5cm]
+{\footnotesize 本書は Project Gutenberg のパブリックドメイン（eBook \#38769）の翻訳（全10章）の章立てに沿って、\\
+中学校・高等学校の数学の知識で読み進められるように書き下ろした入門書です。}
+\end{center}
+\end{titlepage}
+
 \frontmatter
 \tableofcontents
-\clearpage
 \mainmatter
-\chapter{第1講：Chapter I: REAL VARIABLES}
 
-\subsection*{Chapter I: 実変数}
+%==========================================================
+\chapter*{はじめに：「厳密さ」という考え方}
+\addcontentsline{toc}{chapter}{はじめに：「厳密さ」という考え方}
+\markboth{はじめに}{はじめに}
+%==========================================================
 
-\subsection*{1. 有理数}
+ハーディ（1877〜1947）の『純粋数学教程』は、大学で解析学を学ぶ人のための、20世紀初めの教科書です。微積分の基礎を、「なんとなく」ではなく、実数・極限・連続の定義から、きちんと組み立てます。本書は、翻訳版の10章に1対1で沿って、各章の考え方を図で整理します。大学レベルの内容ですが、必要なのは、高校の数学（関数のグラフ、数列、微分積分の基本）だけです。
 
-\subsection*{\section*{1.1 有理数の定義と操作}}
+\begin{figure}[htbp]
+\centering
+\begin{tikzpicture}[node distance=3mm]
+ \node[fbox, text width=2.7cm] (a) {第1〜3章\\実数・関数・複素数};
+ \node[fbox, text width=2.7cm, right=of a] (b) {第4〜5章\\極限と連続};
+ \node[fbox, text width=2.7cm, right=of b] (c) {第6〜7章\\微分と積分};
+ \node[fbox, text width=2.7cm, right=of c] (d) {第8〜10章\\級数・指数・対数};
+ \draw[ax] (a)--(b); \draw[ax] (b)--(c); \draw[ax] (c)--(d);
+\end{tikzpicture}
+\caption{本書の構成。土台（数）から、極限、微積分、そして級数・指数関数へ。}
+\end{figure}
 
-最初に、有理数について考えてみましょう。有理数とは、分数 \( r = \frac{p}{q} \) の形で表される数のことです。ここで、\( p \) と \( q \) は正または負の整数であり、共通な因子がないようにします。つまり、もし \( p \) と \( q \) に共通な因子がある場合は、それを両方で割ることで簡略化することができます。また、\( q \) を正にするために、必要であれば分子と分母を負の数で割ります。
+\begin{notebox}{事実・推測・未確認の区別}
+本書の数値は、筆者が計算して確かめたものです。ハーディ自身の定理の証明は載せません。翻訳版は小型モデルによる訳であり、細部は原著との照合が必要です。
+\end{notebox}
 
-例えば：
-\[
-\frac{p}{-q} = -\frac{p}{q}, \quad \frac{-p}{-q} = \frac{p}{q}
-\]
+%==========================================================
+\chapter{実変数}
+\markboth{第1章}{実変数}
+%==========================================================
 
-さらに、「有理数 \( 0 \)」を定義するために、\( p = 0 \) の場合も考慮します。つまり、有理数は以下の形で表されます：
-\[
-r = \frac{p}{q}, \quad (p, q \text{は整数}, \; q \neq 0)
-\]
+数直線上の点は、小数で表せます。$\sqrt2=1.41421356\ldots$ は、有理数（分数）では表せない数です。ハーディは、実数を、有理数の「切り口」（デデキントの切断）として定義します。
 
-\subsection*{\section*{1.2 有理数の操作}}
+\begin{figure}[htbp]
+\centering
+\begin{tikzpicture}
+ \draw[ax] (-0.3,0)--(10.3,0);
+ \foreach \xa/\lab in {0/1,10/2} {\draw (\xa,0.1)--(\xa,-0.1); \node[below] at (\xa,-0.1) {\lab};}
+ \draw[thick, primaryblue, fill=softblue] (0,0.5) rectangle (4.14,0.9);
+ \draw[thick, warmamber, fill=softamber] (4.14,0.5) rectangle (10,0.9);
+ \draw[crimson, thick] (4.14,0.2)--(4.14,1.2);
+ \node[above, font=\footnotesize] at (2.1,0.95) {$A$：$x^2<2$ の有理数};
+ \node[above, font=\footnotesize] at (7.1,0.95) {$B$：$x^2>2$ の有理数};
+ \node[below, font=\footnotesize, crimson] at (4.14,-0.3) {切り口 $=\sqrt2$};
+\end{tikzpicture}
+\caption{$\sqrt2$ を、有理数の2つの組 $A,B$ の切り口として定義する。切り口にあたる有理数はない。}
+\end{figure}
 
-次に、有理数の基本的な操作について考えてみましょう。例えば、\( r \) と \( s \) が有理数であるとき：
+\begin{figure}[htbp]
+\centering
+\begin{tikzpicture}[x=3.2cm]
+ \foreach \l/\r/\yy in {1/2/0, 1.4/1.5/0.8, 1.41/1.42/1.6, 1.414/1.415/2.4} {
+   \draw[thick, primaryblue, fill=softblue] (\l-1,\yy) rectangle (\r-1,\yy+0.35);
+   \node[right, font=\footnotesize] at (1.05,\yy+0.17) {[\l,\ \r]};
+ }
+ \draw[crimson, dashed] (0.41421,-0.1)--(0.41421,2.9);
+\end{tikzpicture}
+\caption{$\sqrt2$ を挟む区間を、どんどん狭めていく。（横軸は $x-1$。$1.41^2=1.9881<2<1.42^2=2.0164$ などで確認できる）}
+\end{figure}
 
-- 加法：\( r + s \)
-- 減法：\( r - s \)
-- 乗法：\( rs \)
-- 除法（分母が0でない場合）：\( \frac{r}{s} \)
+\begin{pointbox}{この章のポイント}
+\begin{itemize}[leftmargin=1.5em]
+\item 実数は、有理数の切り口（または区間の入れ子）として厳密に定義できる。
+\end{itemize}
+\end{pointbox}
 
-これらは、中学校や高校の数学で学んだ算術則に基づいています。具体的な例を挙げてみましょう。
+%==========================================================
+\chapter{実変数の関数}
+\markboth{第2章}{実変数の関数}
+%==========================================================
 
-\textbf{例題 I.}
+関数は、変数 $x$ の値を決めると $y$ が決まる対応です。定義される範囲（定義域）と、値のとる範囲（値域）に注意します。
 
-1. \( r \) と \( s \) が有理数であるとき、\( r + s \), \( r - s \), \( rs \), および \( \frac{r}{s} \)（ただし \( s \neq 0 \)）も有理数である。
+\begin{figure}[htbp]
+\centering
+\begin{tikzpicture}
+\begin{axis}[width=5.8cm, height=5cm, title={$y=\lfloor x\rfloor$（階段関数）}, xlabel={$x$}, xmin=-2, xmax=3, ymin=-2.5, ymax=3, grid=major, every axis title/.style={font=\footnotesize}]
+ \foreach \k in {-2,-1,0,1,2} {
+   \addplot[thick, primaryblue] coordinates {(\k,\k)(\k+1,\k)};
+   \addplot[only marks, mark=*, mark size=1.5pt, color=primaryblue] coordinates {(\k,\k)};
+   \addplot[only marks, mark=o, mark size=1.5pt, color=primaryblue] coordinates {(\k+1,\k)};
+ }
+\end{axis}
+\begin{axis}[xshift=6.6cm, width=5.8cm, height=5cm, title={$y=1/x$（$x\ne0$）}, xlabel={$x$}, xmin=-3, xmax=3, ymin=-4, ymax=4, grid=major, every axis title/.style={font=\footnotesize}]
+ \addplot[thick, crimson, domain=0.25:3, samples=60] {1/x};
+ \addplot[thick, crimson, domain=-3:-0.25, samples=60] {1/x};
+\end{axis}
+\end{tikzpicture}
+\caption{左：床関数（$x$ 以下の最大の整数）。整数点で値が飛ぶ。右：$1/x$ は $x=0$ で定義されない。}
+\end{figure}
 
-2. 正の有理数 \( m > n \) と正の有理数 \( \lambda \) があるとき、\(\lambda(m^2 - n^2)\), \(2\lambda mn\), および \(\lambda(m^2 + n^2)\) もすべて正の有理数である。よって、辺の長さが有理数である直角三角形を任意に決定する方法を示せ。
+\begin{pointbox}{この章のポイント}
+\begin{itemize}[leftmargin=1.5em]
+\item 関数には、定義域がある。値が飛ぶ関数や、定義されない点のある関数もある。
+\end{itemize}
+\end{pointbox}
 
-3. 終わりのある小数は、分母に \( 2 \) または \( 5 \) 以外の素因数を持たない有理数を表す。逆もまた真であり、このような有理数は一意的に終了小数として表現できる。
+%==========================================================
+\chapter{複素数}
+\markboth{第3章}{複素数}
+%==========================================================
 
-4. 正の有理数は以下の単純な順列で並べることができます：
-\[
-\frac{1}{1}, \quad \frac{2}{1}, \quad \frac{1}{2}, \quad \frac{3}{1}, \quad \frac{2}{2}, \quad \frac{1}{3}, \quad \frac{4}{1}, \quad \frac{3}{2}, \quad \frac{2}{3}, \quad \frac{1}{4}, \; \dots
-\]
+複素数 $z=a+bi$ は、平面上の点 $(a,b)$ です。大きさ（絶対値）は $|z|=\sqrt{a^2+b^2}$。たとえば $z=3+4i$ なら $|z|=5$。
 
-ここで、\( p/q \) がこの数列の \( \left[\frac{1}{2}(p + q - 1)(p + q - 2) + q\right] \) 番目の項であることを示せ。
+\begin{figure}[htbp]
+\centering
+\begin{tikzpicture}[scale=1.0]
+ \draw[->] (-0.5,0)--(5.5,0) node[right] {実軸}; \draw[->] (0,-0.5)--(0,4.6) node[above] {虚軸};
+ \draw[thick, primaryblue, ->] (0,0)--(1,2) node[above left, font=\small] {$1+2i$};
+ \draw[thick, accentgreen, ->] (0,0)--(3,1) node[below right, font=\small] {$3+i$};
+ \draw[thick, crimson, ->] (0,0)--(4,3) node[above right, font=\small] {$4+3i$};
+ \draw[dashed] (1,2)--(4,3)--(3,1);
+\end{tikzpicture}
+\caption{複素数の足し算は、平行四辺形の対角線。$(1+2i)+(3+i)=4+3i$。}
+\end{figure}
 
-\subsection*{\section*{1.3 小数理論}}
+\begin{pointbox}{この章のポイント}
+\begin{itemize}[leftmargin=1.5em]
+\item 複素数は平面上の点。足し算は、ベクトルの和。
+\end{itemize}
+\end{pointbox}
 
-一般的小数理論については、第IV章で詳しく考慮します。つまり、小数が有理数や無理数にどのように関連しているかを深く探ります。
+%==========================================================
+\chapter{正の整数変数の関数の極限}
+\markboth{第4章}{数列の極限}
+%==========================================================
 
-\subsection*{2. 有理数の直線的な表現}
+数列 $a_n=\dfrac1n$ は、$n$ が大きくなると $0$ に近づきます。「近づく」を厳密にいうと、「どんな小さな正の数 $\varepsilon$ に対しても、十分大きな $N$ があって、$n>N$ ならば $|a_n-0|<\varepsilon$」。
 
-\subsection*{\section*{2.1 直線上的表示}}
+\begin{figure}[htbp]
+\centering
+\begin{tikzpicture}
+\begin{axis}[width=10cm, height=5.5cm, xlabel={$n$}, ylabel={$a_n=1/n$}, xmin=0, xmax=30, ymin=-0.05, ymax=1.1, grid=major]
+ \addplot[only marks, mark=*, mark size=1.5pt, color=primaryblue, samples at={1,...,30}] {1/x};
+ \addplot[draw=none, fill=softrose, fill opacity=0.6] coordinates {(0,-0.1)(30,-0.1)(30,0.1)(0,0.1)} \closedcycle;
+ \draw[dashed, crimson] (axis cs:10,-0.05)--(axis cs:10,1.1);
+ \node[crimson, font=\footnotesize, anchor=south west] at (axis cs:10.4,0.4) {$N=10$};
+\end{axis}
+\end{tikzpicture}
+\caption{$\varepsilon=0.1$ のとき、$n>10$ なら $1/n<0.1$。ピンクの帯の中に、$n>10$ のすべての点が入る。}
+\end{figure}
 
-次に、有理数を直線上に表す方法について考えてみましょう。まず、直線 \( \Lambda \) 上に点 \( A_0 \)（原点）と点 \( A_1 \) を定義します。点 \( A_0 \) は数 \( 0 \)、点 \( A_1 \) は数 \( 1 \) を表します。
+もう1つの例は、$\left(1+\frac1n\right)^n$。$n=1$ で $2$、$n=10$ で $2.594$、$n=100$ で $2.705$、$n=1000$ で $2.717$。極限は $e=2.71828\ldots$ です。
 
-有理数 \( r = \frac{p}{q} \) の点 \( A_r \) を定義するために、以下の条件を満たす点 \( A_r \) を選択します：
-\[
-\frac{A_0A_r}{A_0A_1} = r
-\]
+\begin{pointbox}{この章のポイント}
+\begin{itemize}[leftmargin=1.5em]
+\item 極限：どんな $\varepsilon$ の帯にも、$n$ が十分大きければ入る。
+\end{itemize}
+\end{pointbox}
 
-例えば、正の有理数 \( r = \frac{p}{q} \) の場合、\( A_{r} \) は \( A_0A_1 \) 方向に延長した線分 \( A_0A_r \) の端点です。負の有理数 \( r = -s \) の場合、\( A_{-s} \) は \( A_0A_s \) の逆方向に等距離にある点です。
+%==========================================================
+\chapter{連続変数の関数の極限・連続性}
+\markboth{第5章}{関数の極限と連続}
+%==========================================================
 
-\subsection*{\section*{2.2 有理点}}
+関数 $f(x)=2x+1$ が $x=1$ で連続であるとは、$f(1)=3$ のまわりの、どんな小さな範囲（$\varepsilon$）に対しても、$x=1$ のまわりに、十分小さな範囲（$\delta$）があって、その範囲の $x$ なら $f(x)$ が $3\pm\varepsilon$ に収まる、ということです。
 
-以上の定義から、すべての正有理数や負有理数の値 \( r \) に対して、直線上に点 \( A_r \) を一意的に定めることができます。つまり：
-\[
-A_0A_r = r \cdot A_0A_1
-\]
+\begin{figure}[htbp]
+\centering
+\begin{tikzpicture}
+\begin{axis}[width=9cm, height=6cm, xlabel={$x$}, ylabel={$y$}, xmin=0.6, xmax=1.4, ymin=2.5, ymax=3.5, grid=major]
+ \addplot[thick, primaryblue, domain=0.6:1.4] {2*x+1};
+ \addplot[draw=none, fill=softamber, fill opacity=0.5] coordinates {(0.6,2.8)(1.4,2.8)(1.4,3.2)(0.6,3.2)} \closedcycle;
+ \addplot[draw=none, fill=softgreen, fill opacity=0.6] coordinates {(0.9,2.5)(1.1,2.5)(1.1,3.5)(0.9,3.5)} \closedcycle;
+ \addplot[only marks, mark=*, color=crimson] coordinates {(1,3)};
+\end{axis}
+\end{tikzpicture}
+\caption{$\varepsilon=0.2$（黄の横帯 $2.8<y<3.2$）に対して、$\delta=0.1$（緑の縦帯 $0.9<x<1.1$）をとれば、その範囲の曲線は黄の帯に収まる。}
+\end{figure}
 
-もし自然に \( A_0A_1 \) を長さ単位と取って \( A_0A_1 = 1 \) と表すなら、上式は簡略化されます：
-\[
-A_0A_r = r
-\]
+\begin{pointbox}{この章のポイント}
+\begin{itemize}[leftmargin=1.5em]
+\item 連続性：$\varepsilon$ に対して、必ず $\delta$ が見つかる。
+\end{itemize}
+\end{pointbox}
 
-この直線上の点を「有理点」と呼びます。
+%==========================================================
+\chapter{導関数と積分}
+\markboth{第6章}{導関数と積分}
+%==========================================================
 
-\subsection*{3. 無理数}
-
-\subsection*{\section*{3.1 無理数の定義}}
-
-次に、無理数について考えてみましょう。無理数とは、有理数で表せない実数のことです。例えば、\(\sqrt{2}\) は有理数ではありません。
-
-\subsection*{\section*{3.2 無理数の存在性}}
+導関数は、$\dfrac{f(x+h)-f(x)}{h}$ の $h\to0$ の極限、積分は、面積を細かい長方形で近似した極限です。$\int_0^1x^2\,\dd x=\dfrac13$ を、長方形の和で確かめましょう。
 
 \begin{center}
-\begin{tikzpicture}[scale=1.35, >=Stealth]
-    % Draw real line
-    \draw[->, thick, darkslate] (-2.2, 0) -- (7.5, 0) node[right] {数直線 $\Lambda$};
-    % Axis ticks
-    \foreach \x/\label in {-2/-2, -1/-1, 0/0, 1/1, 2/2, 3/3, 4/4, 5/5, 6/6} {
-        \draw[darkslate] (\x, 0.1) -- (\x, -0.1) node[below=3pt] {\small $\label$};
-    }
-    % Cut point sqrt(2) coordinate
-    \def\cpt{1.414}
-    % Left class L (thick segment)
-    \draw[line width=3.5pt, primaryblue] (-2.0, 0) -- (\cpt, 0);
-    % Right class R (thick segment)
-    \draw[line width=3.5pt, accentcrimson!80!black] (\cpt, 0) -- (7.2, 0);
-
-    % Upper labels placed comfortably away from the line and the vertical cut line
-    \node[above=22pt, primaryblue, align=center] at (-0.2, 0) {\textbf{【下組 $L$】}\\ 有理数 $q \le 0$ または $q^2 < 2$};
-    \node[above=22pt, accentcrimson!80!black, align=center] at (4.5, 0) {\textbf{【上組 $R$】}\\ 有理数 $q > 0$ かつ $q^2 > 2$};
-
-    % Cut point dashed line
-    \draw[dashed, red!85!black, line width=1.3pt] (\cpt, -1.1) -- (\cpt, 1.8);
-    \filldraw[fill=white, draw=red!85!black, line width=1.8pt] (\cpt, 0) circle (3.5pt);
-    \node[below=18pt, red!85!black, align=center, fill=white, inner sep=2pt] at (\cpt, -0.3) {\textbf{切断点 $\sqrt{2}$}\\[2pt]\small（有理数直線上の「裂け目」）};
-\end{tikzpicture}
-\par\vspace{0.4em}
-\small\textbf{概念図 1.1}：デデキント切断による無理数 $\sqrt{2}$ の定義。有理数直線は最大元のない下組 $L$ と最小元のない上組 $R$ に分断され、その境界に実数 $\sqrt{2}$ が唯一確定する。
+\begin{tabular}{rrr}
+\toprule
+長方形の本数 $n$ & 左端の和（下から） & 右端の和（上から）\\
+\midrule
+10 & 0.285 & 0.385\\
+100 & 0.32835 & 0.33835\\
+真の値 & \multicolumn{2}{c}{$0.3333\ldots$}\\
+\bottomrule
+\end{tabular}
 \end{center}
 
+$n=10$ の左端の和は $\frac{1}{1000}(0^2+1^2+\cdots+9^2)=\frac{285}{1000}$、右端の和は $\frac{1}{1000}(1^2+\cdots+10^2)=\frac{385}{1000}$。
 
-もし直線上にすべての分母が \( 1, 2, 3, \dots \) の有理数を順に並べて表示すると、直線全体を非常に密に覆うことがわかります。つまり、任意の区間 \( BC \) 内には無数の有理点が存在します。
+\begin{figure}[htbp]
+\centering
+\begin{tikzpicture}
+\begin{axis}[width=9.5cm, height=6cm, xlabel={$x$}, ylabel={$y=x^2$}, xmin=0, xmax=1.1, ymin=0, ymax=1.1, grid=major]
+ \addplot[thick, primaryblue, domain=0:1, samples=40] {x^2};
+ \foreach \k in {0,...,9} {
+   \addplot[draw=crimson, fill=softrose, fill opacity=0.5] coordinates {(\k/10,0)(\k/10+0.1,0)(\k/10+0.1,{(\k/10+0.1)^2})(\k/10,{(\k/10+0.1)^2})} \closedcycle;
+ }
+\end{axis}
+\end{tikzpicture}
+\caption{$y=x^2$ の下の面積を、右端の高さの10本の長方形で上から近似（合計 $0.385$）。本数を増やすと $1/3$ に近づく。}
+\end{figure}
 
-具体的な証明は以下の通りです：
+\begin{pointbox}{この章のポイント}
+\begin{itemize}[leftmargin=1.5em]
+\item 積分は、上からの和と下からの和で挟んで定義する。
+\end{itemize}
+\end{pointbox}
 
-- 区間 \( BC \) が \( A_1A_2 \) の内部にある場合、正の整数 \( k \) を選んで：
-\[
-k \cdot BC > 1
-\]
+%==========================================================
+\chapter{微分積分学の補足的な定理}
+\markboth{第7章}{補足的な定理}
+%==========================================================
 
-この条件を満たす \( k \) があると仮定します。すると、\( A_1A_2 \) を \( k \) 等分して、少なくとも一つの分割点（例えば \( P \)））が \( BC \) の内部に存在します。この点 \( P \)) は、分母が \( k \) の有理数に対応しています。
+\textbf{平均値の定理}：なめらかな曲線の2点を結ぶ弦と平行な接線が、2点のあいだに必ず1本ある。$f(x)=x^2$ を $[0,2]$ で考えると、弦の傾きは $\frac{4-0}{2-0}=2$。接線の傾き $2x=2$ から $c=1$。
 
-したがって、任意の区間 \( BC \) 内には無数の有理点が存在することがわかります。
+\begin{figure}[htbp]
+\centering
+\begin{tikzpicture}
+\begin{axis}[width=8.5cm, height=6cm, xlabel={$x$}, ylabel={$y$}, xmin=-0.3, xmax=2.5, ymin=-0.5, ymax=4.5, grid=major]
+ \addplot[thick, primaryblue, domain=0:2.3, samples=40] {x^2};
+ \addplot[dashed, crimson, domain=0:2] {2*x};
+ \addplot[thick, accentgreen, domain=0.2:2.2] {1+2*(x-1)};
+ \addplot[only marks, mark=*, color=black] coordinates {(0,0)(2,4)(1,1)};
+ \node[font=\footnotesize, anchor=south east] at (axis cs:1,1) {$c=1$};
+\end{axis}
+\end{tikzpicture}
+\caption{平均値の定理。弦（赤）と平行な接線（緑）が $x=1$ にある。}
+\end{figure}
 
-以上の説明から、直線全体を非常に密に覆う無理数も存在することを理解することができます。
+\begin{pointbox}{この章のポイント}
+\begin{itemize}[leftmargin=1.5em]
+\item 平均値の定理：弦と平行な接線が、必ず区間の中にある。
+\end{itemize}
+\end{pointbox}
 
-\clearpage
+%==========================================================
+\chapter{無限級数と無限積分の収束}
+\markboth{第8章}{収束}
+%==========================================================
 
-\chapter{第2講：Chapter II: FUNCTIONS OF REAL VARIABLES}
+無限に足しても有限の値になる級数と、ならない級数があります。$\displaystyle\sum_{n=1}^\infty\frac1{n^2}=\frac{\pi^2}{6}\approx1.6449$ は収束し、$\displaystyle\sum\frac1n$ は発散します。
 
-\subsection*{第2章 実変数の関数}
+\begin{figure}[htbp]
+\centering
+\begin{tikzpicture}
+\begin{axis}[width=10cm, height=5.5cm, xlabel={足した項の数 $n$}, ylabel={部分和}, xmode=log, xmin=1, xmax=1000, ymin=0, ymax=8, grid=major, legend pos=north west, legend style={font=\footnotesize}]
+ \addplot[thick, primaryblue, mark=*] coordinates {(1,1)(2,1.25)(5,1.4636)(10,1.5498)(100,1.6350)(1000,1.6439)};
+ \addplot[thick, crimson, mark=square*] coordinates {(1,1)(10,2.929)(100,5.187)(1000,7.485)};
+ \addplot[dashed, gray, domain=1:1000] {1.6449};
+ \legend{$\sum1/n^2$（収束）,$\sum1/n$（発散）}
+\end{axis}
+\end{tikzpicture}
+\caption{2つの級数の部分和。$\sum1/n^2$ は $1.6449$ に頭打ち、$\sum1/n$ は対数的に増え続ける。}
+\end{figure}
 
-\subsection*{20. 関数の概念}
+\begin{pointbox}{この章のポイント}
+\begin{itemize}[leftmargin=1.5em]
+\item 収束・発散は、部分和が一定の値に近づくかどうかで決まる。
+\end{itemize}
+\end{pointbox}
 
-まず、$x$と$y$を2つの連続な実変数として考えましょう。これらは直線$\Lambda$と$\Mu$上に測定される距離$A_{0}P = x$と$B_{0}Q = y$で幾何的に表現できます。つまり、点$P$と$Q$の位置は互いに関連しており、$x$の値が決まれば$y$の値も決まります。例えば、$y = x$や$y = 2x$や$y = \frac{1}{2}x$や$y = x^{2} + 1$などがあります。これらの関係は、$x$の値が決まれば$y$の値も一意に決まるという性質を持っています。
+%==========================================================
+\chapter{実変数の対数関数と指数関数}
+\markboth{第9章}{対数・指数関数}
+%==========================================================
 
-このような状況では、$y$は$x$の関数と定義されます。つまり、ある変数（ここでは$x$）に対する別の変数（ここでは$y$）の依存性を数学的に表現したものです。この概念は数学全体の中で非常に重要な役割を果たします。
-
-\subsection*{20.1 関数の3つの特性}
-
-関数という概念には、いくつかの特性がありますが、これらは必ずしも全て必要ではありません。以下にその特徴を挙げます：
-
-(1) $y$は任意の$x$の値に対して定義されている。
-
-(2) 与えられた$x$の値に対する$y$の値は一意である。
-
-(3) $x$と$y$との関係は明示的な式で表現され、この式を利用して任意の$x$の値に対する$y$の値を直接計算できる。
-
-これらの特性は多くの重要な関数に当てはまりますが、必ずしも全てが必要ではありません。例えば：
-
-- \textbf{例1}: $y = x$, $2x$, $\frac{1}{2}x$, $x^{2} + 1$など。これらの関係は、$x$の値が決まれば$y$の値も一意に決まります。
-
-- \textbf{例2}: $y = 0$。これは$x$に関わらず常に$y = 0$です。この関数は「定数」と呼ばれます。つまり、どんな$x$の値を与えても、$y$の値は常に同じです。
-
-- \textbf{例3}: $y^{2} = x$。これは$x$が正の場合に二つの解（$±\sqrt{x}$）を持ちます。しかし、$x = 0$のときには一意的な解（$y = 0$）があります。一方で、$x$が負の値である場合、方程式を満たす$y$の値はありません。
-
-- \textbf{例4}: 恒温ガスシリンダーとピストンの状況を考えましょう。ピストンの横截面積を$A$、その重さを$W$とします。ガスは一定の圧力$p_{0}$によって圧縮され、
-  \[
-  W = Ap_{0}
-  \]
-  となります。
-
-  シリンダー内にガスが収納され、ピストンが下に押し下げられるとき、ガスの体積$v$が減少し、ピストン単位面積に対するガスの圧力$p$も増加します。ボイルの法則により、
-  \[
-  pv = a,
-  \]
-  ここで$a$は実験によって定まる数です。
-
-  しかし、ボイルの法則はガスが十分に圧縮されない限り、事実に対して適切な近似を与えるだけです。$v$が減少し、$p$が一定点を超えて増加すると、方程式$(i)$で表現される関係は正確には表現できなくなります。その代わりに、`van der Waals の法則'により
-  \[
-  \left(p + \frac{\alpha}{v^{2}}\right)(v - \beta) = \gamma,
-  \]
-  ここで$\alpha$、$\beta$、$\gamma$は実験によって定まる数です。
-
-  この関係は、$p$を$v$の関数として定義します。これは一部の$v$の値では一つの式で定義され、他の$v$の値では別の式で定義される関数の例です。
-
-- \textbf{例5}: 完全に弾性のある球が高さ$\frac{1}{2}g\tau^{2}$から固定された水平面に落下し、継続的に反発するという状況を考えてみましょう。初等力学の公式によれば、$0 \leq t \leq \tau$ のとき $h = \frac{1}{2}gt^{2}$ です。
-
-これらの例から、関数は様々な形で現れることがわかります。重要なのは、$x$と$y$との間の関係が存在することです。この関係は明示的な式で表現されたり、幾何学的構築によって与えられたりします。
-
-\subsection*{20.2 関数の重要性}
-
-関数の概念は数学だけでなく、物理や工学など様々な分野でも広く使用されます。例えば、上記のガスシリンダーの例では、$p$を$v$の関数として定義することで、ガスの状態をより正確に理解することができます。
-
-また、日常生活でも関数は頻繁に現れます。例えば、あなたの体重が身長に対してどのように依存するか、または温度が時間とともにどのように変化するかなどです。これらの関係を数学的に表現することで、より深い洞察を得ることができます。
-
-\subsection*{20.3 結論}
-
-この章では、関数の基本的な概念と特性について説明しました。関数は$y$が$x$の値に依存することを表す重要な数学的概念です。様々な例を通じて、関数の多様な形態や応用範囲を理解することができます。
-
-今後もこれらの概念を深く掘り下げていきましょう。ご質問や不明点があればいつでもお聞きください。一緒に学び、成長しましょう！
-
-\clearpage
-
-\chapter{第3講：Chapter III: COMPLEX NUMBERS}
+指数関数 $e^x$ は、級数 $e^x=1+x+\dfrac{x^2}{2!}+\dfrac{x^3}{3!}+\cdots$ で定義できます。$x=1$ とした部分和を調べると、$e$ が現れます。
 
 \begin{center}
-\begin{tikzpicture}[scale=1.45, >=Stealth]
-    % Axes
-    \draw[->, thick, darkslate] (-1.2, 0) -- (5.0, 0) node[right] {実軸 $\mathrm{Re}(z)$};
-    \draw[->, thick, darkslate] (0, -0.8) -- (0, 3.8) node[above] {虚軸 $\mathrm{Im}(z)$};
-    % Origin
-    \node[below left=2pt] at (0, 0) {$O$};
-
-    % Complex point z = (3.2, 2.4) -> r = 4.0, theta = 36.87 deg
-    \coordinate (Z) at (3.2, 2.4);
-    \coordinate (X) at (3.2, 0);
-    \coordinate (Y) at (0, 2.4);
-
-    % Projections
-    \draw[dashed, gray!80!black, thick] (0, 2.4) -- (Z) -- (3.2, 0);
-
-    % Vector
-    \draw[->, line width=1.8pt, primaryblue] (0, 0) -- (Z) node[above right=4pt] {\large $z = x + iy = r e^{i\theta}$};
-
-    % Angle arc
-    \draw[->, line width=1.1pt, accentcrimson] (1.3, 0) arc (0:36.87:1.3);
-    \node[accentcrimson, right] at (1.4, 0.45) {\small $\theta = \arg(z)$};
-
-    % Radius label: placed comfortably along the vector with clear offset
-    \node[primaryblue, above left=6pt, rotate=36.87] at (1.6, 1.2) {\small $r = |z| = \sqrt{x^2 + y^2}$};
-
-    % Coordinates on axes with clean distance
-    \draw (3.2, 0.1) -- (3.2, -0.1) node[below=4pt] {$x = r\cos\theta$};
-    \draw (0.1, 2.4) -- (-0.1, 2.4) node[left=4pt] {$y = r\sin\theta$};
-\end{tikzpicture}
-\par\vspace{0.4em}
-\small\textbf{概念図 3.1}：ガウス平面（複素数平面）における直交座標表示 $x+iy$ と極形式 $r(\cos\theta + i\sin\theta)$。
+\begin{tabular}{rr}
+\toprule
+項数 & $1+1+\frac1{2!}+\cdots$ の部分和\\
+\midrule
+2項 & 2\\
+3項 & 2.5\\
+4項 & 2.6667\\
+5項 & 2.7083\\
+6項 & 2.7167\\
+7項 & 2.7181\\
+\bottomrule
+\end{tabular}
 \end{center}
 
-
-\subsection*{Chapter III: 複素数}
-
-\subsection*{34. 直線と平面における移動}
-
-前章で学んだ「実数」~$x$は、多くの視点から見ることができます。純粋な数として考えられる一方で、少なくとも三つの異なる方法で幾何学的な意味が付け加えられます。
-
-まず一つ目の視点では、直線~$\Lambda$（第一章参照）上の長さ~$A_{0}P$の尺度として~$x$を考えることができます。二つ目は、点~$P$の標識として~$x$を考えることです。すなわち、~$A_{0}$から距離が~$x$である点~$P$を指します。
-
-そして三つ目の視点は、直線~$\Lambda$上の位置変化または移動の尺度として~$x$を考えることです。この最後の視点に焦点を当てることが私たちの目的です。
-
-想像してみてください。直線上に小さな粒子が置かれています。この粒子から点~$P$へと移動させます。粒子から~$P$を~$Q$へ移動させるために必要な移動または位置変化を「移動~$\Seg{PQ}$」と呼びます。
-
-完全な移動を特定するには三つの要素が必要です：その「大きさ」、直線沿いの前進または後退方向の「符号」、つまり粒子の元の位置~$P$。しかし、移動によって生じる位置変化のみを考えている場合、移動の点の適用を無視し、長さと符号が同じであれば全ての移動は等価であると考えることが自然です。
-
-すると、移動は長さ~$PQ = x$と、符号が~$x$の正負によって決まる方向で完全に指定されます。したがって、「移動~$[x]$」について話すことができます。そして、$\Seg{PQ} = [x]$と書くことができます。
-
-ページ分割：70
-
-私たちは四角括弧を使用して，位相移動$[x]$を長さまたは数$x$から区別します。\footnote{厳密には，測定する長さ$x$とその実際の長さを区別するために，似たような記号的な差異が必要です。読者はこのような区別が無駄で形式的であると考えるかもしれません。しかし，数学の経験を積むにつれて，彼は異なるものの間にはいかに密接に関連しても同じものではないことを明確に区別することが非常に重要であることが明らかになるでしょう。クリケットが数学的な科学であれば，打者Pのウィック間の移動，得点Q，およびスコアブックに記入されるマークはそれぞれ異なる概念として区別する必要があるでしょう。}
-
-次に平面における位相移動について考えます。\emph{位相移動$\Seg{PQ}$}の定義も同様に行います。しかし、完全に指定するためにより多くの情報が必要です。
-
-必要な情報は以下の通りです：
-(i) 位相移動の\emph{大きさ}，すなわち直線$PQ$の長さ；
-(ii) 位相移動の方向。
-
-点$P$の座標が$a$であるとき、点$Q$の座標は$a + x$となります。したがって、位相移動$[x]$は点$a$から点$a + x$に粒子を移動させます。
-
-\subsection*{まとめ}
-
-この章では、直線と平面における「移動」について考えました。実数~$x$は、長さや位置の尺度としてだけでなく、移動の尺度としても解釈することができます。具体的には、直線上の点から別の点への移動を定義し、その移動を「位相移動」と呼びました。
-
-次回は、平面における複素数について深めていきましょう。複素数は、実数と虚数単位~$i$（$i^2 = -1$）の組み合わせで表される数です。これらを使って、より広範な移動や変換を表現することができます。
-
-どうでしたか？この説明が、あなたの理解を深めるのに役立つことを願っています。複素数は最初は難しそうに見えますが、段階的に学んでいけば自然と理解できるようになります。次回もお楽しみに！
-
-\clearpage
-
-\chapter{第4講：Chapter IV: LIMITS OF FUNCTIONS OF A POSITIVE INTEGRAL VARIABLE}
-
-\subsection*{第4章 初期整数変数の関数の極限}
-
-\subsection*{50. 正整数変数の関数}
-
-これまで、実数変数 \( x \) の関数について議論してきました。しかし、正整数変数 \( n \) の関数も重要な役割を果たします。正整数とは、1, 2, 3, 4, ... というように自然数のことです。
-
-例えば、以下の関数を考えましょう：
-
-(i) \( x \)
-(ii) \( \sqrt{x} \)
-(iii) \( x \) の分母
-(iv) \( x \) の分子と分母の積の平方根
-(v) \( x \) の最大素因数
-(vi) \( \sqrt{x} \) と \( x \) の最大素因数の積
-(vii) \( x \) 番目の素数
-(viii) ダートモア刑務所の囚人 \( x \) の身長（インチ単位）
-
-これらの関数は、定義される \( x \) の値によって異なります。具体的には：
-
-- (i) すべての \( x \) の値で定義されています。
-- (ii) 正の \( x \) の値で定義されています。
-- (iii) 有理数 \( x \) の値で定義されています。
-- (iv) 正の有理数 \( x \) の値で定義されています。
-- (v) 整数 \( x \) の値で定義されています。
-- (vi), (vii) 正の整数 \( x \) の値で定義されています。
-- (viii) 特定の正の整数 \( x \) の値で定義されています。
-
-特に、ダートモア刑務所の囚人 \( x \) の身長という関数は、特定の時間点での囚人の身長を表しています。囚人は異なる時間点で異なる個人となるため、これは二つの変数 \( y = F(x, t) \) として考えることができます。
-
-\subsection*{正整数変数 \( n \)}
-
-今後、これらの関数について、正整数変数 \( n \) の関数として考えていきます。正整数 \( n \) は 1, 2, 3, 4, ... と定義されます。
-
-例えば、関数 \( y = x^2 \) を正整数変数 \( n \) の関数として表すと、
-
-\[
-y = n^2
-\]
-
-となります。つまり、\( n \) が 1, 2, 3, ... という値を取るとき、それぞれの \( n \) に対して \( y \) は \( n^2 \) になります。
-
-\subsection*{極限の概念}
-
-ここで重要なのは、関数 \( y = f(n) \) の極限について考えることです。極限とは、\( n \) が無限大に向かうとき、関数 \( f(n) \) の値がどのように振る舞うのかを調べるものです。
-
-例えば、関数 \( y = n^2 \) の場合、
-
-\[
-\lim_{n \to \infty} n^2
-\]
-
-を考えます。これは \( n \) が無限大に向かうとき、\( n^2 \) の値がどのように振る舞うのかを表しています。
-
-\subsection*{知的好奇心を刺激する}
-
-これらの関数は、私たちの日常生活や科学技術に深く関わっています。例えば、素数の分布や囚人の身長など、数学は私たちの周囲の世界を理解するための強力なツールです。また、極限の概念は微分積分学の基礎となり、現代の物理学や工学にも広く応用されています。
-
-このように、正整数変数 \( n \) の関数を考えることで、新たな視点から数学を再発見することができます。ぜひ、これらの概念を深めてみてください。
-
-以上が第4章「初期整数変数の関数の極限」の概要です。次回は具体的な例を使って、極限の計算方法について詳しく説明しますので、お楽しみに！
-
-\clearpage
-
-\chapter{第5講：Chapter V: LIMITS OF FUNCTIONS OF A CONTINUOUS VARIABLE. CONTINUOUS AND DISCONTINUOUS FUNCTIONS}
-
-\begin{center}
-\begin{tikzpicture}[scale=1.35, >=Stealth]
-    % Axes
-    \draw[->, thick, darkslate] (-0.6, 0) -- (6.8, 0) node[right] {$x$};
-    \draw[->, thick, darkslate] (0, -0.6) -- (0, 4.8) node[above] {$y = f(x)$};
-    % Function curve
-    \draw[domain=0.5:5.8, smooth, variable=\x, line width=1.3pt, primaryblue] plot ({\x}, {0.10*(\x-1)*(\x-1) + 1.2});
-    % Coordinates
-    \def\xzero{3.2}
-    \def\yzero{1.684}
-    \def\del{1.2}
-    \def\eps{0.75}
-
-    % Epsilon band
-    \fill[softblue, opacity=0.75] (0, 0.934) rectangle (6.2, 2.434);
-    \draw[dashed, accentcrimson, thick] (0, 2.434) node[left=3pt] {\small $L + \varepsilon$} -- (6.2, 2.434);
-    \draw[dashed, accentcrimson, thick] (0, 0.934) node[left=3pt] {\small $L - \varepsilon$} -- (6.2, 0.934);
-    \draw[darkslate, dashed, thick] (0, \yzero) node[left=3pt] {$L = f(x_0)$} -- (\xzero, \yzero);
-
-    % Delta interval
-    \draw[dashed, primaryblue, thick] (\xzero-\del, 0) node[below=3pt] {\small $x_0 - \delta$} -- (\xzero-\del, 0.934);
-    \draw[dashed, primaryblue, thick] (\xzero+\del, 0) node[below=3pt] {\small $x_0 + \delta$} -- (\xzero+\del, 2.434);
-    \draw[darkslate, dashed, thick] (\xzero, 0) node[below=3pt] {$x_0$} -- (\xzero, \yzero);
-
-    \filldraw[primaryblue] (\xzero, \yzero) circle (2.8pt);
-    \draw[<->, accentcrimson, line width=1.1pt] (5.6, 0.934) -- (5.6, 2.434) node[midway, right=4pt] {$2\varepsilon$ 許容帯};
-    \draw[<->, primaryblue, line width=1.1pt] (\xzero-\del, 0.4) -- (\xzero+\del, 0.4) node[midway, above=2pt] {$2\delta$ 近傍};
+\begin{figure}[htbp]
+\centering
+\begin{tikzpicture}
+\begin{axis}[width=8cm, height=7cm, axis equal image, xlabel={$x$}, ylabel={$y$}, xmin=-3, xmax=4, ymin=-3, ymax=4, grid=major, legend pos=south east, legend style={font=\footnotesize}]
+ \addplot[thick, primaryblue, domain=-3:1.35, samples=50] {exp(x)};
+ \addplot[thick, crimson, domain=0.05:4, samples=60] {ln(x)};
+ \addplot[dashed, gray, domain=-3:4] {x};
+ \legend{$y=e^x$,$y=\ln x$,$y=x$}
+\end{axis}
 \end{tikzpicture}
-\par\vspace{0.4em}
-\small\textbf{概念図 5.1}：連続性と極限の $\varepsilon\text{-}\delta$ 論法。任意の許容誤差 $\varepsilon > 0$（赤色帯）に対して定義域の近傍幅 $\delta > 0$（青色帯）を適切に選べば、グラフの曲線がすべて許容帯の中に収まる。
-\end{center}
+\caption{$e^x$ と $\ln x$ は、直線 $y=x$ に関して対称（逆関数）。}
+\end{figure}
 
+\begin{pointbox}{この章のポイント}
+\begin{itemize}[leftmargin=1.5em]
+\item $e^x$ は級数で定義でき、$\ln x$ はその逆関数。
+\end{itemize}
+\end{pointbox}
 
-\subsection*{Chapter V: 連続変数の関数の極限}
+%==========================================================
+\chapter{対数関数・指数関数・円関数の一般理論}
+\markboth{第10章}{一般理論}
+%==========================================================
 
-\subsection*{89. $x$ が無限大に向かうときの極限}
+複素数に指数関数を拡張すると、オイラーの公式 $e^{i\theta}=\cos\theta+i\sin\theta$ が現れます。$\theta=\pi$ とすると、$e^{i\pi}=-1$。指数関数と三角関数が、1つの式で結ばれます。
 
-皆さん、こんにちは。今日は「連続変数の関数の極限」について学びましょう。この章では、実数を変数とする関数について考えていきます。具体的には、$x$ という変数が無限大に向かうときに、その関数 $\phi(x)$ の値がどのように振る舞うのかを調べます。
-
-まず、$x$ は基底直線 $\Lambda$ 上の点に対応するすべての値を順次採用します。つまり、$x$ は基底直線上の点から始まり、右方向へと進み続けます。このとき、$x$ が無限大に向かうという言い方をするか、または $x \to \infty$ と表記します。
-
-ここで重要なのは、$x$ が無限大に向かうにつれてすべての値を採用することです。これは、$n$ が無限大に向かうときとは異なります。例えば、$n$ は一連のジャンプによって無限大に向かいますが、$x$ は基底直線 $\Lambda$ の初期位置より右側の全ての点に順次一致します。
-
-\subsection*{定義と理解}
-
-\subsection*{定義[1]．極限の定義}
-
-では、具体的にはどのように $x \to \infty$ のときに関数 $\phi(x)$ が極限 $l$ に収束するのかを定義しましょう。極限とは、$x$ が無限大に向かうとき、$\phi(x)$ の値が $l$ に近づくことを意味します。
-
-ここで、任意に小さな正の数 $\DELTA$ を選んで、ある数 $x_{0}(\DELTA)$ を選びます。この $x_{0}(\DELTA)$ は、$x \geq x_{0}(\DELTA)$ のとき、$\phi(x)$ が $l$ から $\DELTA$ 未満の差異を持つことを指します。
-
-数学的に表すと、
-\[
-|\phi(x) - l| < \DELTA
-\]
-が成り立つとき、関数 $\phi(x)$ は極限 $l$ に収束すると定義します。ここで、$|\cdot|$ は絶対値を表します。
-
-この場合、次のように記述できます：
-\[
-\lim_{x \to \infty} \phi(x) = l,
-\]
-または曖昧性がない限り単に
-\[
-\lim \phi(x) = l, \quad \text{または} \quad \phi(x) \to l.
-\]
-
-\subsection*{定義[2]．無限大への収束}
-
-次に、関数 $\phi(x)$ が $x$ とともに無限大に収束するとは、任意に大きな数 $\Delta$ を選んで、ある数 $x_{0}(\Delta)$ を選びます。このとき、$x \geq x_{0}(\Delta)$ のすべての $x$ について、$\phi(x)$ が $\Delta$ より大きいことを指します。
-
-\subsection*{知的好奇心を刺激する話題}
-
-では、なぜこのような定義が必要なのでしょうか？実際には、この極限の概念は現代の科学や技術にも広く応用されています。例えば、物理学でエネルギーの変化を計算したり、経済学で長期的な市場動向を予測する際にも極限の考え方が使われます。
-
-また、微積分学では、関数の傾き（導関数）や曲線の面積（定積分）を求めるために極限が使用されます。これらの概念は、私たちの日常生活でも広く活用されています。
-
-\subsection*{まとめ}
-
-今日は「連続変数の関数の極限」について学びました。$x \to \infty$ のときに $\phi(x)$ がどのように振る舞うのかを定義し、その重要性についても触れました。次回は、具体的な例を使ってこの概念を深めていきましょう。
-
-皆さん、頑張ってくださいね！
-
-\clearpage
-
-\chapter{第6講：Chapter VI: DERIVATIVES AND INTEGRALS}
-
-\begin{center}
-\begin{tikzpicture}[scale=1.15, >=Stealth]
-    % Left side: Derivative
-    \begin{scope}[shift={(0,0)}]
-        \draw[->, thick, darkslate] (-0.5, 0) -- (4.8, 0) node[right] {$x$};
-        \draw[->, thick, darkslate] (0, -0.5) -- (0, 4.2) node[above] {$y$};
-        % Curve
-        \draw[domain=0.5:4.2, smooth, variable=\x, line width=1.3pt, primaryblue] plot ({\x}, {0.22*\x*\x - 0.15*\x + 0.8});
-        % Points
-        \coordinate (P) at (1.8, 1.243);
-        \coordinate (Q) at (3.3, 2.700);
-        % Secant line
-        \draw[dashed, gray!80!black, thick] (0.6, 0.076) -- (4.0, 3.38) node[above right] {\footnotesize 割線};
-        % Tangent line at x=1.8: slope = 0.642
-        \draw[thick, accentcrimson] (0.6, 0.473) -- (3.6, 2.399) node[right=3pt] {\footnotesize 接線 $f'(x)$};
-        \filldraw[primaryblue] (P) circle (2.5pt) node[below right=2pt] {$P(x, f(x))$};
-        \filldraw[gray!80!black] (Q) circle (2.5pt) node[above left=2pt] {$Q(x+h, f(x+h))$};
-        \node[below=14pt] at (2.2, 0) {\textbf{(a) 導関数（接線の傾き）}};
-    \end{scope}
-
-    % Right side: Riemann Sum (separated by 7.2 cm)
-    \begin{scope}[shift={(7.2,0)}]
-        \draw[->, thick, darkslate] (-0.5, 0) -- (5.4, 0) node[right] {$x$};
-        \draw[->, thick, darkslate] (0, -0.5) -- (0, 4.2) node[above] {$y$};
-        % Rectangles
-        \foreach \i/\h in {1.0/0.88, 1.6/1.22, 2.2/1.68, 2.8/2.27, 3.4/2.98, 4.0/3.80} {
-            \filldraw[fill=softblue, draw=primaryblue!60!black, line width=0.8pt] (\i, 0) rectangle (\i+0.6, \h);
-        }
-        % Curve again on top
-        \draw[domain=0.8:4.8, smooth, variable=\x, line width=1.4pt, primaryblue] plot ({\x}, {0.18*\x*\x + 0.7});
-        \draw (1.0, 0.1) -- (1.0, -0.1) node[below=3pt] {$a$};
-        \draw (4.6, 0.1) -- (4.6, -0.1) node[below=3pt] {$b$};
-        \node at (2.8, 1.0) {\small $\sum f(\xi_i)\Delta x$};
-        \node[below=14pt] at (2.5, 0) {\textbf{(b) 定積分（リーマン和の極限 $\int_a^b f(x)dx$）}};
-    \end{scope}
+\begin{figure}[htbp]
+\centering
+\begin{tikzpicture}[scale=2.2]
+ \draw[->] (-1.3,0)--(1.4,0) node[right] {実軸}; \draw[->] (0,-1.3)--(0,1.4) node[above] {虚軸};
+ \draw[gray] (0,0) circle (1);
+ \def\th{60}
+ \draw[thick, primaryblue, ->] (0,0)--(\th:1);
+ \fill[primaryblue] (\th:1) circle (0.025) node[above right, font=\small] {$e^{i\theta}$};
+ \draw[dashed] (\th:1)--({cos(\th)},0) node[below, font=\scriptsize] {$\cos\theta$};
+ \draw[dashed] (\th:1)--(0,{sin(\th)}) node[left, font=\scriptsize] {$\sin\theta$};
+ \draw (0.25,0) arc (0:\th:0.25); \node[font=\scriptsize] at (0.35,0.12) {$\theta$};
+ \fill[crimson] (-1,0) circle (0.025) node[below left, font=\small] {$e^{i\pi}=-1$};
 \end{tikzpicture}
-\par\vspace{0.4em}
-\small\textbf{概念図 6.1}：微積分学の二大支柱。(a) 割線の極限としての接線の傾き（微分）と、(b) 短冊状長方形の面積の総和の極限としての曲線下の面積（定積分）。
-\end{center}
+\caption{$e^{i\theta}$ は、単位円上の点。$\theta=\pi$（半周）で $-1$ になる。}
+\end{figure}
+
+\begin{notebox}{この本の未解決点}
+\begin{itemize}[leftmargin=1.5em]
+\item ハーディの証明は本書では示していません。定理の正確な主張は翻訳版・原著で確かめてください。
+\item 級数の部分和の値は、筆者が計算しました。
+\end{itemize}
+\end{notebox}
 
-
-\subsection*{第六章 微分と積分}
-
-\subsection*{110. 微分または微係数：曲線の性質について再探求}
-
-皆さん、こんにちは。今日は「微分」や「積分」という数学の重要な概念について学びましょう。これらの概念は、私たちが日常生活で直面するさまざまな問題を解決するのに役立ちます。
-
-まず、微分とは何か考えていきましょう。微分は、曲線の各点における「接線」の傾きを求める方法です。「接線」とは、曲線上の特定の点から引かれた直線のことです。例えば、円や放物線などの一般的な曲線には、その上にあるどの点でも接線が引けるという性質があります。
-
-初等幾何学では、点 \(P\) における曲線の接線は「点 \(Q\) が点 \(P\) に一致する極限位置である直線 \(PQ\) の極限位置」と定義されています。つまり、点 \(Q\) が点 \(P\) に向かって動くとき、直線 \(PQ\) の極限位置が存在すると仮定します。
-
-\subsection*{図36：接線の定義}
-
-図36を見てください。点 \(P\) は曲線上の固定点であり、点 \(Q\) は変動点です。\(PM\) と \(QN\) は \(OY\) 方向に平行で、\(PR\) は \(OX\) 方向に平行です。点 \(P\) の座標を \(x, y\)、点 \(Q\) の座標を \(x + h, y + k\) とします。ここで、\(h\) は \(N\) が \(M\) の右側にある場合は正、左側にある場合は負となります。
-
-接線 \(PT\) が \(OX\) 方向に角度 \(\psi\) を作るという仮定があります。つまり、接線 \(PT\) が直線 \(PQ\) の極限位置であるということは、点 \(Q\) が曲線上から点 \(P\) に向かって動くとき、角 \(QPR\) の極限値が \(\psi\) であることと等価です。
-
-\subsection*{一般の場合}
-
-一般的な場合を考えましょう。まず、\(\psi\) が \(\frac{1}{2}\pi\)（直角）に等しくない場合を考えてみます。このとき、接線 \(PT\) は \(OY\) 方向に並行でないため、\(RPQ\) の角度 \(\psi\) に収束します。
-
-次に、\(\tan RPQ = RQ/PR\) を考えましょう。ここで
-\[
-RQ/PR = (NQ - MP)/MN = \{\phi(x + h) - \phi(x)\}/h;
-\]
-であり、したがって
-\[
-\lim_{h \to 0} \frac{\phi(x + h) - \phi(x)}{h} = \tan\psi.
-\]
-
-これらの式においてすべての長さが適切な符号をもつことを確認してください。例えば図において \(Q\) が \(P\) に近づくとき、直線 \(PQ\) の傾きは接線 \(PT\) の傾きに収束します。
-
-\subsection*{結論}
-
-微分の基本的な考え方は、曲線上の点 \(P\) における接線の傾きを求める方法です。この傾きは、点 \(Q\) が点 \(P\) に向かって動くとき、直線 \(PQ\) の極限位置から得られます。この極限値が \(\tan\psi\) に収束することから、接線の傾きを求める式
-\[
-\lim_{h \to 0} \frac{\phi(x + h) - \phi(x)}{h}
-\]
-が導かれます。
-
-今日学んだ内容は、微分の基本的な概念とその定義方法です。次回は積分について詳しく学びましょう。積分は微分の逆過程であり、曲線の面積や体積を求める方法です。ぜひ次の章も楽しみにしてくださいね！
-
-では、今日はこの程度にします。ご質問があればいつでもお聞きください。お疲れさまでした。
-
-\clearpage
-
-\chapter{第7講：Chapter VII: ADDITIONAL THEOREMS IN THE DIFFERENTIAL AND INTEGRAL CALCULUS}
-
-\subsection*{第7章 微分積分における追加の定理}
-
-\subsection*{147. 高次の平均値の定理}
-
-まず、前回学んだ平均値の定理を思い出してみましょう。これは、区間 \([a, b]\) 内で導関数を持つ関数 \(f(x)\) の値について、ある点 \(\xi\) が存在して、次の式が成り立つことを示しました：
-
-\[
-f(b) - f(a) = (b - a) f'(\xi).
-\]
-
-これは、直感的には区間の両端の関数値の差が、区間に沿って平均的な傾き（導関数）と区間の長さの積に等しいことを示しています。
-
-では、この定理をもう少し深く掘り下げてみましょう。今度は二階導関数を持つ関数について考えます。つまり、関数 \(f(x)\) が区間 \([a, b]\) 内で二階導関数 \(f''(x)\) を持つとします。
-
-\subsection*{1. 関数の定義}
-
-まず、次の関数を考えましょう：
-
-\[
-g(x) = f(b) - f(x) - (b - x) f'(x)
-  - \left(\frac{b - x}{b - a}\right)^2 \{f(b) - f(a) - (b - a)f'(a)\}.
-\]
-
-この関数 \(g(x)\) は、\(x = a\) および \(x = b\) で値が 0 になることがわかります。これは、区間の両端での関数値が一定であることを意味します。
-
-\subsection*{2. 導関数の計算}
-
-次に、この関数 \(g(x)\) の導関数を計算してみましょう。導関数は次のようになります：
-
-\[
-g'(x) = -f'(x) + f'(x) - (b - x) f''(x)
-  - \frac{2(b - x)}{(b - a)^2} \{f(b) - f(a) - (b - a)f'(a)\}.
-\]
-
-整理すると、
-
-\[
-g'(x) = -(b - x) f''(x)
-  - \frac{2(b - x)}{(b - a)^2} \{f(b) - f(a) - (b - a)f'(a)\}.
-\]
-
-\subsection*{3. 導関数の0となる点}
-
-この導関数 \(g'(x)\) が某点 \(x = \xi\) で 0 になることを示しましょう。つまり、ある \(\theta_2\) が存在して、
-
-\[
-\xi = a + \theta_2 (b - a)
-\]
-
-となるような \(\xi\) が区間内に存在します。
-
-このとき、導関数 \(g'(x)\) の値は 0 になります。つまり、
-
-\[
--(b - \xi) f''(\xi)
-  - \frac{2(b - \xi)}{(b - a)^2} \{f(b) - f(a) - (b - a)f'(a)\} = 0.
-\]
-
-これを整理すると、
-
-\[
-f(b) = f(a) + (b - a) f'(a) + \frac{1}{2}(b - a)^2 f''(\xi).
-\]
-
-\subsection*{4. 特定の形での表記}
-
-今、\(b = a + h\) と置き換えてみましょう。すると、
-
-\[
-f(a + h) = f(a) + hf'(a) + \frac{1}{2}h^2 f''(a + \theta_2 h).
-\]
-
-これが二階平均値の定理の標準形です。
-
-\subsection*{5. 台湾の定理}
-
-この結果から、Taylorの定理（または一般の平均値の定理）を導くことができます。これは、関数 \(f(x)\) の任意の次数の導関数を持つ場合に適用されます。つまり、関数 \(f(x)\) が区間 \([a, b]\) 内で最初の \(n\) 階の導関数を持つとすると、
-
-\[
-f(b) = f(a) + (b - a)f'(a) + \frac{1}{2}(b - a)^2 f''(a) + \cdots + \frac{1}{n!}(b - a)^n f^{(n)}(\xi).
-\]
-
-ここで、\(\xi\) は \(a\) と \(b\) の間（\(a\) および \(b\) を除く）の某点です。
-
-この定理は、関数を近似する際に非常に有用で、実際には物理や工学など多くの分野で応用されています。例えば、物質の挙動を予測したり、機械の動きを解析したりする際にも使用されます。
-
-以上のように、高次の平均値の定理は導関数の性質から得られ、Taylorの定理はその一般化として成立します。これらの定理は、微分積分学の深部に潜む数学的な美しさと力強さを示しています。
-
-\clearpage
-
-\chapter{第8講：Chapter VIII: THE CONVERGENCE OF INFINITE SERIES AND INFINITE INTEGRALS}
-
-\begin{center}
-\begin{tikzpicture}[scale=1.35, >=Stealth]
-    % Real line
-    \draw[->, thick, darkslate] (-0.5, 0) -- (10.5, 0) node[right] {和 $S_n$};
-    % Convergence point S at x=5.0
-    \def\slim{5.0}
-    \draw[dashed, red!85!black, line width=1.3pt] (\slim, -1.0) -- (\slim, 2.2);
-    \node[above=3pt, red!85!black] at (\slim, 2.2) {\textbf{収束値 $S$}};
-
-    % Partial sums with ample horizontal separation:
-    % S_1 = 1.0, S_2 = 9.0, S_3 = 2.5, S_4 = 7.5, S_5 = 3.8, S_6 = 6.2
-    \filldraw[primaryblue] (1.0, 0) circle (3pt) node[below=5pt] {\large $S_1$};
-    \filldraw[primaryblue] (9.0, 0) circle (3pt) node[below=5pt] {\large $S_2$};
-    \filldraw[primaryblue] (2.5, 0) circle (3pt) node[below=5pt] {\large $S_3$};
-    \filldraw[primaryblue] (7.5, 0) circle (3pt) node[below=5pt] {\large $S_4$};
-    \filldraw[primaryblue] (3.8, 0) circle (3pt) node[below=5pt] {\large $S_5$};
-    \filldraw[primaryblue] (6.2, 0) circle (3pt) node[below=5pt] {\large $S_6$};
-
-    % Upper & Lower arcs showing alternating oscillations
-    \draw[->, line width=1.2pt, primaryblue] (1.0, 0.2) to[out=50, in=130] (9.0, 0.2);
-    \draw[->, line width=1.2pt, primaryblue] (9.0, -0.35) to[out=230, in=310] (2.5, -0.35);
-    \draw[->, line width=1.2pt, primaryblue] (2.5, 0.2) to[out=50, in=130] (7.5, 0.2);
-    \draw[->, line width=1.2pt, primaryblue] (7.5, -0.35) to[out=230, in=310] (3.8, -0.35);
-    \draw[->, line width=1.2pt, primaryblue] (3.8, 0.2) to[out=50, in=130] (6.2, 0.2);
-
-    % Epsilon band around S: from 4.0 to 6.0
-    \draw[<->, accentcrimson, line width=1.2pt] (4.0, 1.5) -- (6.0, 1.5) node[midway, above=2pt] {$|S_n - S| < \varepsilon$};
-    \draw[dashed, accentcrimson, thick] (4.0, 0) -- (4.0, 1.5);
-    \draw[dashed, accentcrimson, thick] (6.0, 0) -- (6.0, 1.5);
-\end{tikzpicture}
-\par\vspace{0.4em}
-\small\textbf{概念図 8.1}：交代級数の振動と収束（ライプニッツの判定法・コーシーの収束条件）。部分和 $S_n$ が収束値 $S$ を挟んで振動しながら振幅を縮小させ、極限値へと収束していく幾何学的イメージ。
-\end{center}
-
-
-\subsection*{Chapter VIII: 不定期級数および不定積分の収束}
-
-\subsection*{165. 無限級数の収束とは何か？}
-
-前章で、無限級数が収束する、発散する、または振動することについて説明しました。例えば、幾何級数
-\[
-1 + x + x^2 + \dots
-\]
-は、$x$ の値によって収束したり発散したりします。この章では、より系統的に無限級数の収束性を調べます。
-
-まず、無限級数の表記方法について説明しましょう：
-\[
-u_m + u_{m+1} + \dots + u_n = \sum_{m}^{n} \phi(\nu),
-\]
-無限級数 $u_0 + u_1 + u_2 + \dots$ は $\sum_{0}^{\infty} u_n$、または単に $\sum u_n$ と表記します。
-
-例えば、級数 $1 + \frac{1}{2} + \frac{1}{3} + \dots$ を考えます。このとき、$u_n = \frac{1}{n+1}$ と定義できます。この級数は $u_0$ から始まる方が便利なので、$u_n = \frac{1}{n+1}$ とします。
-
-\subsection*{166. 正項級数の収束論}
-
-正項級数とは、すべての項が正（または0）である無限級数のことです。例えば、
-\[
-1 + \frac{1}{2} + \frac{1}{3} + \dots
-\]
-は正項級数です。
-
-正項級数の収束性を調べる方法は比較的単純で、その理由は以下の通りです：
-- すべての項が正であるため、部分和（最初の $n$ 項の合計）は常に増加します。
-- もし部分和が有界（つまり、ある定数よりも小さくならない）であれば、級数は収束します。
-
-逆に、部分和が無限大に向かって増加する場合は、級数は発散します。
-
-\subsection*{167. 基本的な定理}
-
-ここでは、§77で証明された基本的な定理を紹介します。この定理は正項級数の収束性を判定するための重要なツールです：
-
-\par\vspace{0.5em}\noindent\textbf{結果}\par 
-\Item{A.} 正項級数 $\sum u_n$ が収束するためには、部分和 $S_n = \sum_{k=0}^{n} u_k$ の値が有界でなければなりません。つまり、ある定数 $M$ に対して $S_n < M$ が成り立つ必要があります。
-
-\Item{B.} 反対に、部分和 $S_n$ が無限大に向かって増加する場合、級数 $\sum u_n$ は発散します。
-\par\vspace{0.5em}
-
-この定理を理解するために、具体的な例を使って考えてみましょう。例えば、級数
-\[
-1 + \frac{1}{2} + \frac{1}{3} + \dots
-\]
-の部分和 $S_n = 1 + \frac{1}{2} + \frac{1}{3} + \dots + \frac{1}{n+1}$ を考えます。この部分和は無限大に向かって増加しますので、級数は発散します。
-
-一方で、級数
-\[
-1 + \frac{1}{4} + \frac{1}{9} + \dots = \sum_{n=1}^{\infty} \frac{1}{n^2}
-\]
-の部分和 $S_n = 1 + \frac{1}{4} + \frac{1}{9} + \dots + \frac{1}{(n+1)^2}$ は有界で、級数は収束します。
-
-このように、正項級数の収束性を判定するためには、部分和が有界であるかどうかを確認することが重要です。
-
-\clearpage
-
-\chapter{第9講：Chapter IX: THE LOGARITHMIC AND EXPONENTIAL FUNCTIONS OF A REAL VARIABLE}
-
-\subsection*{第九章：対数と指数関数}
-
-\subsection*{196．これまで学んできた関数の種類}
-
-これまでの数多くの関数の中で、最も重要なものは多項式、有理函数、代數函数（明示的または暗黙的）、三角函数（直接または逆）です。これらの関数は日常生活や科学のさまざまな場面で広く使用されています。
-
-しかし、数学においてはまだ新しい関数が導入されることがあります。これは既存の関数では問題を解決できないことが見受けられるためです。例えば、無理数と複素数が最初に導入されたときも同様でした。無理数や複素数は、既存の整数や有理数で解けない代数方程式を解くために必要となりました。
-
-新しい関数の多くは積分問題から生まれました。ある関数 \( f(x) \) を既知の関数を使って積分しようと試みましたが、これらの試みは失敗に終わりました。一定数の失敗後には、問題が解けないと考えられるようになりました。しばしばこれは証明されましたが、その厳密な証明は後にしか得られませんでした。
-
-\subsection*{新しい関数の導入}
-
-新しい関数 \( F(x) \) を導入する際、まずその定義から始めます。具体的には、\( F'(x) = f(x) \) という条件を満たす関数 \( F(x) \) を定義します。この定義から、\( F(x) \) の性質を調査し始めると、\( F(x) \) は既知の関数の有限な組み合わせでは絶対に持つことができない性質を持つことが明らかになります。
-
-例えば、第六章で方程式
-\[
-\log x = \int \frac{dx}{x}
-\]
-を使って関数 \( \log x \) を定義しました。これは \( \log x \) が新しい関数であることを示唆しています。
-
-\subsection*{なぜ \( \log x \) は新しい関数なのか？}
-
-では、なぜ \( \log x \) は新しい関数なのでしょうか？まず、\( \log x \) は有理函数でないことが分かります。有理函数の導函数は、分母に重複因子のみを含む有理函数となります。しかし、代数的または三角関数であるかどうかについては、より難しい問題です。
-
-少量の実験により微分が代数的な無理性を取り除くことはないことが容易に確認できます。例えば、\(\sqrt{1 + x}\) を何回でも微分すると、その結果は常に \(\sqrt{1 + x}\) と有理関数の積となります。
-
-また、\(\sin x\) や \(\cos x\) が含まれる関数を微分すると、これらのいずれかは結果において残ります。つまり、\(\log x\) の微分結果には \(\log x\) 自身が含まれることから、\(\log x\) は既存の関数の有限な組み合わせでは持つことができない性質を持つことが分かります。
-
-したがって、\(\log x\) が新しい関数であるという厳密な証明は得られません（そのような証明については、236ページに詳しく説明されています）。
-
-\subsection*{結論}
-
-このように、新しい関数 \( \log x \) の導入は積分問題から生まれました。そして、その性質を調査することで、\(\log x\) が既存の関数では持つことができない性質を持つことが明らかになりました。これにより、新たな数学的工具として \( \log x \) が導入されました。
-
-この講義を通じて、新しい関数の導入過程とその重要性を理解し、数学の広大な世界にさらに興味を持てるようになります。
-
-\clearpage
-
-\chapter{第10講：Chapter X: THE GENERAL THEORY OF THE LOGARITHMIC, EXPONENTIAL, AND CIRCULAR FUNCTIONS}
-
-\subsection*{Chapter X: 対数関数、指数関数および三角関数の一般理論}
-
-\subsection*{217. 複素変数の函数}
-
-これまで、複素数 \( z = x + iy \) を定義してきました。ここでは、一般的に便利な形で \( x + yi \) の表記を使用します。
-
-いくつかのクラスの \( z \) を含む式について、多項式 \( P(z) \) などの単純な性質を考慮しました。このような式を \( z \) の関数と呼ぶのは自然であり、実際には、多項式 \( P(z) \) および \( Q(z) \) の比 \( \frac{P(z)}{Q(z)} \) を有理関数と呼んだりもしました。
-
-しかし、\( z \) の関数の一般的な定義は与えていませんでした。ここでは、その定義について詳しく説明します。
-
-\subsection*{217.1 \( z \) の関数の定義}
-
-まず、実変数 \( x \) についての関数を定義するときと同じ方法で、\( z \) についての関数を定義することを考えます。すなわち、\( z \) と \( Z \) 間にどのような関係が存在すれば、あるまたはすべての \( z \) の値に対応する \( Z \) の値や値群があるという関係が存すると、\( Z \) を \( z \) の関数と呼びます。
-
-しかし、精密に検討すると、この定義からは何らの利益も得られないことがわかります。なぜなら、\( z = x + iy \) が与えられれば、\( x \) と \( y \) も与えられることになり、逆もまた真です。つまり、\( z \) の値を指定することは、\( x \) と \( y \) のペアの値を指定することと同じことです。
-
-したがって、提案された定義によれば、「\( z \)についての関数」は実変数 \( x \) と \( y \) の複素関数
-\[
-f(x, y) + ig(x, y)
-\]
-に他なりません。例えば
-\[
-x - iy,\quad xy,\quad |z| = \sqrt{x^{2} + y^{2}},\quad \arg z = \arctan(y/x)
-\]
-は「\( z \)についての関数」です。
-
-この定義は完全に正当ですが、無意味であり、新しい概念を真正に定義していないからです。したがって、「複素変数 \( z \) についての関数」という表現を使う際には、より制限された意味で使用することが便利です。すなわち、実変数 \( x \) と \( y \) の一般的な複素関数のクラスの中から特別なクラスを選出し、その表現が限定されるようにします。
-
-しかし、この選択方法を説明し、選ばれた特別なクラスの関数の特性を説明しようとすると、本書の範囲を超えるところまで行かざるを得ません。したがって、一般的な定義は与えず、直接定義します。
-
-\subsection*{217.2 特別なクラスの関数}
-
-ここでは、複素変数 \( z \) の関数として、特に重要なクラスを扱います。これらの関数は、実数 \( x \) と \( y \) の関数から派生し、複素平面上で定義されます。
-
-例えば、指数関数 \( e^z \) は
-\[
-e^{x + iy} = e^x (\cos y + i \sin y)
-\]
-と定義できます。これは、実数 \( x \) の指数関数と三角関数の組合せで表されます。
-
-また、対数関数 \( \log z \) は
-\[
-\log (x + iy) = \ln |z| + i \arg z
-\]
-と定義できます。これは、複素数 \( z \) の絶対値と偏角から成ります。
-
-さらに、三角関数 \( \sin z \) および \( \cos z \) も重要です。これらは
-\[
-\sin z = \frac{e^{iz} - e^{-iz}}{2i},\quad \cos z = \frac{e^{iz} + e^{-iz}}{2}
-\]
-と定義できます。
-
-これらの関数は、複素平面上で一貫した性質を持つため、数学や物理学の多くの応用に広く使用されます。例えば、電気工学では複素指数関数が周波数分析に使われ、量子力学では対数関数と三角関数が波動関数の解析に重要な役割を果たします。
-
-\subsection*{217.3 知的好奇心を刺激する}
-
-これらの関数は、単なる抽象的な概念ではなく、実世界の現象をモデル化するためにも有用です。例えば、複素指数関数 \( e^{iz} \) のグラフは、周期的な振動を示すことができ、これは音波や電磁波などの物理現象を説明するのに役立ちます。
-
-また、対数関数と三角関数の組合せは、円周率 \( \pi \) との深い関係を持つため、数学的にも興味深く、探求の余地が広がります。これらの関数を通じて、複素平面上での振る舞いを理解することで、我々はより深い洞察を得ることができます。
-
-\subsection*{217.4 結論}
-
-この章では、複素変数 \( z \) の関数について定義と例を説明しました。特に重要なクラスの関数として、指数関数、対数関数、および三角関数を扱いました。これらの関数は、数学や物理学の多くの領域で広く使用され、理解することで新たな視点を得ることができます。
-
-これからは、これらの関数を通じて複素平面上での振る舞いを深く探求していきましょう。ご一緒に学び、理解を深めていく旅をお楽しみください。
-
-\clearpage
 \end{document}
