@@ -4,513 +4,863 @@
 \usepackage{amsmath,amssymb,amsfonts,amsthm}
 \usepackage{geometry}
 \geometry{top=24mm,bottom=24mm,left=24mm,right=24mm,footskip=10mm}
+\usepackage{tikz}
+\usetikzlibrary{arrows.meta,calc,positioning,patterns,shapes.geometric,shapes.misc,decorations.pathreplacing,decorations.markings,angles,quotes,intersections,backgrounds,fit}
+\usepackage{pgfplots}
+\pgfplotsset{compat=1.18}
 \usepackage{tcolorbox}
 \tcbuselibrary{skins,breakable}
 \usepackage{hyperref}
+\usepackage{enumitem}
+\usepackage{booktabs}
 \usepackage{fancyhdr}
-\usepackage{graphicx}
-\usepackage{tikz}
-\usetikzlibrary{arrows.meta,calc,positioning,shapes.geometric}
 
-\definecolor{primaryblue}{RGB}{20, 60, 110}
-\definecolor{darkslate}{RGB}{35, 45, 60}
-\definecolor{accentcrimson}{RGB}{160, 30, 45}
-\definecolor{softblue}{RGB}{238, 244, 252}
-\definecolor{warmgold}{RGB}{185, 125, 25}
+\definecolor{primaryblue}{RGB}{24, 76, 120}
+\definecolor{softblue}{RGB}{235, 243, 250}
+\definecolor{darkslate}{RGB}{44, 62, 80}
+\definecolor{warmamber}{RGB}{217, 119, 6}
+\definecolor{softamber}{RGB}{254, 243, 199}
+\definecolor{crimson}{RGB}{185, 28, 28}
+\definecolor{softrose}{RGB}{255, 228, 230}
+\definecolor{accentgreen}{RGB}{16, 120, 70}
+\definecolor{softgreen}{RGB}{236, 253, 245}
+\definecolor{gridgray}{RGB}{200, 205, 210}
 
 \hypersetup{
     colorlinks=true,
     linkcolor=primaryblue,
-    citecolor=darkslate,
     urlcolor=primaryblue,
-    pdftitle={古典で学び直すアルキメデス幾何学・力学入門},
+    citecolor=accentgreen,
     pdfauthor={教育情報分析研究会}
+}
+
+\newtcolorbox{examplebox}[1]{
+    colback=softgreen, colframe=accentgreen, coltitle=white, fonttitle=\bfseries,
+    title=#1, arc=3mm, boxrule=1pt, left=4mm,right=4mm,top=3mm,bottom=3mm, breakable
+}
+\newtcolorbox{pointbox}[1]{
+    colback=softamber, colframe=warmamber, coltitle=darkslate, fonttitle=\bfseries,
+    title=#1, arc=2mm, boxrule=1pt, left=3mm,right=3mm,top=2mm,bottom=2mm, breakable
+}
+\newtcolorbox{notebox}[1]{
+    colback=softrose, colframe=crimson, coltitle=white, fonttitle=\bfseries,
+    title=#1, arc=2mm, boxrule=1pt, left=3mm,right=3mm,top=2mm,bottom=2mm, breakable
+}
+
+\tikzset{
+  >=Stealth,
+  fbox/.style={draw=primaryblue, fill=softblue, rounded corners=3pt, align=center, inner sep=4pt, font=\small},
+  wbox/.style={draw=primaryblue, fill=white, rounded corners=3pt, align=center, inner sep=4pt, font=\small},
+  abox/.style={draw=warmamber, fill=softamber, rounded corners=3pt, align=center, inner sep=4pt, font=\small},
+  gbox/.style={draw=accentgreen, fill=softgreen, rounded corners=3pt, align=center, inner sep=4pt, font=\small},
+  rbox/.style={draw=crimson, fill=softrose, rounded corners=3pt, align=center, inner sep=4pt, font=\small},
+  ax/.style={->, thick, darkslate},
+  lbl/.style={font=\footnotesize, text=darkslate},
 }
 
 \pagestyle{fancy}
 \fancyhf{}
-\fancyhead[LE,RO]{\small\thepage}
-\fancyhead[LO]{\small\rightmark}
-\fancyhead[RE]{\small\leftmark}
+\fancyhead[LE,RO]{\thepage}
+\fancyhead[LO]{\nouppercase{\rightmark}}
+\fancyhead[RE]{\nouppercase{\leftmark}}
 \renewcommand{\headrulewidth}{0.4pt}
-\setlength{\headheight}{18pt}
+
+\hypersetup{pdftitle={古典で学び直すアルキメデス入門 —— ヒース『アルキメデス』に沿って}}
 
 \begin{document}
 
-\frontmatter
-
 \begin{titlepage}
-    \centering
-    \vspace*{2.0cm}
-    {\Huge\textbf{古典で学び直す}\par}
-    \vspace{0.4cm}
-    {\Huge\textbf{アルキメデス幾何学・力学入門}\par}
-    \vspace{0.6cm}
-    {\Large\textbf{梃子の原理・浮力・取り尽くし法から微積分の源流へ}\par}
-    \vspace{0.8cm}
-    {\large — — 高校までの数学・物理で読み解く古代科学の最高峰 — —\par}
-    \vspace{1.5cm}
-    {\large 底本：Sir Thomas Little Heath \textit{Archimedes} (Project Gutenberg eBook No. 35550)\par}
-    \vspace{2.5cm}
-    {\Large\textbf{教育情報分析研究会} 編著\par}
-    \vfill
-    {\large 2026年10月 完全決定版\par}
-    \vspace*{1.0cm}
+\begin{center}
+\vspace*{1.5cm}
+{\Large\bfseries プロジェクト・グーテンベルク古典数学入門シリーズ}\\[0.8cm]
+\rule{\textwidth}{1.5pt}\\[0.4cm]
+{\Huge\bfseries 古典で学び直す\\アルキメデス入門}\\[0.4cm]
+{\Large\bfseries —— 取り尽くし法・てこ・浮力・巨大数 ——}\\[0.4cm]
+\rule{\textwidth}{1.5pt}\\[1.5cm]
+{\large 原著：トーマス・リトル・ヒース（\textit{Thomas Little Heath}）\\
+\textit{Archimedes}}\\[2.0cm]
+{\Large\bfseries 著：教育情報分析研究会}\\[2.5cm]
+\vfill
+{\large 2026年11月 全面改訂版}\\[0.5cm]
+{\footnotesize 本書は Project Gutenberg のパブリックドメイン（eBook \#35550）の翻訳の章立てに沿って、\\
+中学校・高等学校の数学の知識で読み進められるように書き下ろした入門書です。}
+\end{center}
 \end{titlepage}
 
+\frontmatter
 \tableofcontents
-\clearpage
-
-\chapter*{はじめに：大人が今こそ学び直す「アルキメデスの幾何学と物理学」}
-\addcontentsline{toc}{chapter}{はじめに：大人が今こそ学び直す「アルキメデスの幾何学と物理学」}
-
-古代シチリア島の都市国家シラクサに生きたアルキメデス（Archimedes, 前287頃--前212）の名を知らない人はいないでしょう。お風呂に入ったときに水が溢れるのを見て「エウレカ（わかったぞ！）」と叫んで裸で街を駆け抜けた逸話や、「我に支点を与えよ、さらば地球をも動かさん」という梃子（てこ）の名言、シラクサを攻め立てたローマの大艦隊を巨大な投石機や鏡の反射光で防衛した伝説は、今なお世界中の人々を魅了してやみません。
-
-しかし、これらの劇的な逸話の背後にある「数学者・理論物理学者としての真のアルキメデス」の姿を知る人は、驚くほどわずかです。
-
-アルキメデスは、ニュートンやライプニッツが微積分学を創始する1900年も前に、円周率$\pi$の値を$3\frac{10}{71} < \pi < 3\frac{1}{7}$（$3.1408 < \pi < 3.1428$）という驚異的な精度で挟み込み、放物線で囲まれた面積、球の表面積と体積、らせんの幾何学的性質を完璧に決定していました。さらに、幾何学の公理的方法を物理学に初めて持ち込み、「梃子の平衡の法則」や「浮体の安定条件」を数学の定理として厳密に証明したのです。
-
-本書は、20世紀を代表するギリシャ数学史の巨人サー・トーマス・リトル・ヒースの古典『\textit{Archimedes}』（1920年）を導きの書とし、\textbf{50代から80代の大人・学び直し読者}に向けて書き下ろした入門講義です。
-
-難解な大学数学の予備知識は必要ありません。中学・高校で親しんだ三平方の定理や円の性質、力学の初歩を思い出しながら、人類史上最高の数学的直観がいかにして紡ぎ出されたのかを、豊富な図版とともに心ゆくまで味わっていただければ幸いです。
-
-\clearpage
 \mainmatter
-\chapter{第1講：シラクサの巨人と幾何学者の魂 —— 「我が円を乱すな」の真相}
 
-アルキメデスは紀元前287年頃、シチリア島のギリシャ植民都市シラクサに生まれました。天文学者フェイディアスの息子として恵まれた知的環境に育ち、アレクサンドリアのムセイオン（学術研究所）でコノンやエラトステネスら当時の最高峰の知性と交わりました。
+%==========================================================
+\chapter*{はじめに：アルキメデスに会いに行く}
+\addcontentsline{toc}{chapter}{はじめに：アルキメデスに会いに行く}
+\markboth{はじめに}{はじめに}
+%==========================================================
 
-第二次ポエニ戦争において、ローマの知将マルケッルスが率いる強大な軍団がシラクサを海上・陸上から包囲した際、アルキメデスが考案した防衛兵器群はローマ兵を恐怖の底に陥れました。長射程の投石機、城壁の小窓から放たれる矢、船を持ち上げて水中に叩き落とすクレーン（アルキメデスの鉤爪）など、幾何学と力学の応用は圧倒的な威力を発揮しました。
+「ユリイカ！」と叫んで裸のまま街を走った人。「私に支点を与えよ、地球でも動かしてみせよう」と言った人。あなたも、そんな逸話をどこかで耳にしたことがあるのではないでしょうか。紀元前3世紀のシラクサ（シチリア島）に生きたアルキメデスは、数学・物理学・工学のすべてにわたって、時代をはるかに先取りした人でした。
 
-しかし、城内が陥落した際、アルキメデスは砂の上に幾何学の図形を描いて証明に没頭していました。侵入したローマ兵が図を踏み躙ったとき、彼は「私の円を乱すな（Noli turbare circulos meos）」と叫び、その場で刺殺されたと伝えられています。彼が生涯を捧げたのは兵器の開発ではなく、永遠の真理を宿す純粋幾何学の世界でした。
+この本は、翻訳版『アルキメデス』（原著はヒースの小著）の章立てに1対1で沿って、次の7つの章と付録で構成しています。
 
-\begin{tcolorbox}[colback=softblue,colframe=primaryblue,title=\textbf{重要ポイント：アルキメデスの知的肖像},arc=3mm,boxrule=1pt]
-1. \textbf{天文学から幾何学・工学まで}：天球儀（プラネタリウムの祖）を金属で作製し、太陽・月・惑星の運行を歯車機構で再現した。
-2. \textbf{墓碑に刻まれた誇り}：アルキメデスが自ら墓碑に刻むよう遺言したのは、兵器の功績ではなく「球とそれに外接する円柱」の図形であった。
-3. \textbf{純粋数学への敬意}：プルタルコスが伝えるように、彼は機械の発明を単なる幾何学の余興とみなし、理論の厳密性に至上の価値を置いた。
-\end{tcolorbox}
+\begin{figure}[htbp]
+\centering
+\begin{tikzpicture}[node distance=4mm]
+ \node[fbox, text width=2.2cm] (c1) {1 生涯と逸話};
+ \node[fbox, text width=2.2cm, right=of c1] (c2) {2 ギリシャ幾何学};
+ \node[fbox, text width=2.2cm, right=of c2] (c3) {3 著作と写本};
+ \node[fbox, text width=2.2cm, right=of c3] (c4) {4 幾何学};
+ \node[abox, text width=2.2cm, below=7mm of c1] (c5) {5 砂の計算者};
+ \node[abox, text width=2.2cm, right=of c5] (c6) {6 力学};
+ \node[abox, text width=2.2cm, right=of c6] (c7) {7 流体静力学};
+ \node[gbox, text width=2.2cm, right=of c7] (c8) {付録 文献・年表};
+\end{tikzpicture}
+\caption{本書の構成。前半（青）は人と数学の背景、後半（黄）はアルキメデスの三大分野。}
+\end{figure}
+
+\begin{notebox}{読む前の注意：事実・推測・未確認}
+アルキメデスの生涯については、古代の歴史家の書いた逸話が多く、どこまでが事実かは確定していません。本書では「伝承」と「確かな記録」を区別して書きます。また、翻訳版の一部には誤訳と思われる箇所があるため、数値や定理は筆者が数学的に確かめたもの（検算つき）だけを本文に載せます。
+\end{notebox}
+
+%==========================================================
+\chapter{アルキメデスの生涯と逸話}
+\markboth{第1章}{生涯と逸話}
+%==========================================================
+
+\section{確かなことと、伝わる話}
+
+アルキメデス（紀元前287年ごろ〜前212年）は、シチリア島の都市シラクサに生まれ、そこで暮らしました。紀元前212年、ローマ軍がシラクサを攻め落としたとき、兵士に殺されたと伝えられています。生年は、没年から逆算した推定です。
+
+\begin{figure}[htbp]
+\centering
+\begin{tikzpicture}[x=0.34cm]
+ \draw[ax] (-1,0)--(32,0);
+ \foreach \x/\l in {0/前287ごろ,10/前270年代,20/前240年代,30/前212} {\draw (\x,0.15)--(\x,-0.15);}
+ \node[below, font=\scriptsize] at (0,-0.2) {前287ごろ};
+ \node[below, font=\scriptsize] at (30,-0.2) {前212};
+ \node[fbox, text width=2.2cm] at (3,1.4) {シラクサに生まれる\\{\scriptsize （推定）}};
+ \node[abox, text width=3.0cm] at (15,1.4) {ヒエロン2世の治世\\{\scriptsize 王冠の逸話など}};
+ \node[rbox, text width=2.6cm] at (27.2,1.4) {ローマ軍が\\シラクサを攻略};
+ \draw[->] (3,0.85)--(3,0.1); \draw[->] (15,0.85)--(15,0.1); \draw[->] (27.2,0.85)--(29.8,0.1);
+\end{tikzpicture}
+\caption{アルキメデスの生涯の枠組み。生年は推定、没年（前212年）は広く認められている。}
+\end{figure}
 
 \begin{center}
-\begin{tikzpicture}[scale=1.2, >=Stealth]
-    % Cylinder
-    \draw[thick, darkslate] (-1.5, 0) -- (-1.5, 3);
-    \draw[thick, darkslate] (1.5, 0) -- (1.5, 3);
-    \draw[thick, darkslate] (0, 3) ellipse (1.5 and 0.45);
-    \draw[thick, darkslate] (-1.5, 0) arc (180:360:1.5 and 0.45);
-    \draw[dashed, darkslate] (-1.5, 0) arc (180:0:1.5 and 0.45);
-
-    % Inscribed Sphere
-    \draw[line width=1.5pt, primaryblue] (0, 1.5) circle (1.5);
-    \draw[dashed, primaryblue] (0, 1.5) ellipse (1.5 and 0.45);
-
-    % Height and Diameter Annotations
-    \draw[<->, accentcrimson, thick] (2.2, 0) -- (2.2, 3) node[midway, right] {高さ $h = 2r$};
-    \draw[<->, accentcrimson, thick] (-1.5, -0.9) -- (1.5, -0.9) node[midway, below] {直径 $2r$};
-
-    % Ratio box
-    \node[draw=primaryblue, fill=softblue, rounded corners, align=center, inner sep=6pt] at (5.5, 1.5) {
-        \textbf{【アルキメデスの墓碑定理】}\\
-        $\text{球の体積} = \frac{4}{3}\pi r^3$\\
-        $\text{外接円柱の体積} = 2\pi r^3$\\
-        $\Longrightarrow\ \text{球} : \text{円柱} = \mathbf{2 : 3}$\\
-        表面積の比も同様に $\mathbf{2 : 3}$
-    };
-\end{tikzpicture}
-\par\vspace{0.4em}
-\small\textbf{概念図 1}：アルキメデスが自らの最高傑作として墓碑に刻ませた「球と外接円柱」の体積・表面積比（$2:3$）。
+\begin{tabular}{p{3.5cm}p{9cm}}
+\toprule
+区分 & 内容 \\
+\midrule
+ほぼ確かなこと & シラクサの人。晩年にローマとの戦争のなかで死んだ。数学・力学・天文の著作を書いた。\\
+伝承（逸話） & 王冠の黄金の混ぜ物を見破った話、支点があれば地球を動かせるという言葉、戦争での防衛機械、墓に球と円柱を刻ませたこと。\\
+\bottomrule
+\end{tabular}
 \end{center}
 
-\subsection*{解題と現代へのメッセージ}
-西暦前75年、共和政ローマの文豪キケロがシチリアの財務官として赴任した際、草むらに埋もれていたこの「球と円柱」が刻まれた墓碑を自ら探し当てたと述懐しています。後世の近代科学者たちも、アルキメデスのこの簡潔極まりない比例関係の美しさに深い感嘆を寄せています。
+\section{ユリイカ：王冠の逸話}
 
-\clearpage
+シラクサの王ヒエロンが、金細工師に純金の王冠を作らせたところ、銀が混ぜられているのではないかと疑いました。アルキメデスは、王冠を壊さずに調べる方法を考えました。伝承では、入浴中に水があふれるのを見て、解決法がひらめいたとされます。この逸話は、アルキメデスの死後の古代の著作者が伝えたものです。第7章で、数値を使って仕組みを確かめます。
 
-\chapter{第2講：ギリシャ幾何学の到達点 —— ユークリッドからアルキメデスへの跳躍}
+\begin{figure}[htbp]
+\centering
+\begin{tikzpicture}[scale=0.9]
+ % 湯船
+ \draw[thick, primaryblue, fill=softblue] (0,0) rectangle (3,1.6);
+ \draw[thick, primaryblue] (0,1.6)--(0,2.0); \draw[thick, primaryblue] (3,1.6)--(3,2.0);
+ \fill[softblue] (-0.1,1.6) rectangle (0,0);
+ \node at (1.5,0.7) {\small 水};
+ \node[abox] at (1.5,1.15) {\footnotesize 体};
+ \draw[->, thick, accentgreen] (3.2,1.7) to[bend left] (3.9,1.0) node[right, font=\footnotesize] {あふれた水};
+ \node[font=\footnotesize, align=center] at (1.5,-0.7) {物体を入れると、その体積ぶんだけ水があふれる};
+\end{tikzpicture}
+\caption{ユリイカの着想。水に入れた物体の体積は、あふれた水の体積ではかれる。}
+\end{figure}
 
-アルキメデスの数学は、孤立した天才の思いつきではなく、タレスやピタゴラス以来のギリシャ幾何学の豊かな沃野の上に咲いた大輪の花でした。
+\section{防衛機械・螺旋ポンプ・墓石}
 
-ヒッポクラテスによる三日月の求積、アルキュタスによる立方体倍積問題（デロス島の災厄を逃れるための体積2倍問題）の三次元空間解法、そして何よりもプラトンの弟子エウドクソス（Eudoxus, 前408頃--前355頃）が創始した「取り尽くし法（Method of Exhaustion）」と「プロポーション（比）の理論」が、アルキメデスの強固な土台となりました。
+伝承によれば、アルキメデスは兵器や機械も設計したとされます。確実と考えられているものに、水をくみ上げる\textbf{螺旋ポンプ}（アルキメデスのねじ）があります。円筒の中にらせん状の板を入れ、回して水を上へ運ぶ道具です。
 
-ユークリッドが『原論』で幾何学の基礎を体系的に整備したのに対し、アルキメデスはその体系を一気に前進させ、曲線や曲面で囲まれた図形の定量的な計算へと踏み出しました。直線の幾何学から曲線の幾何学への決定的な跳躍が、ここに成し遂げられたのです。
+\begin{figure}[htbp]
+\centering
+\begin{tikzpicture}[scale=0.9]
+ \begin{scope}[rotate=-35]
+  \draw[thick, primaryblue, fill=softblue] (0,-0.6) rectangle (5,0.6);
+  \foreach \x in {0.5,1.2,1.9,2.6,3.3,4.0,4.7} {\draw[thick, warmamber] (\x,-0.6) to[bend left=25] (\x+0.45,0.6);}
+ \end{scope}
+ \node[font=\footnotesize, align=center] at (2.3,-2.0) {斜めの筒の中のらせんを回すと、\\低い水面から高いところへ水が上がる};
+\end{tikzpicture}
+\caption{螺旋ポンプの模式図（断面のイメージ）。らせんの内部で水が一段ずつ押し上げられる。}
+\end{figure}
 
-\begin{tcolorbox}[colback=softblue,colframe=primaryblue,title=\textbf{重要ポイント：取り尽くし法の本質},arc=3mm,boxrule=1pt]
-1. \textbf{実無限の回避}：古代ギリシャ人は「無限小」や「無限の分割」を論理的矛盾の温床として避け、有限の操作の繰り返しで極限を捉えた。
-2. \textbf{背理法（二重帰謬法）}：面積が$A$であることを示すため、「$A$より大きい」と仮定しても矛盾、「$A$より小さい」と仮定しても矛盾することを厳密に示す。
-3. \textbf{現代のイプシロン・デルタ論法}：アルキメデスの論理構造は、19世紀にコーシーやワイエルシュトラスが確立した近代解析学の厳密性と完全に一致している。
-\end{tcolorbox}
+また、アルキメデスは自分の墓に「円柱に内接する球」の図を刻んでほしいと望んだと伝えられています。球の体積と表面積が、それを囲む円柱の$\frac{2}{3}$になるという発見（第4章）を、最も誇りにしていたためだ、とされます。
+
+\begin{figure}[htbp]
+\centering
+\begin{tikzpicture}[scale=1.1]
+ \draw[thick, primaryblue] (-1,-1) rectangle (1,1);
+ \draw[thick, primaryblue] (-1,1) arc (180:360:1 and 0.3);
+ \draw[thick, primaryblue, dashed] (-1,1) arc (180:0:1 and 0.3);
+ \draw[thick, primaryblue] (-1,-1) arc (180:360:1 and 0.3);
+ \draw[thick, primaryblue, dashed] (-1,-1) arc (180:0:1 and 0.3);
+ \draw[thick, warmamber, fill=softamber, fill opacity=0.5] (0,0) circle (1);
+ \draw[thick, warmamber] (-1,0) arc (180:360:1 and 0.3);
+ \draw[thick, warmamber, dashed] (-1,0) arc (180:0:1 and 0.3);
+ \node[font=\small] at (3.2,0.5) {球の体積：円柱の $\dfrac{2}{3}$};
+ \node[font=\small] at (3.2,-0.3) {球の表面積：円柱の表面積の $\dfrac{2}{3}$};
+\end{tikzpicture}
+\caption{墓に刻まれたと伝わる図。球の直径は円柱の高さと底の直径に等しい。}
+\end{figure}
+
+\begin{pointbox}{この章のポイント}
+\begin{itemize}[leftmargin=1.5em]
+\item 没年（前212年）は確か。ほかの逸話は伝承。
+\item 王冠・ねじ・墓の図は、それぞれ第7章・第6章・第4章の中身につながる。
+\end{itemize}
+\end{pointbox}
+
+%==========================================================
+\chapter{アルキメデスに至る古代ギリシャ幾何学}
+\markboth{第2章}{ギリシャ幾何学}
+%==========================================================
+
+アルキメデスは、突然あらわれた天才ではなく、200〜300年にわたるギリシャ幾何学の積み重ねの上に立っています。この章では、その土台を見ておきます。
+
+\begin{figure}[htbp]
+\centering
+\begin{tikzpicture}[x=0.9cm]
+ \draw[ax] (0,0)--(13.2,0);
+ \foreach \x/\n/\y in {1/タレス/前6世紀,3/ピタゴラス/前6世紀,5.2/ヒポクラテス/前5世紀,7.2/エウドクソス/前4世紀,9.2/ユークリッド/前3世紀初め,11.5/アルキメデス/前3世紀} {
+  \draw (\x,0.1)--(\x,-0.1);
+  \node[above, font=\scriptsize] at (\x,0.2) {\n};
+  \node[below, font=\scriptsize] at (\x,-0.2) {\y};
+ }
+\end{tikzpicture}
+\caption{アルキメデスにつながるギリシャ数学者の流れ（おおまかな時代）。}
+\end{figure}
+
+\section{証明するという態度：ピタゴラスの定理}
+
+ギリシャ数学の特徴は、「なぜそうなるか」を証明することです。たとえば、直角三角形の2辺の平方の和が、斜辺の平方に等しい、というピタゴラスの定理には、図で見せる証明があります。
+
+\begin{figure}[htbp]
+\centering
+\begin{tikzpicture}[scale=0.8]
+ \draw[thick, primaryblue, fill=softblue] (0,0) rectangle (5,5);
+ \coordinate (A) at (2,0); \coordinate (B) at (5,2); \coordinate (C) at (3,5); \coordinate (D) at (0,3);
+ \draw[thick, warmamber, fill=softamber] (A)--(B)--(C)--(D)--cycle;
+ \node at (2.5,2.5) {$c^2$};
+ \node[font=\scriptsize] at (1,0.8) {三角形};
+ \node[below, font=\small] at (1,0) {$a$}; \node[below, font=\small] at (3.5,0) {$b$};
+ \node[font=\small, text width=5cm] at (9,2.5) {大きな正方形（1辺 $a+b$）\\$=$ 4つの三角形 $+$ 内側の正方形\\$(a+b)^2 = 4\cdot\frac{ab}{2}+c^2$\\$\therefore\ a^2+b^2=c^2$};
+\end{tikzpicture}
+\caption{ピタゴラスの定理の図による説明。外側の大きな正方形の面積を2通りに書く。（$a=3,\ b=2$ の比率で描画）}
+\end{figure}
+
+\section{3大作図問題とヒポクラテスの月形}
+
+ギリシャの数学者たちは、定規とコンパスだけで次の3つを作図できないか考え続けました。
 
 \begin{center}
-\begin{tikzpicture}[>=Stealth, node distance=1.2cm]
-    % Stacked 2x2 or Vertical 4-stage flow with generous spacing
-    \node[draw=darkslate, rounded corners=2mm, fill=white, inner sep=8pt, minimum width=6.2cm, align=center] (EU) at (0, 3.6) {
-        \textbf{\large エウドクソス}\\[2pt]
-        \small 比の理論・取り尽くし法の創始
-    };
-    \node[draw=darkslate, rounded corners=2mm, fill=white, inner sep=8pt, minimum width=6.2cm, align=center] (EL) at (0, 1.8) {
-        \textbf{\large ユークリッド}\\[2pt]
-        \small 『原論』による幾何学公理体系の確立
-    };
-    \node[draw=primaryblue, line width=1.5pt, rounded corners=2mm, fill=softblue, inner sep=9pt, minimum width=6.2cm, align=center] (AR) at (0, 0) {
-        \textbf{\large アルキメデス}\\[2pt]
-        \small 曲線・曲面の定量的求積と力学的直観の融合
-    };
-    \node[draw=accentcrimson, line width=1.2pt, rounded corners=2mm, fill=accentcrimson!10, inner sep=9pt, minimum width=6.2cm, align=center] (NEW) at (0, -2.4) {
-        \textbf{\large ニュートン ／ ライプニッツ}\\[2pt]
-        \small 現代微積分学の完成と体系化
-    };
-
-    \draw[->, line width=1.2pt, darkslate] (EU) -- (EL);
-    \draw[->, line width=1.2pt, darkslate] (EL) -- (AR);
-    \draw[->, line width=1.8pt, accentcrimson] (AR) -- (NEW) node[midway, right=10pt, fill=white, inner sep=3pt, draw=accentcrimson!50, rounded corners] {\textbf{\small 1900年の時を超えた架橋}};
-
-    % Summary Box below
-    \node[draw=primaryblue!60, fill=white, rounded corners=2mm, align=center, inner sep=7pt, text width=12cm] at (0, -4.0) {
-        \small \textbf{核心的展開}：古代ギリシャ幾何学は、アルキメデスの計算力によって「定性的な論証」から\\
-        「極限と級数による定量的な微分・積分計算」へと決定的な飛躍を遂げた。
-    };
-\end{tikzpicture}
-\par\vspace{0.4em}
-\small\textbf{概念図 2}：エウドクソス・ユークリッドからアルキメデスを経て近代微積分学へと連なる数学思想の系譜。
+\begin{tabular}{ll}
+\toprule
+問題 & 内容 \\
+\midrule
+円積問題 & 円と同じ面積の正方形を作る\\
+立方体倍積問題 & 体積が2倍の立方体を作る\\
+角の三等分 & 任意の角を3等分する\\
+\bottomrule
+\end{tabular}
 \end{center}
 
-\subsection*{解題と現代へのメッセージ}
-ヒースは本書において、アルキメデスがギリシャ数学の伝統を忠実に守りながらも、その限界を打ち破って近代数学の領域へと手を伸ばしていた驚異的な先見性を力説しています。
+（これらは、のちの時代に「定規とコンパスだけでは不可能」と証明されました。）
 
-\clearpage
+円積問題への手がかりとして有名なのが、ヒポクラテスの「月形」です。直角二等辺三角形の斜辺を直径とする半円と、二等辺の外側にある円弧とで囲まれる月形の面積は、三角形の面積に等しくなります。
 
-\chapter{第3講：円周率の挟み撃ち —— 正96角形による極限への挑戦}
+\begin{figure}[htbp]
+\centering
+\begin{tikzpicture}[scale=1.8]
+ \path (-1,0) coordinate (A) (1,0) coordinate (B) (0,1) coordinate (C);
+ \fill[softamber] (C) arc (45:225:{0.7071}) arc (180:90:1) -- cycle;
+ \fill[softamber] (B) arc (-45:135:{0.7071}) arc (90:0:1) -- cycle;
+ \draw[thick, primaryblue] (A)--(B)--(C)--cycle;
+ \draw[thick, warmamber] (A) arc (180:0:1);
+ \draw[thick, warmamber] (C) arc (45:225:{0.7071});
+ \draw[thick, warmamber] (B) arc (-45:135:{0.7071});
+ \node[below left] at (A) {$A$}; \node[below right] at (B) {$B$}; \node[above] at (C) {$C$};
+ \node[font=\footnotesize] at (0,-0.35) {$AC=BC=\sqrt2,\ AB=2$};
+\end{tikzpicture}
+\caption{ヒポクラテスの月形（黄色の2つの部分）。辺 $AC$、$BC$ を直径とする外向きの半円と、斜辺 $AB$ を直径とする半円（点 $C$ を通る）で囲まれる。}
+\end{figure}
 
-古代社会において、円の周の長さや面積を求めることは実用上極めて重要な課題でした。バビロニアでは$\pi \approx 3$、古代エジプトでは$\pi \approx (16/9)^2 \approx 3.16$という近似値が使われていましたが、これらはいずれも経験的な近似にすぎず、数学的な証明を伴うものではありませんでした。
+計算で確かめましょう。$AC=BC=\sqrt2$ とすると、辺 $AC$ を直径とする半円の面積は $\frac12\pi\left(\frac{\sqrt2}{2}\right)^2=\frac{\pi}{4}$。2つあわせて $\frac{\pi}{2}$。斜辺 $AB=2$ を直径とする半円の面積は $\frac12\pi\cdot1^2=\frac{\pi}{2}$。つまり両者は等しくなります。この等しさから、月形2つの面積の和は直角二等辺三角形の面積 $\frac12\cdot\sqrt2\cdot\sqrt2=1$ に等しい、とわかります。
 
-アルキメデスは論文『円の求積（Measurement of a Circle）』において、世界で初めて「円周率の真の値を理論的に挟み撃ちにする」厳密な計算手法を確立しました。
+\section{立方体倍積と「2つの比例中項」}
 
-彼は円に内接する正多角形と外接する正多角形を考え、正六角形から始めて辺の数を$12, 24, 48$、そして「正96角形」へと倍増させていきました。内接正多角形の周長は円周より小さく、外接正多角形の周長は円周より必ず大きくなります。この両側からの猛烈な計算によって、彼は次の不等式を導き出したのです。
+体積2倍の立方体を作るには、辺の長さ $a$ を $\sqrt[3]{2}\,a$ にする必要があります。ギリシャの数学者は、$a : x = x : y = y : 2a$ となる2つの比例中項 $x,y$ を見つければよい、と気づきました。
+
+\begin{center}
+\begin{tikzpicture}[scale=1]
+ \node[fbox] (a) {$a$}; \node[fbox, right=14mm of a] (x) {$x$}; \node[fbox, right=14mm of x] (y) {$y$}; \node[fbox, right=14mm of y] (b) {$2a$};
+ \draw[ax] (a)--node[above, lbl]{$\times r$}(x);
+ \draw[ax] (x)--node[above, lbl]{$\times r$}(y);
+ \draw[ax] (y)--node[above, lbl]{$\times r$}(b);
+\end{tikzpicture}
+\end{center}
+
+等比数列 $a, ar, ar^2, ar^3=2a$ ですから、$r^3=2$、つまり $x=\sqrt[3]{2}\,a$ です。これが立方体倍積の答えになります。
+
+\section{エウドクソスの取り尽くし法}
+
+円や曲線で囲まれた図形の面積を、多角形で下と上から挟んでいく。エウドクソスが整えたこの方法を\textbf{取り尽くし法}といいます。アルキメデスは、これをあざやかに発展させました。
+
+\begin{figure}[htbp]
+\centering
+\begin{tikzpicture}[scale=1.0]
+ \foreach \n/\xs in {4/0,6/3.6,12/7.2} {
+  \begin{scope}[xshift=\xs cm]
+   \draw[thick, primaryblue] (0,0) circle (1.4);
+   \foreach \i in {0,...,\numexpr\n-1\relax} {
+     \pgfmathsetmacro{\a}{360/\n*\i}
+     \pgfmathsetmacro{\b}{360/\n*(\i+1)}
+     \draw[warmamber, thick] ({1.4*cos(\a)},{1.4*sin(\a)}) -- ({1.4*cos(\b)},{1.4*sin(\b)});
+   }
+   \node[font=\footnotesize] at (0,-1.9) {内接 \n 角形};
+  \end{scope}
+ }
+\end{tikzpicture}
+\caption{内接多角形の辺の数を増やすと、円に近づく。取り尽くし法は、この「近づき方」を論理的に扱う方法。}
+\end{figure}
+
+\begin{pointbox}{この章のポイント}
+\begin{itemize}[leftmargin=1.5em]
+\item ギリシャ数学は「証明」を重んじた。ピタゴラスの定理も図で証明できる。
+\item 3大作図問題は、アルキメデスの時代にも未解決だった。
+\item 取り尽くし法は、アルキメデスの道具箱の中心にある。
+\end{itemize}
+\end{pointbox}
+
+%==========================================================
+\chapter{アルキメデスの著作群と写本伝承}
+\markboth{第3章}{著作と写本}
+%==========================================================
+
+\section{残された著作}
+
+アルキメデスの著作は、ギリシャ語の写本という形で、2000年以上かけて私たちに届きました。主なものを表にまとめます。
+
+\begin{center}
+\begin{tabular}{p{4.6cm}p{8cm}}
+\toprule
+著作 & 主な内容\\
+\midrule
+『球と円柱について』 & 球の体積・表面積と円柱との比\\
+『円の測定』 & 円周率の上下からの評価\\
+『円錐状体と球状体について』 & 回転体の体積\\
+『螺旋について』 & アルキメデスの螺旋と面積\\
+『放物線の求積』 & 放物線と弦で囲まれる図形の面積\\
+『平面板の釣り合いについて』 & てこの原理と重心\\
+『砂粒を数えるもの』 & 巨大数の表し方と宇宙の大きさ\\
+『浮体について』 & 流体の静力学\\
+『方法』 & 発見のための力学的方法\\
+\bottomrule
+\end{tabular}
+\end{center}
+
+\section{著作はどう伝わったか}
+
+\begin{figure}[htbp]
+\centering
+\begin{tikzpicture}[node distance=5mm]
+ \node[fbox, text width=2.4cm] (a) {アルキメデス\\{\scriptsize 前3世紀}};
+ \node[fbox, text width=2.4cm, right=of a] (b) {ギリシャ語の\\写本\\{\scriptsize ビザンツ世界}};
+ \node[fbox, text width=2.4cm, right=of b] (c) {ラテン語訳\\{\scriptsize 1269年\\ モールベケ}};
+ \node[fbox, text width=2.4cm, right=of c] (d) {最初の印刷版\\{\scriptsize 1544年 バーゼル}};
+ \node[abox, text width=3.8cm, below=8mm of $(b)!0.5!(c)$] (e) {『方法』を含む祈祷書\\（重ね書き写本）\\{\scriptsize 1906年 ハイベアが発見}};
+ \draw[ax] (a)--(b); \draw[ax] (b)--(c); \draw[ax] (c)--(d);
+ \draw[ax, dashed] (b) -- (e);
+\end{tikzpicture}
+\caption{著作が伝わった道すじ。『方法』は長く失われ、20世紀初めに発見された。}
+\end{figure}
+
+\begin{notebox}{数字の確認}
+1544年のバーゼル版は、翻訳版の付録A（参考文献）にも記載されている最初の印刷版です。1906年のハイベアによる発見は、デンマークの古典学者ハイベアが、コンスタンティノープルで祈祷書として使われていた重ね書き写本の下から『方法』の文章を読み取った出来事として知られています。年号は一般に広く知られているもので、筆者が一次資料で確認したものではありません。
+\end{notebox}
+
+\begin{pointbox}{重ね書き写本とは}
+羊皮紙は高価だったため、古い文字を削り、その上に別の文章を書くことがありました。下に隠れた文字を、のちの時代に読み直したのが『方法』の発見です。
+\end{pointbox}
+
+\begin{figure}[htbp]
+\centering
+\begin{tikzpicture}
+ \draw[thick, fill=softamber] (0,0) rectangle (4,2.4);
+ \foreach \y in {0.4,0.8,...,2.0} {\draw[gray!50, line width=1.2pt] (0.3,\y)--(3.7,\y);}
+ \foreach \y in {0.5,0.9,...,2.1} {\draw[crimson!70, line width=0.5pt] (0.4,\y)--(3.6,\y+0.0);}
+ \node[font=\footnotesize, align=left, text width=5.5cm] at (7.2,1.2) {灰色の線：下に隠れた古い文字（数学）\\赤い線：上に書かれた新しい文字（祈祷書）};
+\end{tikzpicture}
+\caption{重ね書き写本の模式図。上の文字の下に、削られた古い文字が残っている。}
+\end{figure}
+
+%==========================================================
+\chapter{アルキメデスの幾何学 —— 取り尽くし法と求積}
+\markboth{第4章}{アルキメデスの幾何学}
+%==========================================================
+
+\section{円周率を上下から挟む}
+
+『円の測定』で、アルキメデスは円に正六角形を内接・外接させ、辺の数を6→12→24→48→96と倍々にして、円周率を挟みました。その結果は、広く知られているとおり次の評価です。
+
 \[
-3\frac{10}{71} < \pi < 3\frac{1}{7} \quad (3.14084 < \pi < 3.14285)
+3\tfrac{10}{71} < \pi < 3\tfrac{1}{7}.
 \]
-小学・中学校で習う円周率の近似分数「$\frac{22}{7}$」は、まさにこのアルキメデスの計算の上限値に由来しています。
 
-\begin{tcolorbox}[colback=softblue,colframe=primaryblue,title=\textbf{重要ポイント：アルキメデスの円周率決定法},arc=3mm,boxrule=1pt]
-1. \textbf{面積と周長の等価性}：円の面積は「円周を底辺とし、半径を高さとする直角三角形の面積」に等しい（$S = \frac{1}{2} r \times 2\pi r = \pi r^2$）ことを二重帰謬法で証明。
-2. \textbf{平方根の開平計算}：三角比や電卓のない時代に、$\sqrt{3}$の近似分数（$\frac{265}{153} < \sqrt{3} < \frac{1351}{780}$）を手計算で正確に導出して計算に用いた。
-3. \textbf{アルゴリズムの誕生}：辺の数を倍々に増やす漸化式の構造を世界で初めて定式化した。
-\end{tcolorbox}
+小数にすると、$3\frac{10}{71}\approx3.1408$、$3\frac17\approx3.1429$。実際の $\pi=3.14159\ldots$ はこの間にあります。
+
+\begin{figure}[htbp]
+\centering
+\begin{tikzpicture}[scale=1.0]
+ \foreach \n/\xs in {6/0,12/4.6,24/9.2} {
+  \begin{scope}[xshift=\xs cm]
+   \draw[thick, primaryblue] (0,0) circle (1.4);
+   \foreach \i in {0,...,\numexpr\n-1\relax} {
+     \pgfmathsetmacro{\a}{360/\n*\i}
+     \pgfmathsetmacro{\b}{360/\n*(\i+1)}
+     \draw[warmamber, thick] ({1.4*cos(\a)},{1.4*sin(\a)}) -- ({1.4*cos(\b)},{1.4*sin(\b)});
+   }
+   \node[font=\footnotesize] at (0,-1.9) {内接 \n 角形};
+  \end{scope}
+ }
+\end{tikzpicture}
+\caption{内接多角形で円周を下から評価する。辺を倍にするたびに精度が上がる（6→12→24。実際は96角形まで進めた）。}
+\end{figure}
+
+アルキメデスが最初の評価に使うのは、正六角形の周の長さです。半径1の円に内接する正六角形の周は6、直径は2ですから、円周は直径の3倍より少し大きい。ここから、辺を倍々にしていきます。内接多角形の周が直径の何倍になるかを表にしてみます（計算は現代の三角関数による）。
 
 \begin{center}
-\begin{tikzpicture}[scale=1.4, >=Stealth]
-    % Circle
-    \draw[thick, darkslate] (0, 0) circle (1.8);
-    \node[below left=2pt] at (0, 0) {$O$};
-    \draw[->, darkslate] (0, 0) -- (1.27, 1.27) node[midway, above left] {$r$};
-
-    % Inscribed Regular Hexagon
-    \draw[line width=1.3pt, primaryblue] (0:1.8) \foreach \x in {60,120,180,240,300,360} { -- (\x:1.8) };
-
-    % Circumscribed Regular Hexagon
-    \def\Rout{2.078}
-    \draw[line width=1.3pt, accentcrimson] (30:\Rout) \foreach \x in {90,150,210,270,330,390} { -- (\x:\Rout) };
-
-    % Labels
-    \node[primaryblue, below=18pt] at (0, -1.8) {\small \textbf{内接正$n$角形}（円周より小）};
-    \node[accentcrimson, above=18pt] at (0, 2.08) {\small \textbf{外接正$n$角形}（円周より大）};
-
-    % Inequality Box
-    \node[draw=primaryblue, fill=white, rounded corners, align=center, inner sep=6pt] at (4.5, 0) {
-        \textbf{【挟み撃ちの原理】}\\
-        $L_{\text{内接}} < \text{円周} < L_{\text{外接}}$\\
-        $n = 6 \to 12 \to 24 \to 48 \to \mathbf{96}$\\
-        $3\frac{10}{71} < \pi < 3\frac{1}{7}$\\
-        \small ($3.1408 < \pi < 3.1428$)
-    };
-\end{tikzpicture}
-\par\vspace{0.4em}
-\small\textbf{概念図 3}：内接・外接正多角形による円周率$\pi$の挟み撃ち計算。アルキメデスは正96角形を用いて$3.14$の精度を確定した。
+\begin{tabular}{rr}
+\toprule
+内接正$n$角形 & 周 $\div$ 直径\\
+\midrule
+6 & 3.0000\\
+12 & 3.1058\\
+24 & 3.1326\\
+48 & 3.1394\\
+96 & 3.1410\\
+\bottomrule
+\end{tabular}
 \end{center}
 
-\subsection*{解題と現代へのメッセージ}
-この「挟み撃ち（Squeeze Theorem）」の論理は、現代の微積分における極限の基礎定理そのものです。アルキメデスは極限という言葉を使わずとも、完全に同一の厳密性をもって円周率を確定しました。
+\begin{figure}[htbp]
+\centering
+\begin{tikzpicture}
+\begin{axis}[width=10cm, height=5.5cm, xlabel={辺の数（対数目盛）}, ylabel={周÷直径}, xmode=log, log basis x=2, xtick={6,12,24,48,96}, xticklabels={6,12,24,48,96}, ymin=2.95, ymax=3.2, grid=major, every axis plot/.append style={thick}]
+ \addplot[mark=*, color=primaryblue] coordinates {(6,3.0000)(12,3.1058)(24,3.1326)(48,3.1394)(96,3.1410)};
+ \addplot[domain=6:96, dashed, color=crimson] {3.14159265};
+ \node[crimson, font=\footnotesize] at (axis cs:12,3.16) {$\pi=3.14159\ldots$};
+\end{axis}
+\end{tikzpicture}
+\caption{内接多角形の周÷直径は、辺の数を倍にするたびに $\pi$ に近づく（値は筆者が $n\sin(\pi/n)$ から計算）。}
+\end{figure}
 
-\clearpage
+\section{放物線の求積：$\dfrac43$ の発見}
 
-\chapter{第4講：放物線の求積法 —— カヴァリエリに先駆けた積分の萌芽}
+アルキメデスの代表的な成果が、放物線の弦で切り取られた図形（放物線弓形）の面積です。弓形に内接する三角形の面積を $\Delta$ とすると、弓形の面積は $\frac43\Delta$ になります。
 
-アルキメデスの数学的業績の中で最も純粋に解析的な美しさをもつのが『放物線の求積（Quadrature of the Parabola）』です。
+\begin{figure}[htbp]
+\centering
+\begin{tikzpicture}[scale=0.9]
+ \begin{axis}[hide axis, width=9cm, height=6cm, xmin=-2.2, xmax=2.2, ymin=-0.2, ymax=4.3]
+  \addplot[domain=-2:2, thick, primaryblue, samples=50] {x^2};
+  \addplot[thick, accentgreen] coordinates {(-2,4)(2,4)};
+  \addplot[thick, warmamber, fill=softamber, fill opacity=0.4] coordinates {(-2,4)(0,0)(2,4)(-2,4)};
+  \addplot[thick, crimson] coordinates {(-2,4)(-1,1)(0,0)};
+  \addplot[mark=*, only marks] coordinates {(-2,4)(2,4)(0,0)(-1,1)(1,1)};
+  \node[font=\footnotesize] at (axis cs:0,2.7) {$\Delta$};
+ \end{axis}
+\end{tikzpicture}
+\caption{放物線 $y=x^2$ と弦。三角形（黄）は弓形の面積の $\tfrac34$。残りの2つの小弓形に、さらに三角形を入れていく。}
+\end{figure}
 
-放物線と任意の直線（弦）によって切り取られる弓形の面積はいくらになるのか？現代であれば積分記号を用いて即座に計算できる問題ですが、アルキメデスはこの難問に対して二つの全く異なる独自のアプローチを提示しました。
+手順は次のとおりです。弦を底辺とする弓形に、頂点を放物線上にとった三角形（面積 $\Delta$）を内接させます。残った2つの小さな弓形それぞれにも三角形を内接させると、その2つの合計の面積は $\frac14\Delta$ になります（放物線の性質から示せます）。これをくり返すと、
 
-一つは、彼が「力学的方法（天秤の釣り合い）」を用いて直観的に比率を見出した方法であり、もう一つは、弓形の中に三角形を無限に敷き詰めていく「等比級数の和」による幾何学的証明です。
-
-彼は、弦と放物線で囲まれる領域に最大の内接三角形を作り、残された二つの隙間にそれぞれ新たな三角形を作り……という操作を無限に繰り返しました。すると、新たに加わる三角形の面積は、直前の三角形の面積のちょうど「$\frac{1}{4}$」ずつ減少していくことを幾何学的に証明したのです。
 \[
-S = \Delta \left( 1 + \frac{1}{4} + \left(\frac{1}{4}\right)^2 + \left(\frac{1}{4}\right)^3 + \dots \right) = \frac{4}{3} \Delta
+\text{弓形の面積}=\Delta\left(1+\tfrac14+\tfrac1{4^2}+\tfrac1{4^3}+\cdots\right)=\Delta\cdot\frac{1}{1-\frac14}=\frac43\Delta.
 \]
-放物線の弓形の面積は、底辺と高さを共有する内接三角形の面積のきっかり「$\frac{4}{3}$倍」になるというこの結論は、無限等比級数の和を人類が幾何学的に厳密に解き明かした史上初の金字塔でした。
 
-\begin{tcolorbox}[colback=softblue,colframe=primaryblue,title=\textbf{重要ポイント：幾何学的無限級数},arc=3mm,boxrule=1pt]
-1. \textbf{4倍の漸化関係}：放物線の性質から、隙間にできる小さな2つの三角形の合計面積は、親の三角形の$\frac{1}{4}$になる。
-2. \textbf{有限和の恒等式}：$1 + \frac{1}{4} + \dots + \left(\frac{1}{4}\right)^n + \frac{1}{3}\left(\frac{1}{4}\right)^n = \frac{4}{3}$ という厳密な代数関係を幾何学的に提示。
-3. \textbf{無限を完了させる論理}：実無限の和を直接とるのではなく、面積が$\frac{4}{3}\Delta$以外であり得ないことを背理法で完璧に封じ込めた。
-\end{tcolorbox}
+\begin{figure}[htbp]
+\centering
+\begin{tikzpicture}
+ \draw[thick, fill=softamber] (0,0) rectangle (5,1); \node at (2.5,0.5) {$\Delta$};
+ \draw[thick, fill=softblue] (5,0) rectangle (6.25,1); \node at (5.6,0.5) {\footnotesize $\tfrac14\Delta$};
+ \draw[thick, fill=softgreen] (6.25,0) rectangle (6.8125,1); \node at (6.5,0.5) {\tiny $\tfrac1{16}$};
+ \draw[thick, fill=softrose] (6.8125,0) rectangle (7.0,1);
+ \draw[decorate, decoration={brace, amplitude=6pt, mirror}] (0,-0.1)--(7.0,-0.1) node[midway, below=6pt, font=\small] {面積の総和 $\to \tfrac43\Delta$（$=1.333\ldots\Delta$）};
+\end{tikzpicture}
+\caption{$1+\frac14+\frac1{16}+\cdots$ は $\frac43$ に近づく。面積の帯を並べた図（横幅は $\Delta$ を5に対応）。}
+\end{figure}
+
+アルキメデスは、このような無限の和を、背理法（「それより大きくも小さくもない」）で厳密に確定させました。現代ならば「極限」とよぶ考え方です。
+
+\section{球と円柱}
+
+『球と円柱について』の主な結果は次のとおりです（半径を $r$、円柱は高さ $2r$、底面の半径 $r$）。
 
 \begin{center}
-\begin{tikzpicture}[scale=1.2, >=Stealth]
-    % Parabola curve
-    \draw[domain=-2.2:2.2, smooth, variable=\x, line width=1.4pt, primaryblue] plot ({\x}, {3 - 0.6*\x*\x});
-    % Chord
-    \draw[thick, darkslate] (-2, 0.6) -- (2, 0.6) node[right] {弦 $AB$};
-
-    % Main Triangle
-    \coordinate (A) at (-2, 0.6);
-    \coordinate (B) at (2, 0.6);
-    \coordinate (C) at (0, 3.0);
-    \filldraw[fill=softblue, draw=primaryblue, thick] (A) -- (B) -- (C) -- cycle;
-    \node at (0, 1.4) {\textbf{主三角形} $\Delta$};
-
-    % Smaller Triangles
-    \coordinate (C1) at (-1, 2.4);
-    \coordinate (C2) at (1, 2.4);
-    \filldraw[fill=accentcrimson!20, draw=accentcrimson, thick] (A) -- (-1, 2.4) -- (C) -- cycle;
-    \filldraw[fill=accentcrimson!20, draw=accentcrimson, thick] (C) -- (1, 2.4) -- (B) -- cycle;
-    \node[accentcrimson] at (-1.1, 1.8) {\small $\frac{1}{8}\Delta$};
-    \node[accentcrimson] at (1.1, 1.8) {\small $\frac{1}{8}\Delta$};
-
-    % Sum Box
-    \node[draw=primaryblue, fill=white, rounded corners, align=center, inner sep=6pt] at (5.2, 1.8) {
-        \textbf{【等比級数の和】}\\
-        $S = \Delta + 2\left(\frac{1}{8}\Delta\right) + 4\left(\frac{1}{64}\Delta\right) + \dots$\\
-        $= \Delta \left( 1 + \frac{1}{4} + \frac{1}{16} + \frac{1}{64} + \dots \right)$\\
-        $= \frac{4}{3} \Delta$\\
-        \small （放物線弓形の面積は内接三角形の$\frac{4}{3}$）
-    };
-\end{tikzpicture}
-\par\vspace{0.4em}
-\small\textbf{概念図 4}：放物線の弓形領域への三角形分割と無限等比級数の和（公比 $1/4$）。
+\begin{tabular}{lcc}
+\toprule
+ & 球 & 円柱 \\
+\midrule
+体積 & $\frac43\pi r^3$ & $2\pi r^3$ \\
+表面積（底面を含む） & $4\pi r^2$ & $6\pi r^2$ \\
+\bottomrule
+\end{tabular}
 \end{center}
 
-\subsection*{解題と現代へのメッセージ}
-この証明手法は、17世紀にカヴァリエリやフェルマーが積分法を発明した際の直接の模範となりました。アルキメデスの計算は、現代のリーマン積分の精神を完全な形で先取りしていたのです。
+体積の比は $\frac43\pi r^3 : 2\pi r^3 = 2:3$、表面積の比は $4\pi r^2:6\pi r^2=2:3$。どちらも$\frac23$になるという、美しい一致があります（円柱の側面積のみを比べれば、球の表面積と等しく $4\pi r^2$ になります）。
 
-\clearpage
+\begin{figure}[htbp]
+\centering
+\begin{tikzpicture}[scale=0.95]
+ \begin{axis}[ybar, width=9cm, height=5.5cm, symbolic x coords={体積,表面積}, xtick=data, ylabel={円柱を1としたときの球}, ymin=0, ymax=1.2, bar width=18pt, nodes near coords, nodes near coords style={font=\footnotesize}]
+  \addplot[fill=softamber, draw=warmamber] coordinates {(体積,0.6667)(表面積,0.6667)};
+ \end{axis}
+\end{tikzpicture}
+\caption{球と円柱の比は、体積も表面積も $2/3$。}
+\end{figure}
 
-\chapter{第5講：砂粒論（砂の計算者） —— 巨大数と宇宙の大きさを測る指数法則}
+\section{『方法』：どうやって発見したか}
 
-古代ギリシャの人々の間には、「海岸の砂の粒の数は無限であり、いかなる数をもっても数え上げることはできない」という常識的な思い込みがありました。また、当時のギリシャの命数法（ミリアド：万$=10^4$）では、大きな数を体系的に表現することに限界がありました。
+取り尽くし法は「証明の方法」で、「発見の方法」ではありません。アルキメデスは、『方法』という著作の中で、てこの原理を使って面積や体積の見当をつけ、そのあとで厳密に証明した、と書いています。第6章で、てこの原理を学んでから、もう一度この考え方に戻ってきます。
 
-アルキメデスはこの常識に挑戦するため、シラクサ王ヒエロンの息子ゲロンに宛てた手紙として『砂粒論（The Sand-Reckoner）』を著しました。
+\begin{figure}[htbp]
+\centering
+\begin{tikzpicture}[node distance=7mm]
+ \node[abox, text width=3.2cm] (a) {力学的方法\\{\small 切片を並べて\\ てこでつりあわせる}};
+ \node[gbox, text width=3.2cm, right=14mm of a] (b) {予想を立てる\\{\small $\frac43$ など}};
+ \node[fbox, text width=3.2cm, right=14mm of b] (c) {取り尽くし法で\\厳密に証明};
+ \draw[ax] (a)--(b); \draw[ax] (b)--(c);
+\end{tikzpicture}
+\caption{アルキメデスの仕事の流れ。発見は力学で、証明は幾何学で。}
+\end{figure}
 
-彼は驚くべき大胆さをもって、「地球上のすべての砂浜どころか、地球全体、さらには太陽・月・恒星天球に至る全宇宙空間を砂粒でぎっしり埋め尽くしたとしても、その粒の数は有限であり、書き表すことができる」と宣言したのです。
+\section{螺旋}
 
-この目的のために、アルキメデスは現代の「指数法則（$10^m \times 10^n = 10^{m+n}$）」に相当する階層的な数体系（オクタード：$10^8$を一周期とする命数法）をゼロから独力で考案しました。さらに、当時サモスの天文学者アリスタルコスが提唱していた「太陽中心説（地動説）」を採用し、恒星までの宇宙の半径を大胆に見積もった上で、宇宙を満たす砂の総数が「$10^{63}$（アルキメデスの単位で1000万の第8周期の数）」を超えないことを証明してみせたのです。
+『螺旋について』では、一定の速さで回転する半直線上を、一定の速さで点が動いていくときの軌跡（アルキメデスの螺旋）を調べます。極座標では $r=a\theta$ と書けます。
 
-\begin{tcolorbox}[colback=softblue,colframe=primaryblue,title=\textbf{重要ポイント：砂粒論の数学的・天文学的意義},arc=3mm,boxrule=1pt]
-1. \textbf{指数法則の先駆}：数を底$10^8$の階層に分類し、累乗の掛け算が指数の足し算になる性質を明確に認識していた。
-2. \textbf{最古の太陽中心説の記録}：コペルニクスより1800年も前にアリスタルコスが地動説を唱えていた動かぬ証拠を、本書の引用が現代に伝えている。
-3. \textbf{桁外れのスケール感}：観測限界を工学的に測定し、不確実な数値はすべて「過大評価」することで、真の値が計算結果を決して超えない安全マージンをとった。
-\end{tcolorbox}
+\begin{figure}[htbp]
+\centering
+\begin{tikzpicture}[scale=0.9]
+ \draw[gridgray] (-3.4,0)--(3.4,0); \draw[gridgray] (0,-3.4)--(0,3.4);
+ \draw[thick, primaryblue, domain=0:1080, samples=200, smooth, variable=\t] plot ({0.0027*\t*cos(\t)},{0.0027*\t*sin(\t)});
+ \node[font=\footnotesize] at (2.4,-3.0) {$r=a\theta$（3回転ぶん）};
+\end{tikzpicture}
+\caption{アルキメデスの螺旋。回転ごとの間隔が一定になるのが特徴。}
+\end{figure}
+
+\begin{pointbox}{この章のポイント}
+\begin{itemize}[leftmargin=1.5em]
+\item $3\frac{10}{71}<\pi<3\frac17$（96角形から）。
+\item 放物線弓形は、内接三角形の$\frac43$。
+\item 球は円柱の$\frac23$（体積も表面積も）。
+\item 発見は力学（てこ）で、証明は取り尽くし法で。
+\end{itemize}
+\end{pointbox}
+
+%==========================================================
+\chapter{砂の計算者（砂粒論）—— 巨大数と宇宙の大きさ}
+\markboth{第5章}{砂の計算者}
+%==========================================================
+
+『砂粒を数えるもの』は、ゲロン王（ヒエロン2世の子ゲロンと考えられている）にあてて書かれた小論です。「砂の数は無限だと考える人がいるが、宇宙全体を砂で埋めても有限の数で表せる」ことを、新しい数の表し方によって示しました。
+
+\section{ギリシャの数には「万」までしかなかった}
+
+当時のギリシャには、1万（10000）までの数の名前があり、さらにその1万倍（1万×1万＝1億＝$10^8$）までは自然に表せました。アルキメデスは、$10^8$ を単位に新しい段階を作ります。
+
+\begin{figure}[htbp]
+\centering
+\begin{tikzpicture}[node distance=5mm]
+ \node[wbox, text width=2.4cm] (a) {1万\\$10^4$};
+ \node[wbox, text width=2.4cm, right=of a] (b) {万万＝1億\\$10^8$\\{\scriptsize 第1の単位}};
+ \node[wbox, text width=2.4cm, right=of b] (c) {$(10^8)^2=10^{16}$\\{\scriptsize 第2の単位}};
+ \node[wbox, text width=2.4cm, right=of c] (d) {$(10^8)^3=10^{24}$\\{\scriptsize 第3の単位}};
+ \draw[ax] (a)--node[above,lbl]{$\times10^4$}(b);
+ \draw[ax] (b)--node[above,lbl]{$\times10^8$}(c);
+ \draw[ax] (c)--node[above,lbl]{$\times10^8$}(d);
+\end{tikzpicture}
+\caption{アルキメデスの「位（くらい）」の考え方。$10^8$ を1段として積み上げる（本書は現代の指数で書き直している）。}
+\end{figure}
+
+\section{見積もりの手順}
+
+アルキメデスは、いくつかの仮定をおいて、段階的に大きさを見積もります。主な仮定（本書の筆者が整理）は次のとおりです。
 
 \begin{center}
-\begin{tikzpicture}[scale=1.1, >=Stealth]
-    % Sun at center
-    \filldraw[fill=accentcrimson!20, draw=accentcrimson, thick] (0, 0) circle (0.5);
-    \node[accentcrimson] at (0, 0) {\textbf{太陽}};
-
-    % Earth orbit
-    \draw[dashed, darkslate, thick] (0, 0) circle (1.8);
-    \filldraw[fill=primaryblue, draw=primaryblue] (45:1.8) circle (0.15) node[above right] {地球};
-
-    % Sphere of Fixed Stars
-    \draw[line width=1.5pt, darkslate] (0, 0) circle (3.2);
-    \node[above=4pt, darkslate] at (0, 3.2) {\textbf{恒星天球（宇宙の境界）}};
-
-    % Sand particles representation
-    \foreach \r in {0.8, 1.2, 2.2, 2.6} {
-        \foreach \a in {15, 55, 95, 140, 185, 230, 280, 320} {
-            \fill[gray!60!black] (\a:\r) circle (1.2pt);
-        }
-    }
-
-    % Box
-    \node[draw=primaryblue, fill=softblue, rounded corners, align=center, inner sep=6pt] at (6.8, 0) {
-        \textbf{【アルキメデスの計算結論】}\\
-        宇宙の直径 $\approx 10^{14}$ スタディア\\
-        砂粒の体積基準を極小にとっても：\\
-        $\text{全宇宙の砂の総数} < 10^{63}$\\
-        \small 「無限」と恐れられた砂粒の数を\\
-        \small 人間の知性が完全に包囲・有限化した
-    };
-\end{tikzpicture}
-\par\vspace{0.4em}
-\small\textbf{概念図 5}：アリスタルコスの太陽中心系宇宙モデルと、宇宙空間を埋め尽くす砂の総数（$< 10^{63}$）の算定。
+\begin{tabular}{lp{7.5cm}}
+\toprule
+仮定 & 内容\\
+\midrule
+芥子（けし）の種 & 直径は少なくとも $\frac{1}{40}$ ダクチュロス。\\
+砂粒 & 芥子の種1つの体積に、砂粒は10000粒より多く入らない。\\
+1スタディオン & 10000ダクチュロスより小さい。\\
+地球 & 周囲が300万スタディオンより大きくない（当時の最大の見積もり）。\\
+\bottomrule
+\end{tabular}
 \end{center}
 
-\subsection*{解題と現代へのメッセージ}
-『砂粒論』は、数学が自然界のあらゆる巨大なスケールを記述できる普遍言語であることを示した、人類最古のサイエンス・ドキュメンタリーと言えます。
+これらをもとに、アルキメデスは次のように見積もりました。直径1ダクチュロスの球には、芥子の種が $40^3=64000$ 個より多くは入りません。したがって砂粒は
 
-\clearpage
-
-\chapter{第6講：力学と天秤の幾何学 —— 「我に支点を与えよ」の数理的真実}
-
-「我に支点を与えよ、さらば地球をも動かさん」という言葉は、アルキメデスの力学に対する絶対的な自信を示すものとして余りにも有名です。
-
-しかし、アルキメデスの真の偉大さは、経験則や実験観察に頼りがちだった力学を、「ユークリッド幾何学と同じ公理体系」へと引き上げた点にあります。
-
-論文『平面の平衡について（On the Equilibrium of Planes）』において、彼はわずか数個の自明な公理（等しい重さが等しい距離にあれば釣り合う、等しい重さに重さを加えると釣り合いは崩れる、等）を出発点とし、そこから演繹的な論理展開だけで「異なる重さの物体が釣り合うための条件」を完全に証明しました。
 \[
-W_1 \times L_1 = W_2 \times L_2 \quad \left(\frac{W_1}{W_2} = \frac{L_2}{L_1}\right)
+64000\times10^4 = 6.4\times10^8 \ \text{粒より少ない}.
 \]
-すなわち、天秤が釣り合うとき、物体の重量の比は支点からの距離の「逆比」になるという法則です。彼はさらに、三角形、平行四辺形、台形、さらには放物線の弓形に至るまで、あらゆる平面図形の「重心（Center of Gravity）」を純幾何学的に決定する一般理論を構築しました。
 
-\begin{tcolorbox}[colback=softblue,colframe=primaryblue,title=\textbf{重要ポイント：公理的力学の誕生},arc=3mm,boxrule=1pt]
-1. \textbf{幾何学化された物理学}：実験測定ではなく、対称性の公理と背理法によって物理法則を導出するアプローチを確立。
-2. \textbf{重心の概念}：物体を一点で支えたときにどちらにも傾かない点（重心）が存在し、合成・分割が可能であることを数学的に定義。
-3. \textbf{数学的道具としての天秤}：アルキメデスは力学を応用して幾何学の難問（求積問題）を解く「方法（Method）」を編み出した。
-\end{tcolorbox}
+直径1スタディオン（$10^4$ダクチュロス）の球では、体積が $(10^4)^3=10^{12}$ 倍になるので、約 $6.4\times10^{20}$ 粒。ここから、アルキメデスは見やすいように「$10^{21}$ より少ない」と切り上げます。
 
-\begin{center}
-\begin{tikzpicture}[scale=1.2, >=Stealth]
-    % Fulcrum
-    \filldraw[fill=darkslate, draw=darkslate] (0, 0) -- (-0.4, -0.7) -- (0.4, -0.7) -- cycle;
-    \node[below=2pt] at (0, -0.7) {\textbf{支点}};
-
-    % Lever beam
-    \draw[line width=2.2pt, primaryblue] (-3.6, 0) -- (4.8, 0);
-
-    % Left Weight W_1 at distance L_1 = 3.0
-    \draw[thick, darkslate] (-3.0, 0) -- (-3.0, -0.5);
-    \filldraw[fill=softblue, draw=primaryblue, line width=1.2pt] (-3.5, -1.3) rectangle (-2.5, -0.5);
-    \node at (-3.0, -0.9) {\textbf{重さ $W_1$}};
-    \draw[<->, accentcrimson, thick] (-3.0, 0.4) -- (0, 0.4) node[midway, above] {距離 $L_1 = 4$};
-
-    % Right Weight W_2 at distance L_2 = 4.0
-    \draw[thick, darkslate] (4.0, 0) -- (4.0, -0.5);
-    \filldraw[fill=accentcrimson!20, draw=accentcrimson, line width=1.2pt] (3.6, -1.1) rectangle (4.4, -0.5);
-    \node at (4.0, -0.8) {\small \textbf{$W_2$}};
-    \draw[<->, accentcrimson, thick] (0, 0.4) -- (4.0, 0.4) node[midway, above] {距離 $L_2 = 3$};
-
-    % Formula box
-    \node[draw=primaryblue, fill=white, rounded corners, align=center, inner sep=6pt] at (0.5, -2.2) {
-        \textbf{【梃子の平衡条件（逆比の法則）】}\\
-        $W_1 \times L_1 = W_2 \times L_2 \iff \frac{W_1}{W_2} = \frac{L_2}{L_1}$\\
-        \small 重い物体ほど支点に近く、軽い物体ほど支点から遠くに置くことで完全につり合う
-    };
+\begin{figure}[htbp]
+\centering
+\begin{tikzpicture}
+\begin{axis}[width=11cm, height=6cm, ybar, ymin=0, ymax=72, xtick={1,2,3,4}, xticklabels={芥子1個,直径1スタディオン,直径$10^{10}$スタディオン,宇宙（$10^{14}$）}, x tick label style={font=\scriptsize, text width=2.2cm, align=center}, ylabel={砂粒の数（10のべき乗の指数）}, bar width=22pt, nodes near coords, nodes near coords style={font=\footnotesize}, enlarge x limits=0.2]
+ \addplot[fill=softblue, draw=primaryblue] coordinates {(1,4) (2,21) (3,51) (4,63)};
+\end{axis}
 \end{tikzpicture}
-\par\vspace{0.4em}
-\small\textbf{概念図 6}：アルキメデスの梃子の原理。対称性の公理から厳密に演繹された力学平衡の基本法則。
-\end{center}
+\caption{砂粒の数の見積もり（指数）。直径が $10^4$ 倍になると体積は $10^{12}$ 倍。1スタディオンで $10^{21}$、$10^{10}$スタディオンで $10^{51}$、$10^{14}$スタディオンで $10^{63}$。}
+\end{figure}
 
-\subsection*{解題と現代へのメッセージ}
-アルキメデスにとって力学とは、感覚的な経験ではなく「完全なる幾何学の一部門」でした。ガリレオが近代力学を創始した際、彼が唯一の師として仰いだのがこのアルキメデスの著作でした。
+同じように、直径 $10^{10}$ スタディオンの球は $10^{21}\times(10^{10})^3=10^{51}$ 粒より少なく、直径 $10^{14}$ スタディオンの「宇宙」では $10^{21}\times(10^{14})^3=10^{63}$ 粒より少ない、という結論になります。
 
-\clearpage
+\begin{notebox}{翻訳版との照合}
+翻訳版の第5章には、「直径 $10^{10}$ スタディオンの球で $10^{51}$」という途中の値が出ています。最終結論の $10^{63}$ は、翻訳版の段落が一部欠けているため確認できませんでした。本書では、仮定どおり計算した $10^{63}$ を載せていますが、原文との照合は未了です。
+\end{notebox}
 
-\chapter{第7講：流体静力学と「エウレカ」 —— 浮体の原理と王冠の謎}
+\section{宇宙の大きさと太陽中心説}
 
-「エウレカ（Eureka）！」の叫びとともに語り継がれる金の王冠の逸話は、科学史上最も愛されている物語の一つです。
+アルキメデスは、当時の宇宙のモデルとして、地球を中心とする「宇宙」の半径が、太陽までの距離だと説明します。そして、サモスのアリスタルコスが「恒星は動かず、地球が太陽のまわりを回る」という説を唱えたことにも触れています。これは、太陽中心説が古代にすでに論じられていたことを伝える貴重な記録です。
 
-シラクサ王ヒエロンが神殿に奉納するために金細工師に黄金の塊を渡して王冠を作らせたところ、「細工師が金を一部くすねて、同重量の安価な銀を混ぜたのではないか」という疑惑が浮上しました。王は王冠を傷つけることなく不正を見破る方法をアルキメデスに命じました。
-
-悩んでいたアルキメデスが公衆浴場に入ったとき、湯船から水が溢れ出るのを見て、物体を水中に沈めるとその体積に等しい水が押し退けられることに気づき、金と銀の密度の違いを利用して見事に不正を証明したと伝えられています。
-
-しかし、アルキメデスの真の学問的到達点は、この逸話を超えた主著『浮体について（On Floating Bodies）』全2巻に結実しています。彼は流体を「あらゆる部分が均等な圧力で押し合う連続体」としてモデル化し、「流体中の物体は、それが押し退けた流体の重量に等しい浮力を上向きに受ける」という有名な「アルキメデスの原理」を数学的に確立しました。
-
-さらに第2巻では、回転放物面を水に浮かべたとき、比重や傾きに応じて物体が直立して安定するか転覆するかという、現代の造船工学における「船の復原性（メタセンタ）」の理論を、微分も使わずに幾何学だけで完全に解き明かしていたのです。
-
-\begin{tcolorbox}[colback=softblue,colframe=primaryblue,title=\textbf{重要ポイント：アルキメデスの浮力原理と流体力学},arc=3mm,boxrule=1pt]
-1. \textbf{浮力の数理的本質}：物体が受ける上向きの浮力 $F$ は、排除した流体の体積 $V$ と流体の密度 $\rho$ の積に等しい（$F = \rho V g$）。
-2. \textbf{比重による鑑定}：純金は銀よりも密度が大きいため、同一重量なら体積は純金の方が小さく、溢れる水の量も少ない。
-3. \textbf{造船工学の祖}：物体の重心と、水面下の排除体積の重心（浮心）の位置関係から、物体の回転安定性を世界で初めて数学的に証明した。
-\end{tcolorbox}
-
-\begin{center}
-\begin{tikzpicture}[scale=1.2, >=Stealth]
-    % Water Container
-    \draw[thick, darkslate] (-2.2, 0) -- (-2.2, -3.2) -- (2.2, -3.2) -- (2.2, 0);
-    \fill[softblue, opacity=0.6] (-2.2, -0.6) rectangle (2.2, -3.2);
-    \draw[primaryblue, line width=1.2pt] (-2.2, -0.6) -- (2.2, -0.6) node[right] {水面};
-
-    % Submerged Object
-    \filldraw[fill=warmgold!30, draw=warmgold!80!black, line width=1.3pt] (-1.0, -2.4) rectangle (1.0, -1.0);
-    \node at (0, -1.7) {\textbf{浸漬物体}};
-
-    % Force vectors
-    \draw[->, line width=1.8pt, darkslate] (0, -1.7) -- (0, -2.8) node[below] {\textbf{重力 $W$}};
-    \draw[->, line width=1.8pt, accentcrimson] (0, -1.7) -- (0, -0.4) node[above] {\textbf{浮力 $F$}};
-
-    % Side box
-    \node[draw=primaryblue, fill=white, rounded corners, align=center, inner sep=6pt] at (5.4, -1.6) {
-        \textbf{【アルキメデスの原理】}\\
-        $\text{浮力 } F = \text{押し退けた流体の重さ}$\\
-        $F = \rho_{\text{液}} \cdot V_{\text{排除}} \cdot g$\\
-        - $W > F$ ：沈降（密度大）\\
-        - $W = F$ ：中立浮遊（平衡）\\
-        - $W < F$ ：浮上（密度小）
-    };
+\begin{figure}[htbp]
+\centering
+\begin{tikzpicture}[scale=1.0]
+ \draw[thick, primaryblue, dashed] (0,0) circle (3.2);
+ \draw[thick, warmamber] (0,0) circle (1.6);
+ \fill[warmamber] (0,0) circle (0.12) node[below, font=\scriptsize] {太陽};
+ \fill[primaryblue] (1.6,0) circle (0.08) node[above right, font=\scriptsize] {地球};
+ \node[font=\footnotesize] at (0,3.6) {恒星の球（アリスタルコスの想定）};
+ \node[font=\footnotesize, text width=4cm] at (6.2,0) {太陽を中心に地球が回り、\\恒星の球は\\非常に大きいと考える};
 \end{tikzpicture}
-\par\vspace{0.4em}
-\small\textbf{概念図 7}：浮力と重力の釣り合い。押し退けられた液体の重量と完全に等しい浮力が鉛直上向きに作用する。
-\end{center}
+\caption{アリスタルコスの宇宙モデルの概念図（縮尺は無視）。アルキメデスは、このモデルの恒星球の大きさも見積もりに使った。}
+\end{figure}
 
-\subsection*{解題と現代へのメッセージ}
-この『浮体について』第2巻で展開された回転放物面の安定性解析は、古代ギリシャ科学の最高峰と称され、17世紀に至るまで何人（なんぴと）もその水準に達することができませんでした。
+\begin{pointbox}{この章のポイント}
+\begin{itemize}[leftmargin=1.5em]
+\item 万万（$10^8$）を1段とする新しい数の位取り。
+\item 見積もりは「〜より少ない」と上から押さえる方法。
+\item 結果は、現代の書き方で $10^{63}$ 粒より少ない（筆者の再計算）。
+\end{itemize}
+\end{pointbox}
 
-\clearpage
+%==========================================================
+\chapter{力学 —— てこの原理・重心論と幾何学的証明}
+\markboth{第6章}{力学}
+%==========================================================
 
-\chapter{第8講：失われた写本とパリンプセストの奇跡 —— 現代に蘇ったアルキメデス}
+\section{てこの原理}
 
-アルキメデスの著作は、古代末期の混乱、アレクサンドリア図書館の焼失、中世ビザンツ帝国の滅亡など、幾度となく歴史の荒波によって失われかけました。
+アルキメデスの力学の中心は、「てこの原理」です。重さ $A$ と $B$ が、支点からの距離 $a$ と $b$ のところにあるとき、
 
-ルネサンス期に西欧で印刷されたラテン語訳写本には含まれておらず、2000年近くにわたって「幻の書」とされていた決定的な著作がありました。それが『力学的方法（The Method of Mechanical Theorems）』です。
+\[
+A\times a = B\times b \quad\text{のとき、つりあう}.
+\]
 
-1906年、デンマークの碩学ヨハン・ルドヴィグ・ハイベア（J. L. Heiberg）は、コンスタンティノープル（現イスタンブール）の聖墳墓修道院の図書室において、祈祷書として再利用されていた羊皮紙写本（パリンプセスト：古い文字を削り落として上に別の宗教書を書いた二重写本）を調査しました。虫眼鏡を片手に祈祷書の文字の下に微かに残る10世紀のギリシャ文字を解読したハイベアは、そこに驚くべきテクストを発見しました。それこそが、失われたアルキメデスの『方法』だったのです！
-
-さらにこの写本は20世紀末に再び競売にかけられ、最新のシンクロトロン放射光X線蛍光分析（XRF）技術によって、祈祷書のインクの下に隠されていた数式や幾何学図形が完全に可視化・復元されました。アルキメデスが近代積分学の核心である「微小な薄片への分割と天秤による重みづけ」をどのように思考していたかが、21世紀の現代になって初めて白日の下に晒されたのです。
-
-\begin{tcolorbox}[colback=softblue,colframe=primaryblue,title=\textbf{重要ポイント：パリンプセスト発見の歴史的意義},arc=3mm,boxrule=1pt]
-1. \textbf{『方法』の発見}：完成された厳密な幾何学証明の陰に隠されていた、アルキメデス自身の「発見のプロセス（思考の足跡）」が初めて明かされた。
-2. \textbf{ストマキオン（Stomachion）}：14片の多角形を組み合わせて正方形を作るパズルを通じ、世界最古の「組合せ数学」を研究していたことが判明。
-3. \textbf{無限小の直接操作}：円や球を「無数の厚みのない線や面」の集まりとして天秤に載せるという、ニュートン・ライプニッツ流の微積分的思考の確証。
-\end{tcolorbox}
-
-\begin{center}
-\begin{tikzpicture}[scale=0.92, transform shape, >=Stealth]
-    % Stage 1: Ancient Manuscript
-    \node[draw=darkslate, line width=1.2pt, fill=softblue!30, rounded corners=2mm, inner sep=10pt, text width=3.3cm, minimum height=4.2cm, align=center] (B1) at (0, 0) {
-        \textbf{\large 10世紀 写本}\\[6pt]
-        \footnotesize \textcolor{primaryblue}{\textbf{アルキメデス数学原本}}\\[4pt]
-        \footnotesize 『方法』『浮体』\\
-        世界唯一のギリシャ語記録
-    };
-
-    % Arrow 1
-    \draw[->, line width=1.3pt, darkslate] (2.2, 0) -- (3.8, 0) node[midway, above=4pt] {\small\textbf{13世紀 削磨}} node[midway, below=3pt] {\tiny 羊皮紙の再利用};
-
-    % Stage 2: Palimpsest Prayer Book
-    \node[draw=darkslate, line width=1.2pt, fill=orange!12, rounded corners=2mm, inner sep=10pt, text width=3.3cm, minimum height=4.2cm, align=center] (B2) at (6.0, 0) {
-        \textbf{\large 修道院祈祷書}\\[6pt]
-        \footnotesize \textbf{宗教テキスト上書き}\\[4pt]
-        \footnotesize 文字を削り取って再製本\\
-        \vspace{6pt}
-        \tiny \textcolor{gray}{（下層に眠るアルキメデス）}
-    };
-
-    % Arrow 2
-    \draw[->, line width=1.5pt, accentcrimson] (8.2, 0) -- (9.8, 0) node[midway, above=4pt] {\small\textbf{X線・多波長解析}} node[midway, below=3pt] {\tiny 科学的復元};
-
-    % Stage 3: Modern Recovery
-    \node[draw=accentcrimson, line width=1.5pt, fill=white, rounded corners=2mm, inner sep=10pt, text width=3.5cm, minimum height=4.2cm, align=center] (B3) at (12.2, 0) {
-        \textbf{\large 現代の蘇生}\\[6pt]
-        \footnotesize \textbf{ハイベア発見 (1906)}\\[3pt]
-        \footnotesize 米国チーム復元 (2000s)\\[5pt]
-        \small \textcolor{accentcrimson}{\textbf{真の微積分思考の復活}}
-    };
+\begin{figure}[htbp]
+\centering
+\begin{tikzpicture}[scale=1.0]
+ \draw[very thick] (-3.5,0)--(3.5,0);
+ \fill[primaryblue] (0,0) -- (-0.3,-0.6) -- (0.3,-0.6) -- cycle;
+ \node[abox] at (-2.4,0.5) {$A=2$};
+ \node[abox] at (1.2,0.5) {$B=4$};
+ \draw[<->] (-2.4,-0.4)--(0,-0.4) node[midway, below, font=\footnotesize] {$a=2$};
+ \draw[<->] (0,-0.4)--(1.2,-0.4) node[midway, below, font=\footnotesize] {$b=1$};
+ \node[font=\small] at (0,-1.4) {$2\times2 = 4\times1$};
 \end{tikzpicture}
-\par\vspace{0.4em}
-\small\textbf{概念図 8}：パリンプセスト（二重写本）の奇跡的な数奇の運命。2000年の時を超えて解読されたアルキメデスの真の思考法。
-\end{center}
+\caption{てこのつりあい。重いほうを支点の近くに置くと、軽いものとつりあう。（この図は $A\,a=B\,b$ の数値例）}
+\end{figure}
 
-\subsection*{解題と現代へのメッセージ}
-アルキメデスの探求は、過去の化石ではなく、今なお現代の数学・科学研究者たちに刺激を与え続ける生きた知の源泉です。人類の理性が到達した最高峰の輝きは、時空を超えて私たちに思考する喜びを教えてくれます。
+\begin{pointbox}{「地球を動かす」の意味}
+この原理に従えば、支点から遠いところに力を加えるほど、小さな力で大きな重さを持ち上げられます。「支点があれば地球も動かせる」という言葉は、この原理を指す象徴として伝わる話です。ただし、本当に地球を動かすには、距離を非常に長くしなければなりません。
+\end{pointbox}
 
-\clearpage
+\section{重心}
+
+物体を1点で支えてつりあうとき、その点を\textbf{重心}といいます。アルキメデスは、いろいろな図形の重心を求めました。たとえば、三角形の重心は、3本の中線の交点で、各頂点から対辺の中点へ向かう中線を $2:1$ に分けます。
+
+\begin{figure}[htbp]
+\centering
+\begin{tikzpicture}[scale=1.1]
+ \coordinate (A) at (0,0); \coordinate (B) at (5,0); \coordinate (C) at (1.5,3);
+ \draw[thick, primaryblue, fill=softblue] (A)--(B)--(C)--cycle;
+ \coordinate (MA) at ($(B)!0.5!(C)$); \coordinate (MB) at ($(A)!0.5!(C)$); \coordinate (MC) at ($(A)!0.5!(B)$);
+ \draw[warmamber, thick] (A)--(MA); \draw[warmamber, thick] (B)--(MB); \draw[warmamber, thick] (C)--(MC);
+ \coordinate (G) at (barycentric cs:A=1,B=1,C=1);
+ \fill[crimson] (G) circle (0.08) node[above right, font=\footnotesize] {重心 G};
+ \node[font=\footnotesize] at (2.5,-0.6) {中線は G で $2:1$ に分かれる};
+\end{tikzpicture}
+\caption{三角形の重心。3本の中線が1点で交わる。}
+\end{figure}
+
+\section{放物線弓形の面積を「つりあい」から求める}
+
+『方法』では、放物線弓形を細い帯に切り、その帯を別の場所に吊るしててこでつりあわせて、面積が$\frac43\Delta$であることを見出します。ここでは、その発想だけを図にします。
+
+\begin{figure}[htbp]
+\centering
+\begin{tikzpicture}[scale=1.0]
+ \draw[very thick] (-4,0)--(4,0);
+ \fill[primaryblue] (0,0) -- (-0.25,-0.5) -- (0.25,-0.5) -- cycle;
+ \node[abox, text width=2.7cm] at (-2.3,1.0) {弓形の帯\\（元の位置）};
+ \node[gbox, text width=2.7cm] at (2.3,1.0) {三角形の帯\\（てこの反対側）};
+ \draw[->] (-2.3,0.45)--(-2.3,0.05); \draw[->] (2.3,0.45)--(2.3,0.05);
+ \node[font=\footnotesize] at (0,-1.1) {帯ごとにつりあいを調べ、全部を足し合わせる};
+\end{tikzpicture}
+\caption{力学的方法の発想。切片をてこの反対側にずらしても、つりあいは崩れない。}
+\end{figure}
+
+\begin{pointbox}{この章のポイント}
+\begin{itemize}[leftmargin=1.5em]
+\item てこの原理：重さ×距離がつりあう。
+\item 三角形の重心は中線を $2:1$ に分ける点。
+\item 発見の道具としての力学：第4章の$\frac43$に結びつく。
+\end{itemize}
+\end{pointbox}
+
+%==========================================================
+\chapter{流体静力学 —— 浮体の原理とエウレカの発見}
+\markboth{第7章}{流体静力学}
+%==========================================================
+
+\section{浮力の原理}
+
+『浮体について』では、アルキメデスは流体について「静止した流体の表面は、地球の中心を中心とする球面になる」ことなどを示しました。そのうえで、次の結論に至ります。
+
+\begin{pointbox}{アルキメデスの原理（現代風の言い方）}
+流体のなかの物体は、その物体が押しのけた流体の重さに等しい力で、上に押される。
+\end{pointbox}
+
+\begin{figure}[htbp]
+\centering
+\begin{tikzpicture}[scale=1.0]
+ \draw[thick, primaryblue, fill=softblue] (0,0) rectangle (4,2.5);
+ \draw[thick, warmamber, fill=softamber] (1.5,0.5) rectangle (2.5,1.5);
+ \draw[->, very thick, crimson] (2,0.5)--(2,-0.9) node[below, font=\small] {重さ $W$};
+ \draw[->, very thick, accentgreen] (2,1.5)--(2,2.9) node[above, font=\small] {浮力 $F$};
+ \node[font=\footnotesize, align=center] at (5.8,1.2) {$F=$ 押しのけた\\水の重さ};
+\end{tikzpicture}
+\caption{水中の物体にはたらく力。$F>W$なら浮き上がり、$F<W$なら沈む。}
+\end{figure}
+
+\section{王冠の問題を解く}
+
+ここで、王冠の逸話を数値で確かめてみましょう（筆者の設定した数値例で、アルキメデス自身の記録した数値ではありません）。金の密度を $19.3\ \mathrm{g/cm^3}$、銀を $10.5\ \mathrm{g/cm^3}$ と仮定します。
+
+王冠の質量が $1000\ \mathrm{g}$ で、水に沈めたときに押しのけた水の体積が $60\ \mathrm{cm^3}$ だったとします。
+
+\begin{itemize}[leftmargin=1.5em]
+\item 純金なら体積は $1000/19.3\approx51.8\ \mathrm{cm^3}$。
+\item 純銀なら $1000/10.5\approx95.2\ \mathrm{cm^3}$。
+\item 実測は $60\ \mathrm{cm^3}$。純金より大きいので、銀が混ざっている。
+\end{itemize}
+
+金の質量を $g$ グラムとすると、$\dfrac{g}{19.3}+\dfrac{1000-g}{10.5}=60$ を解いて $g\approx811$。金が約 $811\ \mathrm{g}$、銀が約 $189\ \mathrm{g}$ と分かります。
+
+\begin{figure}[htbp]
+\centering
+\begin{tikzpicture}
+\begin{axis}[width=10cm, height=5.5cm, xlabel={金の質量 $g$ [g]}, ylabel={押しのける水の体積 [cm$^3$]}, domain=0:1000, grid=major, xmin=0, xmax=1000, ymin=45, ymax=100]
+ \addplot[thick, primaryblue, samples=2] {x/19.3+(1000-x)/10.5};
+ \addplot[dashed, crimson, samples=2] {60};
+ \addplot[mark=*, only marks, color=crimson] coordinates {(811,60)};
+ \node[crimson, font=\footnotesize, anchor=south west] at (axis cs:520,62) {実測 60};
+\end{axis}
+\end{tikzpicture}
+\caption{金の割合と、王冠が押しのける水の体積の関係。実測値の高さと直線が交わる点が答え（$g\approx811$）。}
+\end{figure}
+
+\begin{notebox}{注意}
+密度の数値は一般的な値の目安で、当時のシラクサの王冠のデータではありません。実際にアルキメデスがどんな方法を使ったかは、伝承にすぎず、確定していません。
+\end{notebox}
+
+\section{浮かぶ・沈む・つりあう}
+
+物体の密度と、流体の密度を比べると、次のように整理できます。
+
+\begin{figure}[htbp]
+\centering
+\begin{tikzpicture}[scale=0.9]
+ \foreach \xs/\t/\h/\c in {0/{軽い（密度が小さい）}/1.7/softgreen, 4.6/{同じ}/1.1/softamber, 9.2/{重い（密度が大きい）}/0.2/softrose} {
+  \begin{scope}[xshift=\xs cm]
+   \draw[thick, primaryblue, fill=softblue] (0,0) rectangle (3.4,2);
+   \draw[thick, fill=\c] (1.2,\h-0.5) rectangle (2.2,\h+0.5);
+   \node[font=\footnotesize] at (1.7,-0.4) {\t};
+   \draw[thick] (-0.1,2)--(3.5,2);
+  \end{scope}
+ }
+ \node[font=\footnotesize] at (1.7,2.5) {浮く};
+ \node[font=\footnotesize] at (6.3,2.5) {中ほどに止まる};
+ \node[font=\footnotesize] at (10.9,2.5) {沈む};
+\end{tikzpicture}
+\caption{物体と水の密度の比べ方。物体のほうが軽ければ浮き、重ければ沈む。}
+\end{figure}
+
+\begin{pointbox}{この章のポイント}
+\begin{itemize}[leftmargin=1.5em]
+\item 浮力 $=$ 押しのけた流体の重さ。
+\item 王冠の問題は、密度の違いを体積から見分ける問題。
+\item 第II巻では、放物線を回転させた立体の浮き方を幾何学で調べる。
+\end{itemize}
+\end{pointbox}
+
+%==========================================================
+\chapter*{付録A：参考文献解題}
+\addcontentsline{toc}{chapter}{付録A：参考文献解題}
+\markboth{付録A}{参考文献}
+%==========================================================
+
+翻訳版の付録Aによると、アルキメデスの著作の最初の印刷版は1544年にバーゼルで刊行されました。そのあと、パリ（1615年）の版や、ラテン語訳・各国語訳などが続きます。ヒースは19世紀末に英語の全集を出版したことで知られています（本書の筆者が確認した範囲では、出版年などの細部は翻訳版に記載の内容に従っており、一次資料での確認は未了です）。
+
+\begin{figure}[htbp]
+\centering
+\begin{tikzpicture}[node distance=5mm]
+ \node[fbox] (a) {1544 バーゼル版};
+ \node[fbox, right=of a] (b) {1615 パリ版};
+ \node[fbox, right=of b] (c) {ラテン語・各国語訳};
+ \node[fbox, right=of c] (d) {20世紀 英訳全集};
+ \draw[ax] (a)--(b); \draw[ax] (b)--(c); \draw[ax] (c)--(d);
+\end{tikzpicture}
+\caption{印刷版・翻訳の流れ（翻訳版付録Aの記述に基づく概観）。}
+\end{figure}
+
+%==========================================================
+\chapter*{付録B：アルキメデスと古代科学史年表}
+\addcontentsline{toc}{chapter}{付録B：アルキメデスと古代科学史年表}
+\markboth{付録B}{年表}
+%==========================================================
+
+\begin{figure}[htbp]
+\centering
+\begin{tikzpicture}[x=0.032cm]
+ \draw[ax] (-660,0)--(-190,0);
+ \foreach \x/\n/\p in {-624/タレス/1, -572/ピタゴラス/-1, -428/アナクサゴラス/1, -380/プラトン/-1, -300/ユークリッド/1, -287/アルキメデス/-1, -262/アポロニウス/1} {
+  \draw (\x,0.1)--(\x,-0.1);
+  \node[font=\tiny, rotate=60, anchor=south west] at (\x,0.2) {\n};
+ }
+ \node[font=\tiny] at (-624,-0.6) {前624};
+ \node[font=\tiny] at (-287,-0.6) {前287};
+\end{tikzpicture}
+\caption{年表の主な人物（開始年は翻訳版の年表の記載に従い、おおまかな目安）。正確な年は確定していない人物が多い。}
+\end{figure}
+
+\begin{notebox}{この本の未解決点}
+\begin{itemize}[leftmargin=1.5em]
+\item 翻訳版第4章の取り尽くし法の説明には、訳文が不自然な箇所があり、原著との照合は未了です。
+\item 『砂粒を数えるもの』の最終値 $10^{63}$ は、筆者の再計算によるもの。
+\item 年表の細かい年号は、人物によって諸説あります。
+\end{itemize}
+\end{notebox}
 
 \end{document}
