@@ -37,15 +37,15 @@
 
 \newtcolorbox{examplebox}[1]{
     colback=softgreen, colframe=accentgreen, coltitle=white, fonttitle=\bfseries,
-    title=#1, arc=3mm, boxrule=1pt, left=4mm,right=4mm,top=3mm,bottom=3mm, breakable
+    title={#1}, arc=3mm, boxrule=1pt, left=4mm,right=4mm,top=3mm,bottom=3mm, breakable
 }
 \newtcolorbox{pointbox}[1]{
     colback=softamber, colframe=warmamber, coltitle=darkslate, fonttitle=\bfseries,
-    title=#1, arc=2mm, boxrule=1pt, left=3mm,right=3mm,top=2mm,bottom=2mm, breakable
+    title={#1}, arc=2mm, boxrule=1pt, left=3mm,right=3mm,top=2mm,bottom=2mm, breakable
 }
 \newtcolorbox{notebox}[1]{
     colback=softrose, colframe=crimson, coltitle=white, fonttitle=\bfseries,
-    title=#1, arc=2mm, boxrule=1pt, left=3mm,right=3mm,top=2mm,bottom=2mm, breakable
+    title={#1}, arc=2mm, boxrule=1pt, left=3mm,right=3mm,top=2mm,bottom=2mm, breakable
 }
 
 \tikzset{
@@ -66,7 +66,9 @@
 \fancyhead[RE]{\nouppercase{\leftmark}}
 \renewcommand{\headrulewidth}{0.4pt}
 
-\hypersetup{pdftitle={古典で学び直すポアンカレ『科学と仮説』入門 —— 13章を図で読む}}
+\hypersetup{pdftitle={古典で学び直すポアンカレ『科学と仮説』入門 —— 全13章を順に読む}}
+\newcommand{\dd}{\mathrm{d}}
+\newcommand{\ee}{\mathrm{e}}
 
 \begin{document}
 
@@ -75,16 +77,16 @@
 \vspace*{1.5cm}
 {\Large\bfseries プロジェクト・グーテンベルク古典数学入門シリーズ}\\[0.8cm]
 \rule{\textwidth}{1.5pt}\\[0.4cm]
-{\Huge\bfseries 古典で学び直す\\ポアンカレ『科学と仮説』入門}\\[0.4cm]
-{\Large\bfseries —— 数・空間・力・自然を13章で歩く ——}\\[0.4cm]
+{\Huge\bfseries 古典で学び直す\\ポアンカレ\\『科学と仮説』入門}\\[0.4cm]
+{\Large\bfseries —— 全13章を、順に読む ——}\\[0.4cm]
 \rule{\textwidth}{1.5pt}\\[1.5cm]
 {\large 原著：アンリ・ポアンカレ\\
 \textit{Science and Hypothesis}}\\[2.0cm]
 {\Large\bfseries 著：教育情報分析研究会}\\[2.5cm]
 \vfill
-{\large 2026年11月 全面改訂版}\\[0.5cm]
-{\footnotesize 本書は Project Gutenberg のパブリックドメイン（eBook \#37157）の翻訳（全13章）の章立てに沿って、\\
-中学校・高等学校の数学の知識で読み進められるように書き下ろした入門書です。}
+{\large 2026年11月 改訂第2版（原著の章ごとに対応）}\\[0.5cm]
+{\footnotesize 本書は Project Gutenberg のパブリックドメイン（eBook \#37157）を底本に、\\
+高等学校の数学の知識で読み進められるように書き下ろした入門書です。}
 \end{center}
 \end{titlepage}
 
@@ -93,532 +95,804 @@
 \mainmatter
 
 %==========================================================
-\chapter*{はじめに：科学は仮説の上に立っている}
-\addcontentsline{toc}{chapter}{はじめに：科学は仮説の上に立っている}
+\chapter*{はじめに：この本の読み方}
+\addcontentsline{toc}{chapter}{はじめに：この本の読み方}
 \markboth{はじめに}{はじめに}
 %==========================================================
 
-『科学と仮説』（1902年）は、数学者アンリ・ポアンカレ（1854〜1912）が、一般の読者に向けて書いた本です。「数学や物理学の基礎には、どんな仮定（仮説）があるのか」という問いを、4つの部（数・空間・力・自然）で考えます。本書も、翻訳版の13章の順に進みます。
+アンリ・ポアンカレ（1854〜1912）は、フランスの数学者・物理学者です。『科学と仮説』は、数学と物理学の基礎にある「仮説」や「約束」の役割を、一般の読者に向けて論じた本です。幾何学の公理は、本当に真なのか。力学の原理は、経験の結果なのか、約束なのか。この本は、全13章で、この問いを順に追います。
+
+原著の13章に、この本も1章ずつ対応させます。各章で、ポアンカレの議論を紹介し、計算で確かめられる例を、1つか2つ添えました。
 
 \begin{figure}[htbp]
 \centering
-\begin{tikzpicture}[node distance=4mm]
- \node[fbox, text width=3.1cm] (a) {第1部 数と量\\{\small 第1〜2章}};
- \node[fbox, text width=3.1cm, right=of a] (b) {第2部 空間\\{\small 第3〜5章}};
- \node[fbox, text width=3.1cm, right=of b] (c) {第3部 力\\{\small 第6〜8章}};
- \node[fbox, text width=3.1cm, right=of c] (d) {第4部 自然\\{\small 第9〜13章}};
- \draw[ax] (a)--(b); \draw[ax] (b)--(c); \draw[ax] (c)--(d);
+\begin{tikzpicture}[node distance=3mm]
+ \node[fbox, text width=2.3cm] (a1) {第1章\\数学的推論};
+ \node[fbox, text width=2.3cm, right=of a1] (a2) {第2章\\数学的量と\\経験};
+ \node[abox, text width=2.3cm, right=of a2] (a3) {第3章\\非ユークリッド\\幾何学};
+ \node[abox, text width=2.3cm, right=of a3] (a4) {第4章\\空間と幾何学};
+ \node[abox, text width=2.3cm, below=3mm of a1] (b1) {第5章\\経験と幾何学};
+ \node[gbox, text width=2.3cm, right=of b1] (b2) {第6章\\古典力学};
+ \node[gbox, text width=2.3cm, right=of b2] (b3) {第7章\\相対運動と\\絶対運動};
+ \node[gbox, text width=2.3cm, right=of b3] (b4) {第8章\\エネルギーと\\熱力学};
+ \node[rbox, text width=2.3cm, below=3mm of b1] (c1) {第9章\\物理学の仮説};
+ \node[rbox, text width=2.3cm, right=of c1] (c2) {第10章\\現代物理学の\\理論};
+ \node[rbox, text width=2.3cm, right=of c2] (c3) {第11章\\確率の計算};
+ \node[rbox, text width=2.3cm, right=of c3] (c4) {第12章\\光学と電磁気};
+ \node[rbox, text width=2.3cm, below=3mm of c1] (d1) {第13章\\電気力学};
 \end{tikzpicture}
-\caption{本書の4部構成。基礎から、物理学の理論へと進む。}
+\caption{原著13章の地図。青：数学（第1〜2章）、橙：幾何学（第3〜5章）、緑：力学（第6〜8章）、赤：物理学（第9〜13章）。}
 \end{figure}
 
-\begin{notebox}{事実・推測・未確認の区別}
-ポアンカレの哲学（規約主義）は、要約して紹介します。数値例は、筆者が計算して確かめたものです。翻訳版は小型モデルによる訳であり、細部は原著との照合が必要です。
+\begin{notebox}{事実・推測・未確認の区別（この本の約束）}
+\begin{itemize}[leftmargin=*]
+\item 各章の数値の例（数学的帰納法、円板の模型、フーコーの振り子、カルノー効率、気体分子の速さ、ルーレットなど）は、計算し直して確かめました。ポアンカレの議論の紹介は、原著の本文にもとづきます。
+\item 原著にない現代の例は、「補足」と書きました。
+\item ポアンカレの議論の細部は、全部は取り上げていません。
+\end{itemize}
 \end{notebox}
 
 %==========================================================
-\chapter{数学的推論の性質}
+\chapter{数学的推論の性質（第1章）}
 \markboth{第1章}{数学的推論の性質}
 %==========================================================
 
-ポアンカレは、数学の推論には、論理だけでは尽くせない、本質的な方法があると考えました。それが、\textbf{数学的帰納法}（漸化的推論）です。
+\section{この章の位置づけ}
 
-\begin{figure}[htbp]
+第1章は、「数学の推論は、三段論法にすぎないのか」を問います。ポアンカレは、数学の特徴は、1つの推論の型、\textbf{帰納（漸化式による推論）}にあると述べます。「$n$ で成り立てば $n+1$ でも成り立つ。そして、$1$ で成り立つ。ゆえに、すべての $n$ で成り立つ」という形の推論です。
+
+\section{帰納の例}
+
+最もよく知られた例は、$1+2+\cdots+n=\dfrac{n(n+1)}2$ です。$n=1$ で $1=1$。$n$ で成り立つと仮定して、両辺に $n+1$ を足すと
+\[
+\frac{n(n+1)}2+(n+1)=\frac{(n+1)(n+2)}2
+\]
+で、$n+1$ でも成り立つ。したがって、すべての $n$ で成り立ちます。計算機で $n=1,\ldots,1000$ のすべてを確かめても、式は成り立ちました。
+
+\begin{table}[htbp]
 \centering
-\begin{tikzpicture}
- \foreach \i in {1,...,8} {
-  \draw[thick, primaryblue, fill=softblue] (\i*0.9,0) rectangle (\i*0.9+0.35,1.1);
-  \node[font=\scriptsize] at (\i*0.9+0.17,-0.25) {\i};
- }
- \draw[thick, crimson, ->] (1.4,1.3) to[bend left=25] (2.1,1.3);
- \node[font=\small, text width=7cm] at (4.5,2.1) {1番目が倒れる（$n=1$ で成り立つ）。\\$n$ 番目が倒れれば $n+1$ 番目も倒れる。\\$\Rightarrow$ すべてが倒れる。};
-\end{tikzpicture}
-\caption{数学的帰納法は、ドミノ倒し。最初の1枚と、「次へ伝わる」ことを確かめれば、無限に続く。}
-\end{figure}
-
-\begin{examplebox}{例：1からnまでの和}
-$n=1$：左辺 $1$、右辺 $\frac{1\cdot2}{2}=1$ ✓。\\
-$n$ で成り立つと仮定。$n+1$ のとき、$1+\cdots+n+(n+1)=\frac{n(n+1)}{2}+(n+1)=\frac{(n+1)(n+2)}{2}$ ✓。
-\end{examplebox}
+\begin{tabular}{lc}
+\toprule
+式 & 確かめた範囲\\
+\midrule
+$1+2+\cdots+n=\tfrac{n(n+1)}2$ & $n=1\sim1000$ すべて成立\\
+$1+3+5+\cdots+(2n-1)=n^2$ & $n=1\sim1000$ すべて成立\\
+$1^3+2^3+\cdots+n^3=\bigl(\tfrac{n(n+1)}2\bigr)^2$ & $n=1\sim1000$ すべて成立\\
+\bottomrule
+\end{tabular}
+\caption{帰納で証明できる3つの式を、$n=1\sim1000$ で数値的に確認。数値の確認は、証明の代わりにはならない。}
+\end{table}
 
 \begin{figure}[htbp]
 \centering
 \begin{tikzpicture}[scale=0.55]
- \foreach \i in {1,...,5} {
-  \foreach \j in {1,...,\i} {
-   \fill[softblue, draw=primaryblue] (\j,-\i) rectangle (\j+1,-\i+1);
-  }
- }
- \foreach \i in {1,...,5} {\node[font=\scriptsize] at (-0.3,-\i+0.5) {\i};}
- \node[font=\footnotesize, text width=6cm] at (11,-2.5) {段の石の数 $1,2,3,4,5$。\\合計 $15=\frac{5\cdot6}{2}$。};
+ \foreach \k in {1,...,5}{\foreach \j in {1,...,\k}{
+   \fill[primaryblue!60] (\j-1,\k-1) rectangle ++(0.9,0.9);
+ }}
+ \foreach \k in {1,...,5}{\node[lbl] at (-0.9,\k-0.5) {\k};}
+ \node[lbl] at (2.5,-0.8) {$1+2+3+4+5=15$ 個の正方形（$\tfrac{5\cdot6}{2}=15$）};
 \end{tikzpicture}
-\caption{階段状の石の数え方。$1+2+3+4+5=15$。}
+\caption{階段の形に並べた正方形の個数が $1+2+\cdots+n$。2つ合わせると $n\times(n+1)$ の長方形になるので、個数は $n(n+1)/2$。}
 \end{figure}
 
-\begin{pointbox}{この章のポイント}
-\begin{itemize}[leftmargin=1.5em]
-\item 帰納法は、「最初」と「$n\to n+1$」の2つで無限を扱う。
-\item ポアンカレは、これを数学に固有の、創造的な推論と見た。
+%ADDED q01
+\section{不等式も帰納で示せる}
+
+帰納は、等式だけでなく、不等式にも使えます。たとえば「すべての自然数 $n$ で $2^n>n$」を示します。$n=1$ で $2>1$。$2^n>n$ と仮定すると、$2^{n+1}=2\cdot2^n>2n\ge n+1$（$n\ge1$ のとき $2n\ge n+1$）なので、$n+1$ でも成り立ちます。
+
+\begin{table}[htbp]
+\centering
+\begin{tabular}{c|ccccccc}
+\toprule
+$n$ & 1 & 2 & 3 & 5 & 10 & 20 & 30\\
+\midrule
+$2^n$ & 2 & 4 & 8 & 32 & 1024 & 1\,048\,576 & 1\,073\,741\,824\\
+$2^n>n$ か & ○ & ○ & ○ & ○ & ○ & ○ & ○\\
+\bottomrule
+\end{tabular}
+\caption{$2^n$ と $n$ の比較。$n=1\sim199$ のすべてで $2^n>n$ を計算機で確かめた（証明は帰納による）。}
+\end{table}
+
+\begin{figure}[htbp]
+\centering
+\begin{tikzpicture}
+\begin{axis}[width=9cm, height=5cm, xmin=0, xmax=10, ymin=0, ymax=130, xlabel={$n$}, ylabel={値},
+  every axis label/.append style={font=\footnotesize}, tick label style={font=\footnotesize}, legend style={font=\scriptsize, at={(0.03,0.97)}, anchor=north west}]
+ \addplot[mark=*, thick, crimson, domain=1:7, samples=7] {2^x};
+ \addplot[mark=square*, thick, primaryblue, domain=1:10, samples=10] {x};
+ \legend{$2^n$, $n$}
+\end{axis}
+\end{tikzpicture}
+\caption{$2^n$ は、$n$ より速く増える。帰納法は、この関係が、どこまでも続くことを保証する。}
+\end{figure}
+
+\begin{pointbox}{この章のまとめ}
+\begin{itemize}[leftmargin=*]
+\item ポアンカレは、数学の推論の本質を、帰納（漸化式による推論）に見る。
+\item 帰納は、無限に多くの場合を、有限の議論で証明できる。数値の確認とは違う。
 \end{itemize}
 \end{pointbox}
 
 %==========================================================
-\chapter{数学的量と経験}
+\chapter{数学的量と経験（第2章）}
 \markboth{第2章}{数学的量と経験}
 %==========================================================
 
-私たちの感覚は、細かい差を区別できません。ポアンカレは、これを「物理的連続体」と呼び、数学の連続体と区別しました。
+\section{この章の位置づけ}
+
+第2章は、数学的な連続（数直線）が、どうやって作られるかを論じます。ポアンカレは、感覚だけで比べると、「$A=B$、$B=C$、しかし $A<C$」という、数学の等号の規則（推移律）に反することが起こる、と述べます。連続の概念は、この矛盾を解消するために、精神が作り出したものだ、というのです。
+
+\section{感覚では、推移律が成り立たない}
+
+重さの違いが、$1.5$ g 以上のとき初めて感じられる、とします（仮の数字）。3つの重さ $A=10$ g、$B=11$ g、$C=12$ g では
+
+\begin{table}[htbp]
+\centering
+\begin{tabular}{lcl}
+\toprule
+比べる2つ & 重さの差 & 感覚での判断\\
+\midrule
+$A$ と $B$ & 1 g & 同じ（$A=B$）\\
+$B$ と $C$ & 1 g & 同じ（$B=C$）\\
+$A$ と $C$ & 2 g & 違う（$A<C$）\\
+\bottomrule
+\end{tabular}
+\caption{感覚の推移律の破れ（閾値を $1.5$ g とした例）。数学の等号では、$A=B$ かつ $B=C$ なら $A=C$ のはず。}
+\end{table}
+
+\begin{figure}[htbp]
+\centering
+\begin{tikzpicture}[scale=1.1]
+ \draw[ax] (9.5,0)--(13,0) node[right, lbl] {重さ（g）};
+ \foreach \w/\n in {10/A,11/B,12/C}{
+   \fill[primaryblue] (\w,0) circle (3pt) node[above, lbl] {\n};
+   \node[lbl] at (\w,-0.4) {\w};
+ }
+ \draw[<->, thick, accentgreen] (10,0.9)--(11,0.9) node[midway, above, lbl] {区別できない};
+ \draw[<->, thick, accentgreen] (11,0.5)--(12,0.5) node[midway, above, lbl] {区別できない};
+ \draw[<->, thick, crimson] (10,1.5)--(12,1.5) node[midway, above, lbl] {区別できる};
+\end{tikzpicture}
+\caption{閾値 $1.5$ g のとき、10 g と 11 g、11 g と 12 g は区別できないが、10 g と 12 g は区別できる。}
+\end{figure}
+
+ポアンカレは、この矛盾を解消するために、「間に、新しい中間項を、いくらでも挿入する」ことで、連続が作られると考えます。数学的な連続は、この手続きの果てに、精神が作ったものです。
+
+%ADDED q02
+\section{有理数で、連続を作る：$\sqrt2$ の例}
+
+数直線を、有理数だけで埋めようとすると、隙間が残ります。$\sqrt2$ は、有理数ではないので、有理数の列で、いくらでも近づけますが、有理数としては存在しません。次の列は、$x_{k+1}=\dfrac{x_k}2+\dfrac1{x_k}$ で作ります（$x_1=1$）。どの項も有理数です。
+
+\begin{table}[htbp]
+\centering
+\begin{tabular}{c|cccc}
+\toprule
+$k$ & $x_k$（分数） & 小数 & $x_k^2$ & $x_k^2-2$\\
+\midrule
+1 & $1$ & 1.000000 & 1 & $-1$\\
+2 & $\tfrac32$ & 1.500000 & 2.25 & $0.25$\\
+3 & $\tfrac{17}{12}$ & 1.416667 & 2.00694 & $0.00694$\\
+4 & $\tfrac{577}{408}$ & 1.414216 & 2.0000060 & $6.0\times10^{-6}$\\
+\bottomrule
+\end{tabular}
+\caption{有理数の列 $x_k$。2乗が $2$ に、急速に近づく（分数で計算して確認）。ただし、どの項の2乗も、ちょうど $2$ にはならない。}
+\end{table}
 
 \begin{figure}[htbp]
 \centering
 \begin{tikzpicture}
- \draw[ax] (0,0)--(8,0);
- \foreach \xa/\lab in {1/10 g,3/11 g,5/12 g} {\fill[primaryblue] (\xa,0) circle (0.1); \node[below] at (\xa,-0.2) {\lab};}
- \draw[<->, accentgreen] (1,0.5)--(3,0.5) node[midway, above, font=\footnotesize] {区別できない $A=B$};
- \draw[<->, accentgreen] (3,1.2)--(5,1.2) node[midway, above, font=\footnotesize] {区別できない $B=C$};
- \draw[<->, crimson] (1,2.0)--(5,2.0) node[midway, above, font=\footnotesize] {区別できる $A<C$};
+\begin{axis}[width=9.5cm, height=5cm, ymode=log, xmin=0.5, xmax=4.5, ymin=1e-7, ymax=1, xtick={1,2,3,4}, xlabel={$k$}, ylabel={$|x_k^2-2|$},
+  every axis label/.append style={font=\footnotesize}, tick label style={font=\footnotesize}]
+ \addplot[mark=*, thick, primaryblue] coordinates {(1,1)(2,0.25)(3,0.006944)(4,0.000006)};
+\end{axis}
 \end{tikzpicture}
-\caption{感覚の連続体。区別できる最小の差を1.5 gとすると、10 gと11 g、11 gと12 gは同じに感じるが、10 gと12 gは区別できる。}
+\caption{誤差 $|x_k^2-2|$ の減り方（対数目盛）。数回の操作で急に小さくなるが、$0$ にはならない。}
 \end{figure}
 
-つまり、感覚の世界では、$A=B$、$B=C$ でも、$A=C$ とは限りません。数学では、こうした矛盾を避けるため、新しい「数の連続体」を作りました。
+ポアンカレは、このような、有理数の間に新しい点を挿入する手続きを、精神が行うことが、連続という概念を生む、と考えます。
 
-\begin{figure}[htbp]
-\centering
-\begin{tikzpicture}[node distance=8mm]
- \node[wbox, text width=3cm] (a) {感覚の連続体\\{\small $A=B,B=C$ でも\\$A\neq C$}};
- \node[gbox, text width=3.6cm, right=22mm of a] (b) {数の連続体\\{\small $=$ は推移的\\（$A=B,B=C\Rightarrow A=C$）}};
- \draw[ax] (a)--node[above, lbl]{理想化} (b);
-\end{tikzpicture}
-\caption{経験から数学へ。数学の連続体は、感覚の限界を超えて作られた理想化。}
-\end{figure}
-
-\begin{pointbox}{この章のポイント}
-\begin{itemize}[leftmargin=1.5em]
-\item 感覚の等しさは、推移的ではない。
-\item 数学の連続体は、その矛盾を解消した理想化。
+\begin{pointbox}{この章のまとめ}
+\begin{itemize}[leftmargin=*]
+\item 感覚では、$A=B$、$B=C$、$A<C$ が起こりうる（推移律の破れ）。
+\item 数学的な連続は、この矛盾を解くために、精神が作った概念。
 \end{itemize}
 \end{pointbox}
 
 %==========================================================
-\chapter{非ユークリッド幾何学}
+\chapter{非ユークリッド幾何学（第3章）}
 \markboth{第3章}{非ユークリッド幾何学}
 %==========================================================
 
-「平行線の公理」を変えると、別の幾何学ができます。その1つ、双曲幾何学の姿を、ポアンカレの円板模型で見てみましょう。円板の中だけを「世界」と考え、円板の「直線」を、境界の円に直交する円弧とします。
+\section{この章の位置づけ}
+
+第3章で、ポアンカレは、ロバチェフスキーの幾何学（鋭角の仮説）と、リーマンの幾何学（鈍角の仮説）を紹介し、これらが矛盾のない体系であることを、「模型」で示します。有名な模型が、温度が場所によって違う「熱い球」の世界です。
+
+\section{熱い球の世界}
+
+半径 $R$ の球の中を、温度が $R^2-r^2$ に比例する世界と考えます（$r$ は中心からの距離）。物体の大きさは、温度に比例して縮むとします。中心では温度が最大で、物差しも最大。球面に近づくほど温度が下がり、物差しが縮みます。この世界の住人が、中心から球面に向かって進むと、物差しがどんどん短くなるので、いくら進んでも球面に届きません。
+
+$R=1$ とすると、中心から距離 $r$ の点までの、この世界の住人にとっての距離は、$\displaystyle\int_0^r\frac{d\rho}{1-\rho^2}=\mathrm{artanh}\,r$ です。
+
+\begin{table}[htbp]
+\centering
+\begin{tabular}{c|ccc}
+\toprule
+普通の距離 $r$ & 0.5 & 0.9 & 0.99\\
+\midrule
+住人にとっての距離（積分で計算） & 0.5493 & 1.4722 & 2.6467\\
+$\mathrm{artanh}\,r$ & 0.5493 & 1.4722 & 2.6467\\
+\bottomrule
+\end{tabular}
+\caption{熱い球の世界の距離。数値積分の結果と $\mathrm{artanh}\,r$ が一致する。$r\to1$ で、距離は無限に大きくなる。}
+\end{table}
 
 \begin{figure}[htbp]
 \centering
-\begin{tikzpicture}[scale=3.0]
- \draw[thick, primaryblue, fill=softblue] (0,0) circle (1);
- \begin{scope}
-  \clip (0,0) circle (1);
-  \foreach \ang in {0,60,120} {
-   \begin{scope}[rotate=\ang]
-    \draw[thick, crimson] (-1,0)--(1,0);
-   \end{scope}
-  }
-  \foreach \ang in {20,80,140,200,260,320} {
-   \begin{scope}[rotate=\ang]
-    \draw[thick, accentgreen] (1.6,0) circle ({sqrt(1.6*1.6-1)});
-   \end{scope}
-  }
- \end{scope}
+\begin{tikzpicture}
+\begin{axis}[width=9.5cm, height=5.2cm, xmin=0, xmax=1, ymin=0, ymax=4, xlabel={普通の距離 $r$（球の半径 $=1$）}, ylabel={住人にとっての距離},
+  every axis label/.append style={font=\footnotesize}, tick label style={font=\footnotesize}, legend style={font=\scriptsize, at={(0.03,0.97)}, anchor=north west}]
+ \addplot[thick, primaryblue, domain=0:0.995, samples=120] {0.5*ln((1+x)/(1-x))};
+ \addplot[dashed, crimson, domain=0:1, samples=2] {x};
+ \legend{熱い球の世界, ふつうの距離}
+\end{axis}
 \end{tikzpicture}
-\caption{ポアンカレの円板。円板の「直線」は、直径（赤）と、境界の円に直交する円弧（緑）。円周は無限の遠方にあたる。}
+\caption{球の外周に近づくほど、住人にとっての距離は無限に大きくなる。外から見れば有限の球が、中の住人には無限の空間に見える。}
 \end{figure}
 
-この世界では、1つの直線 $\ell$ の外の点を通る、$\ell$ と交わらない直線が、無数に引けます。そして、三角形の内角の和は $180^\circ$ より小さくなります。
-
-\begin{figure}[htbp]
-\centering
-\begin{tikzpicture}[scale=0.9]
- \draw[thick, primaryblue] (0,0)--(5,0) node[right] {$\ell$};
- \fill (2.5,2) circle (0.07) node[above right] {$P$};
- \foreach \s in {-0.6,-0.2,0.2,0.6} {\draw[crimson, thick] (2.5-3,2-3*\s)--(2.5+3,2+3*\s);}
- \node[font=\footnotesize, align=center] at (7.2,1.5) {双曲幾何では、$P$ を通り\\ $\ell$ と交わらない直線が\\ 無数にある};
-\end{tikzpicture}
-\caption{平行線の公理を変えた世界。$P$ を通って $\ell$ と交わらない直線（赤）が何本も引ける。}
-\end{figure}
-
-\begin{notebox}{注意}
-図の赤い直線は、ユークリッド平面上に描いたもので、双曲幾何学の世界での姿とは異なります。「交わらない直線が複数ある」という意味の模式図です。
-\end{notebox}
-
-\begin{pointbox}{この章のポイント}
-\begin{itemize}[leftmargin=1.5em]
-\item 平行線の公理を変えると、別の矛盾のない幾何学ができる。
-\item ポアンカレの円板は、双曲幾何学を普通の円板の中に写し取る。
+\begin{pointbox}{この章のまとめ}
+\begin{itemize}[leftmargin=*]
+\item 非ユークリッド幾何学は、ふつうの空間の中の「模型」で表せ、矛盾がないことを示せる。
+\item 熱い球の世界では、住人にとっての距離は $\mathrm{artanh}\,r$ で、球面までの距離は無限。
 \end{itemize}
 \end{pointbox}
 
 %==========================================================
-\chapter{空間と幾何学}
+\chapter{空間と幾何学（第4章）}
 \markboth{第4章}{空間と幾何学}
 %==========================================================
 
-私たちが「空間」と呼ぶものは、見た目の空間・触った感じの空間・筋肉の感覚の空間などを、まとめて作り上げたもの、とポアンカレは考えます。そして、空間の性質は、私たちが物を動かす操作のしくみ（変位の群）から生まれます。
+\section{この章の位置づけ}
 
-\begin{figure}[htbp]
+第4章は、「空間の幾何学は、どこから来るのか」を問います。ポアンカレは、私たちが空間を知るのは、物体を動かしたり、自分が動いたりする経験を通してであり、幾何学は、この「動き」（変位）の群の性質を、まとめたものだと論じます。
+
+\section{動きの順序：回転は順序に依存する}
+
+3次元では、2つの回転を続けて行うとき、順序を入れ替えると結果が変わります。たとえば、$x$ 軸のまわりに $90$ 度、次に $y$ 軸のまわりに $90$ 度回す場合と、先に $y$、次に $x$ の場合では、結果の行列が違います。
+
+\begin{table}[htbp]
 \centering
-\begin{tikzpicture}[node distance=6mm]
- \node[wbox, text width=2.2cm] (a) {見た目};
- \node[wbox, text width=2.2cm, below=3mm of a] (b) {触った感じ};
- \node[wbox, text width=2.2cm, below=3mm of b] (c) {筋肉の感覚};
- \node[gbox, text width=3cm, right=26mm of b] (d) {私たちの\\「空間」};
- \draw[ax] (a)--(d); \draw[ax] (b)--(d); \draw[ax] (c)--(d);
-\end{tikzpicture}
-\caption{複数の感覚が、1つの空間にまとめられる。}
-\end{figure}
-
-\section*{もし、世界のすべてが2倍に大きくなったら}
-
-ポアンカレは、次の思考実験をします。ある夜、宇宙のすべての大きさが、物差しも含めて、2倍になったとしたら、私たちは気づくでしょうか。物差しで測った長さは、変わりません。だから、気づくことはできません。
-
-\begin{figure}[htbp]
-\centering
-\begin{tikzpicture}
- \draw[thick, primaryblue, fill=softblue] (0,0) rectangle (1.2,0.8);
- \draw[thick] (0,-0.4)--(1.2,-0.4) node[midway, below, font=\footnotesize] {物差し 2目盛};
- \draw[ax] (2.4,0.2)--(3.6,0.2);
- \draw[thick, primaryblue, fill=softblue] (4.8,0) rectangle (7.2,1.6);
- \draw[thick] (4.8,-0.4)--(7.2,-0.4) node[midway, below, font=\footnotesize] {物差し（2倍）で 2目盛};
-\end{tikzpicture}
-\caption{すべてが2倍になっても、物差しで測れば同じ。大きさは相対的で、絶対的ではない。}
-\end{figure}
-
-\begin{pointbox}{この章のポイント}
-\begin{itemize}[leftmargin=1.5em]
-\item 空間は、感覚と運動の経験から作られる。
-\item 大きさは相対的。全体が同じ割合で変われば、気づけない。
-\end{itemize}
-\end{pointbox}
-
-%==========================================================
-\chapter{経験と幾何学}
-\markboth{第5章}{経験と幾何学}
-%==========================================================
-
-「三角形の内角の和は $180^\circ$ か」は、実験で確かめられるでしょうか。ポアンカレの答えは、「確かめられるのは、幾何学と物理学（光の進み方）の組み合わせだけ」です。
-
-\begin{figure}[htbp]
-\centering
-\begin{tikzpicture}[node distance=8mm]
- \node[wbox, text width=4cm] (a) {測定：星を見て\\三角形の角の和を測る};
- \node[abox, text width=4.4cm, right=20mm of a, yshift=9mm] (b) {案1：幾何学はユークリッド。\\光は曲がって進む};
- \node[abox, text width=4.4cm, right=20mm of a, yshift=-9mm] (c) {案2：光は直進する。\\幾何学は非ユークリッド};
- \draw[ax] (a)--(b); \draw[ax] (a)--(c);
-\end{tikzpicture}
-\caption{同じ測定結果に、2通りの説明が可能。どちらを選ぶかは、便利さの問題（規約）とポアンカレは考えた。}
-\end{figure}
-
-ポアンカレは、ユークリッド幾何学が、いちばん簡単で便利なので、これからも使われ続けるだろう、と述べます。
-
-\begin{pointbox}{この章のポイント}
-\begin{itemize}[leftmargin=1.5em]
-\item 実験が確かめるのは、幾何学と物理学のセット。
-\item どの幾何学を使うかは、簡単さで選ぶ約束（規約）。
-\end{itemize}
-\end{pointbox}
-
-\begin{notebox}{のちの歴史}
-ポアンカレのこの主張は、のちに、アインシュタインの一般相対性理論が、重力で光が曲がり、空間が曲がっていると説明した点で、別の視点を与えられたと言われます。その評価は専門書で確かめてください。
-\end{notebox}
-
-%==========================================================
-\chapter{古典力学}
-\markboth{第6章}{古典力学}
-%==========================================================
-
-ニュートンの力学の法則は、実験の結果なのか、定義や約束なのか。ポアンカレは、慣性の法則や、加速度の法則に、規約の面があると考えます。
-
-\begin{figure}[htbp]
-\centering
-\begin{tikzpicture}[node distance=8mm]
- \node[fbox, text width=3.6cm] (a) {慣性の法則\\{\small 力がなければ\\ 等速直線運動}};
- \node[fbox, text width=3.6cm, right=of a] (b) {加速度の法則\\{\small $F=ma$}};
- \node[fbox, text width=3.6cm, right=of b] (c) {作用・反作用};
- \draw[ax, <->] (a)--(b); \draw[ax, <->] (b)--(c);
-\end{tikzpicture}
-\caption{力学の3つの法則。互いに関連し合って、体系をなす。}
-\end{figure}
-
-\begin{figure}[htbp]
-\centering
-\begin{tikzpicture}[scale=1.0]
- \draw[->] (0,0)--(8,0) node[right] {時間};
- \foreach \i in {0,1,...,5} {\fill[primaryblue] (\i*1.4,0.6) circle (0.12); }
- \draw[->, thick, crimson] (0.2,1.0)--(7.0,1.0);
- \node[font=\footnotesize] at (4,1.5) {力がなければ、等間隔で一直線};
-\end{tikzpicture}
-\caption{慣性の法則。力がはたらかない物体は、同じ時間に同じ距離を進む。}
-\end{figure}
-
-\begin{pointbox}{この章のポイント}
-\begin{itemize}[leftmargin=1.5em]
-\item 力学の法則は、実験と約束の両面をもつ、とポアンカレは見た。
-\end{itemize}
-\end{pointbox}
-
-%==========================================================
-\chapter{相対運動と絶対運動}
-\markboth{第7章}{相対運動と絶対運動}
-%==========================================================
-
-走る電車の中でボールを投げても、止まった電車の中と同じように見えます。どれが「本当に止まっている」のか、絶対的な基準はありません。
-
-\begin{figure}[htbp]
-\centering
-\begin{tikzpicture}
- \draw[thick, primaryblue, fill=softblue] (0,0) rectangle (3,1.2);
- \draw[->, thick, crimson] (3.2,0.6)--(4.6,0.6) node[right, font=\small] {速さ $v$};
- \fill[accentgreen] (1.5,0.6) circle (0.12);
- \draw[thick] (-0.5,-0.2)--(5,-0.2);
- \node[font=\footnotesize] at (1.5,-0.6) {地面（ホームの人から見て）};
-\end{tikzpicture}
-\caption{電車の中の人には、ボールは真上に飛んで戻る。ホームの人には、電車の速さ $v$ ぶん、斜めに進んで見える。}
-\end{figure}
-
-位置の変換は $x'=x-vt$ と書けます。力学の法則は、この変換で形を変えません（ガリレイの相対性）。
-
-\begin{examplebox}{数値例}
-電車が $v=20\ \mathrm{m/s}$ で走っています。電車の中でボールを真上に投げ、2秒後に手元に戻ったとき、ホームの人から見たボールの水平方向の移動距離は $20\times2=40\ \mathrm{m}$。
-\end{examplebox}
-
-\begin{pointbox}{この章のポイント}
-\begin{itemize}[leftmargin=1.5em]
-\item 絶対的な静止はない。運動は相対的。
-\item 力学の法則は、等速で動く観測者どうしで同じ形になる。
-\end{itemize}
-\end{pointbox}
-
-%==========================================================
-\chapter{エネルギーと熱力学}
-\markboth{第8章}{エネルギーと熱力学}
-%==========================================================
-
-エネルギーは、姿を変えても、総量が変わらない（エネルギー保存則）。ポアンカレは、これが、実験から導かれる法則であるとともに、「エネルギー」という量の定義のしかたでもあることを指摘します。
-
-\begin{figure}[htbp]
-\centering
-\begin{tikzpicture}[node distance=10mm]
- \node[abox, text width=2.4cm] (a) {位置エネルギー};
- \node[fbox, text width=2.4cm, right=of a] (b) {運動エネルギー};
- \node[rbox, text width=2.4cm, right=of b] (c) {熱};
- \draw[ax, <->] (a)--(b); \draw[ax] (b)--(c);
-\end{tikzpicture}
-\caption{エネルギーの変換。落とした物体は、位置エネルギーが運動エネルギーに変わり、最後は熱になる。総量は一定。}
-\end{figure}
-
-熱機関の効率には上限があります。高温 $T_h$、低温 $T_c$（絶対温度）の間で働く熱機関の最大の効率は $1-\dfrac{T_c}{T_h}$。
-
-\begin{examplebox}{数値例}
-$T_h=500$ K、$T_c=300$ K のとき、$1-\frac{300}{500}=0.4$。最大でも40\%。
-\end{examplebox}
-
-\begin{figure}[htbp]
-\centering
-\begin{tikzpicture}
-\begin{axis}[width=9cm, height=5.5cm, xlabel={高温側の温度 $T_h$ [K]}, ylabel={最大効率}, xmin=300, xmax=1000, ymin=0, ymax=0.8, grid=major]
- \addplot[thick, primaryblue, domain=300:1000, samples=40] {1-300/x};
- \addplot[only marks, mark=*, color=crimson] coordinates {(500,0.4)};
-\end{axis}
-\end{tikzpicture}
-\caption{低温側を300 Kに固定したときの最大効率。高温側が高いほど効率が上がる。}
-\end{figure}
-
-\begin{pointbox}{この章のポイント}
-\begin{itemize}[leftmargin=1.5em]
-\item エネルギーは姿を変えても総量が保存される。
-\item 熱機関の効率には、温度で決まる上限がある。
-\end{itemize}
-\end{pointbox}
-
-%==========================================================
-\chapter{物理学における仮説}
-\markboth{第9章}{物理学における仮説}
-%==========================================================
-
-科学者は、実験をして、法則を作ります。そのとき、いくつかの仮説を置きます。ポアンカレは、仮説を役割で分けます。
-
-\begin{center}
-\begin{tabular}{lp{8cm}}
+\begin{tabular}{lc}
 \toprule
-種類 & 役割\\
+回転の順序 & 結果（行列）\\
 \midrule
-検証できる仮説 & 実験で確かめられ、否定されることもある\\
-便宜的な約束（規約） & 話を簡単にするための定義\\
-どちらでもよい仮説 & 結果に影響しない。想像を助けるだけ\\
+$x$ 軸まわり $90^\circ$、次に $y$ 軸まわり $90^\circ$ & $\begin{pmatrix}0&0&1\\1&0&0\\0&1&0\end{pmatrix}$\\
+$y$ 軸まわり $90^\circ$、次に $x$ 軸まわり $90^\circ$ & $\begin{pmatrix}0&1&0\\0&0&-1\\-1&0&0\end{pmatrix}$\\
 \bottomrule
 \end{tabular}
-\end{center}
+\caption{3次元の回転は順序を変えると結果が変わる（計算で確認）。平面の回転では、順序を変えても同じ。}
+\end{table}
 
-\begin{figure}[htbp]
-\centering
-\begin{tikzpicture}[node distance=10mm]
- \node[wbox, text width=2.4cm] (a) {実験};
- \node[abox, text width=2.4cm, right=of a] (b) {仮説を立てる};
- \node[fbox, text width=2.4cm, right=of b] (c) {予測する};
- \node[wbox, text width=2.4cm, right=of c] (d) {再び実験};
- \draw[ax] (a)--(b); \draw[ax] (b)--(c); \draw[ax] (c)--(d);
- \draw[ax, dashed] (d) to[bend left=30] (b);
-\end{tikzpicture}
-\caption{科学の循環。実験と仮説は、何度もやりとりされる。}
-\end{figure}
-
-\begin{pointbox}{この章のポイント}
-\begin{itemize}[leftmargin=1.5em]
-\item 仮説には、検証できるもの、約束、どちらでもよいものがある。
-\item 実験と仮説は、くり返し結びつく。
-\end{itemize}
-\end{pointbox}
-
-%==========================================================
-\chapter{現代物理学の理論}
-\markboth{第10章}{現代物理学の理論}
-%==========================================================
-
-ポアンカレは、同じ現象を説明する理論が複数ありうることに、注目します。たとえば、光や電気について、いくつかの異なる力学的な「模型」が考えられても、方程式が同じなら、予測も同じです。
-
-\begin{figure}[htbp]
-\centering
-\begin{tikzpicture}[node distance=8mm]
- \node[wbox, text width=2.6cm] (a) {模型A\\{\small 例：流体のモデル}};
- \node[wbox, text width=2.6cm, below=of a] (b) {模型B\\{\small 例：弾性体のモデル}};
- \node[gbox, text width=3.2cm, right=26mm of $(a)!0.5!(b)$] (c) {同じ方程式};
- \node[fbox, text width=3.2cm, right=18mm of c] (d) {同じ予測};
- \draw[ax] (a)--(c); \draw[ax] (b)--(c); \draw[ax] (c)--(d);
-\end{tikzpicture}
-\caption{異なる模型でも、方程式が同じなら、予測は同じ。どちらが「本物」かは、実験では決められない。}
-\end{figure}
-
-\begin{notebox}{注意}
-具体的なモデルの例（流体・弾性体）は、考え方を示す例示であり、ポアンカレが挙げた物理的な模型そのものではありません。
-\end{notebox}
-
-\begin{pointbox}{この章のポイント}
-\begin{itemize}[leftmargin=1.5em]
-\item 理論は、方程式の関係を教える。模型は、理解の助けにすぎない。
-\end{itemize}
-\end{pointbox}
-
-%==========================================================
-\chapter{確率論の計算}
-\markboth{第11章}{確率論}
-%==========================================================
-
-ポアンカレは、ルーレットを例に、「偶然」を説明します。わずかな初期条件の違い（回す速さ）が、結果（赤か黒か）を大きく変えます。
+平面の回転は、順序を入れ替えても結果が変わりません。たとえば、$0.3$ ラジアンの回転と $0.5$ ラジアンの回転の合成は、どちらの順でも $0.8$ ラジアンの回転です（$\cos0.8=0.6967$ が、積の成分と一致）。
 
 \begin{figure}[htbp]
 \centering
 \begin{tikzpicture}[scale=0.9]
- \foreach \i in {0,...,35} {
-  \pgfmathsetmacro{\a}{10*\i}
-  \pgfmathsetmacro{\b}{10*(\i+1)}
-  \ifodd\i
-    \fill[crimson] (0,0) -- (\a:2) arc (\a:\b:2) -- cycle;
-  \else
-    \fill[black!75] (0,0) -- (\a:2) arc (\a:\b:2) -- cycle;
-  \fi
- }
- \draw[thick] (0,0) circle (2);
+ \begin{scope}
+ \draw[ax] (0,0)--(2.2,0) node[right, lbl] {$x$};
+ \draw[ax] (0,0)--(0,2.2) node[above, lbl] {$z$};
+ \draw[ax] (0,0)--(-1.2,-1.2) node[below left, lbl] {$y$};
+ \node[lbl] at (0.6,-1.8) {はじめ};
+ \end{scope}
+ \begin{scope}[xshift=5cm]
+ \draw[ax, crimson] (0,0)--(2.2,0) node[right, lbl] {};
+ \draw[ax, crimson] (0,0)--(0,2.2);
+ \draw[ax, crimson] (0,0)--(-1.2,-1.2);
+ \node[lbl] at (0.6,-1.8) {$x$ のあと $y$ の順};
+ \end{scope}
+ \begin{scope}[xshift=10cm]
+ \draw[ax, primaryblue] (0,0)--(0,2.2);
+ \draw[ax, primaryblue] (0,0)--(-1.2,-1.2);
+ \draw[ax, primaryblue] (0,0)--(2.2,0);
+ \node[lbl] at (0.6,-1.8) {$y$ のあと $x$ の順};
+ \end{scope}
 \end{tikzpicture}
-\caption{細かく赤と黒に分けたルーレット。回す速さがほんの少し違うだけで、止まる色が変わる。}
+\caption{回転の順序の概念図。同じ回転を、逆の順序で行うと、行き着く向きが違う。（軸の見た目は略図）}
 \end{figure}
 
-\begin{figure}[htbp]
-\centering
-\begin{tikzpicture}
- \foreach \i in {0,...,39} {
-  \pgfmathsetmacro{\xa}{\i*0.3}
-  \ifodd\i
-    \fill[crimson] (\xa,0) rectangle (\xa+0.3,0.8);
-  \else
-    \fill[black!75] (\xa,0) rectangle (\xa+0.3,0.8);
-  \fi
- }
- \draw[ax] (0,-0.2)--(12.3,-0.2) node[right, font=\footnotesize] {初速};
- \node[font=\footnotesize] at (6,1.3) {初速が少し違うと、結果の色が入れ替わる};
-\end{tikzpicture}
-\caption{初速と結果の色の対応（模式図）。帯が細かいほど、結果は事実上予測できず、赤と黒は半々になる。}
-\end{figure}
-
-初速の幅がある程度ばらつくとき、赤と黒の帯がきわめて細ければ、赤になる確率は $\frac12$ に近くなります。
-
-\begin{pointbox}{この章のポイント}
-\begin{itemize}[leftmargin=1.5em]
-\item 偶然とは、小さな原因が大きな結果を生むこと。
-\item 帯が細かいと、確率は帯の幅の比（半々）で決まる。
+\begin{pointbox}{この章のまとめ}
+\begin{itemize}[leftmargin=*]
+\item ポアンカレは、幾何学を、物体の動き（変位）の群の性質と結びつけて考える。
+\item 3次元の回転は順序に依存し、平面の回転は依存しない。
 \end{itemize}
 \end{pointbox}
 
 %==========================================================
-\chapter{光学と電磁気学}
+\chapter{経験と幾何学（第5章）}
+\markboth{第5章}{経験と幾何学}
+%==========================================================
+
+\section{この章の位置づけ}
+
+第5章の主題は、有名な\textbf{約束主義}です。ユークリッド幾何学と非ユークリッド幾何学のどちらが、現実の空間に当てはまるかは、経験だけでは決まらない。同じ観測を、どちらの幾何学でも説明できる（光の道筋などの解釈を変えれば）、とポアンカレは論じます。
+
+\section{測定で曲がりを調べる限界}
+
+三角形の内角の和を測れば、空間の曲がりが分かるように思えます。しかし、測定には限界があります。球面（地球、半径 $6371$ km）の上の、1辺 $100$ km の正三角形では、内角の和の超過は、面積 $4330$ km$^2$ から
+\[
+\frac{\text{面積}}{R^2}=\frac{4330}{6371^2}=1.07\times10^{-4}\ \text{rad}=22\ \text{秒角}
+\]
+です。測定の精度が $1$ 秒角なら、このずれは測れますが、もし、球の半径が地球より遥かに大きい（たとえば宇宙）なら、同じ大きさの三角形のずれは、検出できません。
+
+\begin{table}[htbp]
+\centering
+\begin{tabular}{lc}
+\toprule
+測定精度（内角の和） & 検出できる曲がりの半径の上限 $R$\\
+\midrule
+$1$ 秒角 & 約 $2.99\times10^{4}$ km\\
+$0.1$ 秒角 & 約 $9.45\times10^{4}$ km\\
+\bottomrule
+\end{tabular}
+\caption{1辺100 kmの正三角形（面積 $4330$ km$^2$）で、角の和の超過が測定精度より小さいとき、球の半径は、少なくともこの値以上でなければならない。}
+\end{table}
+
+\begin{figure}[htbp]
+\centering
+\begin{tikzpicture}
+\begin{axis}[width=9.5cm, height=5.2cm, xmode=log, ymode=log, xmin=1e3, xmax=1e8, ymin=1e-8, ymax=1, xlabel={曲がりの半径 $R$（km）}, ylabel={角の和の超過（rad）},
+  every axis label/.append style={font=\footnotesize}, tick label style={font=\footnotesize}]
+ \addplot[thick, primaryblue, domain=1e3:1e8, samples=2] {4330/(x^2)};
+ \addplot[dashed, crimson, domain=1e3:1e8, samples=2] {4.85e-6};
+\end{axis}
+\end{tikzpicture}
+\caption{1辺100 kmの正三角形の、角の和の超過（青）と、1秒角（$4.85\times10^{-6}$ rad、赤の破線）。$R$ が約 $3\times10^4$ km を超えると、超過が1秒角より小さくなり、測れない。}
+\end{figure}
+
+したがって、「測定でユークリッド幾何学が成り立つと確かめた」ことは、せいぜい、「曲がりの半径がある値より大きい」ことを意味するだけで、ユークリッド幾何学が厳密に成り立つことの証明にはなりません。
+
+\begin{pointbox}{この章のまとめ}
+\begin{itemize}[leftmargin=*]
+\item 約束主義：どの幾何学を使うかは、経験だけでなく、便利さによる約束。
+\item 測定の精度が有限なので、曲がりの半径に下限しか付けられない（例：1秒角の精度で約 $3\times10^4$ km 以上）。
+\end{itemize}
+\end{pointbox}
+
+%==========================================================
+\chapter{古典力学（第6章）}
+\markboth{第6章}{古典力学}
+%==========================================================
+
+\section{この章の位置づけ}
+
+第6章は、ニュートンの力学の原理（慣性の法則、力と加速度の関係、作用反作用）が、経験から得られたのか、約束なのかを論じます。ポアンカレは、これらの原理が、実験で確かめられる面と、定義（約束）の面の両方をもつ、と述べます。
+
+\section{ケプラーの第3法則：経験からの法則}
+
+古典力学の原理の1つの根拠は、天体の観測です。ケプラーの第3法則は、惑星の軌道の長半径 $a$（天文単位）と周期 $T$（年）が、$a^3/T^2=$ 一定であることを述べます。
+
+\begin{table}[htbp]
+\centering
+\begin{tabular}{l|ccccc}
+\toprule
+惑星 & 水星 & 地球 & 火星 & 木星 & 土星\\
+\midrule
+長半径 $a$（天文単位） & 0.387 & 1 & 1.524 & 5.203 & 9.537\\
+周期 $T$（年） & 0.2408 & 1 & 1.881 & 11.862 & 29.457\\
+$a^3/T^2$ & 1.000 & 1.000 & 1.000 & 1.001 & 1.000\\
+\bottomrule
+\end{tabular}
+\caption{ケプラーの第3法則の確認（計算で確認）。どの惑星でも $a^3/T^2\approx1$。}
+\end{table}
+
+\begin{figure}[htbp]
+\centering
+\begin{tikzpicture}
+\begin{axis}[width=9.5cm, height=5.3cm, xmode=log, ymode=log, xmin=0.2, xmax=40, ymin=0.05, ymax=300, xlabel={周期 $T$（年）}, ylabel={長半径 $a$（天文単位）},
+  every axis label/.append style={font=\footnotesize}, tick label style={font=\footnotesize}, legend style={font=\scriptsize, at={(0.97,0.3)}, anchor=east}]
+ \addplot[mark=*, crimson, only marks] coordinates {(0.2408,0.387)(1,1)(1.881,1.524)(11.862,5.203)(29.457,9.537)};
+ \addplot[thick, primaryblue, domain=0.2:40, samples=2] {x^(2/3)};
+ \legend{惑星, $a=T^{2/3}$}
+\end{axis}
+\end{tikzpicture}
+\caption{惑星の周期と長半径。両対数のグラフで、傾き $2/3$ の直線 $a=T^{2/3}$ に乗る。}
+\end{figure}
+
+しかし、ポアンカレは、「力と加速度の関係 $F=ma$」そのものは、経験で確かめにくい、と論じます。力は、加速度から逆に定義されるので、一種の循環が起きるからです。
+
+\begin{pointbox}{この章のまとめ}
+\begin{itemize}[leftmargin=*]
+\item 力学の原理は、経験と約束の両方の面をもつ。
+\item ケプラーの第3法則は、5つの惑星で $a^3/T^2\approx1$。経験的な裏づけの例。
+\end{itemize}
+\end{pointbox}
+
+%==========================================================
+\chapter{相対運動と絶対運動（第7章）}
+\markboth{第7章}{相対運動と絶対運動}
+%==========================================================
+
+\section{この章の位置づけ}
+
+第7章は、運動の相対性を論じます。ある物体が動いているかどうかは、何を基準にするかで決まります。それでも、地球が自転していることを、地球の外を見なくても、実験で示せる方法があります。それが、フーコーの振り子です。ポアンカレは、この実験を取り上げます。
+
+\section{フーコーの振り子}
+
+振り子の振動面は、地球が自転しても、慣性により空間に対して固定されようとします。緯度 $\varphi$ の地点では、振動面は、1日（恒星日 $23.934$ 時間）の $\sin\varphi$ 倍の速さで回転して見えます。したがって、1周する時間は $23.934/\sin\varphi$ 時間です。
+
+\begin{table}[htbp]
+\centering
+\begin{tabular}{lcc}
+\toprule
+場所 & 緯度 & 振動面が1周する時間\\
+\midrule
+北極 & $90^\circ$ & 23.9 時間\\
+パリ & $48.85^\circ$ & 31.8 時間（約31時間47分）\\
+東京 & $35.68^\circ$ & 41.0 時間\\
+赤道 & $0^\circ$ & 回らない（無限大）\\
+\bottomrule
+\end{tabular}
+\caption{フーコーの振り子が1周する時間（$23.934/\sin\varphi$ 時間、計算で確認）。}
+\end{table}
+
+\begin{figure}[htbp]
+\centering
+\begin{tikzpicture}
+\begin{axis}[width=9.5cm, height=5.3cm, xmin=10, xmax=90, ymin=0, ymax=140, xlabel={緯度（度）}, ylabel={1周の時間（時間）},
+  every axis label/.append style={font=\footnotesize}, tick label style={font=\footnotesize}]
+ \addplot[thick, primaryblue, domain=10:90, samples=80] {23.934/sin(x)};
+ \addplot[mark=*, crimson, only marks] coordinates {(35.68,41.0)(48.85,31.8)(90,23.934)};
+\end{axis}
+\end{tikzpicture}
+\caption{フーコーの振り子が1周するのにかかる時間。緯度が低いほど長くなり、赤道では回らない。}
+\end{figure}
+
+（フーコーの振り子の周期の値は、本書の計算です。ポアンカレは、振り子の実験の意味を論じています。）
+
+\begin{pointbox}{この章のまとめ}
+\begin{itemize}[leftmargin=*]
+\item 運動の絶対性は、フーコーの振り子のような実験で、地球の自転を示すことで問題になる。
+\item パリでは約 $31.8$ 時間で1周、北極では $23.9$ 時間、赤道では回らない。
+\end{itemize}
+\end{pointbox}
+
+%==========================================================
+\chapter{エネルギーと熱力学（第8章）}
+\markboth{第8章}{エネルギーと熱力学}
+%==========================================================
+
+\section{この章の位置づけ}
+
+第8章は、エネルギー保存則と、熱力学の原理（カルノーの原理）を論じます。ポアンカレは、エネルギー保存則が、あまりにも広く成り立つために、何が実験で、何が定義なのかが見えにくくなる、と述べます。
+
+\section{カルノーの原理：熱機関の効率}
+
+熱機関が、高温 $T_h$ の熱源から熱を受け、低温 $T_c$ の熱源に熱を捨てて仕事をするとき、効率には上限があります。
+\[
+\eta_{\max}=1-\frac{T_c}{T_h}\qquad(\text{温度は絶対温度}).
+\]
+
+\begin{table}[htbp]
+\centering
+\begin{tabular}{cc|c}
+\toprule
+高温 $T_h$ & 低温 $T_c$ & 最大の効率\\
+\midrule
+$100^\circ$C & $20^\circ$C & 21.4\%\\
+$150^\circ$C & $20^\circ$C & 30.7\%\\
+$400^\circ$C & $30^\circ$C & 55.0\%\\
+$1500^\circ$C & $27^\circ$C & 83.1\%\\
+\bottomrule
+\end{tabular}
+\caption{カルノー効率 $1-T_c/T_h$（温度は絶対温度に直して計算）。温度差が大きいほど高い。}
+\end{table}
+
+\begin{figure}[htbp]
+\centering
+\begin{tikzpicture}
+\begin{axis}[width=9.5cm, height=5.2cm, xmin=300, xmax=2000, ymin=0, ymax=1, xlabel={高温の熱源の温度 $T_h$（K）}, ylabel={最大の効率},
+  every axis label/.append style={font=\footnotesize}, tick label style={font=\footnotesize}]
+ \addplot[thick, primaryblue, domain=320:2000, samples=80] {1-300/x};
+\end{axis}
+\end{tikzpicture}
+\caption{低温の熱源が $300$ K のときのカルノー効率。高温の熱源が熱いほど高くなるが、$100\%$ にはならない。}
+\end{figure}
+
+\begin{pointbox}{この章のまとめ}
+\begin{itemize}[leftmargin=*]
+\item エネルギー保存則とカルノーの原理は、熱力学の基本。
+\item カルノー効率 $1-T_c/T_h$：$150^\circ$C と $20^\circ$C で $30.7\%$。どんな機関も $100\%$ にはならない。
+\end{itemize}
+\end{pointbox}
+
+%==========================================================
+\chapter{物理学における仮説（第9章）}
+\markboth{第9章}{物理学における仮説}
+%==========================================================
+
+\section{この章の位置づけ}
+
+第9章は、物理学で、仮説が果たす役割を論じます。ポアンカレは、実験と理論の関係を述べ、「検証できる仮説」「約束としての仮説」「見かけの（無害な）仮説」を区別します。仮説を立てるときは、できるだけ単純なものを選び、実験で検証し、合わなければ捨てる、と述べます。
+
+\section{単純な仮説：直線で近似する}
+
+実験のデータが、5点（誤差を含む）得られたとします。本書の例では、真の関係を $y=2x+1$ とし、そこに標準偏差 $0.3$ のばらつきをのせて、$x=0,1,2,3,4$ の5点を作りました。
+
+\begin{table}[htbp]
+\centering
+\begin{tabular}{c|ccccc}
+\toprule
+$x$ & 0 & 1 & 2 & 3 & 4\\
+\midrule
+測定値 $y$ & 1.03 & 3.38 & 4.72 & 7.30 & 8.92\\
+\bottomrule
+\end{tabular}
+\caption{真の関係 $y=2x+1$ に、ばらつきを加えた5点（乱数の種3、本書の例）。}
+\end{table}
+
+\begin{itemize}[leftmargin=*]
+\item 仮説1（単純）：直線 $y=a+bx$。最小2乗法で $y=1.127+1.971x$。
+\item 仮説2（複雑）：5点すべてを通る4次式。
+\end{itemize}
+
+どちらも、データをよく説明しますが、まだ測っていない点では、大きく違います。
+
+\begin{table}[htbp]
+\centering
+\begin{tabular}{c|ccc}
+\toprule
+$x$ & 真の値 & 直線（単純） & 4次式（複雑）\\
+\midrule
+4.5 & 10 & 9.996 & 7.487\\
+5 & 11 & 10.982 & 2.993\\
+\bottomrule
+\end{tabular}
+\caption{測っていない点での予測。直線は真の値に近いが、5点をぴったり通る4次式は、大きく外れる。}
+\end{table}
+
+\begin{figure}[htbp]
+\centering
+\begin{tikzpicture}
+\begin{axis}[width=10cm, height=5.5cm, xmin=-0.3, xmax=5.3, ymin=-2, ymax=13, xlabel={$x$}, ylabel={$y$},
+  every axis label/.append style={font=\footnotesize}, tick label style={font=\footnotesize}, legend style={font=\scriptsize, at={(0.03,0.97)}, anchor=north west}]
+ \addplot[mark=*, only marks, black] coordinates {(0,1.03)(1,3.38)(2,4.72)(3,7.30)(4,8.92)};
+ \addplot[thick, primaryblue, domain=-0.3:5.3, samples=2] {1.1267+1.9710*x};
+ \addplot[thick, crimson, dashed, domain=-0.3:5.3, samples=2] {1+2*x};
+ \legend{測定値, 直線の当てはめ, 真の関係}
+\end{axis}
+\end{tikzpicture}
+\caption{5点と、直線の当てはめ（青）、真の関係（赤の破線）。直線は真の関係にほぼ一致する。}
+\end{figure}
+
+ポアンカレが、「もっとも単純な仮説を選ぶ」と述べるのは、単純な仮説のほうが、まだ測っていない点でも、よく当たるからです（この例は、本書の補足で、ポアンカレの本文のものではありません）。
+
+\begin{pointbox}{この章のまとめ}
+\begin{itemize}[leftmargin=*]
+\item 仮説は、できるだけ単純なものを選び、実験で検証し、合わなければ捨てる。
+\item 例：5点を通る複雑な式は、データの外で大きく外れる。単純な直線のほうがよく当たる。
+\end{itemize}
+\end{pointbox}
+
+%==========================================================
+\chapter{現代物理学の理論（第10章）}
+\markboth{第10章}{現代物理学の理論}
+%==========================================================
+
+\section{この章の位置づけ}
+
+第10章は、当時の物理学の理論（力学的な模型、気体の運動論、電気の理論）を、論じます。ポアンカレは、理論は「像」にすぎず、1つの現象を、いくつもの異なる力学的な模型で説明できる、と述べます。
+
+\section{気体の運動論：分子の速さ}
+
+気体の運動論は、気体を、多数の分子の運動で説明します。温度 $T$ の気体の分子の平均の速さは、$\sqrt{8kT/(\pi m)}$（$k$ はボルツマン定数、$m$ は分子の質量）です。$300$ K での値を、本書で計算しました。
+
+\begin{table}[htbp]
+\centering
+\begin{tabular}{l|ccccc}
+\toprule
+気体 & 水素 & ヘリウム & 窒素 & 酸素 & 二酸化炭素\\
+\midrule
+平均の速さ（m/s） & 1775 & 1260 & 476 & 446 & 380\\
+\bottomrule
+\end{tabular}
+\caption{$300$ K での、気体分子の平均の速さ。軽い分子ほど速い。窒素は約 $476$ m/s（音速 $340$ m/s より少し速い）。}
+\end{table}
+
+\begin{figure}[htbp]
+\centering
+\begin{tikzpicture}
+\begin{axis}[xbar, width=10cm, height=5cm, xmin=0, xmax=2000, ytick={1,2,3,4,5}, yticklabels={二酸化炭素,酸素,窒素,ヘリウム,水素}, xlabel={平均の速さ（m/s）}, bar width=11pt, nodes near coords, nodes near coords style={font=\scriptsize},
+  every axis label/.append style={font=\footnotesize}, tick label style={font=\footnotesize}]
+ \addplot[fill=softblue, draw=primaryblue] coordinates {(380,1)(446,2)(476,3)(1260,4)(1775,5)};
+\end{axis}
+\end{tikzpicture}
+\caption{300 K での、気体分子の平均の速さ。}
+\end{figure}
+
+ポアンカレは、こうした力学的な模型が、現象を説明する唯一の方法ではなく、同じ現象を説明する別の模型が、いくつも作れることを強調します。
+
+\begin{pointbox}{この章のまとめ}
+\begin{itemize}[leftmargin=*]
+\item 理論は、現象の「像」で、1つの現象に、複数の模型が可能。
+\item 気体分子の平均の速さは、$300$ K で水素 $1775$ m/s、窒素 $476$ m/s（計算で確認）。
+\end{itemize}
+\end{pointbox}
+
+%==========================================================
+\chapter{確率論の計算（第11章）}
+\markboth{第11章}{確率論の計算}
+%==========================================================
+
+\section{この章の位置づけ}
+
+第11章は、確率論の基礎を論じます。ポアンカレは、確率の値が、人間の無知を表すこと、偶然が、微小な原因の大きな結果から生まれることを、ルーレットなどの例で示します。
+
+\section{ルーレット：どんな分布でも半々になる}
+
+ポアンカレの例は、赤と黒の区画が交互に並んだ円盤を回す、ルーレットです。針の回転角 $\theta$ の確率分布は分からないが、連続的だとします。区画が十分に細かければ、赤に止まる確率は、分布の形によらず、$\tfrac12$ に近づきます。数値で確かめます。区画数を $36$（赤黒18ずつ、交互）とし、回転角が平均 $40$ ラジアン、標準偏差 $\sigma$ の正規分布にしたがうとします。
+
+\begin{table}[htbp]
+\centering
+\begin{tabular}{c|ccccccc}
+\toprule
+標準偏差 $\sigma$（ラジアン） & 0.02 & 0.05 & 0.1 & 0.2 & 0.3 & 1 & 10\\
+\midrule
+赤に止まる確率 & .055 & .264 & .431 & .4995 & .5000 & .5001 & .5003\\
+\bottomrule
+\end{tabular}
+\caption{回転角のばらつき $\sigma$ と、赤に止まる確率（数値積分）。区画の幅は $2\pi/36=0.1745$ ラジアン。$\sigma$ が区画の幅より大きくなると、ほぼ $\tfrac12$。}
+\end{table}
+
+\begin{figure}[htbp]
+\centering
+\begin{tikzpicture}
+\begin{axis}[width=10cm, height=5.3cm, xmode=log, xmin=0.015, xmax=12, ymin=0, ymax=0.62, xlabel={回転角のばらつき $\sigma$（ラジアン、対数目盛）}, ylabel={赤に止まる確率},
+  every axis label/.append style={font=\footnotesize}, tick label style={font=\footnotesize}]
+ \addplot[mark=*, thick, primaryblue] coordinates {(0.02,0.055)(0.05,0.2635)(0.1,0.4314)(0.2,0.4995)(0.3,0.5)(0.5,0.5)(1,0.5001)(3,0.5001)(10,0.5003)};
+ \addplot[dashed, crimson, domain=0.015:12, samples=2] {0.5};
+\end{axis}
+\end{tikzpicture}
+\caption{ルーレットで赤に止まる確率。初期の回転のばらつきが、区画の幅（$0.17$ ラジアン）を超えると、確率は、$\tfrac12$ に落ち着く。}
+\end{figure}
+
+\begin{pointbox}{この章のまとめ}
+\begin{itemize}[leftmargin=*]
+\item 偶然は、小さな原因のわずかな違いが、結果を大きく変えることから生まれる。
+\item ルーレットでは、回転のばらつきが区画の幅より大きければ、分布の形によらず、赤の確率は $\tfrac12$。
+\end{itemize}
+\end{pointbox}
+
+%==========================================================
+\chapter{光学と電磁気学（第12章）}
 \markboth{第12章}{光学と電磁気学}
 %==========================================================
 
-19世紀に、光が電磁気の波であることが分かりました（マクスウェルの理論）。電場と磁場が、互いに垂直に振動しながら進みます。
+\section{この章の位置づけ}
+
+第12章は、光の理論の変遷を論じます。フレネルの光の波動説は、ホイヘンスにさかのぼる波の考えを受け継ぎ、のちに、マクスウェルの電磁理論で、光が電磁波だと分かりました。ポアンカレは、理論が入れ替わっても、方程式の関係は残る、という点を強調します。
+
+\section{光の速さは、電気と磁気の定数から出る}
+
+マクスウェルの理論では、電磁波の速さは $c=\dfrac1{\sqrt{\varepsilon_0\mu_0}}$（真空の誘電率 $\varepsilon_0$ と透磁率 $\mu_0$）です。数値は
+\[
+\varepsilon_0=8.854\times10^{-12}\ \text{F/m},\quad\mu_0=1.2566\times10^{-6}\ \text{H/m}
+\]
+で、$c=2.998\times10^{8}$ m/s となり、実測の光の速さに一致します。
+
+\begin{table}[htbp]
+\centering
+\begin{tabular}{lc}
+\toprule
+量 & 値\\
+\midrule
+$1/\sqrt{\varepsilon_0\mu_0}$（電磁気の定数から） & $2.99792458\times10^8$ m/s\\
+光の速さ（定義値） & $2.99792458\times10^8$ m/s\\
+\bottomrule
+\end{tabular}
+\caption{電磁気の定数から計算した速さは、光の速さに一致する（計算で確認）。}
+\end{table}
+
+マクスウェルの理論では、物質中で、屈折率 $n$ は $\sqrt{\varepsilon_r}$（比誘電率の平方根）に等しいはずです。ガラス（$n=1.5$）なら $\varepsilon_r=2.25$ のはずです。このような関係が、光と電気の理論を結びつけます。
 
 \begin{figure}[htbp]
 \centering
 \begin{tikzpicture}[scale=1.0]
- \draw[->] (0,0)--(10,0) node[right] {進行方向};
- \draw[thick, primaryblue, domain=0:9.4, samples=100] plot (\x, {1.0*sin(\x*57.2958*1.0)});
- \draw[thick, crimson, dashed, domain=0:9.4, samples=100] plot (\x, {0.55*sin(\x*57.2958*1.0)});
- \node[primaryblue, font=\footnotesize] at (1.6,1.3) {電場 $E$};
- \node[crimson, font=\footnotesize] at (4.7,-1.3) {磁場 $B$（電場と垂直な面）};
+ \draw[ax] (0,0)--(7,0) node[right, lbl] {進む向き};
+ \draw[thick, primaryblue, domain=0:6.5, samples=100] plot (\x,{0.8*sin(deg(2*\x))});
+ \node[lbl, primaryblue] at (3.2,1.2) {電場};
+ \node[lbl] at (3.2,-1.4) {電場と磁場が互いに直角に振動し、速さ $c=1/\sqrt{\varepsilon_0\mu_0}$ で進む};
 \end{tikzpicture}
-\caption{電磁波の模式図。電場（青）と磁場（赤、実際は電場と垂直な向きで振動）が、進行方向に垂直に振動する。}
+\caption{電磁波の概念図。電場（青）の振動が、$c=1/\sqrt{\varepsilon_0\mu_0}$ の速さで進む。（磁場は紙面に垂直なので省略）}
 \end{figure}
 
-\begin{notebox}{図についての注意}
-2次元の図では、磁場が電場と垂直な向きであることを正確に描けません。赤い破線は、磁場が電場と同時に同じ位相で振動することを示す記号的な表現で、実際の向きは紙面に垂直と考えてください。
-\end{notebox}
+%ADDED q12
+\section{マクスウェルの関係式：うまくいく場合と、いかない場合}
 
-\begin{pointbox}{この章のポイント}
-\begin{itemize}[leftmargin=1.5em]
-\item 光は電磁波。電場と磁場が垂直に振動して進む。
-\end{itemize}
-\end{pointbox}
+マクスウェルの理論は、屈折率 $n$ と比誘電率 $\varepsilon_r$ の間に、$n=\sqrt{\varepsilon_r}$ という関係を予言します。この関係を、水で調べてみます（現代の標準的な値、本書の補足）。
 
-%==========================================================
-\chapter{電気力学とローレンツ}
-\markboth{第13章}{電気力学とローレンツ}
-%==========================================================
-
-電気を帯びた粒子の運動を調べるうちに、動いている物体では、時間や長さが、ふつうの感覚と少し違うことが分かってきました。ローレンツは、速さ $v$ で動く系のために、係数 $\gamma=\dfrac{1}{\sqrt{1-v^2/c^2}}$ を導入しました。
-
-\begin{center}
-\begin{tabular}{rr}
+\begin{table}[htbp]
+\centering
+\begin{tabular}{lcc}
 \toprule
-$v/c$ & $\gamma$\\
+ & 値 & 備考\\
 \midrule
-0.5 & 1.155\\
-0.9 & 2.294\\
-0.99 & 7.089\\
+水の屈折率 $n$（可視光） & 1.333 & $n^2=1.777$\\
+水の比誘電率 $\varepsilon_r$（静電場、約 $20^\circ$C） & 約 80 & $\sqrt{\varepsilon_r}\approx8.9$\\
 \bottomrule
 \end{tabular}
-\end{center}
+\caption{水では、$n=\sqrt{\varepsilon_r}$ が成り立たない。電場の振動数が違うと、$\varepsilon_r$ の値が大きく変わるためと説明される。}
+\end{table}
+
+水では、光の振動数の電場に対する比誘電率が、静電場の値（約80）とは、まったく違うため、単純な関係は成り立ちません。このように、理論の予言は、条件の違いで、うまくいく場合といかない場合があります。ポアンカレが、理論は「像」であって、現実そのものではないと言うのは、こうした点とも関係します。
 
 \begin{figure}[htbp]
 \centering
 \begin{tikzpicture}
-\begin{axis}[width=9.5cm, height=5.5cm, xlabel={$v/c$}, ylabel={$\gamma$}, xmin=0, xmax=1, ymin=1, ymax=8, grid=major]
- \addplot[thick, primaryblue, domain=0:0.99, samples=100] {1/sqrt(1-x^2)};
- \addplot[only marks, mark=*, color=crimson] coordinates {(0.5,1.155)(0.9,2.294)(0.99,7.089)};
+\begin{axis}[ybar, width=9cm, height=5cm, bar width=22pt, xmin=0.4, xmax=2.6, ymin=0, ymax=10, xtick={1,2}, xticklabels={可視光の屈折率 $n$,静電場から出る $\sqrt{\varepsilon_r}$}, ylabel={値},
+  every axis label/.append style={font=\footnotesize}, tick label style={font=\footnotesize}, nodes near coords, nodes near coords style={font=\scriptsize}]
+ \addplot[fill=softamber, draw=warmamber] coordinates {(1,1.333)(2,8.9)};
 \end{axis}
 \end{tikzpicture}
-\caption{ローレンツ因子 $\gamma$。光の速さに近づくと急に大きくなる。日常の速さでは、$\gamma$ はほぼ1。}
+\caption{水で、マクスウェルの関係の2つの辺が、大きく食い違う。}
 \end{figure}
 
-ポアンカレは、1902年のこの本の段階で、「相対性の原理」が成り立つのではないか、と議論しました。のちに、アインシュタインが1905年に特殊相対性理論として、まとめました（本書の入門書『アインシュタイン』を参照）。
-
-\begin{notebox}{この本の未解決点}
-\begin{itemize}[leftmargin=1.5em]
-\item ポアンカレの規約主義の評価は、本書では行いません。
-\item ローレンツ因子 $\gamma$ の値は、公式から筆者が計算しました。
-\item 翻訳版の細部は、原著との照合が必要です。
+\begin{pointbox}{この章のまとめ}
+\begin{itemize}[leftmargin=*]
+\item 光は電磁波で、速さは $1/\sqrt{\varepsilon_0\mu_0}=2.998\times10^8$ m/s（計算で確認）。
+\item 理論が入れ替わっても、方程式（関係）は残る、とポアンカレは強調する。
 \end{itemize}
-\end{notebox}
+\end{pointbox}
+
+%==========================================================
+\chapter{電気力学とローレンツの理論（第13章）}
+\markboth{第13章}{電気力学とローレンツの理論}
+%==========================================================
+
+\section{この章の位置づけ}
+
+最後の第13章は、動く物体の電気力学、つまり、ローレンツの理論を論じます。地球は太陽のまわりを動いているので、光を運ぶ「エーテル」に対して動いているはずです。この動きを、光の実験で検出できるかが問題になります。
+
+\section{地球の動きは、検出できるか}
+
+地球の公転の速さは約 $30$ km/s（$v/c=10^{-4}$）です。光の往復の時間への効果は、$v/c$ の1次の項は打ち消し合い、2次の項 $(v/c)^2=10^{-8}$ だけが残ります。この小さな効果を、干渉計で検出する実験が、のちに（原著の後の時代に）行われました。
+
+アーム長 $L=11$ m、波長 $\lambda=500$ nm の干渉計を、直角に向きを変えたときの、干渉縞のずれは、エーテル理論では
+\[
+\Delta N\approx\frac{2L}{\lambda}\cdot\frac{v^2}{c^2}=\frac{2\times11}{5\times10^{-7}}\times10^{-8}=0.44\ \text{本}
+\]
+と見積もられます（本書の補足の計算で、ポアンカレの本文の値ではありません）。実験では、このずれは観測されませんでした。
+
+\begin{table}[htbp]
+\centering
+\begin{tabular}{lc}
+\toprule
+量 & 値\\
+\midrule
+地球の公転の速さ $v$ & $3\times10^4$ m/s\\
+$(v/c)^2$ & $1.0\times10^{-8}$\\
+干渉縞のずれの見積もり（$L=11$ m、$\lambda=500$ nm） & 約 $0.44$ 本\\
+\bottomrule
+\end{tabular}
+\caption{エーテルに対する地球の運動が、あるとしたときの、干渉縞のずれの見積もり（補足）。}
+\end{table}
+
+\begin{figure}[htbp]
+\centering
+\begin{tikzpicture}
+\begin{axis}[width=9.5cm, height=5.2cm, xmin=0, xmax=60, ymin=0, ymax=1.8, xlabel={エーテルに対する速さ $v$（km/s）}, ylabel={干渉縞のずれ（本）},
+  every axis label/.append style={font=\footnotesize}, tick label style={font=\footnotesize}]
+ \addplot[thick, primaryblue, domain=0:60, samples=60] {2*11*(x*1000)^2/(5e-7*299792458^2)};
+ \addplot[mark=*, crimson, only marks] coordinates {(30,0.4406)};
+\end{axis}
+\end{tikzpicture}
+\caption{干渉縞のずれの見積もり（$L=11$ m、$\lambda=500$ nm）。速さの2乗に比例する。地球の公転の速さ $30$ km/s で約 $0.44$ 本。}
+\end{figure}
+
+ポアンカレは、この章で、ローレンツの理論と、運動する物体に対する相対性原理の問題を論じます。のちに、アインシュタインの特殊相対性理論が、この問題に、まったく新しい答えを与えました（本書の別の巻『相対性理論』入門を参照）。
+
+\begin{pointbox}{この章のまとめ}
+\begin{itemize}[leftmargin=*]
+\item 地球の動きの効果は、$(v/c)^2=10^{-8}$ ときわめて小さい。
+\item エーテル理論なら、干渉縞が約 $0.44$ 本ずれるはず（補足の見積もり）。のちの実験では、ずれは観測されなかった。
+\end{itemize}
+\end{pointbox}
 
 \end{document}
