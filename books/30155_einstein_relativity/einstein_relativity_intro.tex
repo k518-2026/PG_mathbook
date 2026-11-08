@@ -1,1501 +1,1917 @@
-\documentclass[11pt,a4paper,titlepage]{ltjsbook}
-
+\documentclass[a4paper,11pt,openany]{ltjsbook}
 \usepackage{luatexja}
+\usepackage{luatexja-fontspec}
 \usepackage{amsmath,amssymb,amsfonts,amsthm}
 \usepackage{geometry}
-\geometry{top=23mm,bottom=23mm,left=23mm,right=23mm}
+\geometry{top=24mm,bottom=24mm,left=24mm,right=24mm,footskip=10mm}
 \usepackage{tikz}
-\usetikzlibrary{arrows.meta,calc,positioning,decorations.pathmorphing,shapes.geometric,backgrounds}
+\usetikzlibrary{arrows.meta,calc,positioning,patterns,shapes.geometric,shapes.misc,decorations.pathreplacing,decorations.markings,angles,quotes,intersections,backgrounds,fit}
+\usepackage{pgfplots}
+\pgfplotsset{compat=1.18}
+\usepgfplotslibrary{fillbetween}
 \usepackage{tcolorbox}
 \tcbuselibrary{skins,breakable}
 \usepackage{hyperref}
-\usepackage{booktabs}
 \usepackage{enumitem}
+\usepackage{booktabs}
+\usepackage{fancyhdr}
+
+\definecolor{primaryblue}{RGB}{24, 76, 120}
+\definecolor{softblue}{RGB}{235, 243, 250}
+\definecolor{darkslate}{RGB}{44, 62, 80}
+\definecolor{warmamber}{RGB}{217, 119, 6}
+\definecolor{softamber}{RGB}{254, 243, 199}
+\definecolor{crimson}{RGB}{185, 28, 28}
+\definecolor{softrose}{RGB}{255, 228, 230}
+\definecolor{accentgreen}{RGB}{16, 120, 70}
+\definecolor{softgreen}{RGB}{236, 253, 245}
+\definecolor{gridgray}{RGB}{200, 205, 210}
 
 \hypersetup{
     colorlinks=true,
-    linkcolor=blue!70!black,
-    citecolor=green!50!black,
-    urlcolor=teal!80!black,
-    pdftitle={古典で学び直すアインシュタイン相対性理論入門},
-    pdfauthor={Albert Einstein / 著・解説}
-}
-
-% Custom boxes
-\newtcolorbox{lecturebox}[1][大人のための徹底解説講義]{
-    enhanced,
-    colback=blue!5!white,
-    colframe=blue!65!black,
-    fonttitle=\bfseries\gtfamily,
-    title={#1},
-    arc=2mm,
-    breakable,
-    boxrule=1pt,
-    top=3mm, bottom=3mm, left=3mm, right=3mm
-}
-
-\newtcolorbox{origbox}[1][アインシュタインの原典思索]{
-    enhanced,
-    colback=yellow!5!white,
-    colframe=orange!70!black,
-    fonttitle=\bfseries\gtfamily,
-    title={#1},
-    arc=2mm,
-    breakable,
-    boxrule=1pt,
-    top=3mm, bottom=3mm, left=3mm, right=3mm
+    linkcolor=primaryblue,
+    urlcolor=primaryblue,
+    citecolor=accentgreen,
+    pdfauthor={教育情報分析研究会}
 }
 
 \newtcolorbox{examplebox}[1]{
-    enhanced,
-    colback=green!5!white,
-    colframe=teal!70!black,
-    fonttitle=\bfseries\gtfamily,
-    title={#1},
-    arc=2mm,
-    breakable,
-    boxrule=1pt,
-    top=3mm, bottom=3mm, left=3mm, right=3mm
+    colback=softgreen, colframe=accentgreen, coltitle=white, fonttitle=\bfseries,
+    title={#1}, arc=3mm, boxrule=1pt, left=4mm,right=4mm,top=3mm,bottom=3mm, breakable
+}
+\newtcolorbox{pointbox}[1]{
+    colback=softamber, colframe=warmamber, coltitle=darkslate, fonttitle=\bfseries,
+    title={#1}, arc=2mm, boxrule=1pt, left=3mm,right=3mm,top=2mm,bottom=2mm, breakable
+}
+\newtcolorbox{notebox}[1]{
+    colback=softrose, colframe=crimson, coltitle=white, fonttitle=\bfseries,
+    title={#1}, arc=2mm, boxrule=1pt, left=3mm,right=3mm,top=2mm,bottom=2mm, breakable
 }
 
-\newtcolorbox{exercisebox}[1]{
-    enhanced,
-    colback=purple!5!white,
-    colframe=purple!70!black,
-    fonttitle=\bfseries\gtfamily,
-    title={#1},
-    arc=2mm,
-    breakable,
-    boxrule=1pt,
-    top=3mm, bottom=3mm, left=3mm, right=3mm
+\tikzset{
+  >=Stealth,
+  fbox/.style={draw=primaryblue, fill=softblue, rounded corners=3pt, align=center, inner sep=4pt, font=\small},
+  wbox/.style={draw=primaryblue, fill=white, rounded corners=3pt, align=center, inner sep=4pt, font=\small},
+  abox/.style={draw=warmamber, fill=softamber, rounded corners=3pt, align=center, inner sep=4pt, font=\small},
+  gbox/.style={draw=accentgreen, fill=softgreen, rounded corners=3pt, align=center, inner sep=4pt, font=\small},
+  rbox/.style={draw=crimson, fill=softrose, rounded corners=3pt, align=center, inner sep=4pt, font=\small},
+  ax/.style={->, thick, darkslate},
+  lbl/.style={font=\footnotesize, text=darkslate},
 }
 
-\title{
-    {\Large\gtfamily 数学・科学古典名著再学習シリーズ 第6弾}\\[8pt]
-    {\Huge\bfseries\gtfamily 古典で学び直す\\アインシュタイン相対性理論入門}\\[10pt]
-    {\large\gtfamily いまからでも遅くない、高校までの数学で理解する歴史的名著}\\[6pt]
-    {\normalsize 原典：Albert Einstein \textit{Relativity: The Special and the General Theory} (1916/1920)}
-}
-\author{アルベルト・アインシュタイン 著\\編訳・現代的解説：プロジェクトGutenberg名著復刊委員会}
-\date{2026年10月 完全決定版}
+\pagestyle{fancy}
+\fancyhf{}
+\fancyhead[LE,RO]{\thepage}
+\fancyhead[LO]{\nouppercase{\rightmark}}
+\fancyhead[RE]{\nouppercase{\leftmark}}
+\renewcommand{\headrulewidth}{0.4pt}
+
+\hypersetup{pdftitle={古典で学び直すアインシュタイン『相対性理論』入門 —— 全32節と付録を順に読む}}
+\newcommand{\dd}{\mathrm{d}}
+\newcommand{\ee}{\mathrm{e}}
 
 \begin{document}
 
-\maketitle
+\begin{titlepage}
+\begin{center}
+\vspace*{1.5cm}
+{\Large\bfseries プロジェクト・グーテンベルク古典数学入門シリーズ}\\[0.8cm]
+\rule{\textwidth}{1.5pt}\\[0.4cm]
+{\Huge\bfseries 古典で学び直す\\アインシュタイン\\『相対性理論』入門}\\[0.4cm]
+{\Large\bfseries —— 全32節と付録を、順に読む ——}\\[0.4cm]
+\rule{\textwidth}{1.5pt}\\[1.5cm]
+{\large 原著：アルベルト・アインシュタイン\\
+\textit{Relativity: The Special and General Theory}}\\[2.0cm]
+{\Large\bfseries 著：教育情報分析研究会}\\[2.5cm]
+\vfill
+{\large 2026年11月 改訂第2版（原著の節ごとに対応）}\\[0.5cm]
+{\footnotesize 本書は Project Gutenberg のパブリックドメイン（eBook \#30155）を底本に、\\
+高等学校の数学の知識で読み進められるように書き下ろした入門書です。}
+\end{center}
+\end{titlepage}
 
 \frontmatter
-
-\chapter*{はじめに：大人の学び直しとしての『相対性理論』}
-\addcontentsline{toc}{chapter}{はじめに：大人の学び直しとしての『相対性理論』}
-
-1916年、アルベルト・アインシュタイン（Albert Einstein, 1879--1955）は、自ら打ち立てた二大物理学革命――特殊相対性理論（1905年）と一般相対性理論（1915年）――の全容を、物理学者だけでなく\textbf{「科学的・哲学的な興味を持つ一般読者」}に向けて自ら平易に解説した稀代の名著『特殊および一般相対性理論について（原題：Über die spezielle und die allgemeine Relativitätstheorie, gemeinverständlich）』を著しました。
-
-世間一般において「相対性理論」といえば、難解極まるテンソル解析や微分幾何学、あるいはSFの世界のタイムトラベルやブラックホールといった先入観が先行しがちです。しかし、アインシュタイン自身が序文で宣言しているように、本書の目的は\textbf{「大学の専門教育を受けていない読者でも、標準的な高校程度の教育（中等教育）を受けていれば、その核心思想と論理を完全に追体験できるようにすること」}にありました。
-
-本入門・解説版（第6弾）では、人生経験豊かな50代〜80代の大人の学び直し読者のために、以下の三大特色を備えて構成されています：
-\begin{enumerate}[label=\textbf{\arabic*.}]
-    \item \textbf{アインシュタイン自身の思考実験を高校数学で完全追体験}：列車と堤防の思考実験、光時計、動く物体の縮み、同時性の不一致、重力と加速系の等価原理を、三平方の定理と1次方程式だけで完全に導出します。
-    \item \textbf{全12章・高精細TikZ図版12点と実社会の応用例}：GPS衛星のナノ秒単位の時計補正、新幹線・ジェット機実験、素粒子ミューオンの寿命延伸、巨大重力レンズ、宇宙膨張と現代ビッグバン宇宙論など、現代社会と科学の礎を実感できます。
-    \item \textbf{重要用語辞典＆総合演習問題と詳細解答}：基礎から段階的に確認できる総合問題（全10問）とステップ・バイ・ステップの模範解答を収録し、独学でも完全に理解を深められる構成となっています。
-\end{enumerate}
-
-知的好奇心に満ちた物理学の最高峰へ、アインシュタインと共に歩みを進めましょう。
-
-\clearpage
 \tableofcontents
-\clearpage
-
 \mainmatter
 
+\makeatletter
+\renewcommand\chapter{\par\addvspace{16pt}\global\@topnum\z@\@afterindentfalse\secdef\@chapter\@schapter}
+\makeatother
 
-\clearpage
-\part{特殊相対性理論（時間と空間の革命）}
+%==========================================================
+\chapter*{はじめに：この本の読み方}
+\addcontentsline{toc}{chapter}{はじめに：この本の読み方}
+\markboth{はじめに}{はじめに}
+%==========================================================
 
-\chapter{幾何学の物理的意味と座標系}
-\begin{center}
-{\Large\bfseries\gtfamily ユークリッド幾何学の真実性と剛体定規による空間測定の再定義}
-\end{center}
-\vspace*{2mm}
+アインシュタイン（1879〜1955）の『特殊および一般相対性理論』は、専門家でない読者のために、相対性理論を式をできるだけ使わずに説明した本です。原著は、特殊相対性理論（第I〜XVII節）、一般相対性理論（第XVIII〜XXIX節）、宇宙全体の考察（第XXX〜XXXII節）、付録（4つ）からなります。本書は、この36の節・付録に、1章ずつ対応します。
 
-\section*{本章の視覚的見取り図}
-\begin{center}
-\begin{tikzpicture}[scale=1.05, >=Stealth, every node/.style={font=\small}]
-    % Coordinate axes with ample margin
-    \draw[->, very thick, gray!70] (-0.8, 0) -- (10.2, 0) node[right, black, font=\normalsize\bfseries] {$x$ (空間座標)};
-    \draw[->, very thick, gray!70] (0, -0.6) -- (0, 5.2) node[above, black, font=\normalsize\bfseries] {$y$ (直交座標)};
-    \draw[step=1.0, gray!20, very thin] (-0.5, -0.5) grid (9.8, 4.8);
-    
-    % Reference Frame Badge - placed clearly in upper left
-    \node[draw=blue!80, fill=blue!12, rounded corners=4pt, line width=1.2pt, inner sep=6pt, font=\normalsize\bfseries, text=blue!90!black] 
-        at (2.2, 4.4) {基準剛体座標系 $K$};
-        
-    % Concept Annotation Box - placed on upper right with plenty of room
-    \node[align=left, fill=yellow!15, draw=orange!70, rounded corners=5pt, inner sep=6pt, font=\footnotesize, line width=0.8pt] 
-        at (6.8, 3.8) {\textbf{【アインシュタインの幾何学的洞察】}\\
-        ・ユークリッド幾何学の命題は単なる抽象概念ではない\\
-        ・2点間の「距離」とは、物理的な剛体定規を並べた実測値である\\
-        ・座標系 $K$ は空間を満たす仮想の剛体格子として定義される};
+高等学校の数学で、原著の主張を数値で確かめられるように、各章で、簡単な計算と図を添えました。
 
-    % Measuring Rod (L0) - placed at y = 1.3
-    \draw[|-|, line width=2.5pt, red!85!black] (1.8, 1.3) -- (7.8, 1.3);
-    \node[above=6pt, fill=white, inner sep=3pt, font=\normalsize\bfseries, text=red!85!black] 
-        at (4.8, 1.3) {基準剛体定規（固有長 $L_0$）};
-        
-    % Measuring tick marks on the rod
-    \foreach \x in {2.8, 3.8, 4.8, 5.8, 6.8} {
-        \draw[thick, red!70!black] (\x, 1.15) -- (\x, 1.45);
-    }
-    
-    % Event points A and B with generous clearance below
-    \fill[red!90!black] (1.8, 1.3) circle (4pt);
-    \node[below=10pt, fill=white, inner sep=2.5pt, font=\small\bfseries] at (1.8, 1.3) {基点 $A (x_1, y_1)$};
-    
-    \fill[red!90!black] (7.8, 1.3) circle (4pt);
-    \node[below=10pt, fill=white, inner sep=2.5pt, font=\small\bfseries] at (7.8, 1.3) {終点 $B (x_2, y_2)$};
+\begin{figure}[htbp]
+\centering
+\begin{tikzpicture}[node distance=3mm]
+ \node[fbox, text width=3.4cm] (a) {第1〜17章\\特殊相対性理論\\（原著第I〜XVII節）};
+ \node[abox, text width=3.4cm, right=of a] (b) {第18〜29章\\一般相対性理論\\（第XVIII〜XXIX節）};
+ \node[gbox, text width=3.4cm, right=of b] (c) {第30〜32章\\宇宙全体\\（第XXX〜XXXII節）};
+ \node[rbox, text width=3.4cm, right=of c] (d) {第33〜36章\\付録I〜IV};
 \end{tikzpicture}
+\caption{この本の4つの部分。章の番号は、原著の節の順番（I節＝第1章、XXIX節＝第29章、付録Iは第33章など）に対応する。}
+\end{figure}
 
-\small\textbf{図版解説：}ユークリッド幾何学の命題を物理的な「剛体定規」による目盛り計測として捉え直す座標系 $K$ の構造。
-\end{center}
-\vspace*{2mm}
+\begin{table}[htbp]
+\centering
+\small
+\begin{tabular}{lp{7.5cm}}
+\toprule
+章 & 原著の内容\\
+\midrule
+1〜2 & 幾何学の物理的意味、座標系\\
+3〜7 & 古典力学の空間・時間、ガリレイ座標系、相対性原理、速度の加法、光の伝播との食い違い\\
+8〜10 & 物理学の時間、同時性の相対性、距離の相対性\\
+11〜13 & ローレンツ変換、動く物差しと時計、速度の加法とフィゾーの実験\\
+14〜17 & 理論の発見的価値、一般的結果、経験との関係、ミンコフスキーの4次元空間\\
+18〜29 & 一般相対性理論：等価、重力場、回転体、非ユークリッド幾何、ガウス座標、重力の方程式\\
+30〜32 & ニュートン理論の宇宙論の困難、有限で境界のない宇宙、空間の構造\\
+33〜36 & 付録：ローレンツ変換の導出、ミンコフスキー空間、実験的確認、空間の構造（補足）\\
+\bottomrule
+\end{tabular}
+\caption{本書の章と、原著の節の対応。}
+\end{table}
 
-\section*{アインシュタインの原典思索}
-\begin{origbox}[原著第1章：アルベルト・アインシュタインの肉声]
-幾何学は特定の公理（たとえば「2点を通る直線はただ1つ存在する」など）から論理的に命題を演繹する体系である。しかし純粋幾何学においては、「直線」や「点」という概念が現実の経験的対象とどう対応するかという問いには答えない。
-この幾何学的命題に物理的内容を与えるためには、たとえば「直線」とは「光線の軌跡」あるいは「真っ直ぐな剛体定規の縁」であるというように、現実の物理的実体との対応関係（規約）を定めなければならない。このとき幾何学は自然科学の最も古い一分野となる。
-\end{origbox}
+\begin{notebox}{事実・推測・未確認の区別（この本の約束）}
+\begin{itemize}[leftmargin=*]
+\item 各章の数値（ローレンツ因子、光の曲がり、水星の近日点移動など）は、本書で計算し直しました。物理定数は、$c=299\,792\,458$ m/s、太陽の重力定数 $GM_\odot=1.327\times10^{20}$ m$^3$/s$^2$、太陽の半径 $6.957\times10^{8}$ m などを使いました。
+\item 原著にない現代の例（ミューオンの寿命、GPS の時計、現代の天体の数値）は、本書の補足で、「補足」と書きました。
+\item 原著の主張の紹介は、原著の本文と照らして書きました。ただし、細かい議論や式の導出の全部は取り上げていません。
+\end{itemize}
+\end{notebox}
 
-\section*{大人のための徹底解説講義}
-\begin{lecturebox}[徹底講義：高校数学で追体験する物理学革命]
-私たちが中学や高校で学んだユークリッド幾何学は、公理から出発して定理を純粋論理的に証明していく美しい学問でした。しかし、アインシュタインは冒頭で極めて根本的な問いを投げかけます。
-「私たちがノートの上に引いた直線や、教科書に書かれた三角形の内角の和が180度であるという命題は、現実の物理的宇宙においても絶対に真実なのだろうか？」
+\begin{pointbox}{記号の約束}
+$c$ は光の速さ。$v$ は速さ。$\beta=v/c$、$\gamma=1/\sqrt{1-\beta^2}$（ローレンツ因子）。
+\end{pointbox}
 
-純粋数学としての幾何学は、「点」や「直線」が現実の何であるかを定義しません。しかし、大工さんが家を建てるとき、測量士が土地の境界を定めるとき、私たちは金属や木で作られた「定規（剛体）」を現実に並べて長さを測ります。
-アインシュタインは、「幾何学の命題とは、剛体定規を実際に当てがって測定した結果についての物理的主張である」と明確に位置づけ直しました。そして、物体の位置を一意に指定するために「直交座標系（デカルト座標系 $x, y, z$）」を導入します。
-空間とは単なる抽象的な入れ物ではなく、現実の測定器（定規）によって目盛りが振られた「物理的座標系」なのです。
-\end{lecturebox}
+%==========================================================
+\part{特殊相対性理論}
+%==========================================================
 
-\vspace*{3mm}
-\begin{examplebox}{大人の学び直しのための実社会・重要例題：第1章}
-\textbf{【実社会の具体例：土地の境界確定とGPS・電子基準点の幾何学】}\\
-私たちが家や土地を売買する際、法務局に登記される「公図」や「地積測量図」は、一見すると何千年ものあいだ変わらないユークリッド幾何学の平面上に描かれています。\\
-(1) アインシュタインが指摘した「幾何学の命題（直線や距離）は、物理的な剛体定規を当てがうことによって初めて物理的意味を持つ」という主張を、現代の国土地理院による電子基準点網（GNSS測量）と対比して説明せよ。\\
-(2) 地球が球体（曲面）であるにもかかわらず、なぜ日常生活の建築や不動産登記では「ユークリッド幾何学」を何ら問題なく信用して適用できるのか、微小領域における平坦性の観点から考察せよ。
-\\[2mm]
-\textbf{【懇切丁寧な解答・ステップ解説】}\\
-\textbf{(1) の解：}
-純粋数学におけるユークリッド幾何学の「点」や「直線」は、頭の中の完全無欠な抽象概念であり、それ自体では現実世界のどこにも存在しません。アインシュタインは、この抽象的な命題に「金属の定規（剛体）を並べて長さを測る」という物理的実操作を割り当てて初めて、幾何学が自然科学（物理学）の一部になると喝破しました。
-現代の電子基準点測量でも、衛星から届く「電波の到達時間（物理量）」に光速を乗じて距離を算出し、三角網を構築しています。幾何学は机上の空論ではなく、常に測定手段という物理的実体と分かちがたく結びついているのです。
-\\[2mm]
-\textbf{(2) の解：}
-地球全体の半径は約 $6371\,\text{km}$ という長大さを持っています。私たちが生活する数百メートル四方の住宅地や建築現場では、球面による曲がり（ズレ）はミリメートル以下という無視できる微小量にとどまります。数学的に言えば、「いかに複雑に湾曲した多様体であっても、局所的（ごく狭い範囲）には平坦なユークリッド空間と見なせる」という微積分・幾何学の基本原理によって、私たちは安心して平面幾何学を実用できているのです。
+%==========================================================
+\chapter{幾何学の命題の物理的意味（第I節）}
+\markboth{第1章}{幾何学の命題の物理的意味}
+%==========================================================
+
+\section{この節の位置づけ}
+
+アインシュタインは、まず、学校で習うユークリッド幾何学の命題が、物理的には何を意味するかを問います。「直線」や「点」は、現実の物体で、「ぴんと張った糸」「物差しの目盛り」に対応づけて初めて、「現実について真か偽か」を問えます。幾何学は、物差しや糸の振る舞いについての、物理の命題としても読めます。
+
+\section{三角形の内角の和は、180度か}
+
+ユークリッド幾何学では、三角形の内角の和は180度です。ところが、球面上の三角形では、内角の和は180度を超えます。たとえば、北極と、赤道上の経度が90度離れた2点を結ぶと、3つの角がすべて90度の三角形ができます（球面の8分の1）。内角の和は $270$ 度で、$180$ 度より $90$ 度多くなります。
+
+この90度の余りは、三角形の面積と結びついていて、$\text{余り（ラジアン）}=\dfrac{\text{面積}}{R^2}$ です。球面の8分の1の面積は $\dfrac{4\pi R^2}{8}=\dfrac{\pi R^2}{2}$ なので、余りは $\dfrac{\pi}{2}$（$=90$ 度）です。計算で確かめました。
+
+\begin{figure}[htbp]
+\centering
+\begin{tikzpicture}[scale=1.5]
+ \fill[softamber] (0,1.4)--(0,-0.45) .. controls (0.9,-0.4) and (1.4,-0.2) .. (1.4,0) arc (0:90:1.4) -- cycle;
+ \draw[thick, darkslate] (0,0) circle (1.4);
+ \draw[gray, dashed] (-1.4,0) arc (180:360:1.4 and 0.45);
+ \draw[gray] (-1.4,0) arc (180:0:1.4 and 0.45);
+ \draw[crimson, thick] (0,1.4)--(0,-0.45);
+ \draw[crimson, thick] (0,-0.45) .. controls (0.9,-0.4) and (1.4,-0.2) .. (1.4,0);
+ \draw[crimson, thick] (1.4,0) arc (0:90:1.4);
+ \fill (0,1.4) circle (1.5pt) node[above, lbl] {北極};
+ \fill (0,-0.45) circle (1.5pt) node[below, lbl] {赤道上};
+ \fill (1.4,0) circle (1.5pt) node[right, lbl] {赤道上（90°東）};
+ \node[font=\scriptsize] at (0.4,0.5) {90°$\times3$};
+\end{tikzpicture}
+\caption{球面の「8分の1」の三角形。3つの角がすべて90度なので、内角の和は270度。（図は見やすいように描いた略図）}
+\end{figure}
+
+\begin{pointbox}{この節のまとめ}
+\begin{itemize}[leftmargin=*]
+\item 幾何学の命題は、物差しや糸の振る舞いについての物理の命題として読める。
+\item 球面では、三角形の内角の和は、$180$ 度に「面積÷$R^2$」を加えた値。
+\item 空間が曲がっているかどうかは、実験で決まる。これが後の一般相対性理論につながる。
+\end{itemize}
+\end{pointbox}
+
+%==========================================================
+\chapter{座標系（第II節）}
+\markboth{第2章}{座標系}
+%==========================================================
+
+\section{この節の位置づけ}
+
+第II節は、ものの位置を言い表す「座標系」を扱います。アインシュタインは、地上の雲の位置を、「どの地点の上空か」と「地面からの高さ」で言い表す例を挙げます。位置を言うには、必ず、何かを基準（\textbf{基準物体}）にしなければなりません。
+
+\section{直交座標と距離}
+
+平面に、互いに直角な2本の軸を引けば、点の位置は、2つの数 $(x,y)$ で決まります。原点から点までの距離は、ピタゴラスの定理から $\sqrt{x^2+y^2}$ です。たとえば $(3,4)$ なら $5$。
+
+座標軸を、原点のまわりに回して取り直しても、点そのものは変わらず、距離も変わりません。$(3,4)$ を $30$ 度回した座標は
+\[
+x'=3\cos30^\circ+4\sin30^\circ=4.598,\quad y'=-3\sin30^\circ+4\cos30^\circ=1.964
+\]
+で、$\sqrt{4.598^2+1.964^2}=5.000$ と、距離はやはり $5$ です（数値で確認）。
+
+\begin{figure}[htbp]
+\centering
+\begin{tikzpicture}[scale=0.75]
+ \draw[->, thick, darkslate] (-0.5,0)--(5.5,0) node[right] {$x$};
+ \draw[->, thick, darkslate] (0,-0.5)--(0,5) node[above] {$y$};
+ \begin{scope}[rotate=-30]
+   \draw[->, thick, crimson] (-0.5,0)--(6,0) node[right] {$x'$};
+   \draw[->, thick, crimson] (0,-0.5)--(0,5) node[above] {$y'$};
+ \end{scope}
+ \fill[primaryblue] (3,4) circle (2.5pt);
+ \draw[primaryblue, thick] (0,0)--(3,4) node[midway, above left, lbl] {5};
+ \node[lbl, primaryblue] at (3.8,4.2) {$(3,4)$};
+\end{tikzpicture}
+\caption{同じ点 $(3,4)$ を、座標軸を $30$ 度回した $x',y'$ で表すと、座標の値は変わるが、原点からの距離 $5$ は変わらない。}
+\end{figure}
+
+\begin{pointbox}{この節のまとめ}
+\begin{itemize}[leftmargin=*]
+\item 位置を言うには、基準物体（座標系）が要る。
+\item 座標軸の取り方を変えても、距離のような「物理的な量」は変わらない。
+\item 後の章で、時間も座標に加えると、「変わらない量」が別の形になる。
+\end{itemize}
+\end{pointbox}
+
+%==========================================================
+\chapter{古典力学における空間と時間（第III節）}
+\markboth{第3章}{古典力学の空間と時間}
+%==========================================================
+
+\section{この節の位置づけ}
+
+第III節は、古典力学が、運動の記述をどう扱ってきたかを見直します。アインシュタインの例は、走る列車の窓から石を落とす話です。同じ石の運動が、列車の中の人には直線、線路ぎわの人には曲線（放物線）に見えます。
+
+\section{石の落下：直線か放物線か}
+
+高さ $h=5$ m から石を落とします。列車は時速 $72$ km（$20$ m/s）で走っています。落下時間は $t=\sqrt{2h/g}=\sqrt{2\times5/9.8}=1.010$ 秒です。
+
+\begin{itemize}[leftmargin=*]
+\item 列車の中の人には、石は真下に $5$ m、直線に落ちる。
+\item 線路ぎわの人には、石は列車と同じ速さで前に進みながら落ち、$20\times1.010=20.2$ m 前進しつつ $5$ m 落ちる、放物線の軌道。
+\end{itemize}
+
+\begin{figure}[htbp]
+\centering
+\begin{tikzpicture}
+\begin{axis}[width=7cm, height=5cm, xmin=-1, xmax=22, ymin=-0.5, ymax=5.5, xlabel={前方の距離（m）}, ylabel={高さ（m）},
+  every axis label/.append style={font=\footnotesize}, tick label style={font=\footnotesize}, legend style={font=\scriptsize, at={(0.97,0.97)}, anchor=north east}]
+ \addplot[thick, crimson, domain=0:1.0101, samples=40, variable=\t] ({20*\t},{5-4.9*\t*\t});
+ \addplot[thick, primaryblue, dashed, domain=0:1.0101, samples=2, variable=\t] ({0},{5-4.9*\t*\t});
+ \legend{線路ぎわの人（放物線）, 列車の中の人（直線）}
+\end{axis}
+\end{tikzpicture}
+\caption{同じ石の運動。線路ぎわの人には前に進みながら落ちる曲線（赤）、列車の中の人には真下に落ちる直線（青の破線、列車の座標で）。}
+\end{figure}
+
+\begin{pointbox}{この節のまとめ}
+\begin{itemize}[leftmargin=*]
+\item 運動の「軌道の形」は、基準物体によって違う（直線にも放物線にもなる）。
+\item 運動を言うには、基準物体を決めなければならない。
+\item 古典力学では、時間は、どの基準物体でも同じだと暗黙に仮定してきた。
+\end{itemize}
+\end{pointbox}
+
+%==========================================================
+\chapter{ガリレイの座標系（第IV節）}
+\markboth{第4章}{ガリレイの座標系}
+%==========================================================
+
+\section{この節の位置づけ}
+
+第IV節は、ニュートンの慣性の法則（力を受けない物体は、等速直線運動を続ける）が成り立つ座標系を、\textbf{ガリレイの座標系}（慣性系）と呼んで、定義します。この座標系は、1つではなく、互いに等速で動き合う無数の座標系が、すべてガリレイの座標系になります。
+
+\section{ガリレイ変換}
+
+座標系 $K$ に対して、$K'$ が $x$ 軸方向に速さ $v$ で動いているとき、同じ出来事の座標は
+\[
+x'=x-vt,\qquad y'=y,\qquad z'=z,\qquad t'=t
+\]
+で結ばれます（\textbf{ガリレイ変換}）。時間 $t'=t$ は、どちらの座標系でも同じです。
+
+\begin{figure}[htbp]
+\centering
+\begin{tikzpicture}
+\begin{axis}[width=8cm, height=5.2cm, xmin=-1, xmax=10, ymin=0, ymax=5, xlabel={位置 $x$}, ylabel={時刻 $t$},
+  every axis label/.append style={font=\footnotesize}, tick label style={font=\footnotesize}, legend style={font=\scriptsize, at={(0.03,0.97)}, anchor=north west}]
+ \addplot[thick, primaryblue, domain=0:5, samples=2] ({0},{x});
+ \addplot[thick, crimson, domain=0:5, samples=2] ({2*x},{x});
+ \legend{$K$ に静止している物体, $K'$ に静止している物体（$v=2$）}
+\end{axis}
+\end{tikzpicture}
+\caption{位置と時刻の図。$K$ に静止した物体は縦の線、$K'$ に静止した物体は、傾き $1/v$ の斜めの線になる。}
+\end{figure}
+
+\begin{pointbox}{この節のまとめ}
+\begin{itemize}[leftmargin=*]
+\item ガリレイの座標系は、慣性の法則が成り立つ座標系で、互いに等速で動き合う。
+\item ガリレイ変換：$x'=x-vt$、$t'=t$。
+\end{itemize}
+\end{pointbox}
+
+%==========================================================
+\chapter{相対性原理（狭い意味）（第V節）}
+\markboth{第5章}{相対性原理}
+%==========================================================
+
+\section{この節の位置づけ}
+
+第V節は、「自然の法則は、どのガリレイ座標系でも同じ形で成り立つ」という、\textbf{相対性原理}（狭い意味）を述べます。等速で走る列車の中で、止まっている部屋の中と同じように、ボールを投げ、コップを置けます。列車の中だけで行う実験では、列車が動いているか止まっているか、判定できません。
+
+\section{例：列車の中のボール}
+
+列車が $72$ km/h（$20$ m/s）で走っているとします。車内で、前に向かって $5$ m/s でボールを投げます。
+
+\begin{table}[htbp]
+\centering
+\begin{tabular}{lc}
+\toprule
+観測者 & ボールの速さ\\
+\midrule
+列車の中の人 & $5$ m/s\\
+線路ぎわの人（ガリレイ変換） & $20+5=25$ m/s\\
+\bottomrule
+\end{tabular}
+\caption{同じボールの速さは、基準物体で違う（古典力学）。しかし、どちらでも、運動の「法則」（力と加速度の関係）は同じ形。}
+\end{table}
+
+ボールを投げるときの「力と加速度の関係」$F=ma$ は、どちらの座標系でも同じです。列車の中の人にとっても、線路ぎわの人にとっても、ボールの加速度は同じ（重力による $9.8$ m/s$^2$）だからです。速さは違っても、加速度は同じ、ということが、ガリレイ変換 $x'=x-vt$ を2回時間で微分すると分かります（$v$ が一定のとき、$\ddot{x}'=\ddot x$）。
+
+\begin{figure}[htbp]
+\centering
+\begin{tikzpicture}[scale=0.9]
+ \draw[thick, darkslate] (-1,0)--(9,0);
+ \draw[thick, primaryblue, fill=softblue] (1,0.2) rectangle (6,1.5);
+ \draw[thick, primaryblue] (1.3,0.2) circle (0.18) (5.7,0.2) circle (0.18);
+ \draw[->, ultra thick, crimson] (2,0.8)--(3.4,0.8) node[midway, above, lbl] {ボール $5$ m/s};
+ \draw[->, thick, accentgreen] (6.2,1.6)--(8.2,1.6) node[midway, above, lbl] {列車 $20$ m/s};
+ \node[lbl] at (7,-0.6) {線路ぎわの人から見たボールは $25$ m/s};
+\end{tikzpicture}
+\caption{列車（$20$ m/s）の中で、前にボールを $5$ m/s で投げる。外から見ると $25$ m/s。}
+\end{figure}
+
+\begin{pointbox}{この節のまとめ}
+\begin{itemize}[leftmargin=*]
+\item 相対性原理：自然の法則は、どのガリレイ座標系でも同じ形。
+\item 古典力学では、速度はガリレイ変換で足し算になるが、加速度は変わらないので、運動の法則は同じ形のまま。
+\end{itemize}
+\end{pointbox}
+
+%==========================================================
+\chapter{古典力学の速度の加法定理（第VI節）}
+\markboth{第6章}{速度の加法定理（古典）}
+%==========================================================
+
+\section{この節の位置づけ}
+
+第VI節は、古典力学の「速度の足し算」の定理を、列車を使って再確認します。列車の速さを $v$、列車の中を人が歩く速さを $w$ とすると、線路ぎわから見た人の速さは $W=v+w$ です。
+
+\section{例}
+
+\begin{table}[htbp]
+\centering
+\begin{tabular}{lcc}
+\toprule
+場合 & 列車の速さ $v$ & 歩く速さ $w$\\
+\midrule
+列車の進む向きに歩く & 80 km/h & $+5$ km/h\\
+外から見た人の速さ $W=v+w$ & \multicolumn{2}{c}{85 km/h}\\
+列車と反対の向きに歩く & 80 km/h & $-5$ km/h\\
+外から見た人の速さ & \multicolumn{2}{c}{75 km/h}\\
+\bottomrule
+\end{tabular}
+\caption{列車の中を歩く人の速さ（古典力学）。進行方向なら足し算、反対向きなら引き算。}
+\end{table}
+
+このガリレイ変換にもとづく足し算の規則は、日常の速さではぴったり合います。ところが、もし「人」が光だったら、$c+v$ という速さになるはず、というのが、次の第VII節の問題になります。
+
+\begin{figure}[htbp]
+\centering
+\begin{tikzpicture}[scale=1.0]
+ \draw[->, ultra thick, primaryblue] (0,1.0)--(4,1.0) node[midway, above, lbl] {$v=80$};
+ \draw[->, ultra thick, crimson] (4,1.0)--(4.25,1.0) node[above right, lbl] {$w=5$};
+ \draw[->, ultra thick, accentgreen] (0,0)--(4.25,0) node[midway, below, lbl] {$W=v+w=85$ km/h};
+\end{tikzpicture}
+\caption{速度の足し算。線路ぎわの人から見ると、列車の速さ $80$ と、車内を歩く速さ $5$ が足されて $85$ km/h。}
+\end{figure}
+
+\begin{pointbox}{この節のまとめ}
+\begin{itemize}[leftmargin=*]
+\item 古典力学の速度の加法定理：$W=v+w$（同じ向きなら足し算）。
+\item この規則は、光に当てはめると、次の節の矛盾を生む。
+\end{itemize}
+\end{pointbox}
+
+%==========================================================
+\chapter{光の伝播の法則と相対性原理の見かけの矛盾（第VII節）}
+\markboth{第7章}{光と相対性原理の矛盾}
+%==========================================================
+
+\section{この節の位置づけ}
+
+第VII節は、相対性理論の出発点になる、「見かけの矛盾」を説明します。真空中の光の速さは $c$（約 $3\times10^{8}$ m/s）です。これが、基準物体によらず同じなら、ガリレイ変換の速度の足し算（第6章）とぶつかります。
+
+\section{矛盾の中身}
+
+線路ぎわの人が、「光は速さ $c$ で進む」と測ったとします。列車が、光と同じ向きに速さ $v$ で走っているとき、古典力学の足し算なら、列車の中の人にとって、光の速さは $c-v$ になるはずです。
+
+\begin{table}[htbp]
+\centering
+\begin{tabular}{c|ccc}
+\toprule
+列車の速さ $v/c$ & 0.1 & 0.5 & 0.9\\
+\midrule
+列車の人が測る光の速さ（古典の足し算） & $0.9c$ & $0.5c$ & $0.1c$\\
+列車の人が測る光の速さ（相対性理論） & $c$ & $c$ & $c$\\
+\bottomrule
+\end{tabular}
+\caption{光を追いかける列車での、光の速さ。古典の足し算と相対性理論は食い違う。}
+\end{table}
+
+\begin{figure}[htbp]
+\centering
+\begin{tikzpicture}
+\begin{axis}[width=9cm, height=5cm, xmin=0, xmax=1, ymin=0, ymax=1.15, xlabel={列車の速さ $v/c$}, ylabel={列車の人が測る光の速さ$/c$},
+  every axis label/.append style={font=\footnotesize}, tick label style={font=\footnotesize}, legend style={font=\scriptsize, at={(0.03,0.3)}, anchor=west}]
+ \addplot[thick, crimson, domain=0:1, samples=2] {1-x};
+ \addplot[thick, primaryblue, domain=0:1, samples=2] {1};
+ \legend{古典の足し算 $c-v$, 相対性理論（一定）}
+\end{axis}
+\end{tikzpicture}
+\caption{光を追う列車の人が測る光の速さ。古典なら $c-v$ で下がるが、観測は $c$ のまま（相対性理論）。}
+\end{figure}
+
+アインシュタインは、この矛盾を、「速度の足し算の規則そのもの」が間違っていた、と考えて解きます。それが、時間の見直しにつながります（第VIII〜IX節）。
+
+\begin{pointbox}{この節のまとめ}
+\begin{itemize}[leftmargin=*]
+\item 光の速さ $c$ が基準物体によらず一定なら、古典の速度の足し算とぶつかる。
+\item 解決の鍵は、「同時」や「時間」の意味を見直すこと。
+\end{itemize}
+\end{pointbox}
+
+%==========================================================
+\chapter{物理学における時間の観念（第VIII節）}
+\markboth{第8章}{物理学の時間}
+%==========================================================
+
+\section{この節の位置づけ}
+
+第VIII節は、「時間」を、物理的に測れる量として、定義し直します。ある出来事の「時刻」は、そこに置いた時計の針の位置と、出来事の「同時」で決まります。離れた場所の出来事の「同時」を、どう定義するかが問題です。
+
+\section{光信号による同時の定義}
+
+離れた2点 $A$、$B$ の中点 $M$ に観測者がいます。$A$ と $B$ で稲妻が光り、その光が $M$ に同時に届いたなら、$A$ と $B$ の稲妻は、同時に起きた、と定義します。
+
+\begin{figure}[htbp]
+\centering
+\begin{tikzpicture}[scale=1.0]
+ \draw[thick, darkslate] (0,0)--(8,0);
+ \fill[crimson] (0,0) circle (2pt) node[below, lbl] {$A$};
+ \fill[crimson] (8,0) circle (2pt) node[below, lbl] {$B$};
+ \fill[primaryblue] (4,0) circle (2.5pt) node[below, lbl] {$M$（中点）};
+ \draw[->, thick, warmamber] (0.1,0.3)--(3.8,0.3);
+ \draw[->, thick, warmamber] (7.9,0.3)--(4.2,0.3);
+ \node[lbl] at (2,0.65) {光};
+ \node[lbl] at (6,0.65) {光};
+ \node[lbl] at (4,-1.0) {光が同時に届けば、$A$ と $B$ の稲妻は同時};
+\end{tikzpicture}
+\caption{離れた2つの出来事の「同時」の定義。中点 $M$ に、光が同時に届いたとき。}
+\end{figure}
+
+この定義が、「どの基準物体にも通用するか」が、次の節の問題です。たとえば $A,B$ の間が $3$ km なら、光が $M$ に届くまでは $1.5\,\text{km}/c=5\times10^{-6}$ 秒（5マイクロ秒）かかります。
+
+\begin{pointbox}{この節のまとめ}
+\begin{itemize}[leftmargin=*]
+\item 離れた場所の「同時」は、光信号で定義する（中点に光が同時に届く）。
+\item この定義が、座標系ごとに違う結果を与えるかが、次の節の問題。
+\end{itemize}
+\end{pointbox}
+
+%==========================================================
+\chapter{同時性の相対性（第IX節）}
+\markboth{第9章}{同時性の相対性}
+%==========================================================
+
+\section{この節の位置づけ}
+
+第IX節は、相対性理論の最も驚くべき結論を述べます。「ある座標系で同時な2つの出来事は、別の座標系では、同時でない」。アインシュタインの例は、線路ぎわの人と、走る列車の中の人が、2つの稲妻 $A$、$B$ を観察する場合です。
+
+\section{列車と線路ぎわの稲妻}
+
+線路ぎわの人にとって、稲妻 $A$、$B$ が同時（時刻 $t=0$、位置 $x=\mp L/2$）だったとします。列車の中の人には、同じ2つの出来事の時刻が、$t'=\gamma(t-vx/c^2)$ で変換されて、ずれます。
+
+\begin{table}[htbp]
+\centering
+\begin{tabular}{c|ccc}
+\toprule
+列車の速さ $v/c$ & 0.1 & 0.5 & 0.9\\
+\midrule
+時刻のずれ $\Delta t'$（$L/c$ を単位に）& 0.1005 & 0.5774 & 2.0647\\
+\bottomrule
+\end{tabular}
+\caption{線路ぎわで同時の2つの出来事の、列車での時刻のずれ $\Delta t'=\gamma\beta L/c$（単位は $L/c$）。列車が速いほど、ずれが大きい。}
+\end{table}
+
+\begin{examplebox}{現実的な数値}
+$L=2000$ m（稲妻の間隔）、列車の速さ $v=30$ m/s（時速108 km）では、時刻のずれは $vL/c^2=6.7\times10^{-13}$ 秒にすぎません。日常の速さでは、同時性の相対性は、まったく気づかれません。
 \end{examplebox}
 
-
-\clearpage
-\chapter{古典力学における空間と時間}
-\begin{center}
-{\Large\bfseries\gtfamily ガリレイ変換の限界と「光速度不変の原理」の登場}
-\end{center}
-\vspace*{2mm}
-
-\section*{本章の視覚的見取り図}
-\begin{center}
-\begin{tikzpicture}[scale=1.05, >=Stealth, every node/.style={font=\small}]
-    % Classical law vs question box at top
-    \node[align=left, fill=white, draw=gray!60, rounded corners=5pt, inner sep=6pt, font=\footnotesize, line width=0.8pt] 
-        at (5.0, 5.8) {\textbf{【ガリレイ変換と速度合成則の根本問題】}\\
-        古典力学：堤防から見た歩行速度 $W = v + w$（単純な足し算）\\
-        \textbf{核心の疑問}：もし歩行者ではなく「光（速度 $c$）」を放ったら、$W = v + c$ となるのか？\\
-        $\implies$ マクスウェル電磁気学（光速普遍）と古典力学の真っ向対立！};
-
-    % Train carriage (Moving Frame K') - made wider and taller
-    \draw[very thick, fill=blue!12, draw=blue!75, rounded corners=6pt] (1.0, 2.0) rectangle (8.8, 4.3);
-    \node[font=\normalsize\bfseries, text=blue!85!black] at (5.0, 3.8) {走行列車（運動系 $K'$）};
-    
-    % Observer M' inside train
-    \node[draw=teal!80!black, circle, fill=cyan!35, inner sep=3pt, font=\small\bfseries] (obsMp) at (2.4, 2.9) {観測者 $M'$};
-    
-    % Walker walking inside train
-    \fill[teal!80!black] (4.4, 2.9) circle (3pt);
-    \draw[->, line width=2pt, teal!80!black] (4.4, 2.9) -- (7.2, 2.9) 
-        node[midway, above=4pt, fill=white, inner sep=2.5pt, font=\small\bfseries, text=teal!90!black] {車内歩行 $w$};
-        
-    % Train velocity v arrow
-    \draw[->, line width=2.5pt, red!85!black] (8.8, 3.15) -- (10.8, 3.15) 
-        node[right, font=\normalsize\bfseries, text=red!85!black] {列車速度 $v$};
-
-    % Embankment (Stationary Frame K)
-    \draw[thick, fill=brown!25, draw=brown!60!black] (-0.8, -0.6) rectangle (10.2, 0.6);
-    \node[font=\normalsize\bfseries, text=brown!60!black] at (5.5, 0.0) {堤防（静止基準系 $K$）};
-    
-    % Observer M on embankment
-    \node[draw=orange!80!black, circle, fill=yellow!40, inner sep=3pt, font=\small\bfseries] (obsM) at (0.8, 1.4) {観測者 $M$};
-    \draw[thick, gray!60, dashed] (0.8, 0.6) -- (obsM);
+\begin{figure}[htbp]
+\centering
+\begin{tikzpicture}[scale=1.1]
+ \draw[->, thick, darkslate] (-2.5,0)--(2.7,0) node[right] {$x$};
+ \draw[->, thick, darkslate] (0,-0.3)--(0,3) node[above] {$ct$};
+ \draw[thick, primaryblue] (-2.3,0)--(2.3,0);
+ \draw[thick, crimson] (-2.3,-1.15)--(2.3,1.15);
+ \fill[crimson] (-1.5,0) circle (2pt) node[below, lbl] {$A$};
+ \fill[crimson] (1.5,0) circle (2pt) node[below, lbl] {$B$};
+ \node[lbl, primaryblue] at (2.2,-0.3) {$t=0$（線路の「同時」）};
+ \node[lbl, crimson] at (-1.0,1.4) {$t'=0$（列車の「同時」、$\beta=0.5$）};
 \end{tikzpicture}
+\caption{位置と時刻の図（$c=1$）。線路の「同時」は水平線 $t=0$。列車の「同時」は、傾き $\beta$ の斜めの線 $t'=0$。$A$、$B$ は、$t'=0$ の線の上にはない。}
+\end{figure}
 
-\small\textbf{図版解説：}堤防の静止系 $K$ と一定速度 $v$ で走る列車系 $K'$ における運動の相対性と古典速度合成則。
-\end{center}
-\vspace*{2mm}
+\begin{pointbox}{この節のまとめ}
+\begin{itemize}[leftmargin=*]
+\item 同時性は絶対的ではない。座標系が違えば、同時の意味が違う。
+\item 時刻のずれは、$\Delta t'=\gamma vL/c^2$。日常の速さでは小さすぎて気づかない。
+\end{itemize}
+\end{pointbox}
 
-\section*{アインシュタインの原典思索}
-\begin{origbox}[原著第2章：アルベルト・アインシュタインの肉声]
-古典力学はガリレイ・ニュートンの相対性原理に立脚している。すなわち、ある基準座標系 $K$ において力学法則が成立するならば、これに対して等速直線運動を行っている別の座標系 $K'$ においても全く同一の力学法則が成立する。
-線路の堤防に対して速度 $v$ で走る列車の中を、乗客が列車の進行方向に速度 $w$ で歩くとき、堤防に対する乗客の速度は古典的には $W = v + w$ となる。しかし、この常識的な加算則を光の伝播（速度 $c$）に適用しようとすると、マクスウェル電磁気学の基本法則と激しく衝突することになる。
-\end{origbox}
+%==========================================================
+\chapter{距離の概念の相対性（第X節）}
+\markboth{第10章}{距離の相対性}
+%==========================================================
 
-\section*{大人のための徹底解説講義}
-\begin{lecturebox}[徹底講義：高校数学で追体験する物理学革命]
-時速 $100\,\text{km}$ で走る電車の中で、前方へ時速 $10\,\text{km}$ でボールを投げると、地上に立っている人から見ればボールは時速 $110\,\text{km}$ で飛んでいきます。これが高校物理で習う「ガリレイの速度加算則（$W = v + w$）」であり、ニュートン以来200年以上にわたって人類の絶対的な常識でした。
+\section{この節の位置づけ}
 
-ところが19世紀末、マクスウェルの電磁気学が完成すると、驚くべき矛盾が浮上しました。真空中を進む電磁波（光）の速度 $c \approx 30万\,\text{km/s}$ は、光源が動いていようが止まっていようが、常に一定の値をとると方程式が示していたのです。
-もしガリレイの法則が正しければ、光速の $90\%$ で飛ぶロケットから前方に放たれた光は、地球から見れば「光速の $1.9$ 倍」に見えなければなりません。しかし、マイケルソン・モーリーの実験をはじめとするあらゆる精密測定は、「光の速度は誰から見ても秒速30万キロメートルのままであり、絶対に変わらない」という奇妙な事実を突きつけました。
-アインシュタインは、この一見両立し得ない2つの原理――「相対性原理」と「光速度不変の原理」――を両方とも真理として受け入れる決断を下します。
-\end{lecturebox}
+第X節は、「長さ」も、座標系に相対的であることを示します。動く棒の長さを測るには、棒の両端の位置を、「同時に」記録しなければなりません。ところが「同時」は座標系ごとに違う（第9章）ので、動く棒の長さも、座標系によって違う値になります。
 
-\vspace*{3mm}
-\begin{examplebox}{大人の学び直しのための実社会・重要例題：第2章}
-\textbf{【実社会の具体例：空港の動く歩道と「時速 $100\,\text{km}$ の列車から光を投げたら？」】}\\
-空港の長い通路にある「動く歩道（時速 $4\,\text{km}$）」の上を、旅行者が前方へ時速 $4\,\text{km}$ で歩くと、外の床に立っている人から見れば速度は $4 + 4 = 8\,\text{km/h}$ に見えます。これは高校物理で習う「ガリレイの速度合成則」です。\\
-(1) もし時速 $100\,\text{km}$ で走る列車のヘッドライトから放たれた光の速度を、線路端の静止観察者が測ったとき、ニュートン力学の常識では「光速 $c + 100\,\text{km/h}$」になるはずである。なぜこの結論がマクスウェルの電磁気学と衝突したのかを述べよ。\\
-(2) アインシュタインが、ニュートン力学のガリレイ変換を捨てて「光速度不変の原理」を公理として採択した決断の革命性を考察せよ。
-\\[2mm]
-\textbf{【懇切丁寧な解答・ステップ解説】}\\
-\textbf{(1) の解：}
-19世紀末に確立したマクスウェルの電磁気学によれば、光は電磁波の一種であり、その真空中での伝播速度 $c$ は真空の誘電率 $\varepsilon_0$ と透磁率 $\mu_0$ によって $c = 1/\sqrt{\varepsilon_0 \mu_0} \approx 3 \times 10^8\,\text{m/s}$ と一意に定まります。ここには「光源の速度」というパラメータは一切含まれていません。
-もしガリレイ変換が正しいなら、電磁気学の方程式は動いている列車の中では成り立たなくなってしまいます。「力学の常識（ガリレイ変換）」と「電磁気学の基本法則」は真っ向から衝突していたのです。
-\\[2mm]
-\textbf{(2) の解：}
-当時の多くの物理学者は「電磁気学の方程式が不完全なのだろう」と考え、光を伝える架空の媒質「エーテル」を探し求めました。しかしアインシュタインは逆転の発想をし、「電磁気学の教えの通り、真空中を進む光の速さは光源の運動に関係なく誰にとっても常に不変の $c$ である」と認め、むしろ200年間疑われなかったニュートンの「時間と空間の絶対性（ガリレイ変換）」のほうを書き直す道を選びました。この常識にとらわれない理性の勇気こそが、現代物理学の扉を開いたのです。
+\section{長さを測る手順}
+
+静止している棒（長さ $L_0$）の長さは、両端に物差しを当てれば測れます。動いている棒の長さは、次の手順で測るしかありません。
+
+\begin{enumerate}[leftmargin=*]
+\item 棒に対して動いている座標系で、「同じ時刻」に、棒の両端の位置を記録する。
+\item その2つの位置の距離を測る。
+\end{enumerate}
+
+この「同じ時刻」が、棒に静止した座標系の「同じ時刻」とは違うため、結果は $L_0$ とは異なります。値は第12章で求めますが、例として、$v=0.6c$ で動く長さ $1$ m の棒の長さは $\sqrt{1-0.36}=0.8$ m と測られます。
+
+\begin{figure}[htbp]
+\centering
+\begin{tikzpicture}[scale=1.0]
+ \draw[thick, primaryblue, fill=softblue] (0,0.4) rectangle (5,0.8);
+ \node[lbl] at (2.5,1.15) {静止している棒：長さ $L_0=1$ m};
+ \draw[thick, crimson, fill=softrose] (0.5,-1.0) rectangle (4.5,-0.6);
+ \node[lbl] at (2.5,-1.35) {動く棒（$v=0.6c$）：長さ $0.8$ m（同時に両端を測る）};
+ \draw[<->, thick] (0,0.2)--(5,0.2);
+ \draw[<->, thick] (0.5,-0.4)--(4.5,-0.4);
+\end{tikzpicture}
+\caption{静止した棒と、動く棒の長さ（比を保って描いた概念図）。動く棒は、進む向きに短く測られる。}
+\end{figure}
+
+\begin{pointbox}{この節のまとめ}
+\begin{itemize}[leftmargin=*]
+\item 動く棒の長さは、両端を「同時」に記録して測る。
+\item 「同時」が座標系で違うので、長さも違う。$v=0.6c$ なら $0.8$ 倍（次の章以降で導く）。
+\end{itemize}
+\end{pointbox}
+
+%==========================================================
+\chapter{ローレンツ変換（第XI節）}
+\markboth{第11章}{ローレンツ変換}
+%==========================================================
+
+\section{この節の位置づけ}
+
+第XI節は、2つの座標系 $K$ と $K'$ の間の、出来事の座標の変換則を導きます。この変換則が、ガリレイ変換の代わりに、光の速さ $c$ が一定であることと、相対性原理の両方を満たします。これを\textbf{ローレンツ変換}と呼びます。
+
+\section{変換の式}
+
+座標系 $K'$ が、$K$ に対して、$x$ 軸の向きに速さ $v$ で動いているとき、
+\[
+x'=\gamma\,(x-vt),\qquad y'=y,\qquad z'=z,\qquad t'=\gamma\Bigl(t-\frac{v}{c^2}x\Bigr),\qquad\gamma=\frac1{\sqrt{1-v^2/c^2}} .
+\]
+$v\ll c$ のときは $\gamma\approx1$、$vx/c^2\approx0$ なので、ガリレイ変換 $x'=x-vt$、$t'=t$ に一致します。
+
+\section{変わらない量：時空の間隔}
+
+ローレンツ変換では、$x^2-c^2t^2$ が変わりません（光速を単位にして $c=1$ とすると $x^2-t^2$）。数値で確かめます。出来事 $(x,t)=(3,5)$ を、$\beta=0.6$（$\gamma=1.25$）の座標系に変換すると、
+\[
+x'=1.25\,(3-0.6\times5)=0,\qquad t'=1.25\,(5-0.6\times3)=4 .
+\]
+$x^2-t^2=9-25=-16$、$x'^2-t'^2=0-16=-16$ で、一致します。
+
+\begin{figure}[htbp]
+\centering
+\begin{tikzpicture}[scale=0.85]
+ \draw[->, thick, darkslate] (-0.3,0)--(6.3,0) node[right] {$x$};
+ \draw[->, thick, darkslate] (0,-0.3)--(0,6.3) node[above] {$ct$};
+ \draw[->, thick, crimson] (0,0)--(3.2,5.33) node[above] {$ct'$};
+ \draw[->, thick, crimson] (0,0)--(5.33,3.2) node[right] {$x'$};
+ \draw[dashed, gray] (0,0)--(5.8,5.8);
+ \fill[primaryblue] (3,5) circle (2.5pt) node[right, lbl] {出来事 $(3,5)$};
+ \node[lbl, crimson] at (3.0,3.0) {$\beta=0.6$};
+\end{tikzpicture}
+\caption{位置と時刻の図（$c=1$）。座標軸 $x',ct'$ は、$K$ の軸から、光の線（破線）に向かって、同じだけ傾く。出来事 $(3,5)$ は、$K'$ では $(0,4)$ と測られる（$x'=0$、つまり $ct'$ 軸の上、$ct'=4$）。}
+\end{figure}
+
+\begin{pointbox}{この節のまとめ}
+\begin{itemize}[leftmargin=*]
+\item ローレンツ変換：$x'=\gamma(x-vt)$、$t'=\gamma(t-vx/c^2)$。$v\ll c$ でガリレイ変換に一致。
+\item $x^2-c^2t^2$ は変わらない（例：$-16$ のまま）。時間と空間が混ざり合う。
+\end{itemize}
+\end{pointbox}
+
+%==========================================================
+\chapter{動く物差しと時計の振る舞い（第XII節）}
+\markboth{第12章}{動く物差しと時計}
+%==========================================================
+
+\section{この節の位置づけ}
+
+第XII節は、ローレンツ変換から、有名な2つの結論を導きます。動く物差しは、進む向きに縮む（\textbf{ローレンツ収縮}）。動く時計は、ゆっくり進む（\textbf{時間の遅れ}）。縮み方、遅れ方は、$\gamma$ で決まります。
+
+\section{縮み方と遅れ方}
+
+\[
+L=L_0\sqrt{1-\beta^2}=\frac{L_0}{\gamma},\qquad \Delta t=\gamma\,\Delta t_0 .
+\]
+
+\begin{table}[htbp]
+\centering
+\begin{tabular}{c|ccccccc}
+\toprule
+$\beta=v/c$ & 0.1 & 0.5 & 0.6 & 0.8 & 0.9 & 0.99 & 0.999\\
+\midrule
+$\gamma$ & 1.005 & 1.155 & 1.250 & 1.667 & 2.294 & 7.089 & 22.37\\
+縮み $1/\gamma$ & .995 & .866 & .800 & .600 & .436 & .141 & .045\\
+\bottomrule
+\end{tabular}
+\caption{ローレンツ因子 $\gamma$ と、物差しの縮み $1/\gamma$（計算で確認）。光速に近づくと、$\gamma$ は急に大きくなる。}
+\end{table}
+
+\begin{figure}[htbp]
+\centering
+\begin{tikzpicture}
+\begin{axis}[width=10cm, height=5.4cm, xmin=0, xmax=1, ymin=1, ymax=10, xlabel={$\beta=v/c$}, ylabel={$\gamma$},
+  every axis label/.append style={font=\footnotesize}, tick label style={font=\footnotesize}]
+ \addplot[thick, primaryblue, domain=0:0.99, samples=120] {1/sqrt(1-x^2)};
+\end{axis}
+\end{tikzpicture}
+\caption{ローレンツ因子 $\gamma=1/\sqrt{1-\beta^2}$。$\beta=0.99$ で約7、光速に近づくほど無限に大きくなる。}
+\end{figure}
+
+\begin{examplebox}{例：高速の宇宙船}
+$\beta=0.8$（$\gamma=1.667$）で地球を出た宇宙船が、地球の時計で10年たったとき、船内の時計は $10/1.667=6.0$ 年しか進んでいません。逆に、船内の時計で、地球が $6.0\times1.667=10$ 年進んだことになります（速度が一定で、行って戻らないとき）。
 \end{examplebox}
 
+\begin{pointbox}{この節のまとめ}
+\begin{itemize}[leftmargin=*]
+\item 動く物差しは $1/\gamma$ に縮み、動く時計は $\gamma$ 倍ゆっくり進む。
+\item $\beta=0.6$ なら $\gamma=1.25$：縮みは $0.8$ 倍、遅れは $1.25$ 倍。
+\end{itemize}
+\end{pointbox}
 
-\clearpage
-\chapter{「同時性」の相対性}
-\begin{center}
-{\Large\bfseries\gtfamily 列車と堤防の思考実験が暴く絶対時間の崩壊}
-\end{center}
-\vspace*{2mm}
+%==========================================================
+\chapter{速度の加法定理とフィゾーの実験（第XIII節）}
+\markboth{第13章}{速度の加法とフィゾーの実験}
+%==========================================================
 
-\section*{本章の視覚的見取り図}
-\begin{center}
-\begin{tikzpicture}[scale=1.05, >=Stealth, every node/.style={font=\small}]
-    % Physical verdict box at top
-    \node[align=left, fill=yellow!15, draw=orange!70, rounded corners=5pt, inner sep=6pt, font=\footnotesize, line width=0.8pt] 
-        at (4.0, 6.2) {\textbf{【同時性の相対性（Relativity of Simultaneity）の決定打】}\\
-        ・堤防の観測者 $M$ にとって：光は両端から等距離を同速 $c$ で進むため「$A$ と $B$ は同時に起きた」\\
-        ・車内の観測者 $M'$ にとって：列車が右へ走るため、$B$ からの光に先に出会い、$A$ からの光は後から来る\\
-        $\implies$ \textbf{「同時に起きたかどうか」は観測者の運動状態によって異なる！時間は絶対ではない}};
+\section{この節の位置づけ}
 
-    % Train body
-    \draw[very thick, fill=blue!12, draw=blue!75, rounded corners=6pt] (0.0, 3.0) rectangle (8.0, 4.6);
-    \node[font=\normalsize\bfseries, text=blue!85!black] at (4.0, 4.15) {高速列車（速度 $v$ で右方へ走行）};
-    
-    % Train velocity arrow
-    \draw[->, line width=2.5pt, red!85!black] (8.0, 3.8) -- (9.6, 3.8) 
-        node[right, font=\normalsize\bfseries, text=red!85!black] {$v$};
-        
-    % Observer M' inside train
-    \node[draw=teal!80!black, circle, fill=cyan!35, inner sep=3pt, font=\small\bfseries] (obsMp) at (4.5, 3.5) {$M'$};
-    \node[below=8pt, fill=white, inner sep=2pt, font=\footnotesize\bfseries] at (4.5, 3.0) {車内中点 $M'$（光 $B$ に突進し、光 $A$ から逃げる）};
+第XIII節は、ローレンツ変換から、新しい速度の足し算の式を導き、フィゾーの実験（流れる水の中の光の速さ）で確かめます。
 
-    % Light waves in middle layer (y = 1.6) - well separated from train and embankment
-    \draw[decorate, decoration={snake, amplitude=2.5pt, segment length=6pt}, line width=1.3pt, orange!90!black, ->] 
-        (-0.8, 1.6) -- (3.3, 1.6) node[midway, above=3pt, fill=white, inner sep=1.5pt, font=\footnotesize\bfseries] {光速 $c \longrightarrow$};
-    \draw[decorate, decoration={snake, amplitude=2.5pt, segment length=6pt}, line width=1.3pt, orange!90!black, ->] 
-        (8.8, 1.6) -- (4.7, 1.6) node[midway, above=3pt, fill=white, inner sep=1.5pt, font=\footnotesize\bfseries] {$\longleftarrow$ 光速 $c$};
+\section{相対論の速度の加法}
 
-    % Embankment ground (y = -0.4 to 0.4)
-    \draw[thick, fill=gray!20, draw=gray!60] (-2.2, -0.4) rectangle (10.2, 0.4);
-    \node[font=\normalsize\bfseries, text=gray!80!black] at (6.5, 0.0) {堤防（静止系 $K$）};
-    
-    % Observer M on embankment
-    \node[draw=orange!80!black, circle, fill=yellow!45, inner sep=3pt, font=\small\bfseries] (obsM) at (4.0, 0.4) {$M$};
-    \node[above=4pt, fill=white, inner sep=2pt, font=\footnotesize\bfseries] at (4.0, 0.8) {堤防中点 $M$（$A, B$ からの光が「同時」に到達）};
+列車に対する速さ $w$ で動くものの、地面に対する速さ $W$ は
+\[
+W=\frac{v+w}{1+vw/c^2}
+\]
+です。$v,w\ll c$ なら、$W\approx v+w$（古典）に一致します。
 
-    % Lightning strike points A and B
-    \fill[red!90!black] (-1.0, 0.4) circle (4pt);
-    \node[below=5pt, fill=white, inner sep=2pt, font=\small\bfseries, text=red!80!black] at (-1.0, -0.4) {落雷地点 $A$};
-    \draw[line width=1.5pt, red!80!black, -{Latex[length=3mm]}] (-1.0, 2.2) -- (-1.0, 0.5) 
-        node[midway, left=2pt, font=\scriptsize\bfseries, text=red!80!black] {雷撃};
-        
-    \fill[red!90!black] (9.0, 0.4) circle (4pt);
-    \node[below=5pt, fill=white, inner sep=2pt, font=\small\bfseries, text=red!80!black] at (9.0, -0.4) {落雷地点 $B$};
-    \draw[line width=1.5pt, red!80!black, -{Latex[length=3mm]}] (9.0, 2.2) -- (9.0, 0.5) 
-        node[midway, right=2pt, font=\scriptsize\bfseries, text=red!80!black] {雷撃};
+\begin{table}[htbp]
+\centering
+\begin{tabular}{ccc|c}
+\toprule
+$v/c$ & $w/c$ & 古典 $v+w$ & 相対論 $W/c$\\
+\midrule
+0.5 & 0.5 & 1.0 & 0.8\\
+0.9 & 0.9 & 1.8 & 0.9945\\
+0.99 & 0.99 & 1.98 & 0.99995\\
+0.5 & 1（光） & 1.5 & 1\\
+\bottomrule
+\end{tabular}
+\caption{速度の加法の比較。どれだけ速いものを足しても、光の速さ $c$ を超えない。光を足しても $c$ のまま。}
+\end{table}
+
+\section{フィゾーの実験}
+
+流れる水（流速 $v$、屈折率 $n$）の中を進む光の、管に対する速さは、$v$ が小さいとき、相対論の式から
+\[
+W\approx\frac{c}{n}+v\Bigl(1-\frac1{n^2}\Bigr)
+\]
+となります。水の流れが光を引きずる割合は、$1-1/n^2$ で、水（$n=1.33$）なら $0.435$ です。原著は、ツェーマンの測定で、この式が1\%の精度で確かめられたと述べています。
+
+\begin{figure}[htbp]
+\centering
+\begin{tikzpicture}
+\begin{axis}[ybar, width=9cm, height=5cm, bar width=18pt, xmin=0.4, xmax=3.6, ymin=0, ymax=1.15, xtick={1,2,3}, xticklabels={引きずらない,相対論（水）,完全に引きずる}, ylabel={引きずり係数},
+  every axis label/.append style={font=\footnotesize}, tick label style={font=\footnotesize}, nodes near coords, nodes near coords style={font=\scriptsize}]
+ \addplot[fill=softblue, draw=primaryblue] coordinates {(1,0)(2,0.435)(3,1)};
+\end{axis}
 \end{tikzpicture}
+\caption{流れる水が、中の光を引きずる割合。実験は中間の値（$0.435$、水の場合）を支持する。}
+\end{figure}
 
-\small\textbf{図版解説：}列車と堤防の思考実験。堤防の中点 $M$ で同時の2つの落雷は、前進する車内の中点 $M'$ には同時に届かない。
-\end{center}
-\vspace*{2mm}
+\begin{pointbox}{この節のまとめ}
+\begin{itemize}[leftmargin=*]
+\item 相対論の速度の加法：$W=(v+w)/(1+vw/c^2)$。光速は超えない。
+\item フィゾーの実験は、完全には引きずらない（水で $0.435$）ことを示し、相対論と合う。
+\end{itemize}
+\end{pointbox}
 
-\section*{アインシュタインの原典思索}
-\begin{origbox}[原著第3章：アルベルト・アインシュタインの肉声]
-線路の堤防に沿って走る非常に長い列車を考えよう。堤防上の2地点 $A$ と $B$ に同時に落雷があったとする。堤防の中点 $M$ にいる観察者には、$A$ と $B$ からの光が同時に到達する。
-しかし、列車のちょうど中央にいる乗客 $M'$ は、雷が落ちた瞬間には $M$ と一致していたとしても、光が伝わる間に列車とともに $B$ の方向へ進む。したがって $M'$ は $B$ からの光を迎えに行き、$A$ からの光から遠ざかる。
-ゆえに $M'$ の目には、$B$ の閃光が $A$ の閃光よりも早く到達する。堤防の人にとって「同時」であった事象は、列車の乗客にとっては「同時ではない」のである。
-\end{origbox}
+%==========================================================
+\chapter{相対性理論の発見的価値（第XIV節）}
+\markboth{第14章}{発見的価値}
+%==========================================================
 
-\section*{大人のための徹底解説講義}
-\begin{lecturebox}[徹底講義：高校数学で追体験する物理学革命]
-物理学の歴史上、最も鮮やかで美しい思考実験が、この「列車と堤防の雷」です。
-ニュートン力学では、「いま、この瞬間」という時間は、宇宙のどこであっても、誰にとっても寸分違わず等しく流れていると考えられていました。これを「絶対時間」と呼びます。
+\section{この節の位置づけ}
 
-しかしアインシュタインは問います。「そもそも、遠く離れた2つの場所で起きた出来事が『同時』であるとは、具体的にどうやって確かめるのか？」
-私たちが遠方の出来事を知るには、必ず「光」という信号を受け取る必要があります。そして光の速さは無限大ではなく、秒速30万キロメートルという有限の値です。
-堤防に立っている人にとって同時に届いた雷の光は、前進している列車の乗客にとっては、自らが近づいていく前方（$B$）の光が先に届き、逃げていく後方（$A$）の光は遅れて届きます。光速が誰にとっても不変である以上、「前方の雷が先に落ちた」と結論づける以外にありません。
-「同時」とは客観的・絶対的な事実ではなく、「誰が見ているか（どのような運動状態にあるか）」に完全に依存する相対的な概念だったのです。
-\end{lecturebox}
+第XIV節は、特殊相対性理論が、新しい法則を見つけるための「手引き」になることを述べます。自然の法則は、ローレンツ変換でその形を変えない（不変である）はずだ、という条件をつけると、法則の形が制限されます。これを、アインシュタインは、理論の「発見的な価値」と呼びます。
 
-\vspace*{3mm}
-\begin{examplebox}{大人の学び直しのための実社会・重要例題：第3章}
-\textbf{【実社会の具体例：国際金融取引・高頻度取引（HFT）におけるミリ秒単位の同時性】}\\
-東京証券取引所、ニューヨーク証券取引所、ロンドン証券取引所を光海底ケーブルで結び、1秒間に数万件の自動売買を行う高頻度取引（HFT）では、「どちらの注文が先に取引所に届いたか」が数億円の損益を左右します。\\
-(1) アインシュタインの列車と堤防の思考実験に基づき、「堤防の観測者にとって線路の両端 $A, B$ に同時に落ちた雷」が、列車内の乗客にはなぜ「前方の落雷 $B$ のほうが先に起きた」と観測されるのか、論理的理由を明快に説明せよ。\\
-(2) なぜ「絶対的な同時性」という概念は錯覚であり、光速という有限の信号伝達速度が存在する宇宙においては「同時性は観測者の運動状態に依存する相対的なもの」にならざるを得ないのかを述べよ。
-\\[2mm]
-\textbf{【懇切丁寧な解答・ステップ解説】}\\
-\textbf{(1) の解：}
-堤防の中点にいる観測者 $M$ には、$A$ と $B$ から放たれた光が同時に届くため、「落雷は同時であった」と判定されます。
-しかし、列車の中心にいる乗客 $M'$ は、雷が落ちた瞬間には $M$ と同じ位置にいたものの、光が進んでくる間に列車とともに前方（$B$ の方向）へ移動します。したがって、乗客 $M'$ は「前方の $B$ から来る光を迎えに行き、後方の $A$ から来る光からは逃げる」ことになります。その結果、光速度が不変である以上、$M'$ の目には明らかに前方の落雷 $B$ の閃光が先に飛び込んできます。すなわち、車内の人にとっては「$B$ が先に落ちた」のが客観的事実となります。
-\\[2mm]
-\textbf{(2) の解：}
-もし情報や信号が一瞬で（無限大の速度で）宇宙の端から端まで届くなら、全宇宙共通の「神の絶対時間」を定義できます。しかし現実の宇宙には光速 $c$ という越えられない最高速度が存在します。「離れた2地点の出来事が同時である」と判定するには光信号による照合が不可欠であり、その観測者が動いていれば光の到達順序が入れ替わります。ゆえに、「絶対的な現在」などどこにも存在せず、同時性は観測者の視座に依存する相対的な概念なのです。
+\section{不変な量を探す}
+
+ローレンツ変換で変わらない量があれば、それが、法則の形のもとになります。たとえば、第11章の時空の間隔 $s^2=x^2-c^2t^2$ は不変です。ほかの例で、別の速度 $\beta=0.8$（$\gamma=1.6667$）でも確かめます。出来事 $(x,ct)=(3,5)$ は
+\[
+x'=1.6667\,(3-0.8\times5)=-1.667,\qquad ct'=1.6667\,(5-0.8\times3)=4.333
+\]
+で、$x'^2-ct'^2=2.778-18.778=-16.0$ と、やはり $-16$ です（数値で確認）。
+
+\begin{table}[htbp]
+\centering
+\begin{tabular}{c|ccc}
+\toprule
+$\beta$ & $x'$ & $ct'$ & $x'^2-ct'^2$\\
+\midrule
+0（元） & 3 & 5 & $-16$\\
+0.6 & 0 & 4 & $-16$\\
+0.8 & $-1.667$ & 4.333 & $-16$\\
+\bottomrule
+\end{tabular}
+\caption{同じ出来事を、速さの違う座標系で表したときの座標。位置と時刻は変わるが、$x'^2-ct'^2=-16$ は変わらない。}
+\end{table}
+
+\begin{figure}[htbp]
+\centering
+\begin{tikzpicture}
+\begin{axis}[width=8.5cm, height=6cm, xmin=-6, xmax=6, ymin=0, ymax=8, xlabel={$x$}, ylabel={$ct$},
+  every axis label/.append style={font=\footnotesize}, tick label style={font=\footnotesize}]
+ \addplot[thick, primaryblue, domain=-5.5:5.5, samples=100] {sqrt(x^2+16)};
+ \addplot[mark=*, crimson, only marks] coordinates {(3,5)(0,4)(-1.667,4.333)};
+ \node[font=\scriptsize, anchor=west] at (axis cs:3.1,5) {$\beta=0$};
+ \node[font=\scriptsize, anchor=west] at (axis cs:0.2,3.7) {$\beta=0.6$};
+ \node[font=\scriptsize, anchor=east] at (axis cs:-1.9,4.5) {$\beta=0.8$};
+\end{axis}
+\end{tikzpicture}
+\caption{双曲線 $c^2t^2-x^2=16$。同じ出来事を別の座標系で見ると、座標は双曲線の上を動く。間隔は変わらない。}
+\end{figure}
+
+\begin{pointbox}{この節のまとめ}
+\begin{itemize}[leftmargin=*]
+\item 法則は、ローレンツ変換で形を変えない（不変）はず、という条件が、法則を絞り込む。
+\item 時空の間隔 $x^2-c^2t^2$ は、どの座標系でも同じ（3つの速さで確認）。
+\end{itemize}
+\end{pointbox}
+
+%==========================================================
+\chapter{理論の一般的結果（第XV節）}
+\markboth{第15章}{一般的結果}
+%==========================================================
+
+\section{この節の位置づけ}
+
+第XV節は、特殊相対性理論から出る、一般的な結果を述べます。もっとも有名なのは、質量とエネルギーの等価です。物体の質量 $m$ は、$mc^2$ のエネルギーを蓄えている、と言ってよい。
+
+\section{質量とエネルギー：$E=mc^2$}
+
+1グラムの質量は、$E=0.001\times(2.998\times10^8)^2=8.99\times10^{13}$ J のエネルギーに相当します。これは、TNT火薬約21.5キロトン分です（1キロトン $=4.184\times10^{12}$ J として）。
+
+運動エネルギーは、相対論では $K=(\gamma-1)\,mc^2$ です。遅いときは、古典の $\tfrac12mv^2$ に一致します。
+
+\begin{table}[htbp]
+\centering
+\begin{tabular}{c|ccc}
+\toprule
+$\beta=v/c$ & 相対論 $K/mc^2$ & 古典 $\tfrac12\beta^2$ & 比（相対論/古典）\\
+\midrule
+0.01 & 0.0000500 & 0.0000500 & 1.0001\\
+0.1 & 0.005038 & 0.005000 & 1.0076\\
+0.5 & 0.1547 & 0.1250 & 1.238\\
+0.9 & 1.294 & 0.405 & 3.195\\
+\bottomrule
+\end{tabular}
+\caption{運動エネルギーの比較。遅いうちは一致、光速に近づくと、相対論の値のほうがはるかに大きい。}
+\end{table}
+
+\begin{figure}[htbp]
+\centering
+\begin{tikzpicture}
+\begin{axis}[width=10cm, height=5.4cm, xmin=0, xmax=0.95, ymin=0, ymax=2.5, xlabel={$\beta=v/c$}, ylabel={$K/mc^2$},
+  every axis label/.append style={font=\footnotesize}, tick label style={font=\footnotesize}, legend style={font=\scriptsize, at={(0.03,0.97)}, anchor=north west}]
+ \addplot[thick, primaryblue, domain=0:0.95, samples=100] {1/sqrt(1-x^2)-1};
+ \addplot[thick, crimson, dashed, domain=0:0.95, samples=60] {0.5*x^2};
+ \legend{相対論 $(\gamma-1)$, 古典 $\tfrac12\beta^2$}
+\end{axis}
+\end{tikzpicture}
+\caption{運動エネルギー。低速では2つの曲線が重なるが、光速に近づくと、相対論の曲線は急に大きくなる。}
+\end{figure}
+
+\begin{pointbox}{この節のまとめ}
+\begin{itemize}[leftmargin=*]
+\item $E=mc^2$：1グラムは約 $9\times10^{13}$ J（約21.5キロトン）。
+\item 運動エネルギー $(\gamma-1)mc^2$ は、低速で $\tfrac12mv^2$ に一致する。
+\end{itemize}
+\end{pointbox}
+
+%==========================================================
+\chapter{経験と特殊相対性理論（第XVI節）}
+\markboth{第16章}{経験と特殊相対性理論}
+%==========================================================
+
+\section{この節の位置づけ}
+
+第XVI節は、特殊相対性理論が、経験によってどこまで裏づけられているかを論じます。原著の時代に知られていた裏づけとして、フィゾーの実験（第13章）や、光の伝播についての多くの観測があります。この節では、原著より後の、とくに分かりやすい裏づけの例を補足します。
+
+\section{補足：ミューオンの寿命}
+
+宇宙線が、大気の上空（約10 km）で作るミューオン（素粒子）は、静止していれば、平均 $2.197$ マイクロ秒で壊れます。光速近くで飛んでも、古典的な考えでは、壊れるまでに進む距離は約 $650$ m にすぎません。ところが、実際には、地表まで多くのミューオンが届きます。時間の遅れで説明できます。
+
+\begin{table}[htbp]
+\centering
+\begin{tabular}{c|ccc}
+\toprule
+$\beta$ & $\gamma$ & 古典的な平均到達距離 & 相対論の平均到達距離\\
+\midrule
+0.99 & 7.09 & 652 m & 4622 m\\
+0.998 & 15.82 & 657 m & 10398 m\\
+\bottomrule
+\end{tabular}
+\caption{ミューオンが、壊れるまでに進む平均の距離（$\beta c\tau$ と $\gamma\beta c\tau$、$\tau=2.197\ \mu$s）。$\beta=0.998$ なら約10 km。}
+\end{table}
+
+\begin{figure}[htbp]
+\centering
+\begin{tikzpicture}
+\begin{axis}[xbar, width=10cm, height=4.6cm, xmin=0, xmax=11500, ytick={1,2,3}, yticklabels={古典 $\beta=0.998$,相対論 $\beta=0.99$,相対論 $\beta=0.998$}, xlabel={平均の到達距離（m）}, bar width=12pt, nodes near coords, nodes near coords style={font=\scriptsize},
+  every axis label/.append style={font=\footnotesize}, tick label style={font=\footnotesize}]
+ \addplot[fill=softblue, draw=primaryblue] coordinates {(657,1)(4622,2)(10398,3)};
+\end{axis}
+\end{tikzpicture}
+\caption{ミューオンの平均の到達距離。時間の遅れを考えると、地表（約10 km下）に届く。}
+\end{figure}
+
+（この例は、原著の時代にはなかった、現代の補足です。数値は、寿命 $2.197$ マイクロ秒と、$\beta$ を仮定して計算したものです。）
+
+\begin{pointbox}{この節のまとめ}
+\begin{itemize}[leftmargin=*]
+\item 特殊相対性理論は、多くの実験で裏づけられた。
+\item ミューオンが地表に届く事実は、時間の遅れ（$\gamma$ 倍）で説明できる（補足）。
+\end{itemize}
+\end{pointbox}
+
+%==========================================================
+\chapter{ミンコフスキーの4次元空間（第XVII節）}
+\markboth{第17章}{ミンコフスキーの4次元空間}
+%==========================================================
+
+\section{この節の位置づけ}
+
+第XVII節は、ミンコフスキーの考えを紹介します。空間の3つの座標に、時間の座標を加えた4つの座標で、出来事の位置を表す。出来事の集まりを、4次元の「世界」と見ると、ローレンツ変換は、この世界の中での「座標軸の取り直し」として、すっきりと見えます。
+
+\section{光円錐と、時空の間隔の分類}
+
+原点の出来事から見て、別の出来事 $(x,ct)$ は、間隔 $s^2=x^2-c^2t^2$ の符号で、3つに分かれます。
+
+\begin{table}[htbp]
+\centering
+\begin{tabular}{lcl}
+\toprule
+種類 & $s^2$ の符号 & 意味\\
+\midrule
+時間的 & $s^2<0$ & 光より遅い信号で結べる（原因と結果になりうる）\\
+光的 & $s^2=0$ & 光の信号で結べる\\
+空間的 & $s^2>0$ & 光でも結べない（どの座標系でも同時になりうる）\\
+\bottomrule
+\end{tabular}
+\caption{時空の間隔による、出来事どうしの関係。}
+\end{table}
+
+\begin{examplebox}{例}
+原点に対して、出来事 $(3,5)$ は $s^2=9-25=-16<0$ なので時間的（原因と結果になりうる）。出来事 $(5,3)$ は $s^2=25-9=+16>0$ なので空間的（どちらも他方の原因になれない）。
 \end{examplebox}
 
-
-\clearpage
-\chapter{時間の遅れと「光時計」の数理}
-\begin{center}
-{\Large\bfseries\gtfamily 三平方の定理だけで導く動く時計の遅れの方程式}
-\end{center}
-\vspace*{2mm}
-
-\section*{本章の視覚的見取り図}
-\begin{center}
-\begin{tikzpicture}[scale=1.05, >=Stealth, every node/.style={font=\small}]
-    % Subfigure 1: Rest Frame Clock
-    \begin{scope}[xshift=0cm]
-        \draw[thick, fill=blue!8, draw=blue!60, rounded corners=4pt] (0, 0) rectangle (2.8, 5.0);
-        \node[font=\normalsize\bfseries, text=blue!85!black] at (1.4, 5.4) {【静止系 $S'$（固有時間 $\Delta t_0$）】};
-        
-        % Light source / detector
-        \fill[black] (1.4, 0.7) circle (3.5pt);
-        \node[below=4pt, fill=white, inner sep=2pt, font=\scriptsize\bfseries] at (1.4, 0.6) {発光部・検出器};
-        
-        % Ceiling mirror
-        \draw[line width=3.5pt, blue!80!black] (0.4, 4.3) -- (2.4, 4.3);
-        \node[above=3pt, font=\scriptsize\bfseries, text=blue!80!black] at (1.4, 4.3) {天井の鏡};
-        
-        % Light path up and down
-        \draw[decorate, decoration={snake, amplitude=2pt, segment length=6pt}, line width=1.5pt, red!85!black, ->] 
-            (1.25, 0.8) -- (1.25, 4.2) node[midway, left=2pt, font=\scriptsize\bfseries] {往路 $c$};
-        \draw[decorate, decoration={snake, amplitude=2pt, segment length=6pt}, line width=1.5pt, orange!85!black, ->] 
-            (1.55, 4.2) -- (1.55, 0.8) node[midway, right=2pt, font=\scriptsize\bfseries] {復路 $c$};
-            
-        % Height L dimension with offset
-        \draw[|<->|, thick, gray!80!black] (0.25, 0.7) -- (0.25, 4.3) 
-            node[midway, left=2pt, fill=white, inner sep=2pt, font=\small\bfseries] {$L$};
-            
-        \node[fill=white, draw=blue!40, rounded corners=3pt, inner sep=4pt, font=\footnotesize\bfseries] 
-            at (1.4, -0.7) {$\Delta t_0 = \dfrac{2L}{c}$};
-    \end{scope}
-
-    % Subfigure 2: Moving Frame Clock - expanded height and width
-    \begin{scope}[xshift=4.2cm]
-        \draw[thick, fill=orange!8, draw=orange!60, rounded corners=4pt] (-0.3, 0) rectangle (7.5, 5.0);
-        \node[font=\normalsize\bfseries, text=orange!90!black] at (3.6, 5.4) {【静止観察者 $S$ から見た移動系（時間 $\Delta t$）】};
-        
-        % Ground axis
-        \draw[->, thick, gray!60] (-0.2, 0.7) -- (7.3, 0.7) node[right, black, font=\scriptsize] {$x$};
-        
-        % Positions of clock: start, top bounce, finish
-        \fill[black] (0.5, 0.7) circle (3pt) node[below=5pt, font=\scriptsize] {発光 $t=0$};
-        \draw[line width=2.5pt, blue!80!black] (2.4, 4.3) -- (4.8, 4.3);
-        \fill[blue!80!black] (3.6, 4.3) circle (2.5pt) node[above=4pt, font=\scriptsize] {反射 $t=\frac{\Delta t}{2}$};
-        \fill[black] (6.7, 0.7) circle (3pt) node[below=5pt, font=\scriptsize] {受光 $t=\Delta t$};
-        
-        % Triangle light path
-        \draw[dashed, red!85!black, line width=1.8pt] (0.5, 0.7) -- (3.6, 4.3) -- (6.7, 0.7);
-        \draw[->, line width=1.5pt, red!85!black] (0.5, 0.7) -- (2.05, 2.5);
-        \draw[->, line width=1.5pt, red!85!black] (3.6, 4.3) -- (5.15, 2.5);
-        
-        % Diagonal label clearly placed outside the triangle to the left
-        \node[left=3pt, fill=white, inner sep=2pt, font=\scriptsize\bfseries, text=red!85!black] 
-            at (1.6, 2.7) {斜行距離 $\frac{c\Delta t}{2}$};
-        
-        % Vertical dashed line L
-        \draw[dashed, thick, gray!70] (3.6, 0.7) -- (3.6, 4.3) 
-            node[midway, right=2pt, fill=white, inner sep=1.5pt, font=\scriptsize] {高さ $L$};
-            
-        % Horizontal distances
-        \draw[<->, thick, teal!80!black] (0.5, 0.2) -- (3.6, 0.2) 
-            node[midway, fill=white, inner sep=1.5pt, font=\scriptsize\bfseries] {$\frac{v\Delta t}{2}$};
-        \draw[<->, thick, teal!80!black] (0.5, -0.4) -- (6.7, -0.4) 
-            node[midway, fill=white, inner sep=2pt, font=\scriptsize\bfseries] {全体移動距離 $v\Delta t$};
-            
-        % Pythagorean theorem box - comfortably placed in upper-middle
-        \node[align=left, fill=white, draw=red!50, rounded corners=4pt, inner sep=4pt, font=\scriptsize] 
-            at (3.6, 2.2) {\textbf{直角三角形に三平方の定理を適用：}\\
-            $\left(\dfrac{c\Delta t}{2}\right)^2 = L^2 + \left(\dfrac{v\Delta t}{2}\right)^2$\\
-            $\implies \Delta t = \dfrac{\Delta t_0}{\sqrt{1 - v^2/c^2}} > \Delta t_0$};
-    \end{scope}
+\begin{figure}[htbp]
+\centering
+\begin{tikzpicture}[scale=0.85]
+ \fill[softblue] (0,0)--(-4,4)--(4,4)--cycle;
+ \fill[softblue] (0,0)--(-4,-4)--(4,-4)--cycle;
+ \draw[->, thick, darkslate] (-4.5,0)--(4.8,0) node[right] {$x$};
+ \draw[->, thick, darkslate] (0,-4.5)--(0,4.8) node[above] {$ct$};
+ \draw[thick, crimson] (-4.3,-4.3)--(4.3,4.3);
+ \draw[thick, crimson] (-4.3,4.3)--(4.3,-4.3);
+ \fill[primaryblue] (3,5) circle (0pt);
+ \fill[primaryblue] (1.5,2.5) circle (2.5pt) node[right, lbl] {時間的 $(3,5)$の向き};
+ \fill[warmamber] (3.2,1.5) circle (2.5pt) node[right, lbl] {空間的 $(5,3)$の向き};
+ \node[lbl] at (0,3.2) {未来};
+ \node[lbl] at (0,-3.2) {過去};
 \end{tikzpicture}
+\caption{光円錐（$c=1$）。赤い斜めの線が光の通る道。青い部分（上下）は、原点と時間的な関係にある出来事。左右の白い部分は空間的な関係。}
+\end{figure}
 
-\small\textbf{図版解説：}光時計の思考実験。三平方の定理から時間の遅れ $\Delta t = \Delta t_0 / \sqrt{1 - v^2/c^2}$ が導かれる幾何学的構造。
-\end{center}
-\vspace*{2mm}
+\begin{pointbox}{この節のまとめ}
+\begin{itemize}[leftmargin=*]
+\item 時間を4つ目の座標として加えると、ローレンツ変換は「座標軸の取り直し」。
+\item $s^2=x^2-c^2t^2$ の符号で、出来事の関係は、時間的・光的・空間的に分かれる。
+\end{itemize}
+\end{pointbox}
 
-\section*{アインシュタインの原典思索}
-\begin{origbox}[原著第4章：アルベルト・アインシュタインの肉声]
-光速度がすべての慣性系で一定であるという公理から、運動する系における時間の進み方を直接導き出すことができる。
-運動している座標系 $K'$ の中に置かれた時計は、その運動を外の静止座標系 $K$ から観測したとき、静止している同一の時計に比べて遅れて進む。この遅れの比率は、速度比 $v/c$ を用いて $\sqrt{1 - v^2/c^2}$ という因子によって正確に決定される。
-\end{origbox}
+%==========================================================
+\part{一般相対性理論}
+%==========================================================
 
-\section*{大人のための徹底解説講義}
-\begin{lecturebox}[徹底講義：高校数学で追体験する物理学革命]
-「動いているものの時間は遅れる」という有名な相対論の結論は、実は高校1年生で習う「三平方の定理（ピタゴラスの定理）」だけで完全に証明できます。
-床と天井に鏡を向かい合わせに置き、その間を光の粒が上下に往復する「光時計」を想像してください。
-車内に座っている乗客から見れば、光は天井に向かって真っ直ぐ垂直に往復するだけです（往復距離 $2L$）。
+%==========================================================
+\chapter{特殊および一般の相対性原理（第XVIII節）}
+\markboth{第18章}{特殊および一般の相対性原理}
+%==========================================================
 
-しかし、駅のホームに立っている人からこの列車を見ると、光が天井に到達するまでの間に列車が横へ距離 $v \Delta t$ だけ走るため、光の軌跡は「斜めの二等辺三角形の山」を描きます。
-三角形の斜辺は、垂直の高さ $L$ よりも明らかに長くなります。そして、ホームの人にとっても光の速度は車内と同じ $c$ でなければなりません。「より長い距離を、同じ速さで進む」のですから、ホームの人から見れば、光が往復するのに「より長い時間（$\Delta t$）」がかかることになります。
-これを数式で整理すると、
-\[
-\Delta t = \frac{\Delta t_0}{\sqrt{1 - \frac{v^2}{c^2}}}
-\]
-という美しい公式が導かれます。速度 $v$ が光速 $c$ に近づくほど、分母はゼロに近づき、時間の遅れは無限大へと拡大していきます。
-\end{lecturebox}
+\section{この節の位置づけ}
 
-\vspace*{3mm}
-\begin{examplebox}{大人の学び直しのための実社会・重要例題：第4章}
-\textbf{【実社会の具体例：航空機に原子時計を載せて世界一周したハフェル・キーティング実験】}\\
-1971年、物理学者ジョセフ・ハフェルとリチャード・キーティングは、セシウム原子時計を定期航空機に乗せて地球を東西方向に世界一周飛行させ、地上の静止時計との時間の進み方を比較しました。\\
-(1) 光時計の思考実験において、三平方の定理から導かれた「動く時計の遅れ $\Delta t = \Delta t_0 / \sqrt{1 - v^2/c^2}$」の物理的意味を、光の軌跡が斜めに伸びる幾何学的関係から解説せよ。\\
-(2) ハフェル・キーティング実験において、地球の自転に伴う東回りと西回りの速度差によって、実際にナノ秒単位で特殊相対論の遅れが実測された意義を述べよ。
-\\[2mm]
-\textbf{【懇切丁寧な解答・ステップ解説】}\\
-\textbf{(1) の解：}
-列車の中に垂直に立てた鏡の間を光が往復する時計（光時計）を考えます。車内の人にとっては光は垂直に距離 $2L$ を往復するだけです。
-しかし、外にいる人から見ると、光が上下に移動する間に列車が水平に走るため、光の軌道は「V字形の斜めの軌跡」を描きます。斜辺は垂直の高さより必ず長くなります。外の人にとっても光の進む速さは同じ $c$ ですから、より長い距離を進むためには「より多くの時間」がかからねばなりません。つまり、車内での $1$ 秒の往復が、外の人から見れば $1$ 秒以上の時間がかかって見えることになり、「動いている乗り物の時計は外から見るとゆっくり進む」という結論が幾何学的に確定します。
-\\[2mm]
-\textbf{(2) の解：}
-この実験により、旅客機という私たちの身近な乗り物の速度（時速約 $900\,\text{km}$）であっても、アインシュタインの時間の遅れが机上の空論ではなく、物理的現実として時計の刻みを遅らせていることが完全に証明されました。時間は単なる主観的な感覚ではなく、空間の運動と結びついた客観的な物理量であることが実証された歴史的転換点です。
-\end{examplebox}
+特殊相対性理論の相対性原理は、等速で動き合う座標系だけが対等だという主張でした。第XVIII節は、これでは不満足だと述べます。なぜ、等速の座標系だけが特別なのか。加速している座標系も含めて、すべての座標系が、自然の法則の記述に対等であるべきではないか。これが、\textbf{一般相対性原理}の動機です。
 
+\section{加速する箱の中}
 
-\clearpage
-\chapter{ローレンツ収縮と動く物体の縮み}
-\begin{center}
-{\Large\bfseries\gtfamily 進行方向の空間が物理的に収縮するメカニズム}
-\end{center}
-\vspace*{2mm}
+何もない宇宙空間で、箱（エレベーター）が、一定の加速度 $a=9.8$ m/s$^2$ で、引っぱり上げられているとします。箱の中の人は、足が床に押しつけられ、地上にいるときと同じ重さを感じます。手に持った石を放すと、石は（箱の外から見れば、その場にとどまり、床が上がってくるので）、床に向かって落ちます。
 
-\section*{本章の視覚的見取り図}
-\begin{center}
-\begin{tikzpicture}[scale=1.05, >=Stealth, every node/.style={font=\small}]
-    % Stationary Rod (Intrinsic Length L0)
-    \node[anchor=east, font=\normalsize\bfseries, text=blue!85!black] at (-0.8, 3.2) {静止時（固有長）：};
-    \draw[fill=blue!15, draw=blue!75, line width=1.2pt, rounded corners=2pt] (0, 2.7) rectangle (6.5, 3.7);
-    
-    % Dimension L0
-    \draw[|<->|, line width=1.2pt, blue!85!black] (0, 4.1) -- (6.5, 4.1) 
-        node[midway, fill=white, inner sep=3pt, font=\normalsize\bfseries] {固有長 $L_0$（静止系で測定）};
-    \draw[dashed, gray!60] (0, 2.7) -- (0, 4.3);
-    \draw[dashed, gray!60] (6.5, 2.7) -- (6.5, 4.3);
+\begin{table}[htbp]
+\centering
+\begin{tabular}{c|ccccc}
+\toprule
+放してからの時間（秒） & 1 & 2 & 3 & 4 & 5\\
+\midrule
+石が床に対して動いた距離（m） & 4.9 & 19.6 & 44.1 & 78.4 & 122.5\\
+\bottomrule
+\end{tabular}
+\caption{加速度 $9.8$ m/s$^2$ の箱の中で、石が落ちる距離 $\tfrac12at^2$。地上で石が自由落下する距離と同じ。}
+\end{table}
 
-    % Transverse thickness unchanged note (left of rod)
-    \draw[<->, thick, teal!80!black] (-0.4, 2.7) -- (-0.4, 3.7) node[midway, left=2pt, font=\scriptsize] {幅 $D$};
-
-    % Moving Rod (Lorentz Contracted Length L)
-    \node[anchor=east, font=\normalsize\bfseries, text=red!85!black] at (-0.8, 1.0) {高速運動時（測定長）：};
-    \draw[fill=red!20, draw=red!75, line width=1.2pt, rounded corners=2pt] (0, 0.5) rectangle (3.9, 1.5);
-    
-    % Dimension L
-    \draw[|<->|, line width=1.2pt, red!85!black] (0, -0.1) -- (3.9, -0.1) 
-        node[midway, fill=white, inner sep=3pt, font=\normalsize\bfseries] {$L = L_0 \sqrt{1 - v^2/c^2} < L_0$};
-    \draw[dashed, gray!60] (0, 0.5) -- (0, -0.3);
-    \draw[dashed, gray!60] (3.9, 0.5) -- (3.9, -0.3);
-    
-    % Transverse thickness unchanged note
-    \draw[<->, thick, teal!80!black] (-0.4, 0.5) -- (-0.4, 1.5) node[midway, left=2pt, font=\scriptsize] {幅 $D$};
-
-    % Velocity arrow
-    \draw[->, line width=2.5pt, red!85!black] (4.1, 1.0) -- (5.6, 1.0) 
-        node[right, font=\normalsize\bfseries, text=red!85!black] {速度 $v$};
-        
-    % Explanation Box placed well to the right
-    \node[align=left, fill=yellow!15, draw=orange!70, rounded corners=5pt, inner sep=6pt, font=\footnotesize, line width=0.8pt] 
-        at (9.2, 2.1) {\textbf{【ローレンツ収縮の本質】}\\
-        ・縮むのは「運動方向」の成分のみ\\
-        ・運動に垂直な方向の寸法（幅や高さ）は全く変わらない\\
-        ・物体が押し潰されるのではなく、\\
-        　観測者の「同時性の定義」の違いによって\\
-        　空間の間隔そのものが短縮して測られる};
+\begin{figure}[htbp]
+\centering
+\begin{tikzpicture}[scale=0.95]
+ \draw[thick, primaryblue, fill=softblue] (0,0) rectangle (3,3.5);
+ \node[lbl] at (1.5,0.35) {床};
+ \draw[->, ultra thick, crimson] (1.5,-0.3)--(1.5,-1.3) node[midway, right, lbl] {加速度 $a$};
+ \draw[->, thick, darkslate] (1.5,3.0)--(1.5,0.7) node[midway, right, lbl] {石が落ちる};
+ \draw[thick, primaryblue, fill=softblue] (6,0) rectangle (9,3.5);
+ \node[lbl] at (7.5,0.35) {地面};
+ \draw[->, ultra thick, crimson] (7.5,3.7)--(7.5,2.9);
+ \draw[->, thick, darkslate] (7.5,3.0)--(7.5,0.7) node[midway, right, lbl] {重力で落ちる};
+ \node[lbl] at (1.5,4.0) {加速する箱};
+ \node[lbl] at (7.5,4.4) {地上の部屋};
 \end{tikzpicture}
+\caption{加速する箱の中と、地上の部屋の中では、石は同じように落ちる。区別がつかない。}
+\end{figure}
 
-\small\textbf{図版解説：}進行方向に沿って剛体の長さが縮むローレンツ収縮の幾何学的イメージ。
-\end{center}
-\vspace*{2mm}
+\begin{pointbox}{この節のまとめ}
+\begin{itemize}[leftmargin=*]
+\item 一般相対性原理：すべての座標系が、自然の法則の記述に対等であるべき。
+\item 加速する箱の中の現象は、重力のある部屋の中と区別がつかない（等価）。
+\end{itemize}
+\end{pointbox}
 
-\section*{アインシュタインの原典思索}
-\begin{origbox}[原著第5章：アルベルト・アインシュタインの肉声]
-静止しているときに長さ $L_0$ を持つ剛体の定規を考える。この定規が自身の長さの方向に沿って速度 $v$ で運動しているとき、静止系 $K$ からその長さを測定すると、定規の長さは
-\[
-L = L_0 \sqrt{1 - \frac{v^2}{c^2}}
-\]
-に短縮されて観測される。運動が速ければ速いほど物体は運動方向に短くなり、仮に光速 $c$ に達すれば厚みはゼロとなってしまう。ただし進行方向に垂直な幅は全く変化しない。
-\end{origbox}
+%==========================================================
+\chapter{重力場（第XIX節）}
+\markboth{第19章}{重力場}
+%==========================================================
 
-\section*{大人のための徹底解説講義}
-\begin{lecturebox}[徹底講義：高校数学で追体験する物理学革命]
-時間が伸びるのと表裏一体の関係にあるのが、「空間（長さ）の縮み」です。これをローレンツ収縮と呼びます。
-時速 $300\,\text{km}$ の新幹線であっても、理論上は静止しているときよりわずかに縮んでいます（日常の速度では $10^{-15}$ 程度という原子核サイズの微小量ですが、加速器の中の素粒子では劇的に縮みます）。
+\section{この節の位置づけ}
 
-なぜ物体が縮むのでしょうか？ 物体が押しつぶされるような力が働いているわけではありません。
-「動いている物体の長さを測る」とは、「物体の前端と後端の位置を【同時に】記録してその差をとる」という測定行為です。ところが第3章で見たように、「同時」の基準そのものが運動状態によってズレてしまいます。
-時間の基準がズレる結果として、静止系から測定した物体の長さは、必ず $\sqrt{1 - v^2/c^2}$ 倍に縮んで測定されるのです。
-空間とは硬い不変のステージではなく、時間をどのように測るかによって伸縮する柔軟な布地のようなものなのです。
-\end{lecturebox}
+第XIX節は、重力場の性質を取り上げます。重力場の中では、どんな物体も、重さや材質によらず、同じ加速度で落ちます（ガリレイの発見）。この事実は、重力場が、物体の質量や材質に依存しない「座標系の性質」のようなものであることを示しています。
 
-\vspace*{3mm}
-\begin{examplebox}{大人の学び直しのための実社会・重要例題：第5章}
-\textbf{【実社会の具体例：高エネルギー加速器での素粒子ビームとローレンツ収縮】}\\
-スイス・ジュネーブのCERN（欧州原子核研究機構）にある大型ハドロン衝突型加速器（LHC）では、陽子ビームを光速の $99.9999991\%$ まで加速して正面衝突させます。\\
-(1) 静止した観測者から見て、光速に近い速度で飛ぶ陽子の球体が進行方向に沿ってどのように変形して見えるか、ローレンツ収縮の式 $L = L_0 \sqrt{1 - v^2/c^2}$ を用いて説明せよ。\\
-(2) なぜローレンツ収縮は物体の横幅（進行方向に垂直な方向）には生じず、進行方向の長さだけに起きるのか、座標変換の直交性から考察せよ。
-\\[2mm]
-\textbf{【懇切丁寧な解答・ステップ解説】}\\
-\textbf{(1) の解：}
-静止状態では陽子は真球（球形）をしています。しかし光速の $99.9999991\%$（ローレンツ因子 $\gamma \approx 7450$）に達すると、実験室の観測者から見た陽子の進行方向の厚みは、静止時の約 $\frac{1}{7450}$ にまで激しく押し縮められます。すなわち、球体ではなく「極めて薄い平たいパンケーキ（円盤状）」のような形状になって衝突点に突入します。加速器の検出器設計では、このローレンツ収縮による電荷密度の増大を考慮しなければ正確な衝突解析ができません。
-\\[2mm]
-\textbf{(2) の解：}
-運動は $x$ 軸方向（進行方向）にのみ起きており、$y$ 軸や $z$ 軸（進行方向に垂直な方向）には相対運動がありません。もし進行方向に垂直な方向の長さも変わってしまうと、すれ違う2本の同じ長さの棒について「互いに相手のほうが細い」と主張し合い、すり抜けられるかどうかの物理的事実が破綻してしまいます。したがって、収縮は相対運動が起きている進行軸のみに厳密に限定されます。
-\end{examplebox}
+\section{自由落下の距離}
 
+地表付近の重力加速度 $g=9.8$ m/s$^2$ では、落下距離は $\tfrac12gt^2$。
 
-\clearpage
-\chapter{質量とエネルギーの等価性：$E=mc^2$}
-\begin{center}
-{\Large\bfseries\gtfamily 光の圧力が明かす質量欠損と核エネルギーの源泉}
-\end{center}
-\vspace*{2mm}
+\begin{table}[htbp]
+\centering
+\begin{tabular}{c|ccccc}
+\toprule
+時間（秒） & 1 & 2 & 3 & 4 & 5\\
+\midrule
+落ちた距離（m） & 4.9 & 19.6 & 44.1 & 78.4 & 122.5\\
+速さ $gt$（m/s） & 9.8 & 19.6 & 29.4 & 39.2 & 49.0\\
+\bottomrule
+\end{tabular}
+\caption{自由落下の距離と速さ（空気抵抗を無視）。軽い物体も重い物体も同じ。}
+\end{table}
 
-\section*{本章の視覚的見取り図}
-\begin{center}
-\begin{tikzpicture}[scale=1.05, >=Stealth, every node/.style={font=\small}]
-    % Coordinate axes
-    \draw[->, very thick, gray!70] (0, 0) -- (8.0, 0) node[right, black, font=\normalsize\bfseries] {速度 $v$};
-    \draw[->, very thick, gray!70] (0, 0) -- (0, 5.2) node[above, black, font=\normalsize\bfseries] {質量 $m(v)$ / 全エネルギー $E$};
-    
-    % Light speed barrier
-    \draw[dashed, line width=1.5pt, red!80!black] (6.2, 0) -- (6.2, 5.0);
-    \node[above=3pt, font=\normalsize\bfseries, text=red!85!black] at (6.2, 5.0) {光速壁 $c$（宇宙の最高速度）};
-    
-    % Relativistic Curve plot
-    \draw[domain=0:5.85, smooth, samples=120, line width=2.5pt, blue!80!black] 
-        plot ({\x}, {1.0 / sqrt(1 - (\x/6.2)*(\x/6.2))});
-        
-    % Rest mass marker (v=0)
-    \fill[blue!85!black] (0, 1.0) circle (4pt);
-    \node[left=4pt, fill=white, inner sep=2pt, font=\normalsize\bfseries, text=blue!85!black] at (0, 1.0) {静止エネルギー $E_0 = m_0 c^2$};
-    
-    % Asymptotic divergence note
-    \draw[->, line width=1.2pt, red!85!black] (5.4, 4.0) -- (6.0, 4.5);
-    \node[left=6pt, fill=white, draw=red!40, rounded corners=3pt, inner sep=3pt, font=\footnotesize\bfseries, text=red!85!black] 
-        at (5.3, 4.0) {$v \to c$ で無限大へ発散！};
-        
-    % Explanation badge
-    \node[align=left, fill=yellow!15, draw=orange!70, rounded corners=5pt, inner sep=6pt, font=\footnotesize, line width=0.8pt] 
-        at (3.2, 3.4) {\textbf{【$E = mc^2$ と光速の壁】}\\
-        ・運動エネルギーを加えるほど、物体は加速しにくくなり質量が増大する\\
-        ・速度が光速 $c$ に達するには「無限のエネルギー」が必要\\
-        $\implies$ 質量を持つ通常物体は絶対に光速を超えられない};
+\begin{figure}[htbp]
+\centering
+\begin{tikzpicture}
+\begin{axis}[width=9.5cm, height=5.3cm, xmin=0, xmax=5, ymin=0, ymax=130, xlabel={時間（秒）}, ylabel={落下距離（m）},
+  every axis label/.append style={font=\footnotesize}, tick label style={font=\footnotesize}]
+ \addplot[thick, primaryblue, domain=0:5, samples=60] {4.9*x^2};
+ \addplot[mark=*, crimson, only marks] coordinates {(1,4.9)(2,19.6)(3,44.1)(4,78.4)(5,122.5)};
+\end{axis}
 \end{tikzpicture}
+\caption{自由落下の距離は、時間の2乗に比例する。物体の質量によらない。}
+\end{figure}
 
-\small\textbf{図版解説：}質量とエネルギーの等価性 $E = mc^2$ と、光速 $c$ へ近づくにつれて無限大へ発散する相対論的質量。
-\end{center}
-\vspace*{2mm}
+\begin{pointbox}{この節のまとめ}
+\begin{itemize}[leftmargin=*]
+\item 重力場では、どんな物体も同じ加速度で落ちる。
+\item 落下距離は $\tfrac12gt^2$（$g=9.8$ m/s$^2$）。
+\end{itemize}
+\end{pointbox}
 
-\section*{アインシュタインの原典思索}
-\begin{origbox}[原著第6章：アルベルト・アインシュタインの肉声]
-物体が放射の形でエネルギー $L$ を放出するとき、その物体の質量は $L/c^2$ だけ減少する。不活性な質量とエネルギーとの間には本質的な差異は存在しない。
-物体のエネルギーが変化すれば、それに伴って物体の質量も変化する。静止質量 $m$ を持つ物体は、その内部に
-\[
-E = mc^2
-\]
-に等しい莫大なエネルギーを蓄えている。放射性物質の崩壊において観測される莫大な熱の発生は、この質量欠損がエネルギーへと姿を変えた直接の証拠である。
-\end{origbox}
+%==========================================================
+\chapter{慣性質量と重力質量の等しさ（第XX節）}
+\markboth{第20章}{慣性質量と重力質量}
+%==========================================================
 
-\section*{大人のための徹底解説講義}
-\begin{lecturebox}[徹底講義：高校数学で追体験する物理学革命]
-世界で最も有名な物理方程式、$E = mc^2$。この簡潔を極めた式の真の意味を、アインシュタインは1905年の補遺論文で論証しました。
-物体が光（電磁波）を前後に放出したとき、エネルギー保存則と運動量保存則を満たすためには、光を放出したあとの物体の「慣性（動かしにくさ）」がわずかに軽くなっていなければならないことを突き止めたのです。
+\section{この節の位置づけ}
 
-光速 $c$ は秒速30万キロメートル、すなわち $3 \times 10^8\,\text{m/s}$ です。その2乗である $c^2$ は
-\[
-c^2 \approx 9 \times 10^{16} \approx 90,000,000,000,000,000
-\]
-という天文学的・圧倒的な巨大さです。これは、わずか $1\,\text{グラム}$ の物質が完全にエネルギーに変換されただけで、$90$ 兆ジュール（大型石油タンカー数隻分の燃料を燃やした熱量に匹敵）のエネルギーが解き放たれることを意味します。
-質量とは物質の「重さ」という固定的な属性ではなく、「超高密度に凝縮されたエネルギーそのものの姿」だったのです。
-\end{lecturebox}
+第XX節は、一般相対性原理の根拠として、慣性質量と重力質量が等しいことを挙げます。物体を押したときの動きにくさ（慣性質量）と、重力に引かれる強さ（重力質量）は、別の性質のはずなのに、実験では、精密に比例しています。この一致が、重力場と加速座標系の等価を支える、とアインシュタインは考えます。
 
-\vspace*{3mm}
-\begin{examplebox}{大人の学び直しのための実社会・重要例題：第6章}
-\textbf{【実社会の具体例：原子力発電所・PETがん検診と質量・エネルギー等価性 $E=mc^2$】}\\
-現在、日本の先端医療施設で広く行われているPET検査（陽電子放射断層撮影）では、体内に注入した薬剤から放出される「陽電子」が体内の「電子」と衝突し、両者が跡形もなく消滅して2本のガンマ線（光子エネルギー）に変わる現象を利用しています。\\
-(1) 質量とエネルギーの等価式 $E = mc^2$ の意味を、電子と陽電子の対消滅（質量が $100\%$ 光エネルギーに変換される現象）を例に説明せよ。\\
-(2) なぜ古典物理学では「質量保存の法則」と「エネルギー保存の法則」が別々の法則として信じられていたのか、石炭の燃焼などの化学反応で放出されるエネルギーの微小さの観点から考察せよ。
-\\[2mm]
-\textbf{【懇切丁寧な解答・ステップ解説】}\\
-\textbf{(1) の解：}
-$E = mc^2$ は、「質量とは、閉じ込められた莫大なエネルギーの形態の一つにすぎない」という宇宙の根本真理を示しています。PET検査では、電子（質量 $m$）と陽電子（質量 $m$）が出会うと、物質としての質量が完全に消滅し、合計 $2mc^2 \approx 1.022\,\text{MeV}$ の高エネルギー電磁波（ガンマ線）となって正反対の方向に放射されます。PET装置はこの光子をリング状検出器で捉えてがん細胞の位置をミリ単位で特定します。医療現場で日常的に $E=mc^2$ の直訳的応用が使われているのです。
-\\[2mm]
-\textbf{(2) の解：}
-石炭やガソリンを燃やす化学反応でも、厳密には発生した熱エネルギーの分だけ質量が減少（質量欠損）しています。しかし、$c^2 \approx 9 \times 10^{16}$ という変換係数が途方もなく巨大であるため、放出される熱に対する質量減少は全体の $100億分の1$ 以下という、化学天秤では到底検知できない極微量にすぎませんでした。そのため、19世紀までの科学者は質量とエネルギーが独立に保存していると誤認していたのです。
-\end{examplebox}
+\section{もし、等しくなかったら}
 
+慣性質量を $m_i$、重力質量を $m_g$ とすると、重力場の中の物体の加速度は $a=g\,m_g/m_i$ です。もし、物質によって $m_g/m_i$ が違えば、材質の違う物体は、違う加速度で落ちてしまいます。
 
-\clearpage
-\chapter{ミンコフスキーの4次元時空連続体}
-\begin{center}
-{\Large\bfseries\gtfamily 時間と空間の統合と「世界線」の幾何学}
-\end{center}
-\vspace*{2mm}
+\begin{table}[htbp]
+\centering
+\begin{tabular}{c|cc}
+\toprule
+$m_g/m_i-1$ & 加速度 $a$（m/s$^2$） & $g$ との差（m/s$^2$）\\
+\midrule
+0 & 9.8 & 0\\
+$10^{-3}$ & 9.8098 & $9.8\times10^{-3}$\\
+$10^{-6}$ & 9.800010 & $9.8\times10^{-6}$\\
+$10^{-9}$ & 9.800000010 & $9.8\times10^{-9}$\\
+\bottomrule
+\end{tabular}
+\caption{比 $m_g/m_i$ が $1$ からずれたとき、加速度の差は $g\times(m_g/m_i-1)$。ずれが小さいほど、差は検出しにくい。}
+\end{table}
 
-\section*{本章の視覚的見取り図}
-\begin{center}
-\begin{tikzpicture}[scale=1.05, >=Stealth, every node/.style={font=\small}]
-    % 4D Spacetime coordinate axes
-    \draw[->, very thick, gray!70] (-4.5, 0) -- (4.5, 0) node[right, black, font=\normalsize\bfseries] {空間 $x$};
-    \draw[->, very thick, gray!70] (0, -0.6) -- (0, 5.0) node[above, black, font=\normalsize\bfseries] {時間 $ct$};
-    
-    % Light cone area (Future light cone)
-    \fill[yellow!25, opacity=0.7] (0, 0) -- (4.2, 4.2) -- (-4.2, 4.2) -- cycle;
-    
-    % Light cone boundary rays
-    \draw[line width=2pt, orange!90!black] (-4.2, 4.2) -- (0, 0) -- (4.2, 4.2);
-    \node[above right=2pt, fill=white, inner sep=1.5pt, font=\footnotesize\bfseries, text=orange!90!black] 
-        at (2.6, 2.6) {光の世界線 ($x = +ct$)};
-    \node[above left=2pt, fill=white, inner sep=1.5pt, font=\footnotesize\bfseries, text=orange!90!black] 
-        at (-2.6, 2.6) {光の世界線 ($x = -ct$)};
-        
-    % Worldline of massive particle
-    \draw[line width=2.5pt, blue!80!black] (0, 0) .. controls (0.6, 1.5) and (-0.4, 2.8) .. (0.9, 4.6)
-        node[above=2pt, fill=white, inner sep=2pt, font=\small\bfseries, text=blue!85!black] {物体の世界線 ($v < c$)};
-        
-    % Spacetime interval classification
-    \node[font=\footnotesize\bfseries, text=teal!80!black] at (0, 3.6) {【時間的領域（因果律が成立）】};
-    \node[font=\scriptsize, text=gray!80!black] at (3.3, 0.8) {【空間的領域（因果関係不能）】};
-    \node[font=\scriptsize, text=gray!80!black] at (-3.3, 0.8) {【空間的領域（超光速が必要）】};
-    
-    % Invariant formula badge
-    \node[align=center, fill=white, draw=gray!60, rounded corners=5pt, inner sep=5pt, font=\footnotesize, line width=0.8pt] 
-        at (0, 1.5) {\textbf{ミンコフスキーの時空不変間隔：}\\
-        $s^2 = c^2 t^2 - x^2 > 0$（光円錐内部）};
+\begin{figure}[htbp]
+\centering
+\begin{tikzpicture}
+\begin{axis}[width=9.5cm, height=5cm, xmode=log, ymode=log, xmin=1e-10, xmax=1e-2, ymin=1e-10, ymax=1e-1, xlabel={$m_g/m_i-1$}, ylabel={加速度の差（m/s$^2$）},
+  every axis label/.append style={font=\footnotesize}, tick label style={font=\footnotesize}]
+ \addplot[thick, primaryblue, domain=1e-10:1e-2, samples=2] {9.8*x};
+\end{axis}
 \end{tikzpicture}
+\caption{加速度の差は、$m_g/m_i-1$ に比例する（両対数の直線）。実験が、微小な差まで調べられるほど、等しさの確かさが増す。}
+\end{figure}
 
-\small\textbf{図版解説：}ミンコフスキーの4次元時空と光円錐（Light Cone）。すべての因果律は光円錐の内部に制限される。
-\end{center}
-\vspace*{2mm}
+（現代の実験は、この比が $10^{-12}$ 台よりも小さい精度で $1$ に等しいことを確かめていますが、この数値は本書では原典を確認していません。）
 
-\section*{アインシュタインの原典思索}
-\begin{origbox}[原著第7章：アルベルト・アインシュタインの肉声]
-数学者ヘルマン・ミンコフスキーは1908年にこう宣言した：
-「今日以後、空間それ自身、時間それ自身は完全に影の中に消え去り、両者の或る種の結合のみが独立した実在を保ち続けるであろう」。
-3次元空間の座標 $(x, y, z)$ に虚数時間 $ict$（あるいは時間軸 $ct$）を加えた4次元連続体において、ローレンツ変換は4次元空間における座標軸の直交回転として極めて自然に理解される。
-\end{origbox}
+\begin{pointbox}{この節のまとめ}
+\begin{itemize}[leftmargin=*]
+\item 慣性質量と重力質量が等しいから、すべての物体が同じ加速度で落ちる。
+\item この等しさが、重力場と加速座標系の等価を支える。
+\end{itemize}
+\end{pointbox}
 
-\section*{大人のための徹底解説講義}
-\begin{lecturebox}[徹底講義：高校数学で追体験する物理学革命]
-アインシュタインのかつての数学の恩師であったヘルマン・ミンコフスキーは、特殊相対性理論の数理を一歩進め、現代物理学の基本言語となる「4次元時空（Spacetime）」の概念を創始しました。
-3次元空間の中で、私たちが斜めからサイコロを眺めると、見る角度によって「横幅」が広く見えたり「奥行き」が狭く見えたりします。しかし、サイコロそのものの立体的な大きさは変わっていません。
+%==========================================================
+\chapter{古典力学と特殊相対性理論の基礎の不備（第XXI節）}
+\markboth{第21章}{基礎の不備}
+%==========================================================
 
-ミンコフスキーは、相対論における「時間の遅れ」や「物体の収縮」もこれと全く同じ現象であると喝破しました。
-動いている観測者とは、4次元時空の中で「座標軸が斜めに傾いている観測者」にすぎません。傾いた軸で測るから、時間成分が伸びて見えたり、空間成分が縮んで見えたりするのです。
-空間の隔たり $\Delta x$ と時間の隔たり $\Delta t$ を組み合わせた不変量
+\section{この節の位置づけ}
+
+第XXI節は、古典力学と特殊相対性理論の基礎にある、ある欠陥を指摘します。両方とも、特別な座標系（ガリレイ座標系）を特別扱いします。なぜ、ある座標系が、他と違って特別なのか。その理由が、物理的に説明されていません。アインシュタインは、二つの流体の天体の例で、この問題を示します。
+
+\section{二つの流体の天体：地球の扁平}
+
+回転している天体は、遠心力で、赤道方向にふくらみます。回転の有無を、天体の形で判断できるように見えます。しかし、「回転している」という言い方自体が、何かに対する回転でなければなりません。ここで、「どの基準物体に対して回転か」を、物理的に決める必要が出てきます。
+
+地球の場合の数値で確かめます。赤道半径 $6378.137$ km、極半径 $6356.752$ km なので、扁平率は
 \[
-s^2 = c^2 (\Delta t)^2 - (\Delta x)^2 - (\Delta y)^2 - (\Delta z)^2
+\frac{6378.137-6356.752}{6378.137}=0.003353=\frac1{298.26}
 \]
-は、いかなる等速運動をする観測者から見ても完全に一致します。時間と空間は別個のものではなく、「4次元時空連続体」という織物の縦糸と横糸だったのです。
-\end{lecturebox}
+です。赤道での遠心加速度は、自転の角速度 $7.292\times10^{-5}$ rad/s を使い、$\omega^2R=0.0339$ m/s$^2$（重力加速度の約 $0.35\%$）です。
 
-\vspace*{3mm}
-\begin{examplebox}{大人の学び直しのための実社会・重要例題：第7章}
-\textbf{【実社会の具体例：光円錐と宇宙の因果律（過去・現在・未来の境界線）】}\\
-天文学者が「130億光年彼方の初期銀河の光」をジェームズ・ウェッブ宇宙望遠鏡で観測するとき、私たちは「130億年前の過去の姿」を今この瞬間に見ています。\\
-(1) ミンコフスキーの4次元時空において、光円錐（過去光円錐・未来光円錐）がなぜ物理学における「因果関係（原因と結果）」の絶対の防壁となっているのかを説明せよ。\\
-(2) 光速を超える情報伝達（超光速通信）が存在しない限り、なぜ「過去に戻って歴史を変えてしまうタイムパラドックス」が宇宙において厳格に禁止されているのかを考察せよ。
-\\[2mm]
-\textbf{【懇切丁寧な解答・ステップ解説】}\\
-\textbf{(1) の解：}
-あらゆる物質や信号は光速 $c$ を超えて移動できません。ある事象（出来事）から発した影響が届く範囲は、時間とともに光速で広がる「未来光円錐の内部」に限られます。同様に、現在の私たちに影響を及ぼし得た過去の事象はすべて「過去光円錐の内部」に収まっています。光円錐の外側（他所：Elsewhere）にある事象とは、光速をもってしても情報が届かないため、物理的に原因にも結果にもなり得ません。ミンコフスキー時空は因果の連鎖を幾何学的に整然と隔離しているのです。
-\\[2mm]
-\textbf{(2) の解：}
-もし光速を超える信号が存在すると、ローレンツ変換によって「ある観測者にとっては原因より先に結果が起きる（過去への情報到達）」という逆転現象が生じてしまいます。これは親が生まれる前に子どもが親を殺害できてしまうような因果律の破綻を招きます。宇宙が自己矛盾を起こさず論理的一貫性を保ち続けているのは、光速度という絶対の速度制限が存在するおかげなのです。
-\end{examplebox}
-
-
-\clearpage
-\part{一般相対性理論（重力と曲がった時空）}
-
-\chapter{一般相対性理論への道と「等価原理」}
-\begin{center}
-{\Large\bfseries\gtfamily エレベーターの思考実験と重力＝加速度の発見}
-\end{center}
-\vspace*{2mm}
-
-\section*{本章の視覚的見取り図}
-\begin{center}
-\begin{tikzpicture}[scale=1.05, >=Stealth, every node/.style={font=\small}]
-    % Subfigure 1: Earth Gravity Field
-    \begin{scope}[xshift=0cm]
-        \draw[thick, fill=blue!8, draw=blue!60, rounded corners=5pt] (0, 0) rectangle (3.2, 4.4);
-        \node[font=\normalsize\bfseries, text=blue!85!black] at (1.6, 4.8) {【静止系：地上重力場】};
-        
-        % Ground surface
-        \fill[gray!40] (-0.2, -0.3) rectangle (3.4, 0);
-        \node[font=\scriptsize\bfseries, text=gray!80!black] at (1.6, -0.5) {地球表面（重力源）};
-        
-        % Free-falling ball
-        \fill[red!85!black] (1.6, 2.7) circle (4pt);
-        \node[right=4pt, fill=white, inner sep=2pt, font=\scriptsize\bfseries] at (1.6, 2.7) {落下する球};
-        \draw[->, line width=2.5pt, red!85!black] (1.6, 2.4) -- (1.6, 1.1) 
-            node[midway, right=3pt, font=\normalsize\bfseries] {$g$};
-        \node[below=2pt, fill=white, inner sep=2pt, font=\footnotesize\bfseries] at (1.6, 0.8) {本物の重力加速度};
-    \end{scope}
-
-    % Giant Equivalence Symbol
-    \node[font=\fontsize{28}{32}\bfseries, text=red!80!black] at (4.5, 2.3) {$\equiv$};
-    \node[above=2pt, font=\small\bfseries, text=red!80!black] at (4.5, 2.9) {完全等価};
-
-    % Subfigure 2: Accelerating Rocket in Deep Space
-    \begin{scope}[xshift=5.8cm]
-        \draw[thick, fill=yellow!12, draw=orange!60, rounded corners=5pt] (0, 0) rectangle (3.2, 4.4);
-        \node[font=\normalsize\bfseries, text=orange!90!black] at (1.6, 4.8) {【加速系：宇宙船内】};
-        
-        % Rocket upward acceleration
-        \draw[->, line width=3pt, purple!85!black] (1.6, 4.4) -- (1.6, 5.7) 
-            node[above, font=\normalsize\bfseries, text=purple!85!black] {上向き推力加速 $\alpha = g$};
-            
-        % Suspended ball appearing to fall
-        \fill[red!85!black] (1.6, 2.7) circle (4pt);
-        \node[right=4pt, fill=white, inner sep=2pt, font=\scriptsize\bfseries] at (1.6, 2.7) {浮遊する球};
-        \draw[->, line width=2.5pt, red!85!black] (1.6, 2.4) -- (1.6, 1.1) 
-            node[midway, right=3pt, font=\normalsize\bfseries] {$g$};
-        \node[below=2pt, fill=white, inner sep=2pt, font=\footnotesize\bfseries] at (1.6, 0.8) {慣性力（擬似重力）};
-        
-        % Deep space note
-        \node[font=\scriptsize, text=gray!70!black] at (1.6, -0.5) {重力のない深宇宙};
-    \end{scope}
-    
-    % Conclusion badge
-    \node[align=left, fill=white, draw=gray!60, rounded corners=5pt, inner sep=5pt, font=\footnotesize, line width=0.8pt] 
-        at (4.5, -1.3) {\textbf{【等価原理（Principle of Equivalence）の物理的帰結】}\\
-        密閉された小部屋の中にいる観測者は、どんな物理実験を行っても\\
-        「地球の重力場にいるのか」それとも「宇宙船が加速しているのか」を判別できない！};
+\begin{figure}[htbp]
+\centering
+\begin{tikzpicture}[scale=1.0]
+ \draw[thick, primaryblue, fill=softblue] (0,0) ellipse (2.4 and 2.0);
+ \draw[dashed, crimson] (0,0) circle (2.4);
+ \draw[->, thick, darkslate] (0,-2.6)--(0,2.6) node[above, lbl] {自転軸};
+ \node[lbl] at (3.8,0) {赤道半径が大きい};
+ \node[lbl] at (0,-3.0) {扁平を誇張して描いた略図。実際の扁平率は約 $1/298$};
 \end{tikzpicture}
+\caption{回転する天体は、赤道方向にふくらむ（扁平を誇張した略図。破線は同じ半径の円）。}
+\end{figure}
 
-\small\textbf{図版解説：}アインシュタインの等価原理。一様な重力場と等加速度運動する乗り物の中の物理現象は完全に等価である。
-\end{center}
-\vspace*{2mm}
+\begin{pointbox}{この節のまとめ}
+\begin{itemize}[leftmargin=*]
+\item 古典力学も特殊相対性理論も、ガリレイ座標系を特別扱いするが、その理由が示されていない。
+\item 地球の扁平率は約 $1/298$、赤道の遠心加速度は約 $0.034$ m/s$^2$。
+\end{itemize}
+\end{pointbox}
 
-\section*{アインシュタインの原典思索}
-\begin{origbox}[原著第8章：アルベルト・アインシュタインの肉声]
-広大な宇宙空間に浮かぶ密閉された大きな箱（エレベーター）を想定しよう。その天井の外側にロープがつけられ、何者かが一定の力で箱を引き上げているとする。箱の中の人間は、床に向かって放した物体がすべて等しい加速度で落下するのを目撃する。
-箱の中の人は「自分たちは地上の一様な重力場の中に静止している」と信じ込むであろう。そしていかなる実験を行っても、それが「外からの加速による慣性力」なのか「真の重力」なのかを区別することは原理的に不可能である。これが等価原理である。
-\end{origbox}
+%==========================================================
+\chapter{一般相対性原理からのいくつかの帰結（第XXII節）}
+\markboth{第22章}{一般相対性原理の帰結}
+%==========================================================
 
-\section*{大人のための徹底解説講義}
-\begin{lecturebox}[徹底講義：高校数学で追体験する物理学革命]
-特殊相対性理論は「等速直線運動をしている観測者（慣性系）」だけを扱っていました。しかし、現実の宇宙には加速する乗り物もあれば、天体が及ぼし合う重力も満ち満ちています。
-「あらゆる運動、加速運動も含めて物理法則が同じになるような【一般相対性理論】は創れないだろうか？」
-アインシュタインはこの難問に10年近く挑み続けました。その突破口となったのが、1907年に閃いた「等価原理」です。
+\section{この節の位置づけ}
 
-ビルのエレベーターのワイヤーが切れて自由落下したとき、中にいる人はフワリと宙に浮き、体重計の針はゼロを指します（無重力）。逆に、宇宙空間でロケットが $9.8\,\text{m/s}^2$ で急加速すると、乗組員は地球と同じ重力で床に押しつけられます。
-アインシュタインは直観しました。「重力（引力）と、加速によって生じる力（慣性力）は、本質的に全く同じものである！」
-この等価原理を出発点とすることで、アインシュタインは「重力とは何か？」というニュートン以来の最大の謎に挑むことになります。
-\end{lecturebox}
+第XXII節は、一般相対性原理から、実際に確かめられる予言を引き出します。もっとも有名なのは、重力場のなかで、光の道筋が曲がる、というものです。加速する箱の中を光が横切ると、床が上がってくるため、光は曲がって見えます。等価原理により、重力場の中でも、光は曲がるはずです。
 
-\vspace*{3mm}
-\begin{examplebox}{大人の学び直しのための実社会・重要例題：第8章}
-\textbf{【実社会の具体例：ビルのエレベーターのワイヤーが切れたら？（無重力の創出）】}\\
-国際宇宙ステーション（ISS）の中の宇宙飛行士が宙に浮いているのは、宇宙空間に地球の重力がないからではなく、ISS全体が秒速 $7.7\,\text{km}$ で地球の周りを「自由落下し続けている」からです。\\
-(1) アインシュタインが生涯で「最も幸福な考え（der glücklichste Gedanke meines Lebens）」と呼んだ、「屋根から落下している人には自らの体重が感じられない」という着想が、どのようにして一般相対論の等価原理へと結実したのかを述べよ。\\
-(2) 局所的な自由落下系の中では、重力という「力」が完全に消去され、特殊相対性理論の慣性系と全く区別がつかなくなる論理を説明せよ。
-\\[2mm]
-\textbf{【懇切丁寧な解答・ステップ解説】}\\
-\textbf{(1) の解：}
-1907年、スイス特許局で執務していたアインシュタインは、窓の外を見ながら「もし人がビルの屋上から自由落下したら、その人は自分の体重を感じない（無重力になる）」と気づきました。落下するエレベーターの中では、手から離したリンゴは床に落ちず、空中に静止して見えます。重力によって引き落とされる力と、落下運動に伴う慣性力が完全に相殺するからです。アインシュタインはこの直観から、「重力とは外的な引っ張る力ではなく、加速系における慣性力と全く同一の現象である」という等価原理を打ち立てました。
-\\[2mm]
-\textbf{(2) の解：}
-箱の外が見えない密閉された実験室の中にいる限り、いかなる精密な物理実験（振り子、物体の落下、天秤）を行っても、「自分たちが深宇宙の無重力空間で静止しているのか」、それとも「重力場の中で箱ごと自由落下しているのか」を判定することは原理的に不可能です。すなわち、局所的には重力場は座標系の取り方（自由落下）によって消し去ることができるため、重力を幾何学的な空間の歪みとして再定式化する道が拓かれたのです。
-\end{examplebox}
+\section{太陽による光の曲がり}
 
+太陽のふちをかすめる光の曲がる角度は、一般相対性理論で
+\[
+\delta=\frac{4GM_\odot}{c^2R_\odot}=8.49\times10^{-6}\ \text{rad}=1.75\ \text{秒角}
+\]
+です（$GM_\odot=1.327\times10^{20}$ m$^3$/s$^2$、$R_\odot=6.957\times10^{8}$ m として計算）。原著が述べる「$1.7$ 秒角」と一致します。式の係数が $4$ でなく $2$ だと（ニュートン的な見積もり）、その半分、$0.876$ 秒角です。
 
-\clearpage
-\chapter{回転円盤と非ユークリッド幾何学の必然性}
-\begin{center}
-{\Large\bfseries\gtfamily 円周率が3.14ではなくなる世界と曲がった時空}
-\end{center}
-\vspace*{2mm}
+\begin{table}[htbp]
+\centering
+\begin{tabular}{lcc}
+\toprule
+ & 曲がる角度（ラジアン） & 秒角\\
+\midrule
+一般相対性理論 $4GM/c^2R$ & $8.49\times10^{-6}$ & 1.751\\
+ニュートン的な見積もり $2GM/c^2R$ & $4.25\times10^{-6}$ & 0.876\\
+\bottomrule
+\end{tabular}
+\caption{太陽のふちをかすめる光の曲がり。1秒角は $1/3600$ 度。}
+\end{table}
 
-\section*{本章の視覚的見取り図}
-\begin{center}
-\begin{tikzpicture}[scale=1.05, >=Stealth, every node/.style={font=\small}]
-    % Rotating Disk
-    \draw[line width=1.8pt, fill=cyan!8, draw=teal!75] (0, 0) circle (3.0);
-    
-    % Center of disk
-    \fill[black] (0, 0) circle (3.5pt);
-    \node[below right=3pt, fill=white, inner sep=1.5pt, font=\small\bfseries] at (0, 0) {回転中心 $O$（静止点）};
-    
-    % Rotation angular velocity omega arrow
-    \draw[->, line width=2.5pt, red!85!black] (2.1, 2.1) arc (45:85:3.0) 
-        node[above=4pt, font=\normalsize\bfseries, text=red!85!black] {回転角速度 $\omega$};
-        
-    % Radial measuring rod (Perpendicular to motion -> No contraction!)
-    \draw[|-|, line width=2pt, blue!85!black] (0, 0) -- (0, 2.8) 
-        node[midway, left=4pt, fill=white, inner sep=2pt, font=\small\bfseries, text=blue!85!black] 
-        {半径 $R$（運動に直交 $\implies$ 収縮なし：$R = R_0$）};
-        
-    % Tangential measuring rod on circumference (Along motion -> Lorentz Contracted!)
-    \draw[line width=3pt, red!85!black] (2.9, -0.6) arc (-11:25:2.9);
-    \node[right=8pt, align=left, fill=white, draw=red!50, rounded corners=3pt, inner sep=3pt, font=\footnotesize\bfseries, text=red!85!black] 
-        at (2.9, 0.4) {周長方向の定規：\\速度 $v = R\omega$ で走行 $\implies$ ローレンツ収縮！};
-        
-    % Non-Euclidean Conclusion Box
-    \node[align=left, fill=yellow!15, draw=orange!70, rounded corners=5pt, inner sep=6pt, font=\footnotesize, line width=0.8pt] 
-        at (0, -4.1) {\textbf{【ユークリッド幾何学の必然的崩壊】}\\
-        ・周上の定規が縮むため、円周を測るのに「より多くの定規」が必要となる\\
-        ・実測円周 $C > 2\pi R \implies \dfrac{\text{実測円周}}{\text{実測直径}} > \pi$ （円周率が $3.14\dots$ より大きくなる！）\\
-        $\implies$ \textbf{加速度系や重力場における空間は「曲がった非ユークリッド幾何学」に従う！}};
+\begin{figure}[htbp]
+\centering
+\begin{tikzpicture}[scale=1.0]
+ \fill[warmamber] (4,0) circle (0.9);
+ \node[lbl] at (4,0) {太陽};
+ \draw[thick, primaryblue] (0,1.3)--(2.5,1.3) .. controls (3.7,1.3) and (4.3,1.3) .. (5.5,1.3);
+ \draw[thick, crimson] (0,1.5)--(3.0,1.4)--(4,1.25)--(5.0,1.4)--(8,1.8);
+ \node[lbl, primaryblue] at (1.2,1.0) {曲がらない場合};
+ \node[lbl, crimson] at (6.4,2.2) {実際の光の道（誇張）};
 \end{tikzpicture}
+\caption{太陽のそばを通る星の光は、わずかに曲がる（角度を大きく誇張した略図。実際は $1.75$ 秒角）。}
+\end{figure}
 
-\small\textbf{図版解説：}回転円盤の思考実験。円周方向の定規のみが収縮するため、円周率が $\pi$ より大きくなり非ユークリッド幾何学が現れる。
-\end{center}
-\vspace*{2mm}
+\begin{pointbox}{この節のまとめ}
+\begin{itemize}[leftmargin=*]
+\item 等価原理から、重力場では光が曲がる。
+\item 太陽のふちで $1.75$ 秒角（計算で確認）。原著の $1.7$ 秒角と一致。
+\end{itemize}
+\end{pointbox}
 
-\section*{アインシュタインの原典思索}
-\begin{origbox}[原著第9章：アルベルト・アインシュタインの肉声]
-中心のまわりを高速回転する円盤を考えよう。円盤の半径方向に沿って置かれた定規は運動方向に垂直であるから収縮しない。しかし円盤の円周に沿って置かれた定規は、接線方向の運動に伴ってローレンツ収縮を起こす。
-したがって、円盤の縁に沿って定規を敷き詰めて円周を実測すると、静止時の計算値 $2\pi R$ よりも多くの定規が必要となる。すなわち測定される円周と直径の比は $\pi$ よりも大きくなってしまう。回転系（加速度系、すなわち等価原理による重力場）においては、ユークリッド幾何学はもはや厳密には成立しない。
-\end{origbox}
+%==========================================================
+\chapter{回転する物体上の時計と物差しの振る舞い（第XXIII節）}
+\markboth{第23章}{回転体上の時計と物差し}
+%==========================================================
 
-\section*{大人のための徹底解説講義}
-\begin{lecturebox}[徹底講義：高校数学で追体験する物理学革命]
-幾何学の常識を覆す極めつけの思考実験が「回転する円盤」です。
-平らな円盤を高速で回転させ、その円周と直径を小さな定規を並べて測ることを考えます。
-中心から縁に向かう「半径」を測るとき、定規の向きは回転の進行方向に対して直角ですから、定規は縮みません。
-ところが、ぐるりと「円周」を測るとき、定規は進行方向に沿って並べられるため、ローレンツ収縮を起こして短くなってしまいます。
+\section{この節の位置づけ}
 
-短くなった定規で円周を測れば、定規の目盛りの数は当然多くなります。その結果、
+第XXIII節は、回転する円盤の上で、物差しと時計がどう振る舞うかを考えます。円盤の中心から半径方向には、動きの向きと垂直なので、物差しは縮みません。ところが円周の向きは、物差しが動く向きなので、縮みます。したがって、円盤の上の人が、円周と直径を物差しで測ると、比が $\pi$ にならない。
+
+\section{円周と直径の比}
+
+円盤の縁の速さが $v$（$\beta=v/c$）のとき、円周に沿って並べる物差しは、静止している観測者から見て $1/\gamma$ に縮むので、円盤の上の人は、物差しをより多く並べることになり、円周は $\gamma$ 倍に測られます。直径（半径方向）は変わりません。
+
 \[
-\frac{\text{測定された円周}}{\text{測定された直径}} > 3.14159\dots (\pi)
+\frac{\text{円周}}{\text{直径}}=\pi\gamma .
 \]
-という、古代ギリシャのユークリッド幾何学では絶対にあり得ない事態が発生します。
-回転運動（加速度）が存在する場所では、空間そのものが歪んでおり、曲面を扱う「非ユークリッド幾何学（リーマン幾何学）」を使わなければならないのです。
-等価原理により「加速度＝重力」ですから、この結論は直ちに「重力がある場所の時空は曲がっている」という驚くべき真実を指し示していました。
-\end{lecturebox}
 
-\vspace*{3mm}
-\begin{examplebox}{大人の学び直しのための実社会・重要例題：第9章}
-\textbf{【実社会の具体例：遊園地の回転コーヒーカップと円周率 $\pi$ の破綻】}\\
-遊園地の高速回転する大型アトラクションに乗ると、強い遠心力（外向きの力）を感じます。\\
-(1) アインシュタインの回転円盤の思考実験において、円盤の縁に沿って置かれた定規がローレンツ収縮する一方、中心から外へ向かう半径方向の定規は収縮しない理由を説明せよ。\\
-(2) その結果、測定された円周 $C$ と直径 $D$ の比 $C/D$ が $3.14159\dots$（$\pi$）よりも大きくなってしまうという幾何学的パラドックスから、なぜ「加速度や重力が存在する世界では非ユークリッド幾何学を採用せざるを得ない」と結論づけられるのかを考察せよ。
-\\[2mm]
-\textbf{【懇切丁寧な解答・ステップ解説】}\\
-\textbf{(1) の解：}
-角速度 $\omega$ で回転する円盤を外の静止系から眺めます。半径方向の定規は運動方向に対して垂直であるため、ローレンツ収縮せず、静止時と同じ長さ $R$ を保ちます。
-しかし、円周に沿って並べられた定規は、接線方向の速度 $v = R\omega$ で高速運動しているため、運動方向に沿ってローレンツ収縮を起こし、目盛りの長さが短くなります。
-\\[2mm]
-\textbf{(2) の解：}
-短くなった定規を使って円周を測ると、定規が縮んでいる分だけ、より多くの本数が必要になります。したがって、測定される円周の値 $C$ は、静止時の幾何学的計算値 $2\pi R$ よりも必然的に大きくなります。その結果、
-\[
-\frac{C}{2R} > \pi
-\]
-となり、古代ギリシャ以来信じられてきたユークリッド幾何学の公理「円周と直径の比は常に $\pi$ である」が完全に破綻します。等価原理によれば、回転に伴う遠心力（加速度）は重力と等価です。ゆえに、重力が作用している現実の空間は、平坦なユークリッド空間ではなく、曲がった「非ユークリッド幾何学（リーマン幾何学）」で記述されねばならないという歴史的結論に達したのです。
-\end{examplebox}
+\begin{table}[htbp]
+\centering
+\begin{tabular}{c|cccc}
+\toprule
+縁の速さ $\beta$ & 0 & 0.3 & 0.6 & 0.8\\
+\midrule
+$\gamma$ & 1 & 1.048 & 1.250 & 1.667\\
+円周/直径 $=\pi\gamma$ & 3.142 & 3.293 & 3.927 & 5.236\\
+\bottomrule
+\end{tabular}
+\caption{回転円盤の上で測った、円周と直径の比。速いほど、$\pi$ より大きくなる。}
+\end{table}
 
-
-\clearpage
-\chapter{一般相対論の実験的検証}
-\begin{center}
-{\Large\bfseries\gtfamily 光の重力湾曲・水星の近日点移動・時間の遅れの実証}
-\end{center}
-\vspace*{2mm}
-
-\section*{本章の視覚的見取り図}
-\begin{center}
-\begin{tikzpicture}[scale=1.05, >=Stealth, every node/.style={font=\small}]
-    % Sun (Gravitational Lens)
-    \shade[inner color=yellow!80!white, outer color=orange!95!black] (2.8, 1.2) circle (1.2);
-    \node[font=\large\bfseries, text=black] at (2.8, 1.2) {太陽 $M$};
-    \node[below=1.4cm, font=\scriptsize\bfseries, text=orange!90!black] at (2.8, 1.2) {質量による時空の窪み};
-    
-    % True Star Position
-    \fill[blue!90!black] (-2.5, 3.8) circle (3.5pt);
-    \node[above left=3pt, fill=white, inner sep=2pt, font=\small\bfseries, text=blue!90!black] 
-        at (-2.5, 3.8) {恒星の真の位置 $S$};
-        
-    % Apparent Star Position
-    \fill[purple!85!black] (-1.0, 4.6) circle (3pt);
-    \node[above=3pt, fill=white, inner sep=2pt, font=\small\bfseries, text=purple!85!black] 
-        at (-1.0, 4.6) {見かけの位置 $S'$（ズレて観測）};
-        
-    % Earth and Observer
-    \draw[thick, fill=blue!30] (8.2, 0.4) circle (0.6);
-    \node[font=\footnotesize\bfseries] at (8.2, 0.4) {地球};
-    \fill[black] (7.7, 0.5) circle (2.5pt);
-    \node[above=3pt, font=\scriptsize\bfseries] at (7.7, 0.5) {観測者};
-    
-    % Straight line of sight to apparent position (Dashed purple)
-    \draw[thick, dashed, purple!80!black] (7.7, 0.5) -- (-1.0, 4.6);
-    
-    % Curved real ray of light (Solid red)
-    \draw[line width=2.5pt, red!85!black, ->] (-2.5, 3.8) .. controls (2.3, 2.7) and (3.3, 2.7) .. (7.7, 0.5)
-        node[midway, above=3pt, fill=white, inner sep=2pt, font=\footnotesize\bfseries, text=red!85!black] 
-        {太陽の重力場で曲げられる光線};
-        
-    % Deflection angle theta annotation
-    \draw[<->, line width=1.5pt, purple!85!black] (5.8, 1.3) arc (160:182:2.5);
-    \node[right=4pt, fill=white, draw=purple!50, rounded corners=3pt, inner sep=3pt, font=\footnotesize\bfseries, text=purple!85!black] 
-        at (6.0, 1.6) {偏向角 $\theta = \dfrac{4GM}{c^2 R} \approx 1.75''$};
-        
-    % Historical note
-    \node[align=left, fill=yellow!15, draw=orange!70, rounded corners=5pt, inner sep=5pt, font=\footnotesize, line width=0.8pt] 
-        at (2.8, -1.2) {\textbf{【1919年エディントン皆既日食観測による歴史的実証】}\\
-        ニュートン力学の予言（$0.875''$）の正確に「2倍」曲がるというアインシュタインの予言が完全立証！};
+\begin{figure}[htbp]
+\centering
+\begin{tikzpicture}
+\begin{axis}[width=9.5cm, height=5.3cm, xmin=0, xmax=0.95, ymin=3, ymax=10, xlabel={縁の速さ $\beta$}, ylabel={円周/直径},
+  every axis label/.append style={font=\footnotesize}, tick label style={font=\footnotesize}]
+ \addplot[thick, primaryblue, domain=0:0.95, samples=100] {pi/sqrt(1-x^2)};
+ \addplot[dashed, crimson, domain=0:0.95, samples=2] {pi};
+\end{axis}
 \end{tikzpicture}
+\caption{回転円盤上の、円周と直径の比 $\pi\gamma$。破線は円周率 $\pi$。回転が速いほど、円盤の上の空間は、ユークリッド幾何学から外れる。}
+\end{figure}
 
-\small\textbf{図版解説：}重力場による光線の湾曲（重力レンズ効果）。太陽の質量が周囲の時空を歪め、背後の恒星光が曲げられて地球に届く。
-\end{center}
-\vspace*{2mm}
+\begin{pointbox}{この節のまとめ}
+\begin{itemize}[leftmargin=*]
+\item 回転円盤の上では、円周が $\gamma$ 倍に、直径は変わらず測られる。
+\item 円周/直径 $=\pi\gamma$。$\beta=0.6$ で $3.927$。ユークリッド幾何学が成り立たない。
+\end{itemize}
+\end{pointbox}
 
-\section*{アインシュタインの原典思索}
-\begin{origbox}[原著第10章：アルベルト・アインシュタインの肉声]
-一般相対性理論は3つの決定的な観測的検証を提示した。
-第1に、太陽の近傍を通過する恒星の光線が、太陽の重力場によって外側へ $1.75$ 秒角偏向すること。これは1919年の皆既日食観測によって見事に確認された。
-第2に、ニュートン力学では説明できなかった水星の近日点が、1世紀あたり $43$ 秒角余分に回転することの完全な理論的説明。
-第3に、強い重力場から放射される光の波長が長くなる重力赤方偏移（時計の進みの遅れ）である。
-\end{origbox}
+%==========================================================
+\chapter{ユークリッド的な連続体と非ユークリッド的な連続体（第XXIV節）}
+\markboth{第24章}{非ユークリッド的連続体}
+%==========================================================
 
-\section*{大人のための徹底解説講義}
-\begin{lecturebox}[徹底講義：高校数学で追体験する物理学革命]
-どれほど美しい理論であっても、実験と観測によって検証されなければ物理学の真理とは認められません。アインシュタインは自らの理論の命運を賭けて、3つの具体的な予言を行いました。
+\section{この節の位置づけ}
 
-その筆頭が「太陽による光の曲がり」です。一般相対論によれば、太陽の巨大な質量によって周囲の時空がすり鉢状に凹んでいるため、その縁をかすめる星の光はレンズのように曲げられます。
-1919年、イギリスの天文学者アーサー・エディントン率いる観測隊が西アフリカとブラジルで皆既日食を観測し、太陽の背後にある恒星の位置が、アインシュタインの予言通り正確に $1.75$ 秒角ズレていることを撮影乾板から証明しました。
+第XXIV節は、ユークリッド幾何学が成り立つ「平らな」面と、成り立たない「曲がった」面を比べます。アインシュタインは、机の面を、平らな面の例として挙げ、球面のような曲がった面では、ユークリッド幾何学の命題の一部が成り立たないことを示します。
 
-さらに、天文学者を100年間悩ませていた「水星の軌道が少しずつ回ってしまう謎（近日点移動）」についても、アインシュタイン方程式は見事に余剰の43秒角を完璧に弾き出しました。
-ニュートン力学の限界が暴かれ、アインシュタインの一般相対論が新たな宇宙の法則として世界の頂点に立った歴史的瞬間でした。
-\end{lecturebox}
+\section{球面上の円}
 
-\vspace*{3mm}
-\begin{examplebox}{大人の学び直しのための実社会・重要例題：第10章}
-\textbf{【実社会の具体例：1919年日食観測の熱狂と現代のダークマター探索（重力レンズ）】}\\
-1919年11月、ロンドン王立協会の合同会議でアーサー・エディントン卿の日食観測結果が報告された際、会長のJ.J.トムソンは「これは人類の思想史における最も偉大な成果の一つである」と称えました。\\
-(1) アインシュタインの一般相対性理論が予言した恒星光の曲がり角 $\theta = 4GM/(c^2 R)$（$= 1.75''$）が、ニュートンの重力理論に基づく計算値（$0.875''$）の正確に「2倍」になる物理的理由（時間の遅れと空間の歪みの相乗効果）を解説せよ。\\
-(2) 現代天文学において、巨大銀河団による重力レンズ効果が、目に見えない「暗黒物質（ダークマター）」の質量分布を立体地図化するための最強のツールとなっている実態を述べよ。
-\\[2mm]
-\textbf{【懇切丁寧な解答・ステップ解説】}\\
-\textbf{(1) の解：}
-ニュートン力学では、空間はどこまでも平坦であり、光を仮に微小な質量を持つ粒子とみなして太陽の引力を計算すると、偏向角は $\frac{2GM}{c^2 R}$（約 $0.875$ 秒角）となります。
-しかしアインシュタインの一般相対性理論では、太陽の質量によって「時間のリズム」が遅れるだけでなく、「3次元空間そのもの」も漏斗状に湾曲しています。光線はこの「曲がった時空の最短コース（測地線）」を疾走するため、空間の歪みによる寄与が正確に同量加算され、ニュートン力学のちょうど2倍である $1.75$ 秒角の偏向角が生じます。観測値はこの2倍の数値を鮮やかに実証しました。
-\\[2mm]
-\textbf{(2) の解：}
-一般相対論の重力レンズ効果の素晴らしい特長は、「光を出さない物質であっても、質量（重力）さえあれば背後の銀河の光を曲げる」という点にあります。天文学者は、遠方銀河の歪み具合（アーク状の像や二重像）を逆算解析することで、光学望遠鏡には一切映らない謎のダークマターが宇宙のどこにどれだけ密集しているかを克明に可視化することに成功しています。
-\end{examplebox}
+球面（半径 $R$）の上で、ある点から球面に沿って測った距離 $r$ の点の集まり（円）の円周は、$2\pi R\sin(r/R)$ です。平面なら $2\pi r$ です。両者の比は $\dfrac{\sin(r/R)}{r/R}$ で、$r$ が $R$ に比べて小さければ $1$ に近く、大きくなるほど $1$ より小さくなります。
 
+\begin{table}[htbp]
+\centering
+\begin{tabular}{c|ccccc}
+\toprule
+$r/R$ & 0.1 & 0.5 & 1.0 & 1.5 & $\pi/2$\\
+\midrule
+球面の円周 $\div$ 平面の円周 & 0.9983 & 0.9589 & 0.8415 & 0.6650 & 0.6366\\
+\bottomrule
+\end{tabular}
+\caption{球面上の、半径 $r$ の円の円周を、平面の $2\pi r$ で割った比。$r/R=\pi/2$（赤道）では $2/\pi=0.6366$。}
+\end{table}
 
-\clearpage
-\chapter{重力場の方程式とブラックホール}
-\begin{center}
-{\Large\bfseries\gtfamily アインシュタイン方程式の構造と極限天体の物理}
-\end{center}
-\vspace*{2mm}
-
-\section*{本章の視覚的見取り図}
-\begin{center}
-\begin{tikzpicture}[scale=1.05, >=Stealth, every node/.style={font=\small}]
-    % Subfigure 1: Flat Euclidean Spacetime
-    \begin{scope}[yshift=3.8cm]
-        \draw[thick, fill=blue!6, draw=blue!50] (0, 0) -- (5.5, 0) -- (7.5, 2.0) -- (2.0, 2.0) -- cycle;
-        % Euclidean Triangle
-        \draw[line width=1.5pt, blue!85!black] (2.2, 0.4) -- (5.2, 0.4) -- (4.0, 1.6) -- cycle;
-        \node[font=\footnotesize\bfseries, text=blue!85!black] at (3.8, 0.8) {内角の和 $= 180^\circ$};
-        \node[above=4pt, font=\normalsize\bfseries, text=blue!90!black] at (3.7, 2.0) 
-            {【物質のない平坦な時空（ユークリッド幾何学）】};
-    \end{scope}
-
-    % Subfigure 2: Warped Spacetime by Mass
-    \begin{scope}[yshift=0cm]
-        % Funnel gravity well
-        \draw[thick, fill=orange!10, draw=orange!60] 
-            (0, 0) .. controls (2.2, -1.8) and (3.3, -1.8) .. (5.5, 0)
-            -- (7.5, 2.0) .. controls (5.3, 0.2) and (4.2, 0.2) .. (2.0, 2.0) -- cycle;
-            
-        % Grid lines representing curvature
-        \draw[dashed, gray!60] (1.0, 0.5) .. controls (2.5, -1.0) and (3.5, -1.0) .. (5.0, 0.5);
-        \draw[dashed, gray!60] (2.0, 1.2) .. controls (3.0, -0.4) and (4.0, -0.4) .. (6.0, 1.2);
-        
-        % Massive Star sinking into spacetime
-        \shade[ball color=red!85!black] (3.6, -0.8) circle (0.6);
-        \node[below=4pt, fill=white, inner sep=2pt, font=\small\bfseries, text=red!85!black] at (3.6, -1.5) {大質量天体 $M$};
-        
-        % Curved light geodesic
-        \draw[line width=2pt, teal!85!black, ->] (0.5, 0.2) .. controls (2.5, -0.7) and (4.5, -0.7) .. (6.8, 1.5)
-            node[midway, above=3pt, fill=white, inner sep=1.5pt, font=\scriptsize\bfseries] {測地線（最短軌道）};
-            
-        \node[above=4pt, font=\normalsize\bfseries, text=orange!90!black] at (3.7, 2.0) 
-            {【質量が時空を歪めた湾曲時空（リーマン幾何学）】};
-    \end{scope}
-
-    % Wheeler's famous quote box
-    \node[align=left, fill=yellow!15, draw=orange!70, rounded corners=5pt, inner sep=6pt, font=\footnotesize, line width=0.8pt] 
-        at (3.7, -2.6) {\textbf{【ジョン・ホイーラーによる一般相対論の要約】}\\
-        「時空は物質にどのように動くかを命じ、物質は時空にどのように曲がるかを命じる」\\
-        （Spacetime tells matter how to move; matter tells spacetime how to curve.）};
+\begin{figure}[htbp]
+\centering
+\begin{tikzpicture}
+\begin{axis}[width=9.5cm, height=5.3cm, xmin=0, xmax=3.14, ymin=0, ymax=1.05, xlabel={$r/R$}, ylabel={円周の比},
+  every axis label/.append style={font=\footnotesize}, tick label style={font=\footnotesize}]
+ \addplot[thick, primaryblue, domain=0.01:3.14159, samples=100] {sin(deg(x))/x};
+\end{axis}
 \end{tikzpicture}
+\caption{球面上の円周の比 $\sin(r/R)/(r/R)$。$R$ に比べて円が小さいうちは平面とほとんど同じ。円が大きくなると平面からずれていく。}
+\end{figure}
 
-\small\textbf{図版解説：}一般相対性理論の本質：物質とエネルギーが存在することで周囲の4次元時空連続体が歪み、重力として観測される。
-\end{center}
-\vspace*{2mm}
+人間の大きさの世界では、地球の表面も、ほぼ平面に見えます（$r/R$ が非常に小さいから）。ずれを検出するには、大きな図形が要ります。
 
-\section*{アインシュタインの原典思索}
-\begin{origbox}[原著第11章：アルベルト・アインシュタインの肉声]
-物質の分布と運動を表すエネルギー・運動量テンソル $T_{\mu\nu}$ は、時空の幾何学的曲率を表すアインシュタイン・テンソル $G_{\mu\nu}$ を決定する：
-\[
-R_{\mu\nu} - \frac{1}{2}g_{\mu\nu}R = \frac{8\pi G}{c^4} T_{\mu\nu}
-\]
-時空は物質にどのように動くかを指示し、物質は時空にどのように曲がるかを指示する。この方程式の最も極端な球対称解（シュワルツシルト解）は、光さえも脱出できない事象の地平面を持つ極限天体――ブラックホールの存在を必然的に導く。
-\end{origbox}
+\begin{pointbox}{この節のまとめ}
+\begin{itemize}[leftmargin=*]
+\item 曲がった面では、ユークリッド幾何学の命題が（大きな図形で）成り立たない。
+\item 球面上の円周 $=2\pi R\sin(r/R)$：半径が大きいと、平面より短い。
+\end{itemize}
+\end{pointbox}
 
-\section*{大人のための徹底解説講義}
-\begin{lecturebox}[徹底講義：高校数学で追体験する物理学革命]
-一般相対性理論の心臓部にあるのが、1915年に完成した「アインシュタイン重力場方程式」です。
-物理学者ジョン・ホイーラーはこの方程式の精神を「物質は時空に曲がり方を教え、時空は物質に動き方を教える」という名言で見事に要約しました。
+%==========================================================
+\chapter{ガウスの座標（第XXV節）}
+\markboth{第25章}{ガウスの座標}
+%==========================================================
 
-アインシュタインが方程式を発表したわずか数ヶ月後、ドイツの天文学者カール・シュワルツシルトは第一次世界大戦のロシア戦線において、方程式の厳密解を計算しました。
-その解が告げていたのは、天体の質量がある限界の半径（シュワルツシルト半径 $R_s = \frac{2GM}{c^2}$）よりも内側に凝縮すると、空間の歪みが無限大に達し、光の速さをもってしても二度と外へ戻れない「事象の地平面」が生まれるという衝撃的な予言でした。
-当時は数学的な奇妙な解として片付けられそうになりましたが、現代では電波望遠鏡によって銀河中心のブラックホールの影が直接撮影され、アインシュタインの理論の正しさが極限の現場でも証明されています。
-\end{lecturebox}
+\section{この節の位置づけ}
 
-\vspace*{3mm}
-\begin{examplebox}{大人の学び直しのための実社会・重要例題：第11章}
-\textbf{【実社会の具体例：高層ビル展望台と地上での老化速度の違い（重力赤方偏移）】}\\
-2020年、東京大学の香取秀俊教授らの研究チームは、超高精度な「光格子時計」を東京スカイツリーの地上階と展望台（高度 $450\,\text{m}$）に設置し、一般相対性理論の検証実験を行いました。\\
-(1) アインシュタインの方程式が導く「強い重力場の中（地表）では時間がゆっくり進み、重力の弱い高所では時間は速く進む」という現象のメカニズムを説明せよ。\\
-(2) スカイツリーの実験において、展望台の時計が地上の時計に対して1日あたり約 $4$ ナノ秒速く進んでいたという実測値が持つ、現代社会のインフラ（標高差ミリ単位の測量技術）への応用価値を述べよ。
-\\[2mm]
-\textbf{【懇切丁寧な解答・ステップ解説】}\\
-\textbf{(1) の解：}
-光が重力場を這い上がるとき、重力ポテンシャルに抗して仕事をするためエネルギーを失います。光のエネルギーは振動数に比例（$E=h\nu$）するため、エネルギーを失った光は振動数が下がり、波長が伸びます（重力赤方偏移）。時計とは「周期的な振動を数える装置」ですから、光の振動数が下がるということは、重力源に近い深い谷底にいる観測者の時計は、高い山の上にいる観測者の時計よりも「ゆっくりと時を刻む」ことを意味します。
-\\[2mm]
-\textbf{(2) の解：}
-スカイツリーでの実験精度は $10^{-18}$（300億年に1秒の狂い）に達し、高度差わずか $450\,\text{m}$ であっても、展望台の時間が毎日約 $4.3\,\text{ナノ秒}$ 早く進むことが完全に実証されました。これは単なる物理実験を超え、「時計の進み方の差を測ることで、水準測量を行わずに地殻変動や標高差をセンチ・ミリ単位でリアルタイム監視できる」という、地震予知や防災インフラの革新的新技術として実用化が進んでいます。
-\end{examplebox}
+第XXV節は、曲がった面の上で、位置を表す座標を、直交する直線ではなく、「曲がった線」の網で決める方法（ガウスの座標）を紹介します。ユークリッド平面では、直交座標が使えますが、曲がった面では使えないので、この方法が必要です。
 
+\section{緯度と経度}
 
-\clearpage
-\part{現代宇宙論とアインシュタインの遺産}
+地球の表面では、緯度 $\theta$ と経度 $\varphi$ が、ガウスの座標の例です。半径 $R$ の球面で、緯度（北極からの角）$\theta$ の円（緯線）の半径は $R\sin\theta$ なので、円周は $2\pi R\sin\theta$ です。
 
-\chapter{宇宙論と膨張する宇宙}
-\begin{center}
-{\Large\bfseries\gtfamily アインシュタインの生涯最大の過ちと現代ビッグバン宇宙論}
-\end{center}
-\vspace*{2mm}
+\begin{table}[htbp]
+\centering
+\begin{tabular}{c|ccccc}
+\toprule
+北極からの角 $\theta$ & 30° & 60° & 90°（赤道） & 120° & 150°\\
+\midrule
+緯線の円周 $\div2\pi R$ & 0.500 & 0.866 & 1 & 0.866 & 0.500\\
+\bottomrule
+\end{tabular}
+\caption{球面の緯線の長さ。赤道が最も長く、極に近づくと短くなる。}
+\end{table}
 
-\section*{本章の視覚的見取り図}
-\begin{center}
-\begin{tikzpicture}[scale=1.05, >=Stealth, every node/.style={font=\small}]
-    % Past Universe (Small sphere)
-    \begin{scope}[xshift=0cm]
-        \draw[line width=1.5pt, dashed, fill=blue!8, draw=blue!70] (0, 0) circle (1.5);
-        \node[above=4pt, font=\normalsize\bfseries, text=blue!85!black] at (0, 1.6) {【過去の宇宙（狭い空間）】};
-        
-        \fill[red!85!black] (0.6, 0.5) circle (3pt);
-        \node[above right=1pt, fill=white, inner sep=1.5pt, font=\scriptsize\bfseries] at (0.6, 0.5) {銀河 $A$};
-        
-        \fill[teal!85!black] (-0.5, -0.4) circle (3pt);
-        \node[below left=1pt, fill=white, inner sep=1.5pt, font=\scriptsize\bfseries] at (-0.5, -0.4) {銀河 $B$};
-        
-        \draw[<->, thick, purple!80!black] (-0.35, -0.25) -- (0.45, 0.35) 
-            node[midway, fill=white, inner sep=1.5pt, font=\scriptsize\bfseries] {距離 $d_0$};
-    \end{scope}
+線の長さの測り方は、座標の取り方で変わります。経度が $d\varphi$ だけ違う2点の、緯度 $\theta$ の線の上での距離は $R\sin\theta\,d\varphi$。座標の差 $d\varphi$ と、実際の距離が、場所（緯度）によって、違う比例定数で結ばれています。この比例定数（計量）を知ることが、曲がった面の幾何学の鍵です。
 
-    % Time Evolution Arrow
-    \draw[->, line width=3pt, blue!75!black] (2.0, 0) -- (3.6, 0) 
-        node[midway, above=3pt, font=\small\bfseries, text=blue!85!black] {宇宙膨張};
-    \node[below=3pt, font=\scriptsize, text=gray!70!black] at (2.8, 0) {数十億年};
-
-    % Present / Future Universe (Expanded sphere)
-    \begin{scope}[xshift=6.5cm]
-        \draw[line width=1.8pt, fill=purple!8, draw=purple!70] (0, 0) circle (2.8);
-        \node[above=4pt, font=\normalsize\bfseries, text=purple!85!black] at (0, 2.9) {【現在の宇宙（膨張した空間）】};
-        
-        \fill[red!85!black] (1.3, 1.0) circle (3.5pt);
-        \node[above right=1pt, fill=white, inner sep=1.5pt, font=\scriptsize\bfseries] at (1.3, 1.0) {銀河 $A$};
-        
-        \fill[teal!85!black] (-1.1, -0.9) circle (3.5pt);
-        \node[below left=1pt, fill=white, inner sep=1.5pt, font=\scriptsize\bfseries] at (-1.1, -0.9) {銀河 $B$};
-        
-        \draw[<->, line width=1.2pt, purple!80!black] (-0.8, -0.65) -- (1.0, 0.75) 
-            node[midway, fill=white, inner sep=2pt, font=\small\bfseries] {距離 $d = a(t) d_0 \gg d_0$};
-    \end{scope}
-    
-    % Expansion Insight Box
-    \node[align=left, fill=yellow!15, draw=orange!70, rounded corners=5pt, inner sep=6pt, font=\footnotesize, line width=0.8pt] 
-        at (3.6, -3.8) {\textbf{【ハッブル＝ルメートルの法則と空間の膨張】}\\
-        ・銀河が既存の空間の中を猛スピードで飛んで遠ざかっているのではない\\
-        ・\textbf{銀河と銀河の間の「空間そのもの」が風船のように引き伸ばされている}\\
-        ・アインシュタイン方程式が予測した「動的な膨張宇宙」は現代宇宙論の標準モデルとなった};
+\begin{figure}[htbp]
+\centering
+\begin{tikzpicture}[scale=1.4]
+ \draw[thick, darkslate] (0,0) circle (1.5);
+ \foreach \th in {30,60,90,120,150}{
+   \pgfmathsetmacro{\yy}{1.5*cos(\th)}
+   \pgfmathsetmacro{\xx}{1.5*sin(\th)}
+   \pgfmathsetmacro{\yr}{0.28*\xx}
+   \draw[primaryblue] (-\xx,\yy) arc (180:360:{\xx} and {\yr});
+   \draw[primaryblue, dashed] (-\xx,\yy) arc (180:0:{\xx} and {\yr});
+ }
+ \foreach \lo in {-60,-30,0,30,60}{
+   \draw[crimson] plot[domain=0:180, samples=30, variable=\t] ({1.5*sin(\t)*sin(\lo)},{1.5*cos(\t)});
+ }
+ \node[lbl] at (0,-2.0) {緯線（青）と経線（赤）の網：ガウスの座標の例};
 \end{tikzpicture}
+\caption{球面の緯度・経度の網（略図）。網の目の大きさは、場所によって違う。}
+\end{figure}
 
-\small\textbf{図版解説：}宇宙論的帰結。アインシュタイン方程式が導く動的宇宙と空間自体の膨張モデル。
-\end{center}
-\vspace*{2mm}
+\begin{pointbox}{この節のまとめ}
+\begin{itemize}[leftmargin=*]
+\item 曲がった面では、直交座標の代わりに、曲がった線の網（ガウスの座標）を使う。
+\item 緯度 $\theta$ の緯線の円周は $2\pi R\sin\theta$。座標の差と実際の距離の比が、場所で変わる。
+\end{itemize}
+\end{pointbox}
 
-\section*{アインシュタインの原典思索}
-\begin{origbox}[原著第12章：アルベルト・アインシュタインの肉声]
-もし宇宙全体に物質が一様に分布しているとすれば、一般相対論の方程式は静的な平衡状態を保つことができない。重力による自己崩壊を防ぐため、私は一時的に宇宙定数（宇宙項）$\Lambda$ を方程式に導入した。
-しかしハッブルによる遠方銀河の後退の発見により、宇宙そのものが膨張しているという動的宇宙論（フリードマン・ルメートル模型）が確立された。宇宙項の導入は私の生涯最大の過誤であった。
-\end{origbox}
+%==========================================================
+\chapter{特殊相対性理論の時空連続体をユークリッド的連続体と見る（第XXVI節）}
+\markboth{第26章}{特殊相対性理論の時空連続体}
+%==========================================================
 
-\section*{大人のための徹底解説講義}
-\begin{lecturebox}[徹底講義：高校数学で追体験する物理学革命]
-アインシュタインの思索の旅は、ついに「宇宙全体」の運命へと至ります。
-彼が一般相対論の方程式を宇宙全体に適用したとき、方程式は恐るべき答えを突きつけてきました。「宇宙は静止していられない。膨張しているか、収縮しているかのどちらかだ」。
+\section{この節の位置づけ}
 
-しかし、当時の常識は「宇宙は永遠不変で静止している」というものでした。アインシュタインは自らの方程式の予言を信じきれず、宇宙が潰れないように突っ張り棒となる反発力「宇宙項 $\Lambda$」を人工的に付け加えました。
-ところが1929年、天文学者エドウィン・ハッブルが望遠鏡の観測から「遠くの銀河ほど猛烈な速度で遠ざかっている（宇宙が膨張している）」ことを発見しました。
-アインシュタインは自らの修正を恥じ、「宇宙項は生涯最大の過ちだった」と撤回しました。
+第XXVI節は、特殊相対性理論の時空を、ユークリッド的な連続体に似たものとして見る方法を示します。時間の座標を $x_4=ict$（$i$ は虚数単位）とおくと、時空の間隔は、4つの座標の2乗の和のように見え、ユークリッド幾何学の距離と同じ形になります。
 
-しかしドラマはそこで終わりませんでした。1998年、現代の天文学者は宇宙が単に膨張しているだけでなく、謎のエネルギー（ダークエネルギー）によって「加速膨張」していることを突き止めたのです。そしてその加速を説明するために復活したのが、皮肉にもアインシュタインが捨てた「宇宙項 $\Lambda$」でした。
-天才の過ちさえもが、100年後の最先端天文学の鍵を握っていたのです。
-\end{lecturebox}
+\section{虚数の時間座標}
 
-\vspace*{3mm}
-\begin{examplebox}{大人の学び直しのための実社会・重要例題：第12章}
-\textbf{【実社会の具体例：宇宙背景放射（CMB）とビッグバン宇宙論、宇宙の加速膨張】}\\
-テレビの地上波アナログ放送の時代、チャンネルをどの放送局にも合わない砂嵐画面にすると、「サー」という雑音（スノーノイズ）が聞こえました。その雑音の約 $1\%$ は、宇宙誕生後38万年の「宇宙の晴れ上がり」から138億年旅してきた最古の電波「宇宙マイクロ波背景放射（CMB）」でした。\\
-(1) アインシュタインは当初、宇宙が永遠不変であると信じて方程式に「宇宙項 $\Lambda$」を付け加えましたが、後にハッブルの銀河後退観測を知って「生涯最大の過ち（biggest blunder）」と悔やみました。なぜ方程式は本来、動的な宇宙（膨張または収縮）を予言していたのかを説明せよ。\\
-(2) 1998年の遠方超新星観測により、現代の宇宙は重力による減速ではなく「ダークエネルギーによって加速膨張している」ことが判明し、捨てられた宇宙項 $\Lambda$ が奇跡の復活を遂げた劇的なドラマを考察せよ。
-\\[2mm]
-\textbf{【懇切丁寧な解答・ステップ解説】}\\
-\textbf{(1) の解：}
-一般相対性理論の重力方程式は「物質が存在すれば空間が引き合って収縮する」ことを示しています。すべての星々が引力を持つ以上、宇宙全体が静止して安定することは数学的に不可能であり、膨張するか収縮するかの動的状態しかあり得ません。アインシュタインは当時の「静止した宇宙観」に囚われていたため、収縮を防ぐ反発力として方程式に無理やり定数（宇宙項 $\Lambda$）を挿入しました。しかし方程式自体の数学的構造は、最初から「宇宙は膨張している」というビッグバンモデルの真実を高らかに歌い上げていたのです。
-\\[2mm]
-\textbf{(2) の解：}
-1998年、遠方のIa型超新星の精密観測により、宇宙の膨張速度が落ちるどころか、約50億年前からますます加速しているという衝撃の事実が発見されました。空間そのものを押し広げる正体不明のエネルギー「ダークエネルギー」の存在です。そして、この斥力を数学的に最もシンプルに表現するものが、アインシュタインがかつて導入し葬り去った「宇宙項 $\Lambda$」そのものでした。アインシュタインが「過ち」と呼んだものさえも、1世紀後の先端宇宙論の主役に返り咲いたのです。
-\end{examplebox}
-
-
-\clearpage
-
-\appendix
-
-\chapter{相対性理論の重要用語辞典（アルベルト・アインシュタインの語彙）}
-
-大人の学び直しを助けるため、アインシュタインの原典および現代物理学において極めて重要な鍵概念をコンパクトに整理・解説します。
-
-\begin{description}[font=\normalfont\bfseries\gtfamily]
-    \item[慣性系（Inertial System）] 外力が働いていない物体が静止し続けるか等速直線運動を続ける座標系（慣性の法則が成立する系）。互いに等速で移動する慣性系どうしはすべて物理的に同等である。
-    \item[光速度不変の原理（Principle of Constancy of Light Speed）] 真空中の光の速さ $c \approx 3 \times 10^8\,\text{m/s}$ は、光源の運動状態や観測者の運動速度に一切依存せず、すべての慣性系において常に同一であるという基本原理。
-    \item[特殊相対性原理（Special Principle of Relativity）] すべての慣性座標系において、物理法則は全く同一の形式で表され、絶対静止座標系という特別な系は存在しない。
-    \item[同時性の相対性（Relativity of Simultaneity）] ある観測者にとって「同時に起こった」2つの事象は、その観測者に対して動いている別の観測者にとっては「同時ではない」という事実。時間の一様性・絶対性の否定。
-    \item[ローレンツ変換（Lorentz Transformation）] 光速度不変の原理と特殊相対性原理を満たす、2つの等速運動座標系間の時空変換公式。$\gamma = 1/\sqrt{1 - v^2/c^2}$ を尺度係数とする。
-    \item[時間の遅れ（Time Dilation）] 観測者に対して高速運動している時計は、静止している時計に比べて進み方が遅くなる（$\Delta t = \gamma \Delta t_0$）現象。
-    \item[ローレンツ収縮（Lorentz Contraction）] 観測者に対して運動している剛体は、運動方向に沿って長さが $\sqrt{1 - v^2/c^2}$ 倍に縮んで観測される現象。
-    \item[質量とエネルギーの等価性（$E=mc^2$）] 静止質量 $m$ を持つ物体は、その質量自体の中に $E = mc^2$ という莫大な固有エネルギーを宿しているという帰結。原子力発電や恒星の核融合の根源。
-    \item[ミンコフスキー時空（Minkowski Spacetime）] 3次元空間と時間1次元を一体として扱い、$s^2 = c^2 t^2 - (x^2 + y^2 + z^2)$ という不変量を幾何学的に定義した4次元時空連続体。
-    \item[等価原理（Principle of Equivalence）] 局所的に一様な重力場の中に静止している座標系と、重力のない空間で等加速度運動をしている加速系は、物理的に全く区別がつかないという原理。
-    \item[一般相対性原理（General Principle of Relativity）] 慣性系だけでなく、加速度運動している座標系や重力場の中にある座標系も含め、任意の運動状態にあるすべての座標系において物理法則が共変的（同一形式）に成り立つ。
-    \item[測地線（Geodesic）] 質量やエネルギーによって歪められた曲がった時空において、物体や光線が辿る「最短（最極値）の軌道」。古典力学の「重力による引力」は、時空の測地線運動として幾何学的に書き直される。
-    \item[宇宙項（Cosmological Constant, $\Lambda$）] アインシュタインが静的で閉じた宇宙解を得るために一般相対論の方程式に導入した斥力項。現代宇宙論では「ダークエネルギー」として再評価されている。
-\end{description}
-
-\chapter{総合演習問題と詳細ステップ解説（高校数学で解く相対論）}
-
-本章では、高校数学（三平方の定理・1次方程式・平方根の展開）を用いて自らの手で計算し、相対性理論の真髄を血肉とするための総合演習問題を全10問収録しました。
-
-\begin{exercisebox}{第1問：光時計による時間の遅れの導出}
-高さ $L$ の列車内に設置された光時計を考える。床から天井へ放たれた光が反射して戻る往復時間を、車内の人 $S'$ は $\Delta t'$、堤防の静止観察者 $S$ は $\Delta t$ と測る。列車が水平方向に速度 $v$ で走るとき、三平方の定理を用いて
+時空の間隔 $s^2=x^2+y^2+z^2-c^2t^2$ は、$x_4=ict$ とおくと、$x_4^2=-c^2t^2$ なので
 \[
-\Delta t = \frac{\Delta t'}{\sqrt{1 - v^2/c^2}}
+s^2=x^2+y^2+z^2+x_4^2
 \]
-を導出せよ。
-\\[2mm]
-\textbf{【懇切丁寧な解答】}\\
-車内の人から見れば、光は垂直に往復するだけなので、往復距離は $2L$ である。光速を $c$ とすれば、
-\[
-\Delta t' = \frac{2L}{c} \quad \implies \quad L = \frac{c \Delta t'}{2}
-\]
-一方、堤防の観察者から見ると、光が天井に到達して戻るまでに列車は水平方向に $v \Delta t$ だけ進む。光が片道で進む水平距離は $\frac{v \Delta t}{2}$、垂直距離は $L$ である。三平方の定理より、光が進んだ斜辺の距離 $d$ は
-\[
-d = \sqrt{\left(\frac{v \Delta t}{2}\right)^2 + L^2}
-\]
-堤防の人にとっても光速は同一の $c$ であるから、往復距離 $2d$ は $c \Delta t$ に等しい：
-\[
-c \Delta t = 2 \sqrt{\left(\frac{v \Delta t}{2}\right)^2 + L^2} = \sqrt{(v \Delta t)^2 + 4L^2}
-\]
-両辺を2乗すると、
-\[
-c^2 (\Delta t)^2 = v^2 (\Delta t)^2 + 4L^2
-\]
-ここで $L = \frac{c \Delta t'}{2}$ より $4L^2 = c^2 (\Delta t')^2$ を代入すると、
-\[
-(c^2 - v^2) (\Delta t)^2 = c^2 (\Delta t')^2
-\]
-両辺を $c^2$ で割り、$(\Delta t)^2$ について解くと、
-\[
-\left(1 - \frac{v^2}{c^2}\right) (\Delta t)^2 = (\Delta t')^2 \quad \implies \quad \Delta t = \frac{\Delta t'}{\sqrt{1 - v^2/c^2}}
-\]
-これにより、高校数学の三平方の定理だけで時間の遅れの方程式が厳密に証明された。\qed
-\end{exercisebox}
+と書けます。4つの座標の2乗の和で、ユークリッド幾何学の距離の2乗と同じ形です。数値で確かめます。$x=3$、$ct=5$ なら、$s^2=9-25=-16$。$x_4=5i$ とおけば、$x^2+x_4^2=9+(5i)^2=9-25=-16$ と一致します。
 
-\vspace*{3mm}
+ローレンツ変換は、この4次元の「座標軸の回転」です。ただし、回転の角が、虚数になります。速さ $\beta=0.6$ に当たる量（\textbf{ラピディティ}）は、$\varphi=\mathrm{artanh}\,\beta=0.6931=\ln2$ です。
 
-\begin{exercisebox}{第2問：新幹線の時間の遅れの定量的計算}
-東海道新幹線が時速 $288\,\text{km}$（$= 80\,\text{m/s}$）で $1$ 時間（$= 3600\,\text{秒}$）走行したとする。光速 $c = 3 \times 10^8\,\text{m/s}$ とする。\\
-(1) 速度比 $\beta = v/c$ を求めよ。\\
-(2) 近似式 $\sqrt{1 - x^2} \approx 1 - \frac{1}{2}x^2$ を用いて、新幹線の時計が地上の時計に対して遅れる時間をナノ秒単位で計算せよ。
-\\[2mm]
-\textbf{【懇切丁寧な解答】}\\
-\textbf{(1) の解：}
-\[
-\beta = \frac{v}{c} = \frac{80}{3 \times 10^8} = \frac{8}{3} \times 10^{-7} \approx 2.67 \times 10^{-7}
-\]
-\textbf{(2) の解：}
-地上の時間を $T = 3600\,\text{s}$、車内の時間を $T'$ とすると、$T' = T \sqrt{1 - \beta^2} \approx T \left(1 - \frac{1}{2}\beta^2\right)$ である。遅れの差 $\Delta T = T - T'$ は
-\[
-\Delta T \approx \frac{1}{2} T \beta^2 = \frac{1}{2} \times 3600 \times \left(\frac{8}{3} \times 10^{-7}\right)^2
-= 1800 \times \frac{64}{9} \times 10^{-14} = 200 \times 64 \times 10^{-14} = 12800 \times 10^{-14} = 1.28 \times 10^{-10}\,\text{秒}
-\]
-これは $0.128\,\text{ナノ秒}$（$1$ ナノ秒 $= 10^{-9}$ 秒）に相当する。人間の感覚では到底認知できない微小量であるが、現代の原子時計を用いれば $10^{-18}$ 秒まで計測できるため、日常的な速度であっても相対論的遅れは完全に実証されている。\qed
-\end{exercisebox}
+\begin{table}[htbp]
+\centering
+\begin{tabular}{c|ccccc}
+\toprule
+$\beta$ & 0.1 & 0.5 & 0.6 & 0.9 & 0.99\\
+\midrule
+ラピディティ $\varphi=\mathrm{artanh}\,\beta$ & 0.1003 & 0.5493 & 0.6931 & 1.4722 & 2.6467\\
+\bottomrule
+\end{tabular}
+\caption{速さ $\beta$ に対応するラピディティ。$\beta=0.6$ のとき $\ln 2$。}
+\end{table}
 
-\vspace*{3mm}
+\begin{figure}[htbp]
+\centering
+\begin{tikzpicture}
+\begin{axis}[width=9cm, height=5cm, xmin=0, xmax=1, ymin=0, ymax=3.5, xlabel={$\beta=v/c$}, ylabel={ラピディティ $\varphi$},
+  every axis label/.append style={font=\footnotesize}, tick label style={font=\footnotesize}]
+ \addplot[thick, primaryblue, domain=0:0.995, samples=120] {0.5*ln((1+x)/(1-x))};
+\end{axis}
+\end{tikzpicture}
+\caption{速さ $\beta$ とラピディティ。$\beta\to1$ でラピディティは無限大になる。}
+\end{figure}
 
-\begin{exercisebox}{第3問：素粒子ミューオンの地表到達と寿命延伸}
-宇宙線が大気上層（高度 $10\,\text{km} = 10^4\,\text{m}$）で衝突して生成される素粒子ミューオンの固有寿命はわずか $\tau_0 = 2.2 \times 10^{-6}\,\text{秒}$（$2.2\,\mu\text{s}$）である。ミューオンが光速の $99.5\%$（$v = 0.995c$）で地表に向かって飛行しているとする。\\
-(1) 非相対論的（ニュートン力学）な計算では、ミューオンが崩壊するまでに進める距離は何メートルか。地表に到達できるか答えよ。\\
-(2) 特殊相対性理論の時間の遅れを考慮すると、地上の観測者から見たミューオンの寿命 $\tau$ は何秒に伸びるか。また、その間に進める距離を求め、なぜ地表で大量のミューオンが観測されるのかを説明せよ（ただし $\sqrt{1 - 0.995^2} \approx 0.10$ とする）。
-\\[2mm]
-\textbf{【懇切丁寧な解答】}\\
-\textbf{(1) の解：}
-古典力学での飛行距離 $L_{\text{classic}}$ は
-\[
-L_{\text{classic}} = v \tau_0 = (0.995 \times 3 \times 10^8\,\text{m/s}) \times (2.2 \times 10^{-6}\,\text{s}) \approx 2.985 \times 10^8 \times 2.2 \times 10^{-6} \approx 657\,\text{m}
-\]
-大気上層の高度は $10000\,\text{m}$ であるため、$657\,\text{m}$ 飛んだ時点で大半が崩壊してしまい、地表には一粒たりとも到達できないはずである。\\
-\textbf{(2) の解：}
-ローレンツ因子 $\gamma$ は
-\[
-\gamma = \frac{1}{\sqrt{1 - (0.995)^2}} \approx \frac{1}{0.10} = 10
-\]
-地上の時計から見ると、ミューオンの内部時計は $10$ 倍に引き伸ばされるため、寿命は
-\[
-\tau = \gamma \tau_0 = 10 \times 2.2 \times 10^{-6} = 2.2 \times 10^{-5}\,\text{秒}
-\]
-この間に光速に近い速度で進む距離 $L_{\text{rel}}$ は
-\[
-L_{\text{rel}} = v \tau \approx (3 \times 10^8) \times (2.2 \times 10^{-5}) = 6600\,\text{m} \sim 10000\,\text{m}
-\]
-となり、高度 $10\,\text{km}$ から放たれたミューオンの多くが地表まで余裕をもって到達できる。なお、ミューオン自身の視座（静止系）から見れば、時間の進みは $2.2\,\mu\text{s}$ のままであるが、大気の厚み $10\,\text{km}$ がローレンツ収縮によって $\frac{1}{10}$ の $1\,\text{km}$ に縮んでいるため、やはり地表に到達できると解釈され、両者の観測結果は見事に一致する。\qed
-\end{exercisebox}
+\begin{pointbox}{この節のまとめ}
+\begin{itemize}[leftmargin=*]
+\item $x_4=ict$ とおくと、時空の間隔は、4つの座標の2乗の和の形になる。
+\item ローレンツ変換は、虚数の角（実際には双曲線の角、ラピディティ）の回転。
+\end{itemize}
+\end{pointbox}
 
-\vspace*{3mm}
+%==========================================================
+\chapter{一般相対性理論の時空連続体はユークリッド的ではない（第XXVII節）}
+\markboth{第27章}{一般相対論の時空は非ユークリッド的}
+%==========================================================
 
-\begin{exercisebox}{第4問：GPS衛星の相対論補正（特殊相対論と一般相対論の綱引き）}
-高度 $20000\,\text{km}$ を周回するGPS衛星の軌道速度は約 $v = 3.9\,\text{km/s}$ である。\\
-(1) 特殊相対性理論の速度による効果により、地上に対してGPS衛星の原子時計は1日あたり何マイクロ秒遅れるか（計算値：約 $-7.2\,\mu\text{s}$）。\\
-(2) 一般相対性理論の重力ポテンシャルによる効果（高度が高く重力が弱いため時計が速く進む）により、地上に対してGPS衛星の時計は1日あたり何マイクロ秒進むか（計算値：約 $+45.8\,\mu\text{s}$）。\\
-(3) 両者の総合効果として、GPS衛星の時計は地上に対して1日あたり何マイクロ秒進むか。もしこの補正を行わなければ、位置測定に1日で何キロメートルの誤差が生じるか（光速 $c = 3 \times 10^5\,\text{km/s}$ とする）。
-\\[2mm]
-\textbf{【懇切丁寧な解答】}\\
-\textbf{(1) の解：}
-1日は $86400\,\text{秒}$ である。特殊相対論の遅れは $\frac{1}{2}\frac{v^2}{c^2} \times 86400 \approx 7.2 \times 10^{-6}\,\text{秒} = 7.2\,\mu\text{s}$ の遅れ（$-7.2\,\mu\text{s}/\text{日}$）となる。\\
-\textbf{(2) の解：}
-高度 $20000\,\text{km}$ では地球の重力が地表よりはるかに弱いため、一般相対論により時間は速く進む。その進みは理論計算で $+45.8\,\mu\text{s}/\text{日}$ となる。\\
-\textbf{(3) の解：}
-正味の合成ズレは
-\[
--7.2\,\mu\text{s} + 45.8\,\mu\text{s} = +38.6\,\mu\text{s}/\text{日}
-\]
-衛星の原子時計は地上より毎日 $38.6$ マイクロ秒早く進む。光がこの時間に進む距離は
-\[
-\Delta x = c \times \Delta t = (3 \times 10^5\,\text{km/s}) \times (38.6 \times 10^{-6}\,\text{s}) \approx 11.58\,\text{km}
-\]
-もしアインシュタインの相対性理論を考慮して送信周波数をあらかじめ微調整しておかなければ、カーナビやスマートフォンの位置情報は毎日約 $11.6\,\text{km}$ ずつズレてしまい、実用システムとして完全に崩壊する。現代社会のインフラは、相対性理論の実証によって支えられている。\qed
-\end{exercisebox}
+\section{この節の位置づけ}
 
-\vspace*{3mm}
+第XXVII節は、重力場があると、時空が、ユークリッド的でなくなることを述べます。重力場のなかでは、時計の進み方が場所で違い、物差しの長さも場所で違います。したがって、時間と空間を表す座標は、そのまま、時計や物差しの読みにはならない。
 
-\begin{exercisebox}{第5問：$E=mc^2$ と太陽の寿命・質量欠損}
-太陽の放射エネルギーは毎秒約 $L_{\odot} = 3.8 \times 10^{26}\,\text{W}$（$= 3.8 \times 10^{26}\,\text{J/s}$）である。\\
-(1) アインシュタインの関係式 $E = mc^2$ を用いて、太陽が光と熱として宇宙に放出することで失っている質量（質量欠損）は毎秒何トンか（光速 $c = 3.0 \times 10^8\,\text{m/s}$）。\\
-(2) 太陽の現在の総質量は約 $2.0 \times 10^{30}\,\text{kg}$ である。100億年間（約 $3.15 \times 10^{17}\,\text{秒}$）このペースで燃焼し続けたとしても、失われる質量は太陽全体の何パーセント程度にすぎないかを計算し、なぜ太陽が莫大な寿命を保てるのかを述べよ。
-\\[2mm]
-\textbf{【懇切丁寧な解答】}\\
-\textbf{(1) の解：}
-1秒間に失われる質量 $\Delta m$ は
-\[
-\Delta m = \frac{E}{c^2} = \frac{3.8 \times 10^{26}}{(3.0 \times 10^8)^2} = \frac{3.8 \times 10^{26}}{9.0 \times 10^{16}} \approx 4.22 \times 10^9\,\text{kg} = 422万\,\text{トン}
-\]
-太陽は毎秒422万トンもの自身の体重をエネルギーに変換して輝いている。\\
-\textbf{(2) の解：}
-100億年間に失われる総質量 $M_{\text{loss}}$ は
-\[
-M_{\text{loss}} = 4.22 \times 10^9\,\text{kg/s} \times 3.15 \times 10^{17}\,\text{s} \approx 1.33 \times 10^{27}\,\text{kg}
-\]
-全質量 $M_{\odot} = 2.0 \times 10^{30}\,\text{kg}$ に対する割合は
-\[
-\frac{M_{\text{loss}}}{M_{\odot}} = \frac{1.33 \times 10^{27}}{2.0 \times 10^{30}} \approx 0.00067 = 0.067\%
-\]
-わずか $0.1\%$ 未満である。$c^2$ という係数が $9 \times 10^{16}$ という天文学的数値であるため、ごく微小な質量欠損から想像を絶する熱エネルギーが放出される。これこそが、石炭などの化学燃焼では数千年で燃え尽きてしまう太陽が、数十億年にわたって地球を温め続けられる真の理由である。\qed
-\end{exercisebox}
+\section{高いところで時計は速く進む}
 
-\vspace*{3mm}
+重力が強いところ（地面に近いところ）では、時計は遅く進みます。重力が弱いところでは、速く進みます。地球を回る人工衛星の時計で、この効果を確かめましょう（原著にはない、現代の補足）。衛星の軌道半径を $2.657\times10^{7}$ m（GPS衛星）、地球の半径を $6.371\times10^6$ m とします。
 
-\begin{exercisebox}{第6問：相対論的速度の合成則}
-時速 $100\,\text{km}$ の列車の中から前方へ時速 $50\,\text{km}$ でボールを投げると、地上から見たボールの速度はニュートン力学では単に $100 + 50 = 150\,\text{km/h}$ と足し算される。しかし相対論では速度合成則
-\[
-W = \frac{u + v}{1 + \frac{uv}{c^2}}
-\]
-に従う。\\
-(1) 宇宙船が地球に対して速度 $v = 0.8c$ で飛行中、前方へ向けて速度 $u = 0.8c$ で探査機を発射した。地球から見た探査機の速度 $W$ は光速の何倍か。光速 $c$ を超えないことを示せ。\\
-(2) 宇宙船から前方へ光（$u = c$）を発射した場合、地球から見た光の速度 $W$ を合成則から計算し、光速度不変の原理と矛盾しないことを確かめよ。
-\\[2mm]
-\textbf{【懇切丁寧な解答】}\\
-\textbf{(1) の解：}
-\[
-W = \frac{0.8c + 0.8c}{1 + \frac{(0.8c)(0.8c)}{c^2}} = \frac{1.6c}{1 + 0.64} = \frac{1.6c}{1.64} \approx 0.9756c
-\]
-古典力学の足し算なら $1.6c$ となり光速を突破するが、分母の補正項 $1 + uv/c^2$ の働きにより、結果は光速の約 $97.6\%$ に留まり、決して光速を超えない。\\
-\textbf{(2) の解：}
-$u = c$ を代入すると、
-\[
-W = \frac{c + v}{1 + \frac{cv}{c^2}} = \frac{c + v}{1 + \frac{v}{c}} = \frac{c(c + v)}{c + v} = c
-\]
-どれほど高速（$v$）で運動している乗り物から光を放っても、外の観測者から見た光の速さは寸分違わず $c$ である。速度合成則自体の中に光速度不変の公理が完璧に織り込まれている。\qed
-\end{exercisebox}
+\begin{table}[htbp]
+\centering
+\begin{tabular}{lc}
+\toprule
+効果 & 1日あたりのずれ\\
+\midrule
+重力のため、衛星の時計が速く進む & $+45.7$ マイクロ秒\\
+衛星の速さ（$3.87$ km/s）のため、遅く進む（特殊相対論） & $-7.2$ マイクロ秒\\
+差し引き & $+38.5$ マイクロ秒\\
+\bottomrule
+\end{tabular}
+\caption{GPS衛星の時計の、地上の時計に対する1日のずれ（本書で、定数から計算）。}
+\end{table}
 
-\vspace*{3mm}
+\begin{figure}[htbp]
+\centering
+\begin{tikzpicture}
+\begin{axis}[ybar, width=9cm, height=5cm, bar width=18pt, xmin=0.4, xmax=3.6, ymin=-12, ymax=52, xtick={1,2,3}, xticklabels={重力の効果,速さの効果,差し引き}, ylabel={1日あたり（マイクロ秒）},
+  every axis label/.append style={font=\footnotesize}, tick label style={font=\footnotesize}, nodes near coords, nodes near coords style={font=\scriptsize}]
+ \addplot[fill=softblue, draw=primaryblue] coordinates {(1,45.7)(2,-7.2)(3,38.5)};
+\end{axis}
+\end{tikzpicture}
+\caption{GPS衛星の時計のずれ。補正しないと、1日に約38マイクロ秒、衛星の時計が進み、距離にして約11 km分の誤差になる。}
+\end{figure}
 
-\begin{exercisebox}{第7問：等価原理とエレベーターの光の曲がり}
-無重力空間を上向きに一定加速度 $g$ でロケット（またはエレベーター）が上昇している。幅を $W$ とする。左側の壁の小穴から水平に入射した光線が、右側の壁に到達する現象を考える。\\
-(1) 光が右側の壁に到達するまでの時間 $t$ を光速 $c$ と $W$ を用いて表せ。\\
-(2) その時間 $t$ の間にエレベーターが上向きに加速することによって上昇する距離 $h = \frac{1}{2}gt^2$ を求めよ。\\
-(3) エレベーター内の観測者から見ると、光線が下向きに放物線を描いて $h$ だけ落ちて見えることを説明し、アインシュタインの等価原理により「重力場の中でも光線は必ず下方に湾曲する」と予言できる論理を述べよ。
-\\[2mm]
-\textbf{【懇切丁寧な解答】}\\
-\textbf{(1) の解：}
-光の水平速度は $c$ であるから、幅 $W$ を横切る時間は $t = \frac{W}{c}$ である。\\
-\textbf{(2) の解：}
-等加速度運動の公式より、上昇距離は
-\[
-h = \frac{1}{2} g t^2 = \frac{g W^2}{2 c^2}
-\]
-\textbf{(3) の解：}
-外の慣性系から見れば光は真横に直進しているが、床が上に向かって加速して迎え撃つため、車内の乗客から見れば光線は床に向かって $h$ だけ下方に曲がったように観測される。
-等価原理によれば「加速度系と重力場は物理的に同一」であるから、地上に静止したエレベーター（重力加速度 $g$）の中でも、全く同一の湾曲 $h$ が光線に生じなければならない。こうしてアインシュタインは、「質量のない純粋な光線も重力によって曲げられる」という驚天動地の結論を、高校物理の運動方程式だけで導き出したのである。\qed
-\end{exercisebox}
+38.5マイクロ秒に光の速さをかけると、$38.5\times10^{-6}\times3\times10^8\approx11.5$ km の距離の誤差に当たります。
 
-\vspace*{3mm}
+\begin{pointbox}{この節のまとめ}
+\begin{itemize}[leftmargin=*]
+\item 重力場のなかでは、時計の進み方が場所で違う。
+\item GPS衛星の時計は、重力で $+45.7$、速さで $-7.2$、差し引き $+38.5$ マイクロ秒/日（補足）。
+\end{itemize}
+\end{pointbox}
 
-\begin{exercisebox}{第8問：太陽による恒星光の重力偏向角（エディントン観測の検証）}
-1919年5月29日の皆既日食において、アーサー・エディントン卿は西アフリカのプリンシペ島で太陽の縁すれすれを通る恒星の光を観測した。一般相対性理論による光の偏向角の公式は
-\[
-\theta = \frac{4GM}{c^2 R} \quad \text{（ラジアン）}
-\]
-で与えられる。\\
-太陽質量 $M_{\odot} \approx 1.99 \times 10^{30}\,\text{kg}$、太陽半径 $R_{\odot} \approx 6.96 \times 10^8\,\text{m}$、万有引力定数 $G \approx 6.67 \times 10^{-11}\,\text{m}^3/(\text{kg}\cdot\text{s}^2)$、光速 $c \approx 3.00 \times 10^8\,\text{m/s}$ とする。\\
-(1) 偏向角 $\theta$ をラジアン単位で求めよ。\\
-(2) $1\,\text{ラジアン} = \frac{180 \times 3600}{\pi} \approx 206265\,\text{秒角}$（arcsec）を用いて、偏向角を秒角に換算せよ。古典ニュートン力学（光を質量を持つ粒子と仮定した場合の半分）の予言値 $0.875''$ と比較せよ。
-\\[2mm]
-\textbf{【懇切丁寧な解答】}\\
-\textbf{(1) の解：}
-\[
-\theta = \frac{4 \times (6.674 \times 10^{-11}) \times (1.989 \times 10^{30})}{(3.00 \times 10^8)^2 \times (6.963 \times 10^8)}
-= \frac{5.310 \times 10^{20}}{6.267 \times 10^{25}} \approx 8.473 \times 10^{-6}\,\text{rad}
-\]
-\textbf{(2) の解：}
-\[
-\theta'' = 8.473 \times 10^{-6} \times 206265'' \approx 1.75''
-\]
-ニュートン力学の粒子論による計算では $\frac{2GM}{c^2 R} = 0.875''$ であったのに対し、アインシュタインの一般相対性理論では「時間の遅れ」と「空間の湾曲」の双方が寄与するため、正確に2倍の $1.75''$ となる。エディントンの観測隊が日食写真の乾板を測定した結果は $1.98'' \pm 0.12''$ および $1.61'' \pm 0.30''$ であり、アインシュタインの予言が鮮やかに立証され、世界中の新聞が「科学の歴史が書き換わった」と一面で報じた。\qed
-\end{exercisebox}
+%==========================================================
+\chapter{一般相対性原理の厳密な定式化（第XXVIII節）}
+\markboth{第28章}{一般相対性原理の定式化}
+%==========================================================
 
-\vspace*{3mm}
+\section{この節の位置づけ}
 
-\begin{exercisebox}{第9問：水星の近日点移動とニュートン力学の破綻}
-太陽に最も近い惑星である水星の楕円軌道は、100年間に約 $5600''$（秒角）回転（移動）する。そのうち木星や金星など他の惑星からの摂動によるニュートン力学的なズレは $5160''$、地球の歳差運動による見かけの回転が $43''$ 分解され、どうしても説明のつかない「余剰の $43''$/世紀」が19世紀以来の天文学の最大の謎であった。\\
-アインシュタインが導いた一般相対論による1公転あたりの近日点移動角 $\Delta \phi$ は
-\[
-\Delta \phi = \frac{6\pi GM}{c^2 a (1 - e^2)} \quad \text{（ラジアン/公転）}
-\]
-で与えられる。水星の軌道長半径 $a \approx 5.79 \times 10^{10}\,\text{m}$、離心率 $e \approx 0.2056$、公転周期 $T \approx 87.97\,\text{日}$（1世紀あたりの公転回数 $N \approx 415$ 回）として、1世紀あたりの相対論的移動角を秒角で計算せよ。
-\\[2mm]
-\textbf{【懇切丁寧な解答】}\\
-分母の幾何学的項を計算すると、
-\[
-1 - e^2 = 1 - (0.2056)^2 = 1 - 0.0423 = 0.9577
-\]
-1公転あたりの角移動 $\Delta \phi$ は
-\[
-\Delta \phi = \frac{6\pi \times (6.674 \times 10^{-11}) \times (1.989 \times 10^{30})}{(3.00 \times 10^8)^2 \times (5.79 \times 10^{10}) \times 0.9577}
-= \frac{2.499 \times 10^{21}}{4.991 \times 10^{27}} \approx 5.007 \times 10^{-7}\,\text{rad/公転}
-\]
-1世紀あたりの総移動角は、公転回数 $N = 415$ を掛けて、
-\[
-\Delta \Phi = 415 \times 5.007 \times 10^{-7} \approx 2.078 \times 10^{-4}\,\text{rad/世紀}
-\]
-これを秒角に換算すると、
-\[
-\Delta \Phi'' = 2.078 \times 10^{-4} \times 206265'' \approx 42.86'' \approx 43''/\text{世紀}
-\]
-1世紀にわずか $43''$（満月の視直径の約 $\frac{1}{40}$）という極微の狂いが、アインシュタインの方程式によって何ら任意の仮定なしにピタリと導き出された。この計算に成功した夜、アインシュタインは「心臓が激しく波打ち、全身が震えるほどの歓喜を覚えた」と友人に書き送っている。\qed
-\end{exercisebox}
+第XXVIII節は、一般相対性原理を、より正確に述べ直します。「自然の法則を表す方程式は、どんな座標系で書いても、同じ形（一般共変）になるべきだ」。座標は、物理的な意味のない、ただの「名札」にすぎない、という立場です。
 
-\vspace*{3mm}
+\section{座標の取り方によらない量：面積}
 
-\begin{exercisebox}{第10問：シュワルツシルト半径（ブラックホールの境界面）}
-一般相対性理論において、天体の質量 $M$ がそのシュワルツシルト半径
+同じ図形の面積は、座標の取り方に関係なく決まります。半径 $r$ の円の面積は、直交座標でも、極座標でも、$\pi r^2$ です。直交座標で、単位の正方形の格子点を数える方法と、極座標の積分で、結果を比べます。
+
+\begin{table}[htbp]
+\centering
+\begin{tabular}{c|ccc}
+\toprule
+半径 $r$ & 5 & 10 & 50\\
+\midrule
+格子点の数（直交座標で数える） & 81 & 317 & 7845\\
+$\pi r^2$（極座標の積分） & 78.54 & 314.16 & 7853.98\\
+\bottomrule
+\end{tabular}
+\caption{半径 $r$ の円の内側にある格子点の数と $\pi r^2$。$r$ が大きいほど、相対誤差が小さくなる。}
+\end{table}
+
+極座標の積分は $\displaystyle\int_0^{2\pi}\!\!\int_0^r\rho\,d\rho\,d\theta=\pi r^2$ で、被積分関数 $\rho$（計量の一部）が、座標の取り方による違いを吸収します。
+
+\begin{figure}[htbp]
+\centering
+\begin{tikzpicture}[scale=0.55]
+ \foreach \i in {-5,...,5}{\foreach \j in {-5,...,5}{
+   \pgfmathsetmacro{\d}{\i*\i+\j*\j}
+   \ifdim\d pt<25.5pt \fill[primaryblue] (\i,\j) circle (3pt);\else \fill[gridgray] (\i,\j) circle (2pt);\fi
+ }}
+ \draw[crimson, thick] (0,0) circle (5);
+\end{tikzpicture}
+\caption{半径5の円と、格子点（青：円の内側または円周上、灰色：外側）。青い点は81個。}
+\end{figure}
+
+\begin{pointbox}{この節のまとめ}
+\begin{itemize}[leftmargin=*]
+\item 一般共変性：法則の形は、座標の取り方によらない。
+\item 面積のような、座標によらない量が、物理の本体。円の面積は、どの座標でも $\pi r^2$。
+\end{itemize}
+\end{pointbox}
+
+%==========================================================
+\chapter{一般相対性原理にもとづく重力問題の解決（第XXIX節）}
+\markboth{第29章}{重力問題の解決}
+%==========================================================
+
+\section{この節の位置づけ}
+
+第XXIX節は、一般相対性理論が、ニュートンの重力理論を近似として含み、しかも、ニュートンの理論では説明できなかった現象を説明することを述べます。アインシュタインは、この理論から導ける、3つの検証可能な予言を挙げます。この節では、とくに、水星の近日点の移動を見ます。
+
+\section{水星の近日点の移動}
+
+水星の軌道（楕円）は、1周するたびに、少しずつ回転します。一般相対性理論では、1周あたりの回転の角は
 \[
-R_s = \frac{2GM}{c^2}
+\Delta\phi=\frac{6\pi GM_\odot}{c^2\,a\,(1-e^2)}
 \]
-の内側にまで凝縮すると、表面脱出速度が光速 $c$ に達し、光さえも脱出できない「事象の地平面（ブラックホール）」が形成される。\\
-(1) 地球の質量 $M_{\text{earth}} \approx 5.97 \times 10^{24}\,\text{kg}$ をブラックホールにするには、何ミリメートルの半径に圧縮しなければならないか。\\
-(2) 太陽の質量 $M_{\odot} \approx 1.99 \times 10^{30}\,\text{kg}$ のシュワルツシルト半径は何キロメートルか。\\
-(3) 銀河系の中心にある巨大ブラックホール「いて座A*（Sagittarius A*）」の質量は太陽の約400万倍である。そのシュワルツシルト半径は何万キロメートルか。地球と太陽の距離（1天文単位 $\approx 1.5 \times 10^8\,\text{km}$）と比較せよ。
-\\[2mm]
-\textbf{【懇切丁寧な解答】}\\
-\textbf{(1) の解：}
+です。水星の軌道長半径 $a=5.791\times10^{10}$ m、離心率 $e=0.2056$、公転周期 $87.97$ 日で計算すると、1周あたり $5.02\times10^{-7}$ rad、1世紀（415.2周）で $2.08\times10^{-4}$ rad、つまり
 \[
-R_s = \frac{2 \times (6.674 \times 10^{-11}) \times (5.972 \times 10^{24})}{(3.00 \times 10^8)^2} = \frac{7.971 \times 10^{14}}{9.00 \times 10^{16}} \approx 8.86 \times 10^{-3}\,\text{m} \approx 8.9\,\text{mm}
+42.98\ \text{秒角}/\text{世紀}
 \]
-地球の全物質を、わずかビー玉サイズ（直径約 $1.8\,\text{cm}$）にまで押し縮めるとブラックホールになる。\\
-\textbf{(2) の解：}
+です。原著が述べる「$43$ 秒角/世紀」と一致します。
+
+\begin{table}[htbp]
+\centering
+\begin{tabular}{lc}
+\toprule
+量 & 値\\
+\midrule
+1周あたりの回転 & $5.02\times10^{-7}$ rad\\
+1世紀の周回数 & 415.2\\
+1世紀の回転 & $42.98$ 秒角\\
+原著の値 & 43 秒角/世紀\\
+\bottomrule
+\end{tabular}
+\caption{水星の近日点の移動（一般相対論の予言）。原著の観測値（約43秒角/世紀）と一致する。}
+\end{table}
+
+\begin{figure}[htbp]
+\centering
+\begin{tikzpicture}[scale=0.9]
+ \fill[warmamber] (0,0) circle (0.22);
+ \foreach \k in {0,1,2,3,4,5}{
+   \draw[primaryblue!\the\numexpr 30+\k*14\relax, thick, rotate=\k*18] (0.6,0) ellipse (2.6 and 1.5);
+ }
+ \node[lbl] at (0,-2.4) {楕円軌道が、周回ごとに少しずつ回る（回転角を大きく誇張）};
+\end{tikzpicture}
+\caption{水星の軌道の近日点の移動（略図）。実際の回転は、1周あたり $5\times10^{-7}$ rad（約0.1秒角）ときわめて小さい。}
+\end{figure}
+
+\begin{pointbox}{この節のまとめ}
+\begin{itemize}[leftmargin=*]
+\item 一般相対性理論は、水星の近日点の移動を、1世紀あたり約43秒角と予言する（計算で $42.98$）。
+\item 原著の値と一致する。ニュートンの理論だけでは、この移動は説明できなかった。
+\end{itemize}
+\end{pointbox}
+
+%==========================================================
+\part{宇宙全体に関する考察}
+%==========================================================
+
+%==========================================================
+\chapter{ニュートンの理論の宇宙論的な困難（第XXX節）}
+\markboth{第30章}{ニュートン理論の宇宙論的な困難}
+%==========================================================
+
+\section{この節の位置づけ}
+
+第XXX節は、ニュートンの重力理論を、宇宙全体に当てはめたときの困難を述べます。星が、無限に広い宇宙に、ほぼ一様に分布しているとします。すると、重力のポテンシャル（位置エネルギー）が、遠くへ行くほど、いくらでも大きくなり、うまく定まりません。
+
+\section{一様な宇宙の重力ポテンシャル}
+
+質量密度 $\rho$ が一様な宇宙で、ある点から距離 $r$ の範囲の質量が作る重力ポテンシャルの大きさは、おおよそ $\dfrac{2\pi G\rho}{3}\,r^2$ で増えます。$r$ をいくらでも大きくできるので、ポテンシャルは、いくらでも大きくなります。
+
+数値の例で確かめます（仮の値）。$\rho=10^{-26}$ kg/m$^3$（宇宙の平均密度にほぼ当たる大きさ）のとき、
+
+\begin{table}[htbp]
+\centering
+\begin{tabular}{c|ccc}
+\toprule
+距離 $r$（m） & $10^{25}$ & $10^{26}$ & $2.5\times10^{26}$\\
+\midrule
+$\dfrac{2\pi G\rho r^2}{3}$（m$^2$/s$^2$） & $1.4\times10^{14}$ & $1.4\times10^{16}$ & $8.7\times10^{16}$\\
+$c^2$（m$^2$/s$^2$）との比 & 0.0016 & 0.16 & 0.97\\
+\bottomrule
+\end{tabular}
+\caption{一様な宇宙の、重力ポテンシャルの大きさの目安。$r$ が $2.5\times10^{26}$ m 付近で、$c^2$ に達する。}
+\end{table}
+
+距離 $r\approx2.5\times10^{26}$ m（約260億光年）で、ポテンシャルが $c^2$ に達します。それより遠くでは、ニュートンの理論は、使えなくなります。
+
+\begin{figure}[htbp]
+\centering
+\begin{tikzpicture}
+\begin{axis}[width=9.5cm, height=5.2cm, xmin=0, xmax=3, ymin=0, ymax=1.3, xlabel={距離 $r$（$10^{26}$ m）}, ylabel={ポテンシャル$/c^2$},
+  every axis label/.append style={font=\footnotesize}, tick label style={font=\footnotesize}]
+ \addplot[thick, primaryblue, domain=0:3, samples=60] {0.1555*x^2};
+ \addplot[dashed, crimson, domain=0:3, samples=2] {1};
+\end{axis}
+\end{tikzpicture}
+\caption{一様な宇宙の重力ポテンシャル（$\rho=10^{-26}$ kg/m$^3$）。距離の2乗で増え、約 $2.5\times10^{26}$ m で $c^2$（破線）に達する。}
+\end{figure}
+
+（この数値は、本書の仮の値による説明用の計算で、原著の数値ではありません。）
+
+\begin{pointbox}{この節のまとめ}
+\begin{itemize}[leftmargin=*]
+\item 無限に一様な宇宙では、ニュートンの重力ポテンシャルは、距離の2乗で増え、定まらない。
+\item 仮の値でも、$r\approx2.5\times10^{26}$ m で $c^2$ に達し、理論が破れる。
+\end{itemize}
+\end{pointbox}
+
+%==========================================================
+\chapter{「有限」で「境界のない」宇宙の可能性（第XXXI節）}
+\markboth{第31章}{有限で境界のない宇宙}
+%==========================================================
+
+\section{この節の位置づけ}
+
+第XXXI節は、宇宙が、有限の大きさをもちながら、端（境界）がない、という可能性を示します。アインシュタインは、2次元の例として、球面を使います。球面は、面積が有限ですが、端がありません。同じことが、3次元の空間でも起こりうる、と考えます。
+
+\section{球面の世界}
+
+球面の上の2次元の生き物にとって、世界は、有限の面積 $4\pi R^2$ をもち、端がありません。まっすぐ進めば、元の場所に戻ってきます。地球（$R=6371$ km）を例にとると、
+
+\begin{table}[htbp]
+\centering
+\begin{tabular}{lc}
+\toprule
+量 & 値\\
+\midrule
+一周する距離（大円） $2\pi R$ & 40030 km\\
+表面積 $4\pi R^2$ & $5.10\times10^{8}$ km$^2$\\
+\bottomrule
+\end{tabular}
+\caption{地球の表面を、2次元の世界と見たときの、有限の大きさ。}
+\end{table}
+
+\begin{figure}[htbp]
+\centering
+\begin{tikzpicture}[scale=1.3]
+ \draw[thick, darkslate] (0,0) circle (1.5);
+ \draw[gray, dashed] (-1.5,0) arc (180:360:1.5 and 0.5);
+ \draw[gray] (-1.5,0) arc (180:0:1.5 and 0.5);
+ \draw[->, ultra thick, crimson] (-1.5,0) arc (180:360:1.5 and 0.5);
+ \draw[->, ultra thick, crimson] (1.5,0) arc (0:180:1.5 and 0.5);
+ \fill (-1.5,0) circle (2pt) node[left, lbl] {出発点};
+ \node[lbl] at (0,-2.0) {まっすぐ進むと、元に戻る};
+\end{tikzpicture}
+\caption{球面の上で、まっすぐ進む（大円に沿う）と、元の出発点に戻る。球面は有限で、端がない。}
+\end{figure}
+
+宇宙の3次元空間が、この球面の「3次元版」（3次元球面）なら、どの方向にまっすぐ進んでも、いつかは元に戻ります。有限なのに、端がない。
+
+\begin{pointbox}{この節のまとめ}
+\begin{itemize}[leftmargin=*]
+\item 球面は、有限の面積をもち、端がない。3次元でも、同じことが考えられる。
+\item 地球の表面は、一周40030 km、面積 $5.1\times10^8$ km$^2$ の、有限で端のない2次元の世界。
+\end{itemize}
+\end{pointbox}
+
+%==========================================================
+\chapter{一般相対性理論による空間の構造（第XXXII節）}
+\markboth{第32章}{空間の構造}
+%==========================================================
+
+\section{この節の位置づけ}
+
+第XXXII節は、一般相対性理論にもとづいて、宇宙の空間の構造を論じます。物質が一様に分布しているなら、空間は、球面のように曲がった、有限の大きさのものになりうる、とアインシュタインは述べます。この節では、その幾何学を、数値で見ます。
+
+\section{3次元球面の体積}
+
+半径 $R$ の3次元球面（4次元空間の中の球面）の体積は $2\pi^2R^3$ で、半径 $R$ の2次元球面の面積は $4\pi R^2$ です。
+
+\begin{table}[htbp]
+\centering
+\begin{tabular}{c|cc}
+\toprule
+半径 $R$ & 2次元球面の面積 $4\pi R^2$ & 3次元球面の体積 $2\pi^2R^3$\\
+\midrule
+1 & 12.566 & 19.739\\
+2 & 50.265 & 157.91\\
+10 & 1256.6 & 19739\\
+\bottomrule
+\end{tabular}
+\caption{2次元球面の面積と3次元球面の体積。半径が $10$ 倍になると、面積は $100$ 倍、体積は $1000$ 倍。}
+\end{table}
+
+\begin{figure}[htbp]
+\centering
+\begin{tikzpicture}
+\begin{axis}[width=9.5cm, height=5.2cm, xmin=0, xmax=5, ymin=0, ymax=1300, xlabel={半径 $R$}, ylabel={大きさ},
+  every axis label/.append style={font=\footnotesize}, tick label style={font=\footnotesize}, legend style={font=\scriptsize, at={(0.03,0.97)}, anchor=north west}]
+ \addplot[thick, primaryblue, domain=0:5, samples=50] {4*pi*x^2};
+ \addplot[thick, crimson, domain=0:5, samples=50] {2*pi^2*x^3};
+ \legend{面積 $4\pi R^2$, 体積 $2\pi^2R^3$}
+\end{axis}
+\end{tikzpicture}
+\caption{半径 $R$ と、2次元球面の面積、3次元球面の体積。半径が大きくなると、体積のほうが急に大きくなる。}
+\end{figure}
+
+\begin{pointbox}{この節のまとめ}
+\begin{itemize}[leftmargin=*]
+\item 物質が一様なら、空間は、有限の大きさの曲がった空間（3次元球面）になりうる。
+\item 3次元球面の体積は $2\pi^2R^3$、2次元球面の面積は $4\pi R^2$。
+\end{itemize}
+\end{pointbox}
+
+%==========================================================
+\part{付録}
+%==========================================================
+
+%==========================================================
+\chapter{付録I：ローレンツ変換の簡単な導出}
+\markboth{第33章}{付録I：ローレンツ変換の導出}
+%==========================================================
+
+\section{この付録の位置づけ}
+
+付録Iは、第11章の変換の式を、短い論法で導きます。出発点は、「光の速さが、どの座標系でも $c$」ということと、「変換が1次式（直線を直線に写す）」ということです。
+
+\section{光の前線から導く}
+
+原点で、$t=0$ に光を出したとします。座標系 $K$ では、光の前線は、$x=ct$ に沿って進みます。座標系 $K'$（速さ $v$ で動く）でも、同じ光は、$x'=ct'$ に沿って進むはずです。つまり、$x-ct=0$ の出来事は、$x'-ct'=0$ に写り、$x+ct=0$（反対向きの光）は、$x'+ct'=0$ に写ります。
+
+この条件を満たす1次の変換は、$x'=\gamma(x-vt)$、$t'=\gamma(t-vx/c^2)$ の形になります（係数 $\gamma$ は、残りの条件から決まる）。光の前線について確かめます。$x=ct$ を代入すると
 \[
-R_s = \frac{2 \times (6.674 \times 10^{-11}) \times (1.989 \times 10^{30})}{(3.00 \times 10^8)^2} = \frac{2.655 \times 10^{20}}{9.00 \times 10^{16}} \approx 2950\,\text{m} \approx 2.95\,\text{km} \approx 3\,\text{km}
+x'=\gamma(c-v)\,t,\qquad t'=\gamma\Bigl(1-\frac vc\Bigr)t=\frac{\gamma(c-v)}{c}\,t,
 \]
-太陽ほどの巨大な恒星でも、半径約 $3\,\text{km}$（富士山の高さ程度）に収縮すればブラックホールとなる。\\
-\textbf{(3) の解：}
-太陽の400万倍であるから、
+したがって $\dfrac{x'}{t'}=c$。光の速さは、$K'$ でも $c$ です。
+
+\begin{table}[htbp]
+\centering
+\begin{tabular}{c|ccc}
+\toprule
+$\beta$ & 0.3 & 0.6 & 0.9\\
+\midrule
+$x'/t'$（光の前線）$/c$ & 1 & 1 & 1\\
+\bottomrule
+\end{tabular}
+\caption{光の前線 $x=ct$ を、速さ $\beta$ の座標系に変換して、$x'/t'$ を $c$ で割った値。どの $\beta$ でも $1$。}
+\end{table}
+
+\begin{figure}[htbp]
+\centering
+\begin{tikzpicture}[scale=0.9]
+ \draw[->, thick, darkslate] (-3,0)--(3.2,0) node[right] {$x$};
+ \draw[->, thick, darkslate] (0,-0.3)--(0,3.5) node[above] {$ct$};
+ \draw[thick, crimson] (0,0)--(3,3);
+ \draw[thick, crimson] (0,0)--(-3,3);
+ \draw[->, thick, primaryblue] (0,0)--(1.6,2.6) node[above, lbl] {$ct'$};
+ \node[lbl, crimson] at (2.3,3.1) {光};
+ \node[lbl, crimson] at (-2.3,3.1) {光};
+\end{tikzpicture}
+\caption{光の前線（赤）は、どの座標系でも、同じ角度（光速）の線。変換後の軸 $ct'$（青）は傾くが、赤い線は赤い線のまま。}
+\end{figure}
+
+\begin{pointbox}{この付録のまとめ}
+\begin{itemize}[leftmargin=*]
+\item 光の前線 $x=\pm ct$ を、同じ $x'=\pm ct'$ に写す1次変換が、ローレンツ変換。
+\item 確かめ：光の前線を変換しても、$x'/t'=c$ のまま。
+\end{itemize}
+\end{pointbox}
+
+%==========================================================
+\chapter{付録II：ミンコフスキーの4次元空間（「世界」）}
+\markboth{第34章}{付録II：ミンコフスキーの4次元空間}
+%==========================================================
+
+\section{この付録の位置づけ}
+
+付録IIは、ミンコフスキーの4次元の「世界」を、第26章の $x_4=ict$ を使って説明します。ローレンツ変換は、この世界の中の、虚数の角の回転で、実際には、双曲線の角（ラピディティ）で書き直せます。
+
+\section{ラピディティの足し算}
+
+ラピディティ $\varphi=\mathrm{artanh}(v/c)$ は、速度の足し算を、ふつうの足し算にします。2つの速さ $\beta_1,\beta_2$ を足した結果は、$\tanh(\varphi_1+\varphi_2)$ です。数値で確かめます。
+
+\begin{table}[htbp]
+\centering
+\begin{tabular}{cc|ccc}
+\toprule
+$\beta_1$ & $\beta_2$ & $\varphi_1+\varphi_2$ & $\tanh(\varphi_1+\varphi_2)$ & 公式 $\tfrac{\beta_1+\beta_2}{1+\beta_1\beta_2}$\\
+\midrule
+0.5 & 0.5 & 1.0986 & 0.8 & 0.8\\
+0.9 & 0.9 & 2.9444 & 0.99448 & 0.99448\\
+\bottomrule
+\end{tabular}
+\caption{ラピディティで速度を足した結果と、速度の加法の公式の結果は一致する（計算で確認）。}
+\end{table}
+
+\begin{figure}[htbp]
+\centering
+\begin{tikzpicture}
+\begin{axis}[width=8cm, height=6cm, xmin=-3.2, xmax=3.2, ymin=0.9, ymax=3.4, xlabel={$x$}, ylabel={$ct$}, axis lines=middle,
+  every axis label/.append style={font=\footnotesize}, tick label style={font=\footnotesize}]
+ \addplot[thick, primaryblue, domain=-1.7:1.7, samples=100, variable=\p] ({sinh(\p)},{cosh(\p)});
+ \addplot[mark=*, crimson, only marks] coordinates {(0,1)(0.5774,1.1547)(1.3333,1.6667)};
+ \node[font=\scriptsize, anchor=west] at (axis cs:0.1,1.0) {$\beta=0$};
+ \node[font=\scriptsize, anchor=west] at (axis cs:0.65,1.12) {$\beta=0.5$};
+ \node[font=\scriptsize, anchor=west] at (axis cs:1.4,1.7) {$\beta=0.8$};
+\end{axis}
+\end{tikzpicture}
+\caption{双曲線 $c^2t^2-x^2=1$。点 $(\sinh\varphi,\cosh\varphi)$ が、速さ $\beta=\tanh\varphi$ の座標系での「時間の単位」の位置。速さが大きいほど、双曲線の上を遠くまで動く。}
+\end{figure}
+
+確かめると、$\beta=0.5$ では $\varphi=0.5493$、点は $(\sinh0.5493,\cosh0.5493)=(0.5774,1.1547)$、$\beta=0.8$ では $\varphi=1.0986$、点は $(1.3333,1.6667)$ です（点の座標 $x/ct=\tanh\varphi=\beta$ ともなる）。
+
+\begin{pointbox}{この付録のまとめ}
+\begin{itemize}[leftmargin=*]
+\item ラピディティ $\varphi=\mathrm{artanh}\,\beta$ は、速度の足し算を、ふつうの足し算にする。
+\item 例：$0.5c+0.5c$ はラピディティで $0.5493\times2=1.0986$、$\tanh=0.8$。
+\end{itemize}
+\end{pointbox}
+
+%==========================================================
+\chapter{付録III：一般相対性理論の実験的確認}
+\markboth{第35章}{付録III：実験的確認}
+%==========================================================
+
+\section{この付録の位置づけ}
+
+付録IIIは、一般相対性理論の、検証可能な3つの予言を、まとめて述べます。(1) 水星の近日点の移動（第29章）、(2) 重力場による光の曲がり（第22章）、(3) 太陽のような重い天体の表面から来る光の、スペクトル線の波長のずれ（重力赤方偏移）です。
+
+\section{3つの効果の大きさ}
+
+重力赤方偏移は、太陽の表面から来る光の波長が、重力のために、わずかに長くなる効果です。ずれの割合は $\dfrac{GM_\odot}{c^2R_\odot}$ で、計算すると $2.12\times10^{-6}$ です。波長 $500$ nm の光なら、$500\times2.12\times10^{-6}=1.06\times10^{-3}$ nm（1.06ピコメートル）長くなります。
+
+\begin{table}[htbp]
+\centering
+\small
+\begin{tabular}{p{3.6cm}p{5cm}p{4.6cm}}
+\toprule
+効果 & 一般相対論の予言（本書の計算） & 原著の記述\\
+\midrule
+水星の近日点の移動 & $42.98$ 秒角/世紀 & 43 秒角/世紀\\
+太陽のふちの光の曲がり & $1.75$ 秒角 & 1.7 秒角\\
+太陽表面の重力赤方偏移 & $2.12\times10^{-6}$（500 nm で 1.06 pm） & （本書では原著の記述を確認していない）\\
+\bottomrule
+\end{tabular}
+\caption{一般相対論の3つの予言。最初の2つは、原著の数値と一致した。}
+\end{table}
+
+\begin{figure}[htbp]
+\centering
+\begin{tikzpicture}
+\begin{axis}[ybar, width=10cm, height=5cm, bar width=22pt, ymode=log, xmin=0.4, xmax=3.6, ymin=1e-7, ymax=1e-2, xtick={1,2,3}, xticklabels={近日点（1周あたり rad）,光の曲がり（rad）,赤方偏移（割合）}, ylabel={効果の大きさ},
+  every axis label/.append style={font=\footnotesize}, tick label style={font=\scriptsize}]
+ \addplot[fill=softblue, draw=primaryblue] coordinates {(1,5.02e-7)(2,8.49e-6)(3,2.12e-6)};
+\end{axis}
+\end{tikzpicture}
+\caption{3つの効果の大きさ（対数目盛）。どれも極めて小さく、精密な観測が必要だった。}
+\end{figure}
+
+\begin{pointbox}{この付録のまとめ}
+\begin{itemize}[leftmargin=*]
+\item 3つの予言：近日点の移動（約43秒角/世紀）、光の曲がり（約1.75秒角）、重力赤方偏移（$2.1\times10^{-6}$）。
+\item どれも小さいが、近日点移動と光の曲がりは、原著の数値と本書の計算が一致した。
+\end{itemize}
+\end{pointbox}
+
+%==========================================================
+\chapter{付録IV：空間の構造（補足）}
+\markboth{第36章}{付録IV：空間の構造（補足）}
+%==========================================================
+
+\section{この付録の位置づけ}
+
+付録IVは、第XXXII節の、宇宙の空間の構造の補足です。曲がった空間では、三角形の内角の和が $180$ 度からずれ、そのずれが面積と結びつくことを、数値で確かめます。球面（半径 $R$）の上の三角形では、内角の和は
 \[
-R_s = 4.0 \times 10^6 \times 2.95\,\text{km} \approx 1.18 \times 10^7\,\text{km} = 1180万\,\text{km}
+\text{内角の和}=\pi+\frac{\text{面積}}{R^2}\quad(\text{ラジアン})
 \]
-太陽の半径が約 $70万\,\text{km}$ であるから、その約17倍の領域である。地球と太陽の距離 $1億5000万\,\text{km}$ の約 $8\%$（水星の軌道半径の約 $\frac{1}{5}$）にすっぽりと収まるサイズである。2022年にイベント・ホライズン・テレスコープ（EHT）が撮影したいて座A*の電波写真の影（シャドウ）は、まさにこのアインシュタイン方程式の解が1世紀の時を経て天体観測によって視覚的に捉えられた記念碑的成果である。\qed
-\end{exercisebox}
+です。
 
-\chapter*{おわりに：現代文明の礎となったアインシュタインの遺産}
-\addcontentsline{toc}{chapter}{おわりに：現代文明の礎となったアインシュタインの遺産}
+\section{面積と角度の余り}
 
-アルベルト・アインシュタインが本書『特殊および一般相対性理論について』を出版してから一世紀以上の歳月が流れました。かつて「世界で真に理解できる者は3人しかいない」とまで噂されたこの理論は、いまやSFの空想物語ではなく、私たちのスマートフォンの中（GPS高精度測位）、病院の先端医療（PET診断における陽電子消滅）、エネルギーインフラ（原子力発電）、そして宇宙望遠鏡による深宇宙探査の現場において、寸秒の狂いもなく稼働する「現代文明の実用技術」となっています。
+\begin{table}[htbp]
+\centering
+\begin{tabular}{c|ccc}
+\toprule
+三角形の面積 $A/R^2$ & 0.1 & 1.0 & $\pi/2$（8分の1球面）\\
+\midrule
+内角の和の余り（度） & 5.73 & 57.30 & 90.00\\
+\bottomrule
+\end{tabular}
+\caption{球面上の三角形の、内角の和の「$180$ 度に対する余り」（面積を $R^2$ で割った値を、度に直した）。}
+\end{table}
 
-しかし、技術的応用の価値以上に私たちの心を揺さぶり続けるのは、アインシュタインが見せた\textbf{「人間の理性と論理的思考の力」}です。彼は実験室に籠もって大がかりな装置を操作したのではなく、自らの頭の中で「もし光の速さで光を追いかけたらどう見えるか」「走る列車の中で雷を見たらどうなるか」「落下するエレベーターの中の人には何が起きるか」という純粋な\textbf{思考実験（Gedankenexperiment）}を徹底的に突き詰めることで、2000年来の絶対時間・絶対空間の常識を覆しました。
+\begin{figure}[htbp]
+\centering
+\begin{tikzpicture}
+\begin{axis}[width=9.5cm, height=5.2cm, xmin=0, xmax=1.6, ymin=0, ymax=95, xlabel={$A/R^2$}, ylabel={角度の余り（度）},
+  every axis label/.append style={font=\footnotesize}, tick label style={font=\footnotesize}]
+ \addplot[thick, primaryblue, domain=0:1.6, samples=2] {x*180/pi};
+ \addplot[mark=*, crimson, only marks] coordinates {(0.1,5.73)(1,57.30)(1.5708,90)};
+\end{axis}
+\end{tikzpicture}
+\caption{球面上の三角形の角度の余りは、面積に比例する。比例定数は $180/\pi\approx57.3$ 度。}
+\end{figure}
 
-大人の学び直しの旅を終えた読者の皆様が、夜空を見上げるとき、あるいは手元のスマートフォンの地図アプリを開くとき、その背後に広がる「時間と空間が織りなす壮大で美しい四次元幾何学の世界」を、アインシュタインの温かな眼差しとともに実感していただけるなら、編訳者一同のこの上ない喜びです。
+宇宙の空間の曲がりを調べるには、非常に大きな三角形を測る必要があります。地球の表面で、一辺が約 $100$ km の三角形でも、$A/R^2\approx(100^2\sqrt3/4)/6371^2=1.07\times10^{-4}$ で、余りは約 $0.006$ 度（約22秒角）にすぎません。
+
+\begin{pointbox}{この付録のまとめ}
+\begin{itemize}[leftmargin=*]
+\item 球面上の三角形の内角の和の余り（ラジアン）$=A/R^2$。
+\item 小さな三角形では、余りはほとんど測れない。曲がりを知るには、大きな三角形が要る。
+\end{itemize}
+\end{pointbox}
+
+%==========================================================
+\chapter*{おわりに：この本で確かめたことの一覧}
+\addcontentsline{toc}{chapter}{おわりに：この本で確かめたことの一覧}
+\markboth{おわりに}{おわりに}
+%==========================================================
+
+\begin{table}[htbp]
+\centering
+\small
+\begin{tabular}{lll}
+\toprule
+章 & 確かめた内容 & 方法\\
+\midrule
+第1章 & 球面の8分の1の三角形、余り $\pi/2$ & 面積の計算\\
+第2章 & 座標の回転で距離が不変 & 数値計算\\
+第3〜7章 & 石の落下、速度の足し算、光との矛盾 & 計算\\
+第9〜12章 & 同時性のずれ、ローレンツ因子の表、宇宙船 & 計算\\
+第11、14章 & 時空の間隔の不変性 & 3つの速さで数値確認\\
+第13章 & 相対論の速度の加法、フィゾーの係数0.435 & 計算\\
+第15〜16章 & $E=mc^2$、運動エネルギー、ミューオン（補足） & 計算\\
+第18〜21章 & 自由落下、質量の比、地球の扁平 & 計算\\
+第22章 & 光の曲がり $1.75$ 秒角 & $4GM/c^2R$\\
+第23〜26章 & 回転円盤、球面の円周、緯線、ラピディティ & 計算\\
+第27章 & GPS衛星の時計（補足） & 重力と速さの効果の計算\\
+第29章 & 水星の近日点 $42.98$ 秒角/世紀 & $6\pi GM/c^2a(1-e^2)$\\
+第30〜32章 & 宇宙のポテンシャル（仮の値）、球面・3次元球面 & 計算\\
+第33〜36章 & 光の前線、ラピディティの足し算、3つの効果、三角形の余り & 計算\\
+\bottomrule
+\end{tabular}
+\caption{本書で確かめたことの一覧。}
+\end{table}
+
+\begin{notebox}{本書でできなかったこと}
+\begin{itemize}[leftmargin=*]
+\item 原著の哲学的・歴史的な議論（実験の歴史、マッハの原理の議論など）の細部は、取り上げていません。
+\item 第27章のGPS、第16章のミューオンは、原著にない現代の補足です。第30章の宇宙の密度は、説明用の仮の値です。
+\item 一般相対論の方程式（アインシュタイン方程式）そのものの導出は、扱っていません。
+\end{itemize}
+\end{notebox}
 
 \end{document}
