@@ -319,6 +319,101 @@ $S=\left\{1,\frac12,\frac13,\frac14,\ldots\right\}$ の集積点は $0$ だけ�
 \end{itemize}
 \end{pointbox}
 
+\section{補充 第1章を例題で確かめる}
+
+\subsection*{例題1：分数を小数に直すと、終わるか、くり返す}
+
+有理数を小数に直すと、必ず「終わる」か「同じ並びをくり返す」かのどちらかです。分母が $2$ と $5$ の因数だけでできていれば終わり、そうでなければくり返します。
+
+\begin{center}
+\begin{tabular}{lll}
+\toprule
+分数 & 小数 & くり返しの長さ\\
+\midrule
+$\frac18$ & $0.125$ & 終わる\\
+$\frac13$ & $0.333\ldots$ & 1\\
+$\frac16$ & $0.1666\ldots$ & 1\\
+$\frac1{11}$ & $0.090909\ldots$ & 2\\
+$\frac17$ & $0.142857\,142857\ldots$ & 6\\
+\bottomrule
+\end{tabular}
+\end{center}
+
+\begin{examplebox}{なぜくり返すのか}
+割り算の余りは、分母を $q$ とすると、$0,1,\ldots,q-1$ の $q$ 通りしかありません。$q+1$ 回割れば、どこかで同じ余りが2度出て、それ以降は同じ計算のくり返しになります。$\frac17$ なら余りは $1,3,2,6,4,5$ と巡って $1$ に戻るので、周期は $6$ です。
+\end{examplebox}
+
+\subsection*{例題2：$\sqrt2$ を有理数ではさむ}
+
+$x^2<2$ となる有理数 $x$ の集まりを下組、$x^2>2$ となる正の有理数の集まりを上組とします。この2つの境目にある数が $\sqrt2$ です。
+
+\begin{center}
+\begin{tabular}{rrl}
+\toprule
+$x$ & $x^2$ & $2$ との比較\\
+\midrule
+$1.4$ & $1.96$ & 下組\\
+$1.5$ & $2.25$ & 上組\\
+$1.41$ & $1.9881$ & 下組\\
+$1.42$ & $2.0164$ & 上組\\
+$1.414$ & $1.999396$ & 下組\\
+$1.415$ & $2.002225$ & 上組\\
+\bottomrule
+\end{tabular}
+\end{center}
+
+\begin{figure}[htbp]
+\centering
+\begin{tikzpicture}
+ \foreach \y/\a/\b/\sc in {2.6/1.4/1.5/100, 1.3/1.41/1.42/1000, 0/1.414/1.415/10000} {
+   \draw[thick] (0,\y)--(10,\y);
+   \draw (0,\y+0.1)--(0,\y-0.1) node[below, font=\scriptsize] {\a};
+   \draw (10,\y+0.1)--(10,\y-0.1) node[below, font=\scriptsize] {\b};
+   \pgfmathsetmacro{\px}{(1.41421356-\a)*\sc}
+   \fill[crimson] (\px,\y) circle (0.08);
+ }
+ \draw[dashed, gray] (1.421,2.6)--(1.421,1.3);
+ \draw[dashed, gray] (4.21,1.3)--(2.136,0);
+ \node[crimson, font=\footnotesize, above] at (1.421,2.7) {$\sqrt2$};
+ \node[font=\scriptsize, right] at (10.2,2.6) {幅 $0.1$};
+ \node[font=\scriptsize, right] at (10.2,1.3) {幅 $0.01$};
+ \node[font=\scriptsize, right] at (10.2,0) {幅 $0.001$};
+\end{tikzpicture}
+\caption{区間をだんだん狭めて $\sqrt2=1.41421356\ldots$ を追いこむ。各段は、前の段の赤い点の付近を10倍に拡大したもの。}
+\end{figure}
+
+\subsection*{例題3：上限は「最大値」とは限らない}
+
+集合 $\{1-\frac1n\}=\{0,\ \frac12,\ \frac23,\ \frac34,\ldots\}$ の項は、どれも $1$ より小さく、$1$ にいくらでも近づきます。したがって上限は $1$ ですが、$1$ はこの集合の要素ではなく、最大値はありません。
+
+\begin{figure}[htbp]
+\centering
+\begin{tikzpicture}
+ \draw[->] (-0.2,0)--(10.4,0);
+ \foreach \n in {1,...,12} {\pgfmathsetmacro{\px}{(1-1/\n)*9}\fill[primaryblue] (\px,0) circle (0.07);}
+ \draw[thick, crimson] (9,0.25)--(9,-0.25);
+ \node[crimson, below] at (9,-0.25) {上限 $1$};
+ \node[below, font=\small] at (0,-0.1) {0};
+\end{tikzpicture}
+\caption{$1-\frac1n$（$n=1,\ldots,12$）の点は、$1$ の左側に積み重なる。$1$ そのものには届かない。}
+\end{figure}
+
+\subsection*{例題4：集積点の例}
+
+\begin{figure}[htbp]
+\centering
+\begin{tikzpicture}
+ \draw[->] (-0.5,0)--(8.8,0);
+ \foreach \n in {1,...,14} {\pgfmathsetmacro{\px}{8/\n}\fill[primaryblue] (\px,0) circle (0.07);}
+ \fill[crimson] (0,0) circle (0.09); \node[crimson, below] at (0,-0.15) {集積点 $0$};
+ \node[below, font=\small] at (8,-0.1) {$1$};
+ \node[above, font=\small] at (4,0.1) {$\frac12$}; \node[above, font=\small] at (2.67,0.1) {$\frac13$};
+\end{tikzpicture}
+\caption{集合 $\{1,\frac12,\frac13,\ldots\}$ は、$0$ のまわりにいくらでも点が集まる。集積点は $0$ ただ1つで、$0$ 自身は集合に入っていない。}
+\end{figure}
+
+数列 $(-1)^n\left(1+\frac1n\right)$ のとりうる値の集合は、$1$ と $-1$ の2点に集積します。有界な無限集合には、必ず集積点がある（ボルツァーノ・ワイエルシュトラスの定理）ことを、これらの例で確かめられます。
+
 %==========================================================
 \chapter{実変数の関数}
 \markboth{第2章}{実変数の関数}
@@ -458,6 +553,126 @@ $z=f(x,y)$ のように、2つの変数に依存する関数は、3次元空間�
 \item 2変数の関数は曲面、関係式は曲線を定める。
 \end{itemize}
 \end{pointbox}
+
+\section{補充 第2章を例題で確かめる}
+
+\subsection*{例題1：多項式の根とグラフ}
+
+$f(x)=x^3-2x^2-x+2=(x-1)(x+1)(x-2)$。根は $-1,\ 1,\ 2$ の3つで、グラフはそこで $x$ 軸と交わります。$f(0)=2$。
+
+\begin{figure}[htbp]
+\centering
+\begin{tikzpicture}
+\begin{axis}[width=9.5cm, height=5.8cm, xlabel={$x$}, ylabel={$f(x)$}, xmin=-1.6, xmax=2.6, ymin=-3, ymax=4, grid=major]
+ \addplot[thick, primaryblue, domain=-1.6:2.6, samples=80] {x^3-2*x^2-x+2};
+ \addplot[only marks, mark=*, color=crimson] coordinates {(-1,0)(1,0)(2,0)};
+ \addplot[only marks, mark=square*, color=accentgreen] coordinates {(0,2)};
+\end{axis}
+\end{tikzpicture}
+\caption{3次式 $x^3-2x^2-x+2$ のグラフ。赤い点が根（$-1,1,2$）、緑の点が $f(0)=2$。}
+\end{figure}
+
+\subsection*{例題2：有理関数と漸近線}
+
+$y=\dfrac1{x^2-1}$ は、$x=\pm1$ で分母が $0$ になり、定義されません。その近くで値は限りなく大きく（または小さく）なります。
+
+\begin{figure}[htbp]
+\centering
+\begin{tikzpicture}
+\begin{axis}[width=9.5cm, height=6cm, xlabel={$x$}, ylabel={$y$}, xmin=-3, xmax=3, ymin=-5, ymax=5, grid=major]
+ \addplot[thick, primaryblue, domain=-3:-1.15, samples=50] {1/(x^2-1)};
+ \addplot[thick, primaryblue, domain=-0.9:0.9, samples=50] {1/(x^2-1)};
+ \addplot[thick, primaryblue, domain=1.15:3, samples=50] {1/(x^2-1)};
+ \addplot[dashed, crimson] coordinates {(-1,-5)(-1,5)};
+ \addplot[dashed, crimson] coordinates {(1,-5)(1,5)};
+\end{axis}
+\end{tikzpicture}
+\caption{$1/(x^2-1)$。点線は漸近線 $x=\pm1$。$x=0$ で $-1$、$|x|$ が大きいと $0$ に近づく。}
+\end{figure}
+
+\subsection*{例題3：極座標で曲線を描く}
+
+極座標 $(r,\theta)$ と直交座標の関係は $x=r\cos\theta,\ y=r\sin\theta$。$r=1+\cos\theta$ は、心臓の形（カージオイド）になります。
+
+\begin{center}
+\begin{tabular}{rrr}
+\toprule
+$\theta$ & $r=1+\cos\theta$ & 点 $(x,y)$\\
+\midrule
+$0$ & $2$ & $(2,\,0)$\\
+$\frac\pi2$ & $1$ & $(0,\,1)$\\
+$\pi$ & $0$ & $(0,\,0)$\\
+$\frac{3\pi}2$ & $1$ & $(0,\,-1)$\\
+\bottomrule
+\end{tabular}
+\end{center}
+
+\begin{figure}[htbp]
+\centering
+\begin{tikzpicture}[scale=1.5]
+ \draw[->] (-0.4,0)--(2.5,0) node[right] {$x$}; \draw[->] (0,-1.5)--(0,1.5) node[above] {$y$};
+ \draw[thick, primaryblue, domain=0:360, samples=120, variable=\t] plot ({(1+cos(\t))*cos(\t)}, {(1+cos(\t))*sin(\t)});
+ \draw[thick, crimson, dashed, domain=-90:90, samples=60, variable=\t] plot ({2*cos(\t)*cos(\t)}, {2*cos(\t)*sin(\t)});
+ \node[primaryblue, font=\small] at (-0.3,1.2) {$r=1+\cos\theta$};
+ \node[crimson, font=\small] at (2.1,1.1) {$r=2\cos\theta$};
+\end{tikzpicture}
+\caption{カージオイド $r=1+\cos\theta$（青）と、円 $r=2\cos\theta$（赤の点線、中心 $(1,0)$・半径 $1$）。}
+\end{figure}
+
+\subsection*{例題4：陰関数と代数関数}
+
+$x^2+y^2=25$ は、$y$ を $x$ の式として解いていない「陰」の形です。解くと $y=\pm\sqrt{25-x^2}$ で、1つの $x$ に2つの $y$ が対応します（2価）。
+
+\begin{center}
+\begin{tabular}{rrr}
+\toprule
+$x$ & $y=\sqrt{25-x^2}$ & $y=-\sqrt{25-x^2}$\\
+\midrule
+$0$ & $5$ & $-5$\\
+$3$ & $4$ & $-4$\\
+$4$ & $3$ & $-3$\\
+$5$ & $0$ & $0$\\
+\bottomrule
+\end{tabular}
+\end{center}
+
+\begin{figure}[htbp]
+\centering
+\begin{tikzpicture}[scale=0.5]
+ \draw[->] (-6,0)--(6.3,0) node[right] {$x$}; \draw[->] (0,-6)--(0,6.3) node[above] {$y$};
+ \draw[thick, primaryblue] (0,0) circle (5);
+ \foreach \p in {(3,4),(4,3),(3,-4),(4,-3)} {\fill[crimson] \p circle (0.12);}
+ \node[font=\small] at (3.9,4.6) {$(3,4)$};
+\end{tikzpicture}
+\caption{円 $x^2+y^2=25$。上半分と下半分の2つの関数 $y=\pm\sqrt{25-x^2}$ に分かれる。}
+\end{figure}
+
+\subsection*{例題5：指数関数と対数関数は、鏡写しの関係}
+
+$y=2^x$ と $y=\log_2x$ は、直線 $y=x$ について対称です。
+
+\begin{center}
+\begin{tabular}{r|rrrrrr}
+\toprule
+$x$ & $-2$ & $-1$ & $0$ & $1$ & $2$ & $3$\\
+\midrule
+$2^x$ & $0.25$ & $0.5$ & $1$ & $2$ & $4$ & $8$\\
+\bottomrule
+\end{tabular}
+\end{center}
+
+\begin{figure}[htbp]
+\centering
+\begin{tikzpicture}
+\begin{axis}[width=8.5cm, height=7cm, xlabel={$x$}, ylabel={$y$}, xmin=-3, xmax=6, ymin=-3, ymax=6, grid=major, axis equal image, legend pos=south east, legend style={font=\footnotesize}]
+ \addplot[thick, primaryblue, domain=-3:2.6, samples=60] {2^x};
+ \addplot[thick, crimson, domain=0.13:6, samples=60] {ln(x)/ln(2)};
+ \addplot[dashed, gray, domain=-3:6] {x};
+ \legend{$2^x$,$\log_2x$,$y=x$}
+\end{axis}
+\end{tikzpicture}
+\caption{$2^x$（青）と $\log_2x$（赤）は、$y=x$（点線）を軸に折り返すと重なる。}
+\end{figure}
 
 %==========================================================
 \chapter{複素数}
@@ -620,6 +835,114 @@ $z^4=1$ & $1,\ i,\ -1,\ -i$\\
 \item $z^n=1$ の解は、単位円を $n$ 等分する点。
 \end{itemize}
 \end{pointbox}
+
+\section{補充 第3章を例題で確かめる}
+
+\subsection*{例題1：複素数の四則}
+
+$z=3+2i$、$w=1-i$ とします。
+
+\begin{center}
+\renewcommand{\arraystretch}{1.4}
+\begin{tabular}{ll}
+\toprule
+計算 & 結果\\
+\midrule
+$z+w$ & $4+i$\\
+$zw=(3+2i)(1-i)=3-3i+2i-2i^2$ & $5-i$\\
+$\dfrac zw=\dfrac{(3+2i)(1+i)}{(1-i)(1+i)}=\dfrac{1+5i}{2}$ & $0.5+2.5i$\\
+$|z|=\sqrt{3^2+2^2}$ & $\sqrt{13}\approx3.606$\\
+\bottomrule
+\end{tabular}
+\end{center}
+
+\begin{figure}[htbp]
+\centering
+\begin{tikzpicture}[scale=0.9]
+ \draw[->] (-1,0)--(6.3,0) node[right] {実軸}; \draw[->] (0,-2)--(0,3.3) node[above] {虚軸};
+ \foreach \x in {1,...,6} {\draw (\x,0.07)--(\x,-0.07);}
+ \draw[->, thick, primaryblue] (0,0)--(3,2) node[above right] {$z=3+2i$};
+ \draw[->, thick, crimson] (0,0)--(1,-1) node[below] {$w=1-i$};
+ \draw[->, thick, accentgreen] (0,0)--(4,1) node[above right] {$z+w=4+i$};
+ \draw[->, thick, darkslate] (0,0)--(5,-1) node[below right] {$zw=5-i$};
+ \draw[dashed, gray] (3,2)--(4,1)--(1,-1);
+\end{tikzpicture}
+\caption{複素数を平面上の矢印として見る。足し算は平行四辺形、掛け算は「長さを掛けて、角を足す」。}
+\end{figure}
+
+\subsection*{例題2：$1+i$ の累乗は、渦を巻く}
+
+$|1+i|=\sqrt2$、偏角は $45^\circ$。ド・モアブルの定理から、$n$ 乗すると長さは $(\sqrt2)^n$ 倍、角は $45^\circ\times n$ になります。
+
+\begin{center}
+\begin{tabular}{rrrr}
+\toprule
+$n$ & $(1+i)^n$ & 長さ & 偏角\\
+\midrule
+$1$ & $1+i$ & $1.414$ & $45^\circ$\\
+$2$ & $2i$ & $2$ & $90^\circ$\\
+$3$ & $-2+2i$ & $2.828$ & $135^\circ$\\
+$4$ & $-4$ & $4$ & $180^\circ$\\
+$8$ & $16$ & $16$ & $360^\circ$\\
+\bottomrule
+\end{tabular}
+\end{center}
+
+\begin{figure}[htbp]
+\centering
+\begin{tikzpicture}[scale=0.55]
+ \draw[->] (-5,0)--(5.5,0) node[right] {実軸}; \draw[->] (0,-4.5)--(0,5) node[above] {虚軸};
+ \draw[thick, primaryblue, domain=0:360, samples=120, variable=\t] plot ({1.4142^(\t/45)*cos(\t)}, {1.4142^(\t/45)*sin(\t)});
+ \foreach \p/\l in {(1,1)/{$1+i$},(0,2)/{$2i$},(-2,2)/{$(1+i)^3$},(-4,0)/{$-4$}} {
+   \fill[crimson] \p circle (0.13); \node[font=\scriptsize, above right] at \p {\l};
+ }
+\end{tikzpicture}
+\caption{$(1+i)^t$ の軌跡（$t=0$ から $8$）。1周ごとに長さが $16$ 倍になる。}
+\end{figure}
+
+\subsection*{例題3：$1$ の累乗根は、単位円を等分する}
+
+$z^5=1$ の解は、単位円周上を $72^\circ$ ごとに5等分した点です。
+
+\begin{center}
+\begin{tabular}{rrr}
+\toprule
+$k$ & 偏角 & $z_k=\cos\theta+i\sin\theta$\\
+\midrule
+$0$ & $0^\circ$ & $1$\\
+$1$ & $72^\circ$ & $0.309+0.951i$\\
+$2$ & $144^\circ$ & $-0.809+0.588i$\\
+$3$ & $216^\circ$ & $-0.809-0.588i$\\
+$4$ & $288^\circ$ & $0.309-0.951i$\\
+\bottomrule
+\end{tabular}
+\end{center}
+
+5つの和は、実部が $1+2(0.309)+2(-0.809)=0$、虚部は打ち消しあって $0$。つまり、5つの根の和は $0$ です。
+
+\begin{figure}[htbp]
+\centering
+\begin{tikzpicture}[scale=2.2]
+ \draw[->] (-1.3,0)--(1.4,0) node[right] {実軸}; \draw[->] (0,-1.3)--(0,1.4) node[above] {虚軸};
+ \draw[gray] (0,0) circle (1);
+ \draw[thick, primaryblue] (0:1)--(72:1)--(144:1)--(216:1)--(288:1)--cycle;
+ \foreach \a in {0,72,144,216,288} {\fill[crimson] (\a:1) circle (0.04);}
+ \node[font=\scriptsize, right] at (0:1.03) {$z_0=1$}; \node[font=\scriptsize, above right] at (72:1) {$z_1$};
+ \node[font=\scriptsize, above left] at (144:1) {$z_2$}; \node[font=\scriptsize, below left] at (216:1) {$z_3$};
+ \node[font=\scriptsize, below right] at (288:1) {$z_4$};
+\end{tikzpicture}
+\caption{$z^5=1$ の5つの根は、単位円に内接する正五角形の頂点。}
+\end{figure}
+
+\subsection*{例題4：実数の範囲で解けない方程式}
+
+$x^2-2x+5=0$ は判別式 $4-20=-16<0$ で、実数の解がありません。複素数まで広げると $x=1\pm2i$ です。
+
+\begin{examplebox}{検算}
+$(1+2i)^2=1+4i-4=-3+4i$。$-2(1+2i)=-2-4i$。合計して $5$ を足すと、$-3+4i-2-4i+5=0$ ✓。
+\end{examplebox}
+
+解と係数の関係「解の和 $=2$、積 $=(1+2i)(1-2i)=1+4=5$」も確かめられます。
 
 %==========================================================
 \chapter{正整数変数の関数の極限}
@@ -2529,5 +2852,92 @@ $\log(1+z)=z-\dfrac{z^2}{2}+\dfrac{z^3}{3}-\cdots$ は、$|z|<1$ の複素数で
 \item 翻訳版は小型モデルによる訳で、細部は原著との照合が必要です。
 \end{itemize}
 \end{notebox}
+
+
+\section{補充 第10章を例題で確かめる}
+
+\subsection*{例題1：$\ee^{x+iy}$ の計算}
+
+$\ee^{x+iy}=\ee^x(\cos y+i\sin y)$ を使います。
+
+\begin{center}
+\renewcommand{\arraystretch}{1.4}
+\begin{tabular}{ll}
+\toprule
+式 & 値\\
+\midrule
+$\ee^{i\pi/2}$ & $i$\\
+$\ee^{i\pi}$ & $-1$\\
+$\ee^{2\pi i}$ & $1$\\
+$\ee^{1+i\pi/4}=\ee\left(\cos45^\circ+i\sin45^\circ\right)$ & $1.922+1.922i$\\
+\bottomrule
+\end{tabular}
+\end{center}
+
+最後の値は $2.71828\times0.70711=1.9221$ です。
+
+\subsection*{例題2：$i^i$ は実数になる}
+
+$i=\ee^{i\pi/2}$ なので、$i^i=\left(\ee^{i\pi/2}\right)^i=\ee^{i\cdot i\pi/2}=\ee^{-\pi/2}\approx0.2079$。虚数の虚数乗が実数になります。ただし対数は多価なので、$i=\ee^{i\pi/2+2k\pi i}$ から、$i^i=\ee^{-\pi/2-2k\pi}$ も、すべて $i^i$ の値です（主値は $k=0$）。
+
+\subsection*{例題3：$\ee^{i\theta}$ の級数が $\cos\theta+i\sin\theta$ になる}
+
+$\theta=1$ で、$\ee^{i}=1+i-\dfrac12-\dfrac{i}{6}+\dfrac1{24}+\dfrac{i}{120}-\cdots$。
+
+\begin{center}
+\begin{tabular}{rrr}
+\toprule
+項数 & 実部の部分和 & 虚部の部分和\\
+\midrule
+$2$（$1+i$） & $1.0000$ & $1.0000$\\
+$3$ & $0.5000$ & $1.0000$\\
+$4$ & $0.5000$ & $0.8333$\\
+$5$ & $0.5417$ & $0.8333$\\
+$6$ & $0.5417$ & $0.8417$\\
+\bottomrule
+\end{tabular}
+\end{center}
+
+実際の値は $\cos1=0.5403$、$\sin1=0.8415$。実部は $\cos$ の級数、虚部は $\sin$ の級数が、それぞれ別々に現れます。
+
+\begin{figure}[htbp]
+\centering
+\begin{tikzpicture}
+\begin{axis}[width=10cm, height=5.6cm, xlabel={$\theta$}, xmin=0, xmax=12.6, ymin=-1.3, ymax=1.3, grid=major, xtick={0,3.1416,6.2832,9.4248,12.5664}, xticklabels={$0$,$\pi$,$2\pi$,$3\pi$,$4\pi$}, legend pos=south east, legend style={font=\footnotesize}]
+ \addplot[thick, primaryblue, domain=0:12.57, samples=150] {cos(deg(x))};
+ \addplot[thick, crimson, domain=0:12.57, samples=150] {sin(deg(x))};
+ \legend{実部 $\cos\theta$,虚部 $\sin\theta$}
+\end{axis}
+\end{tikzpicture}
+\caption{$\ee^{i\theta}$ の実部と虚部。単位円上を回る点の影が、$\cos$ と $\sin$ の波になる。}
+\end{figure}
+
+\subsection*{例題4：三角関数と双曲線関数のつながり}
+
+$\cos(iy)=\cosh y$、$\sin(iy)=i\sinh y$。虚数を代入すると、$\cos$ が $\cosh$ に、$\sin$ が $\sinh$ に変わります。
+
+\begin{center}
+\begin{tabular}{rrr}
+\toprule
+$y$ & $\cos(iy)=\cosh y$ & $\sin(iy)=i\sinh y$\\
+\midrule
+$0$ & $1$ & $0$\\
+$1$ & $1.5431$ & $1.1752\,i$\\
+$2$ & $3.7622$ & $3.6269\,i$\\
+\bottomrule
+\end{tabular}
+\end{center}
+
+\begin{figure}[htbp]
+\centering
+\begin{tikzpicture}
+\begin{axis}[width=9.5cm, height=5.6cm, xlabel={$x$}, xmin=-4, xmax=4, ymin=-2, ymax=6, grid=major, legend pos=north west, legend style={font=\footnotesize}]
+ \addplot[thick, primaryblue, domain=-4:4, samples=100] {cos(deg(x))};
+ \addplot[thick, crimson, domain=-3:3, samples=60] {(exp(x)+exp(-x))/2};
+ \legend{$\cos x$,$\cosh x$}
+\end{axis}
+\end{tikzpicture}
+\caption{$\cos x$ はゆれ続け、$\cosh x$ は爆発的に増える。見かけは違うが、虚数を介して同じ式の別の顔。}
+\end{figure}
 
 \end{document}
