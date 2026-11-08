@@ -37,15 +37,15 @@
 
 \newtcolorbox{examplebox}[1]{
     colback=softgreen, colframe=accentgreen, coltitle=white, fonttitle=\bfseries,
-    title=#1, arc=3mm, boxrule=1pt, left=4mm,right=4mm,top=3mm,bottom=3mm, breakable
+    title={#1}, arc=3mm, boxrule=1pt, left=4mm,right=4mm,top=3mm,bottom=3mm, breakable
 }
 \newtcolorbox{pointbox}[1]{
     colback=softamber, colframe=warmamber, coltitle=darkslate, fonttitle=\bfseries,
-    title=#1, arc=2mm, boxrule=1pt, left=3mm,right=3mm,top=2mm,bottom=2mm, breakable
+    title={#1}, arc=2mm, boxrule=1pt, left=3mm,right=3mm,top=2mm,bottom=2mm, breakable
 }
 \newtcolorbox{notebox}[1]{
     colback=softrose, colframe=crimson, coltitle=white, fonttitle=\bfseries,
-    title=#1, arc=2mm, boxrule=1pt, left=3mm,right=3mm,top=2mm,bottom=2mm, breakable
+    title={#1}, arc=2mm, boxrule=1pt, left=3mm,right=3mm,top=2mm,bottom=2mm, breakable
 }
 
 \tikzset{
@@ -66,7 +66,9 @@
 \fancyhead[RE]{\nouppercase{\leftmark}}
 \renewcommand{\headrulewidth}{0.4pt}
 
-\hypersetup{pdftitle={古典で学び直すド・モルガン数学思考入門 —— 『数学の学習とその困難について』の章立てに沿って}}
+\hypersetup{pdftitle={古典で学び直すド・モルガン『数学の学習とその困難について』入門 —— 全17章を順に読む}}
+\newcommand{\dd}{\mathrm{d}}
+\newcommand{\ee}{\mathrm{e}}
 
 \begin{document}
 
@@ -75,16 +77,16 @@
 \vspace*{1.5cm}
 {\Large\bfseries プロジェクト・グーテンベルク古典数学入門シリーズ}\\[0.8cm]
 \rule{\textwidth}{1.5pt}\\[0.4cm]
-{\Huge\bfseries 古典で学び直す\\ド・モルガン数学思考入門}\\[0.4cm]
-{\Large\bfseries —— 算術・代数・幾何のつまずきを17章でほぐす ——}\\[0.4cm]
+{\Huge\bfseries 古典で学び直す\\ド・モルガン\\『数学の学習とその困難について』入門}\\[0.4cm]
+{\Large\bfseries —— 算術・代数・幾何のつまずきを、全17章で順に読む ——}\\[0.4cm]
 \rule{\textwidth}{1.5pt}\\[1.5cm]
 {\large 原著：オーガスタス・ド・モルガン\\
 \textit{On the Study and Difficulties of Mathematics}}\\[2.0cm]
 {\Large\bfseries 著：教育情報分析研究会}\\[2.5cm]
 \vfill
-{\large 2026年11月 全面改訂版}\\[0.5cm]
-{\footnotesize 本書は Project Gutenberg のパブリックドメイン（eBook \#39088）の翻訳（全17章）の章立てに沿って、\\
-中学校・高等学校の数学の知識で読み進められるように書き下ろした入門書です。}
+{\large 2026年11月 改訂第2版（原著の章ごとに対応）}\\[0.5cm]
+{\footnotesize 本書は Project Gutenberg のパブリックドメイン（eBook \#39088）を底本に、\\
+高等学校の数学の知識で読み進められるように書き下ろした入門書です。}
 \end{center}
 \end{titlepage}
 
@@ -92,548 +94,917 @@
 \tableofcontents
 \mainmatter
 
+\makeatletter
+\renewcommand\chapter{\par\addvspace{16pt}\global\@topnum\z@\@afterindentfalse\secdef\@chapter\@schapter}
+\makeatother
+
 %==========================================================
-\chapter*{はじめに：数学の「つまずき」を理由から理解する}
-\addcontentsline{toc}{chapter}{はじめに：数学の「つまずき」を理由から理解する}
+\chapter*{はじめに：この本の読み方}
+\addcontentsline{toc}{chapter}{はじめに：この本の読み方}
 \markboth{はじめに}{はじめに}
 %==========================================================
 
-ド・モルガン（1806〜1871）は、イギリスの数学者で、教える人としても有名でした。この本は、算術・代数・幾何を学ぶときに、つまずきやすい点を、「なぜそうなるのか」から説明します。本書は、翻訳版の17章に1対1で沿って、各章の要点を図で整理します。
+オーガスタス・ド・モルガン（1806〜1871）は、イギリスの数学者・論理学者です。『数学の学習とその困難について』は、算術・代数・幾何を学ぶときに、なぜつまずきやすいのかを、理由から説明しようとした本です。ただ規則を暗記するのではなく、「なぜそうなるのか」を理解することが、数学の学習の中心だ、というのが、ド・モルガンの立場です。
+
+この本は、原著の17章に、1章ずつ対応させます。各章で、ド・モルガンの話題を紹介し、計算で確かめられる例と図を添えました。
 
 \begin{figure}[htbp]
 \centering
-\begin{tikzpicture}
- \node[fbox, text width=4.2cm] (a) {算術\\{\small 第1〜5章}};
- \node[fbox, text width=4.2cm, right=6mm of a] (b) {代数\\{\small 第6〜12章}};
- \node[fbox, text width=4.2cm, right=6mm of b] (c) {幾何・比例\\{\small 第13〜17章}};
- \draw[ax] (a)--(b); \draw[ax] (b)--(c);
+\begin{tikzpicture}[node distance=3mm]
+ \node[wbox, text width=2.3cm] (a) {第1章\\数学の性質と\\目的};
+ \node[fbox, text width=2.3cm, right=of a] (b) {第2〜5章\\算術};
+ \node[abox, text width=2.3cm, right=of b] (c) {第6〜12章\\代数};
+ \node[gbox, text width=2.3cm, right=of c] (d) {第13〜17章\\幾何と比例};
 \end{tikzpicture}
-\caption{本書の3つのまとまり。算術から代数、幾何へと進む。}
+\caption{原著17章の構成。算術（記数法、基本規則、分数、小数）、代数（記法から、方程式、負の数、対数、学び方）、幾何（定義、推論、公理、比例、代数との結びつき）。}
 \end{figure}
 
-\begin{notebox}{事実・推測・未確認の区別}
-計算例は、筆者が確かめた数値を使っています。ド・モルガン自身の例題は載せていません。翻訳版は小型モデルによる訳であり、細部は原著との照合が必要です。
+\begin{notebox}{事実・推測・未確認の区別（この本の約束）}
+\begin{itemize}[leftmargin=*]
+\item 各章の計算（記数法、9で割った余りによる検算、循環小数、二次方程式、対数、ピタゴラスの定理など）は、計算し直して確かめました。
+\item ド・モルガンの主張の紹介は、章の主題にもとづく要約です。原著の細かい議論は、全部は取り上げていません。
+\item 現代の記法や例は、本書の補足です。
+\end{itemize}
 \end{notebox}
 
 %==========================================================
-\chapter{数学の性質と目的について}
+\chapter{数学の性質と目的についての序論（第1章）}
 \markboth{第1章}{数学の性質と目的}
 %==========================================================
 
-数学を学ぶ目的は、計算ができるようになることだけでなく、\textbf{理由を考えて、筋道立てて推論する力}を養うことにある、とド・モルガンは言います。
+\section{この章の位置づけ}
+
+第1章は、数学とは何か、なぜ学ぶのか、を述べる序論です。ド・モルガンは、数学の学習の目的を、(1) 知識そのもの、(2) 正しく考える習慣を身につけること、と見ます。計算の手順を覚えるだけでは、後者が身につかない。理由を理解することが、大切だ、と述べます。
+
+\section{「なぜ」を確かめる：検算の習慣}
+
+数学を学ぶうえで、結果をいろいろな方法で確かめる習慣が大切です。たとえば $37\times58$ を計算して $2146$ と出たとします。確かめる方法は、いくつもあります。
+
+\begin{table}[htbp]
+\centering
+\begin{tabular}{ll}
+\toprule
+確かめ方 & 結果\\
+\midrule
+概算：$40\times60=2400$ に近いか & $2146$ は近い（大きく違わない）\\
+一の位：$7\times8=56$ の一の位は 6 & $2146$ の一の位は 6\\
+$37\times58=37\times60-37\times2$ & $2220-74=2146$\\
+\bottomrule
+\end{tabular}
+\caption{掛け算の答え $2146$ を、3通りの方法で確かめる。}
+\end{table}
 
 \begin{figure}[htbp]
 \centering
-\begin{tikzpicture}[node distance=8mm]
- \node[wbox, text width=2.6cm] (a) {規則を覚える};
- \node[abox, text width=2.6cm, right=of a] (b) {理由を考える};
- \node[gbox, text width=2.8cm, right=of b] (c) {応用できる\\推論の力};
- \draw[ax] (a)--(b); \draw[ax] (b)--(c);
+\begin{tikzpicture}[x=0.065cm,y=0.065cm]
+ \draw[fill=softblue, draw=primaryblue] (0,0) rectangle (58,37);
+ \draw[dashed, crimson] (50,0)--(50,37);
+ \node[font=\small] at (25,18) {$37\times50=1850$};
+ \node[font=\small] at (54,18) {};
+ \node[lbl] at (29,-7) {58};
+ \node[lbl, rotate=90] at (-6,18) {37};
+ \node[lbl] at (29,44) {$37\times58=37\times50+37\times8=1850+296=2146$};
 \end{tikzpicture}
-\caption{数学の学習。規則の暗記で止まらず、理由を考えるところまで進む。}
+\caption{長方形の面積による $37\times58$ の確かめ。$50$ と $8$ に分けて足す。}
 \end{figure}
 
-\begin{pointbox}{この章のポイント}
-\begin{itemize}[leftmargin=1.5em]
-\item 目的は、計算力より、推論力を養うこと。
+\begin{pointbox}{この章のまとめ}
+\begin{itemize}[leftmargin=*]
+\item 数学の学習の目的は、知識と、正しく考える習慣。
+\item 答えは、概算、一の位、別の分け方など、複数の方法で確かめる。
 \end{itemize}
 \end{pointbox}
 
 %==========================================================
-\chapter{算術の記数法について}
-\markboth{第2章}{記数法}
+\chapter{算術の記数法について（第2章）}
+\markboth{第2章}{算術の記数法}
 %==========================================================
 
-私たちは、位取りによって数を書きます。$1234$ は、$1\times1000+2\times100+3\times10+4$。位が1つ左へ行くごとに、10倍になります。
+\section{この章の位置づけ}
+
+第2章は、数の書き表し方（記数法）です。位取り記数法では、数字の位置が、その大きさを決めます。10進法が使われるのは、指が10本だから、という歴史的な理由で、数学的に特別な理由があるわけではありません。ほかの基数でも、同じ仕組みで数を書けます。
+
+\section{ほかの基数で書く}
+
+1831 を、いろいろな基数で書くと、次のようになります（A、B は 10、11 を表す数字）。
+
+\begin{table}[htbp]
+\centering
+\begin{tabular}{c|ccccc}
+\toprule
+基数 & 2 & 5 & 8 & 10 & 12\\
+\midrule
+1831 の表記 & 11100100111 & 24311 & 3447 & 1831 & 1087\\
+桁数 & 11 & 5 & 4 & 4 & 4\\
+\bottomrule
+\end{tabular}
+\caption{1831 を、基数 2、5、8、10、12 で書く（計算で確認）。基数が小さいほど、桁数が多い。}
+\end{table}
+
+たとえば 8進法の $3447$ は、$3\times8^3+4\times8^2+4\times8+7=1536+256+32+7=1831$ です。
 
 \begin{figure}[htbp]
 \centering
 \begin{tikzpicture}
- \foreach \xa/\dg/\lab in {0/1/千,2/2/百,4/3/十,6/4/一} {
-   \draw[thick, primaryblue, fill=softblue] (\xa,0) rectangle (\xa+1.6,1.3);
-   \node[font=\Huge] at (\xa+0.8,0.65) {\dg};
-   \node[below, font=\footnotesize] at (\xa+0.8,0) {\lab の位};
- }
+\begin{axis}[ybar, width=9cm, height=4.8cm, bar width=16pt, xmin=0.4, xmax=5.6, ymin=0, ymax=22, xtick={1,2,3,4,5}, xticklabels={2進,8進,10進,12進,5進}, ylabel={100万を書くのに必要な桁数},
+  every axis label/.append style={font=\footnotesize}, tick label style={font=\footnotesize}, nodes near coords, nodes near coords style={font=\scriptsize}]
+ \addplot[fill=softblue, draw=primaryblue] coordinates {(1,20)(2,7)(3,7)(4,6)(5,9)};
+\end{axis}
 \end{tikzpicture}
-\caption{位取り。1234 は、千が1、百が2、十が3、一が4。}
+\caption{1,000,000 を書くのに必要な桁数（5進は9桁）。基数が大きいほど桁数は少ないが、覚える数字の種類は増える。}
 \end{figure}
 
-10を基準にしたのは、指が10本だったから、と言われます。ほかの基準も使えます。2を基準にした記数法（2進法）では、$13=8+4+1$ は $1101$ と書けます。
-
-\begin{figure}[htbp]
-\centering
-\begin{tikzpicture}
- \foreach \xa/\dg/\lab in {0/1/8,2/1/4,4/0/2,6/1/1} {
-   \draw[thick, accentgreen, fill=softgreen] (\xa,0) rectangle (\xa+1.6,1.3);
-   \node[font=\Huge] at (\xa+0.8,0.65) {\dg};
-   \node[below, font=\footnotesize] at (\xa+0.8,0) {\lab の位};
- }
- \node[right, font=\small] at (8,0.65) {$=8+4+0+1=13$};
-\end{tikzpicture}
-\caption{2進法の $1101$。位は、右から $1,2,4,8$ と2倍ずつ。}
-\end{figure}
-
-\begin{pointbox}{この章のポイント}
-\begin{itemize}[leftmargin=1.5em]
-\item 位取りの基準（基数）は10でなくてもよい。仕組みは同じ。
+\begin{pointbox}{この章のまとめ}
+\begin{itemize}[leftmargin=*]
+\item 位取り記数法は、どの基数でも成り立つ。10進法は歴史的な選択。
+\item 1831 は、2進で 11100100111、8進で 3447、12進で 1087。
 \end{itemize}
 \end{pointbox}
 
 %==========================================================
-\chapter{算術の基本規則}
+\chapter{算術の基本規則（第3章）}
 \markboth{第3章}{算術の基本規則}
 %==========================================================
 
-足し算・引き算・掛け算・割り算の筆算には、それぞれ理由があります。掛け算は、長方形の面積で考えると分かりやすくなります。$47\times36$ を、$(40+7)\times(30+6)$ と分けます。
+\section{この章の位置づけ}
+
+第3章は、足し算・引き算・掛け算・割り算の規則（筆算の手順）を扱います。ド・モルガンは、これらの規則が、なぜ正しいのか（繰り上がりや、位を揃える理由）を理解することが大切だ、と説きます。
+
+\section{9で割った余りによる検算}
+
+筆算の結果を確かめる古くからの方法が、「9を捨てる」（9で割った余りを使う）検算です。ある数を9で割った余りは、各位の数字の和を9で割った余りに等しい、という性質を使います。
+
+$3487\times296$ を計算すると $1\,032\,152$。9で割った余りで確かめます。
+
+\begin{table}[htbp]
+\centering
+\begin{tabular}{lcc}
+\toprule
+数 & 各位の和 & 9で割った余り\\
+\midrule
+$3487$ & $3+4+8+7=22$ & 4\\
+$296$ & $2+9+6=17$ & 8\\
+余りの積 $4\times8=32$ & & 5\\
+答え $1\,032\,152$ & $1+0+3+2+1+5+2=14$ & 5\\
+\bottomrule
+\end{tabular}
+\caption{9で割った余りによる検算。余りの積の余りと、答えの余りが一致すれば、答えはおそらく正しい。}
+\end{table}
+
+答えを間違えて $1\,032\,252$ と書いたとすると、余りは $6$ で、$5$ と一致せず、誤りが分かります。ただし、余りが一致しても、正しいとは限りません（桁を入れ替えた誤りなどは見逃す）。
 
 \begin{figure}[htbp]
 \centering
-\begin{tikzpicture}[scale=1.0]
- \draw[thick, fill=softblue] (0,0) rectangle (4,3);
- \draw[thick, fill=softamber] (4,0) rectangle (4.7,3);
- \draw[thick, fill=softgreen] (0,3) rectangle (4,3.6);
- \draw[thick, fill=softrose] (4,3) rectangle (4.7,3.6);
- \node at (2,1.5) {$40\times30=1200$};
- \node[font=\scriptsize] at (4.35,1.5) {$7\times30$};
- \node[font=\scriptsize] at (2,3.3) {$40\times6$};
- \node[font=\tiny] at (4.35,3.3) {$7\times6$};
- \node[font=\footnotesize, align=left] at (8.2,1.8) {$1200+210+240+42$\\$=1692$};
+\begin{tikzpicture}[node distance=7mm]
+ \node[wbox, text width=2.5cm] (a) {$3487\to4$\\$296\to8$};
+ \node[fbox, text width=2.5cm, right=of a] (b) {$4\times8=32\to5$};
+ \node[wbox, text width=3.0cm, right=of b] (c) {答え $1032152\to5$};
+ \node[gbox, text width=2.0cm, right=of c] (d) {一致\\ → 検算 OK};
+ \draw[->, thick] (a)--(b); \draw[->, thick] (b)--(c); \draw[->, thick] (c)--(d);
 \end{tikzpicture}
-\caption{面積による掛け算。大きな長方形を4つに分けて、面積を足す。（縮尺は図示のための概略）}
+\caption{9を捨てる検算の流れ。}
 \end{figure}
 
-\begin{pointbox}{この章のポイント}
-\begin{itemize}[leftmargin=1.5em]
-\item 掛け算の筆算は、分配法則（面積の分割）にもとづく。
+\begin{pointbox}{この章のまとめ}
+\begin{itemize}[leftmargin=*]
+\item 筆算の規則は、理由を理解して使う。
+\item 9で割った余りによる検算：余りの積の余りが、答えの余りと一致するか。
 \end{itemize}
 \end{pointbox}
 
 %==========================================================
-\chapter{分数（算術）}
+\chapter{分数（算術）（第4章）}
 \markboth{第4章}{分数}
 %==========================================================
 
-分数の足し算が、わかりにくい理由は、「分母が違うと、そのままでは足せない」からです。$\frac34+\frac23$ は、分母を12にそろえて、$\frac{9}{12}+\frac{8}{12}=\frac{17}{12}$。
+\section{この章の位置づけ}
 
-\begin{figure}[htbp]
+第4章は分数です。分数の計算でつまずく原因は、規則を、理由なしに覚えようとすることにある、とド・モルガンは見ます。通分、約分、割り算の「ひっくり返して掛ける」規則の、それぞれの理由を理解することが大切です。
+
+\section{通分と割り算}
+
+$\dfrac13+\dfrac14$ は、通分して $\dfrac4{12}+\dfrac3{12}=\dfrac7{12}$。割り算 $\dfrac34\div\dfrac25$ は、「ひっくり返して掛ける」と $\dfrac34\times\dfrac52=\dfrac{15}8$。理由は、$\dfrac34\div\dfrac25$ を、同じ分母に直して $\dfrac{15}{20}\div\dfrac{8}{20}=\dfrac{15}{8}$ としても、同じ値になるからです。
+
+\begin{table}[htbp]
 \centering
-\begin{tikzpicture}[scale=1.0]
- \draw[thick] (0,0) rectangle (6,0.7);
- \foreach \xa in {1.5,3,4.5} {\draw (\xa,0)--(\xa,0.7);}
- \fill[softblue] (0,0) rectangle (4.5,0.7); \draw[thick] (0,0) rectangle (6,0.7);
- \node[font=\footnotesize] at (3,1.0) {$\frac34$};
- \draw[thick] (0,-1.2) rectangle (6,-0.5);
- \foreach \xa in {2,4} {\draw (\xa,-1.2)--(\xa,-0.5);}
- \fill[softamber] (0,-1.2) rectangle (4,-0.5); \draw[thick] (0,-1.2) rectangle (6,-0.5);
- \node[font=\footnotesize] at (3,-1.5) {$\frac23$};
- \draw[thick] (0,-2.7) rectangle (6,-2.0);
- \foreach \xa in {0.5,1,...,5.5} {\draw[gray] (\xa,-2.7)--(\xa,-2.0);}
- \fill[softblue] (0,-2.7) rectangle (4.5,-2.0);
- \fill[softamber] (4.5,-2.7) rectangle (6,-2.0);
- \node[font=\footnotesize] at (3,-3.0) {12等分にそろえる：$\frac{9}{12}+\frac{8}{12}$（はみ出す分は1を超える）};
-\end{tikzpicture}
-\caption{分数の足し算。同じ大きさの単位にそろえると、個数を足せる。$\frac{17}{12}=1\frac{5}{12}$。}
-\end{figure}
-
-\begin{pointbox}{この章のポイント}
-\begin{itemize}[leftmargin=1.5em]
-\item 分数は、同じ単位（分母）にそろえて足す。
-\end{itemize}
-\end{pointbox}
-
-%==========================================================
-\chapter{小数}
-\markboth{第5章}{小数}
-%==========================================================
-
-小数は、分母が10、100、1000、…の分数を、位取りで書いたものです。$0.375=\frac{3}{10}+\frac{7}{100}+\frac{5}{1000}=\frac{375}{1000}=\frac38$。
-
-\begin{figure}[htbp]
-\centering
-\begin{tikzpicture}
- \draw[thick] (0,0)--(10,0);
- \foreach \i in {0,...,10} {\draw (\i,0.1)--(\i,-0.1); \node[below, font=\footnotesize] at (\i,-0.1) {0.\i};}
- \fill[crimson] (3.75,0) circle (0.1);
- \node[above, font=\footnotesize] at (3.75,0.2) {0.375};
-\end{tikzpicture}
-\caption{0〜1の数直線を10等分した目盛り。0.375 は、0.3 と 0.4 のあいだ。（目盛りは $0.0,\ 0.1,\dots$ の意味）}
-\end{figure}
-
-分数によっては、割り切れず、同じ数字がくり返される小数になります。$\frac13=0.333\ldots$、$\frac17=0.142857142857\ldots$（6桁がくり返し）。
-
-\begin{center}
-\begin{tabular}{rl}
+\begin{tabular}{lcc}
 \toprule
-分数 & 小数\\
+計算 & 手順 & 結果\\
 \midrule
-$\frac12$ & 0.5（割り切れる）\\
-$\frac13$ & 0.333…（循環）\\
-$\frac17$ & 0.142857142857…（循環）\\
+$\tfrac13+\tfrac14$ & 通分して足す & $\tfrac7{12}$\\
+$\tfrac{18}{24}$ & 最大公約数 $6$ で約分 & $\tfrac34$\\
+$\tfrac34\div\tfrac25$ & 通分して割る／逆数を掛ける & $\tfrac{15}8$（どちらも同じ）\\
 \bottomrule
 \end{tabular}
-\end{center}
-
-\begin{pointbox}{この章のポイント}
-\begin{itemize}[leftmargin=1.5em]
-\item 小数は、10の累乗を分母とする分数の位取り表記。
-\item 分数は、割り切れるか、循環する小数になる。
-\end{itemize}
-\end{pointbox}
-
-%==========================================================
-\chapter{代数の記法と原理}
-\markboth{第6章}{代数の記法}
-%==========================================================
-
-代数では、文字を使って、どんな数にでも当てはまる関係を書きます。文字は、「任意の数」を表す約束の記号です。
-
-\begin{figure}[htbp]
-\centering
-\begin{tikzpicture}
- \draw[thick] (0,0)--(6,0); \fill (3,0) circle (0.1);
- \draw[thick, primaryblue, fill=softblue] (0.3,0.3) rectangle (2.4,0.9);
- \draw[thick, warmamber, fill=softamber] (3.6,0.3) rectangle (5.7,0.9);
- \node at (1.35,0.6) {$x+3$}; \node at (4.65,0.6) {$8$};
- \draw[thick] (3,0)--(2.7,-0.6)--(3.3,-0.6)--cycle;
- \node[font=\footnotesize] at (3,-1.0) {方程式 $x+3=8$ は、天秤のつりあい};
-\end{tikzpicture}
-\caption{等式は天秤。両側に同じ操作をすれば、つりあいは保たれる。}
-\end{figure}
-
-\begin{pointbox}{この章のポイント}
-\begin{itemize}[leftmargin=1.5em]
-\item 文字は任意の数を表す。等式は天秤。
-\end{itemize}
-\end{pointbox}
-
-%==========================================================
-\chapter{代数の基本規則}
-\markboth{第7章}{代数の基本規則}
-%==========================================================
-
-代数の計算の土台は、交換法則・結合法則・分配法則です。分配法則 $(a+b)^2=a^2+2ab+b^2$ は、正方形の面積で見ると明らかです。
-
-\begin{figure}[htbp]
-\centering
-\begin{tikzpicture}[scale=1.0]
- \draw[thick, fill=softblue] (0,0) rectangle (3,3);
- \draw[thick, fill=softamber] (3,0) rectangle (4.2,3);
- \draw[thick, fill=softamber] (0,3) rectangle (3,4.2);
- \draw[thick, fill=softrose] (3,3) rectangle (4.2,4.2);
- \node at (1.5,1.5) {$a^2$}; \node at (3.6,1.5) {$ab$}; \node at (1.5,3.6) {$ab$}; \node at (3.6,3.6) {$b^2$};
- \node[below] at (1.5,0) {$a$}; \node[below] at (3.6,0) {$b$};
-\end{tikzpicture}
-\caption{$(a+b)^2=a^2+2ab+b^2$。1辺 $a+b$ の正方形を4つの部分に分けた。}
-\end{figure}
-
-\begin{examplebox}{確かめ}
-$a=3,\ b=2$：$(3+2)^2=25$。$3^2+2\cdot3\cdot2+2^2=9+12+4=25$ ✓。
-\end{examplebox}
-
-\begin{pointbox}{この章のポイント}
-\begin{itemize}[leftmargin=1.5em]
-\item 代数の規則は、算術の規則を文字で書いたもの。面積で理由が見える。
-\end{itemize}
-\end{pointbox}
-
-%==========================================================
-\chapter{一次方程式}
-\markboth{第8章}{一次方程式}
-%==========================================================
-
-$3x+5=20$ を解く。両辺から5を引いて $3x=15$、3で割って $x=5$。
-
-\begin{figure}[htbp]
-\centering
-\begin{tikzpicture}
-\begin{axis}[width=9cm, height=5.5cm, xlabel={$x$}, ylabel={$y$}, xmin=0, xmax=8, ymin=0, ymax=30, grid=major]
- \addplot[thick, primaryblue, domain=0:8] {3*x+5};
- \addplot[dashed, crimson, domain=0:8] {20};
- \addplot[only marks, mark=*, color=crimson] coordinates {(5,20)};
-\end{axis}
-\end{tikzpicture}
-\caption{$y=3x+5$ と $y=20$ のグラフの交点が、方程式の解（$x=5$）。}
-\end{figure}
-
-\begin{pointbox}{この章のポイント}
-\begin{itemize}[leftmargin=1.5em]
-\item 一次方程式は、両辺に同じ操作をして解く。解はグラフの交点。
-\end{itemize}
-\end{pointbox}
-
-%==========================================================
-\chapter{負の符号について}
-\markboth{第9章}{負の符号}
-%==========================================================
-
-「負の数」は、昔は理解されにくいものでした。ド・モルガンは、負の数が、反対向きの量であることを、丁寧に説明します。たとえば、収入が正、支出が負。右へ進むのが正、左へ進むのが負。
-
-\begin{figure}[htbp]
-\centering
-\begin{tikzpicture}
- \draw[ax] (-5.5,0)--(5.5,0);
- \foreach \i in {-5,...,5} {\draw (\i,0.1)--(\i,-0.1); \node[below, font=\scriptsize] at (\i,-0.1) {\i};}
- \draw[->, thick, primaryblue] (0,0.5)--(3,0.5) node[midway, above, font=\footnotesize] {$+3$};
- \draw[->, thick, crimson] (0,-0.9)--(-2,-0.9) node[midway, below, font=\footnotesize] {$-2$};
-\end{tikzpicture}
-\caption{数直線。正は右向き、負は左向き。負の数は「反対向き」の量。}
-\end{figure}
-
-負 $\times$ 負 $=$ 正は、「反対向きを、さらに反対向きにすると、元の向き」と考えると納得できます。たとえば $(-2)\times(-3)=6$。
-
-\begin{figure}[htbp]
-\centering
-\begin{tikzpicture}
- \draw[ax] (-4,0)--(7,0);
- \foreach \i in {-3,...,6} {\draw (\i,0.1)--(\i,-0.1); \node[below, font=\scriptsize] at (\i,-0.1) {\i};}
- \fill[primaryblue] (-2,0) circle (0.1);
- \fill[crimson] (6,0) circle (0.1);
- \draw[->, thick, accentgreen, bend left=40] (-2,0.2) to node[above, lbl] {$\times(-3)$：$0$ を中心に反転し、3倍} (6,0.2);
-\end{tikzpicture}
-\caption{$-2$ に $-3$ を掛ける。向きが反転（$-$）し、長さが3倍になるので、$+6$。}
-\end{figure}
-
-\begin{pointbox}{この章のポイント}
-\begin{itemize}[leftmargin=1.5em]
-\item 負の数は反対向きの量。$(-)\times(-)=(+)$ は向きの反転が2回。
-\end{itemize}
-\end{pointbox}
-
-%==========================================================
-\chapter{二次方程式}
-\markboth{第10章}{二次方程式}
-%==========================================================
-
-$x^2-5x+6=0$ は、$(x-2)(x-3)=0$ と因数分解でき、$x=2,\ 3$。グラフでは、放物線 $y=x^2-5x+6$ が $x$ 軸と交わる点です。
-
-\begin{figure}[htbp]
-\centering
-\begin{tikzpicture}
-\begin{axis}[width=9cm, height=5.5cm, xlabel={$x$}, ylabel={$y$}, xmin=0, xmax=5, ymin=-1, ymax=7, grid=major]
- \addplot[thick, primaryblue, domain=0:5, samples=50] {x^2-5*x+6};
- \addplot[only marks, mark=*, color=crimson] coordinates {(2,0)(3,0)};
-\end{axis}
-\end{tikzpicture}
-\caption{$y=x^2-5x+6$ のグラフと $x$ 軸の交点 $x=2,3$。}
-\end{figure}
-
-一般に、$ax^2+bx+c=0$ の解は $x=\dfrac{-b\pm\sqrt{b^2-4ac}}{2a}$。$b^2-4ac$ が負なら、実数の解はなく、グラフは $x$ 軸に届きません。
-
-\begin{figure}[htbp]
-\centering
-\begin{tikzpicture}
-\begin{axis}[width=9.5cm, height=5.5cm, xlabel={$x$}, xmin=-1, xmax=5, ymin=-1, ymax=5, grid=major, legend pos=north east, legend style={font=\footnotesize}]
- \addplot[thick, primaryblue, domain=-1:5, samples=40] {(x-2)^2-1};
- \addplot[thick, accentgreen, domain=-1:5, samples=40] {(x-2)^2};
- \addplot[thick, crimson, domain=-1:5, samples=40] {(x-2)^2+1};
- \legend{判別式 $>0$（解2つ）,$=0$（解1つ）,$<0$（実数解なし）}
-\end{axis}
-\end{tikzpicture}
-\caption{判別式の符号と、放物線と $x$ 軸の関係。}
-\end{figure}
-
-\begin{pointbox}{この章のポイント}
-\begin{itemize}[leftmargin=1.5em]
-\item 二次方程式の解はグラフと $x$ 軸の交点。判別式で個数が決まる。
-\end{itemize}
-\end{pointbox}
-
-%==========================================================
-\chapter{累乗根一般と対数について}
-\markboth{第11章}{累乗根と対数}
-%==========================================================
-
-$2^{10}=1024$ なので、$\log_{10}1024\approx3.0103$、$\log_{10}2\approx0.3010$。対数は、掛け算を足し算に変える道具です：$\log(ab)=\log a+\log b$。
-
-\begin{figure}[htbp]
-\centering
-\begin{tikzpicture}[x=3cm]
- \draw[thick] (0,0)--(1,0);
- \foreach \v/\lab in {1/1,2/2,3/3,4/4,5/5,6/6,7/7,8/8,9/9,10/10} {
-   \pgfmathsetmacro{\pos}{ln(\v)/ln(10)}
-   \draw (\pos,0.1)--(\pos,-0.1); \node[below, font=\scriptsize] at (\pos,-0.1) {\lab};
- }
- \draw[thick, primaryblue, ->] (0,0.5)--({ln(2)/ln(10)},0.5) node[midway, above, font=\scriptsize] {$\log2$};
- \draw[thick, crimson, ->] ({ln(2)/ln(10)},0.9)--({ln(8)/ln(10)},0.9) node[midway, above, font=\scriptsize] {$\log4$};
-\end{tikzpicture}
-\caption{対数目盛。長さを足すと、数の掛け算になる（$2\times4=8$：$\log2+\log4=\log8$）。計算尺の原理。}
-\end{figure}
-
-\begin{figure}[htbp]
-\centering
-\begin{tikzpicture}
-\begin{axis}[width=9cm, height=5.5cm, xlabel={$x$}, ylabel={$\log_{10}x$}, xmin=0, xmax=10, ymin=-1, ymax=1.2, grid=major]
- \addplot[thick, primaryblue, domain=0.12:10, samples=80] {ln(x)/ln(10)};
-\end{axis}
-\end{tikzpicture}
-\caption{常用対数のグラフ。$x$ が10倍になるごとに、値が1ずつ増える。}
-\end{figure}
-
-\begin{pointbox}{この章のポイント}
-\begin{itemize}[leftmargin=1.5em]
-\item $\log(ab)=\log a+\log b$。掛け算が足し算になる。
-\end{itemize}
-\end{pointbox}
-
-%==========================================================
-\chapter{代数の学び方について}
-\markboth{第12章}{代数の学び方}
-%==========================================================
-
-ド・モルガンは、代数を学ぶとき、規則をただ覚えるのではなく、「なぜその規則が成り立つか」を考えながら、練習問題で確かめることを勧めます。
-
-\begin{figure}[htbp]
-\centering
-\begin{tikzpicture}[node distance=10mm]
- \node[fbox, text width=2.4cm] (a) {規則を知る};
- \node[abox, text width=2.4cm, right=of a] (b) {理由を考える};
- \node[gbox, text width=2.4cm, right=of b] (c) {問題で練習};
- \node[wbox, text width=2.4cm, right=of c] (d) {間違いを確かめる};
- \draw[ax] (a)--(b); \draw[ax] (b)--(c); \draw[ax] (c)--(d);
- \draw[ax, dashed] (d) to[bend left=35] (a);
-\end{tikzpicture}
-\caption{学びの循環（本書による整理）。間違いを確かめて、また規則に戻る。}
-\end{figure}
-
-\begin{pointbox}{この章のポイント}
-\begin{itemize}[leftmargin=1.5em]
-\item 理由を考え、練習し、間違いから学ぶ、をくり返す。
-\end{itemize}
-\end{pointbox}
-
-%==========================================================
-\chapter{幾何学の定義について}
-\markboth{第13章}{幾何学の定義}
-%==========================================================
-
-幾何学は、点・線・面・立体の定義から始まります。点には大きさがなく、線には太さがなく、面には厚さがない、という理想化です。
-
-\begin{figure}[htbp]
-\centering
-\begin{tikzpicture}[scale=0.9, every node/.style={align=center}]
- \fill[primaryblue] (0,0) circle (0.1); \node[below, font=\small] at (0,-0.4) {点\\{\scriptsize 0次元}};
- \draw[thick, primaryblue] (2.5,-0.3)--(4.5,0.5); \node[below, font=\small] at (3.5,-0.4) {線\\{\scriptsize 1次元}};
- \draw[thick, primaryblue, fill=softblue] (6,-0.4)--(8,-0.4)--(8.6,0.6)--(6.6,0.6)--cycle; \node[below, font=\small] at (7.3,-0.5) {面\\{\scriptsize 2次元}};
- \draw[thick, primaryblue, fill=softblue] (10.2,-0.3) rectangle (11.4,0.7); \draw[thick, primaryblue] (11.4,0.7)--(11.9,1.1)--(11.9,0.1)--(11.4,-0.3); \draw[thick, primaryblue] (10.2,0.7)--(10.7,1.1)--(11.9,1.1); \node[below, font=\small] at (11,-0.5) {立体\\{\scriptsize 3次元}};
-\end{tikzpicture}
-\caption{点・線・面・立体。次元が1つ増えるごとに、広がりが1方向増える。}
-\end{figure}
-
-\begin{pointbox}{この章のポイント}
-\begin{itemize}[leftmargin=1.5em]
-\item 点・線・面は、大きさ・太さ・厚さをもたない理想化。
-\end{itemize}
-\end{pointbox}
-
-%==========================================================
-\chapter{幾何学的推論について}
-\markboth{第14章}{幾何学的推論}
-%==========================================================
-
-幾何の証明は、定義と公理から、1歩ずつ論理で進みます。たとえば、「三角形の内角の和は $180^\circ$」は、1辺に平行な線を引くと、証明できます。
-
-\begin{figure}[htbp]
-\centering
-\begin{tikzpicture}[scale=1.0]
- \coordinate (A) at (0,0); \coordinate (B) at (5,0); \coordinate (C) at (1.8,2.4);
- \draw[thick, primaryblue, fill=softblue] (A)--(B)--(C)--cycle;
- \draw[thick, crimson] (-1.2,2.4)--(6.2,2.4);
- \node[font=\small] at (A) [below left] {$A$}; \node[font=\small] at (B) [below right] {$B$}; \node[font=\small] at (C) [above] {$C$};
- \node[font=\scriptsize, crimson] at (0.9,2.65) {$\alpha$};
- \node[font=\scriptsize, accentgreen] at (3.2,2.65) {$\beta$};
- \node[font=\scriptsize, crimson] at (0.5,0.25) {$\alpha$};
- \node[font=\scriptsize, accentgreen] at (4.4,0.25) {$\beta$};
- \node[font=\scriptsize] at (1.8,1.9) {$\gamma$};
-\end{tikzpicture}
-\caption{$C$ を通り $AB$ に平行な線（赤）を引く。錯角が等しい（$\alpha$ と $\alpha$、$\beta$ と $\beta$）。$\alpha+\gamma+\beta$ は一直線の角で $180^\circ$。}
-\end{figure}
-
-\begin{pointbox}{この章のポイント}
-\begin{itemize}[leftmargin=1.5em]
-\item 補助線を引いて、既知の事実（錯角）に結びつけるのが幾何の推論。
-\end{itemize}
-\end{pointbox}
-
-%==========================================================
-\chapter{公理について}
-\markboth{第15章}{公理}
-%==========================================================
-
-公理は、証明なしに受け入れる出発点です。ユークリッドの共通概念の例に、「同じものに等しいものは互いに等しい」があります。
-
-\begin{figure}[htbp]
-\centering
-\begin{tikzpicture}[node distance=8mm]
- \node[fbox] (a) {$A=C$}; \node[fbox, right=14mm of a] (b) {$B=C$};
- \node[gbox, right=14mm of b] (c) {$A=B$};
- \draw[ax] (a)--(c.north west |- a.east) ;
- \node[font=\footnotesize, below=6mm of b] {「同じものに等しいものは互いに等しい」};
-\end{tikzpicture}
-\caption{ユークリッドの共通概念の一例。}
-\end{figure}
-
-\begin{notebox}{注意}
-上の図は、公理が「推論の出発点」になることを示す簡単な例示で、矢印は省略した形です。公理の個数や正確な文言は、ユークリッドの原典で確かめてください。
-\end{notebox}
-
-\begin{pointbox}{この章のポイント}
-\begin{itemize}[leftmargin=1.5em]
-\item 公理は、証明なしに認める出発点。
-\end{itemize}
-\end{pointbox}
-
-%==========================================================
-\chapter{比例について}
-\markboth{第16章}{比例}
-%==========================================================
-
-$a:b=c:d$ のとき、$ad=bc$。相似な三角形では、対応する辺の比が等しくなります。
-
-\begin{examplebox}{影から木の高さを知る}
-身長 $1.5$ m の人の影が $2$ m のとき、同時刻に木の影が $8$ m。相似な直角三角形なので、$1.5:2=h:8$ から、$h=\dfrac{1.5\times8}{2}=6$ m。
-\end{examplebox}
+\caption{分数の計算（分数のまま計算し直して確認）。}
+\end{table}
 
 \begin{figure}[htbp]
 \centering
 \begin{tikzpicture}[scale=0.8]
- \draw[thick] (0,0)--(12,0);
- \draw[thick, accentgreen] (2,0)--(2,1.5); \node[left, font=\footnotesize] at (2,0.75) {1.5 m};
- \draw[thick, primaryblue] (6,0)--(6,6); \node[left, font=\footnotesize] at (6,3) {$h=6$ m};
- \draw[dashed, crimson] (2,1.5)--(4,0); \draw[dashed, crimson] (6,6)--(10,0);
- \node[below, font=\footnotesize] at (3,0) {2 m}; \node[below, font=\footnotesize] at (8,0) {8 m};
+ \draw[thick, primaryblue] (0,0) rectangle (6,1);
+ \fill[softblue] (0,0) rectangle (2,1);
+ \draw[primaryblue] (2,0)--(2,1) (4,0)--(4,1);
+ \node[lbl] at (1,0.5) {$\frac13$};
+ \draw[thick, warmamber] (0,-1.5) rectangle (6,-0.5);
+ \fill[softamber] (0,-1.5) rectangle (1.5,-0.5);
+ \foreach \x in {1.5,3,4.5}{\draw[warmamber] (\x,-1.5)--(\x,-0.5);}
+ \node[lbl] at (0.75,-1.0) {$\frac14$};
+ \node[lbl] at (3.0,-2.2) {$\frac13+\frac14=\frac4{12}+\frac3{12}=\frac7{12}$};
 \end{tikzpicture}
-\caption{影の比を使った測量。同時刻なら太陽光の角度が同じなので、2つの三角形は相似。}
+\caption{同じ長さの帯を、3等分したものと4等分したもの。足すには、同じ細かさ（12等分）に直す（通分）。}
 \end{figure}
 
-\begin{pointbox}{この章のポイント}
-\begin{itemize}[leftmargin=1.5em]
-\item 比例式 $a:b=c:d \iff ad=bc$。相似を使えば、測れないものを測れる。
+\begin{pointbox}{この章のまとめ}
+\begin{itemize}[leftmargin=*]
+\item 分数の規則は、理由（同じ細かさに直す）から理解する。
+\item $\tfrac13+\tfrac14=\tfrac7{12}$、$\tfrac34\div\tfrac25=\tfrac{15}8$。
 \end{itemize}
 \end{pointbox}
 
 %==========================================================
-\chapter{代数の線・角・図形への応用}
-\markboth{第17章}{代数の幾何への応用}
+\chapter{小数（第5章）}
+\markboth{第5章}{小数}
 %==========================================================
 
-座標を使えば、線や図形が数で表せ、計算で調べられます。3点 $(0,0),\ (4,0),\ (0,3)$ を頂点とする三角形の面積は $\frac12\cdot4\cdot3=6$、斜辺の長さは $\sqrt{4^2+3^2}=5$。
+\section{この章の位置づけ}
+
+第5章は小数です。小数点の位置の考え方と、割り切れない分数が、循環する小数になる理由を扱います。
+
+\section{循環小数}
+
+分数 $\dfrac1p$ を小数にすると、$p$ が $2$ と $5$ だけの素因数をもたなければ、循環小数になります。循環する部分の長さ（周期）は、$p$ によって決まります。
+
+\begin{table}[htbp]
+\centering
+\begin{tabular}{c|ccccccccc}
+\toprule
+$p$ & 3 & 7 & 11 & 13 & 17 & 19 & 23 & 29 & 97\\
+\midrule
+$\tfrac1p$ の周期 & 1 & 6 & 2 & 6 & 16 & 18 & 22 & 28 & 96\\
+\bottomrule
+\end{tabular}
+\caption{$1/p$ の循環の長さ（割り算の余りを追って計算）。周期は $p-1$ の約数。$p=7,17,19,23,29,97$ では、ちょうど $p-1$。}
+\end{table}
+
+$\dfrac17=0.\dot1\dot4\dot2\dot8\dot5\dot7$（周期6）です。割り算の余りは、$1,3,2,6,4,5$ と巡り、$1$ に戻ると、同じ数字の並びがくり返されます。余りは $p$ 未満の有限の種類しかないので、必ず循環します。
+
+\begin{figure}[htbp]
+\centering
+\begin{tikzpicture}[scale=1.0]
+ \foreach \i/\r in {0/1,1/3,2/2,3/6,4/4,5/5}{
+   \pgfmathsetmacro{\ang}{90-60*\i}
+   \node[fbox] (n\i) at ({1.7*cos(\ang)},{1.7*sin(\ang)}) {$\r$};
+ }
+ \foreach \i/\j in {0/1,1/2,2/3,3/4,4/5,5/0}{\draw[->, thick] (n\i)--(n\j);}
+ \node[lbl, align=center] at (0,0) {$\tfrac17$ の\\余り};
+\end{tikzpicture}
+\caption{$1\div7$ の割り算で、余りが巡る様子（$1\to3\to2\to6\to4\to5\to1$）。6個で一巡するので、周期は6。}
+\end{figure}
+
+$0.999\ldots=1$ も、部分和で確かめられます。$1-0.9=0.1$、$1-0.99=0.01$、…と、差は限りなく $0$ に近づきます。
+
+\begin{pointbox}{この章のまとめ}
+\begin{itemize}[leftmargin=*]
+\item 割り算の余りは有限の種類しかないので、小数は必ず循環する。
+\item $\tfrac17$ の周期は6。$p=7,17,19,23,29,97$ では周期が $p-1$（計算で確認）。
+\end{itemize}
+\end{pointbox}
+
+%==========================================================
+\chapter{代数の記法と原理（第6章）}
+\markboth{第6章}{代数の記法と原理}
+%==========================================================
+
+\section{この章の位置づけ}
+
+第6章から代数です。代数では、数の代わりに文字を使い、計算の規則を、一般的に述べます。ド・モルガンは、文字は「どんな数でもよい」ことを表し、規則は、文字にどんな数を入れても成り立つ、ことが大切だと説きます。
+
+\section{文字の規則を、数で確かめる}
+
+$(a+b)^2=a^2+2ab+b^2$ は、文字 $a,b$ にどんな数を入れても成り立つ規則です。数で確かめてみます。
+
+\begin{table}[htbp]
+\centering
+\begin{tabular}{cc|cc}
+\toprule
+$a$ & $b$ & $(a+b)^2$ & $a^2+2ab+b^2$\\
+\midrule
+2 & 3 & 25 & $4+12+9=25$\\
+5 & $-2$ & 9 & $25-20+4=9$\\
+$-4$ & $-1$ & 25 & $16+8+1=25$\\
+\bottomrule
+\end{tabular}
+\caption{$(a+b)^2=a^2+2ab+b^2$ の確認。$a,b\in\{-5,\ldots,5\}$ の121通りすべてで、計算機でも確かめた。}
+\end{table}
+
+\begin{figure}[htbp]
+\centering
+\begin{tikzpicture}[scale=0.9]
+ \fill[softblue] (0,0) rectangle (3,3);
+ \fill[softamber] (3,0) rectangle (5,3);
+ \fill[softamber] (0,3) rectangle (3,5);
+ \fill[softrose] (3,3) rectangle (5,5);
+ \draw[thick, darkslate] (0,0) rectangle (5,5);
+ \draw (3,0)--(3,5); \draw (0,3)--(5,3);
+ \node at (1.5,1.5) {$a^2$};
+ \node at (4,1.5) {$ab$};
+ \node at (1.5,4) {$ab$};
+ \node at (4,4) {$b^2$};
+ \node[lbl] at (1.5,-0.4) {$a$};
+ \node[lbl] at (4,-0.4) {$b$};
+\end{tikzpicture}
+\caption{1辺 $a+b$ の正方形を分けると、$a^2$、$ab$ が2つ、$b^2$。$(a+b)^2=a^2+2ab+b^2$。}
+\end{figure}
+
+\begin{pointbox}{この章のまとめ}
+\begin{itemize}[leftmargin=*]
+\item 代数の文字は「どんな数でもよい」。規則は、どんな数でも成り立つ。
+\item $(a+b)^2=a^2+2ab+b^2$ は、数と図で確かめられる。
+\end{itemize}
+\end{pointbox}
+
+%==========================================================
+\chapter{代数の基本規則（第7章）}
+\markboth{第7章}{代数の基本規則}
+%==========================================================
+
+\section{この章の位置づけ}
+
+第7章は、代数の基本の規則（分配の法則、乗法公式、因数分解）を扱います。ド・モルガンは、これらを覚える際、規則が、算術の規則を、文字で一般化したものだと理解することが大切だ、と説きます。
+
+\section{公式を使った暗算}
+
+$(a-b)(a+b)=a^2-b^2$ という公式は、暗算に役立ちます。$47^2$ を、$(50-3)^2=50^2-2\cdot50\cdot3+3^2=2500-300+9=2209$ と計算できます。
+
+\begin{table}[htbp]
+\centering
+\begin{tabular}{lcc}
+\toprule
+計算 & 公式の使い方 & 結果\\
+\midrule
+$47^2$ & $(50-3)^2=2500-300+9$ & 2209\\
+$53\times47$ & $(50+3)(50-3)=2500-9$ & 2491\\
+$98\times102$ & $(100-2)(100+2)=10000-4$ & 9996\\
+\bottomrule
+\end{tabular}
+\caption{公式を使った暗算。$a,b\in\{-9,\ldots,9\}$ で $(a-b)(a+b)=a^2-b^2$ も、計算機で確認した。}
+\end{table}
+
+\begin{figure}[htbp]
+\centering
+\begin{tikzpicture}[scale=0.85]
+ \fill[softblue] (0,0) rectangle (5,5);
+ \fill[white] (3.5,3.5) rectangle (5,5);
+ \draw[thick, darkslate] (0,0) rectangle (5,5);
+ \draw[crimson, thick] (3.5,3.5) rectangle (5,5);
+ \node at (2,2.2) {$a^2-b^2$};
+ \node[lbl] at (2.5,-0.4) {$a$};
+ \node[lbl] at (4.25,5.4) {$b$};
+ \draw[dashed, crimson] (3.5,0)--(3.5,3.5);
+ \draw[dashed, crimson] (0,3.5)--(3.5,3.5);
+\end{tikzpicture}
+\caption{大きな正方形（1辺 $a$）から小さな正方形（1辺 $b$）を除いた、L字形の面積が $a^2-b^2$。これを長方形に並べ替えると、縦横が $(a-b)$ と $(a+b)$ になる。}
+\end{figure}
+
+\begin{pointbox}{この章のまとめ}
+\begin{itemize}[leftmargin=*]
+\item 代数の規則は、算術の規則の一般化。
+\item $(a-b)(a+b)=a^2-b^2$ で、$47^2=2209$、$53\times47=2491$ が暗算できる。
+\end{itemize}
+\end{pointbox}
+
+%==========================================================
+\chapter{一次方程式（第8章）}
+\markboth{第8章}{一次方程式}
+%==========================================================
+
+\section{この章の位置づけ}
+
+第8章は一次方程式です。文章で書かれた問題を、方程式に直し、解く。ド・モルガンは、方程式が、問題の条件を式に写したものであり、解くことは、「条件を満たす数を見つけること」だと述べます。
+
+\section{例：年齢の問題と、追いつく問題}
+
+\textbf{年齢の問題}：父の年齢は、息子の3倍です。10年後には、父の年齢は、息子の2倍になります。今の年齢は？ 息子の今の年齢を $x$ とすると、$3x+10=2(x+10)$、つまり $x=10$。息子10歳、父30歳です。確かめると、10年後は息子20歳、父40歳で、40は20の2倍です。
+
+\textbf{追いつく問題}：A が午前8時に時速5 km で出発し、B が午前9時に同じ場所から時速7 km で同じ向きに出発します。B が A に追いつくのは、何時間後か。A が出発してから $t$ 時間後に追いつくとすると、$5t=7(t-1)$、これを解いて $t=3.5$。午前11時30分で、そのとき2人とも $17.5$ km 進んでいます。
+
+\begin{table}[htbp]
+\centering
+\begin{tabular}{lcc}
+\toprule
+ & A（時速5 km） & B（時速7 km、1時間遅れ）\\
+\midrule
+出発から3時間 & 15 km & 14 km\\
+出発から3.5時間 & 17.5 km & 17.5 km\\
+出発から4時間 & 20 km & 21 km\\
+\bottomrule
+\end{tabular}
+\caption{A と B の進んだ距離（A の出発から数えた時間）。3.5時間で並び、そのあとは B が前に出る。}
+\end{table}
 
 \begin{figure}[htbp]
 \centering
 \begin{tikzpicture}
-\begin{axis}[width=8cm, height=6cm, axis equal image, xlabel={$x$}, ylabel={$y$}, xmin=-0.5, xmax=5, ymin=-0.5, ymax=4, grid=major]
- \addplot[thick, primaryblue, fill=softblue, fill opacity=0.5] coordinates {(0,0)(4,0)(0,3)(0,0)};
- \node[font=\small] at (axis cs:2,1.1) {面積 6};
- \node[font=\small, crimson] at (axis cs:2.4,2.1) {5};
+\begin{axis}[width=9cm, height=5.2cm, xmin=0, xmax=5, ymin=0, ymax=30, xlabel={A が出発してからの時間（時間）}, ylabel={進んだ距離（km）},
+  every axis label/.append style={font=\footnotesize}, tick label style={font=\footnotesize}, legend style={font=\scriptsize, at={(0.03,0.97)}, anchor=north west}]
+ \addplot[thick, primaryblue, domain=0:5, samples=2] {5*x};
+ \addplot[thick, crimson, domain=1:5, samples=2] {7*(x-1)};
+ \addplot[mark=*, black, only marks] coordinates {(3.5,17.5)};
+ \legend{A, B}
 \end{axis}
 \end{tikzpicture}
-\caption{座標で表した三角形。面積は $6$、斜辺は $5$。}
+\caption{2本の直線の交点が、追いつく時刻と場所（$t=3.5$、$17.5$ km）。連立の一次式の解は、直線の交点。}
 \end{figure}
 
-\begin{notebox}{この本の未解決点}
-\begin{itemize}[leftmargin=1.5em]
-\item ド・モルガン自身の例題・議論は、本書では取り上げていません。翻訳版を併せてお読みください。
-\item 翻訳版は小型モデルによる訳で、細部は原著との照合が必要です。
+\begin{pointbox}{この章のまとめ}
+\begin{itemize}[leftmargin=*]
+\item 方程式は、問題の条件を式に写したもの。解は、条件を満たす数。
+\item 年齢の問題は息子10歳・父30歳。追いつく問題は3.5時間後、17.5 km 地点。
+\end{itemize}
+\end{pointbox}
+
+%==========================================================
+\chapter{負の符号について（第9章）}
+\markboth{第9章}{負の符号}
+%==========================================================
+
+\section{この章の位置づけ}
+
+第9章は、負の数と負の符号の扱いです。ド・モルガンの時代にも、負の数は、理解しにくいものでした。「$-1$ に $-1$ をかけると、なぜ $+1$ になるのか」。この章は、この疑問に、数学の規則の一貫性から答えようとします。
+
+\section{$(-1)\times(-1)=+1$ の理由}
+
+分配の法則 $a(b+c)=ab+ac$ を、負の数でも成り立たせたいとします。$(-1)\times\bigl(1+(-1)\bigr)$ を2通りに計算します。
+
+\begin{itemize}[leftmargin=*]
+\item 括弧の中を先に：$1+(-1)=0$ なので、$(-1)\times0=0$。
+\item 分配の法則で：$(-1)\times1+(-1)\times(-1)=-1+(-1)\times(-1)$。
+\end{itemize}
+
+2つが等しいはずなので、$-1+(-1)\times(-1)=0$、したがって $(-1)\times(-1)=+1$ でなければなりません。
+
+\begin{table}[htbp]
+\centering
+\begin{tabular}{c|cc}
+\toprule
+$\times$ & $+3$ & $-3$\\
+\midrule
+$+2$ & $+6$ & $-6$\\
+$-2$ & $-6$ & $+6$\\
+\bottomrule
+\end{tabular}
+\caption{符号の積の表。同じ符号どうしは $+$、違う符号は $-$。}
+\end{table}
+
+\begin{figure}[htbp]
+\centering
+\begin{tikzpicture}[scale=0.9]
+ \draw[ax] (-4.5,0)--(4.8,0);
+ \foreach \x in {-4,...,4}{\draw (\x,0.1)--(\x,-0.1); \node[lbl, below] at (\x,-0.1) {\x};}
+ \draw[->, ultra thick, primaryblue] (0,0.6)--(2,0.6) node[midway, above, lbl] {$\times2$};
+ \draw[->, ultra thick, crimson] (0,-1.1)--(-2,-1.1) node[midway, below, lbl] {$\times(-1)$：向きが逆};
+ \fill[primaryblue] (1,0) circle (2pt);
+ \fill[crimson] (-1,0) circle (2pt);
+\end{tikzpicture}
+\caption{$-1$ をかけることは、数直線で、向きを逆にすること。2回かければ、元の向きに戻る。したがって $(-1)\times(-1)=+1$。}
+\end{figure}
+
+\begin{pointbox}{この章のまとめ}
+\begin{itemize}[leftmargin=*]
+\item $(-1)\times(-1)=+1$ は、分配の法則を負の数でも保つために、そうなるべきもの。
+\item $-1$ をかけることは、数直線で向きを逆にすること。
+\end{itemize}
+\end{pointbox}
+
+%==========================================================
+\chapter{二次方程式（第10章）}
+\markboth{第10章}{二次方程式}
+%==========================================================
+
+\section{この章の位置づけ}
+
+第10章は、二次方程式です。解の公式が、平方完成から出ること、判別式の符号によって、解の個数が決まることを扱います。
+
+\section{判別式と解}
+
+$ax^2+bx+c=0$ の解は $x=\dfrac{-b\pm\sqrt{b^2-4ac}}{2a}$。判別式 $D=b^2-4ac$ の符号で、解の種類が決まります。
+
+\begin{table}[htbp]
+\centering
+\begin{tabular}{lcc}
+\toprule
+方程式 & 判別式 $D$ & 解\\
+\midrule
+$x^2-5x+6=0$ & $1$ & $x=2,\ 3$\\
+$x^2-4x+4=0$ & $0$ & $x=2$（重解）\\
+$2x^2-3x-2=0$ & $25$ & $x=2,\ -\tfrac12$\\
+$x^2+2x+5=0$ & $-16$ & $x=-1\pm2i$（実数解なし）\\
+\bottomrule
+\end{tabular}
+\caption{判別式と解（計算で確認）。$D>0$ で異なる2つの実数解、$D=0$ で重解、$D<0$ で実数解なし。}
+\end{table}
+
+\begin{figure}[htbp]
+\centering
+\begin{tikzpicture}
+\begin{axis}[width=9.5cm, height=5.5cm, xmin=-1, xmax=5, ymin=-2, ymax=8, xlabel={$x$}, ylabel={$y$}, axis lines=middle,
+  every axis label/.append style={font=\footnotesize}, tick label style={font=\footnotesize}, legend style={font=\scriptsize, at={(0.97,0.97)}, anchor=north east}]
+ \addplot[thick, primaryblue, domain=-0.5:4.5, samples=80] {x^2-5*x+6};
+ \addplot[thick, accentgreen, domain=-0.5:4.5, samples=80] {x^2-4*x+4};
+ \addplot[thick, crimson, domain=-0.5:4.5, samples=80] {x^2-4*x+5};
+ \addplot[mark=*, black, only marks] coordinates {(2,0)(3,0)};
+ \legend{$D=1$（2つの解）, $D=0$（重解）, $D<0$（解なし）}
+\end{axis}
+\end{tikzpicture}
+\caption{放物線と $x$ 軸の交わり方。$D>0$ なら2点、$D=0$ なら接する、$D<0$ なら交わらない（赤は例として $x^2-4x+5$）。}
+\end{figure}
+
+\begin{pointbox}{この章のまとめ}
+\begin{itemize}[leftmargin=*]
+\item 解の公式は平方完成から出る。判別式 $D=b^2-4ac$ の符号で、解の個数が決まる。
+\item $x^2-5x+6=0$ は $x=2,3$。$x^2+2x+5=0$ は $x=-1\pm2i$。
+\end{itemize}
+\end{pointbox}
+
+%==========================================================
+\chapter{累乗根一般と対数について（第11章）}
+\markboth{第11章}{累乗根と対数}
+%==========================================================
+
+\section{この章の位置づけ}
+
+第11章は、累乗根と対数です。対数は、掛け算を足し算に変える道具で、計算尺や対数表を生みました。ド・モルガンは、対数の考え方（指数の足し算）を、理由から説明することを勧めます。
+
+\section{対数で掛け算をする}
+
+$37\times58$ を、常用対数で計算します。$\log_{10}37=1.5682$、$\log_{10}58=1.7634$。足すと $3.3316$、$10^{3.3316}=2146$ で、$37\times58=2146$ と一致します。
+
+\begin{table}[htbp]
+\centering
+\begin{tabular}{c|cccc}
+\toprule
+$n$ & 2 & 3 & 5 & 7\\
+\midrule
+$\log_{10}n$ & 0.3010 & 0.4771 & 0.6990 & 0.8451\\
+\bottomrule
+\end{tabular}
+\caption{常用対数の値（計算で確認）。たとえば $\log_{10}2+\log_{10}5=0.3010+0.6990=1=\log_{10}10$。}
+\end{table}
+
+\begin{figure}[htbp]
+\centering
+\begin{tikzpicture}
+\begin{axis}[width=9cm, height=5.2cm, xmin=0, xmax=100, ymin=0, ymax=2.1, xlabel={$n$}, ylabel={$\log_{10}n$},
+  every axis label/.append style={font=\footnotesize}, tick label style={font=\footnotesize}]
+ \addplot[thick, primaryblue, domain=1:100, samples=100] {ln(x)/ln(10)};
+ \addplot[mark=*, crimson, only marks] coordinates {(37,1.5682)(58,1.7634)};
+\end{axis}
+\end{tikzpicture}
+\caption{常用対数のグラフ。掛け算は対数の足し算：$\log37+\log58=3.3316$、これは $2146$ の対数。}
+\end{figure}
+
+\begin{pointbox}{この章のまとめ}
+\begin{itemize}[leftmargin=*]
+\item 対数は、掛け算を足し算に変える。$\log(ab)=\log a+\log b$。
+\item $37\times58$：$1.5682+1.7634=3.3316$、$10^{3.3316}=2146$。
+\end{itemize}
+\end{pointbox}
+
+%==========================================================
+\chapter{代数の学び方について（第12章）}
+\markboth{第12章}{代数の学び方}
+%==========================================================
+
+\section{この章の位置づけ}
+
+第12章は、代数の学び方についての助言です。ド・モルガンは、規則を覚えるだけでなく、自分で実例を作り、数を入れて確かめ、図に描いてみることを勧めます。
+
+\section{数を入れて確かめる}
+
+代数の式変形が正しいかどうかは、具体的な数を入れて確かめられます。たとえば、$(x+3)(x-2)$ を展開して $x^2+x-6$ と書いたとき、いくつかの $x$ で、両辺の値を比べます。
+
+\begin{table}[htbp]
+\centering
+\begin{tabular}{c|ccccc}
+\toprule
+$x$ & $-3$ & 0 & 1 & 2 & 3\\
+\midrule
+$(x+3)(x-2)$ & 0 & $-6$ & $-4$ & 0 & 6\\
+$x^2+x-6$ & 0 & $-6$ & $-4$ & 0 & 6\\
+\bottomrule
+\end{tabular}
+\caption{展開の確かめ。どの $x$ でも、両辺が一致する。もし $x^2-x-6$ と書いていたら、$x=1$ で $-6\ne-4$ で誤りが分かる。}
+\end{table}
+
+2次式なら、異なる3つの値で一致すれば、2つの式は、完全に同じ式だと言えます（2次式は、3点で決まる）。
+
+\begin{figure}[htbp]
+\centering
+\begin{tikzpicture}
+\begin{axis}[width=9cm, height=5cm, xmin=-4, xmax=4, ymin=-8, ymax=8, xlabel={$x$}, ylabel={値}, axis lines=middle,
+  every axis label/.append style={font=\footnotesize}, tick label style={font=\footnotesize}, legend style={font=\scriptsize, at={(0.03,0.97)}, anchor=north west}]
+ \addplot[thick, primaryblue, domain=-3.5:3.5, samples=80] {(x+3)*(x-2)};
+ \addplot[mark=*, crimson, only marks] coordinates {(-3,0)(0,-6)(1,-4)(2,0)(3,6)};
+ \legend{$(x+3)(x-2)=x^2+x-6$, 確かめた点}
+\end{axis}
+\end{tikzpicture}
+\caption{確かめた5点は、すべて同じ放物線の上にある。}
+\end{figure}
+
+\begin{pointbox}{この章のまとめ}
+\begin{itemize}[leftmargin=*]
+\item 代数は、規則の暗記でなく、実例で確かめながら学ぶ。
+\item 展開は、数を入れて確かめられる。2次式なら、3点の一致で十分。
+\end{itemize}
+\end{pointbox}
+
+%==========================================================
+\chapter{幾何学の定義について（第13章）}
+\markboth{第13章}{幾何学の定義}
+%==========================================================
+
+\section{この章の位置づけ}
+
+第13章から幾何学です。ド・モルガンは、点・線・面といった、幾何学の基本の言葉の定義を取り上げます。ユークリッドの定義（「点は、部分をもたないもの」「線は、幅のない長さ」）は、現実の点や線ではなく、考えの上の対象を表していて、定義の読み方に注意が必要だ、と論じます。
+
+\section{角の種類}
+
+角は、大きさで種類に分けられます。
+
+\begin{table}[htbp]
+\centering
+\begin{tabular}{lc}
+\toprule
+名前 & 大きさ\\
+\midrule
+鋭角 & $0^\circ$ より大きく $90^\circ$ より小さい\\
+直角 & $90^\circ$\\
+鈍角 & $90^\circ$ より大きく $180^\circ$ より小さい\\
+平角 & $180^\circ$\\
+周角 & $360^\circ$\\
+\bottomrule
+\end{tabular}
+\caption{角の種類。直角は、円を4等分した1つ。}
+\end{table}
+
+\begin{figure}[htbp]
+\centering
+\begin{tikzpicture}[scale=0.8]
+ \foreach \i/\a/\lab in {0/50/{鋭角 50°},1/90/{直角 90°},2/130/{鈍角 130°},3/180/{平角 180°}}{
+   \begin{scope}[xshift=\i*3.6cm]
+   \draw[thick, darkslate] (0,0)--(2.2,0);
+   \draw[thick, darkslate] (0,0)--({2.2*cos(\a)},{2.2*sin(\a)});
+   \draw[crimson, thick] (0.7,0) arc (0:\a:0.7);
+   \node[lbl] at (0.3,-0.7) {\lab};
+   \end{scope}
+ }
+\end{tikzpicture}
+\caption{角の4つの例。開き具合で、鋭角、直角、鈍角、平角。}
+\end{figure}
+
+\begin{pointbox}{この章のまとめ}
+\begin{itemize}[leftmargin=*]
+\item 幾何学の定義は、考えの上の対象（幅のない線など）を表す。
+\item 角は、鋭角・直角・鈍角・平角・周角に分けられる。
+\end{itemize}
+\end{pointbox}
+
+%==========================================================
+\chapter{幾何学的推論について（第14章）}
+\markboth{第14章}{幾何学的推論}
+%==========================================================
+
+\section{この章の位置づけ}
+
+第14章は、幾何学の証明の進め方です。ド・モルガンは、幾何学の推論が、「定義と公理から出発して、一歩ずつ、必然的に進む」ことの美しさを述べます。同時に、図に頼りすぎる危険も指摘します。
+
+\section{ピタゴラスの定理を数で確かめる}
+
+直角三角形の、直角をはさむ2辺を $a,b$、斜辺を $c$ とすると、$a^2+b^2=c^2$。整数の組で確かめます。
+
+\begin{table}[htbp]
+\centering
+\begin{tabular}{ccc|ccc}
+\toprule
+$a$ & $b$ & $c$ & $a^2+b^2$ & $c^2$ & 一致\\
+\midrule
+3 & 4 & 5 & 25 & 25 & ○\\
+5 & 12 & 13 & 169 & 169 & ○\\
+8 & 15 & 17 & 289 & 289 & ○\\
+7 & 24 & 25 & 625 & 625 & ○\\
+\bottomrule
+\end{tabular}
+\caption{ピタゴラスの定理を満たす整数の組（計算で確認）。}
+\end{table}
+
+\begin{figure}[htbp]
+\centering
+\begin{tikzpicture}[scale=0.5]
+ \draw[thick, darkslate, fill=softblue] (0,0)--(4,0)--(0,3)--cycle;
+ \draw[thick, primaryblue, fill=softamber] (0,0) rectangle (-3,3);
+ \draw[thick, primaryblue, fill=softgreen] (0,0) rectangle (4,-4);
+ \draw[thick, primaryblue, fill=softrose] (4,0)--(7,4)--(3,7)--(0,3)--cycle;
+ \node at (-1.5,1.5) {$9$};
+ \node at (2,-2) {$16$};
+ \node at (3.5,3.5) {$25$};
+ \node[lbl] at (1.3,0.8) {直角};
+\end{tikzpicture}
+\caption{3辺 $3,4,5$ の直角三角形と、各辺を1辺とする正方形。面積は $9$、$16$、$25$ で、$9+16=25$。}
+\end{figure}
+
+\begin{pointbox}{この章のまとめ}
+\begin{itemize}[leftmargin=*]
+\item 幾何学の推論は、定義と公理から、一歩ずつ進む。図に頼りすぎない。
+\item ピタゴラスの定理：$3^2+4^2=5^2$、$5^2+12^2=13^2$、$8^2+15^2=17^2$。
+\end{itemize}
+\end{pointbox}
+
+%==========================================================
+\chapter{公理について（第15章）}
+\markboth{第15章}{公理}
+%==========================================================
+
+\section{この章の位置づけ}
+
+第15章は、公理（証明なしに認める前提）です。ユークリッドの公理には、「等しいものに等しいものを加えれば、等しい」のような、ごく当たり前のものと、平行線についての公準のような、より複雑なものがあります。ド・モルガンは、公理が何を意味し、なぜ認めるのかを論じます。
+
+\section{三角形の内角の和：公理から導かれる結果}
+
+平行線の公準から、「三角形の内角の和は $180^\circ$」が導かれます。座標でランダムに作った三角形3つで、内角の和を計算しても、$180.0000000000^\circ$ になります（計算機で確認）。
+
+\begin{table}[htbp]
+\centering
+\begin{tabular}{lc}
+\toprule
+三角形 & 内角の和\\
+\midrule
+ランダムな三角形（1） & $180^\circ$\\
+ランダムな三角形（2） & $180^\circ$\\
+ランダムな三角形（3） & $180^\circ$\\
+球面上の、3つの角がすべて直角の三角形 & $270^\circ$\\
+\bottomrule
+\end{tabular}
+\caption{平面の三角形の内角の和は $180^\circ$。平行線の公準が成り立たない球面では $180^\circ$ とは限らない（球面の8分の1の三角形で $270^\circ$）。}
+\end{table}
+
+\begin{figure}[htbp]
+\centering
+\begin{tikzpicture}[scale=0.8]
+ \draw[thick, darkslate, fill=softblue] (0,0)--(5,0)--(1.5,3)--cycle;
+ \draw[crimson, thick] (0,-0.0)++(0.6,0) arc (0:31:0.6);
+ \draw[crimson, thick] (5,0)++(-0.7,0) arc (180:149:0.7);
+ \draw[crimson, thick] (1.5,3)++(0.0,-0.6) arc (-90:-146:0.6);
+ \node[lbl] at (0.9,0.25) {$\alpha$};
+ \node[lbl] at (4.2,0.3) {$\beta$};
+ \node[lbl] at (1.5,2.2) {$\gamma$};
+ \node[lbl] at (2.5,-0.7) {$\alpha+\beta+\gamma=180^\circ$};
+\end{tikzpicture}
+\caption{平面の三角形の3つの角の和は $180^\circ$（平行線の公準から）。}
+\end{figure}
+
+\begin{pointbox}{この章のまとめ}
+\begin{itemize}[leftmargin=*]
+\item 公理は、証明なしに認める前提。平行線の公準は、ほかの公理より複雑。
+\item 平面では内角の和が $180^\circ$。球面では $180^\circ$ を超える（$270^\circ$ の例）。
+\end{itemize}
+\end{pointbox}
+
+%==========================================================
+\chapter{比例について（第16章）}
+\markboth{第16章}{比例}
+%==========================================================
+
+\section{この章の位置づけ}
+
+第16章は、比と比例です。長さや面積の比を考えるとき、2つの量が、通約できる（共通の単位で測れる）場合と、できない場合があります。ド・モルガンは、ユークリッドの比例の定義（「等倍」を使う定義）が、通約できない量にも使えるよう、工夫されたものだと説明します。
+
+\section{通約できない比：$\sqrt2$}
+
+正方形の対角線と1辺の比は $\sqrt2:1$ で、これは、整数どうしの比では表せません。それでも、整数の比で、いくらでも近づけます。
+
+\begin{table}[htbp]
+\centering
+\begin{tabular}{c|cccc}
+\toprule
+整数の比 & $\tfrac75$ & $\tfrac{17}{12}$ & $\tfrac{99}{70}$ & 真の値 $\sqrt2$\\
+\midrule
+値 & 1.4000 & 1.41667 & 1.41429 & 1.41421\\
+\bottomrule
+\end{tabular}
+\caption{$\sqrt2$ に近づく整数の比（計算で確認）。どれも、ちょうどにはならない。}
+\end{table}
+
+身近な例は、紙の A 判です。A4 は 210 mm $\times$ 297 mm で、長辺÷短辺 $=1.4143$、$\sqrt2=1.4142$ にほぼ等しい。半分に折っても、縦横の比が変わらない形です。
+
+\begin{figure}[htbp]
+\centering
+\begin{tikzpicture}[scale=0.6]
+ \draw[thick, primaryblue, fill=softblue] (0,0) rectangle (4.24,3);
+ \draw[dashed, crimson] (2.12,0)--(2.12,3);
+ \node[lbl] at (1.06,1.5) {A5};
+ \node[lbl] at (3.18,1.5) {A5};
+ \node[lbl] at (2.12,-0.5) {長辺$=\sqrt2\times$短辺};
+\end{tikzpicture}
+\caption{A4 を半分に折ると A5（相似）。縦横比 $\sqrt2:1$ が保たれる。}
+\end{figure}
+
+\begin{pointbox}{この章のまとめ}
+\begin{itemize}[leftmargin=*]
+\item 比の定義は、通約できない量にも使えるよう工夫されている。
+\item 対角線と1辺の比 $\sqrt2$ は、整数の比 $\tfrac{99}{70}=1.41429$ などで、いくらでも近づける。
+\end{itemize}
+\end{pointbox}
+
+%==========================================================
+\chapter{代数の線・角・図形の比の測定への応用（第17章）}
+\markboth{第17章}{代数の線・角・図形への応用}
+%==========================================================
+
+\section{この章の位置づけ}
+
+最終の第17章は、代数を、幾何学の量（線の長さ、角、図形の面積の比）に応用します。代数と幾何学を結びつけると、図形の問題を、方程式で解けるようになります。
+
+\section{相似と三角比}
+
+\textbf{相似}：身長 $1.8$ m の人の影が $2.4$ m、同じ時刻に、木の影が $12$ m のとき、木の高さは、$1.8:2.4=h:12$ より、$h=9$ m。
+
+\textbf{三角比}：直角三角形の辺の比は、角で決まります。よく使う角の値は、
+
+\begin{table}[htbp]
+\centering
+\begin{tabular}{c|ccc}
+\toprule
+角 & $\sin$ & $\cos$ & $\tan$\\
+\midrule
+$30^\circ$ & $\tfrac12=0.500$ & $\tfrac{\sqrt3}2=0.866$ & $\tfrac1{\sqrt3}=0.577$\\
+$45^\circ$ & $\tfrac{\sqrt2}2=0.707$ & $\tfrac{\sqrt2}2=0.707$ & $1$\\
+$60^\circ$ & $\tfrac{\sqrt3}2=0.866$ & $\tfrac12=0.500$ & $\sqrt3=1.732$\\
+\bottomrule
+\end{tabular}
+\caption{よく使う角の三角比（計算で確認）。$\sin60^\circ=\cos30^\circ$ などの関係が見える。}
+\end{table}
+
+\begin{figure}[htbp]
+\centering
+\begin{tikzpicture}[scale=1.8]
+ \draw[thick, darkslate] (0,0) circle (1);
+ \draw[->, darkslate] (-1.2,0)--(1.3,0);
+ \draw[->, darkslate] (0,-1.2)--(0,1.3);
+ \foreach \a in {30,45,60}{
+   \draw[primaryblue] (0,0)--({cos(\a)},{sin(\a)});
+   \fill[crimson] ({cos(\a)},{sin(\a)}) circle (1pt);
+ }
+ \node[lbl] at (1.0,0.3) {$30^\circ$};
+ \node[lbl] at (0.85,0.75) {$45^\circ$};
+ \node[lbl] at (0.45,0.95) {$60^\circ$};
+ \node[lbl] at (0,-1.4) {単位円の上の点 $(\cos\theta,\sin\theta)$};
+\end{tikzpicture}
+\caption{単位円と、$30^\circ,45^\circ,60^\circ$ の点。座標が $(\cos\theta,\sin\theta)$ に当たる。}
+\end{figure}
+
+\begin{pointbox}{この章のまとめ}
+\begin{itemize}[leftmargin=*]
+\item 代数を図形に応用すると、相似の問題は、比の方程式で解ける（木の高さ $9$ m）。
+\item 三角比は、角から辺の比を決める。$30^\circ$ で $\sin=\tfrac12$、$45^\circ$ で $\tan=1$、$60^\circ$ で $\cos=\tfrac12$。
+\end{itemize}
+\end{pointbox}
+
+%==========================================================
+\chapter*{おわりに：この本で確かめたことの一覧}
+\addcontentsline{toc}{chapter}{おわりに：この本で確かめたことの一覧}
+\markboth{おわりに}{おわりに}
+%==========================================================
+
+\begin{table}[htbp]
+\centering
+\small
+\begin{tabular}{lll}
+\toprule
+章 & 確かめた内容 & 方法\\
+\midrule
+第1章 & $37\times58=2146$ の確かめ & 概算・一の位・分解\\
+第2章 & 1831 を基数2〜12で表記、桁数 & 計算\\
+第3章 & 9を捨てる検算（$3487\times296$） & 余りの計算\\
+第4章 & 分数の通分・約分・割り算 & 分数で計算\\
+第5章 & 循環小数の周期（$p=3\sim97$） & 割り算の余り\\
+第6〜7章 & $(a+b)^2$、$(a-b)(a+b)$ の恒等式、暗算 & 数値・全探索\\
+第8章 & 年齢の問題、追いつく問題 & 方程式\\
+第9章 & $(-1)\times(-1)=1$ & 分配の法則\\
+第10章 & 二次方程式と判別式 & 解の公式\\
+第11章 & 対数での掛け算、常用対数の値 & 計算\\
+第12章 & 展開の数値による確かめ & 数の代入\\
+第13〜15章 & 角の種類、ピタゴラスの定理、内角の和 & 計算・乱数の三角形\\
+第16〜17章 & $\sqrt2$ の近似、A判、相似、三角比 & 計算\\
+\bottomrule
+\end{tabular}
+\caption{本書で確かめたことの一覧。}
+\end{table}
+
+\begin{notebox}{本書でできなかったこと}
+\begin{itemize}[leftmargin=*]
+\item ド・モルガンの原著の細かい議論、当時の教育への意見、歴史的な言及は、章の主題にもとづく要約にとどまり、全部は取り上げていません（未確認）。
+\item 本書の例（年齢の問題、追いつく問題、A判など）は、ド・モルガンの本文のものではなく、本書の例示です。
 \end{itemize}
 \end{notebox}
 
