@@ -1,802 +1,3158 @@
 \documentclass[a4paper,11pt,openany]{ltjsbook}
 \usepackage{luatexja}
+\usepackage{luatexja-fontspec}
 \usepackage{amsmath,amssymb,amsfonts,amsthm}
 \usepackage{geometry}
 \geometry{top=24mm,bottom=24mm,left=24mm,right=24mm,footskip=10mm}
 \usepackage{tikz}
-\usetikzlibrary{shapes,arrows,positioning,calc,patterns,backgrounds,decorations.pathmorphing,angles,quotes,intersections}
+\usetikzlibrary{arrows.meta,calc,positioning,patterns,shapes.geometric,shapes.misc,decorations.pathreplacing,decorations.markings,angles,quotes,intersections,backgrounds,fit}
+\usepackage{pgfplots}
+\pgfplotsset{compat=1.18}
+\usepgfplotslibrary{fillbetween}
 \usepackage{tcolorbox}
 \tcbuselibrary{skins,breakable}
 \usepackage{hyperref}
 \usepackage{enumitem}
 \usepackage{booktabs}
 \usepackage{fancyhdr}
-\usepackage{adjustbox}
 
-% --------------------------------------------------
-% カラー設計
-% --------------------------------------------------
-\definecolor{primaryblue}{RGB}{20, 50, 100}
-\definecolor{secondaryblue}{RGB}{50, 100, 160}
-\definecolor{darkslate}{RGB}{30, 45, 60}
-\definecolor{softblue}{RGB}{240, 245, 252}
-\definecolor{warmgold}{RGB}{180, 130, 20}
-\definecolor{softamber}{RGB}{254, 250, 240}
-\definecolor{accentgreen}{RGB}{34, 139, 34}
-\definecolor{softgreen}{RGB}{240, 249, 240}
-\definecolor{crimson}{RGB}{160, 30, 30}
-\definecolor{softrose}{RGB}{253, 242, 242}
-\definecolor{deepnavy}{RGB}{10, 25, 60}
+\definecolor{primaryblue}{RGB}{24, 76, 120}
+\definecolor{softblue}{RGB}{235, 243, 250}
+\definecolor{darkslate}{RGB}{44, 62, 80}
+\definecolor{warmamber}{RGB}{217, 119, 6}
+\definecolor{softamber}{RGB}{254, 243, 199}
+\definecolor{crimson}{RGB}{185, 28, 28}
+\definecolor{softrose}{RGB}{255, 228, 230}
+\definecolor{accentgreen}{RGB}{16, 120, 70}
+\definecolor{softgreen}{RGB}{236, 253, 245}
+\definecolor{gridgray}{RGB}{200, 205, 210}
 
 \hypersetup{
     colorlinks=true,
     linkcolor=primaryblue,
-    citecolor=accentgreen,
     urlcolor=primaryblue,
-    pdftitle={大人のためのプリンキピア入門 —— 幾何学で読み解く万有引力と微積分の原点},
-    pdfauthor={アイザック・ニュートン / Antigravity 数理科学シリーズ}
+    citecolor=accentgreen,
+    pdfauthor={教育情報分析研究会}
 }
 
-% --------------------------------------------------
-% 装飾ボックス環境
-% --------------------------------------------------
-\newtcolorbox{lecturebox}[1][]{
-    enhanced,
-    breakable,
-    colback=softamber,
-    colframe=warmgold,
-    fonttitle=\bfseries\gtfamily,
-    title={大人の学び直し・深掘り講義},
-    sharp corners,
-    boxrule=1.2pt,
-    left=12pt, right=12pt, top=10pt, bottom=10pt,
-    #1
+\newtcolorbox{examplebox}[1]{
+    colback=softgreen, colframe=accentgreen, coltitle=white, fonttitle=\bfseries,
+    title={#1}, arc=3mm, boxrule=1pt, left=4mm,right=4mm,top=3mm,bottom=3mm, breakable
+}
+\newtcolorbox{pointbox}[1]{
+    colback=softamber, colframe=warmamber, coltitle=darkslate, fonttitle=\bfseries,
+    title={#1}, arc=2mm, boxrule=1pt, left=3mm,right=3mm,top=2mm,bottom=2mm, breakable
+}
+\newtcolorbox{notebox}[1]{
+    colback=softrose, colframe=crimson, coltitle=white, fonttitle=\bfseries,
+    title={#1}, arc=2mm, boxrule=1pt, left=3mm,right=3mm,top=2mm,bottom=2mm, breakable
 }
 
-\newtcolorbox{theorembox}[2][]{
-    enhanced,
-    breakable,
-    colback=softblue,
-    colframe=primaryblue,
-    fonttitle=\bfseries\gtfamily,
-    title={#2},
-    sharp corners,
-    boxrule=1.2pt,
-    left=12pt, right=12pt, top=10pt, bottom=10pt,
-    #1
-}
-
-\newtcolorbox{proofbox}[1][]{
-    enhanced,
-    breakable,
-    colback=white,
-    colframe=secondaryblue!70!black,
-    fonttitle=\bfseries\gtfamily,
-    title={幾何学的ステップ解説（高校数学で読み解く証明）},
-    sharp corners,
-    boxrule=0.8pt,
-    left=10pt, right=10pt, top=8pt, bottom=8pt,
-    #1
-}
-
-\newtcolorbox{reflectionbox}[1][]{
-    enhanced,
-    breakable,
-    colback=softgreen,
-    colframe=accentgreen,
-    fonttitle=\bfseries\gtfamily,
-    title={思索と現代的展望},
-    sharp corners,
-    boxrule=1pt,
-    left=10pt, right=10pt, top=8pt, bottom=8pt,
-    #1
+\tikzset{
+  >=Stealth,
+  fbox/.style={draw=primaryblue, fill=softblue, rounded corners=3pt, align=center, inner sep=4pt, font=\small},
+  wbox/.style={draw=primaryblue, fill=white, rounded corners=3pt, align=center, inner sep=4pt, font=\small},
+  abox/.style={draw=warmamber, fill=softamber, rounded corners=3pt, align=center, inner sep=4pt, font=\small},
+  gbox/.style={draw=accentgreen, fill=softgreen, rounded corners=3pt, align=center, inner sep=4pt, font=\small},
+  rbox/.style={draw=crimson, fill=softrose, rounded corners=3pt, align=center, inner sep=4pt, font=\small},
+  ax/.style={->, thick, darkslate},
+  lbl/.style={font=\footnotesize, text=darkslate},
 }
 
 \pagestyle{fancy}
 \fancyhf{}
 \fancyhead[LE,RO]{\thepage}
-\fancyhead[LO]{\rightmark}
-\fancyhead[RE]{\leftmark}
+\fancyhead[LO]{\nouppercase{\rightmark}}
+\fancyhead[RE]{\nouppercase{\leftmark}}
 \renewcommand{\headrulewidth}{0.4pt}
+
+\hypersetup{pdftitle={古典で学び直すプリンキピア入門 —— 定義・法則から万有引力まで、編と節の順に読む}}
+\newcommand{\dd}{\mathrm{d}}
+\newcommand{\ee}{\mathrm{e}}
 
 \begin{document}
 
-% ==================================================
-% タイトルページ
-% ==================================================
 \begin{titlepage}
 \begin{center}
 \vspace*{1.5cm}
-{\Large\gtfamily\bfseries 知の遺産を高校数学で味わい直す最高峰シリーズ}\\[1.0cm]
-{\Huge\gtfamily\bfseries 大人のためのプリンキピア入門}\\[0.4cm]
-{\LARGE\gtfamily\bfseries —— 幾何学で読み解く万有引力と微積分の原点}\\[0.8cm]
-{\large\textit{A Masterclass in Newton's Mathematical Principles for Adult Learners}}\\[2.0cm]
-
-\begin{tcolorbox}[colback=white,colframe=primaryblue,width=0.88\textwidth,arc=3mm,boxrule=1.2pt]
-\centering\vspace{0.4cm}
-{\Large\gtfamily\bfseries アイザック・ニュートン}\\[0.2cm]
-{\large （Sir Isaac Newton, 1642--1727）}\\[0.3cm]
-\rule{0.6\textwidth}{0.6pt}\\[0.3cm]
-{\small 『自然哲学の数学的諸原理（\textit{Philosophiae Naturalis Principia Mathematica}）』}\\[0.15cm]
-{\small （1687年ラテン語初版・Project Gutenberg \#28233 底本）}\\[0.3cm]
-\vspace{0.2cm}
-\end{tcolorbox}
-
+{\Large\bfseries プロジェクト・グーテンベルク古典数学入門シリーズ}\\[0.8cm]
+\rule{\textwidth}{1.5pt}\\[0.4cm]
+{\Huge\bfseries 古典で学び直す\\プリンキピア入門}\\[0.4cm]
+{\Large\bfseries —— 定義・運動の法則・第1編〜第3編を\\原著の節の順に読む ——}\\[0.4cm]
+\rule{\textwidth}{1.5pt}\\[1.5cm]
+{\large 原著：アイザック・ニュートン\\
+\textit{Philosophiae Naturalis Principia Mathematica}}\\[2.0cm]
+{\Large\bfseries 著：教育情報分析研究会}\\[2.5cm]
 \vfill
-{\large\gtfamily\bfseries Antigravity 数理科学エディトリアル}\\[0.3cm]
-{\normalsize 幾何学作図・高校数学の比率論・極限の直観・TikZ完全図解}\\[0.8cm]
-{\large 2026年 決定版}
+{\large 2026年11月 改訂第2版（編・節ごとに対応）}\\[0.5cm]
+{\footnotesize 本書は Project Gutenberg のパブリックドメイン（eBook \#28233）の翻訳の章立てに沿って、\\
+高等学校の数学・物理の知識で読み進められるように書き下ろした入門書です。}
 \end{center}
 \end{titlepage}
 
+\frontmatter
 \tableofcontents
+\mainmatter
 
-% ==================================================
-% 第1章：知の革命とニュートンの幾何学作法
-% ==================================================
-\chapter{知の革命とニュートンの幾何学作法}
+%==========================================================
+\chapter*{はじめに：この本の読み方}
+\addcontentsline{toc}{chapter}{はじめに：この本の読み方}
+\markboth{はじめに}{はじめに}
+%==========================================================
 
-\section{なぜニュートンは微積分記号を使わなかったのか？}
+ニュートン（1642〜1727）の『自然哲学の数学的諸原理』（通称『プリンキピア』）は、1687年に初版が出ました。運動の三法則と万有引力の法則から、惑星の軌道、月の運動、潮汐、彗星までを、一つの理論で説明した本です。
 
-1687年7月、英国王立協会の若き天文学者エドモンド・ハレー（Edmond Halley）の私費援助と献身的な校閲により、人類の歴史を根底から変革した一冊の書物がロンドンで刊行されました。それがアイザック・ニュートンによる『自然哲学の数学的諸原理（\textit{Philosophiae Naturalis Principia Mathematica}）』、通称\textbf{『プリンキピア』}です。
+この本の特徴は、\textbf{計算が幾何学（図形）で書かれている}ことです。微積分の記号（$\dd x$ や $\int$）は、ほとんど出てきません。代わりに、線分の比、面積、円錐曲線（楕円・放物線・双曲線）、「限りなく小さくしたときの比」（最初比・最後比）で議論を進めます。現代の読者には読みにくいので、本書は、各節の結論を高等学校の数学・物理で追えるように書き直します。
 
-現代のわれわれが物理学を学ぶとき、ニュートンの運動方程式はライプニッツ流の微分記号を用いて次のように教えられます：
-\begin{equation}
-\mathbf{F} = m \frac{d^2 \mathbf{r}}{dt^2}
-\end{equation}
-そして、微積分の方程式を変数分離や積分計算によって解くことで、ケプラーの法則を代数的に導出するのが標準的な現代の講義です。
+\begin{figure}[htbp]
+\centering
+\begin{tikzpicture}[node distance=3mm]
+ \node[fbox, text width=3.1cm] (a) {序文・献辞\\ハレーの賛詩};
+ \node[fbox, text width=3.1cm, right=of a] (b) {定義・\\絶対空間・時間};
+ \node[fbox, text width=3.1cm, right=of b] (c) {運動の法則\\と系};
+ \node[abox, text width=3.1cm, below=5mm of a] (d) {第1編 §1〜3\\極限比・向心力\\円錐曲線};
+ \node[abox, text width=3.1cm, right=of d] (e) {第1編 §4〜7\\軌道の作図\\直線運動};
+ \node[abox, text width=3.1cm, right=of e] (f) {第1編 §8〜10\\近点移動・振子};
+ \node[abox, text width=3.1cm, below=5mm of d] (g) {第1編 §11〜14\\多体・球の引力\\光の屈折};
+ \node[gbox, text width=3.1cm, right=of g] (h) {第2編 §1〜5\\抵抗・流体};
+ \node[gbox, text width=3.1cm, right=of h] (i) {第2編 §6〜9\\振子・波・渦};
+ \node[rbox, text width=3.1cm, below=5mm of g] (j) {第3編(1)\\規則・現象\\万有引力};
+ \node[rbox, text width=3.1cm, right=of j] (k) {第3編(2)\\月・潮汐・歳差\\彗星};
+\end{tikzpicture}
+\caption{本書の全11章。翻訳版の章立てと同じ順に並べてある。}
+\end{figure}
 
-しかし、驚くべきことに、ニュートン自身が著した『プリンキピア』の全316ページ（ラテン語初版）のどこをめくっても、$dy/dx$ や $\int$ といった\textbf{現代的な微積分の記号は一行たりとも現れません}。
+\begin{notebox}{事実・推測・未確認の区別}
+本書では、数値は検算しなおしたものだけを載せています。翻訳版は、ラテン語の原文に、小型モデルの訳文が混ざっており、壊れた節や乱れた番号があります。本書の説明は、\textbf{ニュートンの原著の内容を、本書の著者が現代の言葉で書き直したもの}です。ニュートンの数値（地球の扁平率など）が現代の値と違う場合は、そう書きます。命題の番号は、翻訳版の見出しに合わせた目安です。
+\end{notebox}
 
-ニュートンはすでに1665年から1666年にかけて「流率法（Fluxions）」と呼ばれる独自の微積分理論を完成させていました。それにもかかわらず、なぜ彼は主著『プリンキピア』をすべて\textbf{ユークリッド流の純粋幾何学（三角形、円錐曲線、比と比例）}だけで書き下ろしたのでしょうか？
+\section*{本書で使う記号}
 
-\begin{lecturebox}
-\textbf{幾何学という「普遍言語」の選択}\\
-当時のヨーロッパ数学界において、微分や無限小という新しい代数的技法は「無限小とはゼロなのか、非ゼロなのか？」という論理的批判に常に晒されていました。もしニュートンが自作の未公開微積分記号で宇宙の体系を論述すれば、同時代の碩学たち（クリスティアン・ホイヘンスやゴットフリート・ライプニッツら）から「代数計算のトリックであり、自然の幾何学的実在を論証していない」と反論される危険がありました。
+\begin{center}
+\begin{tabular}{ll}
+\toprule
+記号 & 意味\\
+\midrule
+$F$ & 力\\
+$m$ & 質量（ニュートンの「物質の量」）\\
+$v$ & 速さ\\
+$r$ & 距離（半径）\\
+$T$ & 周期\\
+$a$ & 楕円の長半径\\
+$G$ & 万有引力定数（ニュートンの時代には知られていなかった）\\
+\bottomrule
+\end{tabular}
+\end{center}
 
-そこでニュートンは、古代ギリシャのエウクレイデス（ユークリッド）やアルキメデス、アポロニオスが確立した\textbf{「誰一人として疑い得ない厳密な幾何学的証明」}の形式を採用したのです。彼は幾何学的な図形の中に時間の経過と極限操作を埋め込み、「動く幾何学」として近代微積分の本質を読者の眼前に現前させました。
-\end{lecturebox}
+%==========================================================
+\chapter{献辞、第1版序文、およびハレーの賛詩}
+\markboth{第1章}{序文・献辞}
+%==========================================================
 
-本書の目的は、難解とされる『プリンキピア』の原著の証明を、\textbf{「高校までに学ぶ初等幾何学（三角形の相似、等積変形、三平方の定理、円錐曲線）」}と\textbf{「極限の直観（lim）」}だけで完全に解き明かすことです。数式の暗記から解放され、300年前のニュートンが宇宙を見つめたときの感動的な幾何学的美学を、豊富なTikZ図解とともに追体験していきましょう。
+この章は、本論に入る前の「序」にあたる部分です。献辞、ニュートンの第1版序文、エドモンド・ハレーの賛詩が並びます。数式はほとんどありませんが、この本がどんな意図で書かれたかが分かります。
 
-% ==================================================
-% 第2章：運動の基本定義と三法則
-% ==================================================
-\chapter{運動の定義と三法則の幾何学的解釈}
+\section{序文：力学を幾何学の一部として}
 
-\section{ニュートンが定めた物理の基本量}
+ニュートンは序文で、「力学を、手の技（職人の技術）ではなく、精密な学問として扱う」という立場を述べます。古代の人は、力学を、自然の研究のうち最も大事なものと考えていた、と続けます。そのうえで、この本は\textbf{哲学（自然学）の数学的な原理}を述べるものだと言います。
 
-ニュートンは『プリンキピア』の冒頭において、自然界を論じるための基礎用語を「定義（Definitiones I--VIII）」として厳密に整備しました。
+\begin{figure}[htbp]
+\centering
+\begin{tikzpicture}[node distance=7mm]
+ \node[fbox, text width=3.4cm] (a) {自然の現象\\（運動）};
+ \node[abox, text width=3.4cm, right=of a] (b) {力\\を調べる};
+ \node[gbox, text width=3.4cm, right=of b] (c) {その力から\\別の現象を\\説明する};
+ \draw[ax] (a)--(b); \draw[ax] (b)--(c);
+ \node[lbl, below=1mm of b] {序文の方法};
+\end{tikzpicture}
+\caption{序文の考え方。運動の現象から力を導き、その力で別の現象を説明する。}
+\end{figure}
 
-\begin{theorembox}{定義 I 〜 IV：質量、運動量、慣性力、外力}
+\begin{pointbox}{ここが要点}
+序文には、この本の方針が、一文で出てきます。\textbf{「自然哲学のすべての難しさは、運動の現象から自然の力を調べ、次にその力から他の現象を説明することにある」}という趣旨です（第1編・第2編・第3編が、その順になっています）。
+\end{pointbox}
+
+\section{ハレーの賛詩}
+
+エドモンド・ハレー（1656〜1742）は、ニュートンに『プリンキピア』を書くことを強くすすめた人物で、出版費用も（王立協会に資金がなかったため）自分で出しました（事実）。
+
+賛詩はラテン語の詩で、ニュートンの業績をたたえるものです。内容は詩的な表現が中心で、数学的な主張はありません。翻訳版では、この部分が大きく崩れており、読み取れない部分があります。
+
+\begin{notebox}{この本の未解決点}
+翻訳版の第1章には、ほとんど本文が残っていません。本書の説明は、原著の構成（献辞・序文・賛詩）の一般的な知識に基づく概説です。賛詩の個別の語句や、ニュートンの序文の細かい表現は、原著で確かめてください。
+\end{notebox}
+
+\section{『プリンキピア』の刊行の歴史}
+
+\begin{center}
+\begin{tabular}{lll}
+\toprule
+年 & 出来事 & 備考\\
+\midrule
+1684 & ハレーがケンブリッジのニュートンを訪ねる & 逆2乗の力と軌道の問題\\
+1687 & 初版刊行 & 全3編\\
+1713 & 第2版 & ロジャー・コーツが編集\\
+1726 & 第3版 & ヘンリー・ペンバートンが編集\\
+\bottomrule
+\end{tabular}
+\end{center}
+
+\begin{figure}[htbp]
+\centering
+\begin{tikzpicture}
+ \draw[ax] (0,0)--(10.2,0);
+ \foreach \y/\x/\l in {1684/0.3/{ハレーの訪問}, 1687/1.9/{初版}, 1713/6.6/{第2版}, 1726/9.2/{第3版}} {
+   \fill[primaryblue] (\x,0) circle (0.08);
+   \node[below, font=\scriptsize] at (\x,-0.1) {\y};
+   \node[above, font=\scriptsize] at (\x,0.1) {\l};
+ }
+\end{tikzpicture}
+\caption{『プリンキピア』の刊行の年表（時間の長さは目盛りに比例させてある）。}
+\end{figure}
+
+\section{この本の構成と、本書の読み方}
+
+『プリンキピア』は、全体が次の三つの編と、その前置きに分かれます（事実）。
+
 \begin{itemize}[leftmargin=1.5em]
-    \item \textbf{定義 I（物質の量 / 質量 $m$）}:
-    物質の量とは、その密度と体積の積から生じる尺度である。
-    \item \textbf{定義 II（運動の量 / 運動量 $\mathbf{p}$）}:
-    運動の量とは、速度と物質の量の積から生じる尺度である（$\mathbf{p} = m \mathbf{v}$）。
-    \item \textbf{定義 III（慣性力 / \textit{Vis Insita}）}:
-    物質に本来備わっている力であり、すべての物体が静止または直線等速運動の状態を維持し続けようとする抵抗の力である。
-    \item \textbf{定義 IV（加えられた力 / 外力 $\mathbf{F}$）}:
-    静止または直線等速運動の状態を変えるために、物体に加えられる作用である。
+\item 前置き：定義（8個）、運動の公理（三法則）と系。
+\item 第1編：抵抗のない空間での物体の運動。
+\item 第2編：抵抗のある媒質（空気や水）の中の運動と、流体の理論。
+\item 第3編：世界の体系（惑星・月・潮汐・彗星への応用）。
 \end{itemize}
-\end{theorembox}
 
-ここで注目すべきは、ニュートンが「質量（物質の量）」と「重さ（重量）」を明確に区別した最初の科学者である点です。重さは引力によって場所に依存して変化しますが、物質の量（質量）は地球上でも月面でも不変です。
+\begin{figure}[htbp]
+\centering
+\begin{tikzpicture}[scale=1.0]
+ \foreach \i/\w/\t/\c in {0/1.4/{前置き}/softblue, 1/4.6/{第1編}/softamber, 2/3.4/{第2編}/softgreen, 3/3.0/{第3編}/softrose} {
+   \pgfmathsetmacro{\xs}{ifthenelse(\i==0,0,ifthenelse(\i==1,1.4,ifthenelse(\i==2,6.0,9.4)))}
+   \draw[fill=\c, draw=darkslate] (\xs,0) rectangle (\xs+\w,0.9);
+   \node at (\xs+\w/2,0.45) {\t};
+ }
+\end{tikzpicture}
+\caption{本の構成の大まかな比率（概略図。ページ数の正確な比ではない）。}
+\end{figure}
 
-\section{運動の三法則（Axiomata sive Leges Motus）}
+\begin{examplebox}{読み方のすすめ}
+最初から順に読む必要はありません。\textbf{第3編の「万有引力の確立」（本書第10章）を先に読む}と、前の編の命題がどこで使われるかが分かります。そのあとで、第1編の図形の議論に戻ると、道具が何のためにあるのかが見えます。
+\end{examplebox}
 
-続いてニュートンは、自然界のすべての力学現象を司る「公理または運動の法則」を3つ提示しました。
+%==========================================================
+\chapter{定義および絶対空間・絶対時間・水桶の実験}
+\markboth{第2章}{定義と絶対空間}
+%==========================================================
 
-\begin{theorembox}{運動の三法則}
+本論の最初に、ニュートンは8つの「定義」を置きます。そのあと、注記（スコリウム）で、時間・空間・場所・運動を、「絶対的」なものと「相対的」なものに分けます。この章は、『プリンキピア』の哲学的な土台です。
+
+\section{定義I・II：物質の量と運動の量}
+
+\textbf{定義I}：物質の量（現代でいう\textbf{質量}）は、密度と体積を掛けたものです。同じ材質でも、体積が2倍なら、物質の量も2倍。
+
+\textbf{定義II}：運動の量（現代でいう\textbf{運動量}）は、速さと物質の量を掛けたものです。
+
+\[
+p=mv.
+\]
+
+\begin{center}
+\begin{tabular}{rrr}
+\toprule
+物体 & 質量 $m$ [kg] & 速さ $v$ [m/s]\\
+\midrule
+A & $2$ & $3$\\
+B & $1$ & $6$\\
+C & $3$ & $2$\\
+\bottomrule
+\end{tabular}
+\end{center}
+
+A の運動量は $2\times3=6$、B は $1\times6=6$、C は $3\times2=6$。速さも質量も違うのに、運動の量は同じです。
+
+\begin{figure}[htbp]
+\centering
+\begin{tikzpicture}
+\begin{axis}[width=9cm, height=5.8cm, xlabel={質量 $m$ [kg]}, ylabel={速さ $v$ [m/s]}, xmin=0, xmax=6, ymin=0, ymax=12, grid=major, legend pos=north east, legend style={font=\footnotesize}]
+ \addplot[thick, primaryblue, domain=0.5:6, samples=60] {6/x};
+ \addplot[thick, crimson, domain=0.5:6, samples=60] {12/x};
+ \addplot[only marks, mark=*, color=black] coordinates {(2,3)(1,6)(3,2)};
+ \legend{$p=6$,$p=12$}
+\end{axis}
+\end{tikzpicture}
+\caption{同じ運動量（$p=mv$）をもつ組み合わせは、双曲線の上に並ぶ。A, B, C の3点は、すべて $p=6$ の曲線の上。}
+\end{figure}
+
+\section{定義III・IV：固有の力（慣性）と、加えられた力}
+
+\textbf{定義III}（物質の固有の力）：物体が、いまの状態（静止、または一直線上の等速運動）を保とうとする力。後に「慣性」とよばれるものです。物質の量に比例します。
+
+\textbf{定義IV}（外力）：物体の状態を変える作用。外力は、一瞬だけ働くこともあれば、続けて働くこともあります（衝突と、重力のような違い）。
+
+\begin{figure}[htbp]
+\centering
+\begin{tikzpicture}
+ \draw[thick] (0,0)--(10,0);
+ \foreach \x in {0.5,2.5,4.5} {\fill[primaryblue] (\x,0.4) circle (0.2);}
+ \draw[ax] (0.7,0.4)--(2.3,0.4); \draw[ax] (2.7,0.4)--(4.3,0.4);
+ \node[lbl] at (2.5,1.0) {外力なし：等速で進み続ける};
+ \fill[crimson] (6.5,0.4) circle (0.2);
+ \draw[ax, crimson] (6.5,1.6)--(6.5,0.7) node[midway, right, lbl] {外力};
+ \draw[ax] (6.7,0.4) .. controls (8,0.4) and (8.8,0.1) .. (9.6,-0.5);
+ \node[lbl] at (8,1.0) {外力を受けて向きが変わる};
+\end{tikzpicture}
+\caption{外力がなければ、物体は等速直線運動を続ける（左）。外力があると、速さや向きが変わる（右）。}
+\end{figure}
+
+\section{定義V〜VIII：向心力と、その3つの量}
+
+\textbf{定義V}：向心力とは、物体を、ある一点（中心）に向かって引き寄せる力です。重力、磁力、ひもの張力など、原因は問いません。
+
+ニュートンは、向心力の大きさを3つの意味に分けます。
+
+\begin{center}
+\renewcommand{\arraystretch}{1.3}
+\begin{tabular}{llp{6cm}}
+\toprule
+定義 & 名前 & 意味\\
+\midrule
+VI & 絶対量 & 力のもとになる原因（磁石の強さ、天体の質量など）の大きさ\\
+VII & 加速量 & 距離と時間を決めたとき、物体に生じる加速度\\
+VIII & 運動量（駆動量） & 加速量に、物体の質量を掛けた量（現代の「力」）\\
+\bottomrule
+\end{tabular}
+\end{center}
+
+\begin{figure}[htbp]
+\centering
+\begin{tikzpicture}[node distance=5mm]
+ \node[fbox, text width=2.6cm] (a) {絶対量\\（原因の強さ）\\例：太陽の質量};
+ \node[abox, text width=2.6cm, right=12mm of a] (b) {加速量\\（加速度）\\$a=\dfrac{GM}{r^2}$};
+ \node[gbox, text width=2.8cm, right=12mm of b] (c) {運動量（駆動量）\\（現代の力）\\$F=ma$};
+ \draw[ax] (a)--(b) node[midway, above, lbl] {距離};
+ \draw[ax] (b)--(c) node[midway, above, lbl] {質量};
+\end{tikzpicture}
+\caption{向心力の3つの量。原因の強さ → 加速度 → 質量を掛けて力、の順。}
+\end{figure}
+
+\begin{examplebox}{ひもで回す石（検算）}
+質量 $0.2$ kg の石を、長さ $1$ m のひもで、$4$ m/s で回します。向心力（ひもの張力）は
+\[
+F=\frac{mv^2}{r}=\frac{0.2\times16}{1}=3.2\ \text{N}.
+\]
+加速量（加速度）は $\dfrac{v^2}{r}=16\ \mathrm{m/s^2}$。これに質量 $0.2$ kg を掛けた $3.2$ N が運動量（駆動量）に当たります。
+\end{examplebox}
+
+\section{定義の注記：時間・空間・場所・運動}
+
+ニュートンは、日常で使う時間・空間・場所・運動の言葉を、\textbf{絶対的なもの}と\textbf{相対的なもの}に分けます。
+
+\begin{center}
+\renewcommand{\arraystretch}{1.3}
+\begin{tabular}{lll}
+\toprule
+ & 絶対的 & 相対的\\
+\midrule
+時間 & 数学的な時間。ひとりでに一様に流れる & 時計・日・月など、感覚で測る長さ\\
+空間 & 動かず、常に同じ & 動く物の位置で決まる空間\\
+運動 & 絶対的な場所から別の絶対的な場所への移動 & 相対的な場所の間の移動\\
+\bottomrule
+\end{tabular}
+\end{center}
+
+\begin{figure}[htbp]
+\centering
+\begin{tikzpicture}[scale=1.0]
+ \draw[thick, fill=softblue] (0,0) rectangle (6,1.2);
+ \node[font=\small] at (3,1.55) {動く船（相対的な空間）};
+ \draw[ax] (0.4,-0.5)--(5.6,-0.5) node[midway, below, lbl] {船の速度};
+ \fill[crimson] (1.0,0.6) circle (0.12);
+ \draw[ax, crimson] (1.2,0.6)--(3.0,0.6) node[midway, above, lbl] {船に対する歩み};
+\end{tikzpicture}
+\caption{船の上を歩く人の運動は、船に対する運動と、地球に対する運動で、違う値になる。}
+\end{figure}
+
+\begin{center}
+\begin{tabular}{rr}
+\toprule
+場所 & 地球の自転による速さ [m/s]\\
+\midrule
+赤道 & 465\\
+北緯 $35^\circ$（日本の中部あたり） & $465\times\cos35^\circ\approx381$\\
+北極点 & 0\\
+\bottomrule
+\end{tabular}
+\end{center}
+
+地上に立っている人は、地球に対しては静止していますが、自転にのって動いています。赤道での速さは、周囲約 $40075$ km を、$86164$ 秒（恒星日）で回るので、$40075\times1000/86164\approx465$ m/s です。
+
+\section{水桶の実験：絶対的な回転の証拠}
+
+ニュートンは、絶対運動が存在する証拠として、\textbf{水桶の実験}をあげます。ひもで吊るした桶に水を入れ、桶をひねってからひもを放します。
+
 \begin{enumerate}[leftmargin=1.5em]
-    \item \textbf{第1法則（慣性の法則）}:
-    すべての物体は、外力によって状態を変えることを強制されない限り、静止状態または直線等速運動の状態を維持し続ける。
-    \item \textbf{第2法則（運動の変化の法則）}:
-    運動の変化（運動量の変化）は、加えられた力に比例し、その力が加えられた直線の方向に沿って生じる。
-    \begin{equation}
-    \Delta \mathbf{p} \propto \mathbf{F} \Delta t
-    \end{equation}
-    \item \textbf{第3法則（作用・反作用の法則）}:
-    作用には常に等しく、かつ反対向きの反作用が対立する。すなわち、二つの物体の相互作用は、常に互いに等しく反対方向に向かう。
+\item 桶だけが回り、水はまだ静止：水面は平ら（桶と水は、相対的に回っている）。
+\item 水がしだいに回り始める：水面は、周囲から盛り上がり、中央がへこむ。
+\item 水が桶と同じ速さで回る：水面はもっともへこむ（桶と水は、相対的には静止）。
+\item 桶を止める：水はまだ回り続け、水面はへこんだまま。
 \end{enumerate}
-\end{theorembox}
 
-\section{力の合成則と平行四辺形の幾何学}
+\begin{figure}[htbp]
+\centering
+\begin{tikzpicture}[scale=0.75]
+ \foreach \xs/\k/\lab in {0/0/{(1)桶だけ回る}, 4.2/1/{(2)水が回り始める}, 8.4/2/{(3)ともに回る}, 12.6/3/{(4)桶を止める}} {
+   \begin{scope}[xshift=\xs cm]
+    \draw[thick] (0,0)--(0,2.2) (2.4,0)--(2.4,2.2) (0,0)--(2.4,0);
+    \ifnum\k=0 \fill[softblue] (0.05,0.05) rectangle (2.35,1.4); \draw[primaryblue, thick] (0.05,1.4)--(2.35,1.4);\fi
+    \ifnum\k=1 \fill[softblue] (0.05,0.05)--(0.05,1.5) .. controls (0.7,1.35) and (1.7,1.35) .. (2.35,1.5)--(2.35,0.05)--cycle; \draw[primaryblue, thick] (0.05,1.5) .. controls (0.7,1.3) and (1.7,1.3) .. (2.35,1.5);\fi
+    \ifnum\k=2 \fill[softblue] (0.05,0.05)--(0.05,1.8) .. controls (0.7,1.0) and (1.7,1.0) .. (2.35,1.8)--(2.35,0.05)--cycle; \draw[primaryblue, thick] (0.05,1.8) .. controls (0.7,1.0) and (1.7,1.0) .. (2.35,1.8);\fi
+    \ifnum\k=3 \fill[softblue] (0.05,0.05)--(0.05,1.8) .. controls (0.7,1.0) and (1.7,1.0) .. (2.35,1.8)--(2.35,0.05)--cycle; \draw[primaryblue, thick] (0.05,1.8) .. controls (0.7,1.0) and (1.7,1.0) .. (2.35,1.8);\fi
+    \node[font=\scriptsize] at (1.2,-0.45) {\lab};
+   \end{scope}
+ }
+\end{tikzpicture}
+\caption{水桶の実験の4つの場面（模式図）。(1) と (3) は、桶に対する水の相対運動で見ると、(1) は動き、(3) は静止。ところが水面の形は逆。}
+\end{figure}
 
-ニュートンは第2法則の直後の「系1（Corol. I）」において、複数の力が作用するときの合成則を平行四辺形の対角線として証明しました。
+\begin{pointbox}{ニュートンの論法}
+(1) と (3) を比べると、桶と水の相対的な関係は、(1) では動き、(3) では静止しており、逆です。しかし水面の形は、(1) が平ら、(3) がへこみで、それは相対的な関係では決まりません。したがって、水面のへこみは、水の\textbf{絶対的な回転運動}によって生じる、というのがニュートンの主張です。
+\end{pointbox}
+
+\begin{notebox}{のちの議論（事実）}
+この論証は、のちに批判されました。マッハ（19世紀末）は、「水の回転は、桶ではなく、宇宙の遠くの星々に対して決まるのかもしれない」と考えました。これは、アインシュタインの一般相対性理論の形成に影響した考えとして知られています。この問題は、現代でも議論が続いています。
+\end{notebox}
+
+\begin{examplebox}{回転の効果の大きさ（検算）}
+水がへこむ理由は、遠心力（回転座標系で見たときの見かけの力）です。角速度 $\omega$ で回るとき、水面は放物面 $h=\dfrac{\omega^2r^2}{2g}$ になります。$\omega=2\pi\times2=12.57\ \mathrm{rad/s}$（毎秒2回転）、半径 $r=0.1$ m で $h=\dfrac{12.57^2\times0.01}{2\times9.8}=0.081$ m。中央と縁の高さの差は、約 $8$ cm になります。
+\end{examplebox}
+
+\begin{figure}[htbp]
+\centering
+\begin{tikzpicture}
+\begin{axis}[width=9cm, height=5.4cm, xlabel={中心からの距離 $r$ [m]}, ylabel={水面の高さ [m]}, xmin=-0.1, xmax=0.1, ymin=0, ymax=0.09, grid=major]
+ \addplot[thick, primaryblue, domain=-0.1:0.1, samples=60] {(12.57^2*x^2)/(2*9.8)};
+\end{axis}
+\end{tikzpicture}
+\caption{毎秒2回転する桶の水面（放物面）。中心が最も低く、縁が約 $8$ cm 高い。}
+\end{figure}
+
+%==========================================================
+\chapter{運動の公理または法則、系、および注記}
+\markboth{第3章}{運動の三法則}
+%==========================================================
+
+この章では、物理の教科書でおなじみの「運動の三法則」が登場します。そのあとに6つの「系」が続き、最後に、衝突の実験の注記があります。
+
+\section{第1法則：慣性の法則}
+
+\textbf{すべての物体は、力を加えられないかぎり、静止の状態、または一直線上の等速運動の状態を保つ。}
+
+\begin{figure}[htbp]
+\centering
+\begin{tikzpicture}
+\begin{axis}[width=9cm, height=5.2cm, xlabel={時間 $t$ [s]}, ylabel={位置 $x$ [m]}, xmin=0, xmax=5, ymin=0, ymax=10, grid=major, legend pos=north west, legend style={font=\footnotesize}]
+ \addplot[thick, primaryblue, domain=0:5] {2*x};
+ \addplot[thick, crimson, domain=0:5] {4};
+ \legend{等速（$v=2$ m/s）,静止}
+\end{axis}
+\end{tikzpicture}
+\caption{力がなければ、位置のグラフは、傾き一定の直線（等速）か、水平線（静止）になる。}
+\end{figure}
+
+\section{第2法則：運動の変化は力に比例する}
+
+\textbf{運動の変化は、加えられた力に比例し、その力の向きの直線上で起こる。}
+
+現代の式で書くと、$F=ma$（または $F=\dfrac{\Delta(mv)}{\Delta t}$）です。ニュートン自身は、この形の式では書いていません（事実。幾何学的な言葉で述べています）。
 
 \begin{center}
-\begin{tikzpicture}[scale=1.4]
-    % 座標の定義
-    \coordinate (A) at (0, 0);
-    \coordinate (B) at (4, 0);
-    \coordinate (C) at (1.5, 2.5);
-    \coordinate (D) at ($(B)+(C)-(A)$);
-
-    % 平行四辺形の描画
-    \draw[thick, primaryblue, -{Stealth[length=3mm]}] (A) -- (B) node[midway, below=3pt] {力 $\mathbf{F}_1$ による変位 $AB$};
-    \draw[thick, crimson, -{Stealth[length=3mm]}] (A) -- (C) node[midway, above left] {力 $\mathbf{F}_2$ による変位 $AC$};
-    \draw[dashed, gray] (B) -- (D);
-    \draw[dashed, gray] (C) -- (D);
-    \draw[very thick, warmgold, -{Stealth[length=3.5mm]}] (A) -- (D) node[midway, above=6pt, sloped] {\textbf{合力による真の変位 $AD$}};
-
-    % 点のラベル
-    \filldraw[primaryblue] (A) circle (2pt) node[below left] {$A$ (質点)};
-    \filldraw[primaryblue] (B) circle (2pt) node[below right] {$B$};
-    \filldraw[crimson] (C) circle (2pt) node[above left] {$C$};
-    \filldraw[warmgold] (D) circle (2pt) node[above right] {$D$};
-\end{tikzpicture}
+\begin{tabular}{rrr}
+\toprule
+力 $F$ [N] & 質量 $m$ [kg] & 加速度 $a=F/m$ [m/s$^2$]\\
+\midrule
+$10$ & $2$ & $5$\\
+$10$ & $5$ & $2$\\
+$20$ & $5$ & $4$\\
+\bottomrule
+\end{tabular}
 \end{center}
 
-質点が時間 $\Delta t$ の間に、力 $\mathbf{F}_1$ 単独ならば $A$ から $B$ へ達し、力 $\mathbf{F}_2$ 単独ならば $A$ から $C$ へ達するとき、二つの力が同時に働くならば、質点は平行四辺形 $ABDC$ の対角線 $AD$ を進みます。この高校数学の「ベクトルの加法」が、すべての天体運動解析の幾何学的基盤となるのです。
+\begin{figure}[htbp]
+\centering
+\begin{tikzpicture}
+\begin{axis}[width=9cm, height=5.6cm, xlabel={力 $F$ [N]}, ylabel={加速度 $a$ [m/s$^2$]}, xmin=0, xmax=20, ymin=0, ymax=10, grid=major, legend pos=north west, legend style={font=\footnotesize}]
+ \addplot[thick, primaryblue, domain=0:20] {x/2};
+ \addplot[thick, crimson, domain=0:20] {x/5};
+ \legend{$m=2$ kg,$m=5$ kg}
+\end{axis}
+\end{tikzpicture}
+\caption{加速度は力に比例し、質量に反比例する。質量が小さい（2 kg）ほど、同じ力でも傾きが急。}
+\end{figure}
 
-% ==================================================
-% 第3章：幾何学的極限法（補題 I 〜 XI）
-% ==================================================
-\chapter{幾何学的極限法 —— 「初等比および最終比」の極意}
+\section{第3法則：作用・反作用の法則}
 
-\section{アルキメデスの取り尽くし法を動的に昇華する}
+\textbf{すべての作用には、大きさが等しく、向きが反対の反作用がある。}
 
-『プリンキピア』第1編の第1節は、「初等および最終比の方法（\textit{De methodo rationum primarum et ultimarum}）」と題された11個の「補題（Lemma）」から始まります。これこそが、ニュートンがライプニッツに先駆けて直観していた\textbf{幾何学的微積分学}の核心です。
+\begin{figure}[htbp]
+\centering
+\begin{tikzpicture}
+ \fill[softblue, draw=primaryblue] (0,0) rectangle (1.6,1.0); \node at (0.8,0.5) {A};
+ \fill[softrose, draw=crimson] (2.0,0) rectangle (3.6,1.0); \node at (2.8,0.5) {B};
+ \draw[ax, primaryblue] (1.6,0.7)--(2.0,0.7) node[midway, above, lbl] {A が B を押す $F$};
+ \draw[ax, crimson] (2.0,0.3)--(1.6,0.3) node[midway, below, lbl] {B が A を押す $-F$};
+\end{tikzpicture}
+\caption{作用と反作用は、別々の物体にかかる、同じ大きさで逆向きの力。}
+\end{figure}
 
-現代の高校数学で学ぶ「区分求積法（長方形の短冊の和による面積計算）」を、ニュートンは次のような美しい幾何学的作図で論証しました（補題 II・III）。
+\begin{examplebox}{地球とリンゴ}
+リンゴ（$0.2$ kg）が地球に引かれる力は $0.2\times9.8=1.96$ N。同じ大きさの力で、リンゴも地球を引いています。地球の質量は $5.97\times10^{24}$ kg なので、地球の加速度は $\dfrac{1.96}{5.97\times10^{24}}\approx3.3\times10^{-25}\ \mathrm{m/s^2}$。まったく感じられません。
+\end{examplebox}
+
+\section{系I・II：力の平行四辺形と、力の分解}
+
+\textbf{系I}：物体に2つの力が同時に働くとき、物体は、2つの力を隣り合う2辺とする平行四辺形の対角線に沿って動く。
+
+\textbf{系II}：1つの力は、平行四辺形の2辺に当たる2つの力に分けられる（力の分解）。
+
+\begin{figure}[htbp]
+\centering
+\begin{tikzpicture}[scale=0.9]
+ \coordinate (O) at (0,0); \coordinate (A) at (3.5,0.6); \coordinate (B) at (1.2,2.4); \coordinate (C) at (4.7,3.0);
+ \draw[ax, primaryblue] (O)--(A) node[midway, below, lbl] {$F_1=3$};
+ \draw[ax, crimson] (O)--(B) node[midway, left, lbl] {$F_2=2$};
+ \draw[dashed, gray] (A)--(C)--(B);
+ \draw[ax, very thick, accentgreen] (O)--(C) node[midway, above, sloped, lbl] {合力};
+\end{tikzpicture}
+\caption{2つの力 $F_1,F_2$ の合力は、平行四辺形の対角線。}
+\end{figure}
+
+\begin{examplebox}{数値例（検算）}
+$F_1=3$ N（$x$ 方向）、$F_2=4$ N（$y$ 方向）が直角に働くとき、合力の大きさは $\sqrt{3^2+4^2}=5$ N。$x$ 軸との角度は $\arctan\dfrac43\approx53.1^\circ$。
+\end{examplebox}
+
+\section{系III：運動量の保存}
+
+\textbf{物体系の運動の量（運動量の総和）は、物体どうしの作用では変わらない。}
 
 \begin{center}
+\begin{tabular}{lrrr}
+\toprule
+ & 質量 [kg] & 速さ [m/s] & 運動量\\
+\midrule
+衝突前 A & $2$ & $3$ & $6$\\
+衝突前 B & $1$ & $0$ & $0$\\
+\midrule
+くっついた後 (A+B) & $3$ & $2$ & $6$\\
+\bottomrule
+\end{tabular}
+\end{center}
+
+運動量の総和は、衝突の前も後も $6$。ただし運動エネルギーは、$\frac12\cdot2\cdot3^2=9$ から $\frac12\cdot3\cdot2^2=6$ に減ります（差の $3$ は熱や変形に変わる）。
+
+\begin{figure}[htbp]
+\centering
+\begin{tikzpicture}
+ \begin{scope}
+  \fill[softblue, draw=primaryblue] (0,0) rectangle (1.4,0.9); \node at (0.7,0.45) {A};
+  \fill[softrose, draw=crimson] (3.0,0) rectangle (3.8,0.9); \node at (3.4,0.45) {B};
+  \draw[ax] (1.5,0.45)--(2.7,0.45) node[midway, above, lbl] {$3$ m/s};
+  \node[lbl] at (1.9,-0.45) {衝突前：$p=2\times3=6$};
+ \end{scope}
+ \begin{scope}[xshift=6.4cm]
+  \fill[softgreen, draw=accentgreen] (0,0) rectangle (2.2,0.9); \node at (1.1,0.45) {A+B};
+  \draw[ax] (2.3,0.45)--(3.4,0.45) node[midway, above, lbl] {$2$ m/s};
+  \node[lbl] at (1.5,-0.45) {衝突後：$p=3\times2=6$};
+ \end{scope}
+\end{tikzpicture}
+\caption{くっつく衝突。運動量の総和は変わらない。}
+\end{figure}
+
+\section{系IV：重心の運動}
+
+\textbf{複数の物体の重心の運動は、物体どうしの作用では変わらない。} 外から力がなければ、重心は静止し続けるか、等速で進み続けます。
+
+\begin{figure}[htbp]
+\centering
+\begin{tikzpicture}[scale=0.9]
+ \draw[gray] (0,0)--(8,0);
+ \foreach \xa/\xb in {1.0/5.0, 2.0/4.5, 3.0/4.0, 3.6/3.6} {\fill[primaryblue] (\xa,0) circle (0.1); \fill[crimson] (\xb,0) circle (0.1);}
+ \draw[ax, accentgreen] (3.6,-0.6) -- (3.6,-0.1) node[pos=0, below, lbl] {重心};
+ \node[lbl] at (6.5,0.5) {2球が引き合い近づくときも、重心は動かない};
+\end{tikzpicture}
+\caption{質量が等しい2つの球が引き合うと、重心（中点）は動かず、2つの球が重心に近づく。}
+\end{figure}
+
+\section{系V・VI：相対運動}
+
+\textbf{系V}：物体の相対運動は、空間が静止しているか、一直線上を等速で動いているかによらず、同じ。\textbf{系VI}：物体が、互いに平行な向きの等しい加速度を受けるときも、相対運動は変わらない。
+
+\begin{examplebox}{走る電車の中のボール}
+等速の電車の中でボールを真上に投げると、ボールは自分の手元に落ちます。電車の中の物理は、止まっている地面の上と同じです。これが（ガリレイの）相対性原理で、運動を「絶対的」か「相対的」かで区別できないことの証拠でもあります。
+\end{examplebox}
+
+\section{注記：衝突の法則}
+
+ニュートンは、レン、ウォリス、ホイヘンスが先に発見した衝突の法則を、振り子を使った実験で確かめました（事実）。落下の法則はガリレオに帰されます。
+
+\begin{center}
+\begin{tabular}{lrrrr}
+\toprule
+衝突 & $m_1$ & $v_1$ & 衝突後の $v_1'$ & 衝突後の $v_2'$\\
+\midrule
+質量が等しい弾性衝突 & $1$ & $4$ & $0$ & $4$\\
+$m_1=2,\ m_2=1$ & $2$ & $3$ & $1$ & $4$\\
+\bottomrule
+\end{tabular}
+\end{center}
+
+2行目の検算：$v_1'=\dfrac{m_1-m_2}{m_1+m_2}v_1=\dfrac13\cdot3=1$、$v_2'=\dfrac{2m_1}{m_1+m_2}v_1=\dfrac43\cdot3=4$。運動量の総和は $2\cdot1+1\cdot4=6$（衝突前は $2\cdot3=6$）、運動エネルギーは $\frac12\cdot2\cdot1+\frac12\cdot1\cdot16=9$（衝突前も $9$）。
+
+\begin{figure}[htbp]
+\centering
+\begin{tikzpicture}
+\begin{axis}[width=9cm, height=5.6cm, xlabel={質量比 $m_2/m_1$}, ylabel={衝突後の速さ（$v_1=1$ に対して）}, xmin=0, xmax=5, ymin=-1.1, ymax=2.1, grid=major, legend pos=north east, legend style={font=\footnotesize}]
+ \addplot[thick, primaryblue, domain=0.05:5, samples=60] {(1-x)/(1+x)};
+ \addplot[thick, crimson, domain=0.05:5, samples=60] {2/(1+x)};
+ \legend{$v_1'$ （入射側）,$v_2'$ （標的側）}
+\end{axis}
+\end{tikzpicture}
+\caption{弾性衝突の後の速さ。標的が軽いと入射側もそのまま進み、重いと跳ね返る（$v_1'<0$）。}
+\end{figure}
+
+\begin{notebox}{この本の未解決点}
+翻訳版の第3章には、同じ文が重複して現れる箇所があります。ニュートンの実験の細かい数値（振り子の長さ、反発係数）は翻訳版に読み取れないので、本書は法則の説明にとどめました。
+\end{notebox}
+
+\section{第3章の復習：定義と法則を図で整理}
+
+\begin{figure}[htbp]
+\centering
+\begin{tikzpicture}[node distance=5mm]
+ \node[fbox, text width=3.0cm] (m) {質量 $m$\\（定義I）};
+ \node[fbox, text width=3.0cm, right=10mm of m] (p) {運動量 $p=mv$\\（定義II）};
+ \node[abox, text width=3.0cm, right=10mm of p] (f) {力 $F=\dfrac{\Delta p}{\Delta t}$\\（第2法則）};
+ \draw[ax] (m)--(p); \draw[ax] (p)--(f);
+ \node[gbox, text width=4.6cm, below=8mm of p] (c) {運動量の保存（系III）\\＝ 第3法則の結果};
+ \draw[ax] (f)--(c); \draw[ax] (p)--(c);
+\end{tikzpicture}
+\caption{質量 → 運動量 → 力 → 運動量の保存、という流れ。}
+\end{figure}
+
+%==========================================================
+\chapter{第1編 物体の運動（第1節〜第3節：極限比の方法と向心力の基本定理）}
+\markboth{第4章}{第1編 第1〜3節}
+%==========================================================
+
+第1編は、抵抗のない空間での物体の運動を扱います。この章は、第1〜3節です。第1節は、微積分の代わりになる「最初比と最後比」の方法、第2節は、中心に向かう力から軌道の性質を導く基本定理、第3節は、楕円・放物線・双曲線の上の運動です。
+
+\section{第1節：最初比と最後比の方法（補題I〜XI）}
+
+\subsection{補題I：限りなく近づく量は、等しくなる}
+
+\textbf{補題I}（趣旨）：与えられた時間のうちに等しくなろうと近づき続ける2つの量が、最後には、与えられたどんな差よりも小さい差になるなら、それらは最後には等しい。
+
+現代の言葉では、「2つの量の差が、いくらでも小さくなるなら、極限は等しい」ということです。
+
+\begin{figure}[htbp]
+\centering
+\begin{tikzpicture}
+\begin{axis}[width=9.5cm, height=5.4cm, xlabel={$n$}, ylabel={値}, xmin=0, xmax=20, ymin=0.9, ymax=2.2, grid=major, legend pos=north east, legend style={font=\footnotesize}]
+ \addplot[thick, primaryblue, mark=*, mark size=1pt, samples at={1,2,...,20}] {1+1/x};
+ \addplot[thick, crimson, mark=square*, mark size=1pt, samples at={1,2,...,20}] {1-0.0};
+ \addplot[dashed, gray, domain=0:20] {1};
+ \legend{$1+\frac1n$,$1$}
+\end{axis}
+\end{tikzpicture}
+\caption{$1+\frac1n$ と $1$ の差は、$n$ を増やすといくらでも小さくなる。最後には等しい（極限は $1$）。}
+\end{figure}
+
+\subsection{補題II：内接・外接する長方形と、曲線の下の面積}
+
+曲線の下の面積を、幅の等しい長方形で下から（内接）、上から（外接）はさみます。長方形の幅を限りなく細くすると、内接の合計と外接の合計は、最後には等しく、曲線の下の面積になります。これは、積分の考え方そのものです。
+
+\begin{center}
+\begin{tabular}{rrr}
+\toprule
+分割数 $n$ & 内接の和 & 外接の和\\
+\midrule
+$4$ & $0.21875$ & $0.46875$\\
+$10$ & $0.28500$ & $0.38500$\\
+$100$ & $0.32835$ & $0.33835$\\
+\bottomrule
+\end{tabular}
+\end{center}
+
+（$y=x^2$、$0\le x\le1$ の例。厳密な値は $\frac13=0.3333\ldots$）
+
+\begin{figure}[htbp]
+\centering
+\begin{tikzpicture}[scale=3.6]
+ \draw[->] (-0.05,0)--(1.15,0) node[right] {$x$}; \draw[->] (0,-0.05)--(0,1.1);
+ \foreach \k in {0,1,2,3} {
+   \pgfmathsetmacro{\xl}{\k/4}\pgfmathsetmacro{\xr}{(\k+1)/4}\pgfmathsetmacro{\hl}{\xl*\xl}\pgfmathsetmacro{\hr}{\xr*\xr}
+   \draw[fill=softblue, draw=primaryblue] (\xl,0) rectangle (\xr,\hl);
+   \draw[fill=softrose, draw=crimson, opacity=0.6] (\xl,\hl) rectangle (\xr,\hr);
+ }
+ \draw[thick, darkslate, domain=0:1, samples=40] plot (\x,{\x*\x});
+\end{tikzpicture}
+\caption{$y=x^2$ の下の面積を、青（内接）と、青＋赤（外接）の長方形ではさむ。赤い部分が、はさんだ誤差。}
+\end{figure}
+
+\subsection{補題III〜VI：長方形の幅が異なるときも、同じ結論}
+
+幅が等しくなくてもよく、最大の幅が0に近づけば、結論は変わりません。さらに、補題IV〜VIは、「曲線の上の図形」でも同じことが言える、という拡張です。
+
+\subsection{補題VII〜IX：弦・弧・接線の比は、最後には1}
+
+\textbf{補題VII}：曲線の弧、その弦、その接線は、弧を限りなく短くすると、最後には、たがいの比が $1$ になります。
+
+\begin{center}
+\begin{tabular}{rrrr}
+\toprule
+弧の長さ $\theta$ & 弦 $2\sin\frac\theta2$ & 弦/弧 & 接線 $\tan\theta$ / 弧\\
+\midrule
+$1$ & $0.95885$ & $0.9589$ & $1.5574$\\
+$0.5$ & $0.49481$ & $0.9896$ & $1.0926$\\
+$0.1$ & $0.09996$ & $0.9996$ & $1.0033$\\
+\bottomrule
+\end{tabular}
+\end{center}
+
+（半径 $1$ の円。弧 $\theta$ の接線は、弧の端点から、もう一方の端点の方向へ引いた接線が、延長線と交わる点までの長さ。表の接線は $\tan\theta$。）
+
+\begin{figure}[htbp]
+\centering
+\begin{tikzpicture}[scale=2.4]
+ \draw[gray] (0,0) circle (1);
+ \coordinate (A) at (1,0); \coordinate (B) at (0.8,0.6);
+ \draw[thick, primaryblue] (A) arc (0:36.87:1);
+ \draw[thick, crimson] (A)--(B);
+ \draw[thick, accentgreen] (A)--(1,{0.75});
+ \draw[dashed, gray] (0,0)--(B); \draw[dashed, gray] (0,0)--(A);
+ \node[font=\small, primaryblue] at (0.93,0.42) {弧};
+ \node[font=\small, crimson] at (0.72,0.2) {弦};
+ \node[font=\small, accentgreen] at (1.12,0.55) {接線};
+\end{tikzpicture}
+\caption{弧・弦・接線。弧を短くすると、3本はほとんど重なる。（模式図）}
+\end{figure}
+
+\subsection{補題X・XI：落ちる距離は時間の2乗に比例する}
+
+\textbf{補題X}：力（一定）で物体が進む距離は、時間の2乗に比例します。\textbf{補題XI}：曲線の接線から、曲線までの距離（\textbf{矢高}）は、弧の長さの2乗に比例します。
+
+\begin{center}
+\begin{tabular}{rrr}
+\toprule
+弧の長さ $\varepsilon$（半径 $1$） & 接線からのへだたり $1-\cos\varepsilon$ & $\varepsilon^2/2$\\
+\midrule
+$0.5$ & $0.12242$ & $0.12500$\\
+$0.1$ & $0.00500$ & $0.00500$\\
+$0.01$ & $0.0000500$ & $0.0000500$\\
+\bottomrule
+\end{tabular}
+\end{center}
+
+\begin{figure}[htbp]
+\centering
+\begin{tikzpicture}
+\begin{axis}[width=9.5cm, height=5.6cm, xlabel={時間 $t$ [s]}, ylabel={落下距離 $s$ [m]}, xmin=0, xmax=4.5, ymin=0, ymax=100, grid=major]
+ \addplot[thick, primaryblue, domain=0:4.5, samples=60] {4.9*x^2};
+ \addplot[only marks, mark=*, color=crimson] coordinates {(1,4.9)(2,19.6)(3,44.1)(4,78.4)};
+\end{axis}
+\end{tikzpicture}
+\caption{$s=4.9t^2$。距離の比は $1:4:9:16$。補題Xの内容（「時間の2乗に比例」）。}
+\end{figure}
+
+この2つの補題が、次の第2節で、向心力の大きさを求める計算の核心になります。
+
+\section{第2節：向心力の決定（命題I〜X）}
+
+\subsection{命題I：中心力があれば、面積速度は一定}
+
+\textbf{命題I（定理I）}：向心力を受けて動く物体が、中心に向かう動径が描く面積は、時間に比例する。これが\textbf{ケプラーの第2法則}（面積速度一定）です。
+
+証明の考え方は、次の通りです。(1) 力が働かなければ、物体は、時間 $\Delta t$ ごとに、まっすぐ同じ距離 $AB=Bc$ を進む。中心 $S$ からの三角形 $SAB$ と $SBc$ は、同じ底辺・同じ高さで、面積が等しい。(2) 点 $B$ で、中心 $S$ に向かう力が、一瞬だけ働くと、$c$ が $C$ に移るが、$cC\parallel BS$ なので、$SBC$ の面積は $SBc$ に等しい。(3) これを何度もくり返し、間隔を限りなく細かくする。
+
+\begin{figure}[htbp]
+\centering
 \begin{tikzpicture}[scale=1.3]
-    % 座標軸
-    \draw[->, thick] (-0.5, 0) -- (6.5, 0) node[right] {$x$};
-    \draw[->, thick] (0, -0.5) -- (0, 4.5) node[above] {$y$};
-
-    % 曲線 y = f(x)
-    \draw[very thick, primaryblue, domain=0.8:5.8, samples=100] plot (\x, {0.12*\x*\x + 0.4}) node[right] {曲線 $y = f(x)$};
-
-    % 等分割の点
-    \coordinate (A) at (1, 0);
-    \coordinate (B) at (2, 0);
-    \coordinate (C) at (3, 0);
-    \coordinate (D) at (4, 0);
-    \coordinate (E) at (5, 0);
-
-    % 外接長方形
-    \fill[softrose, opacity=0.6] (1, 0) rectangle (2, {0.12*4 + 0.4});
-    \fill[softrose, opacity=0.6] (2, 0) rectangle (3, {0.12*9 + 0.4});
-    \fill[softrose, opacity=0.6] (3, 0) rectangle (4, {0.12*16 + 0.4});
-    \fill[softrose, opacity=0.6] (4, 0) rectangle (5, {0.12*25 + 0.4});
-
-    % 内接長方形
-    \fill[softblue, opacity=0.7] (1, 0) rectangle (2, {0.12*1 + 0.4});
-    \fill[softblue, opacity=0.7] (2, 0) rectangle (3, {0.12*4 + 0.4});
-    \fill[softblue, opacity=0.7] (3, 0) rectangle (4, {0.12*9 + 0.4});
-    \fill[softblue, opacity=0.7] (4, 0) rectangle (5, {0.12*16 + 0.4});
-
-    % 輪郭線
-    \draw[thick, crimson] (1, 0) rectangle (2, {0.12*4 + 0.4});
-    \draw[thick, crimson] (2, 0) rectangle (3, {0.12*9 + 0.4});
-    \draw[thick, crimson] (3, 0) rectangle (4, {0.12*16 + 0.4});
-    \draw[thick, crimson] (4, 0) rectangle (5, {0.12*25 + 0.4});
-
-    \draw[thick, secondaryblue] (1, 0) rectangle (2, {0.12*1 + 0.4});
-    \draw[thick, secondaryblue] (2, 0) rectangle (3, {0.12*4 + 0.4});
-    \draw[thick, secondaryblue] (3, 0) rectangle (4, {0.12*9 + 0.4});
-    \draw[thick, secondaryblue] (4, 0) rectangle (5, {0.12*16 + 0.4});
-
-    % 目盛りラベル
-    \node[below] at (1, 0) {$a$};
-    \node[below] at (2, 0) {$x_1$};
-    \node[below] at (3, 0) {$x_2$};
-    \node[below] at (4, 0) {$x_3$};
-    \node[below] at (5, 0) {$b$};
-
-    % 差分の長方形
-    \draw[ultra thick, warmgold] (4, {0.12*16 + 0.4}) rectangle (5, {0.12*25 + 0.4});
-    \node[above right, warmgold] at (5, {0.12*20 + 0.4}) {差の合計 $=$ 最大長方形};
+ \coordinate (S) at (0,0); \coordinate (A) at (-3,1.2); \coordinate (B) at (-1.2,1.2); \coordinate (c) at (0.6,1.2); \coordinate (C) at (0.6,0.4);
+ \fill[softblue] (S)--(A)--(B)--cycle; \fill[softrose] (S)--(B)--(C)--cycle;
+ \draw[thick] (A)--(B)--(c); \draw[thick, primaryblue] (B)--(C);
+ \draw[dashed, gray] (c)--(C); \draw[dashed, gray] (S)--(c);
+ \draw (S)--(A); \draw (S)--(B); \draw (S)--(C);
+ \fill (S) circle (0.05) node[below] {$S$}; \fill (A) circle (0.04) node[above left] {$A$}; \fill (B) circle (0.04) node[above] {$B$};
+ \fill (c) circle (0.04) node[above right] {$c$}; \fill (C) circle (0.04) node[right] {$C$};
+ \draw[ax, crimson] (B)--(-0.9,0.75) node[right, lbl] {$S$ へ向かう力};
 \end{tikzpicture}
-\end{center}
+\caption{命題I。三角形 $SAB$（青）と $SBC$（赤）の面積は等しい。$Cc\parallel SB$ だから。}
+\end{figure}
 
-\begin{proofbox}
-\textbf{補題 II・III の幾何学的証明：}\\
-区間 $[a, b]$ を幅 $\Delta x$ の $n$ 個の短冊に等分割します。
-\begin{enumerate}
-    \item 曲線の「外側」に接する長方形の面積の総和を $S_{\text{outer}}$、曲線の「内側」に含まれる長方形の面積の総和を $S_{\text{inner}}$ とします。
-    \item 両者の差（ピンク色の余白部分）を水平方向に左から右へずらして寄せ集めると、驚くべきことに\textbf{「幅 $\Delta x$、高さが最大長方形の高さ（$f(b) - f(a)$）」をもつ単一の長方形}と完全に一致します：
-    \begin{equation}
-    S_{\text{outer}} - S_{\text{inner}} = \Delta x \times [f(b) - f(a)]
-    \end{equation}
-    \item 短冊の幅を無限に細かくする極限（$\Delta x \to 0$）をとると、右辺は明らかにゼロに収束します：
-    \begin{equation}
-    \lim_{\Delta x \to 0} (S_{\text{outer}} - S_{\text{inner}}) = 0
-    \end{equation}
-    したがって、外接和と内接和は挟み撃ちの原理によって同一の確定した値（曲線下の真の面積）へと最終比において一致します。\QED
-\end{enumerate}
-\end{proofbox}
+\subsection{命題II：逆の主張}
 
-\section{弦と弧と接線の最終等価性（補題 VI 〜 VIII）}
+\textbf{命題II}：面積が時間に比例して一定の割合で増すなら、物体は、中心に向かう力（向心力）を受けている。つまり、命題Iの逆も成り立ちます。この2つを合わせると、\textbf{面積速度一定 $\Longleftrightarrow$ 力が中心を向く}、という対応になります。
 
-ニュートン幾何学のもう一つの強力な武器が、\textbf{「極限において、円弧とその弦、および接線の長さの比は 1 に等しくなる」}という定理です。
+\begin{figure}[htbp]
+\centering
+\begin{tikzpicture}[scale=2.3]
+ \pgfmathsetmacro{\e}{0.5}
+ \draw[thick, primaryblue] (-0.5,0) ellipse ({1} and {0.866});
+ \draw[thick, darkslate, fill=white] (0,0) circle (0.02);
+ \fill[crimson] (0,0) circle (0.04) node[below right, font=\scriptsize] {$S$};
+ \foreach \x/\y in {0.5/0, 0.104/0.69, -0.476/0.866, -0.935/0.78, -1.253/0.57, -1.439/0.298, -1.5/0, -1.439/-0.298, -1.253/-0.57, -0.935/-0.78, -0.476/-0.866, 0.104/-0.69} {
+   \fill[primaryblue] (\x,\y) circle (0.025);
+   \draw[gray, thin] (0,0)--(\x,\y);
+ }
+\end{tikzpicture}
+\caption{離心率 $0.5$ の楕円軌道。等しい時間（周期の $\frac1{12}$）ごとの位置と、焦点 $S$ からの線。焦点付近（右）は点の間隔が広く、遠い所（左）は狭い。}
+\end{figure}
+
+このとき、12個の扇形の面積は、どれも $\dfrac{\pi ab}{12}=\dfrac{\pi\times1\times0.866}{12}\approx0.2267$ で等しくなっています（楕円の全面積 $\pi ab$ を12等分）。
 
 \begin{center}
-\begin{tikzpicture}[scale=1.5]
-    % 円弧
-    \draw[thick, gray!50] (0, 0) circle (3);
-    \draw[very thick, primaryblue] (0:3) arc (0:45:3) node[midway, right=2pt] {弧 $AB$};
-
-    % 点
-    \coordinate (O) at (0, 0);
-    \coordinate (A) at (3, 0);
-    \coordinate (B) at (45:3);
-
-    % 接線
-    \draw[thick, crimson] (3, -0.5) -- (3, 3) node[above] {接線 $AD$};
-    \coordinate (D) at (3, {3*tan(45)});
-    \draw[dashed, gray] (O) -- (D);
-    \draw[thick, warmgold] (A) -- (B) node[midway, left=2pt] {弦 $AB$};
-
-    % 点の描画
-    \filldraw[primaryblue] (A) circle (2pt) node[below right] {$A$};
-    \filldraw[primaryblue] (B) circle (2pt) node[above left] {$B$};
-    \filldraw[crimson] (D) circle (2pt) node[above right] {$D$};
-    \filldraw (O) circle (1.5pt) node[below left] {$O$ (中心)};
-
-    % 角度
-    \draw[->] (0.7, 0) arc (0:45:0.7) node[midway, right] {$\theta$};
-\end{tikzpicture}
+\begin{tabular}{rrr}
+\toprule
+区間の分け方 $n$ & 三角形 $S P_kP_{k+1}$ の面積（平均） & 真の扇形の面積\\
+\midrule
+$12$ & $0.2117$ & $0.2267$\\
+\bottomrule
+\end{tabular}
 \end{center}
 
-高校数学で学ぶ三角関数の極限公式：
-\begin{equation}
-\lim_{\theta \to 0} \frac{\sin \theta}{\theta} = 1, \quad \lim_{\theta \to 0} \frac{\tan \theta}{\theta} = 1
-\end{equation}
-は、幾何学的には\textbf{「$\lim_{B \to A} \frac{\text{弦 } AB}{\text{弧 } AB} = 1$ かつ $\lim_{B \to A} \frac{\text{接線 } AD}{\text{弧 } AB} = 1$」}を意味します。ニュートンはこの幾何学的性質を用いて、滑らかな曲線を微視的な直線の折れ線として大胆に近似・解析したのです。
+三角形の面積（$0.17\sim0.22$）は、弦で近似したために、ばらつきがあります。区間を細かくするほど、真の扇形の面積に近づく、というのが命題Iの証明の核心でした。
 
-% ==================================================
-% 第4章：ケプラー第2法則の完全幾何学的証明
-% ==================================================
-\chapter{ケプラー第2法則（面積速度一定）の幾何学的証明}
+\subsection{命題III・IV：円運動と向心力}
 
-\section{『プリンキピア』第1編 命題1（定理1）の衝撃}
+\textbf{命題IV}：円運動の向心力は、速さの2乗を半径で割った量に比例する。
 
-ニュートンの偉大さを最も純粋に体験できるのが、第1編の\textbf{命題1（Proposition I, Theorem I）}です。
-ケプラーが天体観測データ（ティコ・ブラーエの精密記録）から帰納的に発見した「惑星は太陽を中心として等しい時間に等しい面積を描く（面積速度一定の法則）」を、ニュートンは\textbf{「中心力（向心力）のみを受ける物体の必然的幾何学帰結」}として、驚くほど単純な「三角形の等積変形」だけで完全に演繹しました。
+\[
+F=\frac{mv^2}{r}=\frac{4\pi^2mr}{T^2}.
+\]
 
-\begin{theorembox}{第1編 命題1 定理1}
-物体が任意の固定点に向かう中心力に引き寄せられながら運動するとき、その物体が固定点を中心として動径によって掃引する面積は、運動の行われる不動の平面内にあり、時間に比例する（単位時間あたりの掃引面積は常に一定である）。
-\end{theorembox}
-
-\section{高校数学で完璧にわかる4つの論理ステップ}
-
-この証明には、三平方の定理すら不要です。用いるのは\textbf{「底辺が等しく高さが共通な二つの三角形は面積が等しい」}という中学校で習う知識だけです！
+\textbf{系}（ケプラーの第3法則との結びつき）：周期の2乗が半径の3乗に比例する（$T^2\propto r^3$）なら、向心力は $r$ の2乗に反比例する（$F\propto\dfrac{r}{T^2}\propto\dfrac{r}{r^3}=\dfrac{1}{r^2}$）。
 
 \begin{center}
-\begin{tikzpicture}[scale=1.5]
-    % 中心 S
-    \coordinate (S) at (0, 0);
-
-    % 時間 dt ごとの点
-    \coordinate (A) at (1.5, 3.5);
-    \coordinate (B) at (3.5, 3.2);
-    
-    % 力がない場合の直進点 c (Bc = AB)
-    \coordinate (c) at ($(B) + ($(B)-(A)$)$);
-
-    % 向心力による引寄せベクトル (B から S への方向)
-    \coordinate (F_dir) at ($(S)-(B)$);
-    % 引寄せ変位 cC は SB に平行
-    \coordinate (C) at ($(c) + 0.45*(F_dir)$);
-
-    % さらに次のステップ
-    \coordinate (d) at ($(C) + ($(C)-(B)$)$);
-    \coordinate (D) at ($(d) + 0.42*($(S)-(C)$)$);
-
-    % 動径線（中心 S から各点へ）
-    \draw[thick, gray!70] (S) -- (A);
-    \draw[thick, primaryblue] (S) -- (B);
-    \draw[thick, crimson] (S) -- (C);
-    \draw[thick, gray!70] (S) -- (D);
-
-    % 軌道線
-    \draw[very thick, primaryblue] (A) -- (B);
-    \draw[very thick, crimson] (B) -- (C);
-    \draw[very thick, gray!70] (C) -- (D);
-
-    % 慣性直進線と撃力変位線
-    \draw[dashed, warmgold, thick] (B) -- (c) node[midway, above right] {力のない直進 ($Bc=AB$)};
-    \draw[dashed, darkslate, thick, -{Stealth[length=2.5mm]}] (c) -- (C) node[midway, right] {中心 $S$ への引き寄せ ($cC \parallel SB$)};
-
-    % 面積のハッチング（色塗り）
-    \fill[softblue, opacity=0.4] (S) -- (A) -- (B) -- cycle;
-    \fill[softrose, opacity=0.4] (S) -- (B) -- (C) -- cycle;
-    \fill[softamber, opacity=0.25] (S) -- (B) -- (c) -- cycle;
-
-    % 点の描画
-    \filldraw[deepnavy] (S) circle (2.5pt) node[below left] {\textbf{$S$（太陽・引力中心）}};
-    \filldraw[primaryblue] (A) circle (2pt) node[above left] {$A$};
-    \filldraw[primaryblue] (B) circle (2pt) node[above=2pt] {$B$};
-    \filldraw[warmgold] (c) circle (2pt) node[above right] {$c$};
-    \filldraw[crimson] (C) circle (2pt) node[right] {$C$};
-    \filldraw[gray] (D) circle (1.5pt) node[right] {$D$};
-
-    % ラベル
-    \node[primaryblue] at (2.2, 2.0) {$\triangle SAB$};
-    \node[crimson] at (3.2, 1.8) {$\triangle SBC$};
-\end{tikzpicture}
+\renewcommand{\arraystretch}{1.3}
+\begin{tabular}{lrrr}
+\toprule
+惑星 & 軌道半径 $a$ [AU] & 周期 $T$ [年] & $a^3/T^2$\\
+\midrule
+水星 & $0.387$ & $0.241$ & $0.998$\\
+金星 & $0.723$ & $0.615$ & $0.999$\\
+地球 & $1.000$ & $1.000$ & $1.000$\\
+火星 & $1.524$ & $1.881$ & $1.000$\\
+木星 & $5.203$ & $11.86$ & $1.001$\\
+\bottomrule
+\end{tabular}
 \end{center}
 
-\begin{proofbox}
-ニュートンの証明の全ステップ：
-\begin{enumerate}[leftmargin=1.8em]
-    \item \textbf{ステップ1：力がない場合の等速度直進運動}\\
-    時間 $\Delta t$ の間に物体が $A$ から $B$ へ進んだとします。もし点 $B$ において何の外力も働かなければ（第1法則・慣性）、物体は等速度のまま次の時間 $\Delta t$ の間に直線 $AB$ の延長上の点 $c$ へ達します。\\
-    当然、$Bc = AB$ です。
-    
-    \item \textbf{ステップ2：慣性三角形の等積性}\\
-    三角形 $\triangle SAB$ と三角形 $\triangle SBc$ を比較します。\\
-    底辺をそれぞれ $AB$ と $Bc$ と見なすと、$AB = Bc$ であり、頂点はいずれも太陽 $S$ で共通ですから、二つの三角形の高さは完全に一致します。したがって：
-    \begin{equation}
-    \text{面積}(\triangle SAB) = \text{面積}(\triangle SBc)
-    \end{equation}
+（数値は、現代の軌道要素。$a^3/T^2$ は、ほぼ一定の $1$ になる。）
 
-    \item \textbf{ステップ3：中心力（撃力）の加算と等積変形}\\
-    実際には、点 $B$ に達した瞬間に、中心 $S$ へ向かう引力積（瞬間的な撃力）が加わります。平行四辺形の法則により、質点の真の到達点 $C$ は、線分 $cC$ が中心線 $SB$ と平行になるように決定されます（$cC \parallel SB$）。
-    
-    ここで、三角形 $\triangle SBC$ と三角形 $\triangle SBc$ に着目してください！\\
-    線分 $SB$ を共通の「底辺」と見なすと、平行線 $cC \parallel SB$ の上に頂点 $c$ と頂点 $C$ が並んでいます。\\
-    平行線の性質により、\textbf{「共通底辺 $SB$ に対する頂点 $C$ の高さと頂点 $c$ の高さは寸分違わず等しい」}のです！\\
-    したがって：
-    \begin{equation}
-    \text{面積}(\triangle SBC) = \text{面積}(\triangle SBc)
-    \end{equation}
-
-    \item \textbf{ステップ4：面積速度一定の成立と極限}\\
-    式(4.2)と式(4.3)を連立すると、驚くべき等式が導かれます：
-    \begin{equation}
-    \text{面積}(\triangle SAB) = \text{面積}(\triangle SBC)
-    \end{equation}
-    全く同様の議論により、次の時間 $\Delta t$ で描かれる三角形 $\triangle SCD$ の面積もこれと等しくなります。\\
-    時間の刻み幅を極限 $\Delta t \to 0$ へと縮めれば、離散的な折れ線軌道は滑らかな連続曲線となり、\textbf{「単位時間に動径が掃引する面積は軌道のいかなる場所でも厳密に一定である」}ことが証明されました。\QED
-\end{enumerate}
-\end{proofbox}
-
-\begin{reflectionbox}
-\textbf{ニュートンの幾何学的思考の美}\\
-現代の物理学教育では、角運動量保存則 $\mathbf{L} = \mathbf{r} \times m\mathbf{v} = \text{const}$ から面積速度一定を導くのが通例です。しかし、ベクトルの外積という抽象代数を持ち出すまでもなく、ニュートンの「底辺が等しく、平行線の間にある三角形は面積が等しい」という証明は、小学生・中学生でも視覚的に理解できるほど本質的で透明です。
-\end{reflectionbox}
-
-% ==================================================
-% 第5章：楕円軌道と万有引力の逆二乗則
-% ==================================================
-\chapter{楕円軌道と逆二乗則の幾何学的演繹}
-
-\section{ケプラーの第1法則から逆二乗則を導く（命題11）}
-
-ケプラーの第1法則は「惑星は太陽を一つの焦点とする楕円軌道を描く」というものです。ニュートンは『プリンキピア』第1編 命題11（問題6）において、\textbf{「楕円軌道を描く向心力は、太陽からの距離の二乗に反比例する（$F \propto 1/r^2$）」}ことを幾何学的に完全に証明しました。
-
-この証明の鍵を握るのが、ニュートンが考案した\textbf{「向心力の幾何学的尺度」}です。
-
-\begin{center}
-\begin{tikzpicture}[scale=1.6]
-    % 楕円の描画 (長半径 a=3, 短半径 b=2)
-    \draw[thick, primaryblue] (0, 0) ellipse (3 and 2);
-
-    % 焦点 S, H (c = sqrt(9-4) = sqrt(5) approx 2.236)
-    \coordinate (S) at (-2.236, 0);
-    \coordinate (H) at (2.236, 0);
-
-    % 楕円上の点 P
-    \coordinate (P) at (-1.2, 1.833);
-    % 微小時間後の点 Q
-    \coordinate (Q) at (-1.8, 1.6);
-
-    % 接線 PR
-    \coordinate (R) at (-2.3, 2.3);
-
-    % 点 Q から接線 PR への垂線 QR、動径 SP への平行線
-    \coordinate (T) at ($(P)!0.4!(S)$);
-
-    % 線の描画
-    \draw[very thick, crimson] (S) -- (P) node[midway, below left] {動径 $SP = r$};
-    \draw[thick, gray] (H) -- (P);
-    \draw[thick, warmgold] (P) -- (R) node[above] {接線};
-    \draw[dashed, darkslate] (Q) -- (P);
-
-    % 向心力による落下変位 QR
-    \draw[thick, crimson, -{Stealth}] (R) -- (Q) node[midway, left] {$QR \propto F \Delta t^2$};
-
-    % 点のプロット
-    \filldraw[deepnavy] (S) circle (2.5pt) node[below] {$S$ (太陽・焦点)};
-    \filldraw[gray] (H) circle (2pt) node[below] {$H$ (もう一つの焦点)};
-    \filldraw[primaryblue] (P) circle (2pt) node[above right] {$P$ (現在位置)};
-    \filldraw[primaryblue] (Q) circle (2pt) node[left] {$Q$ (微小時間後)};
-    \filldraw[warmgold] (R) circle (1.5pt) node[above] {$R$};
+\begin{figure}[htbp]
+\centering
+\begin{tikzpicture}
+\begin{loglogaxis}[width=9.5cm, height=6.2cm, xlabel={軌道半径 $a$ [AU]}, ylabel={周期 $T$ [年]}, grid=major, xmin=0.3, xmax=12, ymin=0.15, ymax=40]
+ \addplot[thick, crimson, domain=0.3:12, samples=40] {x^1.5};
+ \addplot[only marks, mark=*, color=primaryblue] coordinates {(0.387,0.241)(0.723,0.615)(1,1)(1.524,1.881)(5.203,11.86)(9.537,29.46)};
+\end{loglogaxis}
 \end{tikzpicture}
-\end{center}
+\caption{6つの惑星（水星・金星・地球・火星・木星・土星）の周期と軌道半径。両対数のグラフで、傾き $\frac32$ の直線 $T=a^{3/2}$（赤）の上に並ぶ。}
+\end{figure}
 
-\begin{lecturebox}
-\textbf{ニュートンの幾何学的力尺度公式}\\
-質点が微小時間 $\Delta t$ の間に接線方向へ直進しようとする変位を $PR$ とし、向心力によって軌道上へと引き戻される変位を $QR$ とします。
-運動の第2法則（自由落下公式 $s = \frac{1}{2} a t^2$）より、微小変位 $QR$ は向心力 $F$ と時間の二乗の積に比例します：
-\begin{equation}
-QR \propto F \times (\Delta t)^2
-\end{equation}
-一方、ケプラーの第2法則（面積速度一定）により、掃引面積 $\text{Area}(\triangle SPQ)$ は時間 $\Delta t$ に比例します。点 $Q$ から動径 $SP$ に下ろした垂線の足を $T$ とすると、三角形の面積は $\frac{1}{2} SP \times QT$ ですから：
-\begin{equation}
-\Delta t \propto SP \times QT
-\end{equation}
-式(5.1)と式(5.2)を組み合わせると、向心力 $F$ の幾何学的尺度が直ちに得られます：
-\begin{equation}
-F \propto \lim_{Q \to P} \frac{QR}{(SP)^2 \times QT^2} = \frac{1}{SP^2} \times \lim_{Q \to P} \frac{QR}{QT^2}
-\end{equation}
-驚くべきことに、向心力はすでに $1/SP^2 = 1/r^2$ を外側に括り出しています！\\
-あとは、\textbf{「幾何学的極限比 $\lim_{Q \to P} \frac{QR}{QT^2}$ が楕円軌道全体において一定値（定数）になるか？」}を調べるだけでよいのです。
-\end{lecturebox}
+\begin{examplebox}{地球の公転で検算}
+地球の軌道半径 $r=1.496\times10^{11}$ m、周期 $T=3.156\times10^7$ s。向心加速度は
+\[
+\frac{4\pi^2r}{T^2}=\frac{39.478\times1.496\times10^{11}}{(3.156\times10^7)^2}=\frac{5.906\times10^{12}}{9.960\times10^{14}}=5.93\times10^{-3}\ \mathrm{m/s^2}.
+\]
+地表の重力加速度（$9.8$）の、約1650分の1です。
+\end{examplebox}
 
-\section{アポロニオスの円錐曲線幾何学による解決}
+\subsection{命題V〜IX：向心力を求める一般の公式}
 
-ニュートンは古代ギリシャのアポロニオスが著した『円錐曲線論』の性質（楕円の主径、副径、通径 $L$ の関係式）を鮮やかに適用しました。
+\textbf{命題VI}は、向心力の大きさを、軌道の形から求める一般の公式です。軌道上の点 $P$ で、中心 $S$ からの距離を $SP$、接線までの垂線の長さを $QT$（接線方向の短い距離）と、矢高 $QR$ として、
 
-\begin{proofbox}
-楕円の半長軸を $a$、半短軸を $b$、通径（焦点を通る弦の長さの半分）を $L = \frac{2b^2}{a}$ とします。楕円の幾何学的共役直径の性質により、点 $Q$ が点 $P$ に無限に近づく極限において、常に次の相似関係が成り立ちます：
-\begin{equation}
-\lim_{Q \to P} \frac{QT^2}{QR} = L = \frac{2b^2}{a} \quad (\text{一定値})
-\end{equation}
-したがって、式(5.3)にこれを代入すれば：
-\begin{equation}
-F \propto \frac{1}{SP^2} \times \frac{1}{L} \propto \frac{1}{r^2}
-\end{equation}
-惑星を太陽に向かって引き寄せている力は、\textbf{「太陽からの距離の二乗に反比例する」}ことが、ユークリッド幾何学とアポロニオス幾何学の純粋な結合によって完全に証明されたのです！\QED
-\end{proofbox}
+\[
+F\propto\frac{QR}{SP^2\cdot QT^2}.
+\]
 
-% ==================================================
-% 第6章：地球・月・リンゴの重力統一検証
-% ==================================================
-\chapter{地球・月・リンゴの重力統一検証}
+ここで、補題XI（矢高は弧の2乗に比例）と、命題I（面積速度が一定）が使われます。
 
-\section{「月は地球に向かって毎秒何ミリ落下しているか？」}
-
-ニュートンが人類史に打ち立てた最大の偉業は、「地上のリンゴを落とす重力」と「天空の月を軌道に繋ぎ止める引力」が、全く同一の物理法則（逆二乗則）に従う同一の力であることを数値的・幾何学的に立証したことです（第3編 命題4）。
-
-この思考実験を、高校物理の公式（円運動の加速度 $a = v^2/r = r\omega^2$）を用いて追体験してみましょう。
-
-\begin{center}
+\begin{figure}[htbp]
+\centering
 \begin{tikzpicture}[scale=1.4]
-    % 地球
-    \filldraw[primaryblue!20] (0, 0) circle (0.8);
-    \draw[thick, primaryblue] (0, 0) circle (0.8);
-    \node at (0, 0) {\textbf{地球}};
-    \node[below] at (0, -0.8) {半径 $R$};
-
-    % 月の軌道
-    \draw[dashed, secondaryblue] (0, 0) circle (4);
-    
-    % 月の位置
-    \coordinate (M) at (45:4);
-    \filldraw[warmgold] (M) circle (3pt) node[above right] {\textbf{月 (Moon)}};
-
-    % 接線方向の直進と落下
-    \coordinate (M_tangent) at ($(M) + (-0.8, 0.8)$);
-    \draw[thick, gray, -{Stealth}] (M) -- (M_tangent) node[above] {慣性による直進};
-    \draw[very thick, crimson, -{Stealth}] (M_tangent) -- (40:4) node[midway, right] {地球への「落下」};
-
-    % 距離の表示
-    \draw[<->, thick, darkslate] (0, 0) -- (M) node[midway, fill=white] {距離 $r \approx 60R$};
+ \coordinate (S) at (-2.5,-0.6); \coordinate (P) at (0,0); \coordinate (Q) at (1.1,0.28);
+ \draw[thick, primaryblue] (-1.0,-0.2) .. controls (-0.5,0.0) and (-0.2,0.04) .. (P) .. controls (0.5,0.08) and (0.9,0.22) .. (Q);
+ \draw[dashed, gray] (P)--(1.6,0.0);
+ \draw (S)--(P); \draw[dashed, gray] (S)--(Q);
+ \draw[crimson] (Q)--(1.1,0.0) node[midway, right, lbl] {$QR$ ?};
+ \fill (S) circle (0.05) node[left] {$S$}; \fill (P) circle (0.04) node[above left] {$P$}; \fill (Q) circle (0.04) node[above] {$Q$};
 \end{tikzpicture}
-\end{center}
+\caption{命題VIの図の構成（模式図）。$P$ から短い弧 $PQ$ を取り、$S$ に向かう線 $QR$（矢高）を求める。}
+\end{figure}
 
-\begin{theorembox}{ニュートンの月落とし計算（Moon-test）}
-\begin{enumerate}[leftmargin=1.8em]
-    \item \textbf{地表におけるリンゴの落下加速度}:\\
-    ガリレオの落体の法則により、地球表面（地球中心から距離 $R$）において、リンゴは最初の1秒間に約 $4.9\,\text{m}$ 落下します：
-    \begin{equation}
-    g \approx 9.8\,\text{m/s}^2 \implies s_{\text{apple}} = \frac{1}{2} g t^2 = 4.9\,\text{m}
-    \end{equation}
+\begin{notebox}{細部は原著で}
+命題V〜IXは、翻訳版で記号の乱れがあり、本書の図は、原著の図を再現したものではありません。式の意味（矢高 $\propto$ 力）と、使う補題の対応のみを説明しています。
+\end{notebox}
 
-    \item \textbf{月の公転半径と公転周期}:\\
-    天文学の観測から、月までの距離は地球半径の約60倍であることが分かっていました：
-    \begin{equation}
-    r_{\text{moon}} \approx 60 R
-    \end{equation}
-    また、月の公転周期は $T \approx 27.32\,\text{日} \approx 2.36 \times 10^6\,\text{秒}$ です。
+\subsection{命題VII〜IX：円と螺旋の中心力}
 
-    \item \textbf{逆二乗則が正しければ、月における引力加速度はどうなるか？}:\\
-    引力が距離の二乗に反比例するならば、月における地球引力加速度 $a_{\text{moon}}$ は地表の重力の $\frac{1}{60^2} = \frac{1}{3600}$ に弱まっているはずです：
-    \begin{equation}
-    a_{\text{moon}} = \frac{g}{60^2} = \frac{9.8}{3600} \approx 0.00272\,\text{m/s}^2
-    \end{equation}
-    この加速度のもとで、月が1秒間に地球中心に向かって「落下」する距離 $s_{\text{moon}}$ は：
-    \begin{equation}
-    s_{\text{moon}} = \frac{1}{2} a_{\text{moon}} (1\,\text{s})^2 \approx \frac{4.9\,\text{m}}{3600} \approx 1.36\,\text{mm}
-    \end{equation}
+\textbf{命題VII}：円周上の1点 $S$ に向かう力で、物体が円周上を動くとき、力は $SP^5$ に反比例する（$F\propto SP^{-5}$）。\textbf{命題IX}：対数らせん（$r=Ce^{k\theta}$）上を動く物体の、中心に向かう力は、距離の3乗に反比例（$F\propto r^{-3}$）。
 
-    \item \textbf{円運動の幾何学から月の実際の落下量を計算する}:\\
-    月が半径 $r$ の円軌道を速さ $v = 2\pi r / T$ で公転するとき、1秒間に直進する接線変位から円周軌道上へ戻るための幾何学的落下変位は：
-    \begin{equation}
-    s = \frac{v^2}{2r} = \frac{2\pi^2 r}{T^2}
-    \end{equation}
-    実測値 $r \approx 3.84 \times 10^8\,\text{m}$ と $T \approx 2.36 \times 10^6\,\text{s}$ を代入すると：
-    \begin{equation}
-    s \approx \frac{2 \times (3.1416)^2 \times 3.84 \times 10^8}{(2.36 \times 10^6)^2} \approx 0.00136\,\text{m} = \mathbf{1.36\,\text{mm}}
-    \end{equation}
-\end{enumerate}
-\end{theorembox}
+\begin{figure}[htbp]
+\centering
+\begin{tikzpicture}[scale=0.55]
+ \draw[->] (-5,0)--(6,0); \draw[->] (0,-4.5)--(0,5);
+ \draw[thick, primaryblue, domain=0:900, samples=250, variable=\t] plot ({0.2*exp(0.0035*\t)*cos(\t)}, {0.2*exp(0.0035*\t)*sin(\t)});
+ \fill[crimson] (0,0) circle (0.1) node[below left, font=\scriptsize] {$S$};
+\end{tikzpicture}
+\caption{対数らせん。中心 $S$ へ向かう力は、距離の3乗に反比例する。}
+\end{figure}
 
-式(6.4)の理論予測値（$1.36\,\text{mm}$）と、式(6.6)の天体観測値（$1.36\,\text{mm}$）は見事に一致しました！
-アリストテレス以来2000年間信じられてきた「地上の不完全な世界」と「天上の神聖な世界」という二元論はここに完全に崩壊し、\textbf{「天界の月も、木から落ちるリンゴとまったく同じ力で地球へと引き寄せられ続けている」}という宇宙の普遍的統一認識が確立されたのです。
+\subsection{命題X：楕円の中心に向かう力は距離に比例}
 
-% ==================================================
-% 第7章：球殻定理 —— なぜ天体を「質点」とみなせるのか？
-% ==================================================
-\chapter{球殻定理 —— 天体を「一点」とみなせる奇跡}
+\textbf{命題X}：楕円の上を、楕円の中心に向かう力で動く物体の力は、距離に比例する。位置を $(a\cos\omega t,\ b\sin\omega t)$ とすると、加速度は $-\omega^2\times$（位置）で、中心に向かい、距離に比例します。
 
-\section{ニュートンを20年間悩ませた数学的難関}
+\begin{figure}[htbp]
+\centering
+\begin{tikzpicture}[scale=0.85]
+ \draw[->] (-3.7,0)--(3.9,0) node[right] {$x$}; \draw[->] (0,-2.7)--(0,2.9) node[above] {$y$};
+ \draw[thick, primaryblue] (0,0) ellipse (3 and 2);
+ \coordinate (P) at ({3*cos(55)},{2*sin(55)});
+ \fill[crimson] (P) circle (0.08) node[above right] {$P$};
+ \draw[ax, crimson] (P)--({3*cos(55)*0.4},{2*sin(55)*0.4}) node[left, lbl] {力 $\propto r$};
+ \draw[dashed, gray] (0,0)--(P);
+\end{tikzpicture}
+\caption{楕円 $x^2/9+y^2/4=1$ 上の運動。中心に向かう力は、中心からの距離 $|OP|$ に比例する。}
+\end{figure}
 
-万有引力の逆二乗則を提唱したとき、ニュートンは深刻な数学的疑念に直面しました。
-月と地球の間の引力を計算するとき、われわれは地球の全質量が「地球の中心の一点」に集中しているものとして距離 $r$ を計算しました。
+\begin{examplebox}{周期は振幅によらない}
+力が $F=-kr$（距離に比例）のとき、周期は $T=2\pi\sqrt{m/k}$ で、軌道の大きさ（長半径・短半径）に無関係です。$m=1$ kg、$k=4$ N/m なら $T=2\pi/2=\pi\approx3.14$ s。軌道の大きさを2倍にしても、周期は変わりません。
+\end{examplebox}
 
-しかし、実際の地球は半径数千キロメートルもある巨大な球体です。月の近くにある地表面の土砂は月を強く引き、地球の裏側にある土砂は遠くから弱く引き、それらは様々な角度から斜めに引っ張り合っています。
-\textbf{「球体のすべての微小部分が及ぼす無数の引力を足し合わせたとき、それは本当に『球の中心に全質量が集まった単一の質点』と同じ引力になるのだろうか？」}
+\section{第3節：偏心円錐曲線における物体の運動（命題XI〜XVII）}
 
-もしこれが成り立たなければ、逆二乗則は巨大な天体に対して破綻してしまいます。ニュートンはこの証明に苦しみ、それが『プリンキピア』出版が遅れた一因とも言われています。そして彼は第1編 命題70〜74において、この難問を純粋な幾何学作図によって完全に証明したのです（\textbf{球殻定理}）。
+ここが、第1編の山場です。物体が、焦点に向かう力を受けて、楕円・放物線・双曲線の上を動くとき、力の大きさが、距離の2乗に反比例することを示します。
 
-\section{球殻の内部では重力が完全にゼロになる（命題70）}
+\subsection{命題XI：楕円の焦点に向かう力は、距離の2乗に反比例}
 
-まずニュートンは、中空の一様な球殻の内部に置かれた質点には、\textbf{あらゆる場所で引力が完全に相殺してゼロになる}ことを証明しました。
+\textbf{命題XI（問題VI）}：楕円軌道で、力の中心が焦点にあるなら、力は距離の2乗に反比例する。
+
+\[
+F=\frac{GMm}{r^2}\quad(\text{この比例定数 }GM\text{ は、軌道ごとに }\ \frac{4\pi^2a^3}{T^2}\text{）}.
+\]
+
+\begin{figure}[htbp]
+\centering
+\begin{tikzpicture}[scale=0.9]
+ \draw[thick, primaryblue] (0,0) ellipse (5 and 4);
+ \fill[crimson] (-3,0) circle (0.1) node[below left] {$F_1$}; \fill[crimson] (3,0) circle (0.1) node[below right] {$F_2$};
+ \coordinate (P) at ({5*cos(50)},{4*sin(50)});
+ \fill (P) circle (0.08) node[above right] {$P$};
+ \draw[thick, accentgreen] (-3,0)--(P); \draw[thick, warmamber] (3,0)--(P);
+ \draw[dashed, gray] (-5,0)--(5,0);
+\end{tikzpicture}
+\caption{楕円の2つの焦点 $F_1,F_2$（$a=5,b=4,c=3$）。$P$ から2つの焦点までの距離の和は一定（$2a=10$）。}
+\end{figure}
 
 \begin{center}
-\begin{tikzpicture}[scale=1.6]
-    % 球殻の断面
-    \draw[very thick, primaryblue] (0, 0) circle (2.5);
-
-    % 内部の点 P (中心からずれた任意の位置)
-    \coordinate (P) at (0.8, 0.4);
-
-    % 対頂角をなす細い円錐（立体角）の直線
-    \draw[thick, crimson] ($(P) + (-2.0, 1.0)$) -- ($(P) + (2.0, -1.0)$);
-    \draw[thick, crimson] ($(P) + (-2.2, 0.7)$) -- ($(P) + (2.2, -0.7)$);
-
-    % 球殻との交点
-    \coordinate (A1) at (-1.15, 1.4);
-    \coordinate (A2) at (-1.35, 1.15);
-    \coordinate (B1) at (2.42, -0.4);
-    \coordinate (B2) at (2.47, -0.15);
-
-    % 微小面要素の描画
-    \draw[ultra thick, warmgold] (A1) -- (A2) node[midway, left] {微小面積 $dS_1$};
-    \draw[ultra thick, accentgreen] (B1) -- (B2) node[midway, right] {微小面積 $dS_2$};
-
-    % 点 P
-    \filldraw[deepnavy] (P) circle (2.5pt) node[below] {$P$ (内部の質点)};
-    
-    % 距離の表示
-    \draw[<->, dashed] (P) -- ($(A1)!0.5!(A2)$) node[midway, above left] {$r_1$};
-    \draw[<->, dashed] (P) -- ($(B1)!0.5!(B2)$) node[midway, below right] {$r_2$};
-\end{tikzpicture}
+\begin{tabular}{rrr}
+\toprule
+点 & $F_1$ までの距離 & $F_2$ までの距離\\
+\midrule
+$(5,0)$ & $8$ & $2$\\
+$(0,4)$ & $5$ & $5$\\
+$(-5,0)$ & $2$ & $8$\\
+\bottomrule
+\end{tabular}
 \end{center}
 
-\begin{proofbox}
-\textbf{高校数学の相似と逆二乗則の相殺：}
-\begin{enumerate}
-    \item 点 $P$ を頂点とする微小な対頂立体角（細い円錐）を考えます。この円錐が球殻の表面を切り取る微小な面積をそれぞれ $dS_1, dS_2$ とし、点 $P$ からの距離を $r_1, r_2$ とします。
-    \item 幾何学的な相似比の性質により、切り取られる面積は距離の二乗に比例します：
-    \begin{equation}
-    dS_1 \propto r_1^2, \quad dS_2 \propto r_2^2 \implies \frac{dS_1}{dS_2} = \frac{r_1^2}{r_2^2}
-    \end{equation}
-    \item 球殻が一様な密度をもつならば、それぞれの小片の質量 $dm_1, dm_2$ も面積に比例するため、質量の比は $\frac{dm_1}{dm_2} = \frac{r_1^2}{r_2^2}$ です。
-    \item ここで、万有引力の逆二乗則を適用します！\\
-    小片 $dm_1$ が点 $P$ の物体を引き寄せる引力 $dF_1$ と、小片 $dm_2$ が引き寄せる引力 $dF_2$ の大きさは：
-    \begin{equation}
-    dF_1 = G \frac{m \cdot dm_1}{r_1^2} \propto \frac{r_1^2}{r_1^2} = 1
-    \end{equation}
-    \begin{equation}
-    dF_2 = G \frac{m \cdot dm_2}{r_2^2} \propto \frac{r_2^2}{r_2^2} = 1
-    \end{equation}
-    なんと、\textbf{「距離が遠くなって弱まる効果（$1/r^2$）」と「面積が広がって質量が増える効果（$r^2$）」が完全に打ち消し合い、両者の引力は完全に等しくなります（$dF_1 = dF_2$）}！
-    \item 二つの力は対頂角として正反対の方向を向いているため、完全に相殺して合力はゼロになります。全球殻にわたってすべての立体角を足し合わせれば、内部のいかなる位置においても引力の合力は厳密にゼロになります。\QED
-\end{enumerate}
-\end{proofbox}
+3点とも、2つの距離の和は $10=2a$ です。
 
-\section{外部の物体に対しては「中心の質点」として振る舞う（命題71）}
+\subsection{命題XII・XIII：双曲線と放物線}
 
-同様の精緻な幾何学積分により、ニュートンは\textbf{「一様な球殻の外部にある質点に対しては、球殻の全質量がその幾何学的中心に集まった質点と全く同じ引力を及ぼす」}ことを証明しました。
-球体は無数の同心球殻の集まりと見なせるため、地球や太陽のような巨大な天体であっても、外部の惑星や月に対しては「中心の一点にある質点」として扱ってよいことが数学的に完全に保証されたのです。
+同じことが、双曲線（命題XII）、放物線（命題XIII）にも成り立ちます。つまり、\textbf{焦点に向かう逆2乗の力のもとでは、物体は、円錐曲線（楕円・放物線・双曲線）のどれか1つを描く}のです。
 
-% ==================================================
-% 第8章：潮汐と彗星 —— 宇宙力学の実証
-% ==================================================
-\chapter{潮汐と彗星 —— 宇宙力学の壮大な実証}
+極座標では、焦点からの距離 $r$ と角 $\theta$ の関係は、
 
-\section{なぜ海は「1日2回」満潮になるのか？（起潮力の幾何学）}
-
-ニュートン以前、潮の満ち引き（潮汐）の真の原因は謎に包まれていました。ガリレオすら「地球の自転と公転による海水の揺れ」という誤った遠心力モデルを主張していました。
-ニュートンは万有引力を用いて、潮汐の真のメカニズムを世界で初めて解明しました（第3編 命題24）。
-
-多くの大人が抱く素朴な疑問は、\textbf{「月が真上にあるときに満潮になるのは引力で引っ張られるから分かる。しかし、なぜ地球の真反対（月と反対側）でも同時に満潮になるのか？」}という点です。
+\[
+r=\frac{p}{1+e\cos\theta}\qquad(p\text{ は半通径、}e\text{ は離心率}).
+\]
 
 \begin{center}
-\begin{tikzpicture}[scale=1.5]
-    % 地球中心
-    \coordinate (O) at (0, 0);
-
-    % 月の方向 (右側)
-    \coordinate (Moon) at (6, 0);
-
-    % 潮汐変形した地球（楕円）
-    \draw[very thick, primaryblue, fill=softblue!50] (0, 0) ellipse (2.2 and 1.5);
-    % 本来の球形地球
-    \draw[dashed, darkslate, thick] (0, 0) circle (1.5);
-
-    % 点 A (月直下), B (月反対), C, D (直角方向)
-    \coordinate (A) at (2.2, 0);
-    \coordinate (B) at (-2.2, 0);
-    \coordinate (C) at (0, 1.5);
-    \coordinate (D) at (0, -1.5);
-
-    % 引力ベクトル（月へ向かう）
-    \draw[ultra thick, crimson, -{Stealth}] (A) -- ($(A) + (1.2, 0)$) node[above] {大引力 $\mathbf{F}_A$};
-    \draw[thick, primaryblue, -{Stealth}] (O) -- ($(O) + (0.8, 0)$) node[above] {中心引力 $\mathbf{F}_O$};
-    \draw[thick, secondaryblue, -{Stealth}] (B) -- ($(B) + (0.4, 0)$) node[above] {小引力 $\mathbf{F}_B$};
-
-    % 相対的な起潮力ベクトル（地球中心基準）
-    \draw[ultra thick, warmgold, -{Stealth[length=3mm]}] (A) -- ($(A) + (0.5, 0)$) node[below right] {外向き起潮力};
-    \draw[ultra thick, warmgold, -{Stealth[length=3mm]}] (B) -- ($(B) + (-0.5, 0)$) node[below left] {外向き起潮力};
-
-    % 点のプロット
-    \filldraw (O) circle (2pt) node[below] {地球中心 $O$};
-    \filldraw[primaryblue] (A) circle (2pt) node[above left] {$A$ (正潮)};
-    \filldraw[primaryblue] (B) circle (2pt) node[above right] {$B$ (背潮)};
-    
-    % 月
-    \filldraw[warmgold] (Moon) circle (5pt) node[above] {\textbf{月 (Moon)}};
-    \draw[->, thick, warmgold] (Moon) -- ($(Moon)+(-0.8, 0)$);
-\end{tikzpicture}
+\begin{tabular}{lll}
+\toprule
+$e$ & 軌道 & エネルギー\\
+\midrule
+$0$ & 円 & 負（束縛）\\
+$0<e<1$ & 楕円 & 負（束縛）\\
+$e=1$ & 放物線 & $0$（ぎりぎり脱出）\\
+$e>1$ & 双曲線 & 正（脱出）\\
+\bottomrule
+\end{tabular}
 \end{center}
 
-\begin{lecturebox}
-\textbf{起潮力（引力の差）の幾何学的解釈：}\\
-月は地球全体を引っ張っていますが、その強さは距離の二乗に反比例するため、場所によって異なります。
+\begin{figure}[htbp]
+\centering
+\begin{tikzpicture}[scale=1.3]
+ \draw[->] (-1.9,0)--(2.9,0); \draw[->] (0,-2.8)--(0,2.8);
+ \clip (-1.9,-2.0) rectangle (2.9,2.0);
+ \draw[thick, primaryblue, domain=0:360, samples=120, variable=\t] plot ({cos(\t)/(1+0.5*cos(\t))}, {sin(\t)/(1+0.5*cos(\t))});
+ \draw[thick, accentgreen, domain=-115:115, samples=80, variable=\t] plot ({cos(\t)/(1+cos(\t))}, {sin(\t)/(1+cos(\t))});
+ \draw[thick, crimson, domain=-125:125, samples=100, variable=\t] plot ({cos(\t)/(1+1.5*cos(\t))}, {sin(\t)/(1+1.5*cos(\t))});
+ \fill (0,0) circle (0.05) node[below left] {焦点};
+ \node[primaryblue, font=\footnotesize] at (-1.25,-0.55) {$e=0.5$};
+ \node[accentgreen, font=\footnotesize] at (1.7,1.55) {$e=1$};
+ \node[crimson, font=\footnotesize] at (2.2,-0.9) {$e=1.5$};
+\end{tikzpicture}
+\caption{同じ焦点・同じ半通径 $p=1$ の3つの円錐曲線：楕円（$e=0.5$）、放物線（$e=1$）、双曲線（$e=1.5$）。}
+\end{figure}
+
+\subsection{命題XIV・XV：周期は、長半径の$\frac32$乗に比例}
+
+\textbf{命題XV}：同じ力の中心のまわりを回る楕円軌道では、周期の2乗が、長半径の3乗に比例する。
+
+\[
+T^2=\frac{4\pi^2}{GM}a^3.
+\]
+
+\begin{examplebox}{ハレー彗星で検算}
+ハレー彗星の長半径は約 $17.8$ AU、離心率は約 $0.967$。周期は $T=17.8^{3/2}=75.1$ 年で、観測された約 $75$〜$76$ 年と合います。近日点距離は $a(1-e)=17.8\times0.033\approx0.587$ AU（金星の軌道の内側）、遠日点距離は $a(1+e)\approx35$ AU（海王星の軌道より少し外側）。
+\end{examplebox}
+
+\begin{figure}[htbp]
+\centering
+\begin{tikzpicture}[scale=0.12]
+ \draw[thick, primaryblue] (-17.2,0) ellipse (17.8 and 4.5);
+ \fill[crimson] (0,0) circle (0.9);
+ \node[font=\scriptsize] at (3.5,2.5) {太陽};
+ \draw[dashed, gray] (0,0) circle (1);
+ \draw[gray, dashed] (0,0) circle (30);
+ \node[font=\scriptsize] at (6,-6) {海王星の軌道（約$30$ AU）};
+ \fill[primaryblue] (-35,0) circle (0.9);
+ \node[font=\scriptsize] at (-30,3.5) {遠日点};
+\end{tikzpicture}
+\caption{ハレー彗星の軌道（概略図。$a=17.8$ AU, $e=0.967$）。太陽のごく近くを通り、海王星の軌道の外まで戻る。}
+\end{figure}
+
+\subsection{命題XVI：速さの求め方}
+
+\textbf{命題XVI}：円錐曲線の上の、各点での速さを求める。現代の式では、
+
+\[
+v^2=GM\left(\frac2r-\frac1a\right)\qquad(\text{ヴィス・ヴィーヴァの式}).
+\]
+
+\begin{center}
+\begin{tabular}{lrr}
+\toprule
+場所（地球の軌道） & 距離 $r$ [$10^{11}$ m] & 速さ $v$ [km/s]\\
+\midrule
+近日点（1月上旬） & $1.471$ & $30.29$\\
+平均 & $1.496$ & $29.78$\\
+遠日点（7月上旬） & $1.521$ & $29.29$\\
+\bottomrule
+\end{tabular}
+\end{center}
+
+（$GM_\odot=1.327\times10^{20}\ \mathrm{m^3/s^2}$ を使用。検算：近日点 $\sqrt{1.327\times10^{20}\times(\frac{2}{1.471\times10^{11}}-\frac1{1.496\times10^{11}})}=30.29$ km/s。）
+
+\begin{figure}[htbp]
+\centering
+\begin{tikzpicture}
+\begin{axis}[width=9.5cm, height=5.6cm, xlabel={太陽からの距離 $r$ [AU]}, ylabel={速さ $v$ [km/s]}, xmin=0.4, xmax=3, ymin=0, ymax=60, grid=major, legend pos=north east, legend style={font=\footnotesize}]
+ \addplot[thick, primaryblue, domain=0.6:3, samples=60] {29.78*sqrt(2/x-1/1.5)};
+ \addplot[thick, crimson, dashed, domain=0.6:3, samples=60] {29.78*sqrt(2/x-1/1.0)};
+ \addplot[only marks, mark=*, color=black] coordinates {(0.983,30.29)(1.017,29.29)};
+ \legend{楕円（$a=1.5$ AU）,円（$a=1$ AU）}
+\end{axis}
+\end{tikzpicture}
+\caption{ヴィス・ヴィーヴァの式による、太陽からの距離と速さの関係。黒い点は地球の近日点・遠日点（地球は $a=1$ AU の曲線の上）。}
+\end{figure}
+
+\subsection{命題XVII：初めの速さと向きから軌道を決める}
+
+\textbf{命題XVII}：逆2乗の力のもとで、物体のある位置と、初めの速さ・向きが与えられたとき、その軌道（円錐曲線）を決める。
+
+\begin{center}
+\begin{tabular}{llr}
+\toprule
+地表（$R=6371$ km）からの水平な初速 & 軌道 & 速さ [km/s]\\
+\midrule
+$\sqrt{gR}$ & 円（地表すれすれ） & $7.90$\\
+$\sqrt2\times7.90$ & 放物線（脱出ぎりぎり） & $11.2$\\
+それ以上 & 双曲線 & $>11.2$\\
+\bottomrule
+\end{tabular}
+\end{center}
+
+（検算：$\sqrt{9.8\times6.371\times10^6}=7901$ m/s、$\times1.4142=11.17$ km/s。）
+
+\begin{figure}[htbp]
+\centering
+\begin{tikzpicture}[scale=1.0]
+ \fill[softblue] (0,0) circle (1.0); \draw[primaryblue, thick] (0,0) circle (1.0);
+ \node[font=\scriptsize] at (0,0) {地球};
+ \coordinate (P) at (0,1.0); \fill[crimson] (P) circle (0.06);
+ \draw[ax, crimson] (P)--(1.0,1.0) node[right, lbl] {水平に発射};
+ \draw[thick, accentgreen] (0,1.0) arc (90:-270:1.0);
+ \node[font=\scriptsize, accentgreen] at (-1.3,-1.4) {円};
+\end{tikzpicture}
+\caption{地表すれすれの水平発射（模式図）。速さ $7.9$ km/s で円、それより速いと楕円、$11.2$ km/s で放物線。}
+\end{figure}
+
+\begin{pointbox}{第4章のまとめ}
 \begin{itemize}[leftmargin=1.5em]
-    \item \textbf{月に近い側（点 $A$）}: 地球中心 $O$ よりも引力が強いため、海水は地球中心から見て「月に向かって引っ張り上げられ」ます。
-    \item \textbf{地球の中心（点 $O$）}: 地球の固体全体は、平均的な引力加速度 $\mathbf{F}_O$ で月に向かって自由落下しています。
-    \item \textbf{月から遠い側（点 $B$）}: 月からの引力 $\mathbf{F}_B$ は地球中心よりも弱くなります。その結果、地球中心が月に向かって強く引かれるため、\textbf{地球中心を基準とする相対座標系で見ると、海水は「取り残されて外側へ膨らむ（潮が満ちる）」}ことになります！
+\item 第1節：「最後には比が1になる」「最後には差がなくなる」という考えが、微積分の代わりをする。
+\item 第2節：中心に向かう力なら面積速度は一定（命題I）。逆も真（命題II）。円運動の公式から、ケプラーの第3法則が、逆2乗の力に対応する。
+\item 第3節：焦点に向かう逆2乗の力のもとで、物体は円錐曲線を描く。周期は、長半径の$\frac32$乗に比例する。
 \end{itemize}
-地球の直径を $2R$、月までの距離を $D$ とすると、起潮力の大きさは逆二乗則の微分（引き算）から、\textbf{「距離の三乗に反比例する」}ことが導かれます：
-\begin{equation}
-\Delta F \approx \frac{d}{dD}\left(\frac{G M}{D^2}\right) \times 2R = \frac{2 G M R}{D^3}
-\end{equation}
-これにより、太陽は質量こそ巨大ですが月より遥かに遠いため、地球に及ぼす起潮力は月の半分程度（約 $46\%$）となり、月の引力こそが潮汐の主役であることが完璧に証明されたのです。
-\end{lecturebox}
+\end{pointbox}
 
-\section{1680年大彗星の幾何学的軌道決定（命題41・42）}
+%==========================================================
+\chapter{第1編 物体の運動（第4節〜第7節：円錐曲線の決定と直線昇降運動）}
+\markboth{第5章}{第1編 第4〜7節}
+%==========================================================
 
-『プリンキピア』第3編のクライマックスを飾るのが、1680年に夜空を巨大な尾で照らした「キルヒの大彗星」の軌道計算です。
-当時、彗星は気象現象（大気の燃焼）や一直線に宇宙を飛び去る不吉の兆候と考えられていました。ニュートンは彗星も惑星と同じく太陽の万有引力に支配され、\textbf{「太陽を焦点とする放物線または極めて細長い楕円軌道」}を描いていることを幾何学的に立証しました。
+前の章では、「逆2乗の力のもとでは軌道が円錐曲線になる」ことを示しました。この章は、その逆向きの問題、つまり、\textbf{条件（焦点・通る点・接線）が与えられたとき、軌道をどう決めるか}を扱います。そのあと、時間と位置の関係（ケプラーの問題）、まっすぐな落下運動へ進みます。
 
-3回の地上天体観測（赤経・赤緯・観測時刻）のみから、地球の公転運動を補正し、空間内の真の彗星放物線軌道を幾何学的に作図・決定するニュートンのアルゴリズムは、天体力学史上最も壮麗な幾何学の金字塔と称えられています。
+\section{第4節：焦点が与えられたときの軌道の決定（命題XVIII〜XXI）}
 
-% ==================================================
-% 第9章：総括 —— 『プリンキピア』が現代の私たちに語りかけるもの
-% ==================================================
-\chapter{総括 —— 現代の私たちにとっての『プリンキピア』}
+\subsection{命題XVIII：焦点・周期・1点から楕円を決める}
 
-\section{神の設計図から自然法則の普遍性へ}
+\textbf{命題XVIII（問題X）}：焦点 $S$ と、長軸の長さ $2a$、通る点 $P_1,P_2$ が与えられたとき、楕円を作図する。
 
-『プリンキピア』の末尾に置かれた有名な「一般注釈（Scholium Generale）」において、ニュートンは近代科学の基本姿勢を象徴する不朽の名言を残しました：
+考え方は、楕円の性質「$2$つの焦点からの距離の和 $=2a$」です。もう一つの焦点 $F_2$ は、$|P_1F_2|=2a-|SP_1|$ かつ $|P_2F_2|=2a-|SP_2|$ を満たします。つまり、$P_1$ を中心とする円と、$P_2$ を中心とする円の交点です。
+
 \begin{center}
-{\Large\textit{Hypotheses non fingo.}}\\[0.2cm]
-\textbf{「我は仮説を作らず。」}
+\begin{tabular}{lrr}
+\toprule
+ & $|SP|$ & もう一つの焦点までの距離 $2a-|SP|$\\
+\midrule
+$P_1=(0,4)$ & $5$ & $5$\\
+$P_2=(5,0)$ & $8$ & $2$\\
+\bottomrule
+\end{tabular}
 \end{center}
 
-デカルトのように「空間は見えない微小粒子の渦（エーテル）で満たされており、その渦が天体を押し流している」といった思弁的な空想（仮説）を弄することをニュートンは拒絶しました。
-「引力がいかなる原因によって生じるか、遠隔作用の背後にある哲学的実体は何か」という問いに対し、ニュートンは次のように宣言したのです：
-\begin{quote}
-「重力が現実に存在し、われわれが説明した法則に従って作用し、天体と海のすべての運動を十全に説明するということ、それだけで十分である。」
-\end{quote}
+（$S=(-3,0)$、$2a=10$ の例。）
 
-科学の目的とは、目に見えない神秘的・形而上学的な原因を妄想することではなく、\textbf{観測可能な諸現象の間に成り立つ「客観的な数学的関係」を厳密に定式化し、自然の振る舞いを予言することにある}という近代科学の方法論がここに確立しました。
+\begin{figure}[htbp]
+\centering
+\begin{tikzpicture}[scale=0.8]
+ \draw[gray, dashed] (0,4) circle (5);
+ \draw[gray, dashed] (5,0) circle (2);
+ \draw[thick, primaryblue] (0,0) ellipse (5 and 4);
+ \fill[crimson] (-3,0) circle (0.1) node[below left] {$S$};
+ \fill[accentgreen] (3,0) circle (0.1) node[below right] {$F_2$};
+ \fill (0,4) circle (0.08) node[above] {$P_1$}; \fill (5,0) circle (0.08) node[right] {$P_2$};
+\end{tikzpicture}
+\caption{$P_1$ を中心とする半径 $5$ の円と、$P_2$ を中心とする半径 $2$ の円の交点 $F_2=(3,0)$ が、第2の焦点。}
+\end{figure}
 
-\begin{reflectionbox}
-\textbf{大人の学び直しの到達点}\\
-私たちは学生時代、物理や数学を「試験のために公式を暗記し、数値を代入する退屈な作業」として受け取ってしまいがちでした。しかし、原著『プリンキピア』の幾何学的世界に立ち戻ったとき、そこにあるのは無機質な数式ではなく、\textbf{「三角形の等積変形」「平行線と相似」「極限の直観」という初等幾何学の道具だけを使って、宇宙の広大な法則を次々と白日の下に晒していく人間の理性の圧倒的な躍動}です。
+交点は、実は2つあります（$(3,0)$ と、約 $(4.57,\,1.98)$）。2つの楕円が条件を満たすので、問題は「2解」になりえます。
 
-リンゴの落下から月の公転、海の潮汐、彗星の運行までを一つの原理（万有引力の逆二乗則）で結びつけたニュートンの『プリンキピア』は、300年を経た現代の私たちにとっても、知性の持つ最高の歓喜と美しさを教えてくれる不滅の古典なのです。
-\end{reflectionbox}
+\subsection{命題XIX〜XXI：放物線・双曲線と、接線が与えられた場合}
+
+\textbf{命題XIX}以降は、焦点と、通る1点・接線が与えられたとき、放物線や双曲線を作図する問題です。放物線の性質「焦点と準線から等距離」、双曲線の性質「2つの焦点からの距離の差が一定」を使います。
+
+\begin{figure}[htbp]
+\centering
+\begin{tikzpicture}[scale=0.9]
+ \draw[->] (-2.2,0)--(3.6,0); \draw[->] (0,-3.2)--(0,3.2);
+ \draw[thick, primaryblue, domain=-3.1:3.1, samples=60, variable=\t] plot ({0.25*\t*\t-1},{\t});
+ \fill[crimson] (0,0) circle (0.08) node[below right] {焦点};
+ \draw[dashed, accentgreen] (-2,-3)--(-2,3) node[above] {準線};
+ \coordinate (P) at (1.25,3.0);
+ \fill (P) circle (0.07) node[right] {$P$};
+ \draw[gray] (P)--(0,0); \draw[gray] (P)--(-2,3.0);
+\end{tikzpicture}
+\caption{放物線 $x=\frac14y^2-1$（焦点 $(0,0)$、準線 $x=-2$）。曲線上の点 $P=(1.25,\,3)$ から、焦点までの距離と準線までの距離は、どちらも $3.25$。}
+\end{figure}
+
+検算：$P=(1.25,3)$ は曲線上にあります（$\frac14\cdot3^2-1=1.25$）。焦点までの距離は $\sqrt{1.25^2+3^2}=\sqrt{10.5625}=3.25$、準線 $x=-2$ までの距離は $1.25-(-2)=3.25$。等しくなっています。
+
+\section{第5節：焦点がいずれも与えられないときの軌道（命題XXII〜XXIX）}
+
+\subsection{補題XXII：図形の変換}
+
+\textbf{補題XXII}：図形を、一方向に一定の倍率で伸び縮みさせる（縦だけ $k$ 倍にする）と、直線は直線に、円錐曲線は円錐曲線に移る。円は、このとき楕円に移ります。
+
+\begin{figure}[htbp]
+\centering
+\begin{tikzpicture}[scale=0.9]
+ \draw[->] (-2.4,0)--(2.6,0); \draw[->] (0,-2.2)--(0,2.4);
+ \draw[thick, primaryblue] (0,0) circle (2);
+ \draw[thick, crimson, dashed] (0,0) ellipse (2 and 1.2);
+ \node[primaryblue, font=\small] at (1.7,1.7) {円};
+ \node[crimson, font=\small] at (1.95,0.85) {楕円};
+\end{tikzpicture}
+\caption{縦を $0.6$ 倍に縮めると、半径 $2$ の円は、楕円（長半径 $2$、短半径 $1.2$）になる。}
+\end{figure}
+
+円の面積は $\pi\cdot2^2=12.57$、楕円の面積は $\pi\cdot2\cdot1.2=7.54$。比は $0.6$（縮めた倍率）です。
+
+\subsection{命題XXII：5点を通る円錐曲線}
+
+\textbf{命題XXII}：与えられた5点を通る軌道（円錐曲線）を決める。一般の円錐曲線の式
+
+\[
+Ax^2+Bxy+Cy^2+Dx+Ey+F=0
+\]
+
+には、6つの係数がありますが、全体を定数倍しても同じ曲線なので、実質5つの自由度があります。5点を通るように決められる、というのが、この命題の代数的な裏づけです。
+
+\begin{examplebox}{例：5点から放物線を決める}
+$(0,0),\ (1,1),\ (-1,1),\ (2,4),\ (3,9)$ を通る曲線を、円錐曲線の式に代入します。\\
+$(0,0)$ から $F=0$。$(1,1)$ から $A+B+C+D+E=0$。$(-1,1)$ から $A-B+C-D+E=0$。2式を足すと $A+C+E=0$、引くと $B+D=0$。$(2,4)$ から $4A+8B+16C+2D+4E=0$、$(3,9)$ から $9A+27B+81C+3D+9E=0$。これらを解くと $B=C=D=0$、$A=-E$ となり、$x^2-y=0$、つまり放物線 $y=x^2$ が得られます。検算：$(3,9)$ で $9-9=0$ ✓。
+\end{examplebox}
+
+\begin{figure}[htbp]
+\centering
+\begin{tikzpicture}
+\begin{axis}[width=8.5cm, height=6cm, xlabel={$x$}, ylabel={$y$}, xmin=-2, xmax=3.5, ymin=-1, ymax=10, grid=major]
+ \addplot[thick, primaryblue, domain=-2:3.3, samples=60] {x^2};
+ \addplot[only marks, mark=*, color=crimson] coordinates {(0,0)(1,1)(-1,1)(2,4)(3,9)};
+\end{axis}
+\end{tikzpicture}
+\caption{5点 $(0,0),(\pm1,1),(2,4),(3,9)$ を通る円錐曲線は、放物線 $y=x^2$ ただ1つ。}
+\end{figure}
+
+\subsection{補題XXVIII：楕円の面積は、有限の代数式では表せない}
+
+\textbf{補題XXVIII}（趣旨）：なめらかな卵形の曲線で、その面積が、有限の項からなる代数方程式で求められるものはない。
+
+円や楕円の面積 $\pi ab$ に現れる $\pi$ は、超越数（どんな整数係数の方程式の解にもならない数）です（リンデマン、1882年）。この補題は、ニュートンが、円の面積を代数的に求めようとする試み（円積問題）に、数学的な限界があることを主張したものと読めます。
+
+\begin{notebox}{この補題の評価（事実と未確認）}
+この補題の証明の妥当性や、適用範囲については、数学史家・数学者の間で議論が続いています。本書は、結論の主張のみを紹介しました。細部は専門書で確かめてください。
+\end{notebox}
+
+\subsection{命題XXIII〜XXIX}
+
+\textbf{命題XXIII〜XXIX}は、軌道が、円錐曲線の5つの条件（通る点・接線）で決まる、さまざまな場合の作図を、一つずつ扱います。細部の図は、翻訳版で乱れているため、本書は省略し、「条件が5つ揃えば、円錐曲線は決まる」という原理だけを押さえます。
+
+\section{第6節：与えられた軌道における運動の決定（命題XXX〜XXXI）}
+
+\subsection{ケプラーの問題：ある時刻の位置は？}
+
+\textbf{命題XXXI}：楕円軌道で、ある時刻の物体の位置を求める。面積速度が一定なので、「経過時間 $\propto$ 掃いた扇形の面積」を使います。時刻から位置を求める式は、次の\textbf{ケプラー方程式}です。
+
+\[
+M=E-e\sin E.
+\]
+
+ここで $M$ は平均近点角（$M=2\pi t/T$）、$E$ は離心近点角、$e$ は離心率です。
+
+\begin{figure}[htbp]
+\centering
+\begin{tikzpicture}[scale=1.4]
+ \draw[gray] (0,0) circle (1.0);
+ \draw[thick, primaryblue] (0,0) ellipse (1.0 and 0.866);
+ \fill[crimson] (0.5,0) circle (0.04) node[below right, font=\scriptsize] {$S$};
+ \coordinate (P) at ({cos(115.8)},{0.866*sin(115.8)});
+ \coordinate (Q) at ({cos(115.8)},{sin(115.8)});
+ \fill (P) circle (0.04) node[above left, font=\scriptsize] {$P$};
+ \fill[gray] (Q) circle (0.03) node[above left, font=\scriptsize] {$Q$};
+ \draw[dashed, gray] (Q)--({cos(115.8)},0);
+ \draw[->, thick, accentgreen] (0.3,0) arc (0:115.8:0.3);
+ \node[accentgreen, font=\scriptsize] at (0.25,0.33) {$E$};
+ \draw (0,0)--(Q);
+\end{tikzpicture}
+\caption{離心近点角 $E$。楕円の外接円（補助円）上の点 $Q$ と、中心 $O$ を結ぶ線が、軸となす角が $E$。}
+\end{figure}
+
+\begin{examplebox}{数値例：$e=0.5$、$M=\pi/2$（周期の $\frac14$ 経過）}
+ニュートン法で解きます。$f(E)=E-0.5\sin E-\frac\pi2$。$E_0=\frac\pi2=1.5708$ から出発すると、
+\end{examplebox}
+
+\begin{center}
+\begin{tabular}{rrr}
+\toprule
+反復 & $E$ & $f(E)$\\
+\midrule
+$0$ & $1.570796$ & $-0.500000$\\
+$1$ & $2.070796$ & $0.061209$\\
+$2$ & $2.021423$ & $0.000540$\\
+$3$ & $2.020980$ & $0.000000$\\
+\bottomrule
+\end{tabular}
+\end{center}
+
+$E=2.02098$ rad（$115.8^\circ$）。このとき焦点から見た位置は $(a(\cos E-e),\ b\sin E)=(-0.935,\ 0.780)$（$a=1,\ b=0.866$）です。
+
+\begin{figure}[htbp]
+\centering
+\begin{tikzpicture}
+\begin{axis}[width=9cm, height=5.6cm, xlabel={平均近点角 $M$}, ylabel={離心近点角 $E$}, xmin=0, xmax=6.28, ymin=0, ymax=6.28, grid=major, xtick={0,1.5708,3.1416,4.7124,6.2832}, xticklabels={$0$,$\pi/2$,$\pi$,$3\pi/2$,$2\pi$}, ytick={0,1.5708,3.1416,4.7124,6.2832}, yticklabels={$0$,$\pi/2$,$\pi$,$3\pi/2$,$2\pi$}, legend pos=north west, legend style={font=\footnotesize}]
+ \addplot[thick, primaryblue, domain=0:6.28, samples=60] {x};
+ \addplot[thick, crimson, domain=0:6.28, samples=120] {x + 0.5*sin(deg(x))};
+ \legend{$e=0$（円）,$e=0.5$（近似）}
+\end{axis}
+\end{tikzpicture}
+\caption{$M$ と $E$ の関係（$e=0$ は直線）。$e=0.5$ の曲線は、$E\approx M+e\sin M$ の1次近似（正確な関係は、上の表のように反復で求める）。}
+\end{figure}
+
+ニュートン自身は、このケプラー方程式を、サイクロイド（円が転がるときの曲線）を使った近似で解く方法を、注記で述べています（事実）。
+
+\section{第7節：物体の直線的な上昇および下降（命題XXXII〜XXXIX）}
+
+\subsection{命題XXXII・XXXIII：逆2乗の力のもとでの落下}
+
+\textbf{命題XXXII}：力の大きさが距離の2乗に反比例するとき、物体が、中心に向かって落ちる運動の時間と速さを決める。力が一定ではなく、近づくほど強くなるので、「$s=\frac12gt^2$」はそのままでは使えません。
+
+初めの距離 $r_0$ から、静かに落ち始めたとき、中心に達するまでの時間は、
+
+\[
+T_\text{fall}=\frac{\pi}{2\sqrt2}\sqrt{\frac{r_0^3}{GM}}.
+\]
+
+\begin{examplebox}{月が地球に落ちるとしたら（計算）}
+月を静止させて、地球の方へ落とすと、地球の中心に達するまでの時間は、$GM_\oplus=3.986\times10^{14}$、$r_0=3.844\times10^8$ m として、
+\[
+T=\frac{\pi}{2\sqrt2}\sqrt{\frac{(3.844\times10^8)^3}{3.986\times10^{14}}}=1.1107\times3.775\times10^5\approx4.19\times10^5\ \text{秒}\approx4.85\ \text{日}.
+\]
+実際の月の公転周期は $27.3$ 日で、その約 $5.6$ 分の1です。（点の質量として扱った理想化の値）
+\end{examplebox}
+
+\begin{figure}[htbp]
+\centering
+\begin{tikzpicture}
+\begin{axis}[width=9.5cm, height=5.8cm, xlabel={初めの距離 $r_0$（地球半径の何倍か）}, ylabel={落下時間 [時間]}, xmin=0, xmax=62, ymin=0, ymax=130, grid=major]
+ \addplot[thick, primaryblue, domain=0.5:62, samples=80] {0.2489*x^1.5};
+ \addplot[only marks, mark=*, color=crimson] coordinates {(1,0.249)(2,0.704)(5,2.783)(10,7.872)(30,40.90)(60.27,116.5)};
+\end{axis}
+\end{tikzpicture}
+\caption{落下時間は、初めの距離の $\frac32$ 乗に比例する（$T\propto r_0^{3/2}$）。赤い点は、$1,\,2,\,5,\,10,\,30,\,60.27$ 地球半径からの落下時間（$60.27$ は月の距離）。}
+\end{figure}
+
+\subsection{命題XXXIV〜XXXIX：その他の落下と速さ}
+
+\textbf{命題XXXVII}は、物体が、中心に向かう力を受けて、上昇したあと戻るまでの時間を扱います。\textbf{命題XXXIX}は、力が一般の場合に、速さと時間を、面積（曲線の下の面積）で表す方法です。現代の言葉では、速さの2乗は、力を距離で積分したもの（エネルギー保存）に当たります。
+
+\begin{figure}[htbp]
+\centering
+\begin{tikzpicture}
+\begin{axis}[width=9cm, height=5.6cm, xlabel={距離 $r$（地球半径 $R$ の倍数）}, ylabel={重力加速度 [m/s$^2$]}, xmin=1, xmax=7, ymin=0, ymax=10.5, grid=major]
+ \addplot[thick, primaryblue, domain=1:7, samples=60] {9.8/x^2};
+\end{axis}
+\end{tikzpicture}
+\caption{逆2乗の力。地表（$r=R$）で $9.8$、$2R$ で $2.45$、$3R$ で $1.09$、$7R$ では $0.2$。この曲線の下の面積が、速さの2乗（の半分）に対応する。}
+\end{figure}
+
+\begin{examplebox}{地球を貫くトンネル（均質な球の場合）}
+密度が一様な球の内部では、力は中心からの距離に比例します（第12節で証明）。地球を貫く真空のトンネルに落ちた物体は、行ったり来たりする単振動をし、周期は
+\[
+T=2\pi\sqrt{R/g}=2\pi\sqrt{\frac{6.371\times10^6}{9.8}}\approx5066\ \text{秒}\approx84.4\ \text{分}.
+\]
+（現実の地球は、中心に近づくほど密度が高いので、この値とは少し違う。）
+\end{examplebox}
+
+\begin{figure}[htbp]
+\centering
+\begin{tikzpicture}
+\begin{axis}[width=9.5cm, height=5.4cm, xlabel={時間 [分]}, ylabel={位置（$R$ を単位に）}, xmin=0, xmax=170, ymin=-1.2, ymax=1.2, grid=major]
+ \addplot[thick, primaryblue, domain=0:170, samples=120] {cos(deg(2*3.14159*x/84.4))};
+\end{axis}
+\end{tikzpicture}
+\caption{トンネルの中の位置（$r=R\cos(2\pi t/T)$、$T=84.4$ 分）。端から端まで、約 $42$ 分。}
+\end{figure}
+
+\begin{pointbox}{第5章のまとめ}
+\begin{itemize}[leftmargin=1.5em]
+\item 第4節：焦点・長軸・通る点から、軌道（第2の焦点）を作図する。
+\item 第5節：5つの条件があれば、円錐曲線は決まる。
+\item 第6節：時刻から位置を決める式がケプラー方程式 $M=E-e\sin E$。
+\item 第7節：逆2乗の力での落下時間は、初めの距離の $\frac32$ 乗に比例する。
+\end{itemize}
+\end{pointbox}
+
+%==========================================================
+\chapter{第1編 物体の運動（第8節〜第10節：任意中心力・近点移動・拘束面振子）}
+\markboth{第6章}{第1編 第8〜10節}
+%==========================================================
+
+この章では、力の法則が「逆2乗」とは限らない場合を扱います。第8節は、任意の中心力のもとでの軌道、第9節は、力の法則が少し変わると、軌道の遠日点・近日点の位置が動いていく話（近点移動）、第10節は、曲面や振り子の運動です。
+
+\section{第8節：任意の向心力による物体の軌道（命題XL〜XLII）}
+
+\subsection{命題XL：速さは、高さの差で決まる}
+
+\textbf{命題XL}：任意の中心力のもとで、物体の速さは、中心からの距離だけで決まる。つまり、同じ距離の場所では、どんな経路をたどっても、同じ速さになります。現代の言葉では、\textbf{エネルギー保存}です。
+
+\[
+\frac12mv^2+U(r)=\text{一定}.
+\]
+
+逆2乗の力 $F=\dfrac{GMm}{r^2}$ のとき $U=-\dfrac{GMm}{r}$ なので、距離 $r_0$ の静止から落ち始めた物体の、距離 $r$ での速さは
+
+\[
+v=\sqrt{2GM\left(\frac1r-\frac1{r_0}\right)}.
+\]
+
+\begin{center}
+\begin{tabular}{lrr}
+\toprule
+場所（地球の中心から） & 距離 [km] & 無限遠から落ちたときの速さ [km/s]\\
+\midrule
+地表 & $6371$ & $11.19$\\
+月の軌道 & $384400$ & $1.44$\\
+\bottomrule
+\end{tabular}
+\end{center}
+
+（$GM_\oplus=3.986\times10^{14}$。検算：$\sqrt{2\times3.986\times10^{14}/6.371\times10^6}=11186$ m/s。月の距離では $\sqrt{2\times3.986\times10^{14}/3.844\times10^8}=1440$ m/s。）
+
+\begin{figure}[htbp]
+\centering
+\begin{tikzpicture}
+\begin{axis}[width=9.5cm, height=5.6cm, xlabel={距離 $r$（地球半径 $R$ の倍数）}, ylabel={脱出速度 [km/s]}, xmin=1, xmax=20, ymin=0, ymax=12, grid=major]
+ \addplot[thick, primaryblue, domain=1:20, samples=60] {11.19/sqrt(x)};
+ \addplot[only marks, mark=*, color=crimson] coordinates {(1,11.19)(60.27,1.44)};
+\end{axis}
+\end{tikzpicture}
+\caption{各距離での脱出速度 $v=11.19/\sqrt{r/R}$ km/s。地表で $11.19$、$4R$ で $5.6$、$16R$ で $2.8$。}
+\end{figure}
+
+\subsection{命題XLI・XLII：力の法則から軌道を求める}
+
+\textbf{命題XLI}：与えられた向心力のもとでの軌道を、面積（積分）で求める。\textbf{命題XLII}：その応用です。現代の式では、運動の方程式を、動径 $r$ の運動に書き直します。
+
+\[
+\frac12m\dot r^2+\underbrace{\frac{L^2}{2mr^2}+U(r)}_{\text{有効ポテンシャル }U_\text{eff}(r)}=E.
+\]
+
+$L$ は角運動量（面積速度 $\times2m$）で、命題Iにより一定です。
+
+\begin{figure}[htbp]
+\centering
+\begin{tikzpicture}
+\begin{axis}[width=9.5cm, height=6cm, xlabel={距離 $r$}, ylabel={$U_\text{eff}(r)$}, xmin=0.3, xmax=8, ymin=-0.7, ymax=0.6, grid=major, legend pos=north east, legend style={font=\footnotesize}]
+ \addplot[thick, primaryblue, domain=0.36:8, samples=100] {-1/x+0.5/(x^2)};
+ \addplot[dashed, crimson, domain=0.3:8] {-0.3};
+ \addplot[dashed, accentgreen, domain=0.3:8] {0};
+ \addplot[dashed, gray, domain=0.3:8] {-0.5};
+ \legend{$U_\text{eff}$,$E=-0.3$（楕円）,$E=0$（放物線）,$E=-0.5$（円）}
+\end{axis}
+\end{tikzpicture}
+\caption{$GM=1,\,L^2/m=1$ のときの有効ポテンシャル $-\frac1r+\frac1{2r^2}$。底（$r=1$）の高さ $-0.5$ が円軌道。$-0.5<E<0$ で楕円、$E=0$ で放物線、$E>0$ で双曲線。}
+\end{figure}
+
+底は $r=1$ で、値は $-1+0.5=-0.5$。$E=-0.3$ のときは、横線が曲線と2か所で交わり、その2点が近日点と遠日点です。
+
+\begin{center}
+\begin{tabular}{rr}
+\toprule
+$E=-0.3$ で $U_\text{eff}=E$ の解 & 意味\\
+\midrule
+$r\approx0.61$ & 近日点\\
+$r\approx2.72$ & 遠日点\\
+\bottomrule
+\end{tabular}
+\end{center}
+
+（検算：$-\frac1r+\frac{0.5}{r^2}=-0.3$ は $0.3r^2-r+0.5=0$。判別式は $1-4\times0.3\times0.5=0.4$ で、$r=\dfrac{1\pm0.6325}{0.6}$ より、$0.613$ と $2.721$。）
+
+\section{第9節：運動する軌道における物体の運動と近点移動（命題XLIII〜XLV）}
+
+\subsection{命題XLIII〜XLIV：逆3乗の力を加えると、軌道が回る}
+
+\textbf{命題XLIII}：軌道が、ゆっくり回転しているなら、それには、中心に向かう力以外に、動径に垂直な力が必要。\textbf{命題XLIV}：逆2乗の力に、逆3乗の力を少し加えると、軌道は閉じず、近日点が少しずつ進む（\textbf{近点移動}）。
+
+極座標では、軌道は
+
+\[
+r=\frac{p}{1+e\cos k\theta},\quad k\ne1
+\]
+
+のようになり、近日点から次の近日点まで進む角度（\textbf{近点角}）は $\dfrac{2\pi}{k}$ です。$k<1$ なら、1周ごとに近日点が前に進みます。
+
+\begin{figure}[htbp]
+\centering
+\begin{tikzpicture}[scale=1.2]
+ \draw[->] (-2.5,0)--(2.5,0); \draw[->] (0,-2.2)--(0,2.2);
+ \draw[thick, primaryblue, domain=0:1080, samples=500, variable=\t] plot ({cos(\t)/(1+0.5*cos(0.9*\t))}, {sin(\t)/(1+0.5*cos(0.9*\t))});
+ \fill[crimson] (0,0) circle (0.06);
+\end{tikzpicture}
+\caption{近点移動する軌道（$k=0.9$、$e=0.5$、3周ぶん）。楕円が閉じず、向きが少しずつ回転して花びら状になる。}
+\end{figure}
+
+\subsection{命題XLV：ほぼ円の軌道での近点角}
+
+\textbf{命題XLV}：ほぼ円の軌道で、力が $F\propto r^n$ のとき、近日点から次の近日点までの角度は、
+
+\[
+\text{近点角}=\frac{\pi}{\sqrt{3+n}}.
+\]
+
+（ニュートンは、これを、幾何学的な級数を使って、特別な場合に書き下しました。）
+
+\begin{center}
+\begin{tabular}{lrr}
+\toprule
+力の法則 & $n$ & 近点角（$\pi/\sqrt{3+n}$）\\
+\midrule
+距離に比例（ばね） & $1$ & $90^\circ$\\
+一定の力 & $0$ & $103.9^\circ$\\
+$1/r$ & $-1$ & $127.3^\circ$\\
+$1/r^2$（万有引力） & $-2$ & $180^\circ$\\
+$1/r^{2.01}$ & $-2.01$ & $180.9^\circ$\\
+\bottomrule
+\end{tabular}
+\end{center}
+
+逆2乗のとき、ちょうど $180^\circ$ になり、軌道は閉じた楕円になります。ばねの力のとき $90^\circ$ なのは、楕円の中心に向かう運動で、近点（短軸の端）から次の近点まで $\frac14$ 周進むためです。
+
+\begin{figure}[htbp]
+\centering
+\begin{tikzpicture}
+\begin{axis}[width=9cm, height=5.6cm, xlabel={力のべき $n$（$F\propto r^n$）}, ylabel={近点角 [度]}, xmin=-2.6, xmax=1.5, ymin=60, ymax=200, grid=major]
+ \addplot[thick, primaryblue, domain=-2.6:1.5, samples=80] {180/sqrt(3+x)};
+ \addplot[only marks, mark=*, color=crimson] coordinates {(-2,180)(1,90)(0,103.92)};
+\end{axis}
+\end{tikzpicture}
+\caption{近点角の力の法則への依存。$n=-2$ で $180^\circ$（閉じた楕円）。}
+\end{figure}
+
+\begin{examplebox}{月の近地点の移動（事実と注意）}
+月の近地点（地球に最も近い点）は、約 $8.85$ 年で1周します。月が地球を1周する間に、約 $3.0^\circ$ ずつ進む計算です（$360^\circ$ を 約118回転で割る）。ニュートンは、太陽の影響を考えて、この移動を約半分しか説明できませんでした。1749年にクレローが、近似を一段進めて、観測された値を説明できることを示しました（事実。ニュートンの法則への疑念が、この計算で解消した）。
+\end{examplebox}
+
+\begin{examplebox}{水星の近日点移動}
+水星の近日点は、百年に約 $5600''$（秒角）進みます。他の惑星の引力でほとんどが説明されますが、約 $43''$ が残ります。これは、アインシュタインの一般相対性理論（1915年）の予測と一致しました（事実）。
+\end{examplebox}
+
+\section{第10節：与えられた曲面上の運動および振子の運動（命題XLVI〜LVI）}
+
+\subsection{命題XLVI〜XLVIII：曲面に拘束された運動}
+
+物体が、なめらかな曲面にそって動くとき、曲面は物体を、面に垂直な方向に押す力（垂直抗力）を及ぼすだけで、速さを変えません。重力だけで速さが決まります。
+
+\subsection{命題XLIX〜LII：サイクロイドの上の振子}
+
+\textbf{サイクロイド}は、円が直線の上を転がるとき、円周上の一点が描く曲線です。
+
+\[
+x=r(t-\sin t),\qquad y=r(1-\cos t).
+\]
+
+\begin{figure}[htbp]
+\centering
+\begin{tikzpicture}
+\begin{axis}[width=10cm, height=4.8cm, xlabel={$x$}, ylabel={$y$}, xmin=0, xmax=13, ymin=0, ymax=2.4, axis equal image, grid=major]
+ \addplot[thick, primaryblue, domain=0:12.57, samples=150, variable=\t] ({\t - sin(deg(\t))}, {1-cos(deg(\t))}) ;
+\end{axis}
+\end{tikzpicture}
+\caption{サイクロイド（半径 $1$ の円が転がるときの、円周上の1点の軌跡）。2つのアーチが見える。}
+\end{figure}
+
+\textbf{命題L}：サイクロイドの形の溝にそって動く振り子（重力のもと）は、振れ幅の大小にかかわらず、周期が一定（\textbf{等時性}）。これは、1659年ごろにホイヘンスが発見した性質で、ニュートンは、この定理を、自分の力学で再構成しています（事実）。
+
+\begin{center}
+\begin{tabular}{rr}
+\toprule
+ふつうの振り子の最大の振れ角 & 周期 / 微小振動の周期\\
+\midrule
+$10^\circ$ & $1.0019$\\
+$30^\circ$ & $1.0174$\\
+$60^\circ$ & $1.0732$\\
+$90^\circ$ & $1.1803$\\
+\bottomrule
+\end{tabular}
+\end{center}
+
+ふつうの振り子（円弧に沿う）は、振れ幅が大きいと周期が長くなります。サイクロイドの振り子は、この誤差がありません。
+
+\begin{figure}[htbp]
+\centering
+\begin{tikzpicture}
+\begin{axis}[width=9cm, height=5.4cm, xlabel={最大の振れ角 [度]}, ylabel={周期の比}, xmin=0, xmax=100, ymin=0.98, ymax=1.22, grid=major, legend pos=north west, legend style={font=\footnotesize}]
+ \addplot[thick, primaryblue, domain=0:90, samples=60] {1+(x*3.14159/180)^2/16 + 11*(x*3.14159/180)^4/3072};
+ \addplot[thick, crimson, domain=0:100] {1};
+ \legend{円弧の振り子（級数の近似）,サイクロイドの振り子}
+\end{axis}
+\end{tikzpicture}
+\caption{振れ角と周期の比。円弧の振り子は、角が大きいと周期が長くなる。サイクロイドの振り子は一定（比 $=1$）。}
+\end{figure}
+
+\begin{examplebox}{秒振り子の長さ（検算）}
+周期 $T=2$ 秒（片道 $1$ 秒）の振り子の長さは、$T=2\pi\sqrt{l/g}$ から
+\[
+l=\frac{gT^2}{4\pi^2}=\frac{9.8\times4}{39.478}=0.993\ \mathrm{m}.
+\]
+約 $1$ m です。この性質は、のちにメートルの定義の候補にもなりました（事実）。
+\end{examplebox}
+
+\subsection{命題LIII〜LVI：振り子の応用}
+
+\textbf{命題LIII〜LVI}は、サイクロイドの振子の拡張です。力が、一定でなくても、円や曲線の軌道で、振り子の周期が決められる条件を、図形で述べています。
+
+\begin{pointbox}{第6章のまとめ}
+\begin{itemize}[leftmargin=1.5em]
+\item 第8節：任意の中心力のもとでも、エネルギー保存と面積速度一定で、軌道の様子が分かる。
+\item 第9節：力が逆2乗から少しずれると、近日点が動く。近点角は $\pi/\sqrt{3+n}$。
+\item 第10節：サイクロイドの振子は、振れ幅によらず周期が一定。
+\end{itemize}
+\end{pointbox}
+
+%==========================================================
+\chapter{第1編 物体の運動（第11節〜第14節：多体引力・球殻引力定理・光学屈折）}
+\markboth{第7章}{第1編 第11〜14節}
+%==========================================================
+
+第1編の最後の章です。太陽や惑星を、「質点」ではなく、「大きさのある物体」として扱うために必要な定理がそろいます。第11節は、2つ以上の物体が互いに引き合う場合、第12節は、球が引く力（有名な球殻定理）、第13節は、球でない物体の引力、第14節は、光の屈折を、粒子の引力で説明する試みです。
+
+\section{第11節：相互に引き合う物体の運動（命題LVII〜LXIX）}
+
+\subsection{命題LVII〜LVIII：2物体は、共通の重心のまわりを回る}
+
+\textbf{命題LVII}：互いに引き合う2つの物体は、2つの重心（共通重心）のまわりを、同じ周期で回る。それぞれの軌道は、重心を焦点とする相似な楕円になります。
+
+太陽のまわりを惑星が回る、という見方は近似で、実際は、太陽もわずかに動いています。
+
+\begin{figure}[htbp]
+\centering
+\begin{tikzpicture}[scale=1.0]
+ \draw[gray, dashed] (0,0) circle (3);
+ \fill[crimson] (0,0) circle (0.12) node[below right] {重心};
+ \fill[primaryblue] (3,0) circle (0.1) node[right] {$m$};
+ \fill[warmamber] (-0.7,0) circle (0.28) node[left] {$M$};
+ \draw[gray, dashed] (0,0) circle (0.7);
+ \draw[ax] (3.0,0.3) arc (0:50:3.0);
+ \draw[ax] (-0.7,-0.28) arc (270:320:0.7);
+\end{tikzpicture}
+\caption{質量 $M$ と $m$（$M>m$）の2物体は、共通重心のまわりを、同じ周期で回る。重い方の円は小さい。}
+\end{figure}
+
+\subsection{命題LX：周期は、質量の和で決まる}
+
+\textbf{命題LX}：2物体が互いに引き合うとき、周期は、
+
+\[
+T^2=\frac{4\pi^2a^3}{G(M+m)},
+\]
+
+ここで $a$ は2物体間の距離（楕円の長半径）。惑星の質量 $m$ が、太陽の質量 $M$ に比べて無視できないと、ケプラーの第3法則の比例定数が、わずかに惑星ごとに変わります。
+
+\begin{center}
+\begin{tabular}{lrr}
+\toprule
+惑星 & 太陽質量/惑星質量 & $\dfrac{a^3}{T^2}\ \bigl[\mathrm{AU^3/年^2}\bigr]$ の理論値\\
+\midrule
+地球 & $332946$ & $1.000003$\\
+木星 & $1047.35$ & $1.00095$\\
+土星 & $3498.6$ & $1.00029$\\
+\bottomrule
+\end{tabular}
+\end{center}
+
+（$a^3/T^2\propto(M+m)/M=1+m/M$。木星では $1+1/1047.35=1.00095$。地球の軌道で $1$ に正規化されていると、木星は $1.00095/1.000003\approx1.0009$。前章の表の木星の $1.001$ と合う。）
+
+\begin{examplebox}{地球と月の共通重心}
+地球と月の共通重心は、地球の中心から $\dfrac{d}{1+M_\oplus/M_\text{月}}=\dfrac{384400}{1+81.30}=4671$ km の所にあります。地球の半径 $6371$ km より小さいので、重心は\textbf{地球の内部}にあります。
+
+太陽と木星の共通重心は、太陽の中心から $\dfrac{5.203\ \text{AU}}{1048.35}=0.00496$ AU $\approx7.4\times10^5$ km。太陽の半径は $6.96\times10^5$ km なので、重心は、太陽のわずか\textbf{外側}にあります。
+\end{examplebox}
+
+\begin{figure}[htbp]
+\centering
+\begin{tikzpicture}
+\begin{axis}[width=9.5cm, height=5.2cm, xlabel={相手の質量 / 自分の質量}, ylabel={重心の位置（全体の距離に対する比）}, xmin=0, xmax=100, ymin=0, ymax=0.5, grid=major]
+ \addplot[thick, primaryblue, domain=1:100, samples=80] {1/(1+x)};
+ \addplot[only marks, mark=*, color=crimson] coordinates {(81.3,0.01215)(1047.35,0)};
+\end{axis}
+\end{tikzpicture}
+\caption{質量比が大きいほど、共通重心は、重い方の中心に近づく。地球–月（比 $81.3$）で距離の約 $1.2\%$。}
+\end{figure}
+
+\subsection{命題LXI〜LXV：3つ以上の物体、命題LXIII}
+
+\textbf{命題LXI〜LXV}は、いくつかの物体が互いに引き合う場合を、2物体に簡単にする方法を述べます。\textbf{命題LXV}（趣旨）：力が距離の2乗に反比例するなら、多数の物体の重心は、静止か等速直線運動を続ける。
+
+\subsection{命題LXVI：3体問題（月・地球・太陽）}
+
+\textbf{命題LXVI}は、『プリンキピア』の中でも特に大きな命題で、系が20以上も続きます。地球と月に対して、太陽が引力を及ぼすとき、月の運動がどう乱されるかを、近似で調べます。
+
+\begin{center}
+\begin{tabular}{lr}
+\toprule
+量 & 月の位置での加速度 [m/s$^2$]\\
+\midrule
+地球の引力 & $2.72\times10^{-3}$\\
+太陽の引力 & $5.93\times10^{-3}$\\
+太陽が地球と月を引く\textbf{差}（潮汐項、約） & $3.0\times10^{-5}$\\
+\bottomrule
+\end{tabular}
+\end{center}
+
+太陽の引力は、月に対して、地球の引力の約 $2.2$ 倍もあります。それでも月が地球を回り続けるのは、太陽は地球も同じように引くので、月と地球の\textbf{相対的な運動}では、差の部分（約 $\frac1{90}$）だけが効くからです。
+
+\begin{figure}[htbp]
+\centering
+\begin{tikzpicture}[scale=1.0]
+ \fill[warmamber] (-4.5,0) circle (0.5) node[below=0.6cm] {太陽};
+ \fill[primaryblue] (1.0,0) circle (0.2) node[below=0.2cm] {地球};
+ \fill[gray] (2.4,0.9) circle (0.1) node[above] {月};
+ \draw[ax, crimson] (1.0,0.1)--(0.2,0.1) node[above, lbl, pos=0.5] {};
+ \draw[ax, crimson] (2.4,1.0)--(1.5,1.0);
+ \draw[ax, crimson] (2.3,0.8)--(1.6,0.7);
+ \node[lbl, align=center] at (3.2,-0.8) {月の方が太陽に少し近い\\→ 引く力がわずかに強い};
+\end{tikzpicture}
+\caption{太陽が、地球と月を引く力の差が、月の軌道を乱す（3体問題）。（模式図）}
+\end{figure}
+
+3体問題は、一般には、解析的に解けません（ポアンカレ、1890年代）。ニュートンは近似で調べ、月の運動のいくつかの不規則（変差・年差など）を、第3編で扱います。
+
+\subsection{命題LXVII〜LXIX}
+
+\textbf{命題LXIX}：物体どうしの引力が、物体の質量に比例するなら、それぞれの物体の運動に及ぼす力の大きさも、質量に比例します。ここで、「引力は引く側の質量に比例する」という、万有引力の形が、はっきりと出てきます。
+
+\section{第12節：球体の引力（命題LXX〜LXXXIV）}
+
+\subsection{命題LXX：球殻の内部では、力は0}
+
+\textbf{命題LXX}：薄い球殻（中が空洞の球）の内部の、どの点にある物体にも、球殻の引力は、全体として0になる（引力が距離の2乗に反比例するとき）。
+
+\begin{figure}[htbp]
+\centering
+\begin{tikzpicture}[scale=1.2]
+ \draw[thick, primaryblue] (0,0) circle (2);
+ \coordinate (P) at (0.7,0.3);
+ \fill[crimson] (P) circle (0.06) node[below right] {$P$};
+ \foreach \a in {20,200} {
+   \draw[thick, accentgreen] (P)--(\a:2.4);
+ }
+ \draw[fill=softgreen, draw=accentgreen] (P)--(15:2.1)--(25:1.98)--cycle;
+ \draw[fill=softrose, draw=crimson] (P)--(195:1.9)--(205:2.12)--cycle;
+ \node[lbl, align=center] at (1.7,1.3) {近い小面積\\（小）};
+ \node[lbl, align=center] at (-1.7,-1.4) {遠い小面積\\（大）};
+\end{tikzpicture}
+\caption{$P$ を頂点とする同じ角度の2つの円錐。近い方の小面積は小さく、遠い方は大きい。面積は距離の2乗に比例し、引力は距離の2乗に反比例するので、2つの力は打ち消しあう。}
+\end{figure}
+
+\subsection{命題LXXI：球殻の外部では、中心に全質量が集まったのと同じ}
+
+\textbf{命題LXXI}：球殻の外部の点には、球殻の引力は、殻の全質量が中心に集まっているのと同じ大きさで、中心に向かって働く。
+
+\subsection{命題LXXII〜LXXV：中身のつまった球}
+
+球を、薄い球殻の重なりと考えると、外では、全質量が中心に集まったのと同じ、内では、内側の球の質量だけが効き、外側の殻は効きません。
+
+均質な球（密度一定）の内部での重力は、
+
+\[
+g(r)=\frac{GM}{R^3}\,r\quad(r\le R),\qquad g(r)=\frac{GM}{r^2}\quad(r\ge R).
+\]
+
+\begin{figure}[htbp]
+\centering
+\begin{tikzpicture}
+\begin{axis}[width=9.5cm, height=5.6cm, xlabel={中心からの距離 $r/R$}, ylabel={重力 $g(r)/g(R)$}, xmin=0, xmax=4, ymin=0, ymax=1.2, grid=major, legend pos=north east, legend style={font=\footnotesize}]
+ \addplot[thick, primaryblue, domain=0:1, samples=2] {x};
+ \addplot[thick, primaryblue, domain=1:4, samples=60, forget plot] {1/x^2};
+ \addplot[dashed, crimson, domain=0.3:1] {1/x^2};
+ \legend{均質な球,{内部に全質量が集まったと誤解した場合}}
+\end{axis}
+\end{tikzpicture}
+\caption{均質な球の内部と外部での重力。内部は距離に比例、外部は距離の2乗に反比例。表面（$r=R$）でなめらかに（値が）つながる。}
+\end{figure}
+
+\begin{examplebox}{地表の下では}
+均質な地球だと、深さ $\frac12R$（約 $3200$ km）で重力は地表の半分です。実際の地球は、中心に近いほど密度が高く、核とマントルの境界で重力が最大（約 $10.7\ \mathrm{m/s^2}$）になります（地震波から求めた地球モデル）。均質の仮定は、粗い近似です。
+\end{examplebox}
+
+\subsection{命題LXXVI〜LXXXIV：力の法則が違う場合・球から球への引力}
+
+\textbf{命題LXXVI〜LXXVII}：距離の2乗に反比例する場合（万有引力）と、距離に比例する場合のみ、「球は全質量が中心に集まったように引く」という性質が成り立ちます。ほかの力の法則（たとえば距離の3乗に反比例）では、成り立ちません。
+
+\begin{center}
+\begin{tabular}{lcc}
+\toprule
+力の法則 & 球殻の内部で力が0 & 球が質点のように引く\\
+\midrule
+$1/r^2$ & はい & はい\\
+$r$（距離に比例） & いいえ（内部で力が増える） & はい\\
+$1/r^3$ & いいえ & いいえ\\
+\bottomrule
+\end{tabular}
+\end{center}
+
+\begin{examplebox}{距離に比例する力の場合（簡単な確かめ）}
+$F=k\,r$（引く側の点が $\mathbf r'$ にあるとき、$\mathbf F=k(\mathbf r'-\mathbf x)$）の形の力は、足し算ができます。質量 $m$ の殻全体が引く力は、$k\,m\,(\mathbf c-\mathbf x)$（$\mathbf c$ は殻の中心）になります。つまり、殻の内部でも、力は0にならず、中心に向かって距離に比例して働きます。球全体では、「全質量が中心に集まったのと同じ」になる、という命題LXXVIIの内容に一致します。
+\end{examplebox}
+
+\section{第13節：非球形物体の引力（命題LXXXV〜XCIII）}
+
+\subsection{円盤・円柱の軸上の引力}
+
+球でない物体の引力は、一般には簡単に求められませんが、軸上の点なら、積分で求められます。均質な円盤（半径 $R$、面密度 $\sigma$）の中心軸上、距離 $z$ の点での引力は
+
+\[
+g=2\pi G\sigma\left(1-\frac{z}{\sqrt{z^2+R^2}}\right).
+\]
+
+$R\to\infty$（無限に広い板）のとき、$g\to2\pi G\sigma$ で、\textbf{距離によらない一定の値}になります。
+
+\begin{center}
+\begin{tabular}{rr}
+\toprule
+$z/R$ & $1-\dfrac{z/R}{\sqrt{(z/R)^2+1}}$\\
+\midrule
+$0.1$ & $0.9005$\\
+$0.5$ & $0.5528$\\
+$1$ & $0.2929$\\
+$2$ & $0.1056$\\
+\bottomrule
+\end{tabular}
+\end{center}
+
+\begin{figure}[htbp]
+\centering
+\begin{tikzpicture}
+\begin{axis}[width=9.5cm, height=5.6cm, xlabel={$z/R$}, ylabel={$g/(2\pi G\sigma)$}, xmin=0, xmax=4, ymin=0, ymax=1.1, grid=major, legend pos=north east, legend style={font=\footnotesize}]
+ \addplot[thick, primaryblue, domain=0.001:4, samples=80] {1-x/sqrt(x^2+1)};
+ \addplot[dashed, crimson, domain=0.3:4, samples=60] {0.5/x^2};
+ \legend{円盤の軸上,質点（$1/z^2$、規格化）}
+\end{axis}
+\end{tikzpicture}
+\caption{円盤の軸上の引力。近くでは一定に近く（広い板に見える）、遠くでは質点のように $1/z^2$ に近づく。}
+\end{figure}
+
+\subsection{ほぼ球の物体：扁平な球}
+
+回転する地球のように、少し扁平な球の引力は、球の引力に、小さな補正が加わります。この補正が、のちの「地球の形」「月・太陽による潮汐・歳差」の議論（第3編）につながります。
+
+\section{第14節：極微小体の運動（光学・屈折への適用、命題XCIV〜XCVIII）}
+
+\subsection{命題XCIV：屈折の法則を、粒子の引力で説明する}
+
+ニュートンは、光を、微小な粒子の流れと考え、境界面の近くで粒子が、媒質に引かれて速さを変える、と考えました。すると、境界面に平行な速さの成分は変わらず、垂直な成分だけが変わるので、
+
+\[
+\frac{\sin i}{\sin r}=\frac{v_2}{v_1}=n\quad(\text{一定}).
+\]
+
+\begin{figure}[htbp]
+\centering
+\begin{tikzpicture}[scale=1.15]
+ \draw[thick] (-3.2,0)--(3.2,0);
+ \node[lbl] at (2.6,0.3) {空気}; \node[lbl] at (2.6,-0.3) {水};
+ \draw[dashed, gray] (0,-2.4)--(0,2.4);
+ \draw[ax, thick, primaryblue] (-2.0,2.0)--(0,0);
+ \draw[ax, thick, crimson] (0,0)--(1.3,-1.8);
+ \draw (0,0.8) arc (90:135:0.8); \node[lbl] at (-0.35,1.1) {$45^\circ$};
+ \draw (0,-0.8) arc (270:306:0.8); \node[lbl] at (0.5,-1.15) {$32.1^\circ$};
+\end{tikzpicture}
+\caption{空気から水への屈折（$n=1.33$）。入射角 $45^\circ$、屈折角 $32.1^\circ$。}
+\end{figure}
+
+\begin{center}
+\begin{tabular}{lrrr}
+\toprule
+媒質 & 屈折率 $n$ & 入射 $45^\circ$ の屈折角 & 臨界角\\
+\midrule
+水 & $1.33$ & $32.1^\circ$ & $48.8^\circ$\\
+ガラス & $1.5$ & $28.1^\circ$ & $41.8^\circ$\\
+\bottomrule
+\end{tabular}
+\end{center}
+
+（検算：水の屈折角は $\arcsin(\sin45^\circ/1.33)=\arcsin(0.5316)=32.1^\circ$、臨界角 $\arcsin(1/1.33)=48.75^\circ$。ガラスは $\arcsin(0.4714)=28.1^\circ$、$\arcsin(1/1.5)=41.8^\circ$。）
+
+\begin{notebox}{ニュートンの説明は、後に否定された（事実）}
+粒子説では、光は、水やガラスの中の方が\textbf{速い}（$v_2=nv_1$）ことになります。ところが、波動説では、媒質の中の方が\textbf{遅い}（$v_2=v_1/n$）と予測されます。1850年にフーコーが、水の中の光の速さを測り、空気中より遅いことを示して、粒子説の予測を退けました（事実）。ただし、「屈折の法則が、引力に似た力で説明できる」という数学の構造は、のちの力学（光学と力学の類似、ハミルトンの理論）の源になりました。
+\end{notebox}
+
+\begin{figure}[htbp]
+\centering
+\begin{tikzpicture}
+\begin{axis}[width=9.5cm, height=5.6cm, xlabel={入射角 [度]}, ylabel={屈折角 [度]}, xmin=0, xmax=90, ymin=0, ymax=60, grid=major, legend pos=north west, legend style={font=\footnotesize}]
+ \addplot[thick, primaryblue, domain=0:90, samples=60] {asin(sin(x)/1.33)};
+ \addplot[thick, crimson, domain=0:90, samples=60] {asin(sin(x)/1.5)};
+ \legend{水（$n=1.33$）,ガラス（$n=1.5$）}
+\end{axis}
+\end{tikzpicture}
+\caption{入射角と屈折角の関係。$90^\circ$（かすめて入射）でも、屈折角は臨界角（水で $48.8^\circ$、ガラスで $41.8^\circ$）より大きくならない。}
+\end{figure}
+
+\subsection{命題XCV〜XCVIII：薄い層、レンズへの応用}
+
+\textbf{命題XCV〜XCVIII}は、薄い層を通る屈折、レンズでの光の集まり方を扱います。薄いレンズの公式 $\dfrac1f=(n-1)\left(\dfrac1{R_1}-\dfrac1{R_2}\right)$ に相当する内容が、図形で述べられています（事実の範囲での概要）。
+
+\begin{examplebox}{レンズの焦点距離（検算）}
+ガラス（$n=1.5$）の両凸レンズで、両面の曲率半径が $R_1=10$ cm、$R_2=-10$ cm のとき、
+\[
+\frac1f=(1.5-1)\left(\frac1{10}+\frac1{10}\right)=0.1\ \mathrm{cm^{-1}},\quad f=10\ \text{cm}.
+\]
+\end{examplebox}
+
+\begin{pointbox}{第7章のまとめ}
+\begin{itemize}[leftmargin=1.5em]
+\item 第11節：2物体は、共通重心のまわりを回る。周期は質量の和で決まる。3体問題は、一般には解けない。
+\item 第12節：球殻の内部では力が0、外部では全質量が中心に集まったのと同じ（逆2乗のとき）。
+\item 第13節：円盤の軸上の引力などを、積分で求める。
+\item 第14節：光の屈折を、粒子の引力で説明する試み。結論（光は水中で速い）は、後に実験で否定された。
+\end{itemize}
+\end{pointbox}
+
+%==========================================================
+\chapter{第2編 抵抗媒質中の運動（第1節〜第5節：速度抵抗と静水力学・流体平衡）}
+\markboth{第8章}{第2編 第1〜5節}
+%==========================================================
+
+第2編は、空気や水のような、抵抗のある媒質の中を動く物体を扱います。第1編では、物体は、何にも妨げられずに動きました。現実の運動は違います。この章では、抵抗の大きさが、(1) 速さに比例する場合、(2) 速さの2乗に比例する場合、(3) その和の場合を調べ、最後に流体の圧力と、大気の密度の議論に進みます。
+
+\section{第1節：速度に比例する抵抗を受ける運動（命題I〜IV）}
+
+\subsection{命題I：速さは、等しい時間で、同じ割合に減る}
+
+\textbf{命題I（定理I）}：抵抗が速さに比例するなら、物体の運動の量は、等しい時間のあいだに、同じ割合で減っていく。つまり、速さは、等比数列のように減ります。現代の式では、
+
+\[
+m\frac{\dd v}{\dd t}=-kv\ \Longrightarrow\ v=v_0\,\ee^{-kt/m}.
+\]
+
+簡単のため $m=1$ とし、$k=0.5\ \mathrm{s^{-1}}$ の例をとります。
+
+\begin{center}
+\begin{tabular}{rrr}
+\toprule
+時刻 $t$ [s] & 速さ $v=10\,\ee^{-0.5t}$ [m/s] & 進んだ距離 [m]\\
+\midrule
+$0$ & $10.00$ & $0$\\
+$1$ & $6.07$ & $7.87$\\
+$2$ & $3.68$ & $12.64$\\
+$4$ & $1.35$ & $17.29$\\
+$10$ & $0.07$ & $19.87$\\
+\bottomrule
+\end{tabular}
+\end{center}
+
+（進んだ距離は $s=\dfrac{v_0}{k}(1-\ee^{-kt})=20(1-\ee^{-0.5t})$。検算：$t=2$ で $20\times0.6321=12.64$。）
+
+\begin{figure}[htbp]
+\centering
+\begin{tikzpicture}
+\begin{axis}[width=9.5cm, height=5.6cm, xlabel={時刻 $t$ [s]}, ylabel={速さ [m/s]　　距離 [m]}, xmin=0, xmax=10, ymin=0, ymax=22, grid=major, legend pos=south east, legend style={font=\footnotesize}]
+ \addplot[thick, primaryblue, domain=0:10, samples=60] {10*exp(-0.5*x)};
+ \addplot[thick, crimson, domain=0:10, samples=60] {20*(1-exp(-0.5*x))};
+ \addplot[dashed, gray, domain=0:10] {20};
+ \legend{速さ,距離,距離の上限 $20$}
+\end{axis}
+\end{tikzpicture}
+\caption{速度に比例する抵抗。速さは指数関数的に減り、進む距離は有限（$v_0/k=20$ m）で頭打ちになる。}
+\end{figure}
+
+\begin{pointbox}{ここが要点}
+抵抗が速さに比例するとき、物体は、どれだけ時間がたっても、初めの速さと抵抗の係数で決まる、\textbf{有限の距離までしか進みません}（命題II）。これは、次の節の「速さの2乗に比例する抵抗」と、大きく違う点です。
+\end{pointbox}
+
+\subsection{命題III・IV：投射体の運動}
+
+重力と、速さに比例する抵抗の両方を受ける投射体の軌道は、放物線ではなく、やや「落ち方が急」な曲線になります。
+
+\begin{figure}[htbp]
+\centering
+\begin{tikzpicture}
+\begin{axis}[width=10cm, height=5.6cm, xlabel={水平距離 $x$ [m]}, ylabel={高さ $y$ [m]}, xmin=0, xmax=90, ymin=0, ymax=25, grid=major, legend pos=north east, legend style={font=\footnotesize}]
+ \addplot[thick, crimson, dashed, domain=0:4.08, samples=60, variable=\t] ({20*\t}, {20*\t - 4.9*\t*\t});
+ \addplot[thick, primaryblue, domain=0:3.64, samples=80, variable=\t] ({100*(1-exp(-0.2*\t))}, {345*(1-exp(-0.2*\t)) - 49*\t});
+ \legend{抵抗なし（放物線）,速度に比例する抵抗}
+\end{axis}
+\end{tikzpicture}
+\caption{初速 $(20,20)$ m/s の投射体。抵抗係数 $k/m=0.2\ \mathrm{s^{-1}}$ のとき、飛距離は約 $52$ m（抵抗なしは $81.6$ m）。軌道は右側で、より急に落ちる。}
+\end{figure}
+
+\begin{center}
+\begin{tabular}{lrr}
+\toprule
+ & 飛行時間 [s] & 飛距離 [m]\\
+\midrule
+抵抗なし & $4.08$ & $81.6$\\
+$k/m=0.2\ \mathrm{s^{-1}}$ & $3.64$ & $51.7$\\
+\bottomrule
+\end{tabular}
+\end{center}
+
+（検算：抵抗なしは $2\times20/9.8=4.08$ s、$20\times4.08=81.6$ m。抵抗ありは $y=0$ を数値的に解いて $t\approx3.64$ s、$x=100(1-\ee^{-0.728})=51.7$ m。）
+
+\section{第2節：速度の2乗に比例する抵抗を受ける運動（命題V〜XIV）}
+
+\subsection{命題V〜VIII：抵抗が速さの2乗に比例するとき}
+
+現実の空気中の運動（速さがある程度速いとき）は、抵抗が速さの2乗に比例する場合に近くなります。
+
+\[
+\frac{\dd v}{\dd t}=-kv^2\ \Longrightarrow\ v=\frac{v_0}{1+kv_0t},\quad s=\frac1k\log(1+kv_0t).
+\]
+
+\begin{center}
+\begin{tabular}{rrr}
+\toprule
+時刻 $t$ [s] & 速さ $v=\dfrac{10}{1+t}$ [m/s] & 進んだ距離 $s=10\log(1+t)$ [m]\\
+\midrule
+$1$ & $5.00$ & $6.93$\\
+$4$ & $2.00$ & $16.09$\\
+$9$ & $1.00$ & $23.03$\\
+$99$ & $0.10$ & $46.05$\\
+\bottomrule
+\end{tabular}
+\end{center}
+
+（$k=0.1\ \mathrm{m^{-1}}$、$v_0=10$ m/s の例。）
+
+\begin{figure}[htbp]
+\centering
+\begin{tikzpicture}
+\begin{axis}[width=9.5cm, height=5.6cm, xlabel={時刻 $t$ [s]}, ylabel={距離 [m]}, xmin=0, xmax=100, ymin=0, ymax=60, grid=major, legend pos=south east, legend style={font=\footnotesize}]
+ \addplot[thick, primaryblue, domain=0:100, samples=80] {10*ln(1+x)};
+ \addplot[thick, crimson, domain=0:100, samples=60] {20*(1-exp(-0.5*x))};
+ \legend{2乗に比例（距離は発散）,速さに比例（頭打ち）}
+\end{axis}
+\end{tikzpicture}
+\caption{同じ初速でも、2乗抵抗では、距離が（ゆっくりと）限りなく増え、線形抵抗では頭打ちになる。}
+\end{figure}
+
+ニュートンは、この関係を、\textbf{双曲線の面積}を使って幾何学的に表現しました。双曲線 $y=1/x$ の下の面積が、自然対数 $\log$ に当たります。
+
+\begin{figure}[htbp]
+\centering
+\begin{tikzpicture}
+\begin{axis}[width=9cm, height=5.6cm, xlabel={$x$}, ylabel={$y=1/x$}, xmin=0.4, xmax=5, ymin=0, ymax=2.2, grid=major]
+ \addplot[thick, primaryblue, domain=0.5:5, samples=60, name path=A] {1/x};
+ \addplot[draw=none, name path=B, domain=1:4] {0};
+ \addplot[fill=softblue, fill opacity=0.7, draw=none] fill between[of=A and B, soft clip={domain=1:4}];
+ \node[font=\footnotesize] at (axis cs:2.2,0.35) {面積 $=\log4=1.386$};
+\end{axis}
+\end{tikzpicture}
+\caption{双曲線 $y=1/x$ の、$x=1$ から $x=4$ までの面積は $\log4\approx1.386$。ニュートンの時代には、この面積が、対数の幾何学的な定義だった。}
+\end{figure}
+
+\subsection{補題II：「モーメント」と積の微分}
+
+命題VIIの前に、ニュートンは\textbf{補題II}を置いています。これは、生成される量（流れる量）の瞬間的な増加（\textbf{モーメント}）の規則で、現代の言葉では、\textbf{積の微分公式}です。
+
+2辺 $A,B$ の長方形で、辺が $\pm\frac12a,\ \pm\frac12b$ だけ変化するとき、面積の変化は
+
+\[
+\left(A+\tfrac12a\right)\left(B+\tfrac12b\right)-\left(A-\tfrac12a\right)\left(B-\tfrac12b\right)=aB+bA.
+\]
+
+\begin{figure}[htbp]
+\centering
+\begin{tikzpicture}[scale=0.9]
+ \draw[fill=softblue, draw=primaryblue] (0,0) rectangle (4,2.6);
+ \draw[fill=softrose, draw=crimson, opacity=0.8] (4,0) rectangle (4.8,2.6);
+ \draw[fill=softamber, draw=warmamber, opacity=0.8] (0,2.6) rectangle (4,3.2);
+ \draw[fill=softgreen, draw=accentgreen, opacity=0.8] (4,2.6) rectangle (4.8,3.2);
+ \node at (2,1.3) {$A\times B$};
+ \node[font=\scriptsize] at (4.4,1.3) {$a\times B$};
+ \node[font=\scriptsize] at (2,2.9) {$A\times b$};
+ \node[font=\scriptsize, align=center] at (4.4,2.9) {$ab$\\（微小）};
+\end{tikzpicture}
+\caption{面積の増加は、$aB$（赤）と $Ab$（橙）と、非常に小さい $ab$（緑）。$a,b$ を小さくすると、$ab$ は無視でき、変化量は $aB+bA$ になる。}
+\end{figure}
+
+\begin{examplebox}{数値例}
+$A=10,\ B=20$、変化 $a=0.2,\ b=0.1$ のとき、元の面積 $200$ が $(10.2)(20.1)=205.02$ になるので、増加は $5.02$。公式 $aB+bA=0.2\times20+0.1\times10=5$ に、小さい $ab=0.02$ を加えると $5.02$ で一致します。
+\end{examplebox}
+
+\begin{notebox}{微積分の優先権論争（事実）}
+この補題に付けた注記（スコリウム）で、ニュートンは、ライプニッツとの約10年にわたる文通に触れ、自分が、極大・極小や接線を求める方法を持っていたことを述べています。ライプニッツも同様の方法を持っていて、彼は、自分の方法（微分法）を、書簡で説明したと、ニュートンは述べます。これが、のちの、微積分の発明の優先権をめぐる論争の出発点の一つになりました。のちの版（第3版）では、この注記は書き換えられています（事実として知られていますが、細部は原著で確かめてください）。
+\end{notebox}
+
+\subsection{命題IX〜XI：落下と上昇、終端速度}
+
+重力を受けて落ちる物体が、速さの2乗に比例する抵抗を受けると、速さは、一定の\textbf{終端速度}に近づきます。
+
+\[
+v(t)=v_t\tanh\!\left(\frac{gt}{v_t}\right),\qquad v_t=\sqrt{\frac{mg}{k}}.
+\]
+
+\begin{center}
+\begin{tabular}{rr}
+\toprule
+時刻 $t$ [s] & 速さ [m/s]（$m=80$ kg, $k=0.25$ kg/m, $v_t=56$ m/s）\\
+\midrule
+$0$ & $0$\\
+$5$ & $39.4$\\
+$10$ & $52.7$\\
+$20$ & $55.9$\\
+\bottomrule
+\end{tabular}
+\end{center}
+
+（$v_t=\sqrt{80\times9.8/0.25}=\sqrt{3136}=56$ m/s $\approx$ 時速 $202$ km。検算：$t=10$ で $56\tanh(1.75)=56\times0.9414=52.7$。）
+
+\begin{figure}[htbp]
+\centering
+\begin{tikzpicture}
+\begin{axis}[width=10cm, height=5.8cm, xlabel={時刻 $t$ [s]}, ylabel={速さ [m/s]}, xmin=0, xmax=25, ymin=0, ymax=140, grid=major, legend pos=north west, legend style={font=\footnotesize}]
+ \addplot[thick, crimson, dashed, domain=0:14, samples=60] {9.8*x};
+ \addplot[thick, primaryblue, domain=0:25, samples=100] {56*(exp(0.175*x)-exp(-0.175*x))/(exp(0.175*x)+exp(-0.175*x))};
+ \addplot[dashed, gray, domain=0:25] {56};
+ \legend{抵抗なし ($gt$),2乗抵抗,終端速度 $56$ m/s}
+\end{axis}
+\end{tikzpicture}
+\caption{落下する人の速さ。抵抗なしなら速さは増え続けるが、2乗抵抗では約 $20$ 秒で終端速度 $56$ m/s に達する。}
+\end{figure}
+
+\subsection{命題XII〜XIV：振り子と抵抗}
+
+\textbf{命題XII〜XIV}は、抵抗を受けながら落ちる物体や、斜面を昇降する物体について、時間・距離を、面積（双曲線や円の面積）で表す方法です。個々の式は、第6節以降で、振り子の実験とともに使われます。
+
+\section{第3節：速度とその2乗の和に比例する抵抗（命題XV〜XVI）}
+
+\textbf{命題XV〜XVI}：抵抗が、速さに比例する部分と、速さの2乗に比例する部分の和であるとき。
+
+$m\dfrac{\dd v}{\dd t}=mg-\alpha v-\beta v^2$ の終端速度は、右辺が0になる $v$：
+
+\[
+v_t=\frac{-\alpha+\sqrt{\alpha^2+4mg\beta}}{2\beta}.
+\]
+
+\begin{center}
+\begin{tabular}{lr}
+\toprule
+モデル（$m=80$ kg） & 終端速度 [m/s]\\
+\midrule
+2乗抵抗のみ（$\beta=0.25$） & $56.0$\\
+線形 $\alpha=2$ + 2乗 $\beta=0.25$ & $52.1$\\
+\bottomrule
+\end{tabular}
+\end{center}
+
+（検算：$\alpha=2$、$\beta=0.25$ で $\sqrt{4+4\times80\times9.8\times0.25}=\sqrt{788}=28.07$、$v_t=(28.07-2)/0.5=52.1$。）
+
+\section{第4節：抵抗媒体中の円運動と螺旋運動（命題XVII〜XVIII）}
+
+\textbf{命題XVII〜XVIII}：抵抗のある媒質の中で、中心力のもとで動く物体は、円軌道を保てず、\textbf{螺旋}を描いて中心へ落ちていきます。
+
+\begin{figure}[htbp]
+\centering
+\begin{tikzpicture}[scale=0.55]
+ \draw[->] (-5.5,0)--(5.5,0); \draw[->] (0,-5.5)--(0,5.5);
+ \draw[gray, dashed] (0,0) circle (5);
+ \draw[thick, primaryblue, domain=0:1260, samples=300, variable=\t] plot ({(5-0.0035*\t)*cos(\t)}, {(5-0.0035*\t)*sin(\t)});
+ \fill[crimson] (0,0) circle (0.12);
+\end{tikzpicture}
+\caption{抵抗のある媒質で、円軌道（点線）から、中心へ向かう螺旋（概念図）。}
+\end{figure}
+
+\begin{examplebox}{空気抵抗を受ける人工衛星（検算）}
+地表から $400$ km の円軌道の速さは $v=\sqrt{GM/(R+h)}=\sqrt{3.986\times10^{14}/6.771\times10^6}=7.67$ km/s、周期は $2\pi\times6.771\times10^6/7673=5545$ 秒 $=92.4$ 分です。薄い大気の抵抗を受けると、軌道は、少しずつ低くなります。このとき衛星の速さは、\textbf{かえって増えます}（低い軌道ほど速いため）。「抵抗を受けて速くなる」という、一見逆説的な結果です（事実）。
+\end{examplebox}
+
+\section{第5節：流体の密度と圧力、および静水力学（命題XIX〜XXIII）}
+
+\subsection{命題XIX〜XXI：流体が静止する条件}
+
+流体が静止して釣り合うには、同じ高さの面で、圧力が等しくなければなりません。深さ $h$ での圧力は、
+
+\[
+p=\rho gh.
+\]
+
+\begin{center}
+\begin{tabular}{lrr}
+\toprule
+液体 & 密度 [kg/m$^3$] & 圧力が $1$ 気圧（$101325$ Pa）になる深さ\\
+\midrule
+水 & $1000$ & $10.3$ m\\
+水銀 & $13595$ & $0.760$ m\\
+\bottomrule
+\end{tabular}
+\end{center}
+
+（検算：水 $101325/(1000\times9.80665)=10.33$ m。水銀 $101325/(13595\times9.80665)=0.760$ m。）
+
+\begin{figure}[htbp]
+\centering
+\begin{tikzpicture}
+\begin{axis}[width=9cm, height=5.6cm, xlabel={深さ $h$ [m]}, ylabel={圧力 [気圧]}, xmin=0, xmax=40, ymin=1, ymax=5.5, grid=major]
+ \addplot[thick, primaryblue, domain=0:40] {1+x/10.33};
+\end{axis}
+\end{tikzpicture}
+\caption{水中の圧力。水面で $1$ 気圧、$10$ m ごとに約 $1$ 気圧ずつ増える。}
+\end{figure}
+
+\subsection{命題XXII：大気の密度は、高さとともに等比的に減る}
+
+\textbf{命題XXI〜XXII}：密度が圧力に比例する流体（ボイルの法則）が、重力のもとで静止しているなら、高さが等差数列で増えるとき、密度は等比数列で減る。現代の式では
+
+\[
+p(h)=p_0\ee^{-h/H},\qquad H=\frac{RT}{Mg}\approx8.4\ \text{km}\ (T=288\text{ K}).
+\]
+
+\begin{center}
+\begin{tabular}{rrr}
+\toprule
+高さ [km] & 圧力（モデル）[kPa] & 備考\\
+\midrule
+$0$ & $101.3$ & 海面\\
+$5.5$ & $52.6$ & 約半分\\
+$8.85$ & $35.3$ & エベレスト山頂（実測は約 $33$ kPa）\\
+$10$ & $30.8$ & 旅客機の巡航（実際は約 $26.5$ kPa）\\
+\bottomrule
+\end{tabular}
+\end{center}
+
+（計算は、$H=8.4$ km の等温モデル。実際の大気は、高さとともに温度が下がるので、上空の圧力は、モデルより小さくなる。）
+
+\begin{figure}[htbp]
+\centering
+\begin{tikzpicture}
+\begin{axis}[width=9.5cm, height=5.8cm, xlabel={圧力 [kPa]}, ylabel={高さ [km]}, xmin=0, xmax=105, ymin=0, ymax=30, grid=major]
+ \addplot[thick, primaryblue, domain=0:30, samples=80, variable=\t] ({101.3*exp(-\t/8.4)}, {\t});
+\end{axis}
+\end{tikzpicture}
+\caption{大気圧の高さ分布（等温の近似、$H=8.4$ km）。高さ $8.4$ km ごとに、圧力は約 $1/\ee=0.37$ 倍になる。}
+\end{figure}
+
+\subsection{命題XXIII：粒子間の力と、ボイルの法則}
+
+\textbf{命題XXIII}：粒子が、互いに、距離に\textbf{反比例}する反発力を及ぼすとき、流体の圧力は、密度に比例する（ボイルの法則）。これは、気体の分子運動の説明の先駆けと言えますが、現代の理論（分子の熱運動）とは違い、静的な粒子間の反発で説明しようとした点が、大きな違いです。
+
+\begin{notebox}{事実と推測の区別}
+ニュートンは、この命題のあとの注記で、「この法則が、実際の気体の粒子に当てはまるかどうかは、実験による」と留保をつけています（事実）。気体の圧力を、分子の熱運動の衝突で説明する理論は、18世紀後半から19世紀に発展しました。
+\end{notebox}
+
+\begin{pointbox}{第8章のまとめ}
+\begin{itemize}[leftmargin=1.5em]
+\item 第1節：速さに比例する抵抗では、速さは指数関数的に減り、進む距離は有限。
+\item 第2節：2乗に比例する抵抗では、距離が対数的に（限りなく）増える。落下では終端速度に近づく。補題IIは、積の微分公式。
+\item 第3節：2種類の抵抗の和でも、終端速度が決まる。
+\item 第4節：抵抗があると、円軌道は螺旋になる。
+\item 第5節：大気の圧力・密度は、高さとともに指数関数的に減る。
+\end{itemize}
+\end{pointbox}
+
+%==========================================================
+\chapter{第2編 抵抗媒質中の運動（第6節〜第9節：振子・流体運動・波動音速・渦動説批判）}
+\markboth{第9章}{第2編 第6〜9節}
+%==========================================================
+
+第2編の後半です。第6節は振り子の実験（慣性質量と重さの比例、空気抵抗の測定）、第7節は流体の流れと、物体が受ける抵抗、第8節は波と音の速さ、第9節は、デカルトの渦動説の検討です。この章の内容は、実験と理論が、もっとも近くに置かれた部分です。
+
+\section{第6節：振子の運動と抵抗（命題XXIV〜XXXI）}
+
+\subsection{命題XXIV：振り子で、物質の量を比べる}
+
+\textbf{命題XXIV}：同じ長さの振り子を、いろいろな物質でつくって振らせ、周期を比べると、物体の「物質の量」（質量）が、重さに比例することが確かめられる。
+
+ニュートンは、金・銀・鉛・ガラス・砂・塩・木・水・小麦の9種類を、同じ形の木の箱に入れて、振り子の周期を比べました（事実）。周期はどれも同じで、精度は約 $\frac1{1000}$ でした。これは、\textbf{慣性質量と重力質量が等しい}ことの実験的な確認で、後の一般相対性理論の出発点（等価原理）でもあります。
+
+\begin{center}
+\begin{tabular}{lll}
+\toprule
+実験 & 年 & 等しいことの精度（相対）\\
+\midrule
+ニュートン（振り子） & 1680年代 & 約 $10^{-3}$\\
+エトヴェシュ（ねじれ秤） & 1889〜1909年 & 約 $10^{-8}$〜$10^{-9}$\\
+MICROSCOPE 衛星 & 2017〜2022年 & 約 $10^{-15}$\\
+\bottomrule
+\end{tabular}
+\end{center}
+
+\begin{figure}[htbp]
+\centering
+\begin{tikzpicture}
+\begin{axis}[width=9.5cm, height=5cm, ybar, bar width=14pt, ylabel={精度（桁）}, symbolic x coords={Newton,Eotvos,MICROSCOPE}, xtick=data, ymin=0, ymax=17, nodes near coords, grid=major]
+ \addplot[fill=softblue, draw=primaryblue] coordinates {(Newton,3)(Eotvos,9)(MICROSCOPE,15)};
+\end{axis}
+\end{tikzpicture}
+\caption{等価原理の確認精度（小数点以下の桁数の目安）。ニュートンの実験から、約12桁、精度が向上した。}
+\end{figure}
+
+\subsection{命題XXV〜XXX：抵抗を受ける振り子}
+
+抵抗のある媒質の中で、振り子を振らせると、振れ幅が少しずつ小さくなります。ニュートンは、この減衰の様子から、媒質の抵抗の大きさを測る方法を述べました。
+
+\[
+x(t)=A\,\ee^{-\gamma t}\cos\omega t.
+\]
+
+\begin{figure}[htbp]
+\centering
+\begin{tikzpicture}
+\begin{axis}[width=10cm, height=5.4cm, xlabel={時刻 $t$ [s]}, ylabel={振れ角}, xmin=0, xmax=20, ymin=-1.1, ymax=1.1, grid=major]
+ \addplot[thick, primaryblue, domain=0:20, samples=300] {exp(-0.12*x)*cos(deg(3.1416*x))};
+ \addplot[dashed, crimson, domain=0:20] {exp(-0.12*x)};
+ \addplot[dashed, crimson, domain=0:20] {-exp(-0.12*x)};
+\end{axis}
+\end{tikzpicture}
+\caption{抵抗のある振り子（周期 $2$ s、減衰率 $\gamma=0.12\ \mathrm{s^{-1}}$）。赤い点線は振幅の包絡線。$20$ 秒後に、振幅は約 $9\%$ に減る。}
+\end{figure}
+
+検算：$\ee^{-0.12\times20}=\ee^{-2.4}=0.0907$。振幅が半分になる時間は $\dfrac{\log2}{\gamma}=5.78$ 秒。
+
+\subsection{命題XXXI}
+
+\textbf{命題XXXI}：抵抗の法則が、速さや密度でどう変わるかを決めるため、振り子の実験を、媒質の密度を変えて行う方法。この節の考え方は、第7節の流体の抵抗の話の前置きになります。
+
+\section{第7節：流体の運動と投射体の抵抗（命題XXXII〜XL）}
+
+\subsection{命題XXXII〜XXXIV：流体の中を進む物体の抵抗}
+
+ニュートンは、物体が、流体の粒子に当たって、粒子に運動量を渡すと考え、抵抗の大きさを求めました（\textbf{ニュートンの衝突理論}）。
+
+\[
+F=\frac12C_d\,\rho\,A\,v^2.
+\]
+
+ここで $\rho$ は流体の密度、$A$ は物体の断面積、$C_d$ は物体の形による係数（抗力係数）。ニュートンの結果は、「球の抵抗は、同じ直径の円柱の抵抗の半分」です。
+
+\begin{center}
+\begin{tabular}{lrr}
+\toprule
+形 & ニュートンの理論の $C_d$ & 実測（レイノルズ数 $10^3\sim10^5$）\\
+\midrule
+円柱（正面から、円板） & $2$ & 約 $1.1$（円板）\\
+球 & $1$ & 約 $0.47$\\
+\bottomrule
+\end{tabular}
+\end{center}
+
+ニュートンの値は、実測より大きくなります。流体は、粒子が独立に当たるのではなく、物体の周りを回り込むためです。しかし、形による抵抗の違いを、最初に数学的に調べた点に価値があります。
+
+\subsection{命題XXXIV注記：抵抗が最小の立体}
+
+\textbf{命題XXXIV}の注記で、ニュートンは、「抵抗が最も小さい回転体の形」を求めています。これは、\textbf{変分法の最初の問題}とされます（事実）。その結論は、先端が平らな、なめらかな曲線の形をした物体で、円錐の頭を切り落とした形に近いものです。
+
+ニュートンの衝突理論では、流れに対する面の傾き角 $\theta$ のとき、面に働く力は $\sin^2\theta$ に比例します。円錐（半頂角 $\alpha$）の先端に働く圧力抵抗の係数は、$C_d=2\sin^2\alpha$ になります。
+
+\begin{center}
+\begin{tabular}{rr}
+\toprule
+円錐の半頂角 $\alpha$ & $C_d=2\sin^2\alpha$\\
+\midrule
+$15^\circ$ & $0.134$\\
+$30^\circ$ & $0.500$\\
+$45^\circ$ & $1.000$\\
+$90^\circ$（円板） & $2.000$\\
+\bottomrule
+\end{tabular}
+\end{center}
+
+\begin{figure}[htbp]
+\centering
+\begin{tikzpicture}
+\begin{axis}[width=9cm, height=5.6cm, xlabel={半頂角 $\alpha$ [度]}, ylabel={$C_d=2\sin^2\alpha$}, xmin=0, xmax=90, ymin=0, ymax=2.2, grid=major]
+ \addplot[thick, primaryblue, domain=0:90, samples=60] {2*sin(x)^2};
+ \addplot[only marks, mark=*, color=crimson] coordinates {(15,0.134)(30,0.5)(45,1)(90,2)};
+\end{axis}
+\end{tikzpicture}
+\caption{ニュートンの衝突理論による円錐の抵抗。尖っているほど抵抗が小さい。この理論は、のちに超音速（極超音速）の流れに、近似的に当てはまることが分かった（事実）。}
+\end{figure}
+
+\subsection{命題XXXV・XXXVI：容器の穴からの流出}
+
+\textbf{命題XXXVI}：水が、容器の底の小さな穴から流れ出るとき、流出する速さを求める。第1版では、ニュートンは、その速さが、水面の高さの半分を落ちたときの速さだと結論しましたが、第2版では、穴の直後で水の流れが細くなる（縮流、\textbf{ヴェナ・コントラクタ}）ことに気づき、細くなった部分の速さが、高さ $h$ 全体を落ちた速さに等しい、と訂正しました（事実）。
+
+\[
+v=\sqrt{2gh}.
+\]
+
+\begin{center}
+\begin{tabular}{rrr}
+\toprule
+水面の高さ $h$ [m] & $\sqrt{2gh}$ [m/s] & 第1版の値 $\sqrt{gh}$ [m/s]\\
+\midrule
+$0.25$ & $2.21$ & $1.57$\\
+$1$ & $4.43$ & $3.13$\\
+$4$ & $8.85$ & $6.26$\\
+\bottomrule
+\end{tabular}
+\end{center}
+
+縮流のあとの噴流の断面積は、穴の面積の約 $0.7$ 倍（ニュートンは直径の比 $21:25$、面積比で約 $0.71\approx1/\sqrt2$ と測りました。現代の標準値は約 $0.62$）。
+
+\begin{figure}[htbp]
+\centering
+\begin{tikzpicture}[scale=1.0]
+ \draw[thick] (0,0)--(0,3.4) (3,0)--(3,3.4);
+ \draw[thick] (0,0)--(1.3,0); \draw[thick] (1.7,0)--(3,0);
+ \fill[softblue] (0.03,0.03) rectangle (2.97,2.8);
+ \draw[primaryblue, thick] (0.03,2.8)--(2.97,2.8);
+ \draw[softblue, fill=softblue] (1.3,0)--(1.7,0)--(1.55,-0.5)--(1.45,-0.5)--cycle;
+ \draw[primaryblue] (1.3,0)--(1.45,-0.5) (1.7,0)--(1.55,-0.5);
+ \draw[->, thick, crimson] (2.4,0)--(2.4,2.8) node[midway, right, lbl] {$h$};
+ \node[lbl] at (1.5,-0.9) {縮流};
+\end{tikzpicture}
+\caption{容器の穴から流れ出る水。穴の直後で噴流は細くなる（縮流）。そこでの速さが $\sqrt{2gh}$。}
+\end{figure}
+
+\subsection{命題XXXVII〜XL：球の落下実験}
+
+\textbf{命題XL}（注記）：球を、高い所から落とし、落下の時間を測って、空気抵抗を調べる実験が、報告されています。ロンドンのセント・ポール大聖堂のドームの高さ（約 $220$ フィート、約 $67$ m）から、いろいろな球を落とした実験が知られています（事実として伝わる。細部は未確認）。
+
+\begin{center}
+\begin{tabular}{rrr}
+\toprule
+落下の高さ [m] & 真空中での落下時間 [s] & 速さ [m/s]\\
+\midrule
+$10$ & $1.43$ & $14.0$\\
+$30$ & $2.47$ & $24.2$\\
+$67$ & $3.70$ & $36.2$\\
+\bottomrule
+\end{tabular}
+\end{center}
+
+（検算：$t=\sqrt{2h/g}$。$h=67$ で $\sqrt{13.67}=3.70$ s、$v=gt=36.2$ m/s。）
+
+\section{第8節：流体内を伝播する運動（波動・音速の理論、命題XLI〜L）}
+
+\subsection{命題XLI〜XLIV：運動が流体の中を伝わる}
+
+\textbf{命題XLI〜XLIV}：流体の中の「圧力の伝わり方」は、直線的ではなく、障害物の背後にも回り込む（\textbf{回折}）。
+
+\subsection{命題XLVI：水面の波の速さ}
+
+\textbf{命題XLVI}（趣旨）：水面の波の速さは、波長の平方根に比例する。深い水では、現代の式で
+
+\[
+v=\sqrt{\frac{g\lambda}{2\pi}}.
+\]
+
+\begin{center}
+\begin{tabular}{rr}
+\toprule
+波長 $\lambda$ [m] & 速さ $v$ [m/s]\\
+\midrule
+$1$ & $1.25$\\
+$10$ & $3.95$\\
+$100$ & $12.49$\\
+\bottomrule
+\end{tabular}
+\end{center}
+
+\begin{figure}[htbp]
+\centering
+\begin{tikzpicture}
+\begin{axis}[width=9cm, height=5.6cm, xlabel={波長 $\lambda$ [m]}, ylabel={速さ [m/s]}, xmin=0, xmax=150, ymin=0, ymax=16, grid=major]
+ \addplot[thick, primaryblue, domain=0:150, samples=80] {sqrt(9.8*x/(2*3.14159))};
+ \addplot[only marks, mark=*, color=crimson] coordinates {(1,1.25)(10,3.95)(100,12.49)};
+\end{axis}
+\end{tikzpicture}
+\caption{深水波の速さ。波長が長いほど速い（$v\propto\sqrt\lambda$）。水深に比べて波長が十分に短いときの式。}
+\end{figure}
+
+\subsection{命題XLVII〜L：音の速さ}
+
+\textbf{命題XLVII〜L}：音は、空気の圧力の波として伝わり、その速さは、圧力と密度から決まります。ニュートンは、振り子との類比から、
+
+\[
+c=\sqrt{\frac{p}{\rho}}
+\]
+
+を導きました。
+
+\begin{examplebox}{ニュートンの式で、実際の値を計算する}
+$0^\circ$C、$1$ 気圧の空気（$p=101325$ Pa、$\rho=1.293\ \mathrm{kg/m^3}$）では、
+\[
+c=\sqrt{\frac{101325}{1.293}}=\sqrt{78364}=280\ \text{m/s}.
+\]
+実測の約 $331$ m/s より、約 $15\%$ 小さい値です。ニュートンは、空気の粒子の大きさや、水蒸気の影響を考えて補正し、実測に近づけようとしました（事実。補正後の値は約 $300$ m/s 前後と伝わりますが、原著で未確認）。
+\end{examplebox}
+
+このずれを説明したのは、ラプラス（1816年）です。音の波は速く、空気は圧縮される間に、熱を逃がす時間がありません（断熱変化）。このとき、圧力の変化の割合が $\gamma=1.4$ 倍になるので、
+
+\[
+c=\sqrt{\gamma\frac{p}{\rho}}=\sqrt{1.4}\times280=1.183\times280=331\ \text{m/s}.
+\]
+
+\begin{center}
+\begin{tabular}{rr}
+\toprule
+気温 [$^\circ$C] & 音の速さ [m/s]（$331.3\sqrt{1+T/273.15}$）\\
+\midrule
+$0$ & $331.3$\\
+$20$ & $343.2$\\
+$40$ & $354.7$\\
+\bottomrule
+\end{tabular}
+\end{center}
+
+\begin{figure}[htbp]
+\centering
+\begin{tikzpicture}
+\begin{axis}[width=9.5cm, height=5.6cm, xlabel={気温 [$^\circ$C]}, ylabel={音の速さ [m/s]}, xmin=-20, xmax=45, ymin=310, ymax=365, grid=major, legend pos=north west, legend style={font=\footnotesize}]
+ \addplot[thick, primaryblue, domain=-20:45, samples=60] {331.3*sqrt(1+x/273.15)};
+ \addplot[thick, crimson, dashed, domain=-20:45, samples=60] {279.9*sqrt(1+x/273.15)};
+ \legend{断熱（ラプラス）,等温（ニュートン）}
+\end{axis}
+\end{tikzpicture}
+\caption{気温と音の速さ。実測は断熱の式に一致し、ニュートンの等温の式は、約 $15\%$ 小さい。}
+\end{figure}
+
+\section{第9節：流体の渦運動（デカルト渦動説の批判的論駁、命題LI〜LIII）}
+
+\subsection{命題LI〜LII：回転する流体の中の物体}
+
+\textbf{命題LI〜LII}：円柱や球を、粘性のある流体の中で回すと、まわりの流体が引きずられて回ります。そのとき、流体の各部分の回る周期が、中心からの距離でどう変わるかを調べます。球のまわりの流体では、周期は、中心からの距離の2乗に比例します（$T\propto r^2$）。
+
+\begin{figure}[htbp]
+\centering
+\begin{tikzpicture}[scale=0.6]
+ \draw[fill=softamber, draw=warmamber] (0,0) circle (0.6);
+ \foreach \r in {1.5,2.5,3.5,4.5} {\draw[gray, dashed] (0,0) circle (\r);
+   \draw[->, thick, primaryblue] (\r,0) arc (0:25:\r);
+   \draw[->, thick, primaryblue] (-\r,0) arc (180:205:\r);}
+ \node[lbl] at (0,0) {軸};
+\end{tikzpicture}
+\caption{回転する物体のまわりの流体の渦。外側ほど、ゆっくり回る。}
+\end{figure}
+
+\subsection{命題LIII：デカルトの渦動説の反駁}
+
+デカルトは、惑星が、太陽のまわりを渦巻く流体に乗って回っている（渦動説）と考えました。ニュートンは、この説を、ケプラーの第3法則（周期の2乗が、距離の3乗に比例）と照らして調べました。
+
+\begin{center}
+\begin{tabular}{lcc}
+\toprule
+モデル & 周期の距離依存 & 観測（ケプラー）と\\
+\midrule
+剛体のように回る渦 & $T=$ 一定 & 合わない\\
+球まわりの粘性の渦（命題LII） & $T\propto r^2$ & 合わない\\
+実際の惑星 & $T\propto r^{3/2}$ & ---\\
+\bottomrule
+\end{tabular}
+\end{center}
+
+\begin{figure}[htbp]
+\centering
+\begin{tikzpicture}
+\begin{loglogaxis}[width=9.5cm, height=6cm, xlabel={太陽からの距離 $r$ [AU]}, ylabel={周期 $T$（相対値）}, xmin=0.3, xmax=12, ymin=0.05, ymax=100, grid=major, legend pos=south east, legend style={font=\footnotesize}]
+ \addplot[thick, primaryblue, domain=0.3:12, samples=40] {x^1.5};
+ \addplot[thick, crimson, dashed, domain=0.3:12, samples=40] {x^2};
+ \addplot[thick, accentgreen, dashed, domain=0.3:12, samples=40] {1};
+ \addplot[only marks, mark=*, color=black] coordinates {(0.387,0.241)(0.723,0.615)(1,1)(1.524,1.881)(5.203,11.86)(9.537,29.46)};
+ \legend{実際（$r^{3/2}$）,球の渦（$r^2$）,剛体の渦（一定）}
+\end{loglogaxis}
+\end{tikzpicture}
+\caption{渦動説のモデルと実際の惑星の周期。黒い点は6つの惑星。観測は傾き $\frac32$ の直線に乗り、渦のどちらのモデルとも合わない。}
+\end{figure}
+
+ニュートンはさらに、彗星が、惑星の軌道面と無関係な方向に、渦を横切って飛ぶことを理由にあげて、渦動説を退けました（事実）。
+
+\begin{pointbox}{第9章のまとめ}
+\begin{itemize}[leftmargin=1.5em]
+\item 第6節：振り子の実験で、質量と重さの比例を約 $10^{-3}$ の精度で確かめた（等価原理の出発点）。
+\item 第7節：形による抵抗の違いの理論、最小抵抗の立体（変分法の始まり）、穴からの流出速度 $\sqrt{2gh}$。
+\item 第8節：波の速さ（$\propto\sqrt\lambda$）と、音の速さ $\sqrt{p/\rho}$。ニュートンの式は約 $15\%$ 小さく、ラプラスが断熱で補正した。
+\item 第9節：デカルトの渦動説は、ケプラーの第3法則と合わない。
+\end{itemize}
+\end{pointbox}
+
+%==========================================================
+\chapter{第3編 世界の体系（推理の規則・太陽系の諸現象・万有引力の確立）}
+\markboth{第10章}{第3編 万有引力の確立}
+%==========================================================
+
+第3編は、第1編・第2編で準備した数学を、実際の天体に当てはめる部分です。最初に「推理の規則」と「現象」（観測された事実）を並べ、そこから万有引力の法則を、一歩ずつ導きます。この章は、その前半、命題I〜XXIV（惑星・月・地球・潮汐）です。
+
+\section{推理の規則（規則I〜IV）}
+
+第3編の冒頭に、ニュートンは、自然哲学で推論するときの\textbf{4つの規則}を置いています。（初版では、これらは「仮説」とよばれていましたが、のちの版で「規則」に改められました。事実）
+
+\begin{center}
+\renewcommand{\arraystretch}{1.3}
+\begin{tabular}{cp{9.5cm}}
+\toprule
+規則 & 内容（趣旨）\\
+\midrule
+I & 自然のものの原因は、それらの現象を説明するのに真であり、かつ十分なものより多く認めるべきではない。\\
+II & 同じ種類の結果には、できるかぎり、同じ原因をあてる（例：人間と動物の呼吸、地上と天上の石の落下）。\\
+III & 増やしたり減らしたりできない、すべての物体に共通の性質は、物体一般の性質とみなす。\\
+IV & 現象から帰納して得た命題は、反対の現象が現れるまでは、ほぼ正しいとみなす。仮説で覆してはならない。\\
+\bottomrule
+\end{tabular}
+\end{center}
+
+\begin{figure}[htbp]
+\centering
+\begin{tikzpicture}[node distance=7mm]
+ \node[fbox, text width=2.8cm] (a) {観測された\\現象};
+ \node[abox, text width=2.8cm, right=of a] (b) {帰納して\\一般の法則};
+ \node[gbox, text width=2.8cm, right=of b] (c) {他の現象を\\予測・説明};
+ \draw[ax] (a)--(b) node[midway, above, lbl] {規則 II, III}; \draw[ax] (b)--(c) node[midway, above, lbl] {規則 IV};
+\end{tikzpicture}
+\caption{ニュートンの推論の道すじ。観測 → 帰納 → 予測。}
+\end{figure}
+
+\section{現象（現象I〜VI）}
+
+\subsection{現象I：木星の衛星は、ケプラーの第3法則に従う}
+
+ガリレオが1610年に発見した木星の4つの衛星（イオ・エウロパ・ガニメデ・カリスト）は、周期の2乗が、軌道半径の3乗に比例します。
+
+\begin{center}
+\begin{tabular}{lrrr}
+\toprule
+衛星 & 軌道半径 $a$ [千km] & 周期 $T$ [日] & $a^3/T^2$ [$10^7$千km$^3$/日$^2$]\\
+\midrule
+イオ & $421.7$ & $1.769$ & $2.396$\\
+エウロパ & $671.0$ & $3.551$ & $2.396$\\
+ガニメデ & $1070.4$ & $7.155$ & $2.396$\\
+カリスト & $1882.7$ & $16.689$ & $2.396$\\
+\bottomrule
+\end{tabular}
+\end{center}
+
+4つとも $a^3/T^2$ が一致しています。この定数から、木星の質量が求められます。$GM=\dfrac{4\pi^2a^3}{T^2}$ に、$2.396\times10^{25}\ \mathrm{m^3/day^2}=3.21\times10^{15}\ \mathrm{m^3/s^2}$ を代入して、$GM_\text{木星}=1.27\times10^{17}\ \mathrm{m^3/s^2}$。$G=6.674\times10^{-11}$ で割ると、$M_\text{木星}=1.90\times10^{27}$ kg（検算済み）。
+
+\begin{figure}[htbp]
+\centering
+\begin{tikzpicture}
+\begin{loglogaxis}[width=9cm, height=5.8cm, xlabel={軌道半径 $a$ [千km]}, ylabel={周期 $T$ [日]}, xmin=300, xmax=3000, ymin=1, ymax=30, grid=major]
+ \addplot[thick, crimson, domain=300:3000, samples=30] {(x/421.7)^1.5*1.769};
+ \addplot[only marks, mark=*, color=primaryblue] coordinates {(421.7,1.769)(671,3.551)(1070.4,7.155)(1882.7,16.689)};
+\end{loglogaxis}
+\end{tikzpicture}
+\caption{木星の4つの衛星。周期と軌道半径は、傾き $\frac32$ の直線（赤）に乗る。}
+\end{figure}
+
+\subsection{現象II〜VI}
+
+\textbf{現象II}（土星の衛星）、\textbf{現象III}（5つの惑星が太陽のまわりを回る）、\textbf{現象IV}（惑星の周期と距離の関係：前章の表）、\textbf{現象V}（惑星は、太陽に向かう動径が、時間に比例する面積を描く）、\textbf{現象VI}（月は、地球に向かう動径が、時間に比例する面積を描く）。
+
+\section{命題I〜III：力は、中心に向かい、逆2乗}
+
+\textbf{命題I}：木星の衛星を木星に引く力は、木星の中心に向かい、距離の2乗に反比例する。\textbf{命題II}：惑星を太陽に引く力も、太陽の中心に向かい、距離の2乗に反比例する。\textbf{命題III}：月を地球に引く力も、同じ性質をもつ。
+
+根拠は、(1) 面積速度が一定（第1編命題I）から、力は中心に向かう。(2) 周期の2乗が、距離の3乗に比例する（第1編命題IV系）から、力は距離の2乗に反比例する。(3) 惑星の近日点が、ほとんど動かないこと（第1編命題XLV）から、力の法則は、きわめて正確に、逆2乗である。
+
+\begin{examplebox}{近日点が動かないことの意味}
+第6章で見たように、力が $r^n$ に比例すると、近点角は $\dfrac{\pi}{\sqrt{3+n}}$ です。指数が $n=-2$ から $\delta$ だけずれると、近日点は、1周あたり、およそ $\pi\delta/2$ ラジアンずつ動きます。惑星の近日点がほとんど動かないので、ニュートンは、$\delta$ が非常に小さい、と結論しました。
+\end{examplebox}
+
+\section{命題IV：月は、落ち続けている（月のテスト）}
+
+\textbf{命題IV}：月を、地球のまわりの軌道にとどめている力は、地表の物体を落とす重力と同じものである。
+
+\begin{center}
+\renewcommand{\arraystretch}{1.3}
+\begin{tabular}{lr}
+\toprule
+量 & 値\\
+\midrule
+月の軌道半径 $r$ & $384400$ km（地球半径の $60.27$ 倍）\\
+月の公転周期（恒星月） & $27.3217$ 日 $=2.3606\times10^6$ 秒\\
+月の向心加速度 $\dfrac{4\pi^2r}{T^2}$ & $2.723\times10^{-3}\ \mathrm{m/s^2}$\\
+地表の重力 $g=9.807$ を $60.27^2$ で割った値 & $2.700\times10^{-3}\ \mathrm{m/s^2}$\\
+\bottomrule
+\end{tabular}
+\end{center}
+
+2つの値は、約 $1\%$ の差で一致します（検算済み）。つまり、月は、地表の重力が、$\frac1{3632}$ に弱まった力で、地球のまわりを回っています。
+
+\begin{figure}[htbp]
+\centering
+\begin{tikzpicture}
+\begin{loglogaxis}[width=9.5cm, height=6cm, xlabel={地球の中心からの距離（地球半径 $R$ を単位に）}, ylabel={加速度 [m/s$^2$]}, xmin=0.8, xmax=100, ymin=1e-4, ymax=30, grid=major]
+ \addplot[thick, primaryblue, domain=1:100, samples=40] {9.807/x^2};
+ \addplot[only marks, mark=*, color=crimson] coordinates {(1,9.807)(60.27,0.002723)};
+ \node[font=\scriptsize, anchor=west] at (axis cs:1.2,14) {リンゴ（地表）};
+ \node[font=\scriptsize, anchor=south] at (axis cs:60.27,0.004) {月};
+\end{loglogaxis}
+\end{tikzpicture}
+\caption{月のテスト。地表のリンゴ（$g=9.8$）と月（$0.0027$）は、同じ逆2乗の曲線の上に乗る。}
+\end{figure}
+
+\begin{figure}[htbp]
+\centering
+\begin{tikzpicture}[scale=0.9]
+ \fill[softblue] (0,0) circle (0.9); \draw[primaryblue] (0,0) circle (0.9);
+ \node[font=\scriptsize] at (0,0) {地球};
+ \draw[gray, dashed] (0,0) circle (5);
+ \fill[gray] (5,0) circle (0.12) node[right] {月};
+ \draw[ax, crimson] (5,0)--(5,-0.9) node[midway, right, lbl] {1秒間に落ちる分};
+ \draw[ax, darkslate] (5,0)--(5.0,0.0);
+ \draw[thick, darkslate] (5,0)--(5,1.8);
+ \node[lbl, align=center] at (4.0,2.3) {接線方向に\\等速で進むはずの道};
+\end{tikzpicture}
+\caption{月は、接線方向にまっすぐ進むはずの道から、地球に向かって落ち続けることで、円軌道を描く。（模式図）}
+\end{figure}
+
+\begin{examplebox}{月は、1秒間にどれだけ落ちるか}
+月の向心加速度 $2.72\times10^{-3}\ \mathrm{m/s^2}$ で、1秒間に落ちる距離は $\frac12\times2.72\times10^{-3}\times1^2=1.36$ mm。月は、1秒間に約 $1.02$ km 進むので、その間に、直線の道から約 $1.4$ mm だけ地球に近づく計算です。
+\end{examplebox}
+
+\section{命題V〜VIII：万有引力}
+
+\textbf{命題V}：木星の衛星や惑星は、それぞれの中心の天体に向かって、\textbf{重さ}をもつ。\textbf{命題VII}：重力は、すべての物体に及び、物体の質量に比例する。\textbf{命題VIII}：球状の天体どうしの引力は、中心間の距離の2乗に反比例し、質量の積に比例する。
+
+\[
+F=G\frac{Mm}{r^2}.
+\]
+
+ニュートンの時代には、$G$ の値は知られていませんでした。キャヴェンディッシュが、1797〜98年に、ねじれ秤で $G$ を測定し（事実）、はじめて地球の質量が、数値で求められました。
+
+\begin{center}
+\begin{tabular}{lrr}
+\toprule
+天体 & 質量 [kg] & 地球との比\\
+\midrule
+太陽 & $1.989\times10^{30}$ & $333000$\\
+木星 & $1.898\times10^{27}$ & $318$\\
+地球 & $5.972\times10^{24}$ & $1$\\
+月 & $7.342\times10^{22}$ & $0.0123$（$\frac1{81.3}$）\\
+\bottomrule
+\end{tabular}
+\end{center}
+
+（検算：地球の質量 $M=\dfrac{gR^2}{G}=\dfrac{9.807\times(6.371\times10^6)^2}{6.674\times10^{-11}}=5.97\times10^{24}$ kg。太陽は $GM_\odot=1.327\times10^{20}$ から $1.989\times10^{30}$ kg。太陽と木星の質量比は $1048$。）
+
+\begin{figure}[htbp]
+\centering
+\begin{tikzpicture}
+\begin{axis}[width=9.5cm, height=5.2cm, ybar, bar width=16pt, ymode=log, ymin=1e22, ymax=1e31, ylabel={質量 [kg]}, symbolic x coords={月,地球,木星,太陽}, xtick=data, grid=major, log origin=infty]
+ \addplot[fill=softblue, draw=primaryblue] coordinates {(月,7.342e22)(地球,5.972e24)(木星,1.898e27)(太陽,1.989e30)};
+\end{axis}
+\end{tikzpicture}
+\caption{天体の質量（対数目盛）。太陽は、地球の約33万倍、木星の約1050倍。}
+\end{figure}
+
+\section{命題IX：地球の内部では、重力は中心に向かって弱まる}
+
+\textbf{命題IX}：地表から地球の中心へ向かって、重力は、中心からの距離に比例して減る（均質の仮定）。第7章の球殻定理の結果です。
+
+\section{命題X〜XIV：惑星の運動}
+
+\textbf{命題X}：天（惑星の空間）には抵抗がほぼない。\textbf{命題XI}：太陽は、わずかに動く（地球・惑星・太陽の共通重心のまわり）。\textbf{命題XIII}：惑星は、太陽を1つの焦点とする楕円を描く。
+
+\begin{figure}[htbp]
+\centering
+\begin{tikzpicture}[scale=0.9]
+ \draw[thick, primaryblue] (0,0) ellipse (4.4 and 3.4);
+ \fill[warmamber] (-2.7,0) circle (0.28) node[below=0.3cm] {太陽};
+ \fill[gray] (2.7,0) circle (0.04);
+ \node[lbl] at (2.7,-0.3) {空の焦点};
+ \fill[primaryblue] (3.8,1.7) circle (0.1);
+\end{tikzpicture}
+\caption{惑星の楕円軌道（模式図）。太陽は、1つの焦点にある。}
+\end{figure}
+
+\begin{examplebox}{太陽の動き}
+太陽系の共通重心は、太陽の中心から、おおむね太陽半径の $0.01$〜$2$ 倍ほどの範囲を動きます（木星と土星の位置関係で変わる）。太陽は、静止していません。
+\end{examplebox}
+
+\section{命題XV〜XVIII：惑星の軌道の細部}
+
+\textbf{命題XV〜XVIII}は、惑星の近日点や交点が、ほとんど動かないこと、惑星の軌道の長軸が、ケプラーの第3法則に従うことなどを、観測に基づいて確かめます。
+
+\section{命題XIX・XX：地球の形}
+
+\subsection{地球は、赤道で膨らんだ回転楕円体}
+
+地球は自転しているので、遠心力のために、赤道のあたりが膨らんだ形になります。ニュートンは、遠心力と重力の比を計算し、
+
+\[
+\frac{\omega^2a}{g}=\frac{(7.292\times10^{-5})^2\times6.378\times10^6}{9.78}=\frac1{288}\approx\frac1{289}.
+\]
+
+ニュートンの値も、$\dfrac1{289}$ でした（事実）。均質な流体の地球を仮定すると、扁平率は、この $\frac54$ 倍で、約 $\dfrac1{231}$。ニュートンは、赤道直径と極直径の比を $230:229$ と見積もりました（事実）。
+
+\begin{center}
+\begin{tabular}{lrr}
+\toprule
+ & 扁平率 $f=\dfrac{a-c}{a}$ & 赤道半径と極半径の差\\
+\midrule
+ニュートン（均質流体） & $\dfrac1{230}$ & 約 $27.7$ km\\
+現代の測定 & $\dfrac1{298.257}$ & $21.385$ km\\
+\bottomrule
+\end{tabular}
+\end{center}
+
+現代の値より扁平率が大きいのは、実際の地球が、中心の密度が高いためです（均質の仮定が粗い）。
+
+\begin{figure}[htbp]
+\centering
+\begin{tikzpicture}[scale=0.9]
+ \draw[thick, primaryblue, fill=softblue] (0,0) ellipse (3.3 and 3.0);
+ \draw[dashed, gray] (0,0) circle (3.3);
+ \draw[->] (-3.7,0)--(3.8,0); \draw[->] (0,-3.4)--(0,3.5);
+ \node[lbl, align=center] at (0,0) {扁平率\\（図は約$1/10$に誇張）};
+ \node[lbl] at (3.8,0.3) {赤道};
+\end{tikzpicture}
+\caption{回転する地球の形（扁平を大きく誇張した図）。点線は、同じ赤道半径の球。実際の扁平率は約 $1/298$。}
+\end{figure}
+
+\subsection{確かめ：緯度による重力の違い}
+
+地球が楕円体なら、重力は、赤道から極へ向かって強くなります。標準の式は
+
+\[
+g(\varphi)=9.780327\left(1+0.0053024\sin^2\varphi-0.0000058\sin^22\varphi\right).
+\]
+
+\begin{center}
+\begin{tabular}{rr}
+\toprule
+緯度 $\varphi$ & $g(\varphi)$ [m/s$^2$]\\
+\midrule
+$0^\circ$（赤道） & $9.7803$\\
+$45^\circ$ & $9.8062$\\
+$90^\circ$（極） & $9.8322$\\
+\bottomrule
+\end{tabular}
+\end{center}
+
+\begin{figure}[htbp]
+\centering
+\begin{tikzpicture}
+\begin{axis}[width=9cm, height=5.4cm, xlabel={緯度 [度]}, ylabel={$g$ [m/s$^2$]}, xmin=0, xmax=90, ymin=9.775, ymax=9.835, grid=major]
+ \addplot[thick, primaryblue, domain=0:90, samples=60] {9.780327*(1+0.0053024*sin(x)^2-0.0000058*sin(2*x)^2)};
+\end{axis}
+\end{tikzpicture}
+\caption{緯度と重力。赤道（$9.780$）から極（$9.832$）まで、約 $0.5\%$ 増える。}
+\end{figure}
+
+\begin{examplebox}{カイエンヌの時計（事実と検算）}
+1672〜73年、フランスの天文学者リシェは、南米のカイエンヌ（緯度 $5^\circ$）で、パリで合わせた振り子時計が、1日に約 $2.5$ 分遅れることに気づきました。ニュートンは、これを、赤道付近で重力が弱いこと、遠心力の効果で説明しました。標準の式で計算すると、パリ（緯度 $48.85^\circ$）の $g=9.810$、カイエンヌの $g=9.781$ から、振り子の周期は $\sqrt{9.810/9.781}=1.0015$ 倍。1日 $86400$ 秒で $127$ 秒、約 $2.1$ 分遅れます（観測の約 $2.5$ 分と、温度の影響などで少し違う）。
+\end{examplebox}
+
+18世紀に、フランス学士院が、ラップランド（1736〜37年）とペルー（1735〜44年）に測地遠征隊を送り、子午線の長さを比べて、地球が極で平たい（扁平）ことを確かめました（事実）。これで、ニュートンの予測が、カッシーニ家の「地球は極に向かって細長い」という説に勝ちました。
+
+\section{命題XXI〜XXIII：分点と、地球の軸の動き}
+
+\textbf{命題XXI〜XXIII}は、地球の赤道の膨らみに、月と太陽が及ぼす力が、地軸を動かす（歳差）ことの予告です。具体的な計算は、次の章の命題XXXIXで、数値になります。
+
+\section{命題XXIV：潮の満ち干}
+
+\textbf{命題XXIV}：海の満ち干は、月と太陽の引力によって起こる。
+
+地球全体が、月に引かれる加速度と、月に近い側・遠い側の海が引かれる加速度の\textbf{差}が、潮汐力です。地球と月の距離を $d$、月の質量を $M$ とすると、潮汐力は $\dfrac{GM}{d^3}$ に比例します。
+
+\begin{center}
+\begin{tabular}{lrr}
+\toprule
+天体 & 質量 $M$ [kg] & 距離 $d$ [m]\\
+\midrule
+月 & $7.342\times10^{22}$ & $3.844\times10^8$\\
+太陽 & $1.989\times10^{30}$ & $1.496\times10^{11}$\\
+\bottomrule
+\end{tabular}
+\end{center}
+
+$M/d^3$ は、月が $1.293\times10^{-3}$、太陽が $5.94\times10^{-4}$（kg/m$^3$）で、月の潮汐力は、太陽の約 $2.2$ 倍です。太陽の引力は、月の約 $180$ 倍も強いのに、潮汐力は、月の方が大きいのです（距離の3乗で効くため）。
+
+\begin{notebox}{ニュートンの見積もり（事実と注意）}
+ニュートンは、潮の高さの観測から、月の潮汐力が、太陽の約 $4.5$ 倍だと推定したと伝わります（細部は原著で確かめてください）。現代の値は約 $2.2$ 倍で、ニュートンの値は、月の質量を実際の約2倍に見積もったことに対応します。
+\end{notebox}
+
+\begin{figure}[htbp]
+\centering
+\begin{tikzpicture}
+\begin{axis}[width=10.5cm, height=5.6cm, xlabel={時間 [時間]（$0$〜$30$ 日）}, ylabel={平衡潮の高さ [m]}, xmin=0, xmax=720, ymin=-0.55, ymax=0.55, grid=major]
+ \addplot[thick, primaryblue, domain=0:720, samples=700] {0.268*cos(deg(2*3.14159*x/12.42))+0.123*cos(deg(2*3.14159*(x-6)/12))};
+\end{axis}
+\end{tikzpicture}
+\caption{月（周期 $12.42$ 時間、振幅 $0.27$ m）と太陽（周期 $12$ 時間、振幅 $0.12$ m）の潮汐の重ね合わせ（理想化）。約 $14.8$ 日の周期で、大潮（振幅最大）と小潮（振幅最小）が交互に現れる。}
+\end{figure}
+
+\begin{center}
+\begin{tabular}{lr}
+\toprule
+ & 潮位の変動幅（平衡潮、理想値）\\
+\midrule
+月のみ & 約 $0.54$ m\\
+太陽のみ & 約 $0.25$ m\\
+大潮（新月・満月、合計） & 約 $0.79$ m\\
+小潮（上弦・下弦、差） & 約 $0.29$ m\\
+\bottomrule
+\end{tabular}
+\end{center}
+
+（実際の潮位は、海岸の形や海底の深さで大きく変わり、数 m に及ぶこともあります。上の値は、地球全体が水でおおわれ、水が瞬時に応答する理想化した「平衡潮」です。）
+
+\begin{pointbox}{第10章のまとめ}
+\begin{itemize}[leftmargin=1.5em]
+\item 規則と現象から、力が中心に向かい、逆2乗であることを導く（命題I〜III）。
+\item 月は、地表の重力が、距離の2乗で弱まった力で回っている（命題IV、約 $1\%$ の精度で一致）。
+\item 万有引力は、質量に比例し、距離の2乗に反比例する（命題VII〜VIII）。
+\item 地球は赤道で膨らむ。ニュートンの予測は、のちに測地遠征で確かめられた。
+\item 潮汐は、月と太陽の潮汐力による（月が太陽の約2.2倍）。
+\end{itemize}
+\end{pointbox}
+
+%==========================================================
+\chapter{第3編 世界の体系（月の摂動・潮汐論・分点歳差・彗星の幾何学軌道論）}
+\markboth{第11章}{第3編 月・歳差・彗星}
+%==========================================================
+
+『プリンキピア』の最後の章です。ここでは、万有引力の法則から、月の複雑な運動、分点の歳差、彗星の軌道を、一つずつ導いていきます。「地上の力学と天の力学は同じ」という主張の、最も説得力のある応用です。
+
+\section{月の運動と摂動（命題XXV〜XXXV）}
+
+\subsection{月は、地球のまわりを回るが、太陽に強く引かれる}
+
+月の軌道は、地球を焦点とする楕円に近いのですが、太陽が月を引く力は、地球が月を引く力の約 $2.2$ 倍あります（第7章の計算）。そのため、月の軌道は、太陽の影響（\textbf{摂動}）を受けて、複雑に変化します。
+
+\begin{center}
+\begin{tabular}{lr}
+\toprule
+月の軌道の性質 & 値\\
+\midrule
+軌道の平均距離 & $384400$ km\\
+離心率 & $0.0549$\\
+軌道傾斜角（黄道面に対して） & $5.145^\circ$\\
+恒星月（星に対する周期） & $27.322$ 日\\
+朔望月（満ち欠けの周期） & $29.531$ 日\\
+\bottomrule
+\end{tabular}
+\end{center}
+
+\begin{examplebox}{朔望月が恒星月より長い理由（検算）}
+月が星に対して1周する間に、地球は太陽のまわりを少し進むので、月が、太陽に対して同じ位置に戻るには、さらに追いつく時間が要ります。
+\[
+\frac1{29.531}=\frac1{27.322}-\frac1{365.256}\quad\Bigl(0.033863=0.036600-0.002738\Bigr).
+\]
+\end{examplebox}
+
+\begin{figure}[htbp]
+\centering
+\begin{tikzpicture}[scale=0.8]
+ \fill[warmamber] (-6.0,0) circle (0.35) node[below=0.35cm] {太陽};
+ \draw[gray, dashed] (-6.0,0) circle (0.0);
+ \fill[primaryblue] (0,0) circle (0.2) node[below=0.2cm] {地球};
+ \draw[gray, dashed] (0,0) circle (1.8);
+ \fill[gray] (1.8,0) circle (0.1) node[right] {月（新月）};
+ \fill[gray] (-1.8,0) circle (0.1) node[left] {月（満月）};
+ \draw[ax] (0,-1.0)--(0.9,-1.2) node[right, lbl, align=left] {地球の公転};
+\end{tikzpicture}
+\caption{朔望月。太陽・地球・月が、同じ並びに戻るには、恒星月より約 $2.2$ 日長くかかる。（模式図）}
+\end{figure}
+
+\subsection{月の不規則な動き（変差・出差・年差）}
+
+ニュートンは、観測されていた月の運動の不規則を、太陽の摂動から説明しようとしました。
+
+\begin{center}
+\renewcommand{\arraystretch}{1.3}
+\begin{tabular}{lp{7.2cm}l}
+\toprule
+名前 & 内容 & 大きさ（概数）\\
+\midrule
+出差（エヴェクション） & 離心率の変化。プトレマイオスが発見 & 約 $1.27^\circ$\\
+変差（ヴァリエーション） & 太陽との位置関係による、速さの周期的な変化。ティコが発見 & 約 $0.65^\circ$\\
+年差 & 地球が太陽に近い時期と遠い時期の違い & 約 $0.2^\circ$\\
+\bottomrule
+\end{tabular}
+\end{center}
+
+\begin{figure}[htbp]
+\centering
+\begin{tikzpicture}
+\begin{axis}[width=10cm, height=5.4cm, xlabel={月と太陽の離角 $D$ [度]（$0$=新月）}, ylabel={月の位置の補正 [度]}, xmin=0, xmax=360, ymin=-0.8, ymax=0.8, xtick={0,90,180,270,360}, grid=major]
+ \addplot[thick, primaryblue, domain=0:360, samples=200] {0.658*sin(2*x)};
+\end{axis}
+\end{tikzpicture}
+\caption{変差。補正の大きさは約 $0.65^\circ$ で、新月・満月・上弦・下弦で $0$。$D=45^\circ$ などで最大。月は、新月・満月（合・衝）で速く、上弦・下弦（矩）で遅く動く。}
+\end{figure}
+
+\subsection{月の軌道面の回転（交点の移動）}
+
+月の軌道面は、黄道面に対して $5.1^\circ$ 傾いていますが、この傾きの軸が、約 $18.6$ 年で逆向き（西向き）に1周します。ニュートンは、これを、太陽の引力の効果として計算しました（事実）。
+
+\begin{center}
+\begin{tabular}{lr}
+\toprule
+周期 & 長さ\\
+\midrule
+交点が1周する周期（逆行） & $18.61$ 年\\
+近地点が1周する周期（順行） & $8.85$ 年\\
+\bottomrule
+\end{tabular}
+\end{center}
+
+交点が1年あたり動く角度は、$\dfrac{360^\circ}{18.61}=19.3^\circ$。
+
+\begin{examplebox}{日食・月食の周期：サロス周期}
+$223$ 朔望月 $=223\times29.5306=6585.3$ 日と、$242$ 交点月 $=242\times27.2122=6585.4$ 日が、ほぼ一致します（約 $18$ 年 $11$ 日）。したがって、日食・月食は、約 $18$ 年 $11$ 日ごとに、ほぼ同じ条件で繰り返されます（サロス周期）。
+\end{examplebox}
+
+\begin{figure}[htbp]
+\centering
+\begin{tikzpicture}[scale=0.9]
+ \draw[thick, primaryblue] (0,0) ellipse (3.6 and 0.6); \node[primaryblue, font=\small] at (3.6,0.9) {黄道面};
+ \draw[thick, crimson, rotate=8] (0,0) ellipse (3.6 and 0.6); \node[crimson, font=\small] at (-3.4,-1.3) {月の軌道面};
+ \fill (0,0) circle (0.1) node[below] {地球};
+ \draw[->, thick, accentgreen] (3.1,0.2) arc (10:70:0.9) node[right, lbl, align=center] {交点は\\西へ移動};
+\end{tikzpicture}
+\caption{月の軌道面は、黄道面に対して約 $5.1^\circ$ 傾き、その交線（交点線）が約 $18.6$ 年で逆まわりに1周する。（傾きを誇張した模式図）}
+\end{figure}
+
+\section{潮汐の理論（命題XXXVI〜XXXVIII）}
+
+\textbf{命題XXXVI〜XXXVII}：太陽と月による潮の力を比べる。\textbf{命題XXXVIII}：月の体の形が、地球の方向にわずかに伸びること。第10章の潮汐の理論の続きで、ここでは、潮汐の観測値（ブリストル近辺などの満潮の高さ）から、月の質量を見積もります。
+
+\begin{notebox}{事実と注意}
+ニュートンは、月の質量を、地球の約 $\frac1{39.8}$ と見積もりました（事実とされる。現代の値は $\frac1{81.3}$）。潮汐の高さの観測値の精度が低かったことと、海の応答の複雑さが、この差の原因です。細部は原著で確かめてください。
+\end{notebox}
+
+\section{分点の歳差（命題XXXIX）}
+
+\subsection{地球の軸は、25,800年かけて首をふる}
+
+\textbf{歳差}は、紀元前2世紀に、ヒッパルコスが発見した現象です（事実）。春分点が、星に対して、毎年約 $50''$（秒角）ずつ、西へ動きます。
+
+\begin{center}
+\begin{tabular}{lr}
+\toprule
+量 & 値\\
+\midrule
+歳差の速さ & 約 $50.3''$/年\\
+1周の周期 & $\dfrac{360\times3600}{50.3}\approx25770$ 年\\
+地軸の傾き（黄道に対して） & $23.44^\circ$\\
+\bottomrule
+\end{tabular}
+\end{center}
+
+ニュートンは、これを、赤道の膨らみに、月と太陽が及ぼす力のモーメントの効果として、$50''$ 台の値に計算しました（事実。ニュートンの値は、観測値と同じ位の大きさ）。
+
+\begin{figure}[htbp]
+\centering
+\begin{tikzpicture}[scale=1.0]
+ \draw[thick, primaryblue, fill=softblue] (0,0) circle (1.0);
+ \draw[->, thick, crimson] (0,-1.5)--(0.0,2.2);
+ \draw[dashed, gray] (0,-1.5)--(0,2.8);
+ \draw[->, thick, accentgreen] (0,0)--(1.0,2.0) node[above right] {地軸};
+ \draw[dashed, accentgreen, ->] (0.55,1.5) arc (160:-160:0.8 and 0.2);
+ \node[lbl] at (-1.5,2.3) {黄道の北極};
+ \node[lbl] at (1.0,-1.3) {約25770年で1周};
+\end{tikzpicture}
+\caption{歳差。地軸は、黄道の北極を中心に、円錐を描いて、約 $25770$ 年で1周する。（模式図）}
+\end{figure}
+
+\begin{center}
+\begin{tabular}{lrr}
+\toprule
+ & 歳差への寄与 & 割合\\
+\midrule
+月 & 約 $34''$/年 & $69\%$\\
+太陽 & 約 $16''$/年 & $31\%$\\
+合計 & 約 $50''$/年 & $100\%$\\
+\bottomrule
+\end{tabular}
+\end{center}
+
+（月:太陽 $\approx2.2:1$ は、第10章の潮汐力の比と同じ。計算：$50.3\times\frac{2.2}{3.2}=34.6$、$50.3-34.6=15.7$。）
+
+\begin{examplebox}{北極星は、入れ替わる}
+地軸の向きが変わるので、「北極星」は時代によって変わります。紀元前2700年ごろの北極星は、りゅう座の $\alpha$ 星（トゥバン）でした（事実）。現在はこぐま座の $\alpha$ 星（ポラリス）で、2100年ごろに天の北極に最も近づきます。約 $13000$ 年後（周期の半分）には、こと座のベガが、北極星に近い位置に来ます。
+\end{examplebox}
+
+\section{彗星（命題XL〜XLII）}
+
+\subsection{命題XL：彗星は、太陽を焦点とする円錐曲線を描く}
+
+\textbf{命題XL}：彗星は、太陽に向かう力を受けて、太陽を焦点とする円錐曲線（ほとんどは細長い楕円、近似としては放物線）を描く。
+
+\begin{figure}[htbp]
+\centering
+\begin{tikzpicture}[scale=1.2]
+ \draw[->] (-1.2,0)--(3.8,0); \draw[->] (0,-2.8)--(0,2.8);
+ \clip (-1.2,-2.6) rectangle (3.8,2.6);
+ \draw[thick, primaryblue, domain=-130:130, samples=100, variable=\t] plot ({0.3*cos(\t)/(1+cos(\t))}, {0.3*sin(\t)/(1+cos(\t))});
+ \fill[warmamber] (0,0) circle (0.12) node[below left] {太陽};
+ \fill[crimson] (0.15,0) circle (0.05) node[below right, font=\scriptsize] {近日点};
+\end{tikzpicture}
+\caption{放物線軌道の彗星（太陽が焦点）。太陽の近くで急カーブし、速さが最大になる。}
+\end{figure}
+
+放物線の軌道では、近日点距離を $q$ として、速さは $v=\sqrt{2GM/r}$（脱出速度）。
+
+\begin{examplebox}{1680年の大彗星の近日点の速さ（計算）}
+1680年の大彗星の近日点距離は、約 $0.0062$ AU $=9.3\times10^8$ m。ほぼ放物線とすると、$v=\sqrt{\dfrac{2\times1.327\times10^{20}}{9.3\times10^8}}=5.3\times10^5$ m/s $=534$ km/s。地球の公転速度（$29.8$ km/s）の約 $18$ 倍です。ニュートンは、この彗星の観測（フラムスティードが提供）を使って、軌道を決めました（事実）。
+\end{examplebox}
+
+\subsection{命題XLI・XLII：観測から軌道を決める}
+
+\textbf{命題XLI}：3回の観測から、放物線の軌道を決める。\textbf{命題XLII}：その作図の完成。ニュートン自身が、「この問題は、最も難しいものの一つ」と述べています（事実）。彼は、1680年の彗星について、3回の観測を元に、軌道要素を求めました。
+
+\subsection{ハレー彗星と、予言の的中}
+
+エドモンド・ハレーは、ニュートンの方法を使って、24個の彗星の軌道を計算しました（事実）。1531年・1607年・1682年の3つの彗星が、軌道の形がほとんど同じことに気づき、\textbf{同じ彗星が約76年ごとに戻る}と考えました。1705年に、次は1758年に戻ると予言しました（事実）。ハレーは1742年に亡くなりましたが、彗星は、予言どおり、1758年末に再び見つかりました（近日点通過は1759年3月）。
+
+\begin{center}
+\begin{tabular}{rr}
+\toprule
+近日点通過の年 & 前回からの間隔（年）\\
+\midrule
+$1531$ & ---\\
+$1607$ & $76.2$\\
+$1682$ & $74.9$\\
+$1759$ & $76.5$\\
+$1835$ & $76.7$\\
+$1910$ & $74.4$\\
+$1986$ & $75.8$\\
+\bottomrule
+\end{tabular}
+\end{center}
+
+\begin{figure}[htbp]
+\centering
+\begin{tikzpicture}
+\begin{axis}[width=9.5cm, height=5.4cm, ybar, bar width=14pt, ylabel={間隔（年）}, symbolic x coords={1607,1682,1759,1835,1910,1986}, xtick=data, ymin=70, ymax=79, grid=major, nodes near coords]
+ \addplot[fill=softblue, draw=primaryblue] coordinates {(1607,76.2)(1682,74.9)(1759,76.5)(1835,76.7)(1910,74.4)(1986,75.8)};
+\end{axis}
+\end{tikzpicture}
+\caption{ハレー彗星の回帰の間隔。木星などの惑星の摂動で、$74$〜$77$ 年とゆらぐ（縦軸は $70$ から始まっている）。次の近日点通過は2061年と計算されている。}
+\end{figure}
+
+\begin{examplebox}{摂動を受けるから、間隔がゆらぐ}
+第4章で、長半径 $17.8$ AU から、周期 $17.8^{3/2}=75.1$ 年と計算しました。実際の周期は、通過ごとに、惑星の引力（とくに木星・土星）で、$74$ 年から $77$ 年の間で変わります。2体問題の厳密解（楕円）からのずれを、摂動として計算する、というニュートンの方法の力が、彗星の予言で示されました。
+\end{examplebox}
+
+\subsection{彗星の尾}
+
+彗星の尾は、太陽と反対の向きに伸びます。ニュートンは、尾を、彗星の頭から、太陽の熱で、気体になって昇った蒸気だと考えました（事実）。現代の理解では、尾は、太陽からの光の圧力と、太陽風（荷電粒子の流れ）によって、ガスやちりが吹き流されたものです。
+
+\begin{figure}[htbp]
+\centering
+\begin{tikzpicture}[scale=1.0]
+ \fill[warmamber] (-4,0) circle (0.35) node[below=0.35cm] {太陽};
+ \draw[thick, primaryblue] (-1.0,1.8) .. controls (0.5,1.2) and (1.6,0.6) .. (2.5,-0.2);
+ \fill[crimson] (0.6,1.15) circle (0.1);
+ \draw[ultra thick, crimson!60, line cap=round] (0.6,1.15)--(3.5,1.85);
+ \node[lbl, align=center] at (3.1,2.25) {尾（太陽と\\反対向き）};
+ \draw[ax] (-3.5,0.3)--(-2.5,0.7);
+\end{tikzpicture}
+\caption{彗星の尾は、軌道の進行方向に関係なく、太陽から遠ざかる向きに伸びる。（模式図）}
+\end{figure}
+
+\section{終わりに：『プリンキピア』の締めくくり}
+
+初版の『プリンキピア』は、彗星の議論で終わっていました。第2版（1713年）で、ニュートンは、末尾に\textbf{一般的注解}を加えました（事実）。そこには、「私は仮説をつくらない」（\textit{hypotheses non fingo}）という、有名な一句があります。重力の\emph{原因}は、現象から導けない以上、仮説にすぎず、実験哲学には、位置をもたない、と述べます。
+
+\begin{notebox}{翻訳版について}
+この一般的注解は、翻訳版では確認できませんでした。翻訳版の最終部分は、彗星の軌道の議論（ラテン語の文が混ざっている）で終わっています。一般的注解の内容は、原著で確かめてください。
+\end{notebox}
+
+\begin{figure}[htbp]
+\centering
+\begin{tikzpicture}[node distance=5mm]
+ \node[fbox, text width=3.0cm] (a) {運動の三法則\\（第1章〜）};
+ \node[abox, text width=3.0cm, right=10mm of a] (b) {向心力・軌道\\（第1編）};
+ \node[gbox, text width=3.0cm, right=10mm of b] (c) {抵抗・流体\\（第2編）};
+ \node[rbox, text width=3.4cm, below=8mm of b] (d) {万有引力\\惑星・月・潮汐\\歳差・彗星\\（第3編）};
+ \draw[ax] (a)--(b); \draw[ax] (b)--(c); \draw[ax] (b)--(d); \draw[ax] (c)--(d);
+\end{tikzpicture}
+\caption{『プリンキピア』の論理の流れ。法則 → 軌道の数学 → 抵抗の数学 → 万有引力で世界を説明。}
+\end{figure}
+
+\begin{pointbox}{第11章のまとめ}
+\begin{itemize}[leftmargin=1.5em]
+\item 月の複雑な運動は、太陽の引力の摂動として説明される。
+\item 歳差（約 $50''$/年、周期約 $25770$ 年）は、赤道の膨らみに、月と太陽が及ぼす力による。
+\item 彗星は、太陽を焦点とする円錐曲線を描く。ハレーは、これを使って、ハレー彗星の回帰を予言した。
+\item 第2版で一般的注解が加わった（翻訳版には、この部分がない）。
+\end{itemize}
+\end{pointbox}
+
+\begin{notebox}{この本の未解決点}
+\begin{itemize}[leftmargin=1.5em]
+\item 翻訳版は、ラテン語の原文に、小型モデルの訳が混ざっていて、一部の命題は、番号が乱れています。本書の命題番号は、見出しに合わせた目安です。
+\item ニュートンの個々の数値（月の質量、潮汐力の比、歳差の値）は、本書では、伝聞で述べたものに「事実とされる」と付けました。原著で確かめてください。
+\item 命題の証明は、本書では、幾何学の議論そのものを再現していません。同じ結論を、現代の式と数値例で示しました。
+\end{itemize}
+\end{notebox}
 
 \end{document}
