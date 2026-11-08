@@ -2,27 +2,61 @@
 \usepackage{luatexja}
 \usepackage{luatexja-fontspec}
 \usepackage{amsmath,amssymb,amsfonts,amsthm}
-\usepackage{graphicx}
 \usepackage{geometry}
 \geometry{top=24mm,bottom=24mm,left=24mm,right=24mm,footskip=10mm}
+\usepackage{tikz}
+\usetikzlibrary{arrows.meta,calc,positioning,patterns,shapes.geometric,shapes.misc,decorations.pathreplacing,decorations.markings,angles,quotes,intersections,backgrounds,fit}
+\usepackage{pgfplots}
+\pgfplotsset{compat=1.18}
+\usepgfplotslibrary{fillbetween}
 \usepackage{tcolorbox}
 \tcbuselibrary{skins,breakable}
-\usepackage{tikz}
-\usetikzlibrary{arrows.meta,calc,shapes,decorations.pathmorphing,backgrounds}
 \usepackage{hyperref}
 \usepackage{enumitem}
 \usepackage{booktabs}
 \usepackage{fancyhdr}
 
-\definecolor{hyperbolicblue}{RGB}{15, 45, 95}
-\definecolor{ellipticgold}{RGB}{185, 120, 15}
-\definecolor{softcream}{RGB}{252, 250, 245}
+\definecolor{primaryblue}{RGB}{24, 76, 120}
+\definecolor{softblue}{RGB}{235, 243, 250}
+\definecolor{darkslate}{RGB}{44, 62, 80}
+\definecolor{warmamber}{RGB}{217, 119, 6}
+\definecolor{softamber}{RGB}{254, 243, 199}
+\definecolor{crimson}{RGB}{185, 28, 28}
+\definecolor{softrose}{RGB}{255, 228, 230}
+\definecolor{accentgreen}{RGB}{16, 120, 70}
+\definecolor{softgreen}{RGB}{236, 253, 245}
+\definecolor{gridgray}{RGB}{200, 205, 210}
 
 \hypersetup{
     colorlinks=true,
-    linkcolor=hyperbolicblue,
-    citecolor=ellipticgold,
-    urlcolor=hyperbolicblue
+    linkcolor=primaryblue,
+    urlcolor=primaryblue,
+    citecolor=accentgreen,
+    pdfauthor={教育情報分析研究会}
+}
+
+\newtcolorbox{examplebox}[1]{
+    colback=softgreen, colframe=accentgreen, coltitle=white, fonttitle=\bfseries,
+    title={#1}, arc=3mm, boxrule=1pt, left=4mm,right=4mm,top=3mm,bottom=3mm, breakable
+}
+\newtcolorbox{pointbox}[1]{
+    colback=softamber, colframe=warmamber, coltitle=darkslate, fonttitle=\bfseries,
+    title={#1}, arc=2mm, boxrule=1pt, left=3mm,right=3mm,top=2mm,bottom=2mm, breakable
+}
+\newtcolorbox{notebox}[1]{
+    colback=softrose, colframe=crimson, coltitle=white, fonttitle=\bfseries,
+    title={#1}, arc=2mm, boxrule=1pt, left=3mm,right=3mm,top=2mm,bottom=2mm, breakable
+}
+
+\tikzset{
+  >=Stealth,
+  fbox/.style={draw=primaryblue, fill=softblue, rounded corners=3pt, align=center, inner sep=4pt, font=\small},
+  wbox/.style={draw=primaryblue, fill=white, rounded corners=3pt, align=center, inner sep=4pt, font=\small},
+  abox/.style={draw=warmamber, fill=softamber, rounded corners=3pt, align=center, inner sep=4pt, font=\small},
+  gbox/.style={draw=accentgreen, fill=softgreen, rounded corners=3pt, align=center, inner sep=4pt, font=\small},
+  rbox/.style={draw=crimson, fill=softrose, rounded corners=3pt, align=center, inner sep=4pt, font=\small},
+  ax/.style={->, thick, darkslate},
+  lbl/.style={font=\footnotesize, text=darkslate},
 }
 
 \pagestyle{fancy}
@@ -32,161 +66,440 @@
 \fancyhead[RE]{\nouppercase{\leftmark}}
 \renewcommand{\headrulewidth}{0.4pt}
 
-\title{\Huge\textbf{大人のための非ユークリッド幾何学入門}\\[4mm]
-\huge\textbf{曲率・平行線・高次元への扉}\\[6mm]
-\Large\textbf{マニング『非ユークリッド幾何学』徹底図解講義}\\[5mm]
-\large 現代数学の視点から読み解く双曲・楕円幾何学}
-
-\author{\textbf{数理文献翻訳プロジェクト} 著}
-\date{2026年11月 決定版}
+\hypersetup{pdftitle={古典で学び直すマニング『非ユークリッド幾何学』入門 —— 平行線公準を外したとき、何が起きるか}}
+\newcommand{\dd}{\mathrm{d}}
+\newcommand{\ee}{\mathrm{e}}
 
 \begin{document}
 
-\maketitle
+\begin{titlepage}
+\begin{center}
+\vspace*{1.5cm}
+{\Large\bfseries プロジェクト・グーテンベルク古典数学入門シリーズ}\\[0.8cm]
+\rule{\textwidth}{1.5pt}\\[0.4cm]
+{\Huge\bfseries 古典で学び直す\\マニング\\『非ユークリッド幾何学』入門}\\[0.4cm]
+{\Large\bfseries —— 平行線公準を外したとき、何が起きるか ——}\\[0.4cm]
+\rule{\textwidth}{1.5pt}\\[1.5cm]
+{\large 原著：ヘンリー・パーカー・マニング\\
+\textit{Non-Euclidean Geometry}（1901年）}\\[2.0cm]
+{\Large\bfseries 著：教育情報分析研究会}\\[2.5cm]
+\vfill
+{\large 2026年11月 改訂第2版（原著の章ごとに対応）}\\[0.5cm]
+{\footnotesize 本書は Project Gutenberg のパブリックドメイン（eBook \#13702）を底本に、\\
+高等学校の数学の知識で読み進められるように書き下ろした入門書です。}
+\end{center}
+\end{titlepage}
 
 \frontmatter
 \tableofcontents
-
-\chapter*{はじめに：2000年の呪縛を解いた幾何学革命}
-\addcontentsline{toc}{chapter}{はじめに：2000年の呪縛を解いた幾何学革命}
-
-紀元前300年頃、エウクレイデス（ユークリッド）が『原論』を著して以来、幾何学は人類にとって「絶対的で不変の真理の殿堂」であった。
-しかし、その中で第5公準（平行線公準）だけは、誰もが直感的には受け入れがたい異様な複雑さを湛えていた。
-
-「もしこの平行線公準が成り立たない世界を考えたら、数学は破綻するのだろうか？」
-
-18世紀のサッケーリやランベルトの苦闘を経て、19世紀前半、カール・フリードリヒ・ガウス、ニコライ・ロバチェフスキー、ヤーノシュ・ボヤイという3人の巨人が独立して辿り着いた結論は驚くべきものであった。――「平行線公準を否定しても、ユークリッド幾何学とまったく同様に完璧で、一抹の矛盾もない壮麗な幾何学が建設できる！」
-
-本書は、1901年にアメリカの数学者ヘンリー・パーカー・マニングが著した名著『非ユークリッド幾何学』の数理的骨格をもとに、現代の幾何学・物理学（一般相対性理論や双曲多様体論）の視点を取り入れながら、大人読者が直感的に非ユークリッド幾何学の美を堪能できるように執筆された入門講義録である。
-
 \mainmatter
 
-\chapter{サッケーリ四角形と3つの幾何学}
+\makeatletter
+\renewcommand\chapter{\par\addvspace{16pt}\global\@topnum\z@\@afterindentfalse\secdef\@chapter\@schapter}
+\makeatother
 
-\section{ユークリッド第5公準の正体}
-ユークリッド幾何学において、平行線とは「同一平面上でいくら延長しても交わらない2直線」である。
-これに対し、サッケーリは底辺 $AB$ の両端に等しい長さの垂線 $AC, BD$ を立て、その上端を結んだ四角形（\\textbf{サッケーリ四角形}）を考案した。
+%==========================================================
+\chapter*{はじめに：この本の読み方}
+\addcontentsline{toc}{chapter}{はじめに：この本の読み方}
+\markboth{はじめに}{はじめに}
+%==========================================================
+
+ヘンリー・P・マニング（ブラウン大学の数学者）の『非ユークリッド幾何学』（1901年）は、ユークリッド幾何学の「平行線の公準」を取り除いたとき、どんな幾何学ができるかを、短く、直接に書いた本です。この本も、原著の章（序文、導入、第1〜4章、歴史的覚書）に、1章ずつ対応させます。
 
 \begin{figure}[htbp]
 \centering
-\begin{tikzpicture}[scale=1.2]
-    \draw[thick, fill=blue!5] (0,0) -- (4,0) -- (4,2.5) -- (0,2.5) -- cycle;
-    \draw[thick, hyperbolicblue] (0,0) -- (4,0) node[midway, below] {底辺 $AB$};
-    \draw[thick, red!80!black] (0,0) -- (0,2.5) node[midway, left] {$AC$};
-    \draw[thick, red!80!black] (4,0) -- (4,2.5) node[midway, right] {$BD$};
-    \draw[thick, purple] (0,2.5) -- (4,2.5) node[midway, above] {上辺 $CD$};
-    \draw[dashed, thick, black!60] (2,0) -- (2,2.5) node[midway, right] {中垂線 $HK$};
-
-    % right angle marks
-    \draw (0,0.3) -- (0.3,0.3) -- (0.3,0);
-    \draw (3.7,0) -- (3.7,0.3) -- (4,0.3);
-    \draw (1.7,0) -- (1.7,0.3) -- (2,0.3);
-    \draw (1.7,2.5) -- (1.7,2.2) -- (2,2.2);
-
-    % labels
-    \node[below left] at (0,0) {$A$};
-    \node[below right] at (4,0) {$B$};
-    \node[above left] at (0,2.5) {$C$};
-    \node[above right] at (4,2.5) {$D$};
-    \node[below] at (2,0) {$H$};
-    \node[above] at (2,2.5) {$K$};
-
-    \node at (0.6,2.2) {$\theta$};
-    \node at (3.4,2.2) {$\theta$};
+\begin{tikzpicture}[node distance=3mm]
+ \node[wbox, text width=1.4cm] (a) {序文};
+ \node[wbox, text width=1.4cm, right=of a] (b) {導入};
+ \node[fbox, text width=2.2cm, right=of b] (c) {汎幾何学\\（3つの仮説）};
+ \node[abox, text width=1.9cm, right=of c] (d) {双曲幾何学};
+ \node[abox, text width=1.9cm, right=of d] (e) {楕円幾何学};
+ \node[gbox, text width=2.2cm, below=4mm of c] (f) {解析的\\非ユークリッド};
+ \node[rbox, text width=2.2cm, right=of f] (g) {歴史的覚書};
 \end{tikzpicture}
-\caption{サッケーリ四角形の構造と上辺角 $\theta$}
+\caption{原著の構成。汎幾何学は、3つの幾何学に共通な命題を扱う章。双曲と楕円が、ユークリッドと違う2つの幾何学。}
 \end{figure}
 
-底角が直角（$90^\circ$）で、左右の垂線が等長であるとき、対称性（重ね合わせ）から上辺角 $\angle C$ と $\angle D$ は必ず等しくなる。
-この上辺角 $\theta$ が取り得る値によって、宇宙の幾何学は厳密に3分される：
-\begin{enumerate}
-    \item \textbf{直角仮説}（$\theta = 90^\circ$）：ユークリッド幾何学（曲率 $K = 0$）
-    \item \textbf{鋭角仮説}（$\theta < 90^\circ$）：双曲幾何学（曲率 $K < 0$）
-    \item \textbf{鈍角仮説}（$\theta > 90^\circ$）：楕円幾何学（曲率 $K > 0$）
-\end{enumerate}
+\begin{notebox}{事実・推測・未確認の区別（この本の約束）}
+\begin{itemize}[leftmargin=*]
+\item 本書で挙げる数値（平行角、三角形の面積、円周、距離など）は、計算し直して確かめました。
+\item 歴史的な年代と人名は、原著の「歴史的覚書」にあるものだけを使いました（ベルトラミなど、原著に年が書かれていない人物は、年を書いていません）。
+\item 原著の証明の細部は、全部は取り上げていません。図は、概念を示す略図です。
+\end{itemize}
+\end{notebox}
 
-\chapter{双曲幾何学：ポアンカレ円板とロバチェフスキー空間}
+%==========================================================
+\chapter{序文}
+\markboth{第1章}{序文}
+%==========================================================
 
-\section{平行角関数 \texorpdfstring{$\Pi(x)$}{Pi(x)} と無限への漸近}
-双曲幾何学においては、1点を通る平行線が左右に2本引け、その間には無数の交わらない直線が存在する。
-垂線の長さを $x$ とするときの平行角 $\Pi(x)$ は、以下の美しい公式（ロバチェフスキーの公式）で与えられる：
+\section{この章の位置づけ}
+
+マニングの序文は短く、この本の方針をはっきり述べます。非ユークリッド幾何学は、数学の重要な一分野として認められるようになった。幾何学を教える人は、その知識をもつべきで、数学に興味をもつ人は、その新しい結果や見方を楽しめるはずだ、と。
+
+\section{どんな読者を想定しているか}
+
+マニングは、この本を、「ほとんど数学の知識を前提としない、簡単で直接的な説明」にしようとしました。最初の3つの章は、平面幾何・立体幾何・三角法だけを知っていれば読め、本全体も、大学で普通に教えられる数学を学んだ人なら読める、と述べています。
+
+\begin{table}[htbp]
+\centering
+\begin{tabular}{ll}
+\toprule
+部分 & 必要な知識（原著の序文による）\\
+\midrule
+最初の3つの章 & 平面幾何、立体幾何、三角法\\
+本全体 & 大学で普通に教える数学\\
+\bottomrule
+\end{tabular}
+\caption{原著の序文が述べる、読むのに必要な数学。}
+\end{table}
+
+\section{独創性を主張しない}
+
+マニングは、この本に「特別な独創性は主張できない」と述べます。命題は古くから確立されていて、証明の一部は新しいかもしれないが、ほかは、すでに他の著者が与えたもので、改良の余地がなかった、と。主にハルステッドの翻訳を通じて、それらの証明に接した、と謝辞を述べています。
+
+\begin{pointbox}{この章のまとめ}
+\begin{itemize}[leftmargin=*]
+\item この本は、簡単で直接的な、非ユークリッド幾何学の入門。
+\item 前半は、平面幾何・立体幾何・三角法だけで読める。
+\item 命題は古くからのもの。証明の多くは、先人のものを使っている。
+\end{itemize}
+\end{pointbox}
+
+%==========================================================
+\chapter{導入}
+\markboth{第2章}{導入}
+%==========================================================
+
+\section{この章の位置づけ}
+
+導入は、非ユークリッド幾何学の考え方を述べます。幾何学の公理は、かつて、知的な精神が否定も検討もできない「思考の法則」と思われていました。ところが、ユークリッドの公理と、全部または一部が矛盾する公理の組を取っても、ユークリッドのものと同じように、矛盾のない幾何学が作れることが、示されました。
+
+\section{3つの仮説}
+
+マニングは、2つの重要な非ユークリッド幾何学を扱います。公理と定義は、平行線に関するもの以外はユークリッドと同じにします。平行線の公理を除くと、3つの\textbf{仮説}（三角形の内角の和についての仮説）が出てきます。
+
+\begin{table}[htbp]
+\centering
+\begin{tabular}{llc}
+\toprule
+仮説 & 三角形の内角の和 & 幾何学\\
+\midrule
+鋭角の仮説 & $180$ 度より小さい & 双曲幾何学\\
+直角の仮説 & $180$ 度に等しい & ユークリッド幾何学\\
+鈍角の仮説 & $180$ 度より大きい & 楕円幾何学\\
+\bottomrule
+\end{tabular}
+\caption{3つの仮説と、対応する幾何学。名前は、後で出てくる「サッケーリの四角形」の頂角（鋭角・直角・鈍角）から来る。}
+\end{table}
+
+\begin{figure}[htbp]
+\centering
+\begin{tikzpicture}
+\begin{axis}[ybar, width=9.5cm, height=4.8cm, bar width=24pt, xmin=0.4, xmax=3.6, ymin=150, ymax=215, xtick={1,2,3}, xticklabels={双曲,ユークリッド,楕円}, ylabel={三角形の内角の和（度）},
+  every axis label/.append style={font=\footnotesize}, tick label style={font=\footnotesize}]
+ \addplot[fill=softblue, draw=primaryblue] coordinates {(1,170)(2,180)(3,190)};
+\end{axis}
+\end{tikzpicture}
+\caption{3つの幾何学での、三角形の内角の和の傾向（高さは例示のため。双曲では $<180$、楕円では $>180$、値は三角形の大きさで変わる）。}
+\end{figure}
+
+マニングは、「私たちは、宇宙のごく限られた部分しか調べられないので、ユークリッドの体系が、2つの非ユークリッド幾何学より正しい、と証明することはできない」と述べます。
+
+\section{この本の進め方}
+
+まず、3つの幾何学に共通する命題を証明し（第3章）、次に、ユークリッドと違う2つの幾何学について、命題と三角法の公式を示し（第4、5章）、最後に解析的な方法で、いくつかの著しい性質を導きます（第6章）。マニングは、幾何学の基礎を直接調べることや、仮定を全部指摘することは、目標にしない、と述べています。
+
+\begin{pointbox}{この章のまとめ}
+\begin{itemize}[leftmargin=*]
+\item 平行線の公理を除くと、内角の和についての3つの仮説が出る。
+\item 鋭角・直角・鈍角の仮説が、双曲・ユークリッド・楕円幾何学に対応する。
+\item 宇宙の一部しか調べられないので、どの幾何学が正しいかは、証明できない。
+\end{itemize}
+\end{pointbox}
+
+%==========================================================
+\chapter{汎幾何学：3つの幾何学に共通する命題}
+\markboth{第3章}{汎幾何学}
+%==========================================================
+
+\section{この章の位置づけ}
+
+第1章（本書の第3章）は、「汎幾何学」と呼ばれ、平行線の公理を使わずに証明できる命題を、集めます。この章は、サッケーリ（1733年）の方法にしたがって書かれた、と原著の歴史的覚書で述べられています。
+
+\section{サッケーリの四角形}
+
+線分 $AB$ の両端に、同じ長さの垂線 $AC$、$BD$ を立てて、$C$、$D$ を結んだ四角形を、サッケーリの四角形と呼びます。上の辺 $CD$ の両端の角（頂角）は、等しくなります。この角が鋭角、直角、鈍角のどれになるかで、3つの仮説が分かれます。
+
+\begin{figure}[htbp]
+\centering
+\begin{tikzpicture}[scale=0.9]
+ \foreach \i/\pa/\pb/\lab in {0/-0.3/2.3/{鋭角：$CD>AB$},1/0/2/{直角：$CD=AB$},2/0.3/1.7/{鈍角：$CD<AB$}}{
+   \begin{scope}[xshift=\i*5.2cm]
+   \draw[thick, primaryblue, fill=softblue] (0,0)--(2,0)--(\pb,1.6)--(\pa,1.6)--cycle;
+   \node[lbl] at (1,-0.4) {$AB$};
+   \node[lbl] at (1,2.0) {$CD$};
+   \node[lbl] at (1,-1.0) {\lab};
+   \end{scope}
+ }
+\end{tikzpicture}
+\caption{サッケーリの四角形の3つの場合（略図）。底辺 $AB$ と同じ長さの垂線を立てると、上の辺 $CD$ が、底辺より長くなるか、等しいか、短くなるかで、頂角の種類が決まる。}
+\end{figure}
+
+\section{角の和と面積}
+
+3つの仮説で、三角形の内角の和は、$180$ 度より小さい、等しい、大きい、のどれかです。その差（欠損または超過）は、三角形の面積に比例します。
+
+球面（半径 $R$）では、三角形の面積は、$R^2\times(\text{内角の和}-\pi)$ です（ラジアン）。計算で確かめます。北極と赤道上の2点で作る三角形（3つの角がすべて90度）は、球面のちょうど8分の1で、面積 $\dfrac{4\pi R^2}{8}=\dfrac{\pi R^2}{2}$ です。内角の和 $270$ 度、超過 $90$ 度 $=\dfrac\pi2$ ラジアンで、$R^2\times\dfrac\pi2$ と一致します。
+
+\begin{table}[htbp]
+\centering
+\begin{tabular}{lcc}
+\toprule
+幾何学 & 内角の和と $\pi$ の差 & 面積との関係（曲率 $K$）\\
+\midrule
+双曲（$K=-1$） & $-($欠損$)$ & 面積 $=\pi-$内角の和\\
+ユークリッド（$K=0$） & $0$ & 面積に関係なく $0$\\
+球面（$K=+1$） & $+($超過$)$ & 面積 $=$内角の和 $-\pi$\\
+\bottomrule
+\end{tabular}
+\caption{3つの幾何学での、角の和の差と面積（曲率 $K=\mp1$ の場合）。}
+\end{table}
+
+\begin{pointbox}{この章のまとめ}
+\begin{itemize}[leftmargin=*]
+\item サッケーリの四角形の頂角が、鋭角・直角・鈍角のどれかで、3つの仮説が分かれる。
+\item 三角形の角の和の「差」は、面積に比例する。球面の8分の1の三角形で、$270$ 度、面積 $\pi R^2/2$。
+\end{itemize}
+\end{pointbox}
+
+%==========================================================
+\chapter{双曲幾何学（ロバチェフスキー・ボヤイの幾何学）}
+\markboth{第4章}{双曲幾何学}
+%==========================================================
+
+\section{この章の位置づけ}
+
+第2章（本書の第4章）は、鋭角の仮説の幾何学、双曲幾何学です。ここでは、直線外の1点を通って、その直線と交わらない直線が、無数に引けます。そのうち、交わるものと交わらないものの境目にある2本が、「平行」と呼ばれます。
+
+\section{平行角}
+
+直線 $CD$ から距離 $a$ の点 $A$ を通る、$CD$ に平行な直線が、$A$ から $CD$ に下ろした垂線となす角を、\textbf{平行角}$\Pi(a)$ と呼びます。双曲幾何学では、曲率 $-1$ の場合
 \[
-\tan\left(\frac{\Pi(x)}{2}\right) = e^{-x}
+\tan\frac{\Pi(a)}2=e^{-a}
 \]
-$x \to 0$ の微小極限では $\Pi(x) \to 90^\circ$ となり、我々が日常経験するユークリッド幾何学に限りなく近づく。一方、$x \to \infty$ では $\Pi(x) \to 0^\circ$ となり、平行線は無限遠で漸近光線となる。
+です。距離 $a$ が大きいほど、平行角は小さくなります。ユークリッド幾何学では、距離によらず、常に $90$ 度です。
+
+\begin{table}[htbp]
+\centering
+\begin{tabular}{c|cccccc}
+\toprule
+距離 $a$ & 0 & 0.25 & 0.5 & 1 & 2 & 3\\
+\midrule
+平行角 $\Pi(a)$（度） & 90 & 75.8 & 62.5 & 40.4 & 15.4 & 5.7\\
+\bottomrule
+\end{tabular}
+\caption{双曲幾何学（曲率 $-1$）の平行角（計算で確認）。距離とともに、急に小さくなる。}
+\end{table}
 
 \begin{figure}[htbp]
 \centering
-\begin{tikzpicture}[scale=2.2]
-    % Poincare disk boundary
-    \draw[very thick, fill=softcream] (0,0) circle (1.5);
-    \node[below right] at (1.1,1.1) {絶対円（無限遠境界）};
-
-    % Geodesic lines as circular arcs orthogonal to boundary
-    \draw[thick, hyperbolicblue] (-1.5,0) -- (1.5,0);
-    \draw[thick, hyperbolicblue] (0,-1.5) -- (0,1.5);
-
-    % Circular arcs
-    \draw[thick, red!80!black] (1.06,1.06) arc (135:225:1.5);
-    \draw[thick, red!80!black] (-1.06,1.06) arc (45:-45:1.5);
-
-    % Point and parallels
-    \filldraw[black] (0,0.6) circle (0.03) node[above right] {点 $P$};
-    \draw[dashed, purple, thick] (0,0.6) -- (-1.414, 0.5);
-    \draw[dashed, purple, thick] (0,0.6) -- (1.414, 0.5);
-
-    \node at (0,-0.8) {\textbf{ポアンカレ円板模型}};
+\begin{tikzpicture}
+\begin{axis}[width=9.5cm, height=5.2cm, xmin=0, xmax=4, ymin=0, ymax=95, xlabel={直線までの距離 $a$}, ylabel={平行角 $\Pi(a)$（度）},
+  every axis label/.append style={font=\footnotesize}, tick label style={font=\footnotesize}, legend style={font=\scriptsize, at={(0.97,0.97)}, anchor=north east}]
+ \addplot[thick, primaryblue, domain=0:4, samples=80] {2*atan(exp(-x))};
+ \addplot[dashed, crimson, domain=0:4, samples=2] {90};
+ \legend{双曲, ユークリッド}
+\end{axis}
 \end{tikzpicture}
-\caption{ポアンカレ円板模型における双曲直線（境界に直交する円弧）}
+\caption{平行角 $\Pi(a)=2\arctan e^{-a}$。ユークリッド幾何学（破線）では常に $90$ 度。}
 \end{figure}
 
-\section{ガウスの面積欠度定理}
-双曲平面における三角形 $\triangle ABC$ の内角の和は常に $180^\circ$（$\pi$）未満である。
-その差 $\Delta = \pi - (A + B + C)$ を\textbf{欠度（deficiency）}と呼ぶ。
-カール・フリードリヒ・ガウスが発見した最も驚嘆すべき定理は：
-\[
-\text{Area}(\triangle ABC) = R^2 \cdot (\pi - A - B - C)
-\]
-すなわち、三角形の面積は内角の和の欠落分に完全に比例し、すべての三角形の面積には上限 $\pi R^2$ が存在する。相似な三角形（形が同じで大きさが異なる三角形）は双曲幾何学には存在し得ず、「形が決まれば大きさも一意に定まる」のである。
+\section{三平方の定理と円周}
 
-\chapter{楕円幾何学：有限な宇宙とクリフォードの平行線}
+双曲幾何学（曲率 $-1$）では、直角三角形の斜辺 $c$ は、$\cosh c=\cosh a\cosh b$ で決まります。2辺が $a=b=1$ なら $c=1.513$（ユークリッドなら $\sqrt2=1.414$）で、斜辺はユークリッドより長くなります。また、半径 $r$ の円の円周は $2\pi\sinh r$ で、$2\pi r$ より大きくなります。
 
-\section{リーマン空間と直線の有限性}
-サッケーリの鈍角仮説（$\theta > 90^\circ$）を受け入れたとき、直線は無限に伸びることはできず、一定の有限の長さ $\pi R$ を持って自身へと閉じる。
-すべての直線は必ず交わり、平行線は1本も引くことができない。
+\begin{table}[htbp]
+\centering
+\begin{tabular}{c|cccc}
+\toprule
+半径 $r$ & 0.5 & 1 & 2 & 3\\
+\midrule
+ユークリッド $2\pi r$ & 3.142 & 6.283 & 12.566 & 18.850\\
+双曲 $2\pi\sinh r$ & 3.274 & 7.384 & 22.788 & 62.944\\
+\bottomrule
+\end{tabular}
+\caption{半径 $r$ の円の円周。双曲幾何学では、半径が大きいと、円周が急に大きくなる。}
+\end{table}
+
+\begin{pointbox}{この章のまとめ}
+\begin{itemize}[leftmargin=*]
+\item 双曲幾何学では、直線外の点を通る平行線が無数にあり、平行角は距離とともに小さくなる。
+\item 例：距離1で $40.4$ 度（計算で確認）。三平方の定理は $\cosh c=\cosh a\cosh b$。円周は $2\pi\sinh r$。
+\end{itemize}
+\end{pointbox}
+
+%==========================================================
+\chapter{楕円幾何学（リーマン幾何学）}
+\markboth{第5章}{楕円幾何学}
+%==========================================================
+
+\section{この章の位置づけ}
+
+第3章（本書の第5章）は、鈍角の仮説の幾何学、楕円幾何学です。ここでは、直線の長さが有限で、どの2本の直線も交わります（平行線がない）。原著の歴史的覚書は、「古い研究者たちは、鋭角の仮説の幾何学しか見つけなかった。直線が有限の長さだと仮定することは思いつかなかった。楕円幾何学は、リーマンが発見した」と述べます。
+
+\section{球面で考える}
+
+楕円幾何学は、球面の幾何学（大円を「直線」とする）と、ほぼ同じです。半径 $R$ の球面で、2点を結ぶ「直線」は大円の弧で、その距離は、$R\times$（中心角）です。
+
+直角三角形の斜辺は $\cos c=\cos a\cos b$（$R=1$）で決まります。3辺がすべて $\pi/2$ の三角形（3つの角がすべて直角）では、$\cos(\pi/2)=0=0\cdot0$ となり、確かに成り立ちます。
+
+\begin{table}[htbp]
+\centering
+\begin{tabular}{lc}
+\toprule
+量（地球の半径 $6371$ km で計算） & 値\\
+\midrule
+東京（北緯 $35.68$°、東経 $139.69$°）と ロンドン（北緯 $51.51$°、西経 $0.13$°）の大円距離 & $9559$ km\\
+地球を一周する大円の長さ $2\pi R$ & $40030$ km\\
+\bottomrule
+\end{tabular}
+\caption{球面（地球）の上での、「直線」（大円）に沿った距離の例。}
+\end{table}
 
 \begin{figure}[htbp]
 \centering
-\begin{tikzpicture}[scale=1.8]
-    % Sphere
-    \draw[thick] (0,0) circle (1.2);
-    \draw[dashed] (-1.2,0) arc (180:0:1.2 and 0.4);
-    \draw[thick] (-1.2,0) arc (180:360:1.2 and 0.4);
-
-    % Great circles
-    \draw[thick, ellipticgold] (0,1.2) arc (90:-90:0.6 and 1.2);
-    \draw[thick, ellipticgold] (0,1.2) arc (90:270:0.6 and 1.2);
-
-    % Pole and Polar
-    \filldraw[red!80!black] (0,1.2) circle (0.04) node[above] {極（Pole）};
-    \draw[very thick, blue!80!black] (-1.2,0) arc (180:360:1.2 and 0.4);
-    \node[below right, blue!80!black] at (0.8,-0.2) {極線（赤道：全長 $\pi$）};
-
-    \node at (0,-1.6) {\textbf{球面と楕円平面（対蹠点の同一視）}};
+\begin{tikzpicture}[scale=1.3]
+ \draw[thick, darkslate] (0,0) circle (1.5);
+ \draw[crimson, thick] (-1.5,0) arc (180:360:1.5 and 0.5);
+ \draw[crimson, thick, dashed] (-1.5,0) arc (180:0:1.5 and 0.5);
+ \draw[primaryblue, thick] (0,1.5) arc (90:-90:0.7 and 1.5);
+ \draw[primaryblue, thick, dashed] (0,1.5) arc (90:270:0.7 and 1.5);
+ \fill (0,1.5) circle (2pt) node[above, lbl] {交点};
+ \fill (0,-1.5) circle (2pt) node[below, lbl] {交点（対蹠点）};
 \end{tikzpicture}
-\caption{楕円空間における極と極線の直交関係}
+\caption{球面の上の2本の「直線」（大円）は、必ず2点（互いに球の裏側にある対蹠点）で交わる。平行線は存在しない。}
 \end{figure}
 
-\section{クリフォードの平行線：至る所等距離なねじれ直線}
-ウィリアム・キングドン・クリフォードが解明した楕円幾何学の最高峰が、\textbf{クリフォードの平行線}である。
-3次元楕円空間において、互いに交わらない2直線をある角度 $\theta = p$ だけねじって回転させると、それらは全長にわたって「至る所等距離」となる。
-この直線群が織りなす二重回転面（クリフォード・トーラス）の上では、驚くべきことに\textbf{通常の平坦なユークリッド幾何学が厳密に成立する}。曲率を持った空間の中に、平坦な世界が美しく埋め込まれているのである。
+\begin{pointbox}{この章のまとめ}
+\begin{itemize}[leftmargin=*]
+\item 楕円幾何学では、直線は有限の長さで、どの2直線も交わる。球面が、そのよい模型。
+\item 球面の三角形は、角の和が $180$ 度を超え、斜辺は $\cos c=\cos a\cos b$。
+\end{itemize}
+\end{pointbox}
 
-\chapter*{結び：現代物理学への招待}
-\addcontentsline{toc}{chapter}{結び：現代物理学への招待}
+%==========================================================
+\chapter{解析的非ユークリッド幾何学}
+\markboth{第6章}{解析的非ユークリッド幾何学}
+%==========================================================
 
-アインシュタインが1915年に発表した一般相対性理論において、重力とはニュートンの言う遠隔力ではなく、「物質とエネルギーが引き起こす時空の歪み（リーマン計量 $g_{\mu\nu}$ の曲率）」そのものであることが証明された。
+\section{この章の位置づけ}
 
-マニングが本書で示した公理的・解析的な思考法は、宇宙の幾何学的構造を問う現代宇宙論、さらには超弦理論やトポロジー的場の量子論の基礎言語として今なお生き続けている。幾何学とは、ただ一つの世界を記述する固定的な枠組みではなく、我々の知性が自由に選び取り、宇宙の深淵を照らし出すための無限の探究の翼なのである。
+第4章（本書の第6章）は、座標と式を使って、3つの幾何学を統一的に扱います。原著では、定数 $k$（その符号で、双曲・楕円・ユークリッドが決まる）を使って、距離や円の式を書きます。
+
+\section{曲率の符号による統一}
+
+本書では、曲率 $K$ を使って、3つの幾何学を並べます。半径 $r$ の円の円周は、$K=-1$ なら $2\pi\sinh r$、$K=0$ なら $2\pi r$、$K=+1$ なら $2\pi\sin r$ です。$r$ が小さいうちは、3つとも $2\pi r$ にほぼ等しく、違いは、大きな円ではっきり出ます。
+
+\begin{figure}[htbp]
+\centering
+\begin{tikzpicture}
+\begin{axis}[width=10cm, height=5.6cm, xmin=0, xmax=3.14, ymin=0, ymax=25, xlabel={半径 $r$}, ylabel={円周},
+  every axis label/.append style={font=\footnotesize}, tick label style={font=\footnotesize}, legend style={font=\scriptsize, at={(0.03,0.97)}, anchor=north west}]
+ \addplot[thick, crimson, domain=0:3.14159, samples=80] {2*pi*sinh(x)/(1)};
+ \addplot[thick, darkslate, domain=0:3.14159, samples=2] {2*pi*x};
+ \addplot[thick, primaryblue, domain=0:3.14159, samples=80] {2*pi*sin(deg(x))};
+ \legend{双曲 $2\pi\sinh r$, ユークリッド $2\pi r$, 球面 $2\pi\sin r$}
+\end{axis}
+\end{tikzpicture}
+\caption{3つの幾何学での円周（曲率 $K=-1,0,+1$）。双曲では急に大きくなり、球面では、$r=\pi/2$ で最大になって、そのあと小さくなる。}
+\end{figure}
+
+\section{2つの模型}
+
+非ユークリッド幾何学は、ふつうの空間の中の「模型」で表せます。たとえば、半径 $1$ の円板の内部を、双曲平面とみなす模型（ポアンカレ円板、のちに作られた模型）では、中心から円板の中の点（中心からの普通の距離 $\rho$）までの双曲的な距離は $2\,\mathrm{artanh}\,\rho$ です。
+
+\begin{table}[htbp]
+\centering
+\begin{tabular}{c|cccc}
+\toprule
+普通の距離 $\rho$ & 0.1 & 0.5 & 0.9 & 0.99\\
+\midrule
+双曲的な距離 $2\,\mathrm{artanh}\,\rho$ & 0.201 & 1.099 & 2.944 & 5.293\\
+\bottomrule
+\end{tabular}
+\caption{ポアンカレ円板での、中心からの距離。円板のふちに近づくほど、距離は無限に大きくなる。（この模型は、マニングの本には出てこない、現代の補足。）}
+\end{table}
+
+\begin{pointbox}{この章のまとめ}
+\begin{itemize}[leftmargin=*]
+\item 解析的には、曲率の符号で、3つの幾何学が統一的に書ける（円周は $2\pi\sinh r$、$2\pi r$、$2\pi\sin r$）。
+\item 円板の模型では、ふちが無限の遠方にあたる。
+\end{itemize}
+\end{pointbox}
+
+%==========================================================
+\chapter{歴史的覚書}
+\markboth{第7章}{歴史的覚書}
+%==========================================================
+
+\section{この章の位置づけ}
+
+最後の章は、非ユークリッド幾何学の歴史を、短くまとめます。マニングは、「歴史はすでに何度も書かれているので、短い概略だけを書く」と述べます。
+
+\section{ユークリッドの第5公準から}
+
+ユークリッドの公理のなかで、1つだけ、表現が複雑で、ほかのような単純な事実に見えないものがあります。「2本の直線が、第3の直線に切られて、同じ側の内角の和が2直角より小さいとき、2直線は、十分に延ばせば、その側で交わる」というものです。ルジャンドルらが、これを証明しようと試みました。ルジャンドルは、三角形の内角の和は2直角を超えないこと（直線が無限の長さだと仮定して）を証明しましたが、内角の和が2直角に等しい三角形が存在することは、証明できませんでした。
+
+\section{年表}
+
+\begin{figure}[htbp]
+\centering
+\begin{tikzpicture}[x=0.076cm]
+ \draw[ax] (1720,0)--(1908,0);
+ \foreach \y in {1750,1800,1850,1900}{\draw (\y,0.08)--(\y,-0.08); \node[lbl, below] at (\y,-0.08) {\y};}
+ \node[fbox, text width=2.4cm] at (1733,1.4) {1733年\\サッケーリ};
+ \node[fbox, text width=2.4cm] at (1766,3.2) {1766年\\ランベルト};
+ \node[abox, text width=2.8cm] at (1830,1.4) {1830年ごろ\\ロバチェフスキー\\ボヤイ};
+ \node[gbox, text width=2.4cm] at (1854,3.2) {1854年\\リーマン};
+ \node[gbox, text width=2.4cm] at (1859,5.0) {1859年\\ケイリー};
+ \node[rbox, text width=2.4cm] at (1872,1.4) {1872年\\クライン};
+ \node[wbox, text width=2.4cm] at (1901,3.2) {1901年\\マニング};
+\end{tikzpicture}
+\caption{原著の歴史的覚書にある年代。サッケーリは1733年に、ほぼ完全な非ユークリッド幾何学の体系を書き、しかしそれを偽だと主張して本を救った。}
+\end{figure}
+
+\begin{table}[htbp]
+\centering
+\small
+\begin{tabular}{llp{6.6cm}}
+\toprule
+年 & 人物 & 内容（原著による）\\
+\midrule
+1733 & サッケーリ & 非ユークリッド幾何学の体系を示したが、他の仮説は偽だと主張。本書の第3章の方法の基礎。\\
+1766 & ランベルト & 平行線公理は証明が必要だと論じ、公理が成り立たない幾何学の性質を述べた。\\
+1830頃 & ロバチェフスキー、ボヤイ & 独立に、平行線公理が必ずしも真でないことを主張・証明した。\\
+1854 & リーマン & 幾何学の基礎を研究し、楕円幾何学を発見。距離の要素から出発する抽象的な見方。\\
+1859 & ケイリー & 射影的な測定の理論を展開。\\
+1872 & クライン & ケイリーの理論が、非ユークリッド幾何学の完全な像を与えることを示した。\\
+\bottomrule
+\end{tabular}
+\caption{原著の歴史的覚書から。ガウスは長年、平行線公理を証明しようとしたが、何も発表しなかった、と書かれている。}
+\end{table}
+
+\section{公理とは何か：この本の結論}
+
+マニングが述べる、非ユークリッド幾何学の主な教訓は、「幾何学の公理は、私たちの経験からの推論にすぎず、物理科学の理論と同じようなものだ」ということです。数学者にとっては、公理は仮説で、その真偽は、数学者でなく哲学者の関心事です。公理は「自明」でなく、必ずしも真でもない。ある命題が証明できるなら（すでに採用した公理の必然的な結果なら）、それを公理と呼ぶべきではない、と述べます。
+
+\begin{pointbox}{この章のまとめ}
+\begin{itemize}[leftmargin=*]
+\item 第5公準の証明の試みから、非ユークリッド幾何学が生まれた（1733年のサッケーリから、1830年ごろのロバチェフスキーとボヤイ、1854年のリーマンまで）。
+\item 教訓：幾何学の公理は、経験からの仮説。数学者は、どの形の公理からも、幾何学を築ける。
+\end{itemize}
+\end{pointbox}
+
+\begin{notebox}{本書でできなかったこと}
+原著の証明の全部（とくに、双曲幾何学の限界線・限界面の議論、楕円幾何学のクリフォードの平行線、解析的な章の細かい計算）は、本書では取り上げていません。本書の数値（平行角、円周、距離）は、原著にある式の例を、本書で計算し直したものです。ポアンカレ円板は、現代の補足です。
+\end{notebox}
 
 \end{document}
