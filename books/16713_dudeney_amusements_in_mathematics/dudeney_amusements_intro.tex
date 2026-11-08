@@ -1,761 +1,1645 @@
-\documentclass[11pt,a4paper,oneside,openany]{ltjsbook}
-
-% --- Typography & Geometry ---
+\documentclass[a4paper,11pt,openany]{ltjsbook}
 \usepackage{luatexja}
 \usepackage{luatexja-fontspec}
-\usepackage{amsmath,amssymb,amsthm}
+\usepackage{amsmath,amssymb,amsfonts,amsthm}
 \usepackage{geometry}
 \geometry{top=24mm,bottom=24mm,left=24mm,right=24mm,footskip=10mm}
-
-% --- Visual & Layout ---
+\usepackage{tikz}
+\usetikzlibrary{arrows.meta,calc,positioning,patterns,shapes.geometric,shapes.misc,decorations.pathreplacing,decorations.markings,angles,quotes,intersections,backgrounds,fit}
+\usepackage{pgfplots}
+\pgfplotsset{compat=1.18}
+\usepgfplotslibrary{fillbetween}
 \usepackage{tcolorbox}
 \tcbuselibrary{skins,breakable}
-\usepackage{tikz}
-\usetikzlibrary{arrows.meta,calc,positioning,shapes.geometric}
-\usepackage{graphicx}
-\usepackage{xcolor}
+\usepackage{hyperref}
+\usepackage{enumitem}
 \usepackage{booktabs}
 \usepackage{fancyhdr}
 
-% --- Color Palette ---
-\definecolor{primaryblue}{RGB}{20, 50, 110}     % 深遠な紺青
-\definecolor{accentcrimson}{RGB}{165, 35, 45}   % 格調ある深紅
-\definecolor{softblue}{RGB}{240, 245, 252}      % 淡い背景青
-\definecolor{darkslate}{RGB}{45, 55, 72}        % 濃墨
-\definecolor{forestgreen}{RGB}{25, 115, 65}     % 深緑
-\definecolor{warmgold}{RGB}{195, 140, 20}       % 琥珀金
+\definecolor{primaryblue}{RGB}{24, 76, 120}
+\definecolor{softblue}{RGB}{235, 243, 250}
+\definecolor{darkslate}{RGB}{44, 62, 80}
+\definecolor{warmamber}{RGB}{217, 119, 6}
+\definecolor{softamber}{RGB}{254, 243, 199}
+\definecolor{crimson}{RGB}{185, 28, 28}
+\definecolor{softrose}{RGB}{255, 228, 230}
+\definecolor{accentgreen}{RGB}{16, 120, 70}
+\definecolor{softgreen}{RGB}{236, 253, 245}
+\definecolor{gridgray}{RGB}{200, 205, 210}
 
-% --- Puzzle Piece Colors for Haberdasher Dissection ---
-\definecolor{pieceA}{RGB}{218, 232, 252}        % 澄んだスカイブルー
-\definecolor{pieceB}{RGB}{255, 242, 204}        % 温もりある琥珀イエロー
-\definecolor{pieceC}{RGB}{213, 232, 212}        % 爽やかなミントグリーン
-\definecolor{pieceD}{RGB}{248, 206, 204}        % 優しいソフトローズ
-
-% --- Headers & Footers (Strictly No text collision) ---
-\pagestyle{fancy}
-\fancyhf{}
-\fancyhead[L]{\small\color{darkslate}\textbf{第\thechapter 講\quad \leftmark}}
-\fancyhead[R]{\small\color{darkslate}デュードニー数学パズル入門}
-\fancyfoot[C]{\color{darkslate}\thepage}
-\renewcommand{\headrulewidth}{0.5pt}
-\renewcommand{\chaptermark}[1]{\markboth{#1}{}}
-
-% --- Hyperref ---
-\usepackage{hyperref}
 \hypersetup{
     colorlinks=true,
     linkcolor=primaryblue,
-    citecolor=accentcrimson,
     urlcolor=primaryblue,
-    pdftitle={古典で学び直すデュードニー数学パズル入門},
-    pdfauthor={教育情報科学研究会}
+    citecolor=accentgreen,
+    pdfauthor={教育情報分析研究会}
 }
+
+\newtcolorbox{examplebox}[1]{
+    colback=softgreen, colframe=accentgreen, coltitle=white, fonttitle=\bfseries,
+    title={#1}, arc=3mm, boxrule=1pt, left=4mm,right=4mm,top=3mm,bottom=3mm, breakable
+}
+\newtcolorbox{pointbox}[1]{
+    colback=softamber, colframe=warmamber, coltitle=darkslate, fonttitle=\bfseries,
+    title={#1}, arc=2mm, boxrule=1pt, left=3mm,right=3mm,top=2mm,bottom=2mm, breakable
+}
+\newtcolorbox{notebox}[1]{
+    colback=softrose, colframe=crimson, coltitle=white, fonttitle=\bfseries,
+    title={#1}, arc=2mm, boxrule=1pt, left=3mm,right=3mm,top=2mm,bottom=2mm, breakable
+}
+
+\tikzset{
+  >=Stealth,
+  fbox/.style={draw=primaryblue, fill=softblue, rounded corners=3pt, align=center, inner sep=4pt, font=\small},
+  wbox/.style={draw=primaryblue, fill=white, rounded corners=3pt, align=center, inner sep=4pt, font=\small},
+  abox/.style={draw=warmamber, fill=softamber, rounded corners=3pt, align=center, inner sep=4pt, font=\small},
+  gbox/.style={draw=accentgreen, fill=softgreen, rounded corners=3pt, align=center, inner sep=4pt, font=\small},
+  rbox/.style={draw=crimson, fill=softrose, rounded corners=3pt, align=center, inner sep=4pt, font=\small},
+  ax/.style={->, thick, darkslate},
+  lbl/.style={font=\footnotesize, text=darkslate},
+}
+
+\pagestyle{fancy}
+\fancyhf{}
+\fancyhead[LE,RO]{\thepage}
+\fancyhead[LO]{\nouppercase{\rightmark}}
+\fancyhead[RE]{\nouppercase{\leftmark}}
+\renewcommand{\headrulewidth}{0.4pt}
+
+\hypersetup{pdftitle={古典で学び直すデュードニー数学パズル入門 —— 全14部430問を部ごとに読む}}
+\newcommand{\dd}{\mathrm{d}}
+\newcommand{\ee}{\mathrm{e}}
 
 \begin{document}
 
-% --- Title Page ---
 \begin{titlepage}
-\centering
+\begin{center}
 \vspace*{1.5cm}
-{\color{primaryblue}\rule{\textwidth}{2pt}}\par
-\vspace{1.0cm}
-{\Huge\textbf{古典で学び直す}\par}
-\vspace{0.4cm}
-{\Huge\textbf{デュードニー数学パズル入門}\par}
-\vspace{0.6cm}
-{\Large\textbf{思考の幾何学・グラフ理論・数論の魔術}\par}
-\vspace{0.8cm}
-{\large —— 珠玉の430問から読み解く近代数学の核心 ——\par}
-\vspace{1.0cm}
-{\color{accentcrimson}\rule{0.6\textwidth}{1.5pt}}\par
-\vspace{2.0cm}
-
-\begin{tcolorbox}[colback=softblue,colframe=primaryblue,width=0.85\textwidth,arc=3mm,boxrule=1.2pt]
-\centering\large
-\textbf{ヘンリー・アーネスト・デュードニー} 原著\\
-\textit{Amusements in Mathematics} (1917)\\
-\vspace{0.5em}
-\normalsize
-50代、60代から始める、知的好奇心を満たす大人のための数学再入門
-\end{tcolorbox}
-
+{\Large\bfseries プロジェクト・グーテンベルク古典数学入門シリーズ}\\[0.8cm]
+\rule{\textwidth}{1.5pt}\\[0.4cm]
+{\Huge\bfseries 古典で学び直す\\デュードニー数学パズル入門}\\[0.4cm]
+{\Large\bfseries —— 全14部・430問を、部ごとに読む ——}\\[0.4cm]
+\rule{\textwidth}{1.5pt}\\[1.5cm]
+{\large 原著：ヘンリー・アーネスト・デュードニー\\
+\textit{Amusements in Mathematics}（1917年）}\\[2.0cm]
+{\Large\bfseries 著：教育情報分析研究会}\\[2.5cm]
 \vfill
-{\large 教育情報科学研究会 編著\par}
-\vspace{1.0cm}
-{\small 本書は英国の偉大なパズル作家H. E. デュードニーの名著『Amusements in Mathematics』を原典とし、\\現代数学（グラフ理論・線形代数・整数論・群論）の視点から厳選・再構成した解説書です。\par}
-\vspace{1.0cm}
+{\large 2026年11月 改訂第2版（原著の14の部ごとに対応）}\\[0.5cm]
+{\footnotesize 本書は Project Gutenberg のパブリックドメイン（eBook \#16713）を底本に、\\
+高等学校の数学の知識で読み進められるように書き下ろした入門書です。}
+\end{center}
 \end{titlepage}
 
-% --- Front Matter ---
 \frontmatter
 \tableofcontents
-\clearpage
-
-% --- Introduction ---
-\chapter*{発刊にあたって —— なぜいまデュードニーなのか}
-\addcontentsline{toc}{chapter}{発刊にあたって —— なぜいまデュードニーなのか}
-
-20世紀初頭のエドワード朝ロンドン。数学者たちが象牙の塔で格闘していた抽象理論を、市民の日常言語とユーモア溢れる物語に託して新聞・雑誌に連載し、英国中を熱狂させた一人の男がいました。\textbf{ヘンリー・アーネスト・デュードニー（Henry Ernest Dudeney, 1857--1930）}です。
-
-彼が生み出した430問を超えるパズルを集大成した『Amusements in Mathematics』（1917年刊行）は、単なる暇つぶしのクイズ集ではありません。そこには、18世紀のオイラーによるグラフ理論の創始、ガウスの合同式による数論、さらには現代のコンピュータ・サイエンスを支えるアルゴリズムの基礎が、驚くほど直観的で美しい形で埋め込まれています。
-
-大人の学び直しにおいて、数式を暗記する受験数学は不要です。必要なのは、\textbf{「なぜそのように考えるのか」「背後にある数学的な構造は何か」という本質への驚きと納得}です。
-
-本書は、デュードニーの代表的傑作を8つの講義形式にまとめ、現代の視点からその数学的構造を徹底的に紐解きます。美しい図解とともに、知的な冒険の旅へ出かけましょう。
-
-\clearpage
-
-% --- Main Matter ---
 \mainmatter
 
-\chapter[ハバダッシャーの奇跡]{第1講：ハバダッシャーの奇跡 —— 正三角形から正方形への幾何学的変身}
-\section*{ヒンジ結合による図形分割・裁ち合わせ（Dissection）の極致}
+%==========================================================
+\chapter*{はじめに：この本の読み方}
+\addcontentsline{toc}{chapter}{はじめに：この本の読み方}
+\markboth{はじめに}{はじめに}
+%==========================================================
 
-幾何学において、ある多角形を有限個のピースに切り分け、並べ替えて別の多角形を隙間なく組み立て直す操作を「裁ち合わせ（Dissection / 等積変形）」と呼びます。
+ヘンリー・アーネスト・デュードニー（1857〜1930）は、イギリスのパズル作家です。『ストランド・マガジン』などの雑誌にパズルを連載し、そのなかから430問を選んで一冊にまとめたのが、1917年の『Amusements in Mathematics』（数学の楽しみ）です。
 
-19世紀末、ハンガリーの数学者ボヤイ・ファルカシュとドイツのゲアウィンは、「面積の等しい任意の二つの多角形は、有限回の直線切断と並べ替えによって互いに移り変わることができる」というボヤイ・ゲアウィンの定理を証明しました。しかし、実際に「何個のピースで、どのように切断すればよいか」を見つけ出すことは、極めて高度な直観と数学的構成力を要求する難問です。
+この本は、原著の14の部（第1部〜第14部）に1章ずつ対応しています。各章では、その部を代表する問題を3〜6問取り上げ、問題文と答えを確かめながら、背後にある数学を説明します。取り上げた問題の数値は、あとから計算で確かめ直しました。
 
-この分野における歴史上最大の傑作と称えられるのが、デュードニーが1902年に発表した「ハバダッシャー（洋品店主）のパズル（The Haberdasher's Puzzle, \#144・\#147の発展）」です。
-彼は、一辺の長さが等しい正三角形を、わずか\textbf{「4つのピース」}に切り分け、それらがヒンジ（蝶番）で数珠つなぎになったまま回転させるだけで、完璧な「正方形」へと姿を変える驚異的な解法を発見しました。
-
-正三角形の一辺を $a$ とすると面積は $S = \frac{\sqrt{3}}{4} a^2$ であり、これと等しい面積をもつ正方形の一辺は $x = \sqrt{S} = a \sqrt{\frac{\sqrt{3}}{4}} \approx 0.658 a$ となります。デュードニーは、正三角形の各辺の中点を基軸とし、幾何学的な垂線と中点連結を組み合わせることで、無理数 $\sqrt[4]{3}$ を見事に図形上で調和させ、4片の連鎖変形を実現したのです。
-
-\begin{tcolorbox}[colback=softblue,colframe=primaryblue,title=\textbf{重要ポイント：裁ち合わせの数理とヒンジ連鎖},arc=3mm,boxrule=1pt]
-1. \textbf{ボヤイ・ゲアウィンの定理}：面積が等しい任意の2つの多角形は、有限個のピースへの分割によって必ず互いに変換可能である。
-2. \textbf{最小ピース数の探求}：正三角形から正方形への変換は「4ピース」が理論的最小限界であることが証明されている。
-3. \textbf{ヒンジ変形の幾何}：4つのピースは頂点のヒンジ（蝶番）でピン留めされており、裏返すことなく平面的にチェーン状に回すだけで三角形と正方形を往復する。
-\end{tcolorbox}
-
-\begin{center}
-\begin{tikzpicture}[>=Stealth, scale=1.05]
-    % --- Left: Equilateral Triangle with 4 Mathematically Precise Pieces ---
-    % Parameters for normalized equilateral triangle of side 4.0:
-    % A = (0, 0), B = (2.0, 3.4641), C = (4.0, 0)
-    % Midpoints: E = (1.0, 1.7321) on AB [Hinge H1], F = (3.0, 1.7321) on BC [Hinge H2]
-    % Cut points: P = (2.9820, 0) on AC, Q = (0.9820, 0) on AC [Hinge H3]
-    % R = (2.1340, 0.7411) foot of perp from F to EP
-    % S = (1.8480, 0.9910) foot of perp from Q to EP
-    \begin{scope}[shift={(0,0)}]
-        \coordinate (A) at (0, 0);
-        \coordinate (B) at (2.0, 3.4641);
-        \coordinate (C) at (4.0, 0);
-        \coordinate (E) at (1.0, 1.7321);
-        \coordinate (F) at (3.0, 1.7321);
-        \coordinate (P) at (2.9820, 0);
-        \coordinate (Q) at (0.9820, 0);
-        \coordinate (R) at (2.1340, 0.7411);
-        \coordinate (S) at (1.8480, 0.9910);
-
-        % 4 Interlocking Pieces (Colored with distinct palette)
-        % Piece 1 (Sky Blue): Quad E-B-F-R
-        \filldraw[fill=pieceA, draw=primaryblue, line width=1.3pt] (E) -- (B) -- (F) -- (R) -- cycle;
-        % Piece 2 (Amber Yellow): Quad F-C-P-R
-        \filldraw[fill=pieceB, draw=primaryblue, line width=1.3pt] (F) -- (C) -- (P) -- (R) -- cycle;
-        % Piece 3 (Mint Green): Quad A-Q-S-E
-        \filldraw[fill=pieceC, draw=primaryblue, line width=1.3pt] (A) -- (Q) -- (S) -- (E) -- cycle;
-        % Piece 4 (Soft Rose): Triangle Q-P-S
-        \filldraw[fill=pieceD, draw=primaryblue, line width=1.3pt] (Q) -- (P) -- (S) -- cycle;
-
-        % Outer boundary of triangle
-        \draw[line width=1.8pt, primaryblue] (A) -- (B) -- (C) -- cycle;
-
-        % Hinges (H1 at E, H2 at F, H3 at Q)
-        \filldraw[fill=warmgold, draw=darkslate, line width=1.2pt] (E) circle (3.5pt) node[left=4pt, font=\small\bfseries] {$H_1$};
-        \filldraw[fill=warmgold, draw=darkslate, line width=1.2pt] (F) circle (3.5pt) node[right=4pt, font=\small\bfseries] {$H_2$};
-        \filldraw[fill=warmgold, draw=darkslate, line width=1.2pt] (Q) circle (3.5pt) node[below=4pt, font=\small\bfseries] {$H_3$};
-
-        % Labels for vertices
-        \node[below left=2pt] at (A) {\textbf{\large $A$}};
-        \node[above=2pt] at (B) {\textbf{\large $B$}};
-        \node[below right=2pt] at (C) {\textbf{\large $C$}};
-
-        % Piece text indicators
-        \node[font=\footnotesize\bfseries, color=primaryblue!80!black] at (2.0, 2.1) {I};
-        \node[font=\footnotesize\bfseries, color=primaryblue!80!black] at (3.0, 0.8) {II};
-        \node[font=\footnotesize\bfseries, color=primaryblue!80!black] at (0.9, 0.9) {III};
-        \node[font=\footnotesize\bfseries, color=primaryblue!80!black] at (1.9, 0.35) {IV};
-
-        \node[below=18pt, align=center] at (2.0, 0) {
-            \textbf{【正三角形】}\quad 面積 $S = \frac{\sqrt{3}}{4} a^2$\\[3pt]
-            \footnotesize 3箇所のヒンジ（$H_1, H_2, H_3$）で連鎖結合
-        };
-    \end{scope}
-
-    % --- Center: Transformation Arrow ---
-    \draw[->, line width=2.4pt, accentcrimson] (4.5, 1.73) -- (6.3, 1.73)
-        node[midway, above=5pt, align=center] {\textbf{\small ヒンジ連鎖回転}}
-        node[midway, below=5pt, align=center] {\scriptsize\color{darkslate} 裏返さず平面的に開閉};
-
-    % --- Right: Reassembled Perfect Square ---
-    % Side of square L = 2.6321
-    % Origin of square shifted to (7.1, 0.42)
-    \begin{scope}[shift={(7.1, 0.42)}]
-        \def\sq{2.6321}
-
-        \coordinate (S4) at (0, 0);          % Bottom-left corner (Right angle of Piece IV)
-        \coordinate (R1) at (\sq, 0);       % Bottom-right corner (Right angle of Piece I)
-        \coordinate (R2) at (\sq, \sq);     % Top-right corner (Right angle of Piece II)
-        \coordinate (S3) at (0, \sq);       % Top-left corner (Right angle of Piece III)
-
-        \coordinate (SQ) at (\sq/2, 0);     % Bottom Hinge H3 (Q on square base)
-        \coordinate (SF) at (\sq/2, \sq);   % Top Hinge H2 (F on square top)
-        \coordinate (SP) at (0, 1.506);     % Cut point P on left side
-        \coordinate (SE) at (\sq, 1.506);   % Hinge H1 on right side
-
-        \coordinate (S_center) at (0.67, 1.89); % Internal meeting point of vertices A, B, C
-
-        % 4 Pieces arranged perfectly in square
-        % Piece 4 (Soft Rose): Triangle S4 - SQ - SP
-        \filldraw[fill=pieceD, draw=primaryblue, line width=1.3pt] (S4) -- (SQ) -- (SP) -- cycle;
-        % Piece 3 (Mint Green): Quad S3 - SF - S_center - SP
-        \filldraw[fill=pieceC, draw=primaryblue, line width=1.3pt] (S3) -- (SF) -- (S_center) -- (SP) -- cycle;
-        % Piece 1 (Sky Blue): Quad R1 - SQ - S_center - SE
-        \filldraw[fill=pieceA, draw=primaryblue, line width=1.3pt] (R1) -- (SQ) -- (S_center) -- (SE) -- cycle;
-        % Piece 2 (Amber Yellow): Quad R2 - SF - S_center - SE
-        \filldraw[fill=pieceB, draw=primaryblue, line width=1.3pt] (R2) -- (SF) -- (S_center) -- (SE) -- cycle;
-
-        % Outer boundary of square
-        \draw[line width=2.0pt, accentcrimson] (S4) -- (R1) -- (R2) -- (S3) -- cycle;
-
-        % Hinges on square
-        \filldraw[fill=warmgold, draw=darkslate, line width=1.2pt] (SE) circle (3.5pt) node[right=4pt, font=\small\bfseries] {$H_1$};
-        \filldraw[fill=warmgold, draw=darkslate, line width=1.2pt] (SF) circle (3.5pt) node[above=4pt, font=\small\bfseries] {$H_2$};
-        \filldraw[fill=warmgold, draw=darkslate, line width=1.2pt] (SQ) circle (3.5pt) node[below=4pt, font=\small\bfseries] {$H_3$};
-
-        % Piece text indicators (Exactly at centroids)
-        \node[font=\footnotesize\bfseries, color=primaryblue!80!black] at (1.81, 0.85) {I};
-        \node[font=\footnotesize\bfseries, color=primaryblue!80!black] at (1.85, 2.16) {II};
-        \node[font=\footnotesize\bfseries, color=primaryblue!80!black] at (0.50, 2.16) {III};
-        \node[font=\footnotesize\bfseries, color=primaryblue!80!black] at (0.44, 0.50) {IV};
-
-        \node[below=18pt, align=center] at (\sq/2, 0) {
-            \textbf{【完全な正方形】}\quad 一辺 $x = a \sqrt{\frac{\sqrt{3}}{4}}$\\[3pt]
-            \footnotesize 同色ピースが寸分違わず正方形を再構成
-        };
-    \end{scope}
-\end{tikzpicture}
-\par\vspace{0.5em}
-\small 概念図 1：デュードニーの最高傑作「ハバダッシャー・パズル」。正三角形から正方形への4分割ヒンジ連鎖変形。
-\end{center}
-
-\clearpage
-
-\chapter[オイラーの一筆書き]{第2講：オイラーの一筆書き定理 —— ケーニヒスベルクから始まるグラフ理論}
-\section*{頂点の次数（偶奇性）が握るネットワーク走破の運命}
-
-1736年、大数学者レオンハルト・オイラーは「ケーニヒスベルクの7つの橋」問題を解決し、現代のトポロジー（位相幾何学）およびグラフ理論の扉を開きました。この理論を誰でも親しめる魅力的なパズルへと昇華させたのがデュードニーです（\#220--\#261）。
-
-一筆書きができるかどうかは、図形の大きさや線の長さとは一切関係がありません。問題となるのは、\textbf{「各頂点（交差点）に集まる線の本数（次数 / degree）」}だけです。
-
-線の本数が奇数である頂点を「奇頂点（Odd Vertex）」、偶数である頂点を「偶頂点（Even Vertex）」と呼びます。1本の線を描いて通過するたびに、その交差点では「入る線」と「出る線」のペア（2本）が消費されます。
-
-したがって：
-1. \textbf{奇頂点が0個}の場合：どの点から出発しても一筆書きが可能で、必ず出発点に戻る（オイラー閉路）。
-2. \textbf{奇頂点が2個}の場合：一方の奇頂点から出発し、もう一方の奇頂点で終わる一筆書きが可能（オイラー路）。
-3. \textbf{奇頂点が4個以上}の場合：いかなる工夫を凝らしても一筆書きは\textbf{数学的に不可能}である。
-
-デュードニーはこのオイラーの定理を駆使し、鉄道の引き込み線パズルや家々の巡回ルート問題など、数々の魅力的な傑作を生み出しました。
-
-\begin{tcolorbox}[colback=softblue,colframe=primaryblue,title=\textbf{重要ポイント：オイラーの一筆書き定理},arc=3mm,boxrule=1pt]
-1. \textbf{幾何学的寸法の捨象}：線の曲がりや長さは無関係であり、頂点の接続関係（次数）のみが本質を決める。
-2. \textbf{奇頂点数の偶数性}：1本の線は2つの端点を持つため、グラフ全体の奇頂点の総数は常に偶数（0, 2, 4, 6...）個である。
-3. \textbf{一筆書きの完全判定}：奇頂点が0個または2個の連結グラフのみが一筆書き可能であり、4個以上は絶対に描けない。
-\end{tcolorbox}
-
-\begin{center}
-\begin{tikzpicture}[>=Stealth, scale=1.1]
-    % Case A: Euler Tour (All Even Vertices)
-    \begin{scope}[shift={(0,0)}]
-        \node[draw=primaryblue, line width=1.5pt, fill=softblue, circle, inner sep=4pt] (A1) at (0, 2.2) {\textbf{4}};
-        \node[draw=primaryblue, line width=1.5pt, fill=softblue, circle, inner sep=4pt] (B1) at (-1.8, 0) {\textbf{2}};
-        \node[draw=primaryblue, line width=1.5pt, fill=softblue, circle, inner sep=4pt] (C1) at (1.8, 0) {\textbf{2}};
-        \node[draw=primaryblue, line width=1.5pt, fill=softblue, circle, inner sep=4pt] (D1) at (0, -1.2) {\textbf{4}};
-
-        \draw[line width=1.4pt, primaryblue] (A1) -- (B1) -- (D1) -- (C1) -- (A1);
-        \draw[line width=1.4pt, primaryblue] (A1) -- (D1);
-        \draw[line width=1.4pt, primaryblue] (-1.8,0) to[bend left=30] (1.8,0);
-
-        \node[below=14pt, align=center] at (0, -1.2) {
-            \textbf{【奇頂点 0個】}\quad 全て偶数次\\
-            \small どの頂点からでも出発点に戻る一筆書きが可能
-        };
-    \end{scope}
-
-    % Case B: Non-Eulerian (4 Odd Vertices)
-    \begin{scope}[shift={(7.5, 0)}]
-        \node[draw=accentcrimson, line width=1.5pt, fill=accentcrimson!15, circle, inner sep=4pt] (A2) at (-1.5, 2.0) {\textbf{3}};
-        \node[draw=accentcrimson, line width=1.5pt, fill=accentcrimson!15, circle, inner sep=4pt] (B2) at (1.5, 2.0) {\textbf{3}};
-        \node[draw=accentcrimson, line width=1.5pt, fill=accentcrimson!15, circle, inner sep=4pt] (C2) at (-1.5, -0.6) {\textbf{3}};
-        \node[draw=accentcrimson, line width=1.5pt, fill=accentcrimson!15, circle, inner sep=4pt] (D2) at (1.5, -0.6) {\textbf{3}};
-
-        \draw[line width=1.4pt, darkslate] (A2) -- (B2) -- (D2) -- (C2) -- (A2);
-        \draw[line width=1.4pt, darkslate] (A2) -- (D2);
-        \draw[line width=1.4pt, darkslate] (B2) -- (C2);
-
-        \node[below=14pt, align=center] at (0, -0.6) {
-            \textbf{【奇頂点 4個】}\quad 完全グラフ $K_4$\\
-            \small 奇頂点が4個 $\to$ \textbf{一筆書きは数学的に不可能}
-        };
-    \end{scope}
-\end{tikzpicture}
-\par\vspace{0.5em}
-\small 概念図 2：オイラーの一筆書き判定原理。各頂点に集まる線の本数（偶数・奇数）が走破可能性を決定づける。
-\end{center}
-
-\clearpage
-
-\chapter[チェス盤の数学]{第3講：チェス盤の数学 —— ナイト・ツアーと8クイーン問題}
-\section*{二次元格子上の探索・対称群・ハミルトン路の数理}
-
-64個の白黒マスからなるチェス盤は、それ自体が豊かな離散数学の実験場です（\#288--\#361）。デュードニーはチェス盤を用いた数学パズルの第一人者でもありました。
-
-代表的な古典問題の一つが「ナイト・ツアー（Knight's Tour, \#339--\#340）」です。チェスのナイト（八方に「2マス進んで1マス曲がる」L字型に跳ぶ駒）を盤上に置き、64マスすべてのマスを重複することなくちょうど1度ずつ訪問して元の位置に戻る（または終わる）ことができるか、という問題です。
-
-グラフ理論の言葉で言えば、これは「ナイトの移動可能なマス同士を結んだグラフにおいて\textbf{ハミルトン閉路（Hamiltonian Cycle）}が存在するか」という問題に他なりません。
-
-ここで極めて重要な数学的性質が\textbf{「色の交代性（パリティ）」}です。ナイトはどのような跳び方をしても、\textbf{白マスから黒マスへ、黒マスから白マスへと、1手ごとに必ずマスの色が反転}します。したがって、ナイト・ツアーが完結するためには、白32マス・黒32マスを厳密に交互に訪れなければならないという絶対的な制約（二部グラフの性質）が課されるのです。
-
-\begin{tcolorbox}[colback=softblue,colframe=primaryblue,title=\textbf{重要ポイント：二次元格子探索とパリティ不変量},arc=3mm,boxrule=1pt]
-1. \textbf{二部グラフ構造}：チェス盤の白マスと黒マスは完全な二部グラフをなし、ナイトの移動は異なるグループ間の辺のみを通る。
-2. \textbf{ハミルトン路の存在条件}：全64マスを踏破するには、奇数手目は白、偶数手目は黒（またはその逆）という厳密な交代性が必須となる。
-3. \textbf{局所対称性と大域探索}：コーナー（角）のマスは進入路が2本しか存在しないため、解法の決定において最優先の制約となる。
-\end{tcolorbox}
-
-\begin{center}
-\begin{tikzpicture}[scale=0.92, >=Stealth]
-    % 5x5 Chessboard with checkered pattern
-    \begin{scope}[shift={(0,0)}]
-        \foreach \x in {-2,-1,0,1,2} {
-            \foreach \y in {-2,-1,0,1,2} {
-                \pgfmathtruncatemacro{\parity}{mod(\x + \y + 10, 2)}
-                \ifnum\parity=0
-                    \fill[white] (\x-0.5, \y-0.5) rectangle (\x+0.5, \y+0.5);
-                \else
-                    \fill[softblue!80!primaryblue!22] (\x-0.5, \y-0.5) rectangle (\x+0.5, \y+0.5);
-                \fi
-                \draw[darkslate!35, thin] (\x-0.5, \y-0.5) rectangle (\x+0.5, \y+0.5);
-            }
-        }
-        \draw[line width=1.8pt, primaryblue] (-2.5, -2.5) rectangle (2.5, 2.5);
-
-        % Center Knight at (0,0) [White Square]
-        \filldraw[fill=primaryblue, draw=primaryblue] (0, 0) circle (0.38);
-        \node[white] at (0, 0) {\textbf{\large N}};
-
-        % 8 Target Squares (All colored squares by chess geometry!)
-        \foreach \tx/\ty in {1/2, -1/2, 1/-2, -1/-2, 2/1, -2/1, 2/-1, -2/-1} {
-            \fill[accentcrimson!25] (\tx-0.5, \ty-0.5) rectangle (\tx+0.5, \ty+0.5);
-            \draw[accentcrimson, line width=1.3pt] (\tx-0.5, \ty-0.5) rectangle (\tx+0.5, \ty+0.5);
-            \filldraw[fill=accentcrimson, draw=white, line width=0.8pt] (\tx, \ty) circle (3pt);
-        }
-
-        % L-shaped trajectory lines (Explicit to guarantee zero TeX if-nesting errors)
-        \draw[->, line width=1.8pt, accentcrimson] (0,0) -- (0, 2) -- (1, 2);
-        \draw[->, line width=1.8pt, accentcrimson] (0,0) -- (2, 0) -- (2, 1);
-        \draw[->, line width=1.1pt, accentcrimson, dashed] (0,0) -- (0, 2) -- (-1, 2);
-        \draw[->, line width=1.1pt, accentcrimson, dashed] (0,0) -- (0, -2) -- (1, -2);
-        \draw[->, line width=1.1pt, accentcrimson, dashed] (0,0) -- (0, -2) -- (-1, -2);
-        \draw[->, line width=1.1pt, accentcrimson, dashed] (0,0) -- (-2, 0) -- (-2, 1);
-        \draw[->, line width=1.1pt, accentcrimson, dashed] (0,0) -- (2, 0) -- (2, -1);
-        \draw[->, line width=1.1pt, accentcrimson, dashed] (0,0) -- (-2, 0) -- (-2, -1);
-
-        \node[below=14pt, align=center] at (0, -2.5) {
-            \textbf{【ナイトの八方移動】}\\
-            \small 白マス中央から到達可能な全8マスは\textbf{すべて黒マス}
-        };
-    \end{scope}
-
-    % Right Explanation Box (Adequate spacing and clear multi-line layout)
-    \begin{scope}[shift={(6.7, 0)}]
-        \node[draw=primaryblue, line width=1.3pt, fill=softblue, rounded corners=3mm, inner sep=10pt, text width=6.2cm, align=left] at (0, 0) {
-            \textbf{\large 【ナイト移動の不変量】}\\[6pt]
-            \small
-            \textbf{・移動ベクトル}：$(\pm 1, \pm 2)$ または $(\pm 2, \pm 1)$\\[3pt]
-            \textbf{・格子点間距離}：$\sqrt{1^2 + 2^2} = \sqrt{5}$\\[3pt]
-            \textbf{・マスの色交代性}：\\
-            \quad \colorbox{white}{\fbox{\strut\bfseries 白マス}} $\;\longleftrightarrow\;$ \colorbox{accentcrimson!20}{\fbox{\strut\bfseries 常に黒マス}}\\[4pt]
-            1手進むごとにマスの色が必ず反転する！\\[6pt]
-            \textbf{・64手完全巡回} $\implies$ ハミルトン閉路\\[4pt]
-            対称性とパリティ（偶奇性）が\\
-            全マス踏破の成否を握る。
-        };
-    \end{scope}
-\end{tikzpicture}
-\par\vspace{0.5em}
-\small 概念図 3：チェスのナイトがもつ「L字移動」の対称性と白黒反転パリティ。ナイト・ツアーの数学的基礎。
-\end{center}
-
-\clearpage
-
-\chapter[川渡りのアルゴリズム]{第4講：川渡りパズルの状態空間探索 —— 狼と山羊とキャベツの論理}
-\section*{制約充足問題（CSP）と有向グラフ最短経路アルゴリズム}
-
-「農夫が狼、山羊、キャベツを一艘の小舟で対岸へ運ばなければならない。舟には農夫のほかに1つしか乗せられない。農夫がいないと、狼は山羊を食べ、山羊はキャベツを食べてしまう。どう運べば全員無事に対岸へ渡れるか？」（\#373--\#377）。
-
-中世から伝わるこの有名な古典パズルは、現代情報科学における\textbf{「状態空間探索（State Space Search）」}および\textbf{「制約充足問題（Constraint Satisfaction Problem）」}の原点です。
-
-各時刻において、「誰が左岸にいて、誰が右岸にいるか」という状態は全部で $2^4 = 16$ 通り存在します。しかし、「農夫不在で狼と山羊が同居」「農夫不在で山羊とキャベツが同居」という禁止状態（制約違反）を除外すると、許される安全な状態はわずか\textbf{10通り}に絞られます。
-
-この安全な状態をノード（節点）、舟による合法的な移動をエッジ（枝）とする「有向グラフ」を描けば、パズルを解くことは\textbf{「初期状態から目標状態への最短経路を探索する問題」}へと完全に帰着されます。この問題のクライマックスは、4手目に「一旦対岸へ運んだ山羊を連れ戻す」という逆転の発想です。局所的な前進にとらわれず、状態空間全体を俯瞰する視点こそが数学的思考の本質です。
-
-\begin{tcolorbox}[colback=softblue,colframe=primaryblue,title=\textbf{重要ポイント：状態空間と幅優先探索（BFS）},arc=3mm,boxrule=1pt]
-1. \textbf{状態のモデル化}：現実の制約をBoolean（真偽値）やビット列として定式化する。
-2. \textbf{制約による枝刈り}：不可能な状態を探索木から即座に排除し、探索空間を劇的に縮小させる。
-3. \textbf{一時的後退の価値}：最短解に至る経路には、一見無駄に見える「元の岸へ戻す」ステップが不可欠となる。
-\end{tcolorbox}
-
-\begin{center}
-\begin{tikzpicture}[>=Stealth, scale=0.92]
-    % State nodes (Arranged neatly with compact multi-line text)
-    \begin{scope}[shift={(0,0)}]
-        \node[draw=primaryblue, line width=1.4pt, fill=softblue, rounded corners=2mm, inner sep=6pt] (S0) at (0, 3.2) {\textbf{初期：左岸(人, 狼, 羊, 甘)}};
-        \node[draw=darkslate, line width=1.1pt, fill=white, rounded corners=2mm, inner sep=5pt] (S1) at (0, 1.8) {\small 羊を対岸へ渡す};
-        \node[draw=darkslate, line width=1.1pt, fill=white, rounded corners=2mm, inner sep=5pt] (S2) at (0, 0.4) {\small 人が単身で戻る};
-        \node[draw=darkslate, line width=1.1pt, fill=white, rounded corners=2mm, inner sep=5pt, align=center] (S3) at (-2.3, -1.0) {\small 狼を渡し\\[2pt]\small 羊を連れ戻す};
-        \node[draw=darkslate, line width=1.1pt, fill=white, rounded corners=2mm, inner sep=5pt, align=center] (S4) at (2.3, -1.0) {\small 甘を渡し\\[2pt]\small 羊を連れ戻す};
-        \node[draw=darkslate, line width=1.1pt, fill=white, rounded corners=2mm, inner sep=5pt] (S5) at (0, -2.4) {\small 甘（または狼）を渡す};
-        \node[draw=accentcrimson, line width=1.6pt, fill=accentcrimson!15, rounded corners=2mm, inner sep=6pt] (S6) at (0, -3.8) {\textbf{達成：全員無事に対岸へ！}};
-
-        \draw[->, line width=1.3pt, primaryblue] (S0) -- (S1);
-        \draw[->, line width=1.3pt, primaryblue] (S1) -- (S2);
-        \draw[->, line width=1.3pt, primaryblue] (S2) -- (S3);
-        \draw[->, line width=1.3pt, primaryblue] (S2) -- (S4);
-        \draw[->, line width=1.3pt, primaryblue] (S3) -- (S5);
-        \draw[->, line width=1.3pt, primaryblue] (S4) -- (S5);
-        \draw[->, line width=1.6pt, accentcrimson] (S5) -- (S6);
-    \end{scope}
-
-    % Right Key insight box (Vertically centered to match layout)
-    \begin{scope}[shift={(7.3, -0.6)}]
-        \node[draw=warmgold!80!black, fill=warmgold!10, rounded corners=2mm, text width=4.6cm, inner sep=9pt, align=left] at (0, 0) {
-            \textbf{\small 【逆転の定石】}\\[4pt]
-            \footnotesize
-            荷物を対岸に運ぶだけでなく、一時的に「羊を連れ帰る」という一見無駄な後退が、袋小路の唯一の突破口となる。\\
-            \vspace{4pt}
-            状態空間グラフにおける最短路アルゴリズムの真骨頂。
-        };
-    \end{scope}
-\end{tikzpicture}
-\par\vspace{0.5em}
-\small 概念図 4：川渡りパズルの状態遷移ネットワーク。禁忌状態を排除した合法状態空間の探索グラフ。
-\end{center}
-
-\clearpage
-
-\chapter[魔方陣の数理]{第5講：魔方陣の代数構造 —— 線形代数と対称群が織りなす宇宙}
-\section*{古代中国の「洛書」からアフィン空間への昇華}
-
-縦・横・対角線の数の和がすべて等しくなるように正方形に数を並べた「魔方陣（Magic Square, \#399--\#412）」。古代中国の易経に登場する「洛書（3次魔方陣）」をはじめ、西洋ではデューラーの版画『メランコリア I』に描かれるなど、人類を魅了し続けてきた神秘の数配置です。
-
-デュードニーはこの魔方陣を、単なる試行錯誤のパズルから厳密な代数学の対象へと引き上げました。
-
-最も基本的な $3 \times 3$ の魔方陣（1から9までの数字）において、全数字の総和は $1 + 2 + \dots + 9 = 45$ です。3行あるため、各行・各列の和（魔方陣定数）は必ず $45 \div 3 = 15$ にならなければなりません。
-
-さらに、中央のマスを通るラインは4本（行1・列1・対角線2）あり、これらを連立させることで、\textbf{「中央の数は必ず 5 でなければならない」}ことが数学的に一意に証明されます。
-
-さらに進んで、現代の線形代数では、魔方陣全体が「連立一次方程式の解空間（アフィン部分空間）」をなすことが知られています。自由度（次元）を計算することで、基本となる独立な魔方陣の線形結合としてすべての魔方陣を生成できるのです。
-
-\begin{tcolorbox}[colback=softblue,colframe=primaryblue,title=\textbf{重要ポイント：魔方陣の不変量と線形構造},arc=3mm,boxrule=1pt]
-1. \textbf{定数の必然性}：$n$ 次魔方陣の行和・列和は、総和の対称性から $M = \frac{n(n^2+1)}{2}$ と厳密に一意決定される。
-2. \textbf{中心数の定理}：奇数次魔方陣の中心マスには、必ず全数字の中央値（3次ならば5）が配置される。
-3. \textbf{対称変換群}：回転（4通り）と反転（2通り）による8個の変換は、二面体群 $D_4$ を構成し、本質的な解は1種類に帰着される。
-\end{tcolorbox}
-
-\begin{center}
-\begin{tikzpicture}[>=Stealth, scale=1.1]
-    % 3x3 Magic Square
-    \begin{scope}[shift={(0,0)}]
-        \draw[step=1.2cm, darkslate, line width=1.4pt] (0,0) grid (3.6,3.6);
-        \draw[line width=2.0pt, primaryblue] (0,0) rectangle (3.6,3.6);
-
-        % Numbers
-        \node at (0.6, 3.0) {\textbf{\LARGE 8}};
-        \node at (1.8, 3.0) {\textbf{\LARGE 1}};
-        \node at (3.0, 3.0) {\textbf{\LARGE 6}};
-
-        \node at (0.6, 1.8) {\textbf{\LARGE 3}};
-        \node[accentcrimson] at (1.8, 1.8) {\textbf{\LARGE 5}};
-        \node at (3.0, 1.8) {\textbf{\LARGE 7}};
-
-        \node at (0.6, 0.6) {\textbf{\LARGE 4}};
-        \node at (1.8, 0.6) {\textbf{\LARGE 9}};
-        \node at (3.0, 0.6) {\textbf{\LARGE 2}};
-
-        \node[below=14pt, align=center] at (1.8, 0) {
-            \textbf{【3次魔方陣（洛書）】}\\
-            \small 各行・列・対角線の和 $= \mathbf{15}$（中心は常に $5$）
-        };
-    \end{scope}
-
-    % Mathematical Decomposition Box
-    \node[draw=primaryblue, fill=softblue, rounded corners=2mm, text width=6.2cm, inner sep=9pt, align=left] at (7.2, 1.8) {
-        \textbf{\large 【魔方陣の代数的構造】}\\[5pt]
-        \small 任意の3次魔方陣は、中心数 $x$、パラメータ $a, b$ を用いる線形モデルとして表現：\\[4pt]
-        \centering
-        \begin{tabular}{|c|c|c|}
-        \hline
-        $x+b$ & $x-a-b$ & $x+a$ \\ \hline
-        $x+a-b$ & $x$ & $x-a+b$ \\ \hline
-        $x-a$ & $x+a+b$ & $x-b$ \\ \hline
-        \end{tabular}\\[6pt]
-        \raggedright\footnotesize
-        線形代数における3次元ベクトル空間の美しい具現化。
-    };
-\end{tikzpicture}
-\par\vspace{0.5em}
-\small 概念図 5：3次魔方陣の代数的構造。中心数「5」の決定性と線形空間としての一般解。
-\end{center}
-
-\clearpage
-
-\chapter[迷路の幾何学]{第6講：迷路の幾何学と脱出アルゴリズム —— トレモーの解法}
-\section*{トポロジーと深さ優先探索（DFS）の先駆的アルゴリズム}
-
-入り組んだ通路の迷宮から生還するための数学的手法とは何か？ デュードニーの第13章「迷路の問題（Mazes and How to Thread Them）」は、古今東西の有名な迷路（ハンプトンコート宮殿の生垣迷路など）を取り上げ、その幾何学的本質を解き明かしています。
-
-初等的な迷路では「壁に右手を当てて歩き続ければ必ず脱出できる（右手法 / 壁づたい法）」と言われます。しかし、これは「迷路が単連結（環状の孤島がない）」場合にしか通用しません。中央に独立したループ構造（多重連結迷路）がある場合、右手法では同じ環状路を無限に周回してしまう罠に陥ります。
-
-いかなる複雑な迷路であっても確実に脱出できる完全なアルゴリズムとして知られるのが、19世紀のフランスの数学者シャルル・ピエール・トレモーが考案した\textbf{「トレモーのアルゴリズム（Trémaux's Algorithm）」}です。
-
-ルールは極めてシンプルです：
-1. 通路を初めて進むときは、床に「1本線」の印をつける。
-2. もし行き止まりに突き当たったら、回れ右をして戻り、通路に「2本目」の印をつけて\textbf{その通路を封鎖（二重印）}する。
-3. すでに印がついている交差点に別の道から出た場合、決してその道には進まず、来た道を引き返して2本目の印をつける。
-
-この操作は、コンピュータ・アルゴリズムにおける\textbf{「深さ優先探索（Depth-First Search, DFS）」そのもの}です。有限の迷路において、各通路は最大でも「往路」と「復路」の計2回しか通過されず、無限ループに陥ることなく確実に脱出路を発見できることが数学的に証明されています。
-
-\begin{tcolorbox}[colback=softblue,colframe=primaryblue,title=\textbf{重要ポイント：トレモーのアルゴリズムとDFS},arc=3mm,boxrule=1pt]
-1. \textbf{右手法の限界}：島（ループ）を含む多重連結迷路では、壁づたい法は無限周回トラップに囚われる。
-2. \textbf{印による状態記憶}：未踏（0本）、探索中（1本）、走破・袋小路（2本）という3状態の記録が完全走破を保証する。
-3. \textbf{計算量の最適性}：通路の総数を $E$ とすると、最大移動回数は高々 $2E$ 回で終了し、線形時間 $O(E)$ でゴールに到達する。
-\end{tcolorbox}
-
-\begin{center}
-\begin{tikzpicture}[>=Stealth, scale=0.88]
-    % Maze graph nodes (Spacious layout with guaranteed zero collision)
-    \node[draw=primaryblue, line width=1.6pt, fill=softblue, circle, inner sep=4pt] (IN) at (0, 1.8) {\textbf{\large 入口}};
-    \node[draw=darkslate, line width=1.4pt, fill=white, circle, inner sep=4pt] (A) at (5.4, 1.8) {\textbf{\large 分岐 $A$}};
-    \node[draw=accentcrimson, line width=1.6pt, fill=accentcrimson!15, rectangle, rounded corners=2mm, inner sep=6pt] (DEAD) at (11.4, 1.8) {\textbf{\large 行き止まり}};
-    \node[draw=darkslate, line width=1.4pt, fill=white, circle, inner sep=4pt] (B) at (5.4, -1.2) {\textbf{\large 分岐 $B$}};
-    \node[draw=forestgreen, line width=1.8pt, fill=forestgreen!20, circle, inner sep=6pt] (OUT) at (11.4, -1.2) {\textbf{\large 出口}};
-
-    % Path 1: IN -> A (Forward 1-line, compact label)
-    \draw[->, line width=1.6pt, primaryblue] (IN) -- (A)
-        node[midway, above=6pt, align=center] {\small ① 初めて進む通路\\[-1pt]\footnotesize （1本線の印）};
-
-    % Path 2: A -> DEAD (Forward straight exploration: clean two-line label centered)
-    \draw[->, line width=1.6pt, darkslate] (A) -- (DEAD)
-        node[midway, above=5pt, align=center] {\small ② 未踏路を直進探索\\[-1pt]\footnotesize （1本線）};
-
-    % Path 3: DEAD -> A (High upward curving backtrack: completely clear of Path 2!)
-    \draw[->, line width=1.6pt, accentcrimson, dashed] (DEAD.north) to[bend right=48]
-        node[midway, above=6pt, accentcrimson] {\textbf{\small ③ 行き止まり！ 2本目で封鎖して後退}} (A.north);
-
-    % Path 4: A -> B (Downward to unexplored path, clean single line on the right)
-    \draw[->, line width=1.6pt, primaryblue] (A) -- (B)
-        node[midway, right=10pt] {\textbf{\small ④ 別の未踏路へ進入} \footnotesize （1本線）};
-
-    % Path 5: B -> OUT (Goal)
-    \draw[->, line width=2.2pt, forestgreen] (B) -- (OUT)
-        node[midway, above=6pt, forestgreen] {\textbf{\small ⑤ 出口（ゴール）到達！}};
-
-    % Bottom Explanation Box with ample top margin
-    \node[draw=primaryblue, line width=1.2pt, fill=softblue!30, rounded corners=2mm, text width=12.5cm, inner sep=9pt, align=left] at (5.7, -3.4) {
-        \small \textbf{トレモーの規則}：通路に印をつけることで、「未踏の道」と「探索済みの袋小路」を厳密に区別する。\\
-        いかなる多重連結迷路も、各通路を往復（計2回）以上通過することなく、有限時間で完全走破される。
-    };
-\end{tikzpicture}
-\par\vspace{0.5em}
-\small 概念図 6：トレモーの迷路走破アルゴリズム。袋小路の二重印封鎖と深さ優先探索のメカニズム。
-\end{center}
-
-\clearpage
-
-\chapter[不定方程式と整数論]{第7講：ディオファントス方程式と整数論 —— 金銭・年齢・分配パズル}
-\section*{「解が整数でなければならない」という最も美しい制約の解法}
-
-代数学の通常の方程式では、未知数の数よりも方程式の数が少ない場合、解は無数に存在して定まりません。しかし、「未知数はすべて正の整数（自然数）でなければならない」という条件がついた瞬間、状況は一変します。
-
-このような方程式を、古代アレクサンドリアの数学者にちなんで\textbf{「不定方程式（ディオファントス方程式 / Diophantine Equation）」}と呼びます。
-
-デュードニーの第1章「算術と代数の問題（\#1--\#141）」の多くは、このディオファントス方程式の鮮やかな応用です。
-例えば、問題第1問「郵便局の困惑（\#1）」では、5シリング（60ペンス）の硬貨を出し、「2ペンス切手を何枚か、その6倍の枚数の1ペンス切手をくれ、そして残りを2ペンス半（2.5ペンス）切手でぴったり支払ってほしい」と求めます。
-
-2ペンス切手の枚数を $x$ とすると、1ペンス切手は $6x$ 枚となります。2.5ペンス切手の枚数を $y$ と置くと、合計金額は：
-\[
-2x + 1(6x) + 2.5y = 60 \implies 8x + \frac{5}{2}y = 60 \implies 16x + 5y = 120
-\]
-この方程式において、$x, y$ はともに正の整数でなければなりません。
-合同式（mod 5）をとると：
-\[
-16x \equiv 120 \pmod 5 \implies x \equiv 0 \pmod 5
-\]
-すなわち、$x$ は 5 の倍数でなければなりません。
-$x = 5$ を代入すると、$16(5) + 5y = 80 + 5y = 120 \implies 5y = 40 \implies y = 8$。
-もし $x \ge 10$ とすると $16x \ge 160 > 120$ となり、$y$ が負になってしまうため不適です。
-
-したがって、可能な解は\textbf{「$x = 5, y = 8$」のただ1組}に確定します！
-（2ペンス切手5枚、1ペンス切手30枚、2.5ペンス切手8枚）。
-
-学校の数学では「連立方程式は式の数が足りなければ解けない」と教わりますが、現実の世界（切手の枚数や人数）がもつ「整数」という制約が、見事に唯一無二の答えを浮き彫りにするのです。
-
-\begin{tcolorbox}[colback=softblue,colframe=primaryblue,title=\textbf{重要ポイント：一次不定方程式と整数の剰余類},arc=3mm,boxrule=1pt]
-1. \textbf{ベズーの等式}：方程式 $ax + by = c$ が整数解をもつための必要十分条件は、$c$ が $\gcd(a, b)$ の倍数であること。
-2. \textbf{合同式（モジュロ演算）の威力}：法（modulus）をとることで変数を1つ消去し、解の候補を瞬時に絞り込む。
-3. \textbf{不等式による境界画定}：非負整数条件（$x \ge 1, y \ge 1$）によって、無限に広がる解の中から現実の有限解を特定する。
-\end{tcolorbox}
-
-\begin{center}
-\begin{tikzpicture}[scale=0.95, >=Stealth]
-    % Accurate coordinate system & grid
-    \def\xscale{1.2}
-    \def\yscale{0.22}
-
-    % Grid lines (integer lattice)
-    \foreach \x in {1,2,3,4,5,6,7,8} {
-        \draw[gray!20, thin] ({\x*\xscale}, 0) -- ({\x*\xscale}, {26*\yscale});
-        \node[below=3pt, font=\footnotesize\color{darkslate}] at ({\x*\xscale}, 0) {\x};
-    }
-    \foreach \y in {4,8,12,16,20,24} {
-        \draw[gray!20, thin] (0, {\y*\yscale}) -- ({8.5*\xscale}, {\y*\yscale});
-        \node[left=3pt, font=\footnotesize\color{darkslate}] at (0, {\y*\yscale}) {\y};
-    }
-
-    % Origin label
-    \node[below left=3pt, font=\footnotesize\color{darkslate}] at (0, 0) {0};
-
-    % Axes with comfortable margins
-    \draw[->, line width=1.3pt, darkslate] (-0.3, 0) -- ({9.8*\xscale}, 0)
-        node[below right=2pt, font=\small\color{darkslate}] {\textbf{$x$（2ペンス切手基準枚数）}};
-    \draw[->, line width=1.3pt, darkslate] (0, -0.3) -- (0, {28*\yscale})
-        node[above right=2pt, font=\small\color{darkslate}] {\textbf{$y$（2.5ペンス切手枚数）}};
-
-    % Line: 16x + 5y = 120 (y = 24 - 3.2x)
-    \draw[line width=2.0pt, primaryblue] (0, {24*\yscale}) -- ({7.5*\xscale}, 0);
-    \node[above right=3pt, primaryblue] at ({1.6*\xscale}, {19*\yscale}) {\textbf{直線 $16x + 5y = 120$}};
-
-    % Boundary points
-    \filldraw[fill=white, draw=darkslate, line width=1.5pt] (0, {24*\yscale}) circle (3.5pt)
-        node[right=6pt, font=\footnotesize, fill=white, inner sep=1.5pt] {$(0, 24)$ [切手無指定]};
-
-    \filldraw[fill=white, draw=darkslate, line width=1.5pt] ({7.5*\xscale}, 0) circle (3.5pt);
-    \node[above right=4pt and 2pt, font=\footnotesize, fill=white, inner sep=1.5pt] at ({7.5*\xscale}, 0) {$(7.5, 0)$ [非整数]};
-
-    % Non-integer points on the line for integer x
-    \foreach \x/\y in {1/20.8, 2/17.6, 3/14.4, 4/11.2, 6/4.8, 7/1.6} {
-        \filldraw[fill=gray!60, draw=darkslate] ({\x*\xscale}, {\y*\yscale}) circle (2.5pt);
-        \draw[gray!40, dotted] ({\x*\xscale}, 0) -- ({\x*\xscale}, {\y*\yscale});
-    }
-
-    % The Unique Integer Solution (5, 8)
-    \draw[accentcrimson, line width=1.3pt, dashed] ({5*\xscale}, 0) -- ({5*\xscale}, {8*\yscale}) -- (0, {8*\yscale});
-    \filldraw[fill=accentcrimson, draw=primaryblue, line width=1.8pt] ({5*\xscale}, {8*\yscale}) circle (5.5pt);
-    \node[above right=10pt, fill=softblue, draw=accentcrimson, line width=1.2pt, rounded corners=2mm, inner sep=6pt, align=left] at ({5*\xscale}, {8*\yscale}) {
-        \textbf{\large 唯一の自然数解 $(x=5, y=8)$}\\[2pt]
-        \footnotesize 2ペンス切手5枚、1ペンス切手30枚、2.5ペンス切手8枚
-    };
-\end{tikzpicture}
-\par\vspace{0.5em}
-\small 概念図 7：一次不定方程式 $16x + 5y = 120$ のグラフ。格子点（整数解）条件により唯一の解 $(5, 8)$ が抽出される。
-\end{center}
-
-\clearpage
-
-\chapter[15パズルの置換群]{第8講：15パズルの置換群と不変量 —— サム・ロイドの難問を解き明かす}
-\section*{交代群 $A_n$ とパリティ保存則による不可能性の証明}
-
-1870年代末、アメリカから全世界へと広がり一大社会現象を巻き起こした「15パズル（15 Puzzle / Sliding Puzzle, \#234--\#238）」。
-
-1から15までの数字が書かれた正方形の駒を、$4 \times 4$ の枠（1マス空き）の中でスライドさせ、順番通りに並べるパズルです。著名なパズル作家サム・ロイドは、\textbf{「14番と15番の駒だけが入れ替わった初期状態から、正しい昇順（1から15）に戻せるか？」}という懸賞問題を新聞に発表し、世界中の人々を不眠不休の熱狂に陥れました。
-
-しかし、この問題には\textbf{最初から絶対に解が存在しない}ことが、現代数学（群論）によって厳密に証明されています。
-
-数学者たちが注目したのは、駒の配置がもつ\textbf{「パリティ（偶奇性）」}という不変量です。
-1. 駒を1回スライドさせることは、数学的には「空きマスとの互換（置換）」を意味します。
-2. 駒を元の位置関係に戻す偶数回の操作によって生じる置換は、すべて\textbf{「偶置換（Even Permutation）」}の集合（交代群 $A_{15}$）に属します。
-3. 一方、14と15の2駒だけを入れ替える操作は、1回の互換のみを含む\textbf{「奇置換（Odd Permutation）」}です。
-
-駒を盤上でどのように合法的にスライドさせても、偶置換から奇置換へと移り変わることは数学的に不可能です。すなわち、全 $16!$ 通りの配置空間は、互いに決して行き来できない\textbf{「解ける世界（偶パリティ）」}と\textbf{「絶対に解けない世界（奇パリティ）」}の2つの独立した宇宙へと完全に分断されているのです。
-
-\begin{tcolorbox}[colback=softblue,colframe=primaryblue,title=\textbf{重要ポイント：置換群とパリティ保存則},arc=3mm,boxrule=1pt]
-1. \textbf{置換の偶奇性}：あみだくじと同様、任意の置換は偶数回または奇数回の互換（2要素の交換）の積として一意に分類される。
-2. \textbf{不変量（Invariant）の原理}：許された操作の前後で変化しない数学的性質を見出すことで、試行錯誤することなく不可能性を断定できる。
-3. \textbf{現代暗号・物理への接続}：パリティの保存則は、素粒子物理学の保存則やコンピュータ・セキュリティの誤り検出符号の根幹をなす概念である。
-\end{tcolorbox}
-
-\begin{center}
-\begin{tikzpicture}[scale=0.90, >=Stealth]
-    % Left Box: Even Permutations (Solvable Universe)
-    \node[draw=primaryblue, line width=1.5pt, fill=softblue!60, rounded corners=3mm, inner sep=9pt, text width=5.0cm, align=center] (EVEN) at (0, 0) {
-        \textbf{\large 【偶置換の世界】}\\[6pt]
-        \textbf{可解な初期配置}\\[4pt]
-        \small 全配置のちょうど半分（$16! / 2$ 通り）\\[6pt]
-        \colorbox{white}{\fbox{\strut 合法的なスライド操作で常に可解}}
-    };
-
-    % Right Box: Odd Permutations (Unsolvable Universe)
-    \node[draw=accentcrimson, line width=1.5pt, fill=accentcrimson!12, rounded corners=3mm, inner sep=9pt, text width=5.0cm, align=center] (ODD) at (8.8, 0) {
-        \textbf{\large 【奇置換の世界】}\\[6pt]
-        \textbf{不可解な初期配置}\\[4pt]
-        \small 全配置のもう半分（$16! / 2$ 通り）\\[6pt]
-        \colorbox{white}{\fbox{\strut\color{accentcrimson}\bfseries ロイドの難問（14--15反転）}}
-    };
-
-    % Center Wall of Impossibility (Spacious separation)
-    \draw[line width=2.4pt, darkslate, dashed] (4.4, -2.4) -- (4.4, 2.4);
-    \node[fill=darkslate, text=white, font=\bfseries\small, rounded corners=2mm, inner sep=5pt] at (4.4, 1.8) {不可能性の壁};
-
-    % Crossing blocked arrow with comfortable space
-    \draw[->, line width=1.8pt, accentcrimson] (ODD.west) -- (5.3, 0)
-        node[midway, above=4pt, font=\bfseries\color{accentcrimson}] {到達不可！}
-        node[at end, left=3pt, font=\Large\bfseries\color{accentcrimson}] {$\times$};
-
-    \node[below=16pt, align=center] at (4.4, -2.4) {
-        \textbf{【結論】}\quad 盤面スライド操作はパリティ（偶奇性）を保存するため、\\
-        二つの世界を行き来することは数学的に絶対に不可能である。
-    };
-\end{tikzpicture}
-\par\vspace{0.5em}
-\small 概念図 8：パリティ（偶奇性）の保存則による不可能性の証明。状態空間の不変量が可解性と不可解性を決定づける。
-\end{center}
-
-\clearpage
-
-\chapter*{巻末付録：デュードニー全430問の数学的体系マップ}
-\addcontentsline{toc}{chapter}{巻末付録：デュードニー全430問の数学的体系マップ}
-
-デュードニーが『\textit{Amusements in Mathematics}』で提示した全430問は、現代の数学教育および離散数学のカリキュラムと驚くほど完璧に対応しています。大人の読者が原著の全問翻訳版に挑戦する際の羅針盤として、各章の数理的テーマを体系化しました。
-
-\begin{table}[h]
+\begin{figure}[htbp]
 \centering
-\small
-\renewcommand{\arraystretch}{1.3}
-\begin{tabular}{lll}
+\begin{tikzpicture}
+\begin{axis}[ybar, width=13.5cm, height=6.2cm, bar width=9pt, xmin=0.4, xmax=14.6, ymin=0, ymax=160, xtick={1,...,14}, xlabel={部の番号}, ylabel={問題数},
+  every axis label/.append style={font=\footnotesize}, tick label style={font=\footnotesize}, nodes near coords, nodes near coords style={font=\scriptsize}]
+ \addplot[fill=softblue, draw=primaryblue] coordinates {(1,141)(2,64)(3,8)(4,25)(5,23)(6,26)(7,74)(8,11)(9,5)(10,14)(11,7)(12,14)(13,1)(14,17)};
+\end{axis}
+\end{tikzpicture}
+\caption{原著の14の部ごとの問題数（合計430問）。第1部の算術・代数が約3分の1を占め、第7部のチェス盤がそれに次ぐ。}
+\end{figure}
+
+\begin{table}[htbp]
+\centering
+\begin{tabular}{clrr}
 \toprule
-\textbf{原著分類} & \textbf{問題番号} & \textbf{背後にある現代数学の分野} \\
+章 & 部の主題 & 問題数 & 原著の問題番号\\
 \midrule
-算術と代数の問題 & \#1 -- \#141 & 不定方程式、合同算術（数論）、数列と級数 \\
-幾何学と裁ち合わせ & \#142 -- \#205 & 等積変形、ボヤイ・ゲアウィンの定理、計算幾何学 \\
-点と線の問題 & \#206 -- \#213 & 射影幾何学、シルベスター・ガライの定理 \\
-駒の移動パズル & \#214 -- \#238 & 置換群、不変量、状態空間探索アルゴリズム \\
-一筆書きと経路 & \#239 -- \#261 & オイラーグラフ、ハミルトン路、トポロジー \\
-組合せと群の問題 & \#262 -- \#287 & 組合せ論、分割数、ブロックデザイン \\
-チェス盤のパズル & \#288 -- \#361 & 二部グラフ、独立集合問題、配置対称群 \\
-測定・秤量・充填 & \#362 -- \#372 & 二進法・三進法（天秤）、ユークリッド互除法 \\
-川渡りパズル & \#373 -- \#377 & 制約充足問題、幅優先探索（BFS） \\
-ゲームの数理 & \#378 -- \#398 & 組合せゲーム理論、不偏ゲーム、ニム和（Nim-sum） \\
-魔方陣と素数方陣 & \#399 -- \#412 & 線形代数（直交基底）、素数論、アフィン幾何 \\
-迷路の解法 & 原著第13章 & 深さ優先探索（DFS）、単連結・多重連結トポロジー \\
-パラドックスの館 & \#413 & 幾何学的消失、極限の錯視、無限のパラドックス \\
-未分類の傑作 & \#414 -- \#430 & 総合的離散数学、ひらめきと不変量の統合 \\
+1 & 算術と代数 & 141 & 1〜141\\
+2 & 幾何学（切り分けと配置） & 64 & 142〜205\\
+3 & 点と線 & 8 & 206〜213\\
+4 & 駒の移動 & 25 & 214〜238\\
+5 & 一筆書きと経路 & 23 & 239〜261\\
+6 & 組合せと群分け & 26 & 262〜287\\
+7 & チェス盤 & 74 & 288〜361\\
+8 & 計量・詰め込み & 11 & 362〜372\\
+9 & 川渡り & 5 & 373〜377\\
+10 & ゲームと賭け & 14 & 378〜391\\
+11 & 必勝法のあるゲーム & 7 & 392〜398\\
+12 & 魔方陣 & 14 & 399〜412\\
+13 & パラドックス & 1 & 413\\
+14 & 未分類の問題 & 17 & 414〜430\\
 \bottomrule
 \end{tabular}
+\caption{本書の章と原著の部の対応。}
 \end{table}
 
-\vspace{1.0cm}
-\begin{center}
-{\large\color{primaryblue}\textbf{知的好奇心こそ、人間が年齢を重ねるごとに深まりゆく最大の知的財産です。}}\\[0.5em]
-デュードニーの珠玉のパズルを通じて、数学の真の美しさと遊ぶ喜びを心ゆくまでご堪能ください。
-\end{center}
+\begin{notebox}{事実・推測・未確認の区別（この本の約束）}
+\begin{itemize}[leftmargin=*]
+\item 取り上げた答えは、原著の答えを読み、そのうえで計算機で全探索・数え上げをして確かめたものです（答えが原著と一致したことを本文に書きました）。原著の絵を見ないと分からない答えは、本書で別の図を描いて示しています。
+\item 原著の説明をそのまま確かめられなかった数字（たとえば第3章の「2,400通り」の数え方）は、そう書いてあります。
+\item 同じシリーズの翻訳版には、問題文の訳語が乱れている箇所があります。本書は、原文（Project Gutenberg \#16713）と照らして書いています。
+\end{itemize}
+\end{notebox}
+
+%==========================================================
+\chapter{算術と代数の問題（第1部、第1〜141問）}
+\markboth{第1章}{算術と代数の問題}
+%==========================================================
+
+\section{この部の位置づけ}
+
+第1部は、全体の3分の1を占める最大の部です。金銭、年齢、時計、速さ、数字の並べ替え、割り算の応用など、日常の言葉で書かれた問題が並びます。デュードニーは序文で、「やさしいものも難しいものも、順番に並べていない。落とし穴があるかもしれないと、解く人に気づかせないためだ」という意味のことを述べています（この文面は、第1部の冒頭にあります）。
+
+ここでは、連立方程式、比、速さ、場合の数、整数の性質を使う6問を選びました。
+
+\section{第1問：郵便局の難問}
+
+「5シリング硬貨（1クラウン）を出して、2ペンス切手をいくつか、その6倍の枚数の1ペンス切手、残りを2ペンス半の切手で、とお願いした」という問題です。1シリング＝12ペンス、5シリング＝60ペンスです。
+
+2ペンス切手を $x$ 枚とすると、1ペンス切手は $6x$ 枚、2ペンス半切手を $y$ 枚として
+\[
+2x+6x+2.5y=60,\qquad 8x+2.5y=60 .
+\]
+両辺に2をかけると $16x+5y=120$、つまり $y=\dfrac{120-16x}{5}$。$y$ が整数になるには $16x$ が5の倍数、つまり $x$ が5の倍数でなければなりません。$x=5$ なら $y=8$、$x=10$ なら $y<0$ になるので、$x=5$、$y=8$ が唯一の答えです。
+
+\begin{examplebox}{確かめ}
+2ペンス切手5枚（10ペンス）、1ペンス切手30枚（30ペンス）、2ペンス半の切手8枚（20ペンス）。合計は $10+30+20=60$ ペンス＝5シリング。原著の答えと一致します。
+\end{examplebox}
+
+\section{第4問：豆祝いの難問}
+
+靴屋25人、仕立屋20人、帽子屋18人、手袋屋12人が宴会に行き、合計は6ポンド13シリング（＝133シリング）でした。「靴屋5人の分は仕立屋4人の分に等しい」「仕立屋12人の分は帽子屋9人の分に等しい」「帽子屋6人の分は手袋屋8人の分に等しい」とき、各グループの支払いはいくらか、という問題です。
+
+1人あたりの支払いを、靴屋 $c$、仕立屋 $t$、帽子屋 $h$、手袋屋 $g$ とします。条件は $5c=4t$、$12t=9h$、$6h=8g$。$t=60k$ とおくと、$c=48k$、$h=80k$、$g=60k$（$80\times6=8\times60$）。グループの合計は
+\[
+25c=1200k,\quad 20t=1200k,\quad 18h=1440k,\quad 12g=720k,
+\]
+合わせて $4560k=133$ シリングなので $k=\tfrac{133}{4560}=\tfrac{7}{240}$。したがって、靴屋グループは $1200k=35$、仕立屋グループも35、帽子屋グループは $1440k=42$、手袋屋グループは $720k=21$（シリング）です。
+
+\begin{figure}[htbp]
+\centering
+\begin{tikzpicture}
+\begin{axis}[xbar, width=10cm, height=4.6cm, xmin=0, xmax=50, ytick={1,2,3,4}, yticklabels={手袋屋,帽子屋,仕立屋,靴屋}, xlabel={グループ全体の支払い（シリング）},
+  every axis label/.append style={font=\footnotesize}, tick label style={font=\footnotesize}, nodes near coords, nodes near coords style={font=\scriptsize}, bar width=11pt]
+ \addplot[fill=softblue, draw=primaryblue] coordinates {(21,1)(42,2)(35,3)(35,4)};
+\end{axis}
+\end{tikzpicture}
+\caption{豆祝いの難問の答え。合計は $35+35+42+21=133$ シリング。}
+\end{figure}
+
+確かめると、1人あたりの支払いは、靴屋 $35/25=1.4$、仕立屋 $35/20=1.75$、帽子屋 $42/18=\tfrac73$、手袋屋 $21/12=1.75$。$5\times1.4=7=4\times1.75$、$12\times1.75=21=9\times\tfrac73$、$6\times\tfrac73=14=8\times1.75$ で、3つの条件がすべて成り立ちます。
+
+\section{第9問：2機の飛行機}
+
+「2機を600ポンドずつで売り、一方は2割の損、他方は2割の得だった。全体で得か損か」という問題です。「2割の得」と「2割の損」は、売値ではなく\textbf{仕入れ値}を基準にします。損をした機は、仕入れ値の0.8倍で600ポンドなので仕入れ値は $600/0.8=750$ ポンド。得をした機は、仕入れ値の1.2倍で600ポンドなので $600/1.2=500$ ポンド。仕入れは合計 $750+500=1250$ ポンド、売上は1200ポンドで、\textbf{50ポンドの損}です。
+
+\begin{pointbox}{この問題の教訓}
+「2割増えて、2割減る」は、元に戻らない。どちらも「元の値」が違うからです。$1.2\times0.8=0.96$ で、4\%減ります。
+\end{pointbox}
+
+\section{第68問：2本の列車}
+
+ロンドンからリバプールへ行く列車と、その逆に行く列車が、同時に出発します。すれ違ってから、それぞれ1時間と4時間で終点に着きます。どちらがどれだけ速いか。
+
+すれ違うまでの時間を $t$ 時間、速さを $v_1$（ロンドン発）、$v_2$（リバプール発）とします。すれ違うまでに $v_1t$ と $v_2t$ を進みます。すれ違ったあと、ロンドン発の列車はリバプール発の列車がすれ違うまでに進んだ道のり $v_2t$ を1時間で進むので $v_2t=v_1\cdot1$。リバプール発の列車は $v_1t$ を4時間で進むので $v_1t=4v_2$。2式をかけ合わせると $v_1v_2t^2=4v_1v_2$、したがって $t=2$。これを代入して $v_1=2v_2$。答えは「\textbf{一方は他方のちょうど2倍の速さ}」で、原著の答えと一致します。
+
+\begin{figure}[htbp]
+\centering
+\begin{tikzpicture}
+\begin{axis}[width=9.5cm, height=6cm, xmin=0, xmax=6.3, ymin=0, ymax=6.6, xlabel={出発からの時間}, ylabel={ロンドンからの道のり},
+  every axis label/.append style={font=\footnotesize}, tick label style={font=\footnotesize}, xtick={0,1,2,3,4,5,6}, ytick={0,2,4,6}]
+ \addplot[thick, primaryblue, domain=0:3, samples=2] {2*x};
+ \addplot[thick, crimson, domain=0:6, samples=2] {6-x};
+ \addplot[mark=*, black] coordinates {(2,4)};
+ \node[font=\footnotesize, anchor=south west] at (axis cs:2.1,4.1) {すれ違い（$t=2$）};
+ \node[font=\footnotesize, primaryblue, anchor=west] at (axis cs:0.3,3.3) {ロンドン発};
+ \node[font=\footnotesize, crimson, anchor=west] at (axis cs:3.4,2.1) {リバプール発};
+\end{axis}
+\end{tikzpicture}
+\caption{時間と道のりの図（全行程を6とする）。ロンドン発は速さ2で3時間、リバプール発は速さ1で6時間かかる。2時間後に出会い、そのあとロンドン発は1時間、リバプール発は4時間で着く。}
+\end{figure}
+
+\noindent 図で確かめます。出会う地点はロンドンから4。ロンドン発の残りは $6-4=2$ で、速さ2なら1時間。リバプール発の残りは4で、速さ1なら4時間です。問題の「1時間と4時間」と一致します。
+
+\section{第80問：3つのグループ（数字を並べる）}
+
+1から9の数字を1回ずつ使って、「2桁×3桁＝4桁」を作る問題です。例は $12\times483=5796$。さらに「1桁×4桁＝4桁」も許すと、解はいくつあるか。
+
+計算機で全部の並べ方（9の階乗＝362,880通り）を調べると、2桁×3桁＝4桁が7個、1桁×4桁＝4桁が2個、合計9個になります。原著の答え（9個）と一致します。
+
+\begin{table}[htbp]
+\centering
+\begin{tabular}{llll}
+\toprule
+12 × 483 = 5796 & 42 × 138 = 5796 & 18 × 297 = 5346 & 27 × 198 = 5346\\
+39 × 186 = 7254 & 48 × 159 = 7632 & 28 × 157 = 4396 & 4 × 1738 = 6952\\
+4 × 1963 = 7852 & & &\\
+\bottomrule
+\end{tabular}
+\caption{「2桁×3桁＝4桁」の7個と「1桁×4桁＝4桁」の2個、合わせて9個。かける順（$483\times12$ など）を入れ替えたものは同じ解として数えている。}
+\end{table}
+
+\section{第90問：世紀のパズル（100を作る）}
+
+1から9の9個の数字を\textbf{1回ずつ}使って、帯分数 $A+\dfrac{n}{d}$ の形で100を作る問題です。例は $91+\dfrac{5742}{638}$（$5742\div638=9$ なので $91+9=100$）。原著は、フランスの数学者リュカが7通りを見つけて「ほかにあるだろうか」と疑ったが、実際には全部で11通りある、と述べています。
+
+本書では、9個の数字の並べ方（362,880通り）を、帯分数のどこで区切るかのすべて（整数部、分子、分母）と組み合わせて計算機で調べ、$A+\tfrac nd=100$ になるものを数えました。結果は\textbf{ちょうど11通り}で、原著と一致します。
+
+\begin{table}[htbp]
+\centering
+\small
+\begin{tabular}{rll}
+\toprule
+分数の値 $k=100-A$ & 整数部 $A$ & 分数 $\dfrac{n}{d}$\\
+\midrule
+4 & 96 & $\dfrac{1428}{357}$、$\dfrac{1752}{438}$、$\dfrac{2148}{537}$\\[2mm]
+6 & 94 & $\dfrac{1578}{263}$\\[2mm]
+9 & 91 & $\dfrac{5742}{638}$、$\dfrac{5823}{647}$、$\dfrac{7524}{836}$\\[2mm]
+18 & 82 & $\dfrac{3546}{197}$\\[2mm]
+19 & 81 & $\dfrac{5643}{297}$、$\dfrac{7524}{396}$\\[2mm]
+97 & 3 & $\dfrac{69258}{714}$\\
+\bottomrule
+\end{tabular}
+\caption{9個の数字を1回ずつ使って100になる帯分数11通り（計算機で全探索）。整数部が1桁なのは $3+\tfrac{69258}{714}$ だけ。}
+\end{table}
+
+\begin{figure}[htbp]
+\centering
+\begin{tikzpicture}
+\begin{axis}[ybar, width=9.5cm, height=5cm, bar width=14pt, xmin=0.5, xmax=6.5, ymin=0, ymax=4, xtick={1,...,6}, xticklabels={96,94,91,82,81,3}, xlabel={整数部 $A$}, ylabel={通り},
+  every axis label/.append style={font=\footnotesize}, tick label style={font=\footnotesize}, nodes near coords, nodes near coords style={font=\scriptsize}]
+ \addplot[fill=softamber, draw=warmamber] coordinates {(1,3)(2,1)(3,3)(4,1)(5,2)(6,1)};
+\end{axis}
+\end{tikzpicture}
+\caption{整数部ごとの解の数（合計11）。}
+\end{figure}
+
+デュードニーは、この問題を「9で割った余り（数字根）」で絞り込むことを紹介しています。1から9の和は45で9の倍数なので、$A$、$n$、$d$ の各桁の和を全部足すと9の倍数です。したがって
+\[
+A+n+d\equiv0\pmod 9 .
+\]
+$n=kd$、$A=100-k$ を代入すると $(100-k)+kd+d\equiv0$、つまり $(1-k)+(k+1)\,d\equiv0\pmod 9$。この式は、$k$ ごとに、分母 $d$ を9で割った余りを決めます。たとえば $k=9$ なら $-8+10d\equiv0$、つまり $d\equiv8\pmod9$。表の $d=638$（$6+3+8=17$、$1+7=8$）、$647$（$17\to8$）、$836$（$17\to8$）はすべて余り8で、この条件に合います。
+
+\begin{pointbox}{数字を使った探索の考え方}
+候補が36万通りあっても、「9で割った余り」のように必ず満たす条件を先に使うと、手で調べる範囲がぐっと減ります。計算機で全部調べて確かめることと、条件で絞り込んで理由を説明することは、組にして使うと効果的です。
+\end{pointbox}
+
+\section{第139問：オランダ人の妻たち}
+
+ヘンドリック、エルス、コルネリウスの3人の男と、その妻ゲルトリュン、カトリュン、アンナが豚を買います。各人は「豚1頭あたり $n$ シリング」で「$n$ 頭」買います（支払いは $n^2$ シリング）。夫は妻より3ギニー（63シリング）多く払い、ヘンドリックはカトリュンより23頭多く、エルスはゲルトリュンより11頭多く買いました。夫婦の組み合わせは。
+
+夫の頭数を $a$、その妻の頭数を $b$ とすると、$a^2-b^2=63$ です。$(a-b)(a+b)=63$ で、63を2つの正の整数の積に分ける方法は $1\times63,\ 3\times21,\ 7\times9$ の3通り。それぞれ $a-b$ と $a+b$ に当てはめると、$(a,b)=(32,31),\ (12,9),\ (8,1)$ です。つまり、夫婦の頭数の組は、この3組しかありません。
+
+あとは、2つの条件で誰がどの組かを決めます。ヘンドリックはカトリュンより23頭多いので、夫の頭数32と妻の頭数9の差 $32-9=23$ が合います（ほかの組み合わせでは差が23になりません）。したがって、ヘンドリックは32頭で、その妻は31頭のアンナ。カトリュンは9頭なので、その夫は12頭のエルス。残るコルネリウス（8頭）の妻はゲルトリュン（1頭）です。もう1つの条件も確かめると、エルス（12頭）はゲルトリュン（1頭）より11頭多く、確かに合います。原著の答え（コルネリウスとゲルトリュン、エルスとカトリュン、ヘンドリックとアンナ）と一致します。
+
+\begin{figure}[htbp]
+\centering
+\begin{tikzpicture}[x=0.52cm,y=0.52cm]
+ % 8^2 - 1^2 as gnomon: draw squares
+ \fill[softblue] (0,0) rectangle (8,8);
+ \fill[white] (0,0) rectangle (1,1);
+ \draw[primaryblue] (0,0) rectangle (8,8);
+ \draw[crimson, thick] (0,0) rectangle (1,1);
+ \node[font=\footnotesize] at (4,4) {$8^2-1^2=63$};
+ \begin{scope}[xshift=10cm]
+ \fill[softamber] (0,0) rectangle (12,12);
+ \fill[white] (0,0) rectangle (9,9);
+ \draw[warmamber] (0,0) rectangle (12,12);
+ \draw[crimson, thick] (0,0) rectangle (9,9);
+ \node[font=\footnotesize, align=center] at (6,6) {$12^2-9^2$\\$=63$};
+ \end{scope}
+ \node[lbl] at (4,-1.2) {$a=8,\ b=1$};
+ \node[lbl] at (16,-1.2) {$a=12,\ b=9$};
+\end{tikzpicture}
+\caption{大きい正方形から小さい正方形をくり抜いた曲尺（かねじゃく）形の面積が63。\\幅は $a-b$、長さは $a+b$ の長方形に切り直せるので、面積 $=(a-b)(a+b)$ になる。}
+\end{figure}
+
+\begin{pointbox}{この章のまとめ}
+\begin{itemize}[leftmargin=*]
+\item 「割合」の問題は、基準になる量（仕入れ値、元の値）をはっきりさせる。
+\item 比が鎖状につながる問題は、1つの量を $k$ とおいて全部を表す。
+\item 整数の積や差の問題は、約数の組に分けると、解が有限個にしぼれる。
+\item 全部の並べ方が数十万通りでも、計算機で確かめれば、手計算の答えの検証ができる。
+\end{itemize}
+\end{pointbox}
+
+%==========================================================
+\chapter{幾何学の問題（第2部、第142〜205問）}
+\markboth{第2章}{幾何学の問題}
+%==========================================================
+
+\section{この部の位置づけ}
+
+第2部は、図形を切って並べ替える「切り分け」と、庭や畑の面積、円や正方形の関係を問う問題です。64問のうち、ここでは5問を選びました。計算で答えが出るもの（第196、200問）と、図の性質を使うもの（第158、173、187問）の両方があります。
+
+\section{第173問：パーキンス夫人のキルト}
+
+13×13の正方形のキルトは、小さな正方形の布169枚をつなぎ合わせたものです。このキルトを、縫い目だけを切って、\textbf{できるだけ少ない数の正方形}に分けるにはどうするか。13×13そのものを1枚と数えるのは、もちろん除きます。
+
+デュードニーの答えは「11枚が最少」です。ここでは、計算機で全部の分け方を探して確かめました（正方形の辺は整数、全体は13×13、13の1枚は除く）。11枚が最少で、辺の長さは $7,6,6,4,3,3,2,2,2,1,1$。面積の合計は
+\[
+49+36+36+16+9+9+4+4+4+1+1=169=13^2
+\]
+で一致します。
+
+\begin{figure}[htbp]
+\centering
+\begin{tikzpicture}[x=0.52cm,y=0.52cm]
+ \foreach \x/\y/\s in {0/0/7, 7/0/6, 7/6/2, 9/6/4, 0/7/6, 6/7/1, 6/8/3, 9/10/1, 10/10/3, 6/11/2, 8/11/2}{
+  \draw[primaryblue, fill=softblue] (\x,\y) rectangle ++(\s,\s);
+  \node[font=\footnotesize] at (\x+\s/2,\y+\s/2) {\s};
+ }
+ \draw[thick, darkslate] (0,0) rectangle (13,13);
+\end{tikzpicture}
+\caption{13×13を11枚の正方形に分ける（原著の答えと同じ大きさの組。計算機で確かめた配置）。数字は1辺の長さ。}
+\end{figure}
+
+\begin{pointbox}{「本質的に1通り」}
+図の最大の正方形は7と6が2つで、$7+6=13$ だから、辺の1つが13にそろいます。デュードニーは、この問題の答えは回転や裏返しを除いて「実質的に1通り」だと述べています。本書の探索では、11枚の分け方が8通り見つかり、そのすべてが、回転と裏返しで上の図に重なりました。
+\end{pointbox}
+
+\section{第158問：大いなる太極図}
+
+太極図（陰と陽の円）には、「内側の円と、それを囲む輪の面積はどちらが大きいか」という問いがあります。デュードニーの答えは「どちらも同じ」です。
+
+内側の円の半径を1とします。この円に外接する正方形の1辺は2、対角線は $2\sqrt2$ です。太極図では、この対角線が外側の大円の直径になっています（デュードニーの図による）。すると大円の半径は $\sqrt2$、面積は $\pi(\sqrt2)^2=2\pi$。内側の円の面積は $\pi$。したがって輪の面積は $2\pi-\pi=\pi$ で、内側の円とちょうど同じになります。
+
+\begin{figure}[htbp]
+\centering
+\begin{tikzpicture}[scale=1.3]
+ \fill[softamber] (0,0) circle (1.4142);
+ \fill[white] (0,0) circle (1);
+ \draw[primaryblue, thick] (0,0) circle (1);
+ \draw[warmamber, thick] (0,0) circle (1.4142);
+ \draw[darkslate] (-1,-1) rectangle (1,1);
+ \draw[crimson, dashed] (-1,-1)--(1,1);
+ \node[font=\footnotesize] at (0.35,-0.4) {$r=1$};
+ \node[font=\footnotesize, anchor=west] at (1.45,0.9) {$R=\sqrt2$};
+\end{tikzpicture}
+\caption{半径1の円に外接する正方形（1辺2）の対角線は $2\sqrt2$。これを直径とする大円の半径は $\sqrt2$、面積は内側の円の2倍。したがって輪の面積と内側の円の面積は等しい。}
+\end{figure}
+
+\section{第196問：つながれたヤギ}
+
+半エーカー（$0.5$ エーカー）の正三角形の牧場で、ヤギを1つの角の杭につなぎます。牧草のちょうど半分を食べさせるには、綱を何インチにするか（インチ単位で）。
+
+1エーカー＝4,840平方ヤード、1ヤード＝36インチだから、1エーカー＝$4840\times1296=6{,}272{,}640$ 平方インチです。牧場の面積は半エーカーで $3{,}136{,}320$ 平方インチ、食べさせる草の面積はその半分の $1{,}568{,}160$ 平方インチ（四分の一エーカー）。綱が角にある正三角形の内側に届く範囲は、半径 $r$ の円の $\tfrac16$（中心角60度）です。したがって
+\[
+\frac{\pi r^2}{6}=1{,}568{,}160\ \Longrightarrow\ r=\sqrt{\frac{6\times1{,}568{,}160}{\pi}}\approx1730.6\ \text{インチ}.
+\]
+最も近いインチに丸めて1,731インチ（48ヤード3インチ）。原著の答えと一致します。
+
+\begin{figure}[htbp]
+\centering
+\begin{tikzpicture}[scale=1.5]
+ \coordinate (A) at (0,0);
+ \coordinate (B) at (4,0);
+ \coordinate (C) at (2,3.4641);
+ \fill[softgreen] (A) -- (B) -- (C) -- cycle;
+ \fill[softamber] (A) -- (2.3,0) arc (0:60:2.3) -- cycle;
+ \draw[thick, darkslate] (A) -- (B) -- (C) -- cycle;
+ \draw[warmamber, thick] (2.3,0) arc (0:60:2.3);
+ \fill[crimson] (A) circle (1.5pt);
+ \node[lbl, below left] at (A) {杭};
+ \node[lbl] at (1.2,0.45) {$\tfrac16$ 円};
+ \draw[<->, lbl] (0,-0.25)--(2.3,-0.25) node[midway, below, lbl] {$r$};
+\end{tikzpicture}
+\caption{正三角形の1つの角の中心角は60度。綱が届く範囲はその角を中心とする扇形で、円の $\tfrac16$。扇形の面積が三角形の半分になる $r$ を求める。}
+\end{figure}
+
+\section{第200問：凧あげの針金}
+
+直径2フィート（24インチ）の球に巻かれた針金があります。針金の太さ（直径）は $\tfrac1{100}$ インチです。針金の長さはいくらか。球はすきまなく詰まっているものとします。
+
+針金は細い円柱です。球の体積は $\tfrac43\pi\cdot12^3$。針金の断面積は $\pi\cdot(0.005)^2$。長さ $L$ は体積を断面積で割って
+\[
+L=\frac{\tfrac43\pi\cdot12^3}{\pi\cdot0.005^2}=\frac{4\cdot12^3}{3\cdot0.005^2}=92{,}160{,}000\ \text{インチ}.
+\]
+1マイルは $63{,}360$ インチなので、約 $1454.5$ マイル（1,454マイルと2,880フィート）。原著の答えと一致します。デュードニーは、円周率を使わない「帽子箱の方法」を紹介しています。球は、ぴったり入る円柱（高さ24インチ）の $\tfrac23$ の体積なので、同じ体積の円柱は高さ16インチ。この円柱を太さ $\tfrac1{100}$ インチの針金の束とみて、断面積の比 $24^2:(\tfrac1{100})^2=5{,}760{,}000$ に高さ16をかけると、同じ $92{,}160{,}000$ インチになります。
+
+\section{第187問：乳しぼりの娘}
+
+畑の隅で乳しぼりをしている娘が、川で桶に水を汲んでから乳製品小屋へ行きます。川のどこへ行けば、道のりが最短か。答えは、川の向こうに乳しぼりの場所の\textbf{鏡像}をとり、それと小屋を直線で結んだときの川との交点です。
+
+\begin{figure}[htbp]
+\centering
+\begin{tikzpicture}[x=0.85cm,y=0.85cm]
+ \draw[thick, primaryblue, fill=softblue] (-0.5,-0.15) rectangle (8.5,0.15);
+ \node[lbl] at (7.7,-0.45) {川};
+ \coordinate (S) at (1,2.2);
+ \coordinate (S2) at (1,-2.2);
+ \coordinate (D) at (7,1.4);
+ \coordinate (B) at (3.7,0);
+ \fill (S) circle (2pt) node[above left, lbl] {乳しぼり};
+ \fill (D) circle (2pt) node[above right, lbl] {小屋};
+ \fill[gray] (S2) circle (2pt) node[below left, lbl] {鏡像};
+ \draw[crimson, thick] (S)--(B)--(D);
+ \draw[gray, dashed] (S2)--(B);
+ \draw[gray, dashed] (S)--(S2);
+ \fill[crimson] (B) circle (2pt) node[below, lbl] {最短の地点};
+\end{tikzpicture}
+\caption{乳しぼりの場所を川に対して折り返した点と小屋を直線で結ぶ。川との交点が最短の地点。実線の経路の長さは、点線の直線の長さと等しい。}
+\end{figure}
+
+理由は、川の上のどの点 $P$ でも、乳しぼりの場所から $P$ までの距離と鏡像から $P$ までの距離が等しいことです。経路の長さは「鏡像から $P$ を経て小屋まで」と同じ長さになり、2点を結ぶ最短の線は直線です。
+
+\begin{pointbox}{この章のまとめ}
+\begin{itemize}[leftmargin=*]
+\item 面積の問題は、全体の面積を単位をそろえて数え直す。
+\item 円や球は、半径の2乗・3乗に比例する量で比べる（第158、200問）。
+\item 最短経路は「鏡像」で直線に直す（第187問）。
+\item 正方形に切り分ける問題は、辺の長さの組み合わせを探索で調べると安心できる（第173問）。
+\end{itemize}
+\end{pointbox}
+
+%==========================================================
+\chapter{点と線の問題（第3部、第206〜213問）}
+\markboth{第3章}{点と線の問題}
+%==========================================================
+
+\section{この部の位置づけ}
+
+第3部は、わずか8問の小さな部です。「何本かの直線の上に、ちょうど何個かの点が並ぶように、点を配置せよ」という、植樹算の問題が並びます。庭に木を植える、コインを並べる、パイを並べる、といった物語がつきますが、数学としては、点と直線の\textbf{接続の構造}を調べる問題です。
+
+\section{第210問：10枚のコイン}
+
+10枚のコインを、5枚ずつ2列に並べて置きます。そこから4枚を別の場所に動かして、\textbf{4枚ずつ並ぶ直線が5本}できるようにします。デュードニーは、この「10個の点、4個ずつの直線5本」を、この部の基本形として扱っています。
+
+答えの1つは、星形五角形（五芒星）です。正五角形の5つの頂点と、5本の対角線が内側で交わってできる5つの交点、あわせて10点をとります。各対角線の上には、両端の頂点2つと、その内側の交点2つが並ぶので、1本の直線に4点が載ります。5本の対角線で5本の直線です。
+
+\begin{figure}[htbp]
+\centering
+\begin{tikzpicture}[scale=2.2]
+ \foreach \k in {0,...,4}{
+   \coordinate (P\k) at ({90+72*\k}:1);
+   \coordinate (Q\k) at ({126+72*\k}:0.381966);
+ }
+ \draw[thick, primaryblue] (P0)--(P2)--(P4)--(P1)--(P3)--cycle;
+ \foreach \k in {0,...,4}{
+   \fill[crimson] (P\k) circle (1.6pt);
+   \fill[warmamber] (Q\k) circle (1.6pt);
+ }
+ \node[lbl, above] at (P0) {A};
+ \node[lbl, left] at (P1) {B};
+ \node[lbl, below left] at (P2) {C};
+ \node[lbl, below right] at (P3) {D};
+ \node[lbl, right] at (P4) {E};
+\end{tikzpicture}
+\caption{星形五角形。赤い点が正五角形の5頂点、橙の点が対角線どうしの5つの交点。10点が5本の直線に4点ずつ載っている。}
+\end{figure}
+
+この図で、内側の交点は、外側の五角形に対して $\tfrac{\cos72^\circ}{\cos36^\circ}\approx0.382$ の距離（外接円の半径を1として）にあります。この値は黄金比 $\varphi=\tfrac{1+\sqrt5}{2}$ を使って $\varphi^{-2}$ と書けます。
+
+\begin{examplebox}{原著の数え方：何通りの動かし方があるか}
+原著は「4枚の取り方は、一方の列から3枚、もう一方の列から1枚。上から3枚を選ぶ方法は $\binom{5}{3}=10$ 通り、下から1枚が5通りで50通り。上下を入れ替えて100通り。取った4枚の置き方が $4!=24$ 通りで、$24\times100=2400$ 通り」と述べています。ここでの掛け算 $24\times100=2400$ は確かめました。ただし、原著の図（2列が重なる形）がないと、「3枚と1枚」の条件が正しいかどうかは本書では検算していません（未確認）。
+\end{examplebox}
+
+デュードニーは、10点・5直線・4点ずつの配置には、本質的に異なる形が6種類あり、「星」「ダーツ」「コンパス」「じょうご」「はさみ」「くぎ」と名づけた、と書いています。これは原著の主張で、本書では確かめていません。
+
+\section{第209問：21本の木}
+
+21本の木を、「5本ずつ並ぶ直線が12本」できるように植えます。直線は12本、1本に5本の木が載るので、木が直線に載る回数の合計は $12\times5=60$。木は21本ですから、平均すると
+\[
+\frac{60}{21}\approx2.86
+\]
+本の直線の上に木が載ることになります。ほとんどの木は、3本の直線の交点になっていなければなりません。
+
+\begin{pointbox}{数えるだけで分かること}
+$a$ 本の木が2本の直線上に、$b$ 本の木が3本の直線上にあるとすると、$a+b=21$、$2a+3b=60$ より $b=18$、$a=3$。木は、3本の直線が交わる点が多くなる必要があります。このように、図を描く前に「接続の数」を数えると、見通しがよくなります。
+\end{pointbox}
+
+\section{第211問：12個のミンスパイ}
+
+12個のパイを、4個ずつ並ぶ直線が6本できるように置きます。これは六芒星の12点に当たります。6本の直線に4点ずつなので、延べ24個で、各点は2本の直線の上にあります（$24\div12=2$）。ここから4個だけ動かして、4個ずつの直線を7本にします。7本に4個ずつなら、延べ28個です。12個で28個なので、平均 $28/12\approx2.33$ 本の直線に載ります。直線の数が増えると、1つの点が3本以上の直線に載る点が必要になります。デュードニーの答えは、動かす4個の置き場所を絵で示していますが、本書では絵がないので追いかけていません。
+
+\begin{pointbox}{この章のまとめ}
+\begin{itemize}[leftmargin=*]
+\item 点と直線の問題は、「何本の直線に何個の点が載るか」を数えると、図を描く前に見通せる。
+\item 5本の直線に4点ずつ載る10点は、星形五角形の頂点と交点で作れる。
+\item 原著の「何通りか」の主張（2,400通り、6種類の基本形）は、原著の図を見て確かめる必要がある。
+\end{itemize}
+\end{pointbox}
+
+%==========================================================
+\chapter{駒の移動の問題（第4部、第214〜238問）}
+\markboth{第4章}{駒の移動の問題}
+%==========================================================
+
+\section{この部の位置づけ}
+
+第4部は、カエル、コイン、駒を、決められた規則で動かして並べ替える問題です。25問あり、「最少の手数は何手か」という問いが中心です。手数を数える問題は、あらゆる動かし方をたどる\textbf{幅優先探索}で、最少手数を確かめられます。ここでは、第214問の「6匹のカエル」を、原著の答えと探索の結果とで照らし合わせます。
+
+\section{第214問：6匹のカエル}
+
+7つの升目が一列に並び、1番〜6番のカエルが並んでいます（1つの升目は空き）。カエルは、となりの空き升に進むか、1匹を飛び越えて、その先の空き升に飛ぶことができます（チェッカーの動き）。前にも後ろにも動けます。順番を逆にして、$6,5,4,3,2,1$ と並べるのに、最少で何手かかるか。
+
+デュードニーの答えは「2,4,6,5,3,1 を3回繰り返し、さらに 2,4,6」の21手で、「これが最少」です。ここでは、空き升を左端に置き、カエル1〜6を左から順に並べた設定で、この手順を実際に動かして確かめました。21手目で $6,5,4,3,2,1$ の逆順になり、空き升は左端に戻ります。
+
+\begin{figure}[htbp]
+\centering
+\begin{tikzpicture}[x=0.62cm,y=0.5cm]
+ \foreach \row/\a/\b/\c/\d/\e/\f/\g/\lab in {
+   0/0/1/2/3/4/5/6/{始め},
+   1/2/1/0/3/4/5/6/{1手目：2},
+   2/2/1/4/3/0/5/6/{2手目：4},
+   3/2/1/4/3/6/5/0/{3手目：6},
+   4/2/1/4/3/6/0/5/{4手目：5},
+   5/2/1/4/0/6/3/5/{5手目：3},
+   6/2/0/4/1/6/3/5/{6手目：1}}{
+   \foreach \v[count=\i from 0] in {\a,\b,\c,\d,\e,\f,\g}{
+     \ifnum\v=0
+       \draw[gridgray, fill=white] (\i,-\row) rectangle ++(1,1);
+     \else
+       \draw[primaryblue, fill=softblue] (\i,-\row) rectangle ++(1,1);
+       \node[font=\footnotesize] at (\i+0.5,-\row+0.5) {\v};
+     \fi
+   }
+   \node[lbl, anchor=west] at (7.4,-\row+0.5) {\lab};
+ }
+\end{tikzpicture}
+\caption{21手の手順の最初の6手（2,4,6,5,3,1）。この6手を3回繰り返し、さらに 2,4,6 で逆順になる。白い升が空き升。}
+\end{figure}
+
+\section{一般の個数の場合：式と探索の一致}
+
+デュードニーは、カエルが $n$ 匹のときの最少手数を、次の式で与えています。
+\[
+\text{最少手数}=
+\begin{cases}
+\dfrac{n^2+n}{2} & (n\text{ が偶数})\\[2mm]
+\dfrac{n^2+3n}{2}-4 & (n\text{ が奇数})
+\end{cases}
+\]
+本書では、$n=2$ から $9$ まで、幅優先探索で最少手数を求めて、この式と比べました。結果はすべて一致しました。
+
+\begin{table}[htbp]
+\centering
+\begin{tabular}{c|cccccccc}
+\toprule
+$n$ & 2 & 3 & 4 & 5 & 6 & 7 & 8 & 9\\
+\midrule
+探索の結果 & 3 & 5 & 10 & 16 & 21 & 31 & 36 & 50\\
+式の値 & 3 & 5 & 10 & 16 & 21 & 31 & 36 & 50\\
+\bottomrule
+\end{tabular}
+\caption{カエルの数 $n$ と最少手数。探索と原著の式は $n=2\sim9$ で一致。}
+\end{table}
+
+\begin{figure}[htbp]
+\centering
+\begin{tikzpicture}
+\begin{axis}[width=9.5cm, height=5.8cm, xmin=1.5, xmax=9.5, ymin=0, ymax=55, xlabel={カエルの数 $n$}, ylabel={最少手数},
+  every axis label/.append style={font=\footnotesize}, tick label style={font=\footnotesize}, legend style={font=\scriptsize, at={(0.03,0.97)}, anchor=north west}]
+ \addplot[mark=*, primaryblue, thick] coordinates {(2,3)(3,5)(4,10)(5,16)(6,21)(7,31)(8,36)(9,50)};
+ \addplot[dashed, crimson, domain=2:9, samples=30] {(x^2+x)/2};
+ \legend{探索の結果, $(n^2+n)/2$}
+\end{axis}
+\end{tikzpicture}
+\caption{最少手数は $n$ のほぼ2乗に比例して増える。奇数のときは、偶数の式より少し少ない。}
+\end{figure}
+
+手数の内訳は、跳び越し（ジャンプ）が $\tfrac{n(n-1)}{2}$ 回で、ほかは1つ進む動きです。$n=6$ なら $\binom62=15$ 回のジャンプと6回の1歩で、合わせて21手になります。これは、逆順にするために「どの2匹も、入れ替わる」必要があり、2匹が入れ替わるときに1回は互いを跳び越すからです（6匹の組は $\binom62=15$ 組）。
+
+デュードニーは、14匹の例も示しています。手順「2,4,6,8,10,12,14,13,11,9,7,5,3,1」を7回繰り返して、さらに「2,4,\ldots,14」で、$(14^2+14)/2=105$ 手になります。本書でも、この手順を動かして、14匹が逆順になることを確かめました。
+
+\begin{pointbox}{この章のまとめ}
+\begin{itemize}[leftmargin=*]
+\item 駒を動かす問題は、全部の局面をたどる幅優先探索で、最少手数を確かめられる。
+\item 6匹のカエルは21手。原著の手順を動かして確かめ、$n=2\sim9$ の最少手数は、探索と原著の式とで一致した。
+\item ジャンプ回数は $\binom{n}{2}$ で決まる、という見方で、手数の下限が分かる。
+\end{itemize}
+\end{pointbox}
+
+%==========================================================
+\chapter{一筆書きと経路の問題（第5部、第239〜261問）}
+\markboth{第5章}{一筆書きと経路の問題}
+%==========================================================
+
+\section{この部の位置づけ}
+
+第5部は、「道を1回ずつ通って全部を回る」問題です。23問あります。これは、のちに\textbf{グラフ理論}と呼ばれる分野の入口です。オイラーが1736年にケーニヒスベルクの橋の問題を解いたことが、その始まりとされています。点（頂点）と、点を結ぶ線（辺）の集まりを\textbf{グラフ}と呼びます。
+
+\section{オイラーの定理}
+
+1つの点に集まる辺の数を、その点の\textbf{次数}と呼びます。連結なグラフについて、次のことが成り立ちます。
+
+\begin{itemize}[leftmargin=*]
+\item すべての点の次数が偶数なら、全部の辺を1回ずつ通って、出発点に戻れる（一筆書きの閉じた道）。
+\item 次数が奇数の点がちょうど2つなら、その2点の一方から出発して、もう一方で終わる一筆書きができる。
+\item それ以外（奇数の点が4つ以上）なら、一筆書きはできない。
+\end{itemize}
+
+直感的な理由は、途中の点では「入る辺」と「出る辺」が対になるので、途中で通る点の次数は偶数でなければならないことです。
+
+\section{第245問：八面体の上のハエ}
+
+正八面体の辺の上を、ハエが歩きます。てっぺんの頂点から出発して、12本の辺を1回ずつ通る道は、何通りあるか。
+
+正八面体は、6つの頂点、12本の辺をもち、どの頂点にも4本の辺が集まります。次数がすべて4（偶数）なので、一筆書きの閉じた道があり、必ず出発点に戻ります。
+
+\begin{figure}[htbp]
+\centering
+\begin{tikzpicture}[scale=1.8]
+ \foreach \k in {0,1,2}{
+   \coordinate (O\k) at ({90+120*\k}:1);
+   \coordinate (I\k) at ({270+120*\k}:0.5);
+ }
+ \draw[primaryblue, thick] (O0)--(O1)--(O2)--cycle;
+ \draw[crimson, thick] (I0)--(I1)--(I2)--cycle;
+ \foreach \i/\j in {0/1,0/2,1/0,1/2,2/0,2/1}{
+   \draw[darkslate] (O\i)--(I\j);
+ }
+ \foreach \k in {0,1,2}{
+   \fill[primaryblue] (O\k) circle (1.8pt);
+   \fill[crimson] (I\k) circle (1.8pt);
+ }
+ \node[lbl, above] at (O0) {頂点 A（てっぺん）};
+\end{tikzpicture}
+\caption{正八面体を平面に描いたもの（グラフとして）。6つの頂点（外側の三角形の3点と内側の三角形の3点）と12本の辺。どの頂点にも4本の辺が集まる。}
+\end{figure}
+
+原著の答えは「1,488通り（逆向きの道も別に数える）」です。本書では、12本の辺を1本ずつ選んで進む全部の道を計算機でたどって数え、てっぺんの頂点から出発する道がちょうど1,488通りあることを確かめました。原著の数と一致します。
+
+\section{第251問：水・ガス・電気}
+
+3軒の家 A、B、C のそれぞれに、水（W）、ガス（G）、電気（E）の3つの管を、互いに交差させずにつなげるか。これは、「3つの点と別の3つの点をすべて結んだグラフ」（$K_{3,3}$）が、平面に交差なく描けるかという問題です。
+
+\begin{figure}[htbp]
+\centering
+\begin{tikzpicture}[x=1.4cm,y=1.4cm]
+ \foreach \x/\n in {0/W,1.5/G,3/E}{\fill[primaryblue] (\x,2) circle (2.2pt) node[above, lbl] {\n};}
+ \foreach \x/\n in {0/A,1.5/B,3/C}{\fill[crimson] (\x,0) circle (2.2pt) node[below, lbl] {\n};}
+ \foreach \i in {0,1.5,3}{\foreach \j in {0,1.5,3}{\draw[darkslate] (\i,2)--(\j,0);}}
+\end{tikzpicture}
+\caption{$K_{3,3}$。9本の管（辺）を直線で描くと、いくつかが交差する。}
+\end{figure}
+
+答えは「できない」です。理由は、オイラーの多面体公式 $V-E+F=2$（頂点の数 $V$、辺の数 $E$、面の数 $F$）から出せます。$K_{3,3}$ では $V=6$、$E=9$ なので、平面に描けると仮定すると $F=2-6+9=5$。ところが、$K_{3,3}$ は、2つのグループの間にしか辺がないため、三角形ができません。したがって、どの面も4辺以上で囲まれ、面の周の辺の数の合計は $4F=20$ 以上。ところがこれは、各辺が2つの面に属するので $2E=18$ に等しいはずです。$20\le18$ は成り立たないので、矛盾です。したがって、$K_{3,3}$ は平面には描けません。
+
+デュードニーは、この問題に答えはないことを認めたうえで、「A の家の敷地を通らせてもらう」という発想の転換を示しています（家A を通る管を認める）。これは、条件を「管どうしが交差しない」から、「管が家の中を通ってもよい」に変えた、言葉の抜け道です。
+
+\begin{pointbox}{この章のまとめ}
+\begin{itemize}[leftmargin=*]
+\item 一筆書きの可否は、次数が偶数か奇数かで決まる（オイラーの定理）。
+\item 正八面体は、どの頂点も次数4で、一筆書きの閉じた道がある。てっぺんから出る道は1,488通り（計算で確認）。
+\item $K_{3,3}$ は、$V-E+F=2$ から、平面に交差なしでは描けない。
+\end{itemize}
+\end{pointbox}
+
+%==========================================================
+\chapter{組合せと群分けの問題（第6部、第262〜287問）}
+\markboth{第6章}{組合せと群分けの問題}
+%==========================================================
+
+\section{この部の位置づけ}
+
+第6部は、「何通りあるか」「どう組み分けるか」を問う問題です。26問あります。順列・組合せの数え上げと、「どの2人も、ちょうど1回ずつ同じ組になる」といった組分けの設計（のちの\textbf{組合せ設計}）がこの部の主役です。
+
+\section{第267問：間違った帽子}
+
+酔った8人の男が、帽子を勝手に取って帰ります。全員が\textbf{他人の帽子}を取る確率はいくらか。
+
+8人の帽子の取り方は $8!=40{,}320$ 通りです。そのうち、全員が自分以外の帽子をとる場合の数 $D_n$（\textbf{完全順列}、あるいは攪乱順列）は、次の関係で求まります。
+\[
+D_n=(n-1)\bigl(D_{n-1}+D_{n-2}\bigr),\qquad D_1=0,\ D_2=1 .
+\]
+これを順に計算すると $D_3=2$、$D_4=9$、$D_5=44$、$D_6=265$、$D_7=1854$、$D_8=14833$。デュードニーの答え（14,833通り）と一致します。
+
+\begin{table}[htbp]
+\centering
+\begin{tabular}{r|rrrrrrrr}
+\toprule
+人数 $n$ & 3 & 4 & 5 & 6 & 7 & 8 & 9 & 10\\
+\midrule
+$D_n$ & 2 & 9 & 44 & 265 & 1,854 & 14,833 & 133,496 & 1,334,961\\
+$D_n/n!$ & .333 & .375 & .367 & .368 & .3679 & .3679 & .3679 & .3679\\
+\bottomrule
+\end{tabular}
+\caption{完全順列の数と、その割合。}
+\end{table}
+
+\begin{figure}[htbp]
+\centering
+\begin{tikzpicture}
+\begin{axis}[width=9.5cm, height=5.6cm, xmin=1.5, xmax=10.5, ymin=0, ymax=0.5, xlabel={人数 $n$}, ylabel={全員が他人の帽子をとる確率}, xtick={2,...,10},
+  every axis label/.append style={font=\footnotesize}, tick label style={font=\footnotesize}, legend style={font=\scriptsize, at={(0.97,0.25)}, anchor=north east}]
+ \addplot[mark=*, primaryblue, thick] coordinates {(2,0.5)(3,0.3333)(4,0.375)(5,0.3667)(6,0.3681)(7,0.3679)(8,0.3679)(9,0.3679)(10,0.3679)};
+ \addplot[dashed, crimson, domain=2:10, samples=2] {0.36788};
+ \legend{$D_n/n!$, $1/\ee\approx0.3679$}
+\end{axis}
+\end{tikzpicture}
+\caption{人数が増えても、確率は約 $1/\ee\approx0.368$ に落ち着く。8人の場合は $14833/40320=0.3679$。}
+\end{figure}
+
+人数 $n$ が大きくなると、確率 $D_n/n!$ は、自然対数の底 $\ee$ の逆数 $1/\ee\approx0.3679$ に近づきます。8人ですでに小数第4位まで一致しています。人数が増えても確率が約37\%にとどまるのは、意外な結果です。
+
+\section{第272問：9人の少年}
+
+9人の少年が、3人ずつの組を作って6日間、散歩に出ます。3人は横一列に並んで歩き、どの2人も、\textbf{となり合って歩くのは1回だけ}にしたい。どう並べるか。
+
+3人の列では、となり合う組が2つ（左と中、中と右）です。1日に3つの列があるので、1日に6組のとなり合いができ、6日で36組。9人の2人組は $\binom92=36$ 通りですから、ちょうど全部の2人組が1回ずつ出ることになります。原著の答えの配置を表に写して、すべての2人組が1回ずつ出ることを計算機で確かめました。
+
+\begin{table}[htbp]
+\centering
+\begin{tabular}{llllll}
+\toprule
+1日目 & 2日目 & 3日目 & 4日目 & 5日目 & 6日目\\
+\midrule
+A B C & B F H & F A G & A D H & G B I & D C A\\
+D E F & E I A & I D B & B E G & C F D & E H B\\
+G H I & C G D & H C E & F I C & H A E & I G F\\
+\bottomrule
+\end{tabular}
+\caption{原著の答え。各列が3人の並び（左から右）。}
+\end{table}
+
+\begin{figure}[htbp]
+\centering
+\begin{tikzpicture}[scale=1.5]
+ \foreach \k/\n in {0/A,1/B,2/C,3/D,4/E,5/F,6/G,7/H,8/I}{
+   \coordinate (N\n) at ({90-40*\k}:1.3);
+   \fill[primaryblue] (N\n) circle (2pt);
+   \node[lbl] at ({90-40*\k}:1.65) {\n};
+ }
+ \draw[primaryblue, thick] (NA)--(NB);
+ \draw[primaryblue, thick] (NB)--(NC);
+ \draw[primaryblue, thick] (ND)--(NE);
+ \draw[primaryblue, thick] (NE)--(NF);
+ \draw[primaryblue, thick] (NG)--(NH);
+ \draw[primaryblue, thick] (NH)--(NI);
+ \draw[crimson, thick] (NB)--(NF);
+ \draw[crimson, thick] (NF)--(NH);
+ \draw[crimson, thick] (NE)--(NI);
+ \draw[crimson, thick] (NI)--(NA);
+ \draw[crimson, thick] (NC)--(NG);
+ \draw[crimson, thick] (NG)--(ND);
+ \draw[accentgreen, thick] (NF)--(NA);
+ \draw[accentgreen, thick] (NA)--(NG);
+ \draw[accentgreen, thick] (NI)--(ND);
+ \draw[accentgreen, thick] (ND)--(NB);
+ \draw[accentgreen, thick] (NH)--(NC);
+ \draw[accentgreen, thick] (NC)--(NE);
+ \draw[warmamber, thick] (NA)--(ND);
+ \draw[warmamber, thick] (ND)--(NH);
+ \draw[warmamber, thick] (NB)--(NE);
+ \draw[warmamber, thick] (NE)--(NG);
+ \draw[warmamber, thick] (NF)--(NI);
+ \draw[warmamber, thick] (NI)--(NC);
+ \draw[violet, thick] (NG)--(NB);
+ \draw[violet, thick] (NB)--(NI);
+ \draw[violet, thick] (NC)--(NF);
+ \draw[violet, thick] (NF)--(ND);
+ \draw[violet, thick] (NH)--(NA);
+ \draw[violet, thick] (NA)--(NE);
+ \draw[cyan!70!black, thick] (ND)--(NC);
+ \draw[cyan!70!black, thick] (NC)--(NA);
+ \draw[cyan!70!black, thick] (NE)--(NH);
+ \draw[cyan!70!black, thick] (NH)--(NB);
+ \draw[cyan!70!black, thick] (NI)--(NG);
+ \draw[cyan!70!black, thick] (NG)--(NF);
+ \foreach \n in {A,...,I}{\fill[darkslate] (N\n) circle (2pt);}
+\end{tikzpicture}
+\caption{9人（点）を、6日間の「となり合い」で結んだ図。6色が6日に対応し、全部で36本。9人の組合せ $\binom92=36$ のどの2人も、ちょうど1本の線で結ばれている（計算機で確認）。}
+\end{figure}
+
+原著は、一般に $12n+9$ 人で $9n+6$ 日の組分けができる、と述べています。$n=1$ なら21人で15日。21人の組合せは $\binom{21}{2}=210$、15日に7列の3人組があり、1列にとなり合う組が2つだから $15\times7\times2=210$ で一致します。$n=2$ の33人・24日も、$\binom{33}{2}=528=24\times11\times2$ で一致します。このように、人数と日数の関係式は、数え上げだけで確かめられます（存在そのものは別の問題で、本書では配置を調べていません）。
+
+\section{補足：キルクマンの15人の女学生}
+
+第272問は、「15人の女学生の問題（第269問の解答を見よ）」を参照しています。15人の女学生が、3人ずつ5組に分かれて7日間散歩し、どの2人も、同じ組になるのが1回だけ、という有名な問題です。15人の組合せは $\binom{15}{2}=105$。1日に5組あり、1組から3組の対ができるので、1日に15組、7日で105組。ちょうど過不足なく対応します。この問題は、1850年ごろにキルクマンが提出したとされています（年代は一般に言われる説明で、本書では原典を確認していません）。
+
+\begin{pointbox}{この章のまとめ}
+\begin{itemize}[leftmargin=*]
+\item 完全順列 $D_n$ の漸化式 $D_n=(n-1)(D_{n-1}+D_{n-2})$。人数が多いとき、確率は $1/\ee$ に近づく。
+\item 9人の少年の問題は、組合せの数 $\binom92=36$ が、6日のとなり合いの数 36 と一致する。
+\item 「どの2人も1回だけ」の組分けは、人数と日数のあいだの数え上げの関係から、可能性の目安が立つ。
+\end{itemize}
+\end{pointbox}
+
+%==========================================================
+\chapter{チェス盤の問題（第7部、第288〜361問）}
+\markboth{第7章}{チェス盤の問題}
+%==========================================================
+
+\section{この部の位置づけ}
+
+第7部は、74問もある大きな部で、第1部に次ぎます。チェスの駒を盤の上に並べたり、動かしたりして、「ルーク（飛車）8個」「クイーン8個」「ビショップ」「ナイト」などの配置と数え上げを問います。この章では、数え上げが検算できる4つの話題を取り上げます。
+
+\section{第295問：8個のルーク}
+
+ルークは、縦と横に何升でも動く駒です。8×8の盤に、互いに取り合わないように8個のルークを置く方法は何通りか。どの行にもどの列にもちょうど1個ずつ置くことになります。1行目の置き場所は8通り、2行目は残りの7列のどれか、……と進むので
+\[
+8\times7\times6\times5\times4\times3\times2\times1=8!=40{,}320
+\]
+通りです。原著の答えと一致します。
+
+\section{第300問：8個のクイーン}
+
+クイーンは縦・横・斜めに動く、最強の駒です。互いに取り合わないように8個を置く方法は、全部で92通りあり、回転・裏返しで重なるものを同じとすると12通りです（ナウクが1850年に提出した問題と、原著に書かれています）。
+
+本書では、全部の置き方を計算機でたどって、92通りと12通りを確かめました。盤の大きさ $n$ を変えると、解の数は次のようになります。
+
+\begin{table}[htbp]
+\centering
+\begin{tabular}{c|cccccccccc}
+\toprule
+$n$ & 1 & 2 & 3 & 4 & 5 & 6 & 7 & 8 & 9 & 10\\
+\midrule
+解の数 & 1 & 0 & 0 & 2 & 10 & 4 & 40 & 92 & 352 & 724\\
+\bottomrule
+\end{tabular}
+\caption{$n\times n$ の盤に $n$ 個のクイーンを置く方法の数（計算機で数えた）。}
+\end{table}
+
+デュードニーは、92通りのうちの1つの型について、「斜め方向にも、どの3個も一直線に並ばない」という条件を付けています。本書で調べると、92通りのうち、盤上のどの3個も一直線上にない（縦横斜め、どんな方向にも）配置は8通りで、これは1つの型を回転・裏返ししたものでした。原著が「12通りのうち、この条件を満たすのは1つ」と言っているのと合います。
+
+\begin{figure}[htbp]
+\centering
+\begin{tikzpicture}[x=0.62cm,y=0.62cm]
+ \foreach \r in {0,...,7}{\foreach \c in {0,...,7}{
+   \pgfmathparse{mod(\r+\c,2)==0?1:0}
+   \ifnum\pgfmathresult=1 \fill[softblue] (\c,7-\r) rectangle ++(1,1);\else \fill[white] (\c,7-\r) rectangle ++(1,1);\fi
+ }}
+ \draw[darkslate] (0,0) rectangle (8,8);
+ \foreach \r/\c in {0/2,1/4,2/7,3/3,4/0,5/6,6/1,7/5}{
+   \node[font=\large, text=crimson] at (\c+0.5,7-\r+0.5) {$\mathsf{Q}$};
+ }
+ \foreach \i in {1,...,8}{\node[lbl] at (\i-0.5,-0.4) {\i};}
+\end{tikzpicture}
+\caption{8個のクイーンの配置の1つ（どの3個も一直線上にない型）。上から順に、各行のクイーンは左から3、5、8、4、1、7、2、6列目。}
+\end{figure}
+
+\section{第297問：ビショップを最少で}
+
+ビショップは斜めに動く駒です。盤のすべての升が、ビショップのいる升か、ビショップが攻撃する升になるように、できるだけ少ない数のビショップを置きます。原著の答えは「8個」です。
+
+ビショップは、白い升にいれば白い升にしか動けません。32個の白升と、32個の黒升を、別々に覆えばよいので、それぞれの色で何個必要かを調べます。本書では、各色の升（32個）を3個のビショップで覆えるかを全部の置き方で調べて、\textbf{3個では覆えず、4個なら覆える}ことを確かめました。したがって2色合わせて最少8個です。
+
+\begin{figure}[htbp]
+\centering
+\begin{tikzpicture}[x=0.5cm,y=0.5cm]
+ \foreach \r in {0,...,7}{\foreach \c in {0,...,7}{
+   \pgfmathparse{mod(\r+\c,2)==0?1:0}
+   \ifnum\pgfmathresult=1 \fill[softblue] (\c,7-\r) rectangle ++(1,1);\else \fill[white] (\c,7-\r) rectangle ++(1,1);\fi
+ }}
+ \draw[darkslate] (0,0) rectangle (8,8);
+ \foreach \c in {0,...,7}{
+   \node[font=\small, text=crimson] at (\c+0.5,4.5) {$\mathsf{B}$};
+ }
+\end{tikzpicture}
+\caption{8個のビショップを、盤の中央の1行（上から4行目）に並べる。原著が示す配置。8個で、盤のすべての升がビショップの上か攻撃範囲に入る。}
+\end{figure}
+
+\section{第347問：長方形の数}
+
+チェス盤の線で囲まれた長方形（正方形を含む）は、全部でいくつあるか。盤の縦の線は9本、横の線も9本あります。長方形は、縦の線を2本、横の線を2本選ぶと決まります。
+\[
+\binom92\times\binom92=36\times36=1296 .
+\]
+このうち正方形は、1辺が $k$ 升（$k=1,\ldots,8$）のものが $(9-k)^2$ 個ずつなので
+\[
+\sum_{k=1}^{8}(9-k)^2=64+49+36+25+16+9+4+1=204 .
+\]
+原著の答え（長方形1,296個、うち正方形204個、正方形でないもの1,092個）と一致します。$n\times n$ の盤では、全体は $\bigl(\tfrac{n(n+1)}{2}\bigr)^2$、つまり「三角数の2乗」です。
+
+\begin{figure}[htbp]
+\centering
+\begin{tikzpicture}
+\begin{axis}[width=9.5cm, height=5.6cm, xmin=0.5, xmax=8.5, ymin=0, ymax=1400, xlabel={盤の1辺の升の数 $n$}, ylabel={長方形の数}, xtick={1,...,8},
+  every axis label/.append style={font=\footnotesize}, tick label style={font=\footnotesize}, legend style={font=\scriptsize, at={(0.03,0.97)}, anchor=north west}]
+ \addplot[mark=*, primaryblue, thick] coordinates {(1,1)(2,9)(3,36)(4,100)(5,225)(6,441)(7,784)(8,1296)};
+ \addplot[mark=square*, crimson, thick] coordinates {(1,1)(2,5)(3,14)(4,30)(5,55)(6,91)(7,140)(8,204)};
+ \legend{長方形すべて, うち正方形}
+\end{axis}
+\end{tikzpicture}
+\caption{$n\times n$ の盤の長方形の数（青）と正方形の数（赤）。$n=8$ で 1,296 と 204。}
+\end{figure}
+
+\section{補足：ナイトの巡回路}
+
+ナイトは「L字型」に動く駒です。盤のすべての升を1回ずつ訪れる道を\textbf{ナイト・ツアー}と呼びます。これはデュードニーの第7部にも関係する話題ですが、ここに載せる経路は、本書の計算機が見つけた1つの例で、原著の答えではありません。経路の各2点がナイトの動きで結ばれ、64升を1回ずつ通ることを確かめました（出発点と終点はナイトの動きでは結ばれない、つまり閉じていません）。
+
+\begin{figure}[htbp]
+\centering
+\begin{tikzpicture}[x=0.66cm,y=0.66cm]
+ \foreach \r in {0,...,7}{\foreach \c in {0,...,7}{
+   \pgfmathparse{mod(\r+\c,2)==0?1:0}
+   \ifnum\pgfmathresult=1 \fill[softblue] (\c,\r) rectangle ++(1,1);\else \fill[white] (\c,\r) rectangle ++(1,1);\fi
+ }}
+ \draw[darkslate] (0,0) rectangle (8,8);
+ \draw[crimson, thick] (0.5,0.5) -- (2.5,1.5) -- (4.5,0.5) -- (6.5,1.5) -- (7.5,3.5) -- (6.5,5.5) -- (7.5,7.5) -- (5.5,6.5) -- (7.5,5.5) -- (6.5,7.5) -- (4.5,6.5) -- (2.5,7.5) -- (0.5,6.5) -- (1.5,4.5) -- (0.5,2.5) -- (1.5,0.5) -- (3.5,1.5) -- (5.5,0.5) -- (7.5,1.5) -- (5.5,2.5) -- (6.5,0.5) -- (7.5,2.5) -- (6.5,4.5) -- (7.5,6.5) -- (5.5,7.5) -- (3.5,6.5) -- (1.5,7.5) -- (0.5,5.5) -- (2.5,6.5) -- (0.5,7.5) -- (1.5,5.5) -- (0.5,3.5) -- (1.5,1.5) -- (3.5,0.5) -- (5.5,1.5) -- (7.5,0.5) -- (6.5,2.5) -- (7.5,4.5) -- (6.5,6.5) -- (4.5,7.5) -- (5.5,5.5) -- (6.5,3.5) -- (4.5,4.5) -- (2.5,3.5) -- (4.5,2.5) -- (5.5,4.5) -- (3.5,5.5) -- (4.5,3.5) -- (2.5,2.5) -- (3.5,4.5) -- (5.5,3.5) -- (4.5,1.5) -- (3.5,3.5) -- (4.5,5.5) -- (3.5,7.5) -- (1.5,6.5) -- (2.5,4.5) -- (3.5,2.5) -- (1.5,3.5) -- (2.5,5.5) -- (0.5,4.5) -- (1.5,2.5) -- (2.5,0.5) -- (0.5,1.5);
+ \fill[accentgreen] (0.5,0.5) circle (3pt);
+\end{tikzpicture}
+\caption{ナイトが64升を1回ずつ通る道の一例（緑の丸が出発点、左下）。}
+\end{figure}
+
+\begin{pointbox}{この章のまとめ}
+\begin{itemize}[leftmargin=*]
+\item ルーク8個は $8!=40{,}320$ 通り。クイーン8個は92通り（回転・裏返しで12通り）。
+\item ビショップで盤全体を覆うには、白升4個、黒升4個の計8個が最少。
+\item 長方形の数は、縦横の線の選び方 $\binom{n+1}{2}^2$ で数える。
+\item 数え上げは、公式で出して、計算機で全部たどって確かめる、という二重の確認ができる。
+\end{itemize}
+\end{pointbox}
+
+%==========================================================
+\chapter{計量・詰め込みの問題（第8部、第362〜372問）}
+\markboth{第8章}{計量・詰め込みの問題}
+%==========================================================
+
+\section{この部の位置づけ}
+
+第8部は11問で、「容器を使って液体を分ける」「混ぜる」「箱に詰める」といった問題です。デュードニーは、この部の解説の最後に、「こうした問題には一般的な規則がなく、個人の工夫に頼ることが多い」と述べています。ここでは、探索で確かめられる問題と、計算で答えが出る問題を取り上げます。
+
+\section{第362問：ワッセイル・ボウル}
+
+クリスマスイブに、3人の浮浪者が、麦酒6クォート（12パイント）の入った小さな樽を手に入れました。1人は5パイントの水差し、もう1人は3パイントの水差しをもっています。ほかの容器は使えません。12パイントを、3人で4パイントずつに分けるにはどうするか。注ぎ替える操作（水差しに注ぐ、人が飲む）を1回と数えて、最少の回数を求めます。
+
+デュードニーの答えは11回です。本書では、「樽・5パイントの水差し・3パイントの水差し・3人の飲んだ量」の状態を全部たどる幅優先探索で、最少の操作回数を調べました。注ぎ方は「ある容器から別の容器へ、いっぱいになるか空になるまで」、または「容器の中身を全部、1人が飲む」とすると、最少は11回で、原著の答えと一致しました。
+
+\begin{table}[htbp]
+\centering
+\begin{tabular}{c|cccccc}
+\toprule
+手 & 樽 & 5パイント & 3パイント & X & Y & Z\\
+\midrule
+0（始め） & 12 & 0 & 0 & 0 & 0 & 0\\
+1 & 7 & 5 & 0 & 0 & 0 & 0\\
+2 & 7 & 2 & 3 & 0 & 0 & 0\\
+3 & 7 & 0 & 3 & 2 & 0 & 0\\
+4 & 7 & 3 & 0 & 2 & 0 & 0\\
+5 & 4 & 3 & 3 & 2 & 0 & 0\\
+6 & 0 & 3 & 3 & 2 & 4 & 0\\
+7 & 0 & 5 & 1 & 2 & 4 & 0\\
+8 & 0 & 5 & 0 & 2 & 4 & 1\\
+9 & 0 & 2 & 3 & 2 & 4 & 1\\
+10 & 0 & 0 & 3 & 4 & 4 & 1\\
+11 & 0 & 0 & 0 & 4 & 4 & 4\\
+\bottomrule
+\end{tabular}
+\caption{11回の操作の途中経過（原著の答えの表）。各行の合計は12パイント。}
+\end{table}
+
+\begin{figure}[htbp]
+\centering
+\begin{tikzpicture}
+\begin{axis}[width=11cm, height=5.4cm, xmin=0, xmax=11, ymin=0, ymax=13, xlabel={操作の回数}, ylabel={パイント}, xtick={0,...,11},
+  every axis label/.append style={font=\footnotesize}, tick label style={font=\footnotesize}, legend style={font=\scriptsize, at={(0.97,0.97)}, anchor=north east}]
+ \addplot[mark=*, primaryblue, thick] coordinates {(0,12)(1,7)(2,7)(3,7)(4,7)(5,4)(6,0)(7,0)(8,0)(9,0)(10,0)(11,0)};
+ \addplot[mark=square*, crimson, thick] coordinates {(0,0)(1,0)(2,0)(3,2)(4,2)(5,2)(6,2)(7,2)(8,2)(9,2)(10,4)(11,4)};
+ \addplot[mark=triangle*, accentgreen, thick] coordinates {(0,0)(1,0)(2,0)(3,0)(4,0)(5,0)(6,4)(7,4)(8,4)(9,4)(10,4)(11,4)};
+ \legend{樽の中身, Xの飲んだ量, Yの飲んだ量}
+\end{axis}
+\end{tikzpicture}
+\caption{樽の中身は、5回目までに12→4に減り、6回目で空になる。X、Yが飲んだ量の変化も合わせて描いた（Z は8回目に1、11回目に4）。}
+\end{figure}
+
+\section{第367問：ワインと水}
+
+ワイングラス（小）を半分までワインで満たし、その2倍の大きさのグラスを3分の1までワインで満たします。それぞれに水を足していっぱいにし、2つを1つのタンブラーに空けます。混ぜた液体の何分の何がワインか。
+
+小さいグラスの容量を1とすると、大きいグラスは2です。ワインは $1\times\tfrac12+2\times\tfrac13=\tfrac12+\tfrac23=\tfrac76$、全体の液体は $1+2=3$。ワインの割合は
+\[
+\frac{7/6}{3}=\frac{7}{18}.
+\]
+したがって、水は $\tfrac{11}{18}$。原著の答えと一致します。人によって答えがばらつくのは、「半分」「3分の1」を、グラス全体ではなく、混ぜた液体全体に対する割合に見誤ってしまうからです。
+
+\section{第364問：樽がちょうど半分か}
+
+樽の中身が半分より多いか少ないかを、定規も棒も使わずに確かめる方法はあるか。答えは、樽を傾ける方法です。
+
+\begin{figure}[htbp]
+\centering
+\begin{tikzpicture}[scale=1.1]
+ % cylinder tilted: draw as parallelogram side view
+ \coordinate (a) at (0,0);
+ \coordinate (b) at (3,0);
+ \coordinate (c) at (3,2);
+ \coordinate (d) at (0,2);
+ \draw[thick, darkslate] (a)--(b)--(c)--(d)--cycle;
+ \fill[softblue] (a)--(b)--(d)--cycle;
+ \draw[crimson, thick] (b)--(d);
+ \node[lbl, below left] at (a) {};
+ \node[lbl, below right] at (b) {底の縁};
+ \node[lbl, above left] at (d) {口の縁};
+ \node[font=\footnotesize] at (1,0.55) {水};
+\end{tikzpicture}
+\caption{樽（断面）を傾けて、水面が口の縁と、反対側の底の縁を結ぶ線にちょうど重なれば、水は半分。長方形の対角線は面積を2等分することを使う。}
+\end{figure}
+
+樽を傾けて、水面が口の縁に届いたところで、水面が反対側の底の縁にちょうど届けば、水面は対角線に重なります。長方形の対角線は面積を2等分し、円筒（上下が対称な容器）では体積も2等分されるので、ちょうど半分です。底が見えるなら半分より少なく、水面が底の縁より高ければ半分より多い、と分かります。デュードニーは、この方法が、対称な形のすべての容器に使えると述べています。
+
+\begin{pointbox}{この章のまとめ}
+\begin{itemize}[leftmargin=*]
+\item 計量の問題は、状態（容器の中身）の組を全部たどる探索で、最少手数を確かめられる。
+\item 第362問は11回が最少（探索で確認）。
+\item 分数の混合は、「元の液体の総量に対するワインの量」で比べる（第367問は $7/18$）。
+\item 対称な容器の半分は、対角線の考えで決められる（第364問）。
+\end{itemize}
+\end{pointbox}
+
+%==========================================================
+\chapter{川渡りの問題（第9部、第373〜377問）}
+\markboth{第9章}{川渡りの問題}
+%==========================================================
+
+\section{この部の位置づけ}
+
+第9部は、5問だけの小さな部です。小さな船で川を渡るときに、「この組み合わせは同じ岸に残せない」という制限がつく問題です。「狼とヤギとキャベツ」の問題の仲間で、状態を全部書き出して調べる\textbf{状態空間の探索}が、そのまま使える問題です。
+
+デュードニーは、この部の解説で「川渡りの問題に、一般的な解き方はない。ある特別な場合の公式は見つかっても、条件が少し変わると役に立たない」と述べています。
+
+\section{第375問：5組の嫉妬深い夫婦}
+
+洪水で、5組の夫婦が水に囲まれ、一度に3人しか乗れない船で逃げます。どの夫も嫉妬深く、妻が、自分のいないところで他の男と一緒にいる（船の上でも岸の上でも）ことを許しません。最少で何回の渡航で、全員が向こう岸に着けるか。
+
+渡航は、往きも帰りも1回と数えます。原著の答えは11回です。本書では、「どちらの岸に誰がいるか、船はどちらにあるか」の状態を全部たどる幅優先探索で、最少の渡航回数を調べ、\textbf{11回}であることを確かめました。
+
+夫を A〜E、妻を a〜e として、探索で見つけた11回の渡り方を次に示します（原著が示す別の手順もありますが、どちらも11回です）。
+
+\begin{table}[htbp]
+\centering
+\begin{tabular}{rcl}
+\toprule
+回 & 向き & 船に乗る人\\
+\midrule
+1 & → & A, a\\
+2 & ← & A\\
+3 & → & b, c, d\\
+4 & ← & a\\
+5 & → & B, C, D\\
+6 & ← & B, b\\
+7 & → & A, B, E\\
+8 & ← & c\\
+9 & → & a, b\\
+10 & ← & a\\
+11 & → & a, c, e\\
+\bottomrule
+\end{tabular}
+\caption{5組の夫婦の11回の渡り方の1例（本書の探索による。→は向こう岸へ、←は元の岸へ）。どの時点でも、妻が夫のいない所で他の男と同席することはない。}
+\end{table}
+
+\section{少ない組の場合：探索の結果}
+
+船の定員と夫婦の数を変えて、同じ探索を行うと、次のようになりました。
+
+\begin{table}[htbp]
+\centering
+\begin{tabular}{ccc}
+\toprule
+夫婦の数 & 船の定員 & 最少の渡航回数\\
+\midrule
+3 & 2 & 11\\
+4 & 2 & 不可能\\
+5 & 2 & 不可能\\
+5 & 3 & 11\\
+\bottomrule
+\end{tabular}
+\caption{探索の結果。3組・定員2は有名な「嫉妬深い夫」の問題で、11回。4組・定員2はどうやっても渡れない。}
+\end{table}
+
+\begin{figure}[htbp]
+\centering
+\begin{tikzpicture}[x=0.9cm,y=0.5cm]
+ \draw[primaryblue, fill=softblue] (-1,0) rectangle (2,6);
+ \draw[primaryblue, fill=softblue] (7,0) rectangle (10,6);
+ \draw[crimson, fill=softrose] (2,0) rectangle (7,6);
+ \node[lbl] at (0.5,5.2) {こちらの岸};
+ \node[lbl] at (8.5,5.2) {向こうの岸};
+ \node[lbl] at (4.5,5.2) {川};
+ \draw[ax] (2.4,3)--(6.6,3) node[midway, above, lbl] {船（3人まで）};
+ \draw[ax] (6.6,1.5)--(2.4,1.5) node[midway, below, lbl] {帰りも1人は必要};
+\end{tikzpicture}
+\caption{川渡りの設定。船が戻るには、必ず誰かが漕いで帰ってこなければならない（往復は2回の渡航）。このことが、最少回数を押し上げる。}
+\end{figure}
+
+\begin{pointbox}{この章のまとめ}
+\begin{itemize}[leftmargin=*]
+\item 川渡りは、「岸の状態」を点、「船で運ぶ」を辺とみなした探索で、最少回数が確かめられる。
+\item 5組の夫婦・定員3の船なら11回（探索で確認）。3組・定員2も11回。4組・定員2は不可能。
+\item 条件が少し変わると、答えが大きく変わる。一般の公式がないというデュードニーの言葉どおり。
+\end{itemize}
+\end{pointbox}
+
+%==========================================================
+\chapter{ゲームと賭けの問題（第10部、第378〜391問）}
+\markboth{第10章}{ゲームと賭けの問題}
+%==========================================================
+
+\section{この部の位置づけ}
+
+第10部は14問で、ドミノ、トランプ、サイコロ、クリケット、競馬など、遊びや賭けに関する問題です。計算の中心は、代数（1次方程式）と、場合の数、確率です。ここでは、式で解ける3問を取り上げます。
+
+\section{第386問：サイコロの手品}
+
+3つのサイコロを、見えないように振ってもらいます。次の計算をしてもらい、結果だけ教えてもらいます。
+
+\begin{enumerate}[leftmargin=*]
+\item 1つ目の出た目に2をかけて、5を足す。
+\item その結果に5をかけて、2つ目の出た目を足す。
+\item その結果に10をかけて、3つ目の出た目を足す。
+\end{enumerate}
+
+1つ目、2つ目、3つ目の目を $a$、$b$、$c$ とすると、
+\[
+\bigl((2a+5)\times5+b\bigr)\times10+c=100a+10b+c+250 .
+\]
+つまり、教えてもらった数から250を引くと、$100a+10b+c$、つまり3桁の数 $abc$ になります。$a,b,c$ はそれぞれ1〜6で桁上がりが起きないので、百の位が1つ目、十の位が2つ目、一の位が3つ目の目です。原著の例（1、3、6が出て386）は、$386-250=136$ で確かめられます。
+
+\begin{figure}[htbp]
+\centering
+\begin{tikzpicture}[node distance=5mm]
+ \node[wbox] (a) {1つ目の目 $a$};
+ \node[fbox, right=of a] (b) {$\times2+5$};
+ \node[fbox, right=of b] (c) {$\times5+b$};
+ \node[fbox, right=of c] (d) {$\times10+c$};
+ \node[abox, right=of d] (e) {$100a+10b+c+250$};
+ \draw[->, thick] (a)--(b); \draw[->, thick] (b)--(c); \draw[->, thick] (c)--(d); \draw[->, thick] (d)--(e);
+\end{tikzpicture}
+\caption{計算の流れ。1つ目の目にかけた数の積が $2\times5\times10=100$ になり、百の位に来る。250 は、$5\times5\times10$ のところから出てくる定数。}
+\end{figure}
+
+\section{第390問：競馬の賭け}
+
+3頭の馬 アコーン、ブルーボトル、カプセルが走ります。オッズは、アコーンが4対1、ブルーボトルが3対1、カプセルが2対1。「どの馬が勝っても、13ポンドもうかる」ように賭けるには、それぞれにいくら賭ければよいか。
+
+オッズ「$k$ 対1」は、賭け金1に対して $k$ の儲けが（賭け金が戻って）あることです。賭け金を $x,y,z$ とします。アコーンが勝てば、儲けは $4x-y-z$。ほかも同様で、3つを13ポンドにします。
+\[
+4x-y-z=13,\quad 3y-x-z=13,\quad 2z-x-y=13 .
+\]
+$S=x+y+z$ とおくと、$5x-S=13$、$4y-S=13$、$3z-S=13$。よって $x=\tfrac{S+13}{5}$、$y=\tfrac{S+13}{4}$、$z=\tfrac{S+13}{3}$。足して
+\[
+S=(S+13)\left(\tfrac15+\tfrac14+\tfrac13\right)=\tfrac{47}{60}(S+13)
+\ \Longrightarrow\ 13S=47\times13\ \Longrightarrow\ S=47 .
+\]
+したがって $x=12$、$y=15$、$z=20$ ポンド。原著の答えと一致します。合計47ポンドを賭け、どの馬が勝っても $60-47=13$ ポンドの儲けです。
+
+\begin{table}[htbp]
+\centering
+\begin{tabular}{lrrr}
+\toprule
+勝った馬 & 戻ってくる金額 & 賭けた合計 & 儲け\\
+\midrule
+アコーン（4対1） & $12\times5=60$ & 47 & 13\\
+ブルーボトル（3対1） & $15\times4=60$ & 47 & 13\\
+カプセル（2対1） & $20\times3=60$ & 47 & 13\\
+\bottomrule
+\end{tabular}
+\caption{3通りのどの結果でも、儲けは13ポンド。}
+\end{table}
+
+\begin{notebox}{なぜ、こんな賭けが成り立つのか}
+オッズ $k$ 対1の馬が勝つと、1あたり $k+1$ 戻ってきます。$\tfrac15+\tfrac14+\tfrac13=\tfrac{47}{60}<1$ なので、どの馬が勝っても同じ額が戻るように賭けると、全部の賭け金より戻りが多くなります（実際の賭けでは、胴元の取り分のため、この合計は1より大きくなるのが普通です）。この問題は、あくまで算数の問題として読んでください。
+\end{notebox}
+
+\begin{pointbox}{この章のまとめ}
+\begin{itemize}[leftmargin=*]
+\item サイコロの手品は、$100a+10b+c+250$ という式の構造で説明できる。
+\item どの結果でも同じ儲けになる賭けは、連立1次方程式で決まる（12、15、20ポンドで13ポンドの儲け）。
+\item 第10部には、クリケットの得点（第387問）のように、競技の規則を知らないと答えが出ない問題もあります。本書では規則を確かめていないので、取り上げていません。
+\end{itemize}
+\end{pointbox}
+
+%==========================================================
+\chapter{必勝法のあるゲームの問題（第11部、第392〜398問）}
+\markboth{第11章}{必勝法のあるゲームの問題}
+%==========================================================
+
+\section{この部の位置づけ}
+
+第11部は7問で、2人で遊ぶゲームの「必ず勝つ方法」を探す問題です。先手と後手のどちらが必勝か、そのためにどう指すかを問います。現代では\textbf{組合せゲーム理論}と呼ばれる分野の入口にあたります。ここでは、3つのゲーム（小石、葉巻、マッチ）を取り上げます。
+
+\section{第392問：小石のゲーム}
+
+奇数個の小石（たとえば15個）を2人の間に置きます。交代で1個、2個、または3個を取り、取った小石の合計が\textbf{奇数}になった人が勝ちです。先手と後手のどちらが勝つか。
+
+全部の局面について「手番の人が勝てるか」を、最後から逆にたどって計算しました（持ち点の奇偶と、残りの個数を状態とする）。奇数個で始めたとき、先手が負けるのは、$n=5,13,21,29,\ldots$ の場合です。原著の「先手が負けるのは5と、5に8の倍数を足した数（13、21、29、…）」と一致します。15個なら先手の勝ちで、先手は最初に2個取ります（原著の答え）。13個なら、後手に正しく指されると先手は必ず負けます。
+
+\begin{figure}[htbp]
+\centering
+\begin{tikzpicture}[x=0.52cm,y=0.5cm]
+ \foreach \n/\w in {1/1,3/1,5/0,7/1,9/1,11/1,13/0,15/1,17/1,19/1,21/0,23/1,25/1,27/1,29/0,31/1,33/1}{
+   \ifnum\w=1
+     \draw[primaryblue, fill=softblue] (\n/2,0) rectangle ++(0.9,1);
+   \else
+     \draw[crimson, fill=softrose] (\n/2,0) rectangle ++(0.9,1);
+   \fi
+   \node[font=\tiny] at (\n/2+0.45,0.5) {\n};
+ }
+ \node[lbl, anchor=west] at (0.5,-0.7) {青：先手の勝ち　　赤：先手の負け（5, 13, 21, 29）};
+\end{tikzpicture}
+\caption{小石の数が奇数 $n$ のときの先手の勝ち負け。負けるのは $n\equiv5\pmod 8$ の場合。}
+\end{figure}
+
+\section{第398問：葉巻のパズル}
+
+四角いテーブルの上に、2人が交代で、葉巻を1本ずつ（平らな端を下にして立てて）置きます。すでにある葉巻に触れてはいけません。最後の1本を置く人が勝ちです。テーブルの大きさや葉巻の大きさは問われません（原著では、テーブルは2フィート四方以上、葉巻は4.5インチ以下とされています）。どちらが勝つか。
+
+答えは、\textbf{先手が必ず勝つ}です。先手は最初の1本を、テーブルの真ん中に置きます。そのあとは、後手が置いた場所の、テーブルの中心に対して\textbf{点対称の位置}に置き返すのです。中心に置いた葉巻は、それ自身が中心に対して対称なので、後手がどこに置いても、点対称の位置は空いていて、先に置いた葉巻にも触れません。したがって、後手が置ける限り、先手も置けます。最後に置くのは先手です。（これは原著の説明に沿った考え方で、葉巻の形や大きさについての細かい条件までは、本書では検討していません。）
+
+\begin{figure}[htbp]
+\centering
+\begin{tikzpicture}[scale=0.9]
+ \draw[thick, darkslate, fill=softamber] (0,0) rectangle (6,6);
+ \fill[crimson] (3,3) circle (5pt);
+ \node[lbl, below right] at (3,3) {先手の1本目};
+ \fill[primaryblue] (1.2,4.6) circle (4pt);
+ \fill[primaryblue] (4.8,1.4) circle (4pt);
+ \draw[gray, dashed] (1.2,4.6)--(4.8,1.4);
+ \node[lbl, above] at (1.2,4.7) {後手};
+ \node[lbl, below] at (4.8,1.3) {先手};
+ \fill[primaryblue] (4.4,4.9) circle (4pt);
+ \fill[primaryblue] (1.6,1.1) circle (4pt);
+ \draw[gray, dashed] (4.4,4.9)--(1.6,1.1);
+\end{tikzpicture}
+\caption{先手は中央に1本置き、あとは後手の置いた点の、中心に対して反対側に置く。点対称なので、後手が置けるかぎり先手も置ける。}
+\end{figure}
+
+デュードニーは、「テーブルと葉巻の大きさの関係で決まる」「確率の問題だ」と考えたクラブの会員たちの誤りを指摘しています。大きさがどうであれ、対称性で答えが決まるのが、この問題の面白さです。
+
+\section{第396問：マッチの謎（ニム）}
+
+30本のマッチを、14、11、5本の3つの山に分けます。2人が交代で、\textbf{1つの山から好きな本数}を取り、\textbf{最後の1本を取った人が負け}です。後手から見て、どの分け方なら必ず勝てるか。
+
+デュードニーの一般解は、「各山の本数を2の累乗の和で表す（8、4、2、1）。どの2の累乗も、全体で偶数個ずつ出てくるように残せば勝てる」というものです。たとえば12、11、7なら、2進法で書いて各桁を数えます。
+
+\begin{table}[htbp]
+\centering
+\begin{tabular}{r|cccc}
+\toprule
+山 & 8 & 4 & 2 & 1\\
+\midrule
+12 & ○ & ○ & & \\
+11 & ○ & & ○ & ○\\
+7 & & ○ & ○ & ○\\
+\midrule
+各桁の個数 & 2 & 2 & 2 & 2\\
+\bottomrule
+\end{tabular}
+\caption{12、11、7 は、どの桁も偶数個。後手が勝つ配置。}
+\end{table}
+
+これは、現代の言い方では、各山の本数のビットごとの排他的論理和（XOR）が0、という条件です。先手が1つの山から取ると、必ずこの偶数の状態が崩れ、後手は別の山から取って、また偶数に戻せます。
+
+原著は、30本を3つの異なる山に分けて、後手が勝つ分け方を13通り挙げています（15, 14, 1／15, 13, 2／15, 12, 3／15, 11, 4／15, 10, 5／15, 9, 6／15, 8, 7／14, 13, 3／14, 11, 5／14, 9, 7／13, 11, 6／13, 10, 7／12, 11, 7）。本書では、次の2つを計算で確かめました。
+
+\begin{itemize}[leftmargin=*]
+\item 「合計30、3つの山の本数が互いに異なり、XORが0」の組は、ちょうど上の13通り。
+\item 「最後の1本を取った人が負け」というルールで、全部の局面を最後から逆にたどって調べても、後手が必ず勝てる3山の分け方は、この13通りだけ。
+\end{itemize}
+
+\begin{notebox}{注意：ルールの細かい違い}
+「最後の1本を取った人が勝ち」のゲームと、「負け」のゲームは、山の本数がすべて1本以下になる終盤だけ、必勝法が変わります。本書の確認は、「負け」のルールで全部を調べたものです（全局面を探索）。デュードニーの13通りが、そのまま正しいことが分かりました。14、11、5本の分け方（原著の例）も、先手が負けることを確かめました。
+\end{notebox}
+
+\begin{pointbox}{この章のまとめ}
+\begin{itemize}[leftmargin=*]
+\item 小石のゲームは、先手が負けるのは $n\equiv5\pmod8$ のとき（探索で確認）。
+\item 葉巻のゲームは、中心に置いて点対称に返せば、先手が必勝。
+\item ニムは、2進法で各桁を偶数個にそろえる（XOR が0）のが必勝法。13通りの分け方を探索で確認。
+\end{itemize}
+\end{pointbox}
+
+%==========================================================
+\chapter{魔方陣の問題（第12部、第399〜412問）}
+\markboth{第12章}{魔方陣の問題}
+%==========================================================
+
+\section{この部の位置づけ}
+
+第12部は14問で、魔方陣（縦・横・斜めの合計がすべて等しい数字の方陣）に関する問題です。素数を使う魔方陣、2乗した数や積で作る魔方陣なども出てきます。ここでは、デュードニーが最初に出す「やっかいな8」を取り上げ、3×3の魔方陣の構造を調べます。
+
+\section{魔方陣の基本}
+
+1から $n^2$ までの数を1回ずつ使って作る $n\times n$ の魔方陣では、全体の合計は $\tfrac{n^2(n^2+1)}{2}$、各行の合計（魔法数）は $\tfrac{n(n^2+1)}{2}$ です。
+
+\begin{table}[htbp]
+\centering
+\begin{tabular}{c|cccc}
+\toprule
+$n$ & 3 & 4 & 5 & 6\\
+\midrule
+魔法数 $\tfrac{n(n^2+1)}{2}$ & 15 & 34 & 65 & 111\\
+\bottomrule
+\end{tabular}
+\caption{$1\sim n^2$ を使う魔方陣の魔法数。}
+\end{table}
+
+\section{第399問：やっかいな8}
+
+1〜9を使う3×3の魔方陣（合計15）は、全部で8通りあります（計算機で全部の並べ方を調べて確かめました）。これは、1つの魔方陣を回転・裏返しした8個で、実質1通りです。この8通りでは、8は必ず\textbf{角}に来ます（計算機で確認）。
+
+デュードニーの問題は、「9つのマスに、互いに異なる数を入れ、縦・横・斜めの合計がすべて15になるようにする。ただし、8を図の位置（上の辺の真ん中）に置く」というものです。「異なる数」とあり、「異なる整数」とは書いていません。1〜9だけでは不可能ですが、分数を使えば可能です。
+
+\begin{figure}[htbp]
+\centering
+\begin{tikzpicture}[x=1cm,y=1cm]
+ \foreach \r/\c/\v in {0/0/4.5,0/1/8,0/2/2.5,1/0/3,1/1/5,1/2/7,2/0/7.5,2/1/2,2/2/5.5}{
+   \draw[primaryblue, fill=softblue] (\c,2-\r) rectangle ++(1,1);
+   \node at (\c+0.5,2-\r+0.5) {\v};
+ }
+ \begin{scope}[xshift=5cm]
+ \foreach \r/\c/\v in {0/0/8,0/1/1,0/2/6,1/0/3,1/1/5,1/2/7,2/0/4,2/1/9,2/2/2}{
+   \draw[warmamber, fill=softamber] (\c,2-\r) rectangle ++(1,1);
+   \node at (\c+0.5,2-\r+0.5) {\v};
+ }
+ \end{scope}
+ \node[lbl] at (1.5,-0.5) {8が辺の真ん中（分数を使う）};
+ \node[lbl] at (6.5,-0.5) {1〜9だけの魔方陣（8は角）};
+\end{tikzpicture}
+\caption{左：デュードニーの答え（4.5, 8, 2.5／3, 5, 7／7.5, 2, 5.5）。縦・横・斜めがすべて15。右：整数 1〜9 だけで作る魔方陣の1つ。8は必ず角に来る。}
+\end{figure}
+
+左の答えの合計を確かめます。各行は $4.5+8+2.5=15$、$3+5+7=15$、$7.5+2+5.5=15$。各列は $4.5+3+7.5=15$、$8+5+2=15$、$2.5+7+5.5=15$。2本の対角線は $4.5+5+5.5=15$、$2.5+5+7.5=15$。すべて15で、9つの数は互いに異なります。原著の答えと一致します。
+
+\section{なぜ中央は必ず5か：3×3の魔方陣の一般形}
+
+魔法数を15とします。中央の数を $c$ とすると、中央を通る4本の線（中央の行、中央の列、2本の対角線）の合計は $4\times15=60$。この4本は、中央以外の8マスを1回ずつ、中央を4回数えるので、全マスの合計に、中央をさらに3回足したもの（$S+3c$）になります。全マスの合計は、3つの行の合計で $S=3\times15=45$ ですから
+\[
+60=45+3c\quad\Longrightarrow\quad c=5 .
+\]
+つまり、整数でなくても、3×3で魔法数が15なら、\textbf{中央は必ず5}です。そのうえで、他の数は2つの数 $x,\ y$ で表せます。
+\[
+\begin{array}{|c|c|c|}\hline
+5+x & 5-x-y & 5+y\\\hline
+5-x+y & 5 & 5+x-y\\\hline
+5-y & 5+x+y & 5-x\\\hline
+\end{array}
+\]
+この形は、どの行・列・対角線を足しても15です。上の辺の真ん中に8を置くには $5-x-y=8$ より $x+y=-3$。デュードニーの答えは $x=-0.5$、$y=-2.5$ に当たり、上の行は $4.5,\ 8,\ 2.5$、下の行は $7.5,\ 2,\ 5.5$ になります。
+
+\begin{pointbox}{この章のまとめ}
+\begin{itemize}[leftmargin=*]
+\item 3×3の魔方陣（魔法数15）の中央は、必ず5。式 $60=45+3c$ から出る。
+\item 1〜9だけだと、8は角にしか置けない。数が整数でなくてよいなら、辺の真ん中にも置ける。
+\item 問題文の「数」と「整数」を読み分けることが、答えへの鍵だった。
+\end{itemize}
+\end{pointbox}
+
+%==========================================================
+\chapter{パラドックス・パーティー（第13部、第413問）}
+\markboth{第13章}{パラドックス・パーティー}
+%==========================================================
+
+\section{この部の位置づけ}
+
+第13部は、「チェス盤の誤り」というたった1問の部です。8×8＝64個の升を切って並べ替えると、7×9＝63個になってしまう。1個はどこに消えたのか、という有名な切り貼りのパラドックスです。デュードニーは、これを物語（パラドックス・パーティー）の中で語っています。
+
+\section{第413問：チェス盤の誤り}
+
+8×8の盤に、左上の角から右下の角へ線を引いて切り、片方の部分をずらして小さな角を切り取って上に貼ると、7升×9升の長方形になります。$7\times9=63$ なので、64個あった升が1個消えたように見えます。
+
+原著の答えは、「小さな三角形の部分の高さを、升の1辺とまったく同じとしたのが誤りだった。実際の高さは $1+\tfrac17$ インチで、長方形は $9\tfrac17$ インチ×7インチ、面積は64平方インチ」というものです。確かめると
+\[
+7\times\left(9+\tfrac17\right)=63+1=64
+\]
+で、面積は保たれています。つまり、ずらして貼った図形は、見た目に7×9の長方形になったように見えて、実際には升の線が少しずれ、わずかな細長い隙間か重なりを含んでいます。「切って貼り直しただけなら、面積は変わらない」という原則を信じることが、この種のパラドックスを解く鍵です。
+
+\begin{notebox}{本書で確かめたこと、確かめていないこと}
+確かめたのは、面積の勘定 $7\times(9+\tfrac17)=64$ です。原著の切り方の図そのもの（どの線で切るか）は、本書では図を再現していません。次の節は、同じ仕組みを使う、より分かりやすい別の例です。
+\end{notebox}
+
+\section{同じ仕組みの例：8×8から5×13へ}
+
+フィボナッチ数 $1,1,2,3,5,8,13,21,\ldots$ を使うと、よく似たパラドックスができます。8×8の正方形（面積64）を4つの部分に切り、並べ直して5×13の長方形（面積65）を作ったように見せる、有名な切り貼りです。面積が1増えるのは不思議ですが、答えは、5×13の長方形の対角線の部分にあります。
+
+並べ直した図形では、対角線のように見える線が、じつは2つの異なる傾きの線分をつないだ折れ線で、長方形の対角線とはぴったり重なっていません。その2つの傾きは、
+\[
+\frac25=0.4,\qquad \frac38=0.375
+\]
+で、わずかに違います。折れ線 $(0,0)\to(5,2)\to(13,5)$ と、$(0,0)\to(8,3)\to(13,5)$ で囲まれる細い平行四辺形が、面積1の隙間です。
+
+\begin{figure}[htbp]
+\centering
+\begin{tikzpicture}[x=0.75cm,y=0.75cm]
+ \draw[gridgray] (0,0) grid (13,5);
+ \draw[thick, darkslate] (0,0) rectangle (13,5);
+ \fill[softrose] (0,0)--(5,2)--(13,5)--(8,3)--cycle;
+ \draw[crimson, thick] (0,0)--(5,2)--(13,5);
+ \draw[primaryblue, thick] (0,0)--(8,3)--(13,5);
+ \fill[crimson] (5,2) circle (2pt);
+ \fill[primaryblue] (8,3) circle (2pt);
+ \node[lbl, anchor=south east] at (5,2) {$(5,2)$};
+ \node[lbl, anchor=north west] at (8,3) {$(8,3)$};
+\end{tikzpicture}
+\caption{5×13の長方形の中で、2本の折れ線が囲む細い平行四辺形。座標 $(0,0),(5,2),(13,5),(8,3)$ で囲まれ、面積は1。切り貼りで、8×8の正方形が5×13の長方形になったように見える「余り」の正体。}
+\end{figure}
+
+面積は、座標から計算できます。4点 $(0,0),(5,2),(13,5),(8,3)$ を順に結ぶ四角形の面積は
+\[
+\frac12\bigl|\,(0\cdot2-5\cdot0)+(5\cdot5-13\cdot2)+(13\cdot3-8\cdot5)+(8\cdot0-0\cdot3)\,\bigr|=\frac12\,|0-1-1+0|=1 .
+\]
+この1が、$5\times13-8\times8=65-64=1$ の差に当たります。
+
+\begin{table}[htbp]
+\centering
+\small
+\begin{tabular}{c|ccccc}
+\toprule
+正方形 & $5^2$ & $8^2$ & $13^2$ & $21^2$ & $34^2$\\
+\midrule
+長方形 & $3\times8$ & $5\times13$ & $8\times21$ & $13\times34$ & $21\times55$\\
+面積の差 & $24-25$ & $65-64$ & $168-169$ & $442-441$ & $1155-1156$\\
+ & $=-1$ & $=+1$ & $=-1$ & $=+1$ & $=-1$\\
+\bottomrule
+\end{tabular}
+\caption{フィボナッチ数を使った切り貼り。面積の差（長方形$-$正方形）は $-1$ と $+1$ が交互に出る。}
+\end{table}
+
+この差が $\pm1$ になるのは、フィボナッチ数の性質 $F_{n-1}F_{n+1}-F_n^2=(-1)^n$ によります。表の値はすべて、掛け算で確かめました（$3\times8=24$、$5\times13=65$、$8\times21=168$、$13\times34=442$、$21\times55=1155$）。
+
+\begin{pointbox}{この章のまとめ}
+\begin{itemize}[leftmargin=*]
+\item 切って貼り直しただけで面積が変わることはない。変わって見えたら、図形が正しく重なっていない。
+\item 原著の答え：小さな三角形の高さが、升の1辺より $\tfrac17$ だけ大きい。面積は $7\times(9+\tfrac17)=64$。
+\item フィボナッチ数を使った8×8→5×13は、傾き $\tfrac25$ と $\tfrac38$ のずれで、面積1の隙間ができる。
+\end{itemize}
+\end{pointbox}
+
+%==========================================================
+\chapter{未分類の問題（第14部、第414〜430問）}
+\markboth{第14章}{未分類の問題}
+%==========================================================
+
+\section{この部の位置づけ}
+
+第14部は17問で、デュードニーが「ほかの部に入らなかった傑作」を集めた部です。ことば遊び、暦、階段の上り下り、本の中の虫など、問題の種類はさまざまです。ここでは、計算や数え上げで確かめられる4問を取り上げます。
+
+\section{第414問：最初に知ったのは誰か}
+
+アンダーソン、ビッグス、カーペンターの3人が、海岸から1マイル沖のボートに乗っています。岸から銃が発射されました。アンダーソンは\textbf{銃声}だけを聞き、ビッグスは\textbf{煙}だけを見、カーペンターは\textbf{弾丸が水に当たる}のだけを見ました。3人のうち、発射を最初に知ったのは誰か。
+
+原著の答えは、ビッグス（煙を見た）、カーペンター（弾丸を見た）、アンダーソン（銃声を聞いた）の順です。理由は、速さの違いです。1マイルは約1,609メートルです。
+
+\begin{itemize}[leftmargin=*]
+\item 光（煙が見える）：秒速約30万キロメートルなので、約 $5\times10^{-6}$ 秒。
+\item 音（銃声）：秒速約340メートルとすると、約 $1609/340\approx4.7$ 秒。
+\item 弾丸：秒速700〜800メートルを仮定すれば、約2〜2.3秒（弾丸の速さは途中で落ちるので、これは仮定です）。
+\end{itemize}
+
+\begin{figure}[htbp]
+\centering
+\begin{tikzpicture}
+\begin{axis}[xmode=log, width=11cm, height=4.6cm, xmin=1e-7, xmax=1e2, ymin=0.4, ymax=3.6, ytick={1,2,3}, yticklabels={音（銃声）,弾丸（仮定）,光（煙）}, xlabel={届くまでの時間（秒、対数目盛）},
+  every axis label/.append style={font=\footnotesize}, tick label style={font=\footnotesize}, grid=major, grid style={gridgray}]
+ \addplot[only marks, mark=*, mark size=3pt, primaryblue] coordinates {(4.7,1)(2.2,2)(5.4e-6,3)};
+ \node[font=\scriptsize, anchor=south] at (axis cs:4.7,1.12) {4.7 秒};
+ \node[font=\scriptsize, anchor=south] at (axis cs:2.2,2.12) {約2.2 秒（仮定）};
+ \node[font=\scriptsize, anchor=south] at (axis cs:5.4e-6,3.12) {約5マイクロ秒};
+\end{axis}
+\end{tikzpicture}
+\caption{1マイル先から届くまでの時間。光、弾丸、音の順に着く。弾丸は秒速約730メートルと仮定（本書の仮定）。}
+\end{figure}
+
+\begin{pointbox}{ただし書き}
+弾丸が音より速いという前提は、原著の答えも使っています。弾丸の速さが秒速340メートルを下回るなら、順番は変わります。ここでの2.2秒は仮定にもとづく数字で、実測値ではありません。
+\end{pointbox}
+
+\section{第416問：暦のパズル}
+
+「世界の終わりが、新しい世紀の最初の日に来るとしたら、それが日曜日である確率は」という問題です。原著の答えは「世紀の最初の日は、日曜日、水曜日、金曜日には決してならない」です。
+
+現在のグレゴリオ暦は、400年（$=146{,}097$ 日 $=20{,}871$ 週間ちょうど）で曜日がもとに戻ります。そこで、世紀の最初の日（1月1日）の曜日を、400年のうちの4つの世紀について、日付から計算して調べました。
+
+\begin{table}[htbp]
+\centering
+\begin{tabular}{l|cccc}
+\toprule
+「01年」から数える（1901、2001、2101、2201） & 火 & 月 & 土 & 木\\
+「00年」から数える（1900、2000、2100、2200） & 月 & 土 & 金 & 水\\
+\bottomrule
+\end{tabular}
+\caption{世紀の最初の1月1日の曜日（グレゴリオ暦）。どちらの数え方でも日曜日は出ない。}
+\end{table}
+
+「01年」から数えると（原著の数え方）、曜日は火、月、土、木の4種類だけで、日曜・水曜・金曜には決してなりません。原著の答えと一致します。なお「00年」から数える場合は、月、土、金、水で、日曜日が出ないのは同じですが、決してならない曜日は日・火・木に変わります。
+
+\begin{figure}[htbp]
+\centering
+\begin{tikzpicture}[x=1.4cm,y=1cm]
+ \foreach \d/\n/\ok in {0/日/0,1/月/1,2/火/1,3/水/0,4/木/1,5/金/0,6/土/1}{
+   \ifnum\ok=1
+     \draw[primaryblue, fill=softblue] (\d-0.4,0) rectangle (\d+0.4,1.2);
+     \node[font=\large] at (\d,0.6) {\n};
+   \else
+     \draw[crimson, fill=softrose] (\d-0.4,0) rectangle (\d+0.4,1.2);
+     \node[font=\large, text=crimson] at (\d,0.6) {\n};
+     \draw[crimson, thick] (\d-0.4,0)--(\d+0.4,1.2);
+   \fi
+ }
+\end{tikzpicture}
+\caption{「01年」から数えた世紀の初日になる曜日。青：なる（月・火・木・土）。赤の斜線：決してならない（日・水・金）。}
+\end{figure}
+
+\section{第418問：階段のぼり}
+
+8段の階段があります。下から出発して、床の上の階（踊り場）に2回着き、1回は下の階（床）に戻ります。ただし、どの段も、\textbf{同じ回数ずつ}使わなければなりません。1度に1段だけ動きます。最少で何歩か。
+
+デュードニーの答えは19歩です。踏む順番は「1（床に戻る）、1、2、3（2に戻る）、3、4、5（4に戻る）、5、6、7（6に戻る）、7、8、踊り場、（8に戻る）、踊り場」で、括弧の中は後ろ向きの1歩です。本書で、この動きを実際に追いかけて、次のことを確かめました。
+
+\begin{itemize}[leftmargin=*]
+\item 全部で19歩で、どの動きも1段分の上り下り。
+\item 1段から8段までの各段を、ちょうど2回ずつ踏む。踊り場も2回、床も2回（出発と戻り）。
+\end{itemize}
+
+\begin{figure}[htbp]
+\centering
+\begin{tikzpicture}
+\begin{axis}[width=11cm, height=6.2cm, xmin=0, xmax=19, ymin=-0.5, ymax=9.5, xlabel={歩数}, ylabel={いる段（0は床、9は踊り場）}, xtick={0,2,...,18}, ytick={0,1,...,9},
+  every axis label/.append style={font=\footnotesize}, tick label style={font=\footnotesize}]
+ \addplot[thick, primaryblue, mark=*, mark size=1.5pt] coordinates {(0,0)(1,1)(2,0)(3,1)(4,2)(5,3)(6,2)(7,3)(8,4)(9,5)(10,4)(11,5)(12,6)(13,7)(14,6)(15,7)(16,8)(17,9)(18,8)(19,9)};
+\end{axis}
+\end{tikzpicture}
+\caption{19歩の階段のぼり。「3歩進んで1歩戻る」を繰り返すので、各段を2回ずつ踏む。最後は踊り場（9）に着く。}
+\end{figure}
+
+\section{第420問：勤勉な本の虫}
+
+3巻の本が、書棚に順番に並んでいます。各巻の中身（ページの厚み）は3インチ、表紙の厚みは各 $\tfrac18$ インチです。虫が、第1巻の最初のページから第3巻の最後のページまで、一直線に穴をあけました。穴の長さは。
+
+うっかりすると、3巻分の中身 $3\times3=9$ インチと、表紙4枚分 $4\times\tfrac18=\tfrac12$ インチを足して $9\tfrac12$ インチと答えてしまいます。しかし、書棚に左から第1巻、第2巻、第3巻と並べると、本の背を手前にして立てるとき、第1巻の最初のページは\textbf{第2巻に一番近い側}に、第3巻の最後のページは第2巻に一番近い側にあります。したがって、虫が通るのは、第1巻の表紙（1枚）、第2巻の表紙（2枚）、第3巻の表紙（1枚）の合計4枚、そして第2巻の中身3インチだけです。
+\[
+3+4\times\tfrac18=3\tfrac12\ \text{インチ}.
+\]
+原著の答え（$3\tfrac12$ インチ）と一致します。
+
+\begin{figure}[htbp]
+\centering
+\begin{tikzpicture}[x=0.55cm,y=0.55cm]
+ \foreach \i/\x in {1/0,2/5,3/10}{
+   \draw[primaryblue, fill=softblue] (\x,0) rectangle (\x+0.25,4);
+   \draw[primaryblue, fill=softblue] (\x+0.25+3,0) rectangle (\x+0.5+3,4);
+   \draw[primaryblue, fill=white] (\x+0.25,0) rectangle (\x+3.25,4);
+   \node[lbl] at (\x+1.75,2) {第\i 巻};
+ }
+ \draw[crimson, very thick] (3.25,3.3)--(10.25,3.3);
+ \fill[crimson] (3.25,3.3) circle (2pt);
+ \fill[crimson] (10.25,3.3) circle (2pt);
+ \node[lbl, anchor=south] at (6.7,3.4) {虫の通り道};
+\end{tikzpicture}
+\caption{書棚の3巻（背を手前に向けた並び）。第1巻の最初のページは第1巻の右端、第3巻の最後のページは第3巻の左端にある。虫は表紙4枚と第2巻の中身だけを通る。}
+\end{figure}
+
+\begin{pointbox}{この章のまとめ}
+\begin{itemize}[leftmargin=*]
+\item 光・弾丸・音の順に着く（弾丸が音より速いと仮定したとき）。
+\item グレゴリオ暦の400年周期で調べると、世紀の最初の日（01年から数える）に日・水・金は来ない。
+\item 階段のぼりは19歩。「3歩進んで1歩戻る」で各段を2回ずつ踏める。
+\item 本の虫の問題は、「最初のページ」の位置の勘違いを見抜く問題。答えは $3\tfrac12$ インチ。
+\end{itemize}
+\end{pointbox}
+
+%==========================================================
+\chapter*{おわりに：この本で確かめたことの一覧}
+\addcontentsline{toc}{chapter}{おわりに：この本で確かめたことの一覧}
+\markboth{おわりに}{おわりに}
+%==========================================================
+
+この本で取り上げた問題の答えを、どのように確かめたかを、最後に一覧にします。原著と一致したか、本書が独自に確かめたか、確かめていないかを区別しています。
+
+\begin{table}[htbp]
+\centering
+\small
+\begin{tabular}{lll}
+\toprule
+問題 & 確かめ方 & 結果\\
+\midrule
+第1、4、9、68問 & 方程式を解いて代入 & 原著と一致\\
+第80問 & 9の階乗の全探索 & 9個。原著と一致\\
+第139問 & 約数の組から決定 & 原著と一致\\
+第173問 & 正方形分割の全探索 & 最少11枚、実質1通り\\
+第196、200問 & 面積・体積の計算 & 1,731インチ、92,160,000インチ\\
+第210問 & 掛け算のみ（$24\times100$） & 数え方の中身は未確認\\
+第214問 & 幅優先探索、手順の再現 & 21手。原著の式と $n=2\sim9$ で一致\\
+第245問 & 全部の道の数え上げ & 1,488通り。原著と一致\\
+第267問 & 漸化式 & 14,833通り。原著と一致\\
+第272問 & 配置の検査 & 36組が1回ずつ。原著と一致\\
+第295、300、347問 & 数え上げ、全探索 & 40,320、92（12）、1,296（204）\\
+第297問 & 色ごとの被覆の全探索 & 最少8個\\
+第362、375問 & 幅優先探索 & いずれも11回。原著と一致\\
+第367、390問 & 分数、連立方程式 & $7/18$、12・15・20ポンド\\
+第392、396問 & 全局面の探索 & 原著と一致\\
+第399問 & 全探索と一般形 & 原著と一致\\
+第413問 & 面積の計算 & 原著の主張は面積の勘定のみ確認\\
+第414、416、418、420問 & 計算・暦計算・手順の再現 & 弾丸の速さは仮定\\
+\bottomrule
+\end{tabular}
+\caption{本書で取り上げた問題と、その確かめ方。}
+\end{table}
+
+\begin{notebox}{本書でできなかったこと}
+\begin{itemize}[leftmargin=*]
+\item 原著の図を見ないと分からない答え（たとえば第143問「十字架を2つに」、第211問「ミンスパイ」、第215問「バッタ」）は、取り上げていません。
+\item 430問のうち、本書が答えを確かめたのは、各部の代表的な問題だけです。残りの問題は、原著を直接ご覧ください。
+\item 弾丸の速さなど、現実のデータが関わる点は、仮定として書きました。
+\end{itemize}
+\end{notebox}
 
 \end{document}
