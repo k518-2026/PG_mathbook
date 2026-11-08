@@ -37,15 +37,15 @@
 
 \newtcolorbox{examplebox}[1]{
     colback=softgreen, colframe=accentgreen, coltitle=white, fonttitle=\bfseries,
-    title=#1, arc=3mm, boxrule=1pt, left=4mm,right=4mm,top=3mm,bottom=3mm, breakable
+    title={#1}, arc=3mm, boxrule=1pt, left=4mm,right=4mm,top=3mm,bottom=3mm, breakable
 }
 \newtcolorbox{pointbox}[1]{
     colback=softamber, colframe=warmamber, coltitle=darkslate, fonttitle=\bfseries,
-    title=#1, arc=2mm, boxrule=1pt, left=3mm,right=3mm,top=2mm,bottom=2mm, breakable
+    title={#1}, arc=2mm, boxrule=1pt, left=3mm,right=3mm,top=2mm,bottom=2mm, breakable
 }
 \newtcolorbox{notebox}[1]{
     colback=softrose, colframe=crimson, coltitle=white, fonttitle=\bfseries,
-    title=#1, arc=2mm, boxrule=1pt, left=3mm,right=3mm,top=2mm,bottom=2mm, breakable
+    title={#1}, arc=2mm, boxrule=1pt, left=3mm,right=3mm,top=2mm,bottom=2mm, breakable
 }
 
 \tikzset{
@@ -66,7 +66,9 @@
 \fancyhead[RE]{\nouppercase{\leftmark}}
 \renewcommand{\headrulewidth}{0.4pt}
 
-\hypersetup{pdftitle={古典で学び直すラッセル数理哲学入門 —— 『神秘主義と論理』の章立てに沿って}}
+\hypersetup{pdftitle={古典で学び直すラッセル『神秘主義と論理』入門 —— 序文と全10篇を順に読む}}
+\newcommand{\dd}{\mathrm{d}}
+\newcommand{\ee}{\mathrm{e}}
 
 \begin{document}
 
@@ -75,16 +77,16 @@
 \vspace*{1.5cm}
 {\Large\bfseries プロジェクト・グーテンベルク古典数学入門シリーズ}\\[0.8cm]
 \rule{\textwidth}{1.5pt}\\[0.4cm]
-{\Huge\bfseries 古典で学び直す\\ラッセル数理哲学入門}\\[0.4cm]
-{\Large\bfseries —— 『神秘主義と論理』の10篇を図で読む ——}\\[0.4cm]
+{\Huge\bfseries 古典で学び直す\\ラッセル\\『神秘主義と論理』入門}\\[0.4cm]
+{\Large\bfseries —— 序文と全10篇を、順に読む ——}\\[0.4cm]
 \rule{\textwidth}{1.5pt}\\[1.5cm]
-{\large 原著：バートランド・ラッセル（\textit{Bertrand Russell}）\\
-\textit{Mysticism and Logic and Other Essays}}\\[2.0cm]
+{\large 原著：バートランド・ラッセル\\
+\textit{Mysticism and Logic and Other Essays}（1917年）}\\[2.0cm]
 {\Large\bfseries 著：教育情報分析研究会}\\[2.5cm]
 \vfill
-{\large 2026年11月 全面改訂版}\\[0.5cm]
-{\footnotesize 本書は Project Gutenberg のパブリックドメイン（eBook \#25447）の翻訳の章立て（全10篇）に沿って、\\
-中学校・高等学校の数学の知識で読み進められるように書き下ろした入門書です。}
+{\large 2026年11月 改訂第2版（原著の篇ごとに対応）}\\[0.5cm]
+{\footnotesize 本書は Project Gutenberg のパブリックドメイン（eBook \#25447）を底本に、\\
+高等学校の数学の知識で読み進められるように書き下ろした入門書です。}
 \end{center}
 \end{titlepage}
 
@@ -93,526 +95,607 @@
 \mainmatter
 
 %==========================================================
-\chapter*{はじめに：ラッセルの本を読む前に}
-\addcontentsline{toc}{chapter}{はじめに：ラッセルの本を読む前に}
+\chapter*{はじめに：この本の読み方}
+\addcontentsline{toc}{chapter}{はじめに：この本の読み方}
 \markboth{はじめに}{はじめに}
 %==========================================================
 
-バートランド・ラッセル（1872〜1970）は、数学者・論理学者・哲学者です。『神秘主義と論理』は、彼が20世紀初めに書いた10篇のエッセイを集めた本で、科学、数学、宗教、知識とは何かを、平易な文章で論じています。
-
-この入門書は、翻訳版の10篇に1対1で沿い、各篇の主題を図で整理します。数学の予備知識は、中学・高校の範囲で足ります。
+バートランド・ラッセル（1872〜1970）は、イギリスの論理学者・哲学者です。『神秘主義と論理、その他の試論』は、1901年から1917年までに書かれた、10篇の試論を集めた本です。前半は一般向けの読み物、後半は、やや専門的な論文です。本書は、序文と10篇に、1章ずつ対応させ、各篇で、数学や論理の話題を、計算で確かめられる例にして添えました。
 
 \begin{figure}[htbp]
 \centering
 \begin{tikzpicture}[node distance=3mm]
- \foreach \xa/\ya/\lab in {0/0/{1 神秘主義と論理},3.1/0/{2 教養教育と科学},6.2/0/{3 自由人の祈祷},9.3/0/{4 数学の研究},12.4/0/{5 数学と形而上学者},
-   0/-1.2/{6 哲学の科学的方法},3.1/-1.2/{7 物質の構成要素},6.2/-1.2/{8 感覚与件と物理学},9.3/-1.2/{9 原因の概念},12.4/-1.2/{10 知識の2種類}} {
-   \node[fbox, text width=2.5cm, minimum height=0.9cm] at (\xa,\ya) {\lab};
- }
+ \node[wbox, text width=1.5cm] (a) {序文};
+ \node[fbox, text width=2.0cm, right=of a] (b) {第I〜IV篇\\一般向け};
+ \node[abox, text width=2.0cm, right=of b] (c) {第V篇\\数学と形而上学};
+ \node[gbox, text width=2.4cm, right=of c] (d) {第VI〜X篇\\やや専門的};
 \end{tikzpicture}
-\caption{本書の10篇。前半は科学・数学の価値、後半は知識と物質の分析。}
+\caption{本書の構成。序文のあと、第I〜IV篇（一般向け）、第V篇（数学と形而上学者たち）、第VI〜X篇（やや専門的な論文）。}
 \end{figure}
 
-\begin{notebox}{事実・推測・未確認の区別}
-ラッセルの議論は、哲学の主張であり、数学の定理のようには証明できません。本書は、「ラッセルがこう主張した」という形で紹介し、評価は加えません。数値や数学の例は、筆者が確認したものだけを載せています。
+\begin{notebox}{事実・推測・未確認の区別（この本の約束）}
+\begin{itemize}[leftmargin=*]
+\item 各章の数値の例（完全数、無限級数、集合の個数、原子の大きさ、遠近法の見かけの大きさ、万有引力、限定記述の真偽など）は、計算し直して確かめました。
+\item ラッセルの哲学的な主張は、各篇の主題にもとづく要約で、細かい議論は、全部は取り上げていません。
+\item 本書の例（計算の部分）は、ラッセルの本文のものではなく、各篇の話題を、数で確かめるための補足です。
+\end{itemize}
 \end{notebox}
 
 %==========================================================
-\chapter{神秘主義と論理}
-\markboth{第1篇}{神秘主義と論理}
+\chapter{序文}
+\markboth{第1章}{序文}
 %==========================================================
 
-\section{2つの心の傾き}
+\section{この章の位置づけ}
 
-ラッセルは、世界を知る方法に、2つの傾きがあると述べます。1つは、全体を一気に感じとる\textbf{直観}（神秘主義）。もう1つは、一歩ずつ確かめていく\textbf{理性}（科学・論理）。
+序文は、10篇が、いつ、どこで発表されたかを述べ、篇の性格を説明します。ロンドンで、1917年9月に書かれました。
 
-\begin{figure}[htbp]
+\section{各篇の由来}
+
+\begin{table}[htbp]
 \centering
-\begin{tikzpicture}[node distance=10mm]
- \node[abox, text width=3.2cm] (a) {直観\\{\small 全体をつかむ}};
- \node[fbox, text width=3.2cm, below=8mm of a] (b) {理性\\{\small 一歩ずつ確かめる}};
- \node[gbox, text width=3.4cm, right=22mm of $(a)!0.5!(b)$] (c) {世界の理解};
- \draw[ax] (a)--(c); \draw[ax] (b)--(c);
-\end{tikzpicture}
-\caption{知るための2つの道。ラッセルは、どちらか一方ではなく、両方が必要だと考える。}
-\end{figure}
-
-\section{神秘主義の4つの特徴}
-
-ラッセルは、神秘主義に共通する考えとして、次の4つを挙げます。
-
-\begin{center}
-\begin{tabular}{lp{8.5cm}}
+\small
+\begin{tabular}{llp{6.2cm}}
 \toprule
-特徴 & 内容 \\
+篇 & 発表年 & 由来（序文による）\\
 \midrule
-直観の重視 & 論証より、直接の洞察を信じる\\
-全体の統一 & 世界は分かれたものでなく、1つだと考える\\
-時間の否定 & 過去・現在・未来の区別は幻だと考える\\
-悪の非実在 & 悪は見かけにすぎないと考える\\
+I 神秘主義と論理 & 1914年7月 & 『ヒバート・ジャーナル』誌\\
+II 教養教育における科学の位置 & 1913年5月 & 『ニュー・ステイツマン』誌に2回に分けて\\
+III 自由人の祈祷 & 1902年執筆（1903年掲載） & 『インディペンデント・レビュー』誌\\
+IV 数学の研究 & 1902年執筆（1907年掲載） & 『ニュー・クォータリー』誌\\
+V 数学と形而上学者たち & 1901年 & 米国の雑誌『インターナショナル・マンスリー』\\
+VI 哲学における科学的方法 & 1914年 & オックスフォードでのハーバート・スペンサー講演\\
 \bottomrule
 \end{tabular}
-\end{center}
-
-ラッセルは、直観が新しい発見のきっかけになることを認めつつ、その確かさは、理性で確かめなければならない、と述べます。
+\caption{序文が述べる、最初の6篇の由来。第VII〜X篇は、より専門的な論文。}
+\end{table}
 
 \begin{figure}[htbp]
 \centering
-\begin{tikzpicture}[node distance=8mm]
- \node[abox, text width=2.6cm] (a) {直観が\\ひらめく};
- \node[fbox, text width=2.6cm, right=of a] (b) {論理で\\確かめる};
- \node[gbox, text width=2.6cm, right=of b] (c) {知識として\\受け入れる};
- \draw[ax] (a)--(b); \draw[ax] (b)--(c);
- \draw[ax, dashed, crimson] (b) to[bend left=35] node[above, lbl, text=crimson]{確かめられなければ捨てる} (a);
+\begin{tikzpicture}[x=0.8cm]
+ \draw[ax] (0,0)--(18,0);
+ \foreach \y in {0,5,10,15}{\draw (\y,0.08)--(\y,-0.08); \node[lbl, below] at (\y,-0.08) {\the\numexpr1900+\y\relax};}
+ \node[fbox, text width=1.6cm] at (1,1.0) {V\\(1901)};
+ \node[fbox, text width=1.6cm] at (3.5,2.7) {III\\(1902/03)};
+ \node[fbox, text width=1.6cm] at (7,1.0) {IV\\(1902/07)};
+ \node[abox, text width=1.6cm] at (12.6,1.0) {II\\(1913)};
+ \node[abox, text width=1.6cm] at (14.6,2.7) {I, VI\\(1914)};
+ \node[rbox, text width=1.6cm] at (17,1.0) {序文\\(1917)};
 \end{tikzpicture}
-\caption{直観と理性の分担。直観は発想を与え、理性が検証する。}
+\caption{序文にもとづく、各篇の発表年。最も古いのは1901年の第V篇。}
 \end{figure}
 
-\begin{pointbox}{この篇のポイント}
-\begin{itemize}[leftmargin=1.5em]
-\item 直観は発見の源、理性は確かめの道具。両方が必要。
-\item 神秘主義の4つの主張は、検証が難しい。
+序文はまた、第III篇「自由人の祈祷」の倫理学上の立場は、現在（1917年）の自分のものとは、完全に同じではない、と述べています。
+
+\begin{pointbox}{この章のまとめ}
+\begin{itemize}[leftmargin=*]
+\item 10篇は、1901年から1917年の間に書かれた。前半は一般向け、後半は、より専門的。
+\item 第V篇は1901年、第I篇と第VI篇は1914年の発表。
 \end{itemize}
 \end{pointbox}
 
 %==========================================================
-\chapter{教養教育における科学の位置}
-\markboth{第2篇}{教養教育と科学}
+\chapter{神秘主義と論理（第I篇）}
+\markboth{第2章}{神秘主義と論理}
 %==========================================================
 
-\section{なぜ科学を学ぶのか}
+\section{この篇の位置づけ}
 
-当時、教養教育といえば、ギリシャ語・ラテン語などの古典が中心でした。ラッセルは、科学も、役に立つからではなく、\textbf{ものの見方を養う}という点で、教養教育の中に位置づけるべきだと主張します。
+第I篇は、神秘主義と論理（科学的な態度）という、人間の2つの傾向の対比を論じます。ラッセルは、世界を一挙に直観で把握しようとする神秘的な傾向と、一歩ずつ確かめる論理的な傾向の、両方に価値を認め、その調和を目指します。
+
+\section{直観と論理：確かめる習慣}
+
+論理の特徴は、結論が、前提から、一歩ずつ確かめられることです。簡単な例として、「すべての $A$ は $B$、すべての $B$ は $C$、ゆえに、すべての $A$ は $C$」の形の推論を、小さな集合で確かめます。
+
+\begin{table}[htbp]
+\centering
+\begin{tabular}{lc}
+\toprule
+集合 & 要素\\
+\midrule
+$A$ & $\{2,4\}$\\
+$B$（偶数） & $\{2,4,6,8\}$\\
+$C$（10以下の自然数） & $\{1,\ldots,10\}$\\
+\bottomrule
+\end{tabular}
+\caption{$A\subset B\subset C$ の例。$A$ の要素は、すべて $B$ に入り、$B$ の要素は、すべて $C$ に入るので、$A$ の要素は、すべて $C$ に入る。}
+\end{table}
+
+\begin{figure}[htbp]
+\centering
+\begin{tikzpicture}[scale=0.9]
+ \draw[crimson, thick, fill=softrose] (0,0) ellipse (3.0 and 1.8);
+ \draw[warmamber, thick, fill=softamber] (0,0) ellipse (2.0 and 1.2);
+ \draw[primaryblue, thick, fill=softblue] (0,0) ellipse (1.0 and 0.6);
+ \node at (0,0) {$A$};
+ \node at (1.5,0.5) {$B$};
+ \node at (2.5,1.1) {$C$};
+\end{tikzpicture}
+\caption{三段論法：$A\subset B\subset C$ なら $A\subset C$。論理は、この一歩ずつの確かめでできている。}
+\end{figure}
+
+\begin{pointbox}{この篇のまとめ}
+\begin{itemize}[leftmargin=*]
+\item ラッセルは、神秘的な直観と、論理的な確かめの両方に、価値を認める。
+\item 論理の特徴は、結論が前提から、一歩ずつ確かめられること。
+\end{itemize}
+\end{pointbox}
+
+%==========================================================
+\chapter{教養教育における科学の位置（第II篇）}
+\markboth{第3章}{教養教育における科学の位置}
+%==========================================================
+
+\section{この篇の位置づけ}
+
+第II篇は、教育のなかで、科学がどんな位置にあるべきかを論じます。ラッセルは、科学の価値を、実用だけでなく、科学が人間の精神に与える「態度」に見ます。
+
+\section{実験で確かめる態度：ガリレオの斜面}
+
+科学の態度を示す古典的な例が、ガリレオの斜面の実験です。球が斜面を転がるとき、転がった距離は、時間の2乗に比例する、とガリレオは見いだしました。等しい時間ごとに測った距離は、$1:3:5:7:\cdots$、全体の距離は $1:4:9:16:\cdots$ になります。
+
+\begin{table}[htbp]
+\centering
+\begin{tabular}{c|ccccc}
+\toprule
+経過した時間（単位） & 1 & 2 & 3 & 4 & 5\\
+\midrule
+転がった全体の距離 & 1 & 4 & 9 & 16 & 25\\
+その時間の間に転がった距離 & 1 & 3 & 5 & 7 & 9\\
+\bottomrule
+\end{tabular}
+\caption{ガリレオの法則：距離は時間の2乗に比例（$1,4,9,16,25$）。各時間に転がる距離は奇数の列 $1,3,5,7,9$。}
+\end{table}
 
 \begin{figure}[htbp]
 \centering
 \begin{tikzpicture}
- \draw[thick, primaryblue, fill=softblue] (0,0) circle (2);
- \draw[thick, warmamber, fill=softamber, fill opacity=0.7] (1.8,0) circle (2);
- \node at (-0.8,0) {古典};
- \node at (2.6,0) {科学};
- \node[font=\small] at (0.9,0) {共通};
- \node[font=\footnotesize] at (0.9,-2.6) {教養＝古典と科学の重なりを広げること};
+\begin{axis}[width=9cm, height=5cm, xmin=0, xmax=5.2, ymin=0, ymax=27, xlabel={時間}, ylabel={距離},
+  every axis label/.append style={font=\footnotesize}, tick label style={font=\footnotesize}]
+ \addplot[thick, primaryblue, domain=0:5.2, samples=60] {x^2};
+ \addplot[mark=*, crimson, only marks] coordinates {(1,1)(2,4)(3,9)(4,16)(5,25)};
+\end{axis}
 \end{tikzpicture}
-\caption{教養教育のイメージ（概念図）。古典と科学は対立するものではなく、重なり合う。}
+\caption{斜面を転がる球の距離は、時間の2乗。測定値（点）が放物線に乗る。}
 \end{figure}
 
-\section{科学が育てる3つの習慣}
-
-科学の学習が育てるものとして、ラッセルは、事実を尊重する態度、証拠にもとづく判断、そして、自分の考えが間違っているかもしれないという謙虚さを挙げます（本書の整理）。
-
-\begin{figure}[htbp]
-\centering
-\begin{tikzpicture}[node distance=5mm]
- \node[fbox, text width=3.2cm] (a) {事実を尊重する};
- \node[fbox, text width=3.2cm, right=of a] (b) {証拠で判断する};
- \node[fbox, text width=3.2cm, right=of b] (c) {間違いを認める};
- \node[gbox, text width=6cm, below=7mm of b] (d) {科学的な ものの見方};
- \draw[ax] (a)--(d); \draw[ax] (b)--(d); \draw[ax] (c)--(d);
-\end{tikzpicture}
-\caption{科学の学習が育てる態度（本書による整理）。}
-\end{figure}
-
-\begin{pointbox}{この篇のポイント}
-\begin{itemize}[leftmargin=1.5em]
-\item 科学は「役に立つ」だけでなく、ものの見方を養う。
-\item 古典と科学は、互いに補い合う。
+\begin{pointbox}{この篇のまとめ}
+\begin{itemize}[leftmargin=*]
+\item 科学の価値は、実用だけでなく、証拠で確かめる態度にある。
+\item ガリレオの法則：距離は時間の2乗に比例（$1,4,9,16,25$）。
 \end{itemize}
 \end{pointbox}
 
 %==========================================================
-\chapter{自由人の祈祷}
-\markboth{第3篇}{自由人の祈祷}
+\chapter{自由人の祈祷（第III篇）}
+\markboth{第4章}{自由人の祈祷}
 %==========================================================
 
-\section{冷たい宇宙の中で}
+\section{この篇の位置づけ}
 
-この篇は、ラッセルの最も有名な文章の1つです。宇宙は人間の希望や恐れに無関心であり、人間は、自然の力の中の小さな存在にすぎない、と彼は考えました。しかし、それでも人間は、理想を築き、愛し、考えることができる。そこに「自由人の祈祷（崇拝）」がある、というのが主題です。
+第III篇は、ラッセルの最も有名な随筆の1つです。科学が描く宇宙は、人間の目的に無関心で、いつか滅びるものかもしれない。そのなかで、神を信じない人は、どう生きるのか。ラッセルは、人間が、無関心な宇宙の中で、自分の理想を大切にし、美しいものを創る自由をもつことに、品位を見いだします。
 
-\begin{figure}[htbp]
-\centering
-\begin{tikzpicture}[node distance=10mm]
- \node[wbox, text width=3.6cm] (a) {宇宙は\\人間に無関心};
- \node[abox, text width=3.6cm, right=of a] (b) {それでも人間は\\理想を築ける};
- \node[gbox, text width=3.6cm, right=of b] (c) {その自覚が\\自由な生き方};
- \draw[ax] (a)--(b); \draw[ax] (b)--(c);
-\end{tikzpicture}
-\caption{「自由人の祈祷」の論理の流れ（本書による要約）。}
-\end{figure}
+\section{太陽のエネルギーの大きさ}
 
-\begin{notebox}{注意}
-この篇は、数学ではなく、人生観についてのエッセイです。本書は内容を断定せず、論旨の流れだけを図にしています。個々の文章の評価は、翻訳版の本文をお読みください。
-\end{notebox}
-
-\begin{pointbox}{この篇のポイント}
-\begin{itemize}[leftmargin=1.5em]
-\item 宇宙の無関心を受け入れたうえで、人間の価値を探る。
-\end{itemize}
-\end{pointbox}
-
-%==========================================================
-\chapter{数学の研究}
-\markboth{第4篇}{数学の研究}
-%==========================================================
-
-\section{数学の美しさ}
-
-ラッセルは、数学を、真理だけでなく、冷たく厳しい美しさをもつもの、と表現します。その美しさは、人間の感情に訴えるものではなく、純粋な形の完全さにある、という考えです。
-
-\section{公理から定理へ}
-
-数学は、いくつかの出発点（公理）から、論理だけで、定理を導き出していく学問です。
-
-\begin{figure}[htbp]
-\centering
-\begin{tikzpicture}[node distance=7mm]
- \node[abox, text width=3cm] (a) {公理\\{\small 出発点}};
- \node[fbox, text width=2.4cm, below left=7mm and 6mm of a] (b) {定理1};
- \node[fbox, text width=2.4cm, below right=7mm and 6mm of a] (c) {定理2};
- \node[gbox, text width=2.4cm, below=12mm of $(b)!0.5!(c)$] (d) {定理3};
- \draw[ax] (a)--(b); \draw[ax] (a)--(c); \draw[ax] (b)--(d); \draw[ax] (c)--(d);
-\end{tikzpicture}
-\caption{公理から定理へ。論理の矢印だけで、新しい結論が導かれる。}
-\end{figure}
-
-\section{ユークリッド幾何と、そうでない幾何}
-
-「三角形の内角の和は $180^\circ$」は、ユークリッド幾何（平面）の定理です。球面上の三角形では、内角の和が $180^\circ$ より大きくなります。公理を変えると、定理も変わります。
-
-\begin{figure}[htbp]
-\centering
-\begin{tikzpicture}[scale=1.0]
- \begin{scope}
-  \draw[thick, primaryblue, fill=softblue] (0,0)--(3,0)--(1.2,2)--cycle;
-  \node[font=\footnotesize] at (1.5,-0.5) {平面：内角の和 $180^\circ$};
- \end{scope}
- \begin{scope}[xshift=6cm]
-  \draw[thick, gray] (1.5,1) circle (1.6);
-  \draw[thick, primaryblue] (1.5,2.6) arc (90:200:1.6 and 1.6);
-  \draw[thick, primaryblue] (1.5,2.6) arc (90:0:1.6 and 1.6);
-  \draw[thick, primaryblue, bend right=15] (0.0,0.7) to[bend right=25] (3.0,0.7);
-  \node[font=\footnotesize] at (1.5,-1.0) {球面：内角の和 $>180^\circ$};
- \end{scope}
-\end{tikzpicture}
-\caption{平面の三角形と、球面の三角形（模式図）。球面では、内角の和が $180^\circ$ を超える。}
-\end{figure}
-
-\begin{examplebox}{具体例：球面三角形}
-地球の北極と、赤道上で経度が $90^\circ$ 離れた2点を結ぶ三角形では、3つの角がすべて $90^\circ$。内角の和は $270^\circ$ です。
-\end{examplebox}
-
-\begin{pointbox}{この篇のポイント}
-\begin{itemize}[leftmargin=1.5em]
-\item 数学は、公理から論理で定理を導く。
-\item 公理を変えると、定理が変わる（球面では内角の和は $180^\circ$ を超える）。
-\end{itemize}
-\end{pointbox}
-
-%==========================================================
-\chapter{数学と形而上学者たち}
-\markboth{第5篇}{数学と形而上学者}
-%==========================================================
-
-\section{無限をめぐる謎}
-
-古代のゼノンは、「アキレスは、先に出発した亀に追いつけない」という議論を出しました。亀のいた場所に着くたびに、亀は少し先へ進んでいるから、というものです。
-
-\begin{figure}[htbp]
-\centering
-\begin{tikzpicture}[scale=1.0]
- \draw[->] (0,0)--(8.6,0);
- \foreach \xa/\lab in {0/{出発点},4/{亀の最初の位置},6/{},7/{},7.5/{}} {\draw (\xa,0.1)--(\xa,-0.1);}
- \node[below, font=\scriptsize] at (0,-0.1) {アキレス};
- \node[below, font=\scriptsize] at (4,-0.1) {亀};
- \draw[->, thick, primaryblue] (0,0.4)--(4,0.4) node[midway, above, font=\scriptsize] {1つ目 距離 $d$};
- \draw[->, thick, warmamber] (4,0.4)--(6,0.4) node[midway, above, font=\scriptsize] {$d/2$};
- \draw[->, thick, accentgreen] (6,0.4)--(7,0.4) node[midway, above, font=\scriptsize] {$d/4$};
- \draw[->, thick, crimson] (7,0.4)--(7.5,0.4) node[midway, above, font=\scriptsize] {$d/8$};
-\end{tikzpicture}
-\caption{ゼノンの議論。段階の距離は、$d, d/2, d/4, d/8, \dots$ と無限に続く。亀の速さがアキレスの半分の場合の例。}
-\end{figure}
-
-ラッセルは、この謎が、無限級数の和という数学で解けることを説明します。距離の合計は
+宇宙の無関心さを実感する材料に、太陽の途方もないエネルギーがあります（現代の補足）。太陽は、毎秒 $3.83\times10^{26}$ J（ワット）のエネルギーを放っています。$E=mc^2$ から、毎秒失う質量は
 
 \[
-d\left(1+\frac12+\frac14+\frac18+\cdots\right)=2d.
+\frac{3.83\times10^{26}}{(3.00\times10^{8})^2}=4.26\times10^{9}\ \text{kg}
 \]
+つまり、毎秒約43億キログラムです。1年（$3.156\times10^7$ 秒）では約 $1.3\times10^{17}$ kg。
 
-無限に多くの段階を足しても、有限の値 $2d$ になります。
-
-\begin{figure}[htbp]
+\begin{table}[htbp]
 \centering
-\begin{tikzpicture}
-\begin{axis}[width=9cm, height=5cm, xlabel={足した項の数}, ylabel={合計（$d=1$）}, xmin=0, xmax=10, ymin=0, ymax=2.2, grid=major]
- \addplot[thick, primaryblue, mark=*, samples at={1,...,10}] {2-2^(1-x)};
- \addplot[dashed, crimson, domain=0:10] {2};
-\end{axis}
-\end{tikzpicture}
-\caption{部分和 $2-2^{1-n}$。項を増やすと、合計は $2$ に近づく。}
-\end{figure}
-
-\section{無限の大きさを比べる}
-
-ラッセルは、カントールの無限の理論も紹介します。自然数 $1,2,3,\ldots$ と、偶数 $2,4,6,\ldots$ は、「全体の一部」のはずの偶数が、ちょうど1対1に対応できます。
-
-\begin{figure}[htbp]
-\centering
-\begin{tikzpicture}[scale=1.0]
- \foreach \i in {1,...,6} {
-  \node[fbox, minimum width=0.8cm] at (\i*1.3,1.4) {\i};
-  \pgfmathtruncatemacro{\ev}{2*\i}
-  \node[gbox, minimum width=0.8cm] at (\i*1.3,0) {\ev};
-  \draw[ax] (\i*1.3,1.1)--(\i*1.3,0.35);
- }
- \node[left, font=\footnotesize] at (0.6,1.4) {自然数};
- \node[left, font=\footnotesize] at (0.6,0) {偶数};
- \node[right, font=\footnotesize] at (8.5,0.7) {$\cdots$};
-\end{tikzpicture}
-\caption{$n\mapsto2n$ で、自然数と偶数が1対1に対応する。無限集合では、「全体の一部が全体と同じ大きさ」になりうる。}
-\end{figure}
-
-\begin{pointbox}{この篇のポイント}
-\begin{itemize}[leftmargin=1.5em]
-\item ゼノンの謎は、無限級数の和で解ける（$1+\frac12+\frac14+\cdots=2$）。
-\item 無限集合は、1対1対応で大きさを比べる。
-\end{itemize}
-\end{pointbox}
-
-%==========================================================
-\chapter{哲学における科学的方法について}
-\markboth{第6篇}{哲学の科学的方法}
-%==========================================================
-
-\section{論理的分析の方法}
-
-ラッセルは、哲学にも科学のような方法を使うべきだ、と主張します。複雑な問題を、簡単な部分に分け、その部分から全体を組み立て直す方法です。
-
-\begin{figure}[htbp]
-\centering
-\begin{tikzpicture}[node distance=8mm]
- \node[rbox, text width=3.2cm] (a) {複雑な問題};
- \node[abox, text width=3.2cm, right=of a] (b) {簡単な部分に\\分ける（分析）};
- \node[gbox, text width=3.2cm, right=of b] (c) {部分から\\組み立てる};
- \draw[ax] (a)--(b); \draw[ax] (b)--(c);
-\end{tikzpicture}
-\caption{論理的分析の流れ。分けて、組み立て直して、理解する。}
-\end{figure}
-
-\section{一度に1つの問題を}
-
-科学者が、1つの問題に絞って研究を進めるように、哲学者も、大きな「世界とは何か」を一度に論じるのではなく、小さな問題から確実に進むべきだ、とラッセルは述べます。
-
-\begin{figure}[htbp]
-\centering
-\begin{tikzpicture}
- \draw[ax] (0,0)--(8,0);
- \foreach \xa in {1,2.4,4,5.6,7} {\fill[primaryblue] (\xa,0) circle (0.1);}
- \node[above, font=\footnotesize] at (1,0.2) {小問題1}; \node[above, font=\footnotesize] at (2.4,0.2) {2}; \node[above, font=\footnotesize] at (4,0.2) {3}; \node[above, font=\footnotesize] at (5.6,0.2) {4};
- \node[above, font=\footnotesize] at (7.3,0.2) {大問題};
-\end{tikzpicture}
-\caption{小さな確かな一歩を積み重ねて、大きな問題に近づく。}
-\end{figure}
-
-\begin{pointbox}{この篇のポイント}
-\begin{itemize}[leftmargin=1.5em]
-\item 分析：複雑なものを単純な要素へ。
-\item 小さな問題から、確かに進む。
-\end{itemize}
-\end{pointbox}
-
-%==========================================================
-\chapter{物質の究極的構成要素}
-\markboth{第7篇}{物質の構成要素}
-%==========================================================
-
-\section{「点」とは何か}
-
-物理学では、物質は「点」の集まりのように扱われます。しかし、点には大きさがありません。ラッセルは、点を、「論理的な構成物」として作り直す方法を考えます。
-
-\begin{figure}[htbp]
-\centering
-\begin{tikzpicture}
- \foreach \rr/\cc in {2.0/softblue,1.4/softamber,0.9/softgreen,0.5/softrose,0.25/softblue} {
-   \draw[thick, primaryblue, fill=\cc] (0,0) circle (\rr);
- }
- \fill (0,0) circle (0.03);
- \node[font=\footnotesize, text width=5cm] at (5.6,0) {だんだん小さくなる領域を\\入れ子にしていくと、\\「点」が現れる（極限）};
-\end{tikzpicture}
-\caption{入れ子になった領域。限りなく小さくしていく「列」として、点を定義する考え方（概念図）。}
-\end{figure}
-
-\section{感覚から物理への橋}
-
-ラッセルは、物理学で使う「物質」も、じつは、私たちの感覚の経験から、論理的に組み立てられたものと見なせる、と考えます。
-
-\begin{figure}[htbp]
-\centering
-\begin{tikzpicture}[node distance=8mm]
- \node[wbox, text width=3.2cm] (a) {感覚の経験\\{\small 見える・触れる}};
- \node[abox, text width=3.2cm, right=of a] (b) {論理的な構成};
- \node[gbox, text width=3.2cm, right=of b] (c) {物理学の物質・点};
- \draw[ax] (a)--(b); \draw[ax] (b)--(c);
-\end{tikzpicture}
-\caption{ラッセルの考え。物質は、経験の積み上げから論理で作られる（本書の整理）。}
-\end{figure}
-
-\begin{notebox}{注意}
-この篇の議論は専門的で、20世紀初めの物理学（原子、電子）の理解を前提としています。本書は、構成の考え方の骨組みのみを示しています。
-\end{notebox}
-
-\begin{pointbox}{この篇のポイント}
-\begin{itemize}[leftmargin=1.5em]
-\item 点や物質を、経験や集合から論理的に作る。
-\end{itemize}
-\end{pointbox}
-
-%==========================================================
-\chapter{感覚与件と物理学の関係}
-\markboth{第8篇}{感覚与件と物理学}
-%==========================================================
-
-\section{同じ机でも、見え方は変わる}
-
-円い机は、真上から見れば円、斜めから見れば楕円に見えます。ラッセルは、見えている「見かけ」（感覚与件）と、物理学が扱う「ほんとうの机」の関係を問います。
-
-\begin{figure}[htbp]
-\centering
-\begin{tikzpicture}[scale=1.0]
- \foreach \xo/\sy/\lab in {0/1.0/{真上から}, 3.6/0.6/{斜めから}, 7.2/0.25/{低い位置から}} {
-  \begin{scope}[xshift=\xo cm]
-   \draw[thick, primaryblue, fill=softblue] (0,0) ellipse (1.3 and {1.3*\sy});
-   \node[font=\footnotesize] at (0,-1.8) {\lab};
-  \end{scope}
- }
-\end{tikzpicture}
-\caption{円い机を、見る位置を変えて見ると、見かけの形は円から細い楕円に変わる。}
-\end{figure}
-
-\begin{examplebox}{数値例}
-真上から見て円（縦横比 $1$）の机を、水平面から $\theta$ の高さの目で見ると、縦横比はおよそ $\sin\theta$。$\theta=90^\circ$ で $1$（円）、$30^\circ$ で $0.5$、$15^\circ$ で約 $0.26$。
-\end{examplebox}
-
-\begin{figure}[htbp]
-\centering
-\begin{tikzpicture}
-\begin{axis}[width=9cm, height=5.5cm, xlabel={見る角度 $\theta$（度）}, ylabel={見かけの縦横比 $\sin\theta$}, xmin=0, xmax=90, ymin=0, ymax=1.05, grid=major]
- \addplot[thick, primaryblue, domain=0:90, samples=60] {sin(x)};
-\end{axis}
-\end{tikzpicture}
-\caption{見る高さと、円がどれだけ細く見えるかの関係（縦横比 $=\sin\theta$）。}
-\end{figure}
-
-\begin{pointbox}{この篇のポイント}
-\begin{itemize}[leftmargin=1.5em]
-\item 見かけ（感覚与件）は、見る位置で変わる。
-\item 物理学の「物」は、いろいろな見かけをまとめたもの、と考えられる。
-\end{itemize}
-\end{pointbox}
-
-%==========================================================
-\chapter{原因の概念について}
-\markboth{第9篇}{原因の概念}
-%==========================================================
-
-\section{「原因と結果」は科学の言葉か}
-
-ふつうは、「Aが原因でBが起こる」と考えます。しかしラッセルは、物理学の進んだ分野では、「原因」という言葉の代わりに、\textbf{量どうしの関係（関数）}が使われている、と指摘します。
-
-\begin{figure}[htbp]
-\centering
-\begin{tikzpicture}[node distance=14mm]
- \node[wbox, text width=2.6cm] (a) {日常の言い方\\{\small Aが原因で\\ Bが起こる}};
- \node[gbox, text width=3.4cm, right=22mm of a] (b) {物理学の言い方\\{\small 量 $x$ と $y$ の\\ 関係式}};
- \draw[ax] (a)--node[above, lbl]{置き換わる} (b);
-\end{tikzpicture}
-\caption{「原因」から「関係式」へ。ラッセルの指摘（本書の整理）。}
-\end{figure}
-
-\section{法則は「関係式」の形をしている}
-
-たとえば、ニュートンの運動の法則 $F=ma$ は、力・質量・加速度の関係を示していて、どれが原因でどれが結果とは、言っていません。
-
-\begin{figure}[htbp]
-\centering
-\begin{tikzpicture}[node distance=8mm]
- \node[fbox] (f) {力 $F$};
- \node[fbox, right=26mm of f] (a) {加速度 $a$};
- \node[abox, above=7mm of $(f)!0.5!(a)$] (m) {質量 $m$};
- \draw[<->, thick] (f)--node[below, lbl]{$F=ma$} (a);
- \draw[->, thick] (m)--(f); \draw[->, thick] (m)--(a);
-\end{tikzpicture}
-\caption{$F=ma$ は、3つの量の関係。どれが先、どれが後、という向きはない。}
-\end{figure}
-
-\begin{notebox}{注意}
-ラッセルの主張は、哲学上の論点で、のちの時代にも議論が続いています。本書は、主張の骨組みの紹介にとどめます。
-\end{notebox}
-
-\begin{pointbox}{この篇のポイント}
-\begin{itemize}[leftmargin=1.5em]
-\item 進んだ科学では、「原因」より「量の関係式」が使われる。
-\end{itemize}
-\end{pointbox}
-
-%==========================================================
-\chapter{直接体験による知識と記述による知識}
-\markboth{第10篇}{2種類の知識}
-%==========================================================
-
-\section{知っている、の2つの意味}
-
-「知っている」には、2つの意味があります。
-
-\begin{center}
-\begin{tabular}{lp{8.5cm}}
+\begin{tabular}{lc}
 \toprule
-種類 & 内容\\
+量 & 値\\
 \midrule
-直接体験による知識 & 自分の経験の中で、直接出会ったもの（色、音、痛みなど）を知っている\\
-記述による知識 & 「〜であるような唯一のもの」という言い方（記述）を通して、間接的に知っている\\
+太陽の光度 & $3.83\times10^{26}$ W\\
+毎秒失う質量（$E=mc^2$） & $4.26\times10^{9}$ kg/s\\
+1年に失う質量 & $1.34\times10^{17}$ kg\\
 \bottomrule
 \end{tabular}
-\end{center}
+\caption{太陽の放射エネルギーと、失う質量（計算で確認）。}
+\end{table}
 
 \begin{figure}[htbp]
 \centering
-\begin{tikzpicture}[node distance=10mm]
- \node[fbox, text width=2.6cm] (me) {私};
- \node[gbox, text width=2.8cm, right=26mm of me, yshift=7mm] (a) {直接出会った\\赤い色};
- \node[abox, text width=3.2cm, right=26mm of me, yshift=-9mm] (b) {「この部屋で\\いちばん背の高い人」};
- \draw[ax] (me)--node[above, lbl]{直接} (a);
- \draw[ax, dashed] (me)--node[below, lbl]{記述を通して} (b);
+\begin{tikzpicture}[scale=1.0]
+ \fill[warmamber] (0,0) circle (0.6);
+ \foreach \a in {0,30,...,330}{\draw[warmamber, thick] ({0.8*cos(\a)},{0.8*sin(\a)})--({1.3*cos(\a)},{1.3*sin(\a)});}
+ \node[lbl] at (0,-1.8) {毎秒 $4.3\times10^9$ kg の質量が、エネルギーに変わる};
 \end{tikzpicture}
-\caption{直接体験（実線）と、記述による知識（点線）。}
+\caption{太陽は、毎秒、約43億キログラムの質量をエネルギーとして放つ（概念図）。}
 \end{figure}
 
-\section{記述の例}
+（これはラッセルの本文のものではなく、本書の補足の計算です。）
 
-「この部屋でいちばん背の高い人」という言い方は、まだ会っていない人についても、使えます。しかし、背の高さを測らない限り、その人が誰なのかは、まだ分かりません。記述によって、人を指していても、その人を直接に知っているわけではありません。
+\begin{pointbox}{この篇のまとめ}
+\begin{itemize}[leftmargin=*]
+\item 科学の描く宇宙は、人間に無関心。そのなかで、理想を大切にする自由を、ラッセルは称える。
+\item 太陽は、毎秒約 $4.3\times10^9$ kg の質量をエネルギーに変える（補足の計算）。
+\end{itemize}
+\end{pointbox}
+
+%==========================================================
+\chapter{数学の研究（第IV篇）}
+\markboth{第5章}{数学の研究}
+%==========================================================
+
+\section{この篇の位置づけ}
+
+第IV篇は、数学の美しさを論じます。ラッセルは、数学には、真理だけでなく、彫刻のように、冷たく、厳しく、純粋な美がある、と述べます。数学の美は、人間の弱さに訴えることなく、しかも、きわめて純粋に完璧なものを作れる点にある、という考えです。
+
+\section{数のなかの美しさ：完全数}
+
+数学の美しさを感じる例として、完全数があります。自分自身を除く約数の和が、自分自身に等しい数です。
+
+\begin{table}[htbp]
+\centering
+\begin{tabular}{rl}
+\toprule
+完全数 & 約数（自分自身を除く）の和\\
+\midrule
+6 & $1+2+3=6$\\
+28 & $1+2+4+7+14=28$\\
+496 & $1+2+4+8+16+31+62+124+248=496$\\
+8128 & （約数の和が $8128$）\\
+\bottomrule
+\end{tabular}
+\caption{10000未満の完全数は、この4つだけ（全数調査で確認）。}
+\end{table}
+
+完全数は、$2^{p-1}(2^p-1)$（$2^p-1$ が素数のとき）の形です。$p=2$ で $2\cdot3=6$、$p=3$ で $4\cdot7=28$、$p=5$ で $16\cdot31=496$、$p=7$ で $64\cdot127=8128$。
 
 \begin{figure}[htbp]
 \centering
 \begin{tikzpicture}
- \foreach \xa/\hh in {0/1.4,1.2/1.6,2.4/1.5,3.6/1.8,4.8/1.55} {
-   \draw[thick, primaryblue, fill=softblue] (\xa,0) rectangle (\xa+0.7,\hh);
- }
- \fill[crimson] (3.95,1.8) circle (0.1);
- \node[font=\footnotesize, text width=4.5cm] at (7.9,1.0) {赤い点＝記述「いちばん背の高い人」が指す人。\\測らなければ誰か分からない。};
+\begin{axis}[ybar, width=9cm, height=4.8cm, bar width=14pt, ymode=log, xmin=0.4, xmax=4.6, ymin=1, ymax=20000, xtick={1,2,3,4}, xticklabels={$p=2$,$p=3$,$p=5$,$p=7$}, ylabel={完全数（対数目盛）},
+  every axis label/.append style={font=\footnotesize}, tick label style={font=\footnotesize}, nodes near coords, nodes near coords style={font=\scriptsize}]
+ \addplot[fill=softblue, draw=primaryblue] coordinates {(1,6)(2,28)(3,496)(4,8128)};
+\end{axis}
 \end{tikzpicture}
-\caption{記述は、条件を満たす人を指す。誰であるかは、調べて初めて分かる。（身長の値は図示のための例）}
+\caption{$2^{p-1}(2^p-1)$ の形の完全数。$p$ が増えると、急に大きくなる。}
 \end{figure}
 
-\begin{pointbox}{この篇のポイント}
-\begin{itemize}[leftmargin=1.5em]
-\item 直接体験の知識と、記述による知識を区別する。
-\item 記述は、会ったことのないものも指せる。
+\begin{pointbox}{この篇のまとめ}
+\begin{itemize}[leftmargin=*]
+\item ラッセルは、数学に、彫刻のような純粋な美を見る。
+\item 完全数 $6,28,496,8128$ は、$2^{p-1}(2^p-1)$ の形（$p=2,3,5,7$）。
 \end{itemize}
 \end{pointbox}
 
-\begin{notebox}{この本の未解決点}
-\begin{itemize}[leftmargin=1.5em]
-\item 翻訳版は小型モデルによる訳で、個々の議論の細部は原著との照合が必要です。
-\item 本書の要約は、各篇の骨組みを筆者が整理したもので、ラッセル自身の用語・論証とは異なる点があります。
+%==========================================================
+\chapter{数学と形而上学者たち（第V篇）}
+\markboth{第6章}{数学と形而上学者たち}
+%==========================================================
+
+\section{この篇の位置づけ}
+
+第V篇は、数学の基礎（無限、連続、極限）の、19世紀の進歩を、一般の読者に紹介する篇で、ラッセル自身が、「できるだけロマンチックに」と編集者に頼まれた、と序文で述べています。この篇には、「純粋数学は、ブールが『思考の法則』（1854年）という著作で発見した」という、有名な一文があります。
+
+\section{ゼノンのパラドックスと無限級数}
+
+ゼノンの「アキレスと亀」を、無限級数で確かめます。亀が100 m 先から出発し、アキレスが亀の10倍の速さで追いかけるとします。アキレスが亀の出発点に着くとき、亀は10 m 先、その10 m をアキレスが進む間に、亀は1 m 進む、……。追いつくまでの距離は、
+\[
+100+10+1+0.1+\cdots=\frac{100}{1-\tfrac1{10}}=111.11\ldots\ \text{m}
+\]
+です。無限に多くの段階があるのに、距離の和は有限（$111\tfrac19$ m）になります。
+
+\begin{table}[htbp]
+\centering
+\begin{tabular}{c|ccccc}
+\toprule
+段階数 & 1 & 2 & 3 & 5 & 10\\
+\midrule
+アキレスの進んだ距離（m） & 100 & 110 & 111 & 111.11 & 111.1111111\\
+\bottomrule
+\end{tabular}
+\caption{アキレスと亀：部分和は、$111.111\ldots$ m に近づく（計算で確認）。}
+\end{table}
+
+\begin{figure}[htbp]
+\centering
+\begin{tikzpicture}
+\begin{axis}[width=9.5cm, height=5.2cm, xmin=0, xmax=8, ymin=90, ymax=115, xlabel={段階の数}, ylabel={アキレスの進んだ距離（m）},
+  every axis label/.append style={font=\footnotesize}, tick label style={font=\footnotesize}]
+ \addplot[mark=*, thick, primaryblue] coordinates {(1,100)(2,110)(3,111)(4,111.1)(5,111.11)(6,111.111)(7,111.1111)};
+ \addplot[dashed, crimson, domain=0:8, samples=2] {111.1111};
+\end{axis}
+\end{tikzpicture}
+\caption{無限に多くの段階の距離の和が、有限の値 $111.11\ldots$ m（赤の破線）に近づく。}
+\end{figure}
+
+\section{無限どうしの対応}
+
+カントールは、自然数の集合と、偶数の集合の間に、$n\leftrightarrow2n$ という1対1の対応があることを見いだしました。部分が全体と同数であるという、無限の特徴です。
+
+\begin{table}[htbp]
+\centering
+\begin{tabular}{c|cccccc}
+\toprule
+自然数 $n$ & 1 & 2 & 3 & 4 & 5 & 6\\
+\midrule
+偶数 $2n$ & 2 & 4 & 6 & 8 & 10 & 12\\
+平方数 $n^2$ & 1 & 4 & 9 & 16 & 25 & 36\\
+\bottomrule
+\end{tabular}
+\caption{自然数を、偶数や平方数と、1対1に対応させる。どの自然数にも、対応する偶数・平方数があり、余りも重なりもない。}
+\end{table}
+
+\begin{pointbox}{この篇のまとめ}
+\begin{itemize}[leftmargin=*]
+\item アキレスと亀：無限級数の和は有限（$100/(1-\tfrac1{10})=111.11$ m）。
+\item 無限集合は、その一部（偶数など）と、1対1に対応できる。
+\item 序文のとおり、ラッセルは、純粋数学はブールの『思考の法則』（1854年）で発見されたと述べる。
+\end{itemize}
+\end{pointbox}
+
+%==========================================================
+\chapter{哲学における科学的方法について（第VI篇）}
+\markboth{第7章}{哲学における科学的方法}
+%==========================================================
+
+\section{この篇の位置づけ}
+
+第VI篇は、1914年のオックスフォードでのハーバート・スペンサー講演です。ラッセルは、哲学に、科学の方法（問題を小さく分け、1つずつ解き、論理的に分析する）を持ち込むことを提案します。
+
+\section{論理的構成：数を、集合から作る}
+
+ラッセルが、論理的分析の例として、よく挙げるのが、「数」の定義です。数 $2$ を、「2個の要素をもつ集合すべての集まり」と定義します。4つの対象 $\{a,b,c,d\}$ から作れる、要素の個数ごとの集合の数は、
+
+\begin{table}[htbp]
+\centering
+\begin{tabular}{c|ccccc}
+\toprule
+要素の個数 $n$ & 0 & 1 & 2 & 3 & 4\\
+\midrule
+そのような部分集合の数 $\binom4n$ & 1 & 4 & 6 & 4 & 1\\
+\bottomrule
+\end{tabular}
+\caption{4つの対象から作れる、$n$ 個の要素をもつ部分集合の数（合計 $2^4=16$）。}
+\end{table}
+
+「数 $2$」は、2個の要素をもつ集合すべての集まりで、この表の $n=2$ の6個は、その一部です。数を、集合の集まりとして定義することで、数の性質を、論理だけから導けるようにします。
+
+\begin{figure}[htbp]
+\centering
+\begin{tikzpicture}
+\begin{axis}[ybar, width=9cm, height=4.8cm, bar width=18pt, xmin=-0.6, xmax=4.6, ymin=0, ymax=7.5, xtick={0,...,4}, xlabel={要素の個数 $n$}, ylabel={部分集合の数},
+  every axis label/.append style={font=\footnotesize}, tick label style={font=\footnotesize}, nodes near coords, nodes near coords style={font=\scriptsize}]
+ \addplot[fill=softblue, draw=primaryblue] coordinates {(0,1)(1,4)(2,6)(3,4)(4,1)};
+\end{axis}
+\end{tikzpicture}
+\caption{4つの対象の、部分集合の数（二項係数）。合計は $16$。}
+\end{figure}
+
+\begin{pointbox}{この篇のまとめ}
+\begin{itemize}[leftmargin=*]
+\item 哲学に、科学の方法（分析と、論理的構成）を持ち込む。
+\item 例：数を、同じ個数の集合の集まりとして定義する。4つの対象の部分集合は、$1,4,6,4,1$ 個。
+\end{itemize}
+\end{pointbox}
+
+%==========================================================
+\chapter{物質の究極的構成要素（第VII篇）}
+\markboth{第8章}{物質の究極的構成要素}
+%==========================================================
+
+\section{この篇の位置づけ}
+
+第VII篇は、物質が、何でできているかを論じます。ラッセルは、物理学が教える「物質」（原子、電子）を、論理的に分析し、物質を、「出来事」の系列から作る「論理的構成」と見られることを論じます。
+
+\section{原子の大きさのスケール}
+
+物質の「究極の構成要素」を考えるとき、原子は、どのくらい小さいでしょうか（現代の補足）。原子の大きさは約 $10^{-10}$ m、原子核は約 $10^{-15}$ m です。
+
+\begin{table}[htbp]
+\centering
+\begin{tabular}{lc}
+\toprule
+対象 & 大きさの目安\\
+\midrule
+原子 & $10^{-10}$ m\\
+原子核 & $10^{-15}$ m\\
+比（原子÷原子核） & $10^{5}$（10万倍）\\
+\bottomrule
+\end{tabular}
+\caption{原子と原子核の大きさの目安。もし原子を直径100 m の競技場とすると、原子核は、約 $1$ mm の粒。}
+\end{table}
+
+\begin{figure}[htbp]
+\centering
+\begin{tikzpicture}
+\draw[thick, primaryblue, fill=softblue] (0,0) circle (3.0);
+\fill[crimson] (0,0) circle (0.04);
+\node[lbl] at (0,-3.5) {原子（円）の大きさを $100$ m とすると、中心の点（原子核）は約 $1$ mm};
+\end{tikzpicture}
+\caption{原子と原子核の大きさの比（点は誇張して描いた）。原子の中は、ほとんど空っぽ。}
+\end{figure}
+
+\begin{pointbox}{この篇のまとめ}
+\begin{itemize}[leftmargin=*]
+\item ラッセルは、物質を、出来事からの論理的構成と見ることを論じる。
+\item 原子は原子核の約10万倍の大きさ（補足の目安）。
+\end{itemize}
+\end{pointbox}
+
+%==========================================================
+\chapter{感覚与件と物理学との関係（第VIII篇）}
+\markboth{第9章}{感覚与件と物理学}
+%==========================================================
+
+\section{この篇の位置づけ}
+
+第VIII篇は、私たちが直接に知る「感覚与件」（見える色や形など）と、物理学が語る物の世界との関係を論じます。机が、見る位置によって、違う形に見えるように、感覚与件は、見る位置に依存する「遠近法」の一部です。
+
+\section{遠近法：見かけの大きさ}
+
+幅 $1$ m の机を、距離 $d$ から見ると、見かけの角度（視角）は $2\arctan\bigl(\tfrac{0.5}{d}\bigr)$ です。
+
+\begin{table}[htbp]
+\centering
+\begin{tabular}{c|cccc}
+\toprule
+距離 $d$（m） & 1 & 2 & 4 & 8\\
+\midrule
+見かけの角度 & $53.1^\circ$ & $28.1^\circ$ & $14.3^\circ$ & $7.15^\circ$\\
+\bottomrule
+\end{tabular}
+\caption{幅 $1$ m の物を見る見かけの角度。距離が2倍になると、角度はおよそ半分。}
+\end{table}
+
+\begin{figure}[htbp]
+\centering
+\begin{tikzpicture}
+\begin{axis}[width=9cm, height=5cm, xmin=0.5, xmax=10, ymin=0, ymax=65, xlabel={距離 $d$（m）}, ylabel={見かけの角度（度）},
+  every axis label/.append style={font=\footnotesize}, tick label style={font=\footnotesize}]
+ \addplot[thick, primaryblue, domain=0.5:10, samples=80] {2*atan(0.5/x)};
+ \addplot[mark=*, crimson, only marks] coordinates {(1,53.13)(2,28.07)(4,14.25)(8,7.15)};
+\end{axis}
+\end{tikzpicture}
+\caption{見かけの角度と距離。遠いほど小さく見える。同じ物でも、見る位置で、感覚与件は違う。}
+\end{figure}
+
+\begin{pointbox}{この篇のまとめ}
+\begin{itemize}[leftmargin=*]
+\item 感覚与件は、見る位置に依存する（遠近法）。
+\item 幅1 m の机は、距離1 m で $53.1^\circ$、8 m で $7.15^\circ$ に見える。
+\end{itemize}
+\end{pointbox}
+
+%==========================================================
+\chapter{原因の概念について（第IX篇）}
+\markboth{第10章}{原因の概念について}
+%==========================================================
+
+\section{この篇の位置づけ}
+
+第IX篇は、「原因」という概念が、物理学では、実は使われていないことを論じます。ラッセルは、万有引力の法則のような、物理学の法則が述べるのは、物の位置や速さの間の、関数的な関係であって、「原因と結果」ではない、と述べます。
+
+\section{万有引力：関数の関係}
+
+2つの物体の間に働く引力は、$F=\dfrac{Gm_1m_2}{r^2}$ です。どちらが原因で、どちらが結果かは、この式には現れません。地球と月の間の引力を計算します。
+
+\begin{table}[htbp]
+\centering
+\begin{tabular}{lc}
+\toprule
+量 & 値\\
+\midrule
+地球の質量 $m_1$ & $5.972\times10^{24}$ kg\\
+月の質量 $m_2$ & $7.342\times10^{22}$ kg\\
+距離 $r$ & $3.844\times10^{8}$ m\\
+引力 $F$ & $1.98\times10^{20}$ N\\
+\bottomrule
+\end{tabular}
+\caption{地球と月の間の万有引力（計算で確認）。地球が月を引く力と、月が地球を引く力は、同じ大きさ。}
+\end{table}
+
+距離が2倍になると、引力は $\tfrac14$、3倍で $\tfrac19$、4倍で $\tfrac1{16}$ です（逆2乗の法則）。
+
+\begin{figure}[htbp]
+\centering
+\begin{tikzpicture}
+\begin{axis}[width=9cm, height=5cm, xmin=1, xmax=4, ymin=0, ymax=1.05, xlabel={距離（元の距離の何倍か）}, ylabel={引力（元の引力の何倍か）},
+  every axis label/.append style={font=\footnotesize}, tick label style={font=\footnotesize}]
+ \addplot[thick, primaryblue, domain=1:4, samples=80] {1/x^2};
+ \addplot[mark=*, crimson, only marks] coordinates {(1,1)(2,0.25)(3,0.1111)(4,0.0625)};
+\end{axis}
+\end{tikzpicture}
+\caption{逆2乗の法則。距離が2倍で $\tfrac14$、3倍で $\tfrac19$。式は、2つの量の関数的関係を述べるだけで、原因と結果は区別しない。}
+\end{figure}
+
+\begin{pointbox}{この篇のまとめ}
+\begin{itemize}[leftmargin=*]
+\item 物理学の法則は、量の間の関数的な関係で、「原因」という言葉は使わない（ラッセルの論点）。
+\item 地球と月の引力は $1.98\times10^{20}$ N。距離2倍で $\tfrac14$。
+\end{itemize}
+\end{pointbox}
+
+%==========================================================
+\chapter{直接体験による知識と記述による知識（第X篇）}
+\markboth{第11章}{直接体験による知識と記述による知識}
+%==========================================================
+
+\section{この篇の位置づけ}
+
+最終の第X篇は、知識の2つの種類を区別します。直接に知る（直接体験による知識）、たとえば、目の前の赤い色。もう1つは、「記述」を通して知る（記述による知識）、たとえば、「ウェイヴァリー小説の作者」という言い方で指される人物。ラッセルは、「記述」の論理的な分析（記述の理論）を示します。
+
+\section{「その〜」の論理}
+
+ラッセルは、「その $P$ は $Q$ である」を、3つの主張に分解します。(1) $P$ であるものが、少なくとも1つある。(2) $P$ であるものは、高々1つ。(3) その $P$ は $Q$ である。このうち1つでも欠ければ、全体は偽です。
+
+3つの対象 $\{1,2,3\}$ の世界で、$P$ と $Q$ を、部分集合として、すべての組み合わせ（$8\times8=64$ 通り）で調べると、
+
+\begin{table}[htbp]
+\centering
+\begin{tabular}{lc}
+\toprule
+場合 & 該当するモデルの数\\
+\midrule
+$P$ がちょうど1つで、それが $Q$ に入る（「その $P$ は $Q$」が真） & 12\\
+$P$ がちょうど1つだが、$Q$ に入らない（偽） & 12\\
+$P$ が空（そのような $P$ がない、偽） & 8\\
+$P$ が2つ以上（一意でない、偽） & 32\\
+\midrule
+合計 & 64\\
+\bottomrule
+\end{tabular}
+\caption{「その $P$ は $Q$ である」の真偽の内訳（3要素の世界の全モデル）。「フランスの現在の王は禿げている」のように、該当するものがなければ、偽。}
+\end{table}
+
+\begin{figure}[htbp]
+\centering
+\begin{tikzpicture}
+\begin{axis}[ybar, width=10cm, height=5cm, bar width=22pt, xmin=0.4, xmax=4.6, ymin=0, ymax=36, xtick={1,2,3,4}, xticklabels={真,偽（$Q$ に入らない）,偽（$P$ が空）,偽（一意でない）}, x tick label style={font=\scriptsize}, ylabel={モデルの数},
+  every axis label/.append style={font=\footnotesize}, tick label style={font=\footnotesize}, nodes near coords, nodes near coords style={font=\scriptsize}]
+ \addplot[fill=softblue, draw=primaryblue] coordinates {(1,12)(2,12)(3,8)(4,32)};
+\end{axis}
+\end{tikzpicture}
+\caption{「その $P$ は $Q$」の真偽の内訳。真になるのは、64通りのうち12通りだけ。}
+\end{figure}
+
+\begin{pointbox}{この篇のまとめ}
+\begin{itemize}[leftmargin=*]
+\item 知識は、直接体験によるものと、記述によるものに分かれる。
+\item 「その $P$ は $Q$」は、存在、一意、述語の3つの主張。3要素の64通りのうち、真は12通り。
+\end{itemize}
+\end{pointbox}
+
+%==========================================================
+\chapter*{おわりに：この本で確かめたことの一覧}
+\addcontentsline{toc}{chapter}{おわりに：この本で確かめたことの一覧}
+\markboth{おわりに}{おわりに}
+%==========================================================
+
+\begin{table}[htbp]
+\centering
+\small
+\begin{tabular}{lll}
+\toprule
+篇 & 確かめた内容 & 方法\\
+\midrule
+序文 & 各篇の発表年 & 序文の記述\\
+I & 三段論法の集合での確かめ & 小さな集合\\
+II & ガリレオの法則（$1,4,9,16,25$） & 計算\\
+III & 太陽の放射と質量損失（補足） & $E=mc^2$\\
+IV & 完全数 $6,28,496,8128$ & 約数の全数調査\\
+V & アキレスと亀、自然数と偶数の対応 & 無限級数、対応表\\
+VI & 部分集合の数 $1,4,6,4,1$ & 二項係数\\
+VII & 原子と原子核の大きさ（補足） & 目安の計算\\
+VIII & 遠近法の見かけの角度 & 三角関数\\
+IX & 万有引力、逆2乗 & 計算\\
+X & 「その $P$ は $Q$」の真偽（64モデル） & 全モデルの数え上げ\\
+\bottomrule
+\end{tabular}
+\caption{本書で確かめたことの一覧。}
+\end{table}
+
+\begin{notebox}{本書でできなかったこと}
+\begin{itemize}[leftmargin=*]
+\item ラッセルの哲学的な議論（神秘主義、倫理、物質の構成、感覚与件の理論）の詳細は、各篇の主題にもとづく要約にとどまり、取り上げていません（未確認）。
+\item 第III、VII篇の数値は、現代の補足で、ラッセルの本文のものではありません。
 \end{itemize}
 \end{notebox}
 
