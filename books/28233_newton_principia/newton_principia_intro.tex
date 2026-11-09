@@ -236,6 +236,127 @@ $G$ & 万有引力定数（ニュートンの時代には知られていなか�
 最初から順に読む必要はありません。\textbf{第3編の「万有引力の確立」（本書第10章）を先に読む}と、前の編の命題がどこで使われるかが分かります。そのあとで、第1編の図形の議論に戻ると、道具が何のためにあるのかが見えます。
 \end{examplebox}
 
+\section{補充 三つの版：1687年・1713年・1726年}
+
+『プリンキピア』は、一度書かれて終わった本ではありません。ニュートンの生涯（1643〜1727年）のうちに、3回、世に出ています。
+
+\begin{table}[htbp]
+\centering
+\begin{tabular}{clp{7.2cm}}
+\toprule
+年 & 版 & 主なできごと（補足：一般に知られた事実）\\
+\midrule
+1687 & 第1版 & ハレーの勧めと世話で刊行。王立協会の後ろだてがあった。\\
+1713 & 第2版 & ロジャー・コーツが校訂し、序文を書いた。\\
+1726 & 第3版 & ヘンリー・ペンバートンが校訂した。ニュートンの存命中の最後の版。\\
+\bottomrule
+\end{tabular}
+\caption{『プリンキピア』の3つの版（本書の翻訳が底本とした版の確認は、翻訳側の記述に従う。ここでは年と校訂者だけを挙げた）。}
+\end{table}
+
+\begin{figure}[htbp]
+\centering
+\begin{tikzpicture}
+ \draw[ax] (0,0)--(11.2,0);
+ \foreach \x/\lab in {0/1643,2.2/1684,3.2/1687,5.2/1713,8.4/1726,9.4/1727}{
+   \draw (\x,-0.08)--(\x,0.08);
+   \node[lbl, below] at (\x,-0.1) {\lab};
+ }
+ \node[lbl, above, align=center] at (0,0.1) {ニュートン\\誕生};
+ \node[lbl, above, align=center] at (2.2,0.1) {ハレーの\\来訪};
+ \node[abox, above] at (3.45,0.75) {第1版};
+ \node[abox, above] at (5.2,0.75) {第2版};
+ \node[abox, above] at (8.2,0.75) {第3版};
+ \node[lbl, above, align=center] at (9.7,0.1) {没};
+ \fill[primaryblue] (3.2,0) circle (2pt);
+ \fill[primaryblue] (5.2,0) circle (2pt);
+ \fill[primaryblue] (8.4,0) circle (2pt);
+\end{tikzpicture}
+\caption{ニュートンの年表（横軸は年に比例しない目安の位置）。1684年のハレーの来訪が、執筆のきっかけとして広く語られる。}
+\end{figure}
+
+間隔を数えると、初版から第2版まで26年、第2版から第3版まで13年です（計算：$1713-1687=26$、$1726-1713=13$）。版が進むたびに、書き直しがありました。
+
+\section{補充 本全体の地図：何が何の土台か}
+
+\begin{figure}[htbp]
+\centering
+\begin{tikzpicture}[node distance=7mm]
+ \node[fbox, text width=9.5cm] (a) {\textbf{定義と運動の法則}（第2・3章）\\質量・運動量・力の言葉と、3つの法則};
+ \node[fbox, text width=9.5cm, below=of a] (b) {\textbf{第1編 物体の運動}（第4〜7章）\\力があるとき、どんな軌道になるか（真空中・14節）};
+ \node[fbox, text width=9.5cm, below=of b] (c) {\textbf{第2編 抵抗媒質中の運動}（第8・9章）\\空気や水の抵抗があるとき・流体・音・波};
+ \node[abox, text width=9.5cm, below=of c] (d) {\textbf{第3編 世界の体系}（第10・11章）\\惑星・月・潮汐・彗星への応用};
+ \draw[ax] (a)--(b); \draw[ax] (b)--(c); \draw[ax] (c)--(d);
+ \draw[ax, bend left=35] (b.east) to node[right, lbl] {逆2乗の法則} (d.east);
+\end{tikzpicture}
+\caption{『プリンキピア』の論理の流れ。第1編の結果を、第3編で実際の天体に当てはめる。}
+\end{figure}
+
+\begin{notebox}{読み方のこつ}
+第3編から先に読み、わからない主張が出たら、第1編の対応する命題に戻る、という読み方もできます。本書は、翻訳と同じ順序で解説しますが、どの章からでも、入口は作ってあります。
+\end{notebox}
+
+\section{補充 数値のものさし：この本で使う量}
+
+本書の補充では、現代の標準的な値を使って、ニュートンの主張を数字で確かめます。以下は、本書の補充で共通に使う値です（補足：一般に使われる標準値。単位はSI）。
+
+\begin{table}[htbp]
+\centering
+\begin{tabular}{lrl}
+\toprule
+量 & 値 & 記号\\
+\midrule
+重力加速度（標準） & $9.80665\ \mathrm{m/s^2}$ & $g$\\
+地球の赤道半径 & $6.378137\times10^{6}\ \mathrm{m}$ & $R_E$\\
+月までの平均距離 & $3.844\times10^{8}\ \mathrm{m}$ & $r$\\
+月の恒星月 & $27.321661$ 日 & $T$\\
+天文単位（太陽〜地球） & $1.495979\times10^{11}\ \mathrm{m}$ & AU\\
+万有引力定数 & $6.6743\times10^{-11}\ \mathrm{N\,m^2/kg^2}$ & $G$\\
+\bottomrule
+\end{tabular}
+\caption{本書で使う標準値。月までの距離は地球半径のおよそ60.3倍（$3.844\times10^8\div6.378137\times10^6=60.27$）。}
+\end{table}
+
+\begin{figure}[htbp]
+\centering
+\begin{tikzpicture}
+\begin{axis}[width=10cm, height=3.6cm, xmode=log, xmin=1e6, xmax=1e12, ymin=0, ymax=4, ytick=\empty, xlabel={距離 [m]（対数目盛）},
+  every axis label/.append style={font=\footnotesize}, tick label style={font=\footnotesize}]
+ \addplot[only marks, mark=*, primaryblue, mark size=2.5pt] coordinates {(6.378137e6,1)(3.844e8,2)(1.495979e11,3)};
+ \node[lbl, above] at (axis cs:6.378137e6,1.1) {地球半径};
+ \node[lbl, above] at (axis cs:3.844e8,2.1) {月まで};
+ \node[lbl, above] at (axis cs:1.495979e11,3.1) {太陽まで};
+\end{axis}
+\end{tikzpicture}
+\caption{地球の半径・月までの距離・太陽までの距離（対数目盛）。月の距離は地球半径の約60倍、太陽の距離は月の距離の約390倍（計算：$1.495979\times10^{11}\div3.844\times10^{8}=389.2$）。}
+\end{figure}
+
+\section{補充 この本が答える3種類の問い}
+
+\begin{figure}[htbp]
+\centering
+\begin{tikzpicture}
+ \node[wbox, text width=3.6cm] (a) {\textbf{問い①}\\軌道がわかっている\\→ 力は何か};
+ \node[wbox, text width=3.6cm, right=8mm of a] (b) {\textbf{問い②}\\力がわかっている\\→ 軌道は何か};
+ \node[wbox, text width=3.6cm, right=8mm of b] (c) {\textbf{問い③}\\現実の天体に\\当てはめると？};
+ \node[abox, below=5mm of a, text width=3.6cm] (a2) {命題I〜XVII\\（第1編 前半）};
+ \node[abox, below=5mm of b, text width=3.6cm] (b2) {命題XL〜など\\（第1編 後半）};
+ \node[abox, below=5mm of c, text width=3.6cm] (c2) {第3編};
+ \draw[ax] (a)--(a2); \draw[ax] (b)--(b2); \draw[ax] (c)--(c2);
+\end{tikzpicture}
+\caption{『プリンキピア』が扱う3種類の問いと、対応する場所の目安。}
+\end{figure}
+
+ケプラーの法則（軌道）から逆2乗の力を導くのが問い①、逆2乗の力から円錐曲線を導くのが問い②、そして月・惑星・彗星に当てはめるのが問い③です。この3つを区別して読むと、章をまたいでも迷いません。
+
+\begin{pointbox}{第1章 補充のまとめ}
+\begin{itemize}[leftmargin=*]
+\item 3つの版：1687・1713・1726年（間隔は26年と13年）。
+\item 第1編の結果を、第3編で天体に当てはめる、という構造。
+\item 月までの距離は地球半径の約60倍。
+\end{itemize}
+\end{pointbox}
+
 %==========================================================
 \chapter{定義および絶対空間・絶対時間・水桶の実験}
 \markboth{第2章}{定義と絶対空間}
@@ -432,6 +553,122 @@ F=\frac{mv^2}{r}=\frac{0.2\times16}{1}=3.2\ \text{N}.
 \end{tikzpicture}
 \caption{毎秒2回転する桶の水面（放物面）。中心が最も低く、縁が約 $8$ cm 高い。}
 \end{figure}
+
+\section{補充 月は落ちている：月のテスト}
+
+ニュートンの考えでは、月を軌道に保つ力は、リンゴを落とす力と同じ種類のものです。確かめてみましょう。月の軌道を、半径 $r$ の円と見ると、向心加速度は
+\[
+a=\frac{4\pi^2 r}{T^2}.
+\]
+$r=3.844\times10^8\ \mathrm{m}$、$T=27.321661$ 日 $=2.3606\times10^{6}\ \mathrm{s}$ を入れると、$a=2.7233\times10^{-3}\ \mathrm{m/s^2}$。
+
+一方、地表の重力加速度 $g=9.80665$ を、距離が60倍（逆2乗なら $1/3600$）になったときの値に直すと、$g/60^2=2.7241\times10^{-3}\ \mathrm{m/s^2}$。
+
+\begin{table}[htbp]
+\centering
+\begin{tabular}{lc}
+\toprule
+量 & $[\mathrm{m/s^2}]$\\
+\midrule
+月の向心加速度 $4\pi^2r/T^2$ & $2.7233\times10^{-3}$\\
+$g/60^2$ & $2.7241\times10^{-3}$\\
+$g/(r/R_E)^2$（$r/R_E=60.27$ を使う） & $2.6999\times10^{-3}$\\
+\bottomrule
+\end{tabular}
+\caption{月のテスト（計算で確認）。3つの値は、0.1\%〜1\%の範囲で、よく一致する。}
+\end{table}
+
+\begin{figure}[htbp]
+\centering
+\begin{tikzpicture}
+\begin{axis}[width=9cm, height=5.5cm, xmode=log, ymode=log, xmin=0.8, xmax=100, ymin=1e-4, ymax=20, xlabel={中心からの距離（地球半径の何倍か）}, ylabel={加速度 [m/s$^2$]},
+  every axis label/.append style={font=\footnotesize}, tick label style={font=\footnotesize}, legend style={font=\scriptsize, at={(0.03,0.03)}, anchor=south west}]
+ \addplot[thick, primaryblue, domain=1:100, samples=2] {9.80665/x^2};
+ \addplot[only marks, mark=*, crimson, mark size=2.5pt] coordinates {(1,9.80665)(60.27,0.0027233)};
+ \legend{逆2乗の法則, 地表と月}
+\end{axis}
+\end{tikzpicture}
+\caption{地表（左上）と月（右下）は、逆2乗の直線の上に並ぶ。両対数のグラフでは、傾き$-2$の直線。}
+\end{figure}
+
+\section{補充 定義V〜VIII：向心力の3つの量}
+
+ニュートンは向心力に、絶対量・加速量・運動量の3つの量を区別しました（補足：現代の言葉に直すと、中心天体の強さ $\mu$、加速度 $a$、力 $F=ma$ に近い）。月の例で、$\mu=a r^2=GM$ を計算すると $\mu=2.7233\times10^{-3}\times(3.844\times10^8)^2=4.024\times10^{14}\ \mathrm{m^3/s^2}$。標準値 $GM_E=3.986\times10^{14}$ に対して、約1\%大きい（月の軌道が完全な円でないことなどが原因と考えられる。未確認）。
+
+\begin{table}[htbp]
+\centering
+\begin{tabular}{lcc}
+\toprule
+量 & 記号 & 月の例\\
+\midrule
+絶対量（中心の強さ） & $\mu=a\,r^2$ & $4.02\times10^{14}\ \mathrm{m^3/s^2}$\\
+加速量 & $a=\mu/r^2$ & $2.72\times10^{-3}\ \mathrm{m/s^2}$\\
+運動量にあたる量 & $F=ma$ & 月の質量 $7.342\times10^{22}$ kg なら $2.0\times10^{20}$ N\\
+\bottomrule
+\end{tabular}
+\caption{向心力の3つの量を、月で計算した例（$F=7.342\times10^{22}\times2.7233\times10^{-3}=2.0\times10^{20}$ N）。}
+\end{table}
+
+\section{補充 水桶の実験：回る水面は放物線}
+
+水桶を一定の角速度 $\omega$ で回すと、水面は、へこんだ放物面になります。水面の高さの差は
+\[
+h=\frac{\omega^2r^2}{2g}.
+\]
+$\omega$ と $r$ を変えて計算します。
+
+\begin{table}[htbp]
+\centering
+\begin{tabular}{c|cc}
+\toprule
+ & $r=0.05$ m & $r=0.10$ m\\
+\midrule
+$\omega=1$ rad/s & 0.13 mm & 0.51 mm\\
+$\omega=2$ rad/s & 0.51 mm & 2.04 mm\\
+$\omega=4$ rad/s & 2.04 mm & 8.16 mm\\
+\bottomrule
+\end{tabular}
+\caption{回る水面の、中心と半径 $r$ の点の高さの差（計算で確認）。$\omega$ を2倍にしても、$r$ を2倍にしても、$h$ は4倍。}
+\end{table}
+
+\begin{figure}[htbp]
+\centering
+\begin{tikzpicture}
+\begin{axis}[width=9cm, height=5.3cm, xmin=-0.1, xmax=0.1, ymin=0, ymax=9, xlabel={中心からの距離 $r$ [m]}, ylabel={水面の高さ [mm]},
+  every axis label/.append style={font=\footnotesize}, tick label style={font=\footnotesize}, legend style={font=\scriptsize, at={(0.5,0.97)}, anchor=north}]
+ \addplot[thick, primaryblue, domain=-0.1:0.1, samples=60] {1000*1*x^2/(2*9.80665)};
+ \addplot[thick, warmamber, domain=-0.1:0.1, samples=60] {1000*4*x^2/(2*9.80665)};
+ \addplot[thick, crimson, domain=-0.1:0.1, samples=60] {1000*16*x^2/(2*9.80665)};
+ \legend{$\omega=1$, $\omega=2$, $\omega=4$}
+\end{axis}
+\end{tikzpicture}
+\caption{回る水面の断面（高さは mm）。回転が速いほど、深い放物線になる。}
+\end{figure}
+
+ニュートンは、この「へこみ」が、桶と水の相対運動ではなく、絶対的な回転の証拠だと考えました。水と桶が一緒に回っていて相対的に静止していても、へこみは残る、というのが議論の要点です。
+
+\section{補充 質量と運動量：次元の確かめ}
+
+\begin{figure}[htbp]
+\centering
+\begin{tikzpicture}
+\begin{axis}[width=9cm, height=5cm, xmin=0, xmax=10, ymin=0, ymax=30, xlabel={速さ $v$ [m/s]}, ylabel={運動量 $p=mv$ [kg\,m/s]},
+  every axis label/.append style={font=\footnotesize}, tick label style={font=\footnotesize}, legend style={font=\scriptsize, at={(0.03,0.97)}, anchor=north west}]
+ \addplot[thick, primaryblue, domain=0:10, samples=2] {1*x};
+ \addplot[thick, warmamber, domain=0:10, samples=2] {2*x};
+ \addplot[thick, crimson, domain=0:10, samples=2] {3*x};
+ \legend{$m=1$ kg, $m=2$ kg, $m=3$ kg}
+\end{axis}
+\end{tikzpicture}
+\caption{運動量 $p=mv$ は、速さに比例し、傾きが質量。ニュートンの「運動の量」の定義。}
+\end{figure}
+
+\begin{pointbox}{第2章 補充のまとめ}
+\begin{itemize}[leftmargin=*]
+\item 月のテスト：$4\pi^2r/T^2=2.723\times10^{-3}$ と $g/60^2=2.724\times10^{-3}$ が一致。
+\item 水桶：回る水面の高さの差は $h=\omega^2r^2/2g$（放物面）。
+\end{itemize}
+\end{pointbox}
 
 %==========================================================
 \chapter{運動の公理または法則、系、および注記}
@@ -634,6 +871,96 @@ $m_1=2,\ m_2=1$ & $2$ & $3$ & $1$ & $4$\\
 \end{tikzpicture}
 \caption{質量 → 運動量 → 力 → 運動量の保存、という流れ。}
 \end{figure}
+
+\section{補充 衝突の法則を、数字で確かめる}
+
+第3法則（作用・反作用）と、運動量の保存（系III）を使うと、2つの物体の衝突の結果が決まります。質量 $m_1=2$ kg の物体が速さ $3$ m/s で、静止している $m_2=1$ kg の物体に当たる場合を考えます。反発係数 $e$ を使うと、衝突後の速さは
+\[
+u_1=\frac{m_1v_1+m_2v_2+m_2e(v_2-v_1)}{m_1+m_2},\qquad
+u_2=\frac{m_1v_1+m_2v_2+m_1e(v_1-v_2)}{m_1+m_2}.
+\]
+
+\begin{table}[htbp]
+\centering
+\begin{tabular}{lcccc}
+\toprule
+衝突の種類 & $e$ & $u_1$ [m/s] & $u_2$ [m/s] & 失われた運動エネルギー [J]\\
+\midrule
+完全弾性 & 1 & 1.0 & 4.0 & 0\\
+中間 & 0.5 & 1.5 & 3.0 & 2.25\\
+完全非弾性 & 0 & 2.0 & 2.0 & 3.0\\
+\bottomrule
+\end{tabular}
+\caption{衝突後の速さ（計算で確認）。運動量は、どの場合も $2\times3=6$ kg\,m/s で保存される（例：$e=0.5$ のとき $2\times1.5+1\times3.0=6$）。運動エネルギーは、はじめ $9$ J。}
+\end{table}
+
+\begin{figure}[htbp]
+\centering
+\begin{tikzpicture}
+\begin{axis}[width=9.5cm, height=5.3cm, xmin=0, xmax=1, ymin=0, ymax=5, xlabel={反発係数 $e$}, ylabel={衝突後の速さ [m/s]},
+  every axis label/.append style={font=\footnotesize}, tick label style={font=\footnotesize}, legend style={font=\scriptsize, at={(0.03,0.5)}, anchor=west}]
+ \addplot[thick, primaryblue, domain=0:1, samples=2] {2-1*x};
+ \addplot[thick, crimson, domain=0:1, samples=2] {2+2*x};
+ \legend{$u_1$（当てた側）, $u_2$（当てられた側）}
+\end{axis}
+\end{tikzpicture}
+\caption{反発係数 $e$ と衝突後の速さ（$m_1=2$、$m_2=1$、$v_1=3$）。$e$ が大きいほど、当てられた側が速く飛ぶ。}
+\end{figure}
+
+\section{補充 力の平行四辺形：3Nと4Nの力}
+
+系I・IIで、ニュートンは、2つの力の合成を平行四辺形で表しました。互いに垂直な $3$ N と $4$ N の力の合力は、$\sqrt{3^2+4^2}=5$ N。向きは、3 N の力から $\arctan(4/3)=53.13^\circ$ です。
+
+\begin{figure}[htbp]
+\centering
+\begin{tikzpicture}[scale=0.9]
+ \draw[gridgray] (0,0) grid (4.5,4.5);
+ \draw[ax, primaryblue] (0,0)--(3,0) node[midway, below, lbl] {3 N};
+ \draw[ax, warmamber] (0,0)--(0,4) node[midway, left, lbl] {4 N};
+ \draw[dashed] (3,0)--(3,4)--(0,4);
+ \draw[ax, crimson, very thick] (0,0)--(3,4) node[midway, above left, lbl] {合力 5 N};
+ \draw (0.8,0) arc (0:53.13:0.8);
+ \node[lbl] at (1.2,0.35) {$53.1^\circ$};
+\end{tikzpicture}
+\caption{直角をなす3 Nと4 Nの合力は5 N（辺の比 $3:4:5$ の直角三角形）。}
+\end{figure}
+
+\begin{table}[htbp]
+\centering
+\begin{tabular}{c|ccc}
+\toprule
+2つの力のなす角 & $0^\circ$ & $90^\circ$ & $180^\circ$\\
+\midrule
+合力（3 Nと4 N） & 7 N & 5 N & 1 N\\
+\bottomrule
+\end{tabular}
+\caption{角度による合力の変化。合力の大きさは $\sqrt{3^2+4^2+2\cdot3\cdot4\cos\theta}$。}
+\end{table}
+
+\section{補充 相対運動：ガリレイ変換}
+
+系V・VIで、ニュートンは、「閉じた船の中の運動は、船が一様に動いていても、止まっていても、区別できない」という趣旨を述べます。速さ $5$ m/s で進む船の上で、船首に向かって $2$ m/s で歩く人は、岸から見ると $5+2=7$ m/s、船尾に向かって歩くと $5-2=3$ m/s です。
+
+\begin{figure}[htbp]
+\centering
+\begin{tikzpicture}
+\begin{axis}[width=9cm, height=5cm, xmin=0, xmax=4, ymin=0, ymax=22, xlabel={時間 $t$ [s]}, ylabel={岸から見た位置 [m]},
+  every axis label/.append style={font=\footnotesize}, tick label style={font=\footnotesize}, legend style={font=\scriptsize, at={(0.03,0.97)}, anchor=north west}]
+ \addplot[thick, primaryblue, domain=0:4, samples=2] {5*x};
+ \addplot[thick, crimson, domain=0:4, samples=2] {7*x};
+ \addplot[thick, warmamber, domain=0:4, samples=2] {3*x};
+ \legend{船（$5$ m/s）, 船首へ歩く（$7$ m/s）, 船尾へ歩く（$3$ m/s）}
+\end{axis}
+\end{tikzpicture}
+\caption{岸から見た位置の時間変化。船の速度が加わるだけで、傾き（速さ）が変わり、船の中の運動の法則は変わらない。}
+\end{figure}
+
+\begin{pointbox}{第3章 補充のまとめ}
+\begin{itemize}[leftmargin=*]
+\item 衝突：運動量は常に保存。運動エネルギーは完全弾性衝突でだけ保存。
+\item 3 Nと4 Nの直角の力の合力は5 N。
+\end{itemize}
+\end{pointbox}
 
 %==========================================================
 \chapter{第1編 物体の運動（第1節〜第3節：極限比の方法と向心力の基本定理）}
@@ -1105,6 +1432,142 @@ $\sqrt2\times7.90$ & 放物線（脱出ぎりぎり） & $11.2$\\
 \end{itemize}
 \end{pointbox}
 
+\section{補充 ニュートンの作図を、そのまま計算する（命題Iの多角形）}
+
+命題Iの証明で、ニュートンは、連続した力を、「一定の時間ごとに中心に向かって与えられる、瞬間の衝撃」でおきかえます。物体は、衝撃と衝撃のあいだは、まっすぐ進みます。この作図を、そのまま計算で再現します。
+
+条件は、$GM=1$、はじめの位置 $(1,0)$、はじめの速度 $(0,0.8)$、時間の刻み $\Delta t=0.25$。次の頂点は「前の速度で $\Delta t$ 進んだ点」、そこで、中心向きの力 $-\vec r/r^3$ に $\Delta t$ をかけた衝撃を与えます。
+
+\begin{table}[htbp]
+\centering
+\begin{tabular}{c|cccccc}
+\toprule
+頂点 & 0 & 1 & 2 & 3 & 4 & 5\\
+\midrule
+$x$ & 1.000 & 1.000 & 0.941 & 0.826 & 0.659 & 0.444\\
+$y$ & 0.000 & 0.200 & 0.388 & 0.553 & 0.683 & 0.764\\
+\bottomrule
+\end{tabular}
+\caption{ニュートンの作図で計算した多角形の頂点（計算で確認）。}
+\end{table}
+
+\begin{figure}[htbp]
+\centering
+\begin{tikzpicture}[scale=3.2]
+ \draw[gridgray] (-0.9,-0.9) rectangle (1.1,0.9);
+ \draw[thick, primaryblue] (1.000,0.000)--(1.000,0.200)--(0.941,0.388)--(0.826,0.553)--(0.659,0.683)--(0.444,0.764)--(0.188,0.775)--(-0.090,0.690)--(-0.352,0.477)--(-0.509,0.122)--(-0.444,-0.287)--(-0.190,-0.574)--(0.117,-0.698)--(0.404,-0.700)--(0.643,-0.619)--(0.825,-0.483)--(0.948,-0.313)--(1.012,-0.123)--(1.016,0.074);
+ \foreach \p in {(1.000,0.000),(1.000,0.200),(0.941,0.388),(0.826,0.553),(0.659,0.683),(0.444,0.764),(0.188,0.775),(-0.090,0.690),(-0.352,0.477),(-0.509,0.122),(-0.444,-0.287),(-0.190,-0.574),(0.117,-0.698),(0.404,-0.700),(0.643,-0.619),(0.825,-0.483),(0.948,-0.313),(1.012,-0.123)}{\fill[primaryblue] \p circle (0.6pt);}
+ \fill[crimson] (0,0) circle (0.9pt) node[below left, lbl] {$S$};
+ \draw[thin, crimson] (0,0)--(1.000,0.200);
+ \draw[thin, crimson] (0,0)--(0.941,0.388);
+ \draw[thin, crimson] (0,0)--(-0.509,0.122);
+ \draw[thin, crimson] (0,0)--(-0.444,-0.287);
+\end{tikzpicture}
+\caption{ニュートンの作図による軌道（青い折れ線）。中心 $S$ から各頂点へ引いた線（赤）がつくる三角形の面積は、すべて等しい。1周でほぼ閉じる。}
+\end{figure}
+
+肝心なのは面積です。連続する三角形の面積を計算すると、すべて $0.1000$（誤差は $10^{-16}$ のオーダー）でした。60個の三角形のうち、最小と最大が一致します。刻み幅 $\Delta t$ を小さくすると、この折れ線は滑らかな軌道に近づき、面積速度が一定、つまり面積の法則（ケプラーの第2法則）が、力が中心を向いていさえすれば成り立つ、という結論になります。中心からの距離は $0.52$ から $1.02$ の間でした。
+
+\section{補充 補題II：内接・外接の和を、数字ではさむ}
+
+補題II（曲線の下の面積）の数値例を、$y=x^2$、区間 $[0,1]$（真の面積は $\tfrac13$）で調べます。$n$ 等分したときの、内接する長方形の和は $\dfrac{(n-1)(2n-1)}{6n^2}$、外接する長方形の和は $\dfrac{(n+1)(2n+1)}{6n^2}$ です。
+
+\begin{table}[htbp]
+\centering
+\begin{tabular}{r|cccc}
+\toprule
+$n$ & 4 & 10 & 100 & 1000\\
+\midrule
+内接の和 & 0.21875 & 0.28500 & 0.32835 & 0.33283\\
+外接の和 & 0.46875 & 0.38500 & 0.33835 & 0.33383\\
+差（外接$-$内接） & 0.25000 & 0.10000 & 0.01000 & 0.00100\\
+\bottomrule
+\end{tabular}
+\caption{長方形の数と、はさみうち（計算で確認）。差はちょうど $1/n$（最も左の長方形の幅の $1\times1$ に等しい）。}
+\end{table}
+
+\begin{figure}[htbp]
+\centering
+\begin{tikzpicture}
+\begin{axis}[width=9.5cm, height=5.2cm, xmode=log, ymode=log, xmin=3, xmax=1500, ymin=5e-4, ymax=0.4, xlabel={長方形の数 $n$}, ylabel={外接$-$内接},
+  every axis label/.append style={font=\footnotesize}, tick label style={font=\footnotesize}]
+ \addplot[mark=*, thick, primaryblue] coordinates {(4,0.25)(10,0.1)(100,0.01)(1000,0.001)};
+\end{axis}
+\end{tikzpicture}
+\caption{内接と外接の差は $1/n$ で、いくらでも小さくなる。両対数のグラフで傾き $-1$ の直線。}
+\end{figure}
+
+差が $1/n$ なので、「長方形の幅 $\to 0$ のとき、内接と外接の和の比は $1$ に近づく」という補題IIの主張が、ここでは具体的に見えています。
+
+\section{補充 補題VII〜IX：弦・弧・接線の比を、表で}
+
+半径 $1$ の円で、中心角 $\theta$ の弧に対し、弦の長さは $2\sin\frac\theta2$、弧の長さは $\theta$、両端の接線が交わる点までの長さ（接線2本の長さ）は $2\tan\frac\theta2$ です。弧に対する比を、$\theta$ を小さくしながら調べます。
+
+\begin{table}[htbp]
+\centering
+\begin{tabular}{c|cccc}
+\toprule
+$\theta$ [rad] & 1.0 & 0.5 & 0.1 & 0.01\\
+\midrule
+弦 $\div$ 弧 & 0.95885 & 0.98962 & 0.99958 & 0.999996\\
+接線 $\div$ 弧 & 1.09260 & 1.02137 & 1.00083 & 1.000008\\
+\bottomrule
+\end{tabular}
+\caption{弦と接線の、弧に対する比（計算で確認）。$\theta\to0$ で、どちらも $1$ に近づく。}
+\end{table}
+
+\begin{figure}[htbp]
+\centering
+\begin{tikzpicture}
+\begin{axis}[width=9.5cm, height=5.2cm, xmin=0, xmax=1.6, ymin=0.9, ymax=1.2, xlabel={$\theta$ [rad]}, ylabel={弧に対する比},
+  every axis label/.append style={font=\footnotesize}, tick label style={font=\footnotesize}, legend style={font=\scriptsize, at={(0.03,0.5)}, anchor=west}]
+ \addplot[thick, primaryblue, domain=0.01:1.6, samples=60] {sin(deg(x/2))/(x/2)};
+ \addplot[thick, crimson, domain=0.01:1.6, samples=60] {tan(deg(x/2))/(x/2)};
+ \legend{弦$\div$弧, 接線$\div$弧}
+\end{axis}
+\end{tikzpicture}
+\caption{$\theta\to0$ のとき、2つの比は $\theta=0$ で、ともに $1$ になる。ニュートンの「最後の比」。}
+\end{figure}
+
+\section{補充 命題X：中心に向かう力が距離に比例するとき}
+
+力が距離に比例する（$F=-kr$）とき、軌道は、中心が楕円の中心にある楕円になります。この動きは、$x$ 方向と $y$ 方向の、独立した単振動に分かれるので、周期は、軌道の大きさに関係なく、$T=2\pi/\sqrt{k/m}$ で一定です。たとえば $k/m=4\ \mathrm{s^{-2}}$ なら、$T=2\pi/2=3.1416$ 秒です。
+
+\begin{table}[htbp]
+\centering
+\begin{tabular}{c|ccc}
+\toprule
+軌道の長半径 $a$ [m] & 1 & 2 & 5\\
+\midrule
+周期 $T$ [s] & 3.1416 & 3.1416 & 3.1416\\
+最大の速さ $a\sqrt{k/m}$ [m/s] & 2 & 4 & 10\\
+\bottomrule
+\end{tabular}
+\caption{力が距離に比例するときの周期（$k/m=4$、計算）。周期は軌道の大きさによらない。}
+\end{table}
+
+\begin{figure}[htbp]
+\centering
+\begin{tikzpicture}
+\begin{axis}[width=8cm, height=5.2cm, axis equal image, xmin=-5.5, xmax=5.5, ymin=-3.5, ymax=3.5, xlabel={$x$}, ylabel={$y$},
+  every axis label/.append style={font=\footnotesize}, tick label style={font=\footnotesize}]
+ \addplot[thick, primaryblue, domain=0:360, samples=100] ({1*cos(x)},{0.6*sin(x)});
+ \addplot[thick, warmamber, domain=0:360, samples=100] ({2*cos(x)},{1.2*sin(x)});
+ \addplot[thick, crimson, domain=0:360, samples=100] ({5*cos(x)},{3*sin(x)});
+\end{axis}
+\end{tikzpicture}
+\caption{同じ中心力 $F=-kr$ の下の、3つの楕円軌道。大きさが違っても、一周にかかる時間は同じ。}
+\end{figure}
+
+\begin{pointbox}{第4章 補充のまとめ}
+\begin{itemize}[leftmargin=*]
+\item 命題Iの作図を計算すると、すべての三角形の面積が $0.1000$ で等しい。
+\item $y=x^2$ のはさみうち：差は $1/n$。
+\item 弦$\div$弧、接線$\div$弧は、弧が短いほど $1$ に近い。
+\item $F\propto r$ の軌道は、大きさによらず周期が同じ。
+\end{itemize}
+\end{pointbox}
+
 %==========================================================
 \chapter{第1編 物体の運動（第4節〜第7節：円錐曲線の決定と直線昇降運動）}
 \markboth{第5章}{第1編 第4〜7節}
@@ -1363,6 +1826,110 @@ T=2\pi\sqrt{R/g}=2\pi\sqrt{\frac{6.371\times10^6}{9.8}}\approx5066\ \text{秒}\a
 \end{itemize}
 \end{pointbox}
 
+\section{補充 ケプラー方程式を解く：ニュートン法の収束}
+
+第6節の「ケプラーの問題」は、$M=E-e\sin E$（$M$ は平均近点角、$E$ は離心近点角）を $E$ について解くことです。この式は、そのままでは $E$ を取り出せないので、反復で解きます。接線の傾きを使うニュートン法では、
+\[
+E_{k+1}=E_k-\frac{E_k-e\sin E_k-M}{1-e\cos E_k}.
+\]
+$e=0.9$、$M=30^\circ$、出発点 $E_0=\pi$ で計算します。
+
+\begin{table}[htbp]
+\centering
+\begin{tabular}{c|ccccccc}
+\toprule
+反復 $k$ & 0 & 1 & 2 & 3 & 4 & 5 & 6\\
+\midrule
+$E_k$ [rad] & 3.14159 & 1.76370 & 1.45941 & 1.41342 & 1.41232 & 1.41232 & 1.41232\\
+真値との差 & $1.7$ & $0.35$ & $0.047$ & $1.1\times10^{-3}$ & $6.3\times10^{-7}$ & $2.0\times10^{-13}$ & $0$\\
+\bottomrule
+\end{tabular}
+\caption{$e=0.9$、$M=30^\circ$ の場合（計算で確認）。真値は $E=80.920^\circ=1.41232$ rad。差は、3回目から、2乗の速さで縮む。}
+\end{table}
+
+\begin{figure}[htbp]
+\centering
+\begin{tikzpicture}
+\begin{axis}[width=9.5cm, height=5.2cm, ymode=log, xmin=0, xmax=5.3, ymin=1e-14, ymax=5, xlabel={反復回数 $k$}, ylabel={真値との差},
+  every axis label/.append style={font=\footnotesize}, tick label style={font=\footnotesize}]
+ \addplot[mark=*, thick, primaryblue] coordinates {(0,1.73)(1,0.351)(2,0.0471)(3,0.0011)(4,6.26e-7)(5,2.03e-13)};
+\end{axis}
+\end{tikzpicture}
+\caption{ニュートン法の誤差（対数目盛）。反復ごとに、有効数字の桁が、およそ2倍になる。}
+\end{figure}
+
+\section{補充 中心差：本当の角度と、一様な角度のずれ}
+
+惑星は、近日点では速く、遠日点では遅く動きます。時間に比例する角度 $M$ と、実際の位置の角度（真近点角 $\nu$）の差 $\nu-M$ を、「中心差」とよびます。離心率が小さければ、最大の差はおよそ $2e$ ラジアンです。
+
+\begin{table}[htbp]
+\centering
+\begin{tabular}{lcccc}
+\toprule
+軌道 & 離心率 $e$ & 中心差の最大 & $2e$ の値 & そのときの $M$\\
+\midrule
+地球（概数） & 0.0167 & $1.914^\circ$ & $1.914^\circ$ & $88.8^\circ$\\
+水星（概数） & 0.2056 & $23.68^\circ$ & $23.56^\circ$ & $75.2^\circ$\\
+$e=0.5$ & 0.5 & $59.19^\circ$ & $57.30^\circ$ & $53.7^\circ$\\
+ハレー彗星（概数） & 0.9672 & $142.8^\circ$ & $110.8^\circ$ & $11.6^\circ$\\
+\bottomrule
+\end{tabular}
+\caption{中心差の最大値（計算で確認。離心率は一般に知られた概数）。$e$ が大きいと $2e$ の近似は粗くなる。}
+\end{table}
+
+\begin{figure}[htbp]
+\centering
+\begin{tikzpicture}
+\begin{axis}[width=10cm, height=5.5cm, xmin=0, xmax=360, ymin=-70, ymax=70, xlabel={平均近点角 $M$ [度]}, ylabel={$\nu-M$ [度]},
+  xtick={0,90,180,270,360}, every axis label/.append style={font=\footnotesize}, tick label style={font=\footnotesize}, legend style={font=\scriptsize, at={(0.97,0.97)}, anchor=north east}]
+ \addplot[thick, primaryblue, domain=0:360, samples=120] {2*0.0167*sin(x)*180/pi};
+ \addplot[thick, warmamber, domain=0:360, samples=120] {2*0.2056*sin(x)*180/pi+1.25*0.2056^2*sin(2*x)*180/pi};
+ \legend{$e=0.0167$（近似）, $e=0.2056$（2次まで）}
+\end{axis}
+\end{tikzpicture}
+\caption{中心差のおよその形（$\nu-M\approx2e\sin M+\tfrac54e^2\sin2M$）。$e$ が大きいほど、振れ幅も大きく、形も崩れる。（補足：この近似式は本書の補足。最大値の表は数値計算による。）}
+\end{figure}
+
+\section{補充 月から地球まで落ちるのに、何日かかるか}
+
+命題XXXII・XXXIIIのように、逆2乗の力のもとで物体を静止状態から落とすと、中心に達するまでの時間は、$t=\dfrac{\pi}{2\sqrt2}\sqrt{\dfrac{r_0^3}{\mu}}$ です。月の距離 $r_0=3.844\times10^8$ m、$\mu=3.986\times10^{14}$ m$^3$/s$^2$ を入れます。
+
+\begin{table}[htbp]
+\centering
+\begin{tabular}{lc}
+\toprule
+量 & 値\\
+\midrule
+$\sqrt{r_0^3/\mu}$ & $3.775\times10^{5}$ s\\
+落下時間 $t$ & $4.193\times10^{5}$ s $=4.85$ 日\\
+月の公転周期 $T$ & 27.32 日\\
+比 $t/T$ & 0.1776 $=1/(4\sqrt2)=0.1768$（近似）\\
+\bottomrule
+\end{tabular}
+\caption{月を止めて、地球に落とすと、約4.85日で中心に届く（計算。地球を質点と見なす）。}
+\end{table}
+
+\begin{figure}[htbp]
+\centering
+\begin{tikzpicture}
+\begin{axis}[width=9cm, height=5cm, xmin=0, xmax=5, ymin=0, ymax=3.9, xlabel={経過時間 [日]}, ylabel={地球中心からの距離 [$10^8$ m]},
+  every axis label/.append style={font=\footnotesize}, tick label style={font=\footnotesize}]
+ \addplot[thick, primaryblue, domain=0:90, samples=90] ({4.853*(x*pi/180+sin(x)*cos(x))/(pi/2)},{3.844*(cos(x))^2});
+\end{axis}
+\end{tikzpicture}
+\caption{月を静止させて落としたときの、距離と時間の関係。はじめはゆっくり、中心に近づくにつれて速くなる。（媒介表示 $r=r_0\cos^2\eta$、$t\propto\eta+\sin\eta\cos\eta$ による）}
+\end{figure}
+
+$t/T$ について：$T$ は円軌道の周期 $2\pi\sqrt{r_0^3/\mu}$ なので、$t/T=\dfrac{\pi/(2\sqrt2)}{2\pi}=\dfrac1{4\sqrt2}=0.1768$。表の $0.1776$ は、月の実際の周期（恒星月）と、$\mu$ の値の食い違いによる差です。
+
+\begin{pointbox}{第5章 補充のまとめ}
+\begin{itemize}[leftmargin=*]
+\item ケプラー方程式は、ニュートン法で解くと、数回で収束する。
+\item 中心差の最大値は、$e$ が小さいときおよそ $2e$。
+\item 月を落とすと、約4.85日（周期の約0.177倍）で中心に届く。
+\end{itemize}
+\end{pointbox}
+
 %==========================================================
 \chapter{第1編 物体の運動（第8節〜第10節：任意中心力・近点移動・拘束面振子）}
 \markboth{第6章}{第1編 第8〜10節}
@@ -1588,6 +2155,122 @@ l=\frac{gT^2}{4\pi^2}=\frac{9.8\times4}{39.478}=0.993\ \mathrm{m}.
 \item 第8節：任意の中心力のもとでも、エネルギー保存と面積速度一定で、軌道の様子が分かる。
 \item 第9節：力が逆2乗から少しずれると、近日点が動く。近点角は $\pi/\sqrt{3+n}$。
 \item 第10節：サイクロイドの振子は、振れ幅によらず周期が一定。
+\end{itemize}
+\end{pointbox}
+
+\section{補充 秒振り子の長さ：$g$ から決まる $0.994$ m}
+
+第10節の振り子の命題は、周期が、長さの平方根に比例することを教えます。小さな振れの単振り子では、$T=2\pi\sqrt{L/g}$。周期が $2$ 秒（片道が $1$ 秒）の「秒振り子」の長さは
+\[
+L=\frac{gT^2}{4\pi^2}=\frac{9.80665\times4}{39.478}=0.99362\ \mathrm{m}.
+\]
+ほぼ $1$ メートル、です。
+
+\begin{table}[htbp]
+\centering
+\begin{tabular}{c|cccc}
+\toprule
+長さ $L$ [m] & 0.25 & 0.5 & 1.0 & 2.0\\
+\midrule
+周期 $2\pi\sqrt{L/g}$ [s] & 1.003 & 1.419 & 2.006 & 2.837\\
+\bottomrule
+\end{tabular}
+\caption{単振り子の周期（小さな振れ。計算で確認：$L=1$ m で $2\pi\sqrt{1/9.80665}=2.0064$）。長さを4倍にすると、周期は2倍。}
+\end{table}
+
+\begin{figure}[htbp]
+\centering
+\begin{tikzpicture}
+\begin{axis}[width=9cm, height=5cm, xmin=0, xmax=2.2, ymin=0, ymax=3.2, xlabel={長さ $L$ [m]}, ylabel={周期 $T$ [s]},
+  every axis label/.append style={font=\footnotesize}, tick label style={font=\footnotesize}]
+ \addplot[thick, primaryblue, domain=0.01:2.2, samples=60] {2*pi*sqrt(x/9.80665)};
+ \addplot[only marks, mark=*, crimson] coordinates {(0.99362,2)};
+\end{axis}
+\end{tikzpicture}
+\caption{周期と長さ。平方根の曲線。赤い点は、周期ちょうど2秒の秒振り子（$L=0.9936$ m）。}
+\end{figure}
+
+\section{補充 等時曲線：サイクロイド振り子の周期}
+
+命題XLIX〜LIIで扱うサイクロイド振り子は、振れの大きさに関係なく、周期が一定（等時性）です。生成円の半径を $a$ とすると、振り子の長さは $4a$、周期は $T=4\pi\sqrt{a/g}$ です。
+
+\begin{table}[htbp]
+\centering
+\begin{tabular}{c|cccc}
+\toprule
+生成円の半径 $a$ [m] & 0.1 & 0.25 & 0.5 & 1.0\\
+\midrule
+周期 $4\pi\sqrt{a/g}$ [s] & 1.269 & 2.006 & 2.837 & 4.013\\
+\bottomrule
+\end{tabular}
+\caption{サイクロイド振り子の周期（計算で確認）。振り子の長さ $4a$ の単振り子の、小さな振れの周期と一致する（$a=0.25$ は $L=1$ m の $2.006$ s と同じ）。}
+\end{table}
+
+\begin{figure}[htbp]
+\centering
+\begin{tikzpicture}
+\begin{axis}[width=10cm, height=5.5cm, xmin=0, xmax=150, ymin=0.95, ymax=1.8, xlabel={最大の振れ角 [度]}, ylabel={周期 $/$ 小さな振れの周期},
+  every axis label/.append style={font=\footnotesize}, tick label style={font=\footnotesize}, legend style={font=\scriptsize, at={(0.03,0.97)}, anchor=north west}]
+ \addplot[thick, primaryblue, mark=*, mark size=1.5pt] coordinates {(10,1.0019)(30,1.0174)(60,1.0732)(90,1.1803)(120,1.3729)(150,1.7622)};
+ \addplot[thick, crimson, dashed, domain=0:150, samples=2] {1};
+ \legend{円弧の振り子, サイクロイド振り子}
+\end{axis}
+\end{tikzpicture}
+\caption{円弧の振り子は、大きく振れるほど周期が長くなる（$150^\circ$ で約1.76倍）。サイクロイド振り子は、常に1。}
+\end{figure}
+
+\begin{table}[htbp]
+\centering
+\begin{tabular}{c|cccccc}
+\toprule
+振れ角 [度] & 10 & 30 & 60 & 90 & 120 & 150\\
+\midrule
+周期の比 & 1.0019 & 1.0174 & 1.0732 & 1.1803 & 1.3729 & 1.7622\\
+\bottomrule
+\end{tabular}
+\caption{円弧の振り子の周期を、小さな振れの周期で割った比（計算で確認。第1種完全楕円積分を使用）。}
+\end{table}
+
+\section{補充 近点移動の実例：水星の$43''$}
+
+第9節で、ニュートンは、逆2乗の力に、わずかな別の力が加わると、軌道の近点がゆっくり回ることを示しました。のちに、水星の近日点の移動が、他の惑星の引力だけでは説明しきれないことがわかり、その差は、一般相対性理論が説明しました（補足：一般に知られた事実）。
+
+一般相対性理論の式では、1周あたりの近日点の移動は
+\[
+\Delta\varphi=\frac{6\pi GM}{c^2a(1-e^2)}
+\]
+です。$GM_\odot=1.3271\times10^{20}$、$c=2.998\times10^8$、水星の $a=5.7909\times10^{10}$ m、$e=0.2056$ を入れると、$\Delta\varphi=5.019\times10^{-7}$ ラジアン。水星は100年で約415周するので、100年あたり約 $43.0''$ になります。
+
+\begin{table}[htbp]
+\centering
+\begin{tabular}{lc}
+\toprule
+量 & 値\\
+\midrule
+1周あたりの移動 & $5.019\times10^{-7}$ rad\\
+100年あたりの周回数 & 415.2\\
+100年あたりの移動 & $43.0''$\\
+\bottomrule
+\end{tabular}
+\caption{水星の近日点移動のうち、相対性理論による分（計算で確認。他の惑星の摂動による約$532''$ は含まない。値は一般に知られた概数で、本書では原典を未照合）。}
+\end{table}
+
+\begin{figure}[htbp]
+\centering
+\begin{tikzpicture}
+\begin{axis}[width=9.5cm, height=5.2cm, xmin=0, xmax=5, ymin=0, ymax=2.2, xlabel={周回数}, ylabel={近日点の向き（仮に拡大）[度]},
+  every axis label/.append style={font=\footnotesize}, tick label style={font=\footnotesize}]
+ \addplot[thick, primaryblue, domain=0:5, samples=2] {0.4*x};
+\end{axis}
+\end{tikzpicture}
+\caption{近日点の向きは、周回のたびに、少しずつ前へ回る。ここでは、直線の傾きを大きく拡大して示した（実際の移動は1周あたり $0.1''$ ほど）。}
+\end{figure}
+
+\begin{pointbox}{第6章 補充のまとめ}
+\begin{itemize}[leftmargin=*]
+\item 秒振り子の長さは $0.99362$ m。
+\item サイクロイド振り子は等時。円弧の振り子は $150^\circ$ で周期が約1.76倍。
+\item 水星の近日点移動のうち、相対性理論の分は100年で約 $43''$。
 \end{itemize}
 \end{pointbox}
 
@@ -1888,6 +2571,113 @@ $2$ & $0.1056$\\
 \item 第12節：球殻の内部では力が0、外部では全質量が中心に集まったのと同じ（逆2乗のとき）。
 \item 第13節：円盤の軸上の引力などを、積分で求める。
 \item 第14節：光の屈折を、粒子の引力で説明する試み。結論（光は水中で速い）は、後に実験で否定された。
+\end{itemize}
+\end{pointbox}
+
+\section{補充 太陽は、月を、地球より強く引いている}
+
+第11節の命題LXVI（3体問題）の出発点は、「太陽が月を引く力が、地球が月を引く力よりも、ずっと大きい」という事実です。数字で確かめます。引力は、$GM/d^2$ に比例するので、$G$ を共通に消して、$M/d^2$ で比べます。
+
+\begin{table}[htbp]
+\centering
+\begin{tabular}{lccc}
+\toprule
+引く天体 & 質量 $M$ [kg] & 月までの距離 $d$ [m] & $M/d^2$ [kg/m$^2$]\\
+\midrule
+太陽 & $1.989\times10^{30}$ & $1.496\times10^{11}$ & $8.887\times10^{7}$\\
+地球 & $5.972\times10^{24}$ & $3.844\times10^{8}$ & $4.042\times10^{7}$\\
+\bottomrule
+\end{tabular}
+\caption{月に対する、太陽と地球の引力の比較（計算で確認。質量・距離は標準的な概数）。比は $8.887/4.042=2.199$。}
+\end{table}
+
+太陽の引力は、地球の引力の約2.2倍です。それでも月が地球から離れないのは、太陽が、地球と月を「ほぼ同じように」引くからです。違いを生むのは、地球と月の位置の差で生じる、小さな引力の差（潮汐力）で、これが月の軌道を乱します。
+
+\begin{figure}[htbp]
+\centering
+\begin{tikzpicture}
+\begin{axis}[width=9cm, height=4.4cm, xbar, xmin=0, xmax=10, ytick={1,2}, yticklabels={地球の引力, 太陽の引力}, xlabel={月への引力（$M/d^2$、単位は $10^7$）},
+  every axis label/.append style={font=\footnotesize}, tick label style={font=\footnotesize}, bar width=14pt, nodes near coords, nodes near coords style={font=\footnotesize}]
+ \addplot[fill=primaryblue!50, draw=primaryblue] coordinates {(4.04,1)};
+ \addplot[fill=warmamber!60, draw=warmamber] coordinates {(8.89,2)};
+\end{axis}
+\end{tikzpicture}
+\caption{月に働く引力：太陽は、地球の約2.2倍。それなのに月が地球の衛星でいられるのは、太陽が地球にも同じ向きの引力を与えるため。}
+\end{figure}
+
+\section{補充 地球の「勢力圏」：ヒル球}
+
+太陽の引力を受けながら、地球のまわりを安定して回れる範囲を、地球のヒル球とよびます。半径の目安は
+\[
+r_H\approx a\left(\frac{m}{3M}\right)^{1/3}.
+\]
+$a=1.496\times10^{11}$ m（地球の軌道半径）、$m=5.972\times10^{24}$ kg、$M=1.989\times10^{30}$ kg を入れると、$r_H=1.496\times10^9$ m。月までの距離 $3.844\times10^8$ m の約3.9倍です（補足：この式は、命題LXVIの考え方を現代の言葉でまとめたもの。ニュートンの原文にはない）。
+
+\begin{figure}[htbp]
+\centering
+\begin{tikzpicture}[scale=1.0]
+ \fill[softblue] (0,0) circle (3.9);
+ \draw[primaryblue, thick] (0,0) circle (3.9);
+ \draw[warmamber, thick, dashed] (0,0) circle (1);
+ \fill[crimson] (0,0) circle (2pt) node[below, lbl] {地球};
+ \fill[warmamber] (1,0) circle (2pt) node[above right, lbl] {月};
+ \draw[<->, thin] (0,-4.3)--(3.9,-4.3) node[midway, below, lbl] {$r_H=1.50\times10^9$ m};
+ \draw[<->, thin] (0,-1.5)--(1,-1.5) node[midway, below, lbl] {$3.84\times10^8$ m};
+\end{tikzpicture}
+\caption{地球のヒル球（青い円）と月の軌道（橙の破線）。縮尺は半径の比（ヒル球は月の軌道の約3.9倍）に合わせた。}
+\end{figure}
+
+\section{補充 球殻の定理を、数値積分で確かめる}
+
+命題LXX・LXXIの球殻の定理（内部では力が0、外部では中心に質量が集まったのと同じ）を、証明ではなく、数値積分で確かめます。半径 $1$、面密度 $1$ の球殻を、薄いリングに分けて足し合わせ、中心から距離 $d$ の点での引力（中心方向の成分）を求めます。外部の予想は $4\pi/d^2$、内部の予想は $0$ です。
+
+\begin{table}[htbp]
+\centering
+\begin{tabular}{c|ccccc}
+\toprule
+距離 $d$ & 0.3 & 0.7 & 1.5 & 2 & 3\\
+\midrule
+数値積分の結果 & 0 & 0 & 5.5851 & 3.1416 & 1.3963\\
+$4\pi/d^2$（外部のみ） & （内部） & （内部） & 5.5851 & 3.1416 & 1.3963\\
+\bottomrule
+\end{tabular}
+\caption{球殻による引力の数値積分（計算で確認。内部の値は $10^{-15}$ 以下で、実質0）。外部では $4\pi/d^2$ に一致する。}
+\end{table}
+
+\begin{figure}[htbp]
+\centering
+\begin{tikzpicture}
+\begin{axis}[width=9.5cm, height=5.2cm, xmin=0, xmax=3.2, ymin=0, ymax=7, xlabel={中心からの距離 $d$（球殻の半径を $1$ とする）}, ylabel={引力},
+  every axis label/.append style={font=\footnotesize}, tick label style={font=\footnotesize}]
+ \addplot[thick, primaryblue, domain=0:1, samples=2] {0};
+ \addplot[thick, primaryblue, domain=1.01:3.2, samples=60] {4*pi/x^2};
+ \addplot[only marks, mark=*, crimson, mark size=2pt] coordinates {(0.3,0)(0.7,0)(1.5,5.5851)(2,3.1416)(3,1.3963)};
+\end{axis}
+\end{tikzpicture}
+\caption{球殻による引力。内部は0、外部は $4\pi/d^2$（逆2乗）。赤い点は、数値積分で得た値。}
+\end{figure}
+
+\section{補充 地球を貫くトンネルの中の重力}
+
+均質な球の内部では、中心からの距離 $r$ の点の重力は、その内側の球の質量だけで決まり、$g(r)=g_0r/R$（比例）になります（命題LXXII）。地球の半径 $6371$ km で、いくつかの深さの重力を並べます。
+
+\begin{table}[htbp]
+\centering
+\begin{tabular}{c|ccccc}
+\toprule
+中心からの距離 & $0$ & $R/4$ & $R/2$ & $R$ & $2R$\\
+\midrule
+重力 $/g_0$ & 0 & 0.25 & 0.5 & 1 & 0.25\\
+\bottomrule
+\end{tabular}
+\caption{均質な球での重力（計算）。内部は距離に比例、外部は距離の2乗に反比例。（補足：実際の地球は、中心ほど密度が高く、中の重力は、比例よりも大きい。）}
+\end{table}
+
+\begin{pointbox}{第7章 補充のまとめ}
+\begin{itemize}[leftmargin=*]
+\item 月への太陽の引力は、地球の引力の約2.2倍。
+\item 地球のヒル球の半径は約 $1.5\times10^9$ m（月の距離の約3.9倍）。
+\item 球殻の定理は、数値積分でも、内部0・外部 $4\pi/d^2$ になる。
 \end{itemize}
 \end{pointbox}
 
@@ -2223,6 +3013,90 @@ $10$ & $30.8$ & 旅客機の巡航（実際は約 $26.5$ kPa）\\
 \end{itemize}
 \end{pointbox}
 
+\section{補充 落下の速さ：抵抗なしと、2乗抵抗の比較}
+
+第2編の命題VII〜（速度の2乗に比例する抵抗）では、落下する物体の速さは、終端速度 $v_t$ に近づきます。解は $v(t)=v_t\tanh(gt/v_t)$。$v_t=30$ m/s の物体で、抵抗がない場合の速さ $gt$ と比べます。
+
+\begin{table}[htbp]
+\centering
+\begin{tabular}{c|cccccc}
+\toprule
+$t$ [s] & 0 & 1 & 2 & 3 & 5 & 10\\
+\midrule
+$v_t\tanh(gt/v_t)$ [m/s] & 0 & 9.47 & 17.23 & 22.60 & 27.80 & 29.91\\
+$gt$（抵抗なし） [m/s] & 0 & 9.81 & 19.61 & 29.42 & 49.03 & 98.07\\
+\bottomrule
+\end{tabular}
+\caption{2乗抵抗の下での落下の速さ（計算で確認）。10秒後に、$29.91$ m/s と、終端速度 $30$ m/s にほぼ達する。}
+\end{table}
+
+\begin{figure}[htbp]
+\centering
+\begin{tikzpicture}
+\begin{axis}[width=9.5cm, height=5.3cm, xmin=0, xmax=10, ymin=0, ymax=60, xlabel={$t$ [s]}, ylabel={速さ [m/s]},
+  every axis label/.append style={font=\footnotesize}, tick label style={font=\footnotesize}, legend style={font=\scriptsize, at={(0.97,0.5)}, anchor=east}]
+ \addplot[thick, primaryblue, domain=0:10, samples=80] {30*tanh(9.80665*x/30)};
+ \addplot[thick, crimson, dashed, domain=0:6, samples=2] {9.80665*x};
+ \addplot[thick, gray, dotted, domain=0:10, samples=2] {30};
+ \legend{2乗抵抗, 抵抗なし, 終端速度}
+\end{axis}
+\end{tikzpicture}
+\caption{はじめは、抵抗が小さいので、抵抗なしの直線に沿う。しだいに曲がって、終端速度 $30$ m/s に近づく。}
+\end{figure}
+
+\section{補充 ボイルの法則と、命題XXIII}
+
+第2編の命題XXIIIは、粒子が互いに、距離に反比例する力で反発し合う気体では、圧力が密度に比例する（ボイルの法則）ことを示します。つまり、温度が一定で、体積 $V$ を半分にすると、圧力 $p$ は2倍になり、$pV$ が一定です。
+
+\begin{table}[htbp]
+\centering
+\begin{tabular}{c|cccc}
+\toprule
+体積 $V$（はじめを $1$） & 1 & $\tfrac12$ & $\tfrac14$ & $\tfrac18$\\
+\midrule
+圧力 $p$ [kPa] & 101.3 & 202.7 & 405.3 & 810.6\\
+$pV$ [kPa] & 101.3 & 101.3 & 101.3 & 101.3\\
+\bottomrule
+\end{tabular}
+\caption{はじめ $101.325$ kPa の気体を縮めたときの圧力（計算）。体積を半分にするごとに、圧力は2倍。}
+\end{table}
+
+\begin{figure}[htbp]
+\centering
+\begin{tikzpicture}
+\begin{axis}[width=9cm, height=5.2cm, xmin=0.1, xmax=1.05, ymin=0, ymax=900, xlabel={体積 $V$}, ylabel={圧力 $p$ [kPa]},
+  every axis label/.append style={font=\footnotesize}, tick label style={font=\footnotesize}]
+ \addplot[thick, primaryblue, domain=0.12:1.05, samples=60] {101.325/x};
+ \addplot[only marks, mark=*, crimson] coordinates {(1,101.325)(0.5,202.65)(0.25,405.3)(0.125,810.6)};
+\end{axis}
+\end{tikzpicture}
+\caption{ボイルの法則。圧力は体積に反比例し、曲線は直角双曲線。}
+\end{figure}
+
+\section{補充 気圧と高度：指数関数の減り方}
+
+第2編の命題XXII（大気の密度）は、高さが等差数列で増えると、密度が等比数列で減ることを導きます。つまり指数関数的に減ります。気温を $288.15$ K、空気の平均的な性質を $R=287.05\ \mathrm{J/(kg\,K)}$ とすると、尺度高さは $H=RT/g=8434$ m（約 $8.4$ km）。
+
+\begin{table}[htbp]
+\centering
+\begin{tabular}{c|ccccc}
+\toprule
+高度 [km] & 0 & 2 & 5 & 8.43 & 10\\
+\midrule
+気圧 $p/p_0=e^{-h/H}$ & 1.000 & 0.789 & 0.553 & 0.368 & 0.305\\
+\bottomrule
+\end{tabular}
+\caption{等温の大気（$H=8.43$ km）での気圧の比（計算で確認）。高さ $H$ で $1/e=0.368$ に減る。（補足：実際の大気は気温が高さとともに下がるため、これとは少しずれる。）}
+\end{table}
+
+\begin{pointbox}{第8章 補充のまとめ}
+\begin{itemize}[leftmargin=*]
+\item 2乗抵抗の落下は、$v_t\tanh(gt/v_t)$ で終端速度に近づく。
+\item 気体を縮めると、圧力は体積に反比例（$pV$ は一定）。
+\item 気圧は、$8.4$ km ごとに $1/e$ に減る。
+\end{itemize}
+\end{pointbox}
+
 %==========================================================
 \chapter{第2編 抵抗媒質中の運動（第6節〜第9節：振子・流体運動・波動音速・渦動説批判）}
 \markboth{第9章}{第2編 第6〜9節}
@@ -2537,6 +3411,92 @@ $40$ & $354.7$\\
 \item 第7節：形による抵抗の違いの理論、最小抵抗の立体（変分法の始まり）、穴からの流出速度 $\sqrt{2gh}$。
 \item 第8節：波の速さ（$\propto\sqrt\lambda$）と、音の速さ $\sqrt{p/\rho}$。ニュートンの式は約 $15\%$ 小さく、ラプラスが断熱で補正した。
 \item 第9節：デカルトの渦動説は、ケプラーの第3法則と合わない。
+\end{itemize}
+\end{pointbox}
+
+\section{補充 抵抗のある弾道：最適な発射角は45度より小さい}
+
+第2編の弾道の命題（命題X〜）を、数値で確かめます。初速 $30$ m/s で、空気抵抗の加速度が $k_qv^2$（$v$ は速さ、向きは運動と逆）のとき、発射角ごとの飛距離を、運動方程式を数値積分して求めました。
+
+\begin{table}[htbp]
+\centering
+\begin{tabular}{l|ccccc|cc}
+\toprule
+ & 15° & 30° & 45° & 60° & 75° & 最適角 & 最大距離\\
+\midrule
+$k_q=0$（抵抗なし）& 45.89 & 79.48 & 91.77 & 79.48 & 45.89 & 45° & 91.77\\
+$k_q=0.005$ m$^{-1}$ & 39.91 & 62.76 & 68.61 & 58.35 & 33.99 & 43° & 68.79\\
+$k_q=0.02$ m$^{-1}$ & 29.51 & 40.59 & 41.56 & 34.43 & 20.07 & 39° & 42.21\\
+\bottomrule
+\end{tabular}
+\caption{初速 $30$ m/s の飛距離 [m]（数値積分で確認）。抵抗が大きいほど、最適角は小さく、飛距離は短くなる。抵抗なしの結果は、$v_0^2\sin2\theta/g$ と一致（例：$900\times0.5/9.80665=45.89$）。}
+\end{table}
+
+\begin{figure}[htbp]
+\centering
+\begin{tikzpicture}
+\begin{axis}[width=10cm, height=5.5cm, xmin=10, xmax=80, ymin=0, ymax=100, xlabel={発射角 [度]}, ylabel={飛距離 [m]},
+  every axis label/.append style={font=\footnotesize}, tick label style={font=\footnotesize}, legend style={font=\scriptsize, at={(0.5,0.03)}, anchor=south}]
+ \addplot[mark=*, thick, primaryblue, mark size=1.5pt] coordinates {(15,45.89)(30,79.48)(45,91.77)(60,79.48)(75,45.89)};
+ \addplot[mark=square*, thick, warmamber, mark size=1.5pt] coordinates {(15,39.91)(30,62.76)(45,68.61)(60,58.35)(75,33.99)};
+ \addplot[mark=triangle*, thick, crimson, mark size=1.8pt] coordinates {(15,29.51)(30,40.59)(45,41.56)(60,34.43)(75,20.07)};
+ \legend{抵抗なし, $k_q=0.005$, $k_q=0.02$}
+\end{axis}
+\end{tikzpicture}
+\caption{発射角と飛距離。抵抗があると、山は低くなり、頂点が左（小さい角）へずれる。}
+\end{figure}
+
+\section{補充 ニュートンの音速と、実測の音速}
+
+第2編の命題XLVIII〜L（音の伝わり）で、ニュートンは、音の速さを、空気の圧力 $p$ と密度 $\rho$ から $c=\sqrt{p/\rho}$ と導きました。標準大気（$p=101325$ Pa、$\rho=1.225$ kg/m$^3$）で計算します。
+
+\begin{table}[htbp]
+\centering
+\begin{tabular}{lc}
+\toprule
+式 & 値 [m/s]\\
+\midrule
+ニュートン $\sqrt{p/\rho}$ & 287.6\\
+ラプラス $\sqrt{\gamma p/\rho}$（$\gamma=1.4$） & 340.3\\
+比（ラプラス$\div$ニュートン） & $\sqrt{1.4}=1.183$\\
+\bottomrule
+\end{tabular}
+\caption{音速の理論値の比較（計算で確認）。ニュートンの値は、実測より約15\%小さい。音の伝わるときは、圧縮による温度変化があり、等温では扱えないため（のちにラプラスが断熱の考え方で補正した。補足：一般に知られた経緯）。}
+\end{table}
+
+\begin{figure}[htbp]
+\centering
+\begin{tikzpicture}
+\begin{axis}[width=9cm, height=4.6cm, xbar, xmin=0, xmax=400, ytick={1,2}, yticklabels={ニュートンの式, ラプラスの式}, xlabel={音速 [m/s]},
+  every axis label/.append style={font=\footnotesize}, tick label style={font=\footnotesize}, bar width=14pt, nodes near coords, nodes near coords style={font=\footnotesize}]
+ \addplot[fill=primaryblue!50, draw=primaryblue] coordinates {(287.6,1)};
+ \addplot[fill=warmamber!60, draw=warmamber] coordinates {(340.3,2)};
+\end{axis}
+\end{tikzpicture}
+\caption{標準大気（約$15^\circ$C）での音速の理論値。ニュートンの式は、実測（約 $340$ m/s）より低い。}
+\end{figure}
+
+\section{補充 深水波の速さ}
+
+第2編の命題XLVI〜の波の考察を、現代の深水波の式 $v=\sqrt{g\lambda/2\pi}$ で確かめます（補足：この式は本書の補足で、ニュートンの結果とは同じではない）。
+
+\begin{table}[htbp]
+\centering
+\begin{tabular}{c|ccc}
+\toprule
+波長 $\lambda$ [m] & 1 & 10 & 100\\
+\midrule
+速さ $v$ [m/s] & 1.25 & 3.95 & 12.49\\
+\bottomrule
+\end{tabular}
+\caption{深水波の速さ（計算で確認）。波長が100倍になると、速さは10倍（$v\propto\sqrt\lambda$）。}
+\end{table}
+
+\begin{pointbox}{第9章 補充のまとめ}
+\begin{itemize}[leftmargin=*]
+\item 2乗抵抗があると、最適な発射角は $45^\circ$ より小さくなる（$k_q=0.02$ で $39^\circ$）。
+\item 音速：ニュートン $287.6$ m/s、ラプラス $340.3$ m/s。
+\item 深水波の速さは波長の平方根に比例する。
 \end{itemize}
 \end{pointbox}
 
@@ -2872,6 +3832,82 @@ $M/d^3$ は、月が $1.293\times10^{-3}$、太陽が $5.94\times10^{-4}$（kg/m
 \end{itemize}
 \end{pointbox}
 
+\section{補充 周期と軌道半径から、中心天体の質量をはかる}
+
+第3編のなかで、ニュートンは、衛星の周期 $T$ と軌道半径 $a$ から、中心天体の質量をはかる方法を示しました（現代の式で書くと、$M=4\pi^2a^3/(GT^2)$）。同じ式を、3つの例に当てはめます。
+
+\begin{table}[htbp]
+\centering
+\begin{tabular}{llccc}
+\toprule
+中心天体 & 衛星 & $a$ [m] & $T$ [日] & 質量 $M$ [kg]\\
+\midrule
+太陽 & 地球 & $1.495979\times10^{11}$ & 365.256 & $1.988\times10^{30}$\\
+地球 & 月 & $3.844\times10^{8}$ & 27.3217 & $6.029\times10^{24}$\\
+木星 & イオ & $4.217\times10^{8}$ & 1.769138 & $1.899\times10^{27}$\\
+\bottomrule
+\end{tabular}
+\caption{周期と軌道半径から出した質量（計算で確認）。地球の値には月の質量も含まれる（標準値は $5.972\times10^{24}$）。}
+\end{table}
+
+\begin{figure}[htbp]
+\centering
+\begin{tikzpicture}
+\begin{axis}[width=9cm, height=4.4cm, xbar, xmode=log, xmin=1e24, xmax=1e31, ytick={1,2,3}, yticklabels={地球, 木星, 太陽}, xlabel={質量 [kg]（対数目盛）},
+  every axis label/.append style={font=\footnotesize}, tick label style={font=\footnotesize}, bar width=12pt, xbar interval=0]
+ \addplot[fill=primaryblue!50, draw=primaryblue] coordinates {(6.03e24,1)(1.899e27,2)(1.988e30,3)};
+\end{axis}
+\end{tikzpicture}
+\caption{周期から求めた質量。太陽の質量は、地球の約33万倍（計算：$1.988\times10^{30}\div6.03\times10^{24}=3.3\times10^5$）。}
+\end{figure}
+
+太陽と地球の比は、ここでは $329{,}796$ で、一般に知られた値 $333{,}000$（地球単独の質量との比）とは、月の質量を含めているために、少し違います。
+
+\section{補充 木星の4つの衛星：$T^2/a^3$ は一定}
+
+第3編の第1の現象は、木星の衛星の周期と距離の関係です。4つの衛星で、$T^2/a^3$ を計算します（周期は日、距離はキロメートルで、結果は $10^{-8}$ を単位に表した）。
+
+\begin{table}[htbp]
+\centering
+\begin{tabular}{lccc}
+\toprule
+衛星 & $a$ [km] & $T$ [日] & $T^2/a^3$ [$10^{-8}$ 日$^2$/km$^3$]\\
+\midrule
+イオ & 421{,}700 & 1.769138 & 4.17362\\
+エウロパ & 671{,}034 & 3.551181 & 4.17361\\
+ガニメデ & 1{,}070{,}412 & 7.154553 & 4.17361\\
+カリスト & 1{,}882{,}709 & 16.689017 & 4.17361\\
+\bottomrule
+\end{tabular}
+\caption{4つのガリレオ衛星のケプラーの第3法則（計算で確認。軌道要素は標準的な値で、本書では原典を未照合）。6桁近くまで一定。}
+\end{table}
+
+そこから出した木星の質量は、4つの衛星すべてで $1.8985\times10^{27}$ kg（4桁目まで一致）です。
+
+\section{補充 太陽の質量は、地球の何倍か}
+
+一般に知られた、太陽の質量と、地球の質量（月を除く）の比は約 $332{,}946$ です（補足：一般に知られた値）。第3編で、ニュートンは、この比を、観測値からおよそ見積もりました。本書の補充で出した数と比べると、次のようになります。
+
+\begin{table}[htbp]
+\centering
+\begin{tabular}{lc}
+\toprule
+方法 & 太陽質量/地球質量\\
+\midrule
+標準値 & $1.989\times10^{30}\div5.972\times10^{24}=3.330\times10^5$\\
+周期と半径（地球＋月） & $3.298\times10^5$\\
+\bottomrule
+\end{tabular}
+\caption{太陽と地球の質量比（計算）。月の質量を足した地球の質量で割っているので、標準値の約1\% 小さい。}
+\end{table}
+
+\begin{pointbox}{第10章 補充のまとめ}
+\begin{itemize}[leftmargin=*]
+\item $M=4\pi^2a^3/(GT^2)$ で、太陽・地球・木星の質量が出る。
+\item ガリレオ衛星の $T^2/a^3$ は、6桁まで一定。
+\end{itemize}
+\end{pointbox}
+
 %==========================================================
 \chapter{第3編 世界の体系（月の摂動・潮汐論・分点歳差・彗星の幾何学軌道論）}
 \markboth{第11章}{第3編 月・歳差・彗星}
@@ -3154,5 +4190,123 @@ $1986$ & $75.8$\\
 \item 命題の証明は、本書では、幾何学の議論そのものを再現していません。同じ結論を、現代の式と数値例で示しました。
 \end{itemize}
 \end{notebox}
+
+\section{補充 放物線軌道の彗星：近日点からの日数（バーカーの式）}
+
+第3編の彗星の議論（命題XL・XLI）で、ニュートンは、放物線軌道の彗星の、位置と時刻の関係を作図で求めました。現代の式にすると、近日点距離 $q$、近日点からの真近点角 $\nu$ のとき、
+\[
+t=\sqrt{\frac{2q^3}{GM_\odot}}\left(D+\frac{D^3}{3}\right),\qquad D=\tan\frac\nu2
+\]
+です（バーカーの式。補足：現代の式の形での記述）。$q=1$ AU の放物線軌道で、各角度までの日数を計算します。
+
+\begin{table}[htbp]
+\centering
+\begin{tabular}{c|ccccc}
+\toprule
+真近点角 $\nu$ & $30^\circ$ & $60^\circ$ & $90^\circ$ & $120^\circ$ & $150^\circ$\\
+\midrule
+近日点からの日数 & 22.6 & 52.7 & 109.6 & 284.8 & 1731.3\\
+\bottomrule
+\end{tabular}
+\caption{$q=1$ AU の放物線軌道の彗星（計算で確認）。近日点を過ぎてから、$90^\circ$ に達するまで約110日、$150^\circ$ まででは約4.7年かかる。}
+\end{table}
+
+\begin{figure}[htbp]
+\centering
+\begin{tikzpicture}
+\begin{axis}[width=9.5cm, height=5.3cm, xmin=0, xmax=150, ymode=log, ymin=10, ymax=3000, xlabel={真近点角 $\nu$ [度]}, ylabel={近日点からの日数},
+  every axis label/.append style={font=\footnotesize}, tick label style={font=\footnotesize}]
+ \addplot[thick, primaryblue, domain=10:150, samples=80] {82.2*(tan(x/2)+tan(x/2)^3/3)};
+ \addplot[only marks, mark=*, crimson] coordinates {(30,22.6)(60,52.7)(90,109.6)(120,284.8)(150,1731.3)};
+\end{axis}
+\end{tikzpicture}
+\caption{放物線軌道での、近日点からの経過日数（縦軸は対数）。遠ざかるほど、角度の進みが遅くなる。（係数 $82.2$ は、$\sqrt{2q^3/GM_\odot}$ を日に直した値：$7.10\times10^6$ s $=82.2$ 日。）}
+\end{figure}
+
+\section{補充 ハレー彗星の軌道の数字}
+
+ハレー彗星の軌道を、概数の長半径 $a=17.834$ AU、離心率 $e=0.9671$ で見ます。
+
+\begin{table}[htbp]
+\centering
+\begin{tabular}{lc}
+\toprule
+量 & 値\\
+\midrule
+周期 $T=a^{3/2}$（年） & 75.3\\
+近日点距離 $a(1-e)$（AU） & 0.587\\
+遠日点距離 $a(1+e)$（AU） & 35.08\\
+\bottomrule
+\end{tabular}
+\caption{ハレー彗星の軌道（計算で確認。$a$、$e$ は一般に知られた概数）。周期は、観測される約75〜76年に、ほぼ合う。}
+\end{table}
+
+\begin{figure}[htbp]
+\centering
+\begin{tikzpicture}
+\begin{axis}[width=9cm, height=4.6cm, xbar, xmin=0, xmax=40, ytick={1,2}, yticklabels={近日点, 遠日点}, xlabel={太陽からの距離 [AU]},
+  every axis label/.append style={font=\footnotesize}, tick label style={font=\footnotesize}, bar width=14pt, nodes near coords, nodes near coords style={font=\footnotesize}]
+ \addplot[fill=primaryblue!50, draw=primaryblue] coordinates {(0.587,1)};
+ \addplot[fill=warmamber!60, draw=warmamber] coordinates {(35.08,2)};
+\end{axis}
+\end{tikzpicture}
+\caption{ハレー彗星の太陽からの距離。近日点は水星の軌道の内側、遠日点は海王星の軌道（約30 AU）の外側。}
+\end{figure}
+
+\section{補充 歳差の速さ：25772年で1周}
+
+歳差（地軸が円錐を描く動き）の周期を $25772$ 年として、1年あたりに動く角度を計算します。
+\[
+\frac{360^\circ\times3600}{25772}=50.29''/\text{年}.
+\]
+ニュートンが第3編で説明した歳差は、月と太陽が、赤道の膨らみを引く力によって起こります（補足：周期の値は一般に知られた現代の値）。
+
+\begin{table}[htbp]
+\centering
+\begin{tabular}{c|ccc}
+\toprule
+経過年数 & 1 & 100 & 1000\\
+\midrule
+動く角度 & $50.29''$ & $1.397^\circ$ & $13.97^\circ$\\
+\bottomrule
+\end{tabular}
+\caption{歳差による地軸の向きの変化（計算：$50.29''\times100=5029''=1.397^\circ$）。72年でおよそ $1^\circ$。}
+\end{table}
+
+\begin{figure}[htbp]
+\centering
+\begin{tikzpicture}
+\begin{axis}[width=9cm, height=4.8cm, xmin=0, xmax=26000, ymin=0, ymax=360, xlabel={経過年数}, ylabel={向きの変化 [度]}, ytick={0,90,180,270,360},
+  every axis label/.append style={font=\footnotesize}, tick label style={font=\footnotesize}]
+ \addplot[thick, primaryblue, domain=0:25772, samples=2] {360/25772*x};
+\end{axis}
+\end{tikzpicture}
+\caption{歳差による、地軸の向きの回転。25772年で360度。}
+\end{figure}
+
+\section{補充 潮汐は、月が太陽の2.2倍}
+
+潮を起こす力は、引力の「差」で、$M/d^3$ に比例します。月と太陽を比べます。
+
+\begin{table}[htbp]
+\centering
+\begin{tabular}{lccc}
+\toprule
+天体 & $M$ [kg] & $d$ [m] & $M/d^3$\\
+\midrule
+月 & $7.342\times10^{22}$ & $3.844\times10^{8}$ & $1.293\times10^{-3}$\\
+太陽 & $1.989\times10^{30}$ & $1.496\times10^{11}$ & $5.94\times10^{-4}$\\
+\bottomrule
+\end{tabular}
+\caption{潮汐力の比（計算で確認。単位は共通なので省略）。月は太陽の $2.176$ 倍。}
+\end{table}
+
+\begin{pointbox}{第11章 補充のまとめ}
+\begin{itemize}[leftmargin=*]
+\item 放物線の彗星（$q=1$ AU）は、近日点から約110日で $\nu=90^\circ$。
+\item ハレー彗星：周期約75.3年、近日点0.587 AU、遠日点35.08 AU。
+\item 歳差は年に $50.29''$。潮汐力は、月が太陽の約2.2倍。
+\end{itemize}
+\end{pointbox}
 
 \end{document}
