@@ -245,7 +245,7 @@
 トムソンは、ガリレオが同じ点を論じたことに触れています。強さを保つには、長さが2倍なら、太さは $2^{3/2}\approx2.83$ 倍にしなければならない、という関係です。
 
 \begin{examplebox}{確かめ}
-長さを $k$ 倍、太さを $m$ 倍にすると、体重は $k^3$ 倍、骨の断面積は $m^2$ 倍。断面あたりの圧力を同じに保つには $k^3/m^2=1$ ではなく、元の圧力のまま、つまり $k^3=m^2$。したがって $m=k^{3/2}$。$k=2$ で $m=2^{1.5}\approx2.83$。
+長さを $k$ 倍、太さを $m$ 倍にすると、体重は $k^3$ 倍、骨の断面積は $m^2$ 倍。断面あたりの圧力（体重÷断面積）$k^3/m^2$ を、元と同じ $1$ に保つには $k^3=m^2$。したがって $m=k^{3/2}$。$k=2$ で $m=2^{1.5}\approx2.83$。
 \end{examplebox}
 
 \begin{figure}[htbp]
@@ -263,6 +263,96 @@
 \section{小さな生き物の世界}
 
 逆に、小さな生き物は、体の大きさに比べて、表面積が大きくなります。だから、水の表面張力や空気の抵抗が、とても大切になります。小さな虫が、水に落ちると、なかなか抜け出せないのは、そのためです。
+
+\section{小さな恒温動物は、いつも食べていなければならない}
+
+翻訳版は、熱の逃げやすさにも、同じ「大きさの法則」を使います。熱は表面から逃げ、熱をつくるのは体全体（体積）です。長さを $k$ 倍にすると、表面積は $k^2$ 倍、体積は $k^3$ 倍なので、体重あたりの熱の逃げやすさは $k^2/k^3=1/k$ 倍になります。つまり、体が小さいほど、体重のわりに熱がたくさん逃げます。
+
+\begin{table}[htbp]
+\centering
+\begin{tabular}{r|cccc}
+\toprule
+長さの倍率 $k$ & 1 & 2 & 10 & 100\\
+\midrule
+体重あたりの熱の逃げやすさ（$1/k$） & 1 & 0.5 & 0.1 & 0.01\\
+\bottomrule
+\end{tabular}
+\caption{同じ形のまま大きくしたときの、体重あたりの熱の逃げやすさ（計算）。大きい動物ほど熱が逃げにくい。}
+\end{table}
+
+\begin{figure}[htbp]
+\centering
+\begin{tikzpicture}
+\begin{axis}[width=9cm, height=5cm, xmode=log, ymode=log, xmin=1, xmax=100, ymin=0.005, ymax=1.5, xlabel={長さの倍率 $k$（対数目盛）}, ylabel={体重あたりの熱の逃げやすさ},
+  every axis label/.append style={font=\footnotesize}, tick label style={font=\footnotesize}]
+ \addplot[thick, primaryblue, domain=1:100, samples=2] {1/x};
+\end{axis}
+\end{tikzpicture}
+\caption{体重あたりの熱の逃げやすさ $1/k$。両対数のグラフで、傾き $-1$ の直線。翻訳版は、ハツカネズミやハチドリは、ゾウやクジラよりずっと熱を失いやすい、と述べる。}
+\end{figure}
+
+\begin{notebox}{事実・推測・未確認}
+上の計算は、「同じ形のまま大きくする」という理想化にもとづきます。実際の動物は、形も、体温の保ち方も、種類によって違うので、$1/k$ はおよその傾向を示すものです。翻訳版にある、ゾウの耳が放熱の役に立つという説明は、原著の主張として紹介するにとどめます。
+\end{notebox}
+
+\section{小さな世界では、表面の力が主役になる}
+
+重力は体積に比例し（$L^3$）、表面張力は長さに比例します（$L$）。そのため、小さな生き物ほど、重力に対する表面張力の割合が大きくなります。重力に対する表面張力の割合は $L/L^3=L^{-2}$ に比例します。
+
+\begin{table}[htbp]
+\centering
+\begin{tabular}{r|cccc}
+\toprule
+長さ（はじめを $1$） & 1 & $\tfrac1{10}$ & $\tfrac1{100}$ & $\tfrac1{1000}$\\
+\midrule
+重力に対する表面張力の割合（$L^{-2}$） & 1 & 100 & 10{,}000 & 1{,}000{,}000\\
+\bottomrule
+\end{tabular}
+\caption{長さを10分の1にするごとに、重力に対する表面張力の割合は100倍になる（計算）。}
+\end{table}
+
+\begin{figure}[htbp]
+\centering
+\begin{tikzpicture}
+\begin{axis}[width=9cm, height=5cm, xmode=log, ymode=log, xmin=1e-3, xmax=1, ymin=0.5, ymax=2e6, xlabel={長さ $L$（はじめを $1$）}, ylabel={表面張力$/$重力（相対）},
+  every axis label/.append style={font=\footnotesize}, tick label style={font=\footnotesize}]
+ \addplot[thick, crimson, domain=1e-3:1, samples=2] {1/x^2};
+\end{axis}
+\end{tikzpicture}
+\caption{小さいほど、表面張力が重力に対して大きくなる。両対数で傾き $-2$。翻訳版は、体長数ミリメートルの昆虫では、表面張力が自重の数百倍から数千倍に達する、と書く（この数字は翻訳版の記述で、本書では未確認）。}
+\end{figure}
+
+\section{巨人は転ぶと危ない：エネルギーの $L^4$ 則}
+
+翻訳版は、『ガリヴァー旅行記』の巨人（身長が普通の人の10倍、約60フィート）を例にとります。転んで頭が地面に当たるときの衝撃エネルギーは、体重（$L^3$）と落ちる高さ（$L$）の積で、$L^4$ に比例します。身長が10倍なら、エネルギーは $10^4=10{,}000$ 倍です。
+
+\begin{table}[htbp]
+\centering
+\begin{tabular}{r|cccc}
+\toprule
+長さの倍率 $L$ & 1 & 2 & 5 & 10\\
+\midrule
+転倒のエネルギー（$L^4$） & 1 & 16 & 625 & 10{,}000\\
+空気抵抗のある落下の終端速度（$\sqrt L$） & 1 & 1.41 & 2.24 & 3.16\\
+\bottomrule
+\end{tabular}
+\caption{長さを $L$ 倍にしたときの、衝撃エネルギーと終端速度の相対値（計算）。エネルギーは急激に、速度はゆるやかに増える。}
+\end{table}
+
+\begin{figure}[htbp]
+\centering
+\begin{tikzpicture}
+\begin{axis}[width=9cm, height=5cm, xmode=log, ymode=log, xmin=1, xmax=10, ymin=0.8, ymax=2e4, xlabel={長さの倍率 $L$}, ylabel={相対値},
+  every axis label/.append style={font=\footnotesize}, tick label style={font=\footnotesize}, legend style={font=\scriptsize, at={(0.03,0.97)}, anchor=north west}]
+ \addplot[thick, crimson, domain=1:10, samples=2] {x^4};
+ \addplot[thick, primaryblue, domain=1:10, samples=2] {x^0.5};
+ \legend{衝撃エネルギー $L^4$, 終端速度 $\sqrt L$}
+\end{axis}
+\end{tikzpicture}
+\caption{大きな生き物ほど、落下の衝撃は、桁違いに大きくなる。翻訳版が引くトムソンの例では、ハツカネズミは坑道に投げ込まれても無事、人は骨折し、馬は飛び散る、と述べられる。}
+\end{figure}
+
+終端速度が $\sqrt L$ に比例するのは、落下の速さが、体重と、空気を受ける面積の比 $L^3/L^2=L$ の平方根で決まるからです（本書の補足：空気抵抗が速さの2乗に比例するとした場合）。
 
 \begin{pointbox}{この章のポイント}
 \begin{itemize}[leftmargin=1.5em]
@@ -372,6 +462,52 @@ $r=ae^{b\theta}$ のとき、$\dfrac{\dd r}{\dd\theta}=br$。半径方向と接�
 \caption{フィボナッチ数の隣どうしの比は、黄金比 $1.618\ldots$ に近づく。}
 \end{figure}
 
+\section{1回転で何倍になるか}
+
+対数螺旋 $r=ae^{b\theta}$ で、1回転（$\theta$ が $2\pi$ 増える）あたりの半径の倍率は $e^{2\pi b}$、半径と接線のなす角は $\arctan(1/b)$ です。いくつかの $b$ で計算します。
+
+\begin{table}[htbp]
+\centering
+\begin{tabular}{c|cccc}
+\toprule
+$b$ & 0.1 & 0.2 & 0.23 & 0.3\\
+\midrule
+1回転の倍率 $e^{2\pi b}$ & 1.87 & 3.51 & 4.24 & 6.59\\
+なす角 $\arctan(1/b)$ & $84.3^\circ$ & $78.7^\circ$ & $77.1^\circ$ & $73.3^\circ$\\
+\bottomrule
+\end{tabular}
+\caption{$b$ と、1回転の倍率・なす角（計算で確認）。$b$ が大きいほど、急速に開く渦になる。}
+\end{table}
+
+\begin{figure}[htbp]
+\centering
+\begin{tikzpicture}
+\begin{axis}[width=9cm, height=5cm, xmin=0, xmax=0.4, ymin=0, ymax=12, xlabel={$b$}, ylabel={1回転の倍率},
+  every axis label/.append style={font=\footnotesize}, tick label style={font=\footnotesize}]
+ \addplot[thick, primaryblue, domain=0:0.4, samples=60] {exp(2*pi*x)};
+ \addplot[only marks, mark=*, crimson] coordinates {(0.1,1.87)(0.2,3.51)(0.23,4.24)(0.3,6.59)};
+\end{axis}
+\end{tikzpicture}
+\caption{$b$ と、1回転の倍率の関係（曲線）と、表の4点（赤）。$b$ がわずかに増えるだけで、倍率は急に増える。}
+\end{figure}
+
+\section{黄金螺旋の $b$}
+
+黄金比 $\varphi$ の長方形から作る渦を、4分の1回転ごとに半径が $\varphi$ 倍になる対数螺旋とみなすと、$e^{b\pi/2}=\varphi$ より $b=\dfrac{\ln\varphi}{\pi/2}=0.3063$ です。1回転では $\varphi^4=6.854$ 倍、なす角は $\arctan(1/b)=73.0^\circ$ になります。
+
+\begin{figure}[htbp]
+\centering
+\begin{tikzpicture}[scale=1.0]
+ \draw[thick, primaryblue, domain=0:720, samples=250, smooth, variable=\tt] plot ({0.05*exp(0.3063*\tt*3.14159/180)*cos(\tt)}, {0.05*exp(0.3063*\tt*3.14159/180)*sin(\tt)});
+ \node[lbl] at (0,-2.9) {$b=0.3063$（2回転ぶん。1回転ごとに6.85倍）};
+\end{tikzpicture}
+\caption{黄金螺旋（$b=0.3063$）。1回転ごとの半径は $\varphi^4\approx6.85$ 倍で、外側の巻きは急に広がる。}
+\end{figure}
+
+\begin{notebox}{事実・推測・未確認}
+オウムガイなどの殻が、きれいな黄金螺旋になるという話は、よく語られますが、実際の殻の $b$ は種によって違うと考えられます。本書では、殻の実測値には立ち入らず、数学的な性質だけを計算で確かめました。
+\end{notebox}
+
 \begin{pointbox}{この章のポイント}
 \begin{itemize}[leftmargin=1.5em]
 \item 対数螺旋 $r=ae^{b\theta}$：回るたびに半径が一定倍。
@@ -452,6 +588,58 @@ $r=ae^{b\theta}$ のとき、$\dfrac{\dd r}{\dd\theta}=br$。半径方向と接�
 「近い種の形が、単純な座標変換で結べる」というのは、トムソンの重要な観察ですが、すべての生き物に当てはまるわけではありません。この考え方は、のちの形態計測学（形の数量化）の出発点の1つとされますが、その経緯は専門書で確かめてください。
 \end{notebox}
 
+\section{変形は、少数の数字で表せる}
+
+翻訳版の第17章は、魚の体全体が、「ひとつのなめらかな歪み」で別の魚へ移ると述べ、これを、各部分がばらばらに変わる、という見方と対比します。数学の言葉では、伸ばしと傾きをあわせた変換（アフィン変換）は、平面では6個の数字（2×2の行列の4つの成分と、平行移動の2つ）で決まります。
+
+\begin{table}[htbp]
+\centering
+\begin{tabular}{lcc}
+\toprule
+ & 一括の変換（アフィン） & 点を1つずつ動かす\\
+\midrule
+必要な数字の個数（点が8個のとき） & 6 & $8\times2=16$\\
+必要な数字の個数（点が30個のとき） & 6 & $30\times2=60$\\
+\bottomrule
+\end{tabular}
+\caption{一括の変換と、点ごとの変更で必要な数字の数（計算）。点が増えても、一括の変換は6個のまま。}
+\end{table}
+
+簡単な魚の輪郭（8点と尾びれ4点）に、$x'=1.2x+0.25y$、$y'=0.8y$ の変換を加えると、次の図のように、全体が、横に伸びて、少し傾いた別の魚になります。
+
+\begin{figure}[htbp]
+\centering
+\begin{tikzpicture}[scale=0.8]
+ \draw[thick, primaryblue] (0,0)--(1,0.5)--(2.2,0.7)--(3.4,0.3)--(4.2,0)--(3.4,-0.3)--(2.2,-0.6)--(1,-0.45)--cycle;
+ \draw[thick, primaryblue] (4.2,0)--(5.0,0.6)--(4.9,0)--(5.0,-0.6)--cycle;
+ \node[lbl] at (2.5,-1.2) {元の魚};
+ \begin{scope}[yshift=-3cm]
+ \draw[thick, crimson] (0,0)--(1.325,0.4)--(2.815,0.56)--(4.155,0.24)--(5.04,0)--(4.005,-0.24)--(2.49,-0.48)--(1.087,-0.36)--cycle;
+ \draw[thick, crimson] (5.04,0)--(6.15,0.48)--(5.88,0)--(5.85,-0.48)--cycle;
+ \node[lbl] at (3,-1.2) {$x'=1.2x+0.25y,\ y'=0.8y$};
+ \end{scope}
+\end{tikzpicture}
+\caption{同じ6個の数字で、すべての点が一度に動く。変換の行列式は $1.2\times0.8=0.96$ で、面積は約4\%小さくなる。}
+\end{figure}
+
+\section{面積はどう変わるか}
+
+変換の行列式は、面積の倍率になります。横に1.5倍に伸ばすと、楕円（半軸 $1.8$ と $0.8$、面積 $\pi\times1.8\times0.8=4.524$）は、半軸 $2.7$ と $0.8$ の楕円（面積 $6.786$）になり、面積は $6.786/4.524=1.5$ 倍です。せん断は、面積を変えません（行列式が $1$）。
+
+\begin{table}[htbp]
+\centering
+\begin{tabular}{lc}
+\toprule
+変換 & 面積の倍率（行列式）\\
+\midrule
+横に1.5倍に伸ばす & 1.5\\
+せん断（傾ける） & 1\\
+$x'=1.2x+0.25y,\ y'=0.8y$ & 0.96\\
+\bottomrule
+\end{tabular}
+\caption{変換と面積の倍率（計算）。}
+\end{table}
+
 \begin{pointbox}{この章のポイント}
 \begin{itemize}[leftmargin=1.5em]
 \item 格子を伸ばす・傾ける・曲げると、中の形も変形する。
@@ -481,7 +669,7 @@ $r=ae^{b\theta}$ のとき、$\dfrac{\dd r}{\dd\theta}=br$。半径方向と接�
 
 \begin{notebox}{この本の未解決点}
 \begin{itemize}[leftmargin=1.5em]
-\item 翻訳版は4章の精選版で、原著全体（約20章）は扱っていません。
+\item 翻訳版は4章（原著1917年版の第1・2・11・17章にあたる）の精選版で、原著の残りの章は扱っていません。
 \item 魚の変換など、原著の図は本書では再現していません。
 \item 刊行の経緯（初版1917年、増補版）は、本書の筆者が確認していない部分があります。
 \end{itemize}
