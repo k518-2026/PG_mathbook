@@ -137,6 +137,41 @@
 
 抽象のおかげで、「$a+b=b+a$」のように、どんなものにも当てはまる法則が書けます。2個と3個を足しても、3個と2個を足しても5個。りんごでも、本でも、同じです。
 
+
+\section{「2たす2は4」は、何にでも当てはまる}
+
+翻訳版は、算術の最初の特徴として、「適用範囲の広さ」を挙げます。2たす2が4であることは、りんごにも、音にも、味にも、天使にも当てはまる、と述べられています。
+
+\begin{table}[htbp]
+\centering
+\begin{tabular}{lcc}
+\toprule
+ものの種類（翻訳版の例） & 2個 $+$ 2個 & 合計\\
+\midrule
+りんご & 2個 $+$ 2個 & 4個\\
+音 & 2つ $+$ 2つ & 4つ\\
+味 & 2種類 $+$ 2種類 & 4種類\\
+天使 & 2人 $+$ 2人 & 4人\\
+\bottomrule
+\end{tabular}
+\caption{ものの種類が違っても、数の関係は変わらない。これが「抽象」の力。}
+\end{table}
+
+\begin{figure}[htbp]
+\centering
+\begin{tikzpicture}[node distance=6mm]
+ \node[wbox] (a) {りんご};
+ \node[wbox, right=of a] (b) {音};
+ \node[wbox, right=of b] (c) {味};
+ \node[wbox, right=of c] (d) {天使};
+ \node[abox, below=10mm of $(b)!0.5!(c)$] (e) {$2+2=4$};
+ \draw[ax] (a)--(e); \draw[ax] (b)--(e); \draw[ax] (c)--(e); \draw[ax] (d)--(e);
+\end{tikzpicture}
+\caption{別々の対象から、共通の関係だけを取り出す。「2たす2は4」は、どの対象にも成り立つ。}
+\end{figure}
+
+翻訳版は、スウィフトの『ガリヴァー旅行記』に出てくるラピュタの数学者を例に、「抽象的な数学は、現実と無縁ではない」と論じます。抽象は、現実から離れるためではなく、現実のあらゆる場面に使える道具をつくるためです。
+
 \begin{pointbox}{この章のポイント}
 \begin{itemize}[leftmargin=1.5em]
 \item 数学は、具体的なものから共通の性質を取り出す。
@@ -177,6 +212,41 @@ $-3$ & $-6$ & $-6$\\
 
 「どれでも」（任意の $x$）と「ある」（ある $x$）を区別することも、重要です。$x+2=5$ は、ある $x$（$=3$）だけで成り立ちます。
 
+
+\section{「どの」と「ある」：任意の数と、ある数}
+
+翻訳版の第2章は、代数が、文字を使って「任意の数」と「ある数」を区別できるようにした、と述べます。
+
+\begin{table}[htbp]
+\centering
+\begin{tabular}{p{4.6cm}p{4.6cm}p{3.2cm}}
+\toprule
+言い方 & 例 & どの $x$ で成り立つか\\
+\midrule
+どの数 $x$ でも成り立つ & $x+2=2+x$ & すべて\\
+ある数 $x$ で成り立つ & $x+2=5$ & $x=3$ だけ\\
+どの数 $x$ にも、それより大きい数がある & 「$x$ に対して $y>x$ となる $y$ がある」 & 無限に続く\\
+\bottomrule
+\end{tabular}
+\caption{「任意の」と「ある」の区別。3番目は、翻訳版が「無限の考え方につながる」と述べる型。}
+\end{table}
+
+翻訳版は、「どの数でも成り立つ」ことは、「ある数で成り立つ」ことを含む、と指摘します。$x+2=2+x$ は、どの数でも成り立つので、ある数についても成り立ちます。
+
+\begin{figure}[htbp]
+\centering
+\begin{tikzpicture}
+ \draw[thick, primaryblue, fill=softblue] (0,0) ellipse (3cm and 1.3cm);
+ \draw[thick, crimson, fill=softrose] (1.6,0) circle (0.5cm);
+ \node[lbl, align=center] at (-1.2,0) {$x+2=2+x$が\\成り立つ数（すべて）};
+ \node[lbl] at (1.6,-0.9) {$x+2=5$};
+ \node[lbl] at (1.6,0) {3};
+\end{tikzpicture}
+\caption{$x+2=2+x$ が成り立つ数（青）の中に、$x+2=5$ が成り立つ数（赤）が含まれる。}
+\end{figure}
+
+翻訳版は、年号をローマ数字で書くと MDCCCCX（$1000+900+10=1910$）になる、とも述べます。位取りのあるインド・アラビア数字を取り入れたことで、数学者は「文字で任意の数を表す」便利さに気づいた、というのが翻訳版の見方です。
+
 \begin{pointbox}{この章のポイント}
 \begin{itemize}[leftmargin=1.5em]
 \item 変数は「何でも入る空欄」。
@@ -215,6 +285,37 @@ $-3$ & $-6$ & $-6$\\
 \end{tikzpicture}
 \end{center}
 
+
+\section{仮定の法則から出発した計算は、仮定ほどには確実でない}
+
+翻訳版の第3章は、家の建築費を例にします。「1立方フィートあたり1シリング」という法則（20立方フィートで1ポンド）を仮定すると、体積 $x$ 立方フィートの建築費 $y$ ポンドは $20y=x$、つまり $y=x/20$ です。
+
+\begin{table}[htbp]
+\centering
+\begin{tabular}{r|ccc}
+\toprule
+体積 $x$ [立方フィート] & 1000 & 5000 & 20000\\
+\midrule
+建築費 $y=x/20$ [ポンド] & 50 & 250 & 1000\\
+\bottomrule
+\end{tabular}
+\caption{仮定した法則 $20y=x$ による建築費（計算）。体積が2倍なら、費用も2倍。}
+\end{table}
+
+\begin{figure}[htbp]
+\centering
+\begin{tikzpicture}
+\begin{axis}[width=9cm, height=5cm, xmin=0, xmax=20000, ymin=0, ymax=1100, xlabel={体積 $x$ [立方フィート]}, ylabel={建築費 $y$ [ポンド]},
+  every axis label/.append style={font=\footnotesize}, tick label style={font=\footnotesize}]
+ \addplot[thick, primaryblue, domain=0:20000, samples=2] {x/20};
+ \addplot[only marks, mark=*, crimson] coordinates {(1000,50)(5000,250)(20000,1000)};
+\end{axis}
+\end{tikzpicture}
+\caption{仮定した法則のグラフ（原点を通る直線）。計算は正確でも、法則が現実に合うかは別の話。}
+\end{figure}
+
+翻訳版の要点は、計算がどれだけ正確でも、結論は、出発点の法則より確実にならない、という点です。数学は、仮定から結論を、まちがいなく導く道具ですが、仮定が現実に合うかどうかは、観察によって確かめるほかありません。
+
 \begin{pointbox}{この章のポイント}
 \begin{itemize}[leftmargin=1.5em]
 \item 応用は、「置き換え→計算→解釈し直し」の3段階。
@@ -249,6 +350,57 @@ $t$（秒） & 落下距離 $s$（m）\\
 \end{axis}
 \end{tikzpicture}
 \caption{自由落下の距離。時間が2倍になると、距離は4倍になる（空気の抵抗は無視）。}
+\end{figure}
+
+
+\section{ガリレオからニュートンへ：落下と慣性}
+
+翻訳版の第4章は、ガリレオ（1564〜1642）が、重さの違う物体を同じ高さから落とすことで、「重いほど速く落ちる」という通説を覆したと述べます。そして、ニュートンの第1法則を紹介します。「力が加わらない物体は、静止するか、一直線に一定の速さで動き続ける」。
+
+\begin{table}[htbp]
+\centering
+\begin{tabular}{llc}
+\toprule
+人物 & 翻訳版の記述 & 年（翻訳版）\\
+\midrule
+レオナルド・ダ・ヴィンチ & アルキメデスの秘密を再発見した人々の一人 & 1452〜1519\\
+コペルニクス & 惑星が太陽のまわりを回ると説明 & 1473〜1543\\
+ガリレオ & 落下の実験、慣性の考え & 1564〜1642\\
+ケプラー & 惑星の軌道は楕円と示した & 1609年\\
+\bottomrule
+\end{tabular}
+\caption{第4章に出てくる人物と年代（翻訳版による）。}
+\end{table}
+
+\begin{figure}[htbp]
+\centering
+\begin{tikzpicture}[x=0.023cm]
+ \draw[ax] (1440,0)--(1660,0);
+ \foreach \y in {1500,1600} {\draw (\y,0.08)--(\y,-0.08); \node[below, font=\scriptsize] at (\y,-0.1) {\y};}
+ \foreach \a/\b/\t/\h in {1452/1519/ダ・ヴィンチ/0.5, 1473/1543/コペルニクス/1.1, 1564/1642/ガリレオ/0.5} {
+   \draw[line width=3pt, primaryblue] (\a,\h)--(\b,\h) node[midway, above, font=\scriptsize] {\t};
+ }
+ \fill[crimson] (1609,0) circle (2pt) node[above, font=\scriptsize] {ケプラー1609};
+\end{tikzpicture}
+\caption{人物の生没年（太い線）とケプラーの発表年（赤）。ガリレオの世代で、数学と実験が結びついた。}
+\end{figure}
+
+\section{ベクトルと平行四辺形の法則}
+
+翻訳版は、大きさと向きで決まる量を「ベクトル」とよびます。速度・加速度・力は、すべてベクトルで、足し算は平行四辺形の法則で行います。蒸気船の甲板を歩く人の例が使われます。
+
+数値例（本書の補足）：船が前へ $6$ m/s で進み、人が船に対して真横へ $8$ m/s で歩くと、岸から見た速さは $\sqrt{6^2+8^2}=10$ m/s、向きは船の進行方向から $\arctan(8/6)=53.1^\circ$ です。
+
+\begin{figure}[htbp]
+\centering
+\begin{tikzpicture}[scale=0.45]
+ \draw[gridgray] (0,0) grid (7,9);
+ \draw[ax, primaryblue] (0,0)--(6,0) node[midway, below, lbl] {船 6 m/s};
+ \draw[ax, warmamber] (0,0)--(0,8) node[midway, left, lbl] {人（船に対して）8 m/s};
+ \draw[dashed] (6,0)--(6,8)--(0,8);
+ \draw[ax, crimson, very thick] (0,0)--(6,8) node[midway, right, lbl] {合成 10 m/s};
+\end{tikzpicture}
+\caption{ベクトルの和。直角をなす6と8の合成は、長さ10（辺の比 $3:4:5$ の2倍）。}
 \end{figure}
 
 \begin{pointbox}{この章のポイント}
@@ -287,6 +439,41 @@ XLVII $\times$ XXXVI（ローマ数字） & MDCXCII（$=1692$）\\
 \bottomrule
 \end{tabular}
 \end{center}
+
+
+\section{5つの法則を、記号で書く意味}
+
+翻訳版の第5章は、加法と乗法の基本法則を記号で書き、「記号の助けで、論理の流れが、ほとんど機械的に目で追える」ことを示します。5つの法則は次のとおりです。
+
+\begin{table}[htbp]
+\centering
+\begin{tabular}{llc}
+\toprule
+法則 & 記号 & $a=2,\ b=3,\ c=4$ での確認\\
+\midrule
+加法の交換律 & $a+b=b+a$ & $5=5$\\
+加法の結合律 & $(a+b)+c=a+(b+c)$ & $9=9$\\
+乗法の交換律 & $ab=ba$ & $6=6$\\
+乗法の結合律 & $(ab)c=a(bc)$ & $24=24$\\
+分配律 & $a(b+c)=ab+ac$ & $14=14$\\
+\bottomrule
+\end{tabular}
+\caption{数の基本法則（翻訳版の5式）と、具体的な数での確認（計算）。}
+\end{table}
+
+\begin{figure}[htbp]
+\centering
+\begin{tikzpicture}
+ \foreach \i/\t in {0/{交換律\\（加法）}, 2.6/{結合律\\（加法）}, 5.2/{交換律\\（乗法）}, 7.8/{結合律\\（乗法）}} {
+   \node[fbox, text width=2.1cm] at (\i,0) {\t};
+ }
+ \node[abox, text width=2.1cm] at (3.9,-1.5) {分配律\\（加法と乗法を結ぶ）};
+ \draw[ax] (2.6,-0.5)--(3.4,-1.1); \draw[ax] (5.2,-0.5)--(4.4,-1.1);
+\end{tikzpicture}
+\caption{5つの法則。分配律だけが、加法と乗法をつなぐ。}
+\end{figure}
+
+翻訳版は、数字の記号法について、アラビア数字がアラブを通じてヨーロッパに入ったこと、インドの数学者バースカラ（翻訳版では1114年生）が体系的に説明したことを述べます。年号は翻訳版の記述で、本書は原典で確認していません。
 
 \begin{pointbox}{この章のポイント}
 \begin{itemize}[leftmargin=1.5em]
@@ -344,6 +531,40 @@ XLVII $\times$ XXXVI（ローマ数字） & MDCXCII（$=1692$）\\
 \caption{数直線。$\sqrt2$ は、1と2のあいだにあるが、分数では表せない点。}
 \end{figure}
 
+
+\section{$\sqrt2$ に、分数で近づく}
+
+翻訳版の第6章は、正方形の対角線 $\sqrt2$ が、分数では正確に表せないことを、ギリシャ人の発見として紹介します。そのうえで、$\tfrac{49}{25}$（$=1.96$）は2より小さく、$\tfrac94$（$=2.25$）は2より大きいので、$\sqrt2$ は $\tfrac75$ と $\tfrac32$ の間にある、と述べます。
+
+近づき方を、$x\mapsto\dfrac12\left(x+\dfrac2x\right)$ という計算で追うと、次のようになります（本書の補足）。
+
+\begin{table}[htbp]
+\centering
+\begin{tabular}{c|cccc}
+\toprule
+回数 & 0 & 1 & 2 & 3\\
+\midrule
+分数 & $\tfrac32$ & $\tfrac{17}{12}$ & $\tfrac{577}{408}$ & $\tfrac{665857}{470832}$\\
+小数 & 1.5 & 1.416667 & 1.414216 & 1.41421356\\
+2乗との差 $x^2-2$ & 0.25 & 0.00694 & $6.0\times10^{-6}$ & $4.5\times10^{-12}$\\
+\bottomrule
+\end{tabular}
+\caption{$\sqrt2=1.41421356\ldots$ への近づき方（正確な分数で計算して確認）。1回ごとに、正しい桁数がほぼ倍になる。}
+\end{table}
+
+\begin{figure}[htbp]
+\centering
+\begin{tikzpicture}
+\begin{axis}[width=9cm, height=4.8cm, ymode=log, xmin=0, xmax=3, ymin=1e-13, ymax=1, xlabel={回数}, ylabel={$x^2-2$},
+  every axis label/.append style={font=\footnotesize}, tick label style={font=\footnotesize}]
+ \addplot[mark=*, thick, primaryblue] coordinates {(0,0.25)(1,0.006944)(2,6.0073e-6)(3,4.511e-12)};
+\end{axis}
+\end{tikzpicture}
+\caption{誤差（縦軸は対数）。3回の計算で、$10^{-12}$ まで小さくなる。}
+\end{figure}
+
+どんなに回数を重ねても、$x^2=2$ にちょうどなる分数にはなりません。「分数でいくらでも近づけるが、ぴったりにはならない」数をふくめて、数全体を「実数」とよぶ、というのが、翻訳版の説明です。
+
 \begin{pointbox}{この章のポイント}
 \begin{itemize}[leftmargin=1.5em]
 \item 数は、必要に応じて拡張されてきた。
@@ -369,6 +590,43 @@ XLVII $\times$ XXXVI（ローマ数字） & MDCXCII（$=1692$）\\
 \end{tikzpicture}
 \caption{複素数平面。横が実数、縦が虚数。$a+bi$ は、座標 $(a,b)$ の点。}
 \end{figure}
+
+
+\section{新しい数は、解けない方程式から生まれた}
+
+翻訳版の第7章は、虚数の誕生を、負の数の誕生と「完全に相似」だと述べます。どちらも、方程式を例外なく解きたい、という要求から生まれました。
+
+\begin{table}[htbp]
+\centering
+\begin{tabular}{lll}
+\toprule
+方程式 & それまでの数では & 新しく必要になった数\\
+\midrule
+$x+3=1$ & 解がない（自然数では） & 負の数（$x=-2$）\\
+$2x=3$ & 解がない（整数では） & 分数（$x=\tfrac32$）\\
+$x^2=2$ & 解がない（分数では） & 無理数（$x=\sqrt2$）\\
+$x^2=-1$ & 解がない（実数では） & 虚数（$x=i$）\\
+\bottomrule
+\end{tabular}
+\caption{方程式が解けるように、数は広がってきた。}
+\end{table}
+
+\begin{figure}[htbp]
+\centering
+\begin{tikzpicture}
+ \draw[thick, fill=softrose] (0,0) circle (2.4cm);
+ \draw[thick, fill=softamber] (0,-0.5) circle (1.9cm);
+ \draw[thick, fill=softgreen] (0,-1.0) circle (1.4cm);
+ \draw[thick, fill=softblue] (0,-1.5) circle (0.9cm);
+ \node[lbl] at (0,2.1) {複素数};
+ \node[lbl] at (0,1.2) {実数};
+ \node[lbl] at (0,0.2) {有理数};
+ \node[lbl] at (0,-1.5) {整数};
+\end{tikzpicture}
+\caption{数の広がり（入れ子の円）。外側ほど、より多くの方程式が解ける。}
+\end{figure}
+
+翻訳版は、「虚数は数なのか」という疑問に、「用語は子どもの名前のように任意で、賢いか賢くないかの問題にすぎない」と答え、ハンプティ・ダンプティの台詞を引きます。大切なのは名前ではなく、その概念が何を可能にするか、という点です。
 
 \begin{pointbox}{この章のポイント}
 \begin{itemize}[leftmargin=1.5em]
@@ -416,6 +674,46 @@ $(1+i)^2=1+2i+i^2=1+2i-1=2i$ ✓（長さ $\sqrt2^2=2$、角 $45^\circ\times2=90
 \caption{$1+i$ を2乗すると、長さは2乗、角は2倍。}
 \end{figure}
 
+
+\section{複素数を、順序対 $(a,b)$ として定義する}
+
+翻訳版の第8章は、複素数を、実数の順序対 $(a,b)$ として定義します。足し算は成分ごと、掛け算は
+
+\[
+(a,b)\times(c,d)=(ac-bd,\ ad+bc)
+\]
+
+と定めます。これで、$(0,1)\times(0,1)=(0\cdot0-1\cdot1,\ 0\cdot1+1\cdot0)=(-1,0)$。つまり、$(0,1)$ を2乗すると $(-1,0)$（実数の $-1$）になり、$(0,1)$ は $i$ の役を果たします。
+
+\begin{table}[htbp]
+\centering
+\begin{tabular}{lcc}
+\toprule
+計算 & 順序対での結果 & ふつうの書き方\\
+\midrule
+$(0,1)\times(0,1)$ & $(-1,0)$ & $i\cdot i=-1$\\
+$(1,1)\times(1,1)$ & $(0,2)$ & $(1+i)^2=2i$\\
+$(3,4)\div(1,2)$ & $\left(\tfrac{11}5,-\tfrac25\right)$ & $\tfrac{3+4i}{1+2i}=\tfrac{11-2i}{5}$\\
+\bottomrule
+\end{tabular}
+\caption{順序対の計算（計算で確認）。3行目の検算：$\left(\tfrac{11}5,-\tfrac25\right)\times(1,2)=(3,4)$。}
+\end{table}
+
+割り算は、掛け算の逆として、$(x,y)\times(a,b)=(c,d)$ を満たす $(x,y)$ を求めることで定義されます。$(a,b)\ne(0,0)$ のとき、答えはただ1つです。
+
+\begin{figure}[htbp]
+\centering
+\begin{tikzpicture}[scale=0.8]
+ \draw[ax] (-1,0)--(5,0) node[right, lbl] {実部};
+ \draw[ax] (0,-1)--(0,5) node[above, lbl] {虚部};
+ \fill[primaryblue] (3,4) circle (2pt) node[above right, lbl] {$(3,4)$};
+ \fill[warmamber] (1,2) circle (2pt) node[above left, lbl] {$(1,2)$};
+ \fill[crimson] (2.2,-0.4) circle (2pt) node[below right, lbl] {$(\tfrac{11}5,-\tfrac25)$};
+ \draw[dashed, gray] (0,0)--(3,4); \draw[dashed, gray] (0,0)--(1,2); \draw[dashed, gray] (0,0)--(2.2,-0.4);
+\end{tikzpicture}
+\caption{$(3,4)\div(1,2)$ の結果（赤）。$(3,4)$ の長さは5、$(1,2)$ は $\sqrt5$、商の長さは $5/\sqrt5=\sqrt5=2.236$（$\sqrt{(11/5)^2+(2/5)^2}=\sqrt{125/25}$）。}
+\end{figure}
+
 \begin{pointbox}{この章のポイント}
 \begin{itemize}[leftmargin=1.5em]
 \item $i$ をかける $=$ $90^\circ$ 回転。複素数のかけ算 $=$ 長さを掛け、角を足す。
@@ -442,6 +740,42 @@ $(1+i)^2=1+2i+i^2=1+2i-1=2i$ ✓（長さ $\sqrt2^2=2$、角 $45^\circ\times2=90
 \end{figure}
 
 直線と円の交点は、2つの式を連立して解きます。上の直線と円なら、$x^2+(0.5x+1)^2=4$ を解いて、$1.25x^2+x-3=0$、$x=\dfrac{-1\pm\sqrt{1+15}}{2.5}=\dfrac{-1\pm4}{2.5}$。つまり $x=1.2$ または $x=-2$ です。
+
+
+\section{座標で、距離と交点を計算する}
+
+翻訳版の第9章は、座標幾何学がデカルトによって（翻訳版では、ベッドに横になって）考えつかれたこと、そして、幾何学の最も重要な着想のひとつだと述べます。座標を使うと、図形の性質が、数の計算になります。
+
+\begin{table}[htbp]
+\centering
+\begin{tabular}{lc}
+\toprule
+量（2点 $(1,2)$ と $(4,6)$） & 値\\
+\midrule
+距離 $\sqrt{(4-1)^2+(6-2)^2}$ & $5$\\
+中点 & $(2.5,\ 4)$\\
+直線の傾き $\dfrac{6-2}{4-1}$ & $\tfrac43$\\
+\bottomrule
+\end{tabular}
+\caption{座標で求める、距離・中点・傾き（計算）。距離は3-4-5の直角三角形。}
+\end{table}
+
+\begin{figure}[htbp]
+\centering
+\begin{tikzpicture}[scale=0.8]
+ \draw[gridgray] (0,0) grid (6,7);
+ \draw[ax] (0,0)--(6.3,0) node[right, lbl] {$x$};
+ \draw[ax] (0,0)--(0,7.3) node[above, lbl] {$y$};
+ \draw[thick, primaryblue] (1,2)--(4,6) node[midway, above left, lbl] {距離 5};
+ \draw[dashed] (1,2)--(4,2)--(4,6);
+ \node[lbl] at (2.5,1.6) {3}; \node[lbl] at (4.4,4) {4};
+ \fill[crimson] (2.5,4) circle (2pt) node[left, lbl] {中点 $(2.5,4)$};
+ \fill (1,2) circle (2pt); \fill (4,6) circle (2pt);
+\end{tikzpicture}
+\caption{2点 $(1,2)$、$(4,6)$ を結ぶ線分。距離は、直角三角形の斜辺として、$\sqrt{3^2+4^2}=5$。}
+\end{figure}
+
+翻訳版は、デカルトがユークリッド（翻訳版では紀元前330年ごろ生まれ）から約2000年後の人であることに触れます。幾何学の歴史の長さと、座標という単純な着想の新しさとの対比が、強調されています。
 
 \begin{pointbox}{この章のポイント}
 \begin{itemize}[leftmargin=1.5em]
@@ -485,6 +819,44 @@ $(1+i)^2=1+2i+i^2=1+2i-1=2i$ ✓（長さ $\sqrt2^2=2$、角 $45^\circ\times2=90
 \end{tabular}
 \end{center}
 
+
+\section{円錐曲線を、離心率 $e$ で分ける}
+
+翻訳版の第10章は、円錐を平面で切ったときの切り口（円・楕円・放物線・双曲線）を扱い、ギリシャ人が、実用ではなく、純粋な関心から研究したことを強調します。焦点から測った極座標では、4つの曲線を、離心率 $e$ で、ひとつの式にまとめられます（本書の補足）。
+
+\[
+r=\frac{l}{1+e\cos\theta}.
+\]
+
+\begin{table}[htbp]
+\centering
+\begin{tabular}{lccc}
+\toprule
+離心率 $e$ & 曲線 & $r$（$\theta=0^\circ$）& $r$（$\theta=180^\circ$）\\
+\midrule
+$0$ & 円 & $1$ & $1$\\
+$0.5$ & 楕円 & $0.667$ & $2$\\
+$1$ & 放物線 & $0.5$ & なし（無限遠）\\
+$2$ & 双曲線 & $0.333$ & なし（反対側に届かない）\\
+\bottomrule
+\end{tabular}
+\caption{$l=1$ のときの、焦点から曲線までの距離（計算）。$e<1$ は閉じた曲線、$e\ge1$ は閉じない。}
+\end{table}
+
+\begin{figure}[htbp]
+\centering
+\begin{tikzpicture}
+\begin{axis}[width=9cm, height=6cm, axis equal image, xmin=-2.2, xmax=3, ymin=-2.6, ymax=2.6, xlabel={$x$}, ylabel={$y$},
+  every axis label/.append style={font=\footnotesize}, tick label style={font=\footnotesize}, legend style={font=\scriptsize, at={(0.97,0.97)}, anchor=north east}]
+ \addplot[thick, primaryblue, domain=0:360, samples=120] ({cos(x)/(1+0.5*cos(x))},{sin(x)/(1+0.5*cos(x))});
+ \addplot[thick, warmamber, domain=-120:120, samples=100] ({cos(x)/(1+cos(x))},{sin(x)/(1+cos(x))});
+ \addplot[thick, crimson, domain=-110:110, samples=100] ({cos(x)/(1+2*cos(x))},{sin(x)/(1+2*cos(x))});
+ \legend{$e=0.5$, $e=1$, $e=2$}
+\end{axis}
+\end{tikzpicture}
+\caption{同じ焦点（原点）をもつ、離心率の異なる曲線（$l=1$）。$e$ が大きいほど、開いた形になる。}
+\end{figure}
+
 \begin{pointbox}{この章のポイント}
 \begin{itemize}[leftmargin=1.5em]
 \item 円錐の切り口から、楕円・放物線・双曲線が現れる。
@@ -522,6 +894,41 @@ $(1+i)^2=1+2i+i^2=1+2i-1=2i$ ✓（長さ $\sqrt2^2=2$、角 $45^\circ\times2=90
 \caption{代表的な関数のグラフ。グラフの形が、変化の仕方を表す。}
 \end{figure}
 
+
+\section{翻訳版の2つの例：列車と年齢}
+
+翻訳版の第11章は、関数を、具体例から説明します。時速20マイルで走る列車の、$t$ 時間後の距離は $s=20t$。ジョンがトマスより1歳上なら、トマスの年齢 $x$ に対して、ジョンの年齢は $y=x+1$。$t$ や $x$ を「引数」、$s$ や $y$ を「値」とよびます。
+
+\begin{table}[htbp]
+\centering
+\begin{tabular}{c|ccccc}
+\toprule
+$t$（時間） & 0 & 1 & 2 & 3 & 4\\
+\midrule
+$s=20t$（マイル） & 0 & 20 & 40 & 60 & 80\\
+\midrule
+$x$（トマスの年齢） & 8 & 9 & 10 & 11 & 12\\
+$y=x+1$（ジョンの年齢） & 9 & 10 & 11 & 12 & 13\\
+\bottomrule
+\end{tabular}
+\caption{列車の距離（上）と、2人の年齢（下）。どちらも、引数が決まると、値が1つに決まる。}
+\end{table}
+
+翻訳版は、引数を決めると値は1つに決まるが、値を決めても引数が1つに決まるとは限らない、と述べます。$y=x^2$ なら、$y=4$ になる $x$ は $2$ と $-2$ の2つです。
+
+\begin{figure}[htbp]
+\centering
+\begin{tikzpicture}
+\begin{axis}[width=9cm, height=5cm, xmin=-3, xmax=3, ymin=0, ymax=9, xlabel={$x$}, ylabel={$y=x^2$},
+  every axis label/.append style={font=\footnotesize}, tick label style={font=\footnotesize}]
+ \addplot[thick, primaryblue, domain=-3:3, samples=60] {x^2};
+ \addplot[dashed, crimson, domain=-3:3, samples=2] {4};
+ \addplot[only marks, mark=*, crimson] coordinates {(-2,4)(2,4)};
+\end{axis}
+\end{tikzpicture}
+\caption{$y=x^2$。値 $4$（赤い破線）に対応する引数は、$2$ と $-2$ の2つ。引数から値は1つ、値から引数は1つとは限らない。}
+\end{figure}
+
 \begin{pointbox}{この章のポイント}
 \begin{itemize}[leftmargin=1.5em]
 \item 関数は、対応の規則。グラフは、その様子を一目で見せる。
@@ -546,6 +953,47 @@ $(1+i)^2=1+2i+i^2=1+2i-1=2i$ ✓（長さ $\sqrt2^2=2$、角 $45^\circ\times2=90
 \end{tikzpicture}
 \caption{周期的な変化の波。くり返しの長さが周期、山の高さが振幅。}
 \end{figure}
+
+
+\section{時間の測り方：1年は365日ちょうどではない}
+
+翻訳版の第12章は、時間の測定が周期的な現象（日・月・年）にもとづくこと、そして、精密な観測では、これらの周期がぴったり比にならないことを述べます。そこで、「すべての日は等しい長さ」あるいは「すべての年は等しい長さ」と、仮定する必要が生じます。
+
+暦は、1年を365日として、ずれをうるう年で調整します。ここで使われる規則（グレゴリオ暦）を計算すると、1年の平均は
+
+\[
+365+\frac14-\frac1{100}+\frac1{400}=365.2425\ \text{日}
+\]
+
+です（本書の補足：うるう年の規則は、4で割れる年はうるう年、ただし100で割れる年は平年、400で割れる年はうるう年）。
+
+\begin{table}[htbp]
+\centering
+\begin{tabular}{lc}
+\toprule
+規則 & 1年の平均の長さ\\
+\midrule
+うるう年なし & 365日\\
+4年に1回 & 365.25日\\
+4年に1回、ただし100年に1回は除く & 365.24日\\
+さらに400年に1回は戻す（現行） & 365.2425日\\
+\bottomrule
+\end{tabular}
+\caption{うるう年の規則を重ねるごとに、平均の長さが太陽年（約365.2422日、本書の補足）に近づく。}
+\end{table}
+
+\begin{figure}[htbp]
+\centering
+\begin{tikzpicture}
+\begin{axis}[width=9.5cm, height=5cm, xbar, xmin=365, xmax=365.3, symbolic y coords={現行,100年除く,4年に1回,なし}, ytick=data, xlabel={1年の平均 [日]},
+  nodes near coords, bar width=10pt, enlarge y limits=0.2, every axis label/.append style={font=\footnotesize}, tick label style={font=\footnotesize}]
+ \addplot[fill=softblue, draw=primaryblue] coordinates {(365,なし) (365.25,4年に1回) (365.24,100年除く) (365.2425,現行)};
+\end{axis}
+\end{tikzpicture}
+\caption{うるう年の規則と、1年の平均の長さ。}
+\end{figure}
+
+規則を重ねることは、「周期が整数倍にならない現象を、整数の規則で近似する」工夫です。
 
 \begin{pointbox}{この章のポイント}
 \begin{itemize}[leftmargin=1.5em]
@@ -587,6 +1035,52 @@ $(1+i)^2=1+2i+i^2=1+2i-1=2i$ ✓（長さ $\sqrt2^2=2$、角 $45^\circ\times2=90
 \caption{木の高さを、距離と角度から求める。}
 \end{figure}
 
+
+\section{測量：基線と2つの角から、三角形が決まる}
+
+翻訳版の第13章は、三角法が天文学と測量のために発明されたこと、測量では、長さより角度の測定が主であることを述べます。ひとつの辺（基線）の長さと、両端での角度がわかれば、三角形全体が決まります。
+
+数値例（本書の補足）：基線 $AB=1000$ m、$A$ での角が $60^\circ$、$B$ での角が $70^\circ$ とします。残りの角は $C=180^\circ-60^\circ-70^\circ=50^\circ$。正弦定理から、
+
+\[
+AC=\frac{1000\sin70^\circ}{\sin50^\circ}=1226.7\ \mathrm{m},\qquad
+BC=\frac{1000\sin60^\circ}{\sin50^\circ}=1130.5\ \mathrm{m}.
+\]
+
+基線から点 $C$ までの高さは $AC\sin60^\circ=1062.3$ m です。
+
+\begin{table}[htbp]
+\centering
+\begin{tabular}{lc}
+\toprule
+量 & 値\\
+\midrule
+角 $C$ & $50^\circ$\\
+$AC$ & 1226.7 m\\
+$BC$ & 1130.5 m\\
+基線から $C$ までの高さ & 1062.3 m\\
+\bottomrule
+\end{tabular}
+\caption{基線1000 mと、2つの角（$60^\circ$、$70^\circ$）から求めた三角形（計算で確認）。}
+\end{table}
+
+\begin{figure}[htbp]
+\centering
+\begin{tikzpicture}[scale=3.2]
+ \coordinate (A) at (0,0); \coordinate (B) at (1,0);
+ \coordinate (C) at ({1.22668*cos(60)},{1.22668*sin(60)});
+ \draw[thick, primaryblue] (A)--(B)--(C)--cycle;
+ \draw[dashed] (C)--({1.22668*cos(60)},0);
+ \fill (A) circle (0.6pt) node[below left] {$A$}; \fill (B) circle (0.6pt) node[below right] {$B$}; \fill (C) circle (0.6pt) node[above] {$C$};
+ \node[lbl] at (0.5,-0.12) {基線 1000 m};
+ \node[lbl, text=crimson] at (0.25,0.1) {$60^\circ$};
+ \node[lbl, text=crimson] at (0.8,0.1) {$70^\circ$};
+\end{tikzpicture}
+\caption{基線と2つの角から、点 $C$ の位置が決まる（縮尺通り）。測量は、この作業のくり返しで国土全体に広がる。}
+\end{figure}
+
+翻訳版が述べるように、角度さえ測れば、形（相似な図）はわかり、あとは1本の基線の長さを正確に測れば、大きさもわかります。
+
 \begin{pointbox}{この章のポイント}
 \begin{itemize}[leftmargin=1.5em]
 \item $\sin,\cos,\tan$ は、直角三角形の辺の比。測量に使える。
@@ -622,6 +1116,53 @@ $1+\frac12+\frac13+\frac14+\cdots$ & 限りなく大きくなる（発散）\\
 \end{tikzpicture}
 \caption{2つの級数の部分和。上は2で頭打ち、下はゆっくり増え続ける（$n=10,100,1000$ で $2.93,5.19,7.49$）。}
 \end{figure}
+
+
+\section{順序と並べ替え：$n!$ の増え方}
+
+翻訳版の第14章は、「級数」（項の順序のある列）を扱うなかで、有限個のものの並べ替えの数 $n!=n\times(n-1)\times\cdots\times2\times1$ を導入します。2個のもの $a,b$ なら、$ab$ と $ba$ の $2!=2$ 通りです。
+
+\begin{table}[htbp]
+\centering
+\begin{tabular}{c|cccccccc}
+\toprule
+$n$ & 1 & 2 & 3 & 4 & 5 & 6 & 10 & 13\\
+\midrule
+$n!$ & 1 & 2 & 6 & 24 & 120 & 720 & 3{,}628{,}800 & 6{,}227{,}020{,}800\\
+\bottomrule
+\end{tabular}
+\caption{$n!$ の値（計算）。$n=10$ で約363万、$n=13$ で約62億。}
+\end{table}
+
+\begin{figure}[htbp]
+\centering
+\begin{tikzpicture}
+\begin{axis}[width=9.5cm, height=5.2cm, ymode=log, xmin=1, xmax=13, ymin=0.8, ymax=1e10, xlabel={$n$}, ylabel={$n!$（対数目盛）},
+  every axis label/.append style={font=\footnotesize}, tick label style={font=\footnotesize}]
+ \addplot[mark=*, thick, primaryblue] coordinates {(1,1)(2,2)(3,6)(4,24)(5,120)(6,720)(7,5040)(8,40320)(9,362880)(10,3628800)(11,39916800)(12,479001600)(13,6227020800)};
+\end{axis}
+\end{tikzpicture}
+\caption{$n!$ の増え方。対数目盛で、グラフが上に反る（指数よりも速く増える）。}
+\end{figure}
+
+並べ替えの数が、いかに速く増えるかが、この表からわかります。13人を並べる方法は、62億通りを超えます。
+
+\section{収束する級数と、発散する級数}
+
+級数については、収束と発散の区別も大切です（本書の補足）。$1+\tfrac12+\tfrac14+\cdots$ は2に近づき、$1+\tfrac12+\tfrac13+\cdots$ は限りなく大きくなる、という対比はこの本の例と同じです。
+
+\begin{table}[htbp]
+\centering
+\begin{tabular}{c|ccc}
+\toprule
+項数 $n$ & 10 & 100 & 1000\\
+\midrule
+$1+\tfrac12+\tfrac14+\cdots$ の部分和 & 1.998 & 2.000 & 2.000\\
+調和級数 $1+\tfrac12+\tfrac13+\cdots$ の部分和 & 2.929 & 5.187 & 7.485\\
+\bottomrule
+\end{tabular}
+\caption{部分和の比較（計算で確認）。調和級数は、項数が10倍になるごとに、約2.3ずつ増える。}
+\end{table}
 
 \begin{pointbox}{この章のポイント}
 \begin{itemize}[leftmargin=1.5em]
@@ -663,6 +1204,73 @@ $h$ & 割線の傾き $2+h$\\
 \caption{$(1,1)$ を通る割線（赤の点線、傾き3と2.5）が、接線（緑、傾き2）に近づいていく。}
 \end{figure}
 
+
+\section{微分法の歴史：フェルマー、ニュートン、ライプニッツ}
+
+翻訳版の第15章は、微分法が、2人の発明者の手で最終的な形になるまでに、長い前史があったことを強調します。翻訳版が挙げる年は次のとおりです。
+
+\begin{table}[htbp]
+\centering
+\begin{tabular}{cl}
+\toprule
+年（翻訳版による） & できごと\\
+\midrule
+1601〜1665 & フェルマー（前段階のアイデアを大きく改善）\\
+1666年ごろ & ニュートンが「流率法」を使い、『原理』の執筆に取りかかる\\
+1684年 & ライプニッツが、はじめて公に発表\\
+1693年 & ニュートンが直接の声明を発表\\
+\bottomrule
+\end{tabular}
+\caption{微分法の成立にかかわる年（翻訳版第15章）。優先権をめぐる争いが起こった、と翻訳版は書く。}
+\end{table}
+
+\begin{figure}[htbp]
+\centering
+\begin{tikzpicture}[x=0.05cm]
+ \draw[ax] (1595,0)--(1700,0);
+ \foreach \y in {1600,1650} {\draw (\y,0.08)--(\y,-0.08); \node[below, font=\scriptsize] at (\y,-0.1) {\y};}
+ \draw[line width=3pt, primaryblue] (1601,0.5)--(1665,0.5) node[midway, above, font=\scriptsize] {フェルマー};
+ \fill[warmamber] (1666,0) circle (2pt) node[above, font=\scriptsize] {1666};
+ \fill[crimson] (1684,0) circle (2pt) node[above, font=\scriptsize] {1684};
+ \fill[accentgreen] (1693,0) circle (2pt) node[above, font=\scriptsize] {1693};
+\end{tikzpicture}
+\caption{微分法をめぐる年表（翻訳版の年による）。橙：ニュートンの使用、赤：ライプニッツの発表、緑：ニュートンの声明。}
+\end{figure}
+
+\section{傾きが、ちょうど $12$ になる}
+
+$y=x^3$ の $x=2$ での傾きを、割線の傾きの極限として計算します。
+
+\[
+\frac{(2+h)^3-2^3}{h}=12+6h+h^2.
+\]
+
+$h\to0$ で $12$ です（公式 $3x^2=3\cdot4=12$ と一致）。
+
+\begin{table}[htbp]
+\centering
+\begin{tabular}{r|ccccc}
+\toprule
+$h$ & 1 & 0.5 & 0.1 & 0.01 & 0.001\\
+\midrule
+割線の傾き & 19 & 15.25 & 12.61 & 12.0601 & 12.006001\\
+\bottomrule
+\end{tabular}
+\caption{$y=x^3$、$x=2$ での割線の傾き（計算で確認）。$h$ が10分の1になるごとに、$12$ との差はおよそ10分の1。}
+\end{table}
+
+\begin{figure}[htbp]
+\centering
+\begin{tikzpicture}
+\begin{axis}[width=9cm, height=5cm, xmode=log, xmin=0.001, xmax=1, ymin=11.5, ymax=19.5, xlabel={$h$（対数目盛）}, ylabel={割線の傾き},
+  every axis label/.append style={font=\footnotesize}, tick label style={font=\footnotesize}]
+ \addplot[mark=*, thick, primaryblue, domain=0.001:1, samples=40] {12+6*x+x^2};
+ \addplot[dashed, crimson, domain=0.001:1, samples=2] {12};
+\end{axis}
+\end{tikzpicture}
+\caption{$h\to0$ で、割線の傾き $12+6h+h^2$ は $12$（赤い破線）に近づく。}
+\end{figure}
+
 \begin{pointbox}{この章のポイント}
 \begin{itemize}[leftmargin=1.5em]
 \item 傾きは、2点を限りなく近づけた割線の傾きの極限。
@@ -685,6 +1293,43 @@ $h$ & 割線の傾き $2+h$\\
  \node[font=\footnotesize] at (4,-0.9) {相似比 $1:2$ ⇒ 面積比 $1:4$};
 \end{tikzpicture}
 \caption{相似な三角形。辺の比が $1:2$ なら、面積比は $1:4$。}
+\end{figure}
+
+
+\section{三角形が合同になる条件と、正弦定理・余弦定理}
+
+翻訳版の第16章は、幾何学を、「ある」と「どの」の概念から、図形どうしの関係の研究として捉えます。たとえば、2つの三角形が合同になる条件のひとつは、「二辺とその間の角が等しい」です。三角法の公式（正弦定理・余弦定理）は、辺と角の関係を、より正確にした形です。
+
+\[
+\frac{\sin A}{a}=\frac{\sin B}{b}=\frac{\sin C}{c},\qquad a^2=b^2+c^2-2bc\cos A.
+\]
+
+数値で確かめます（本書の補足）。辺が $a=7$、$b=5$、$c=8$ の三角形：
+
+\begin{table}[htbp]
+\centering
+\begin{tabular}{lccc}
+\toprule
+ & 角 $A$ & 角 $B$ & 角 $C$\\
+\midrule
+余弦定理から & $60.00^\circ$ & $38.21^\circ$ & $81.79^\circ$\\
+$\sin(\text{角})/\text{対辺}$ & 0.123718 & 0.123718 & 0.123718\\
+\bottomrule
+\end{tabular}
+\caption{辺 $7,5,8$ の三角形（計算で確認）。3つの比は一致し、角の和は $60+38.21+81.79=180^\circ$。}
+\end{table}
+
+\begin{figure}[htbp]
+\centering
+\begin{tikzpicture}[scale=0.7]
+ \coordinate (B) at (0,0); \coordinate (C) at (7,0);
+ \coordinate (A) at ({8*cos(38.213)},{8*sin(38.213)});
+ \draw[thick, primaryblue] (A)--(B)--(C)--cycle;
+ \node[below left] at (B) {$B$}; \node[below right] at (C) {$C$}; \node[above] at (A) {$A$};
+ \node[lbl] at (3.5,-0.4) {$a=7$};
+ \node[lbl] at (0.2,2.2) {$c=8$}; \node[lbl] at (4.4,2.3) {$b=5$};
+\end{tikzpicture}
+\caption{辺が $7,5,8$ の三角形。角 $A$ は $60^\circ$。}
 \end{figure}
 
 \begin{pointbox}{この章のポイント}
@@ -710,6 +1355,48 @@ $h$ & 割線の傾き $2+h$\\
 \end{tikzpicture}
 \caption{長さの測定。単位の整数倍や分数倍になる長さ（有理数の比）と、そうでない長さがある。}
 \end{figure}
+
+
+\section{同じ種類の量と、単位の換算}
+
+翻訳版の第17章は、長さ・面積・体積のように、同じ基準で測れるものを「同じ種類の量」とよびます。長さどうしは足せますが、面積と長さは、種類が違うので足せません。測るには、「等しさの判定」と「足し合わせ」の2つが必要で、長さなら、ものさしを移すことと、端をつなぐことで、これを行います。
+
+\begin{table}[htbp]
+\centering
+\begin{tabular}{lll}
+\toprule
+量の種類 & 基準（例） & 同じ種類の量どうし\\
+\midrule
+長さ & 1メートル & 足せる（$3\ \mathrm{m}+2\ \mathrm{m}=5\ \mathrm{m}$）\\
+面積 & 1平方メートル & 足せる\\
+体積 & 1立方メートル & 足せる\\
+長さと面積 & — & 足せない（種類が違う）\\
+\bottomrule
+\end{tabular}
+\caption{量の種類。基準（単位）が同じ種類のものだけが、足し合わせられる。}
+\end{table}
+
+単位を換えるときは、基準どうしの比を掛けます。1マイル $=5280$ フィート $=1609.344$ メートルなので、時速10マイルは
+
+\[
+10\times\frac{1609.344}{3600}=4.4704\ \mathrm{m/s}
+\]
+
+です（計算で確認）。
+
+\begin{figure}[htbp]
+\centering
+\begin{tikzpicture}
+\begin{axis}[width=9cm, height=5cm, xmin=0, xmax=60, ymin=0, ymax=30, xlabel={時速 [マイル]}, ylabel={秒速 [m/s]},
+  every axis label/.append style={font=\footnotesize}, tick label style={font=\footnotesize}]
+ \addplot[thick, primaryblue, domain=0:60, samples=2] {x*1609.344/3600};
+ \addplot[only marks, mark=*, crimson] coordinates {(10,4.4704)(20,8.9408)(60,26.8224)};
+\end{axis}
+\end{tikzpicture}
+\caption{時速（マイル）と秒速（メートル）の換算。比例の直線で、傾きは $1609.344/3600=0.44704$。}
+\end{figure}
+
+翻訳版は、時間の測定も、同様に、ろうそくの燃焼や、地球の自転など、「等しいと見なされる繰り返し」を基準にしていると述べます。測定するとは、基準との比（数）で、量を表すことです。
 
 \begin{notebox}{この本の未解決点}
 \begin{itemize}[leftmargin=1.5em]
