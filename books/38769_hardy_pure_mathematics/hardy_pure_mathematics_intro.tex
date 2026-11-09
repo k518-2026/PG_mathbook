@@ -414,6 +414,83 @@ $1.415$ & $2.002225$ & 上組\\
 
 数列 $(-1)^n\left(1+\frac1n\right)$ のとりうる値の集合は、$1$ と $-1$ の2点に集積します。有界な無限集合には、必ず集積点がある（ボルツァーノ・ワイエルシュトラスの定理）ことを、これらの例で確かめられます。
 
+\section{補充 二重根号をはずす（§14の定理）}
+
+ハーディは第1章の§14で、二次の根号についての定理を扱います。$\sqrt{a+\sqrt b}$ のような二重根号は、$c=\sqrt{a^2-b}$ が有理数（または簡単な根号）なら、
+\[
+\sqrt{a\pm\sqrt b}=\sqrt{\frac{a+c}2}\pm\sqrt{\frac{a-c}2}
+\]
+と、2つの根号の和・差に直せます。たとえば $\sqrt{5+2\sqrt6}$ は、$a=5$、$b=24$、$c=\sqrt{25-24}=1$ なので $\sqrt3+\sqrt2$ です。
+
+\begin{table}[htbp]
+\centering
+\begin{tabular}{cc|cc|c}
+\toprule
+$a$ & $b$ & $\sqrt{a+\sqrt b}$（数値） & 公式の右辺 & 差\\
+\midrule
+5 & 24 & 3.146264 & $\sqrt3+\sqrt2$ & $<10^{-15}$\\
+7 & 48 & 3.732051 & $2+\sqrt3$ & $<10^{-15}$\\
+3 & 8 & 2.414214 & $1+\sqrt2$ & $<10^{-15}$\\
+11 & 120 & 4.685558 & $\sqrt6+\sqrt5$ & $<10^{-15}$\\
+\bottomrule
+\end{tabular}
+\caption{二重根号をはずした結果（計算で確認）。マイナスの場合 $\sqrt{a-\sqrt b}$ も、$\sqrt{\tfrac{a+c}2}-\sqrt{\tfrac{a-c}2}$ に等しい。}
+\end{table}
+
+\begin{figure}[htbp]
+\centering
+\begin{tikzpicture}
+\begin{axis}[ybar, width=10cm, height=5cm, bar width=12pt, xmin=0.4, xmax=4.6, ymin=0, ymax=5.5, xtick={1,2,3,4}, xticklabels={{$(5,24)$},{$(7,48)$},{$(3,8)$},{$(11,120)$}}, xlabel={$(a,b)$}, ylabel={値},
+  every axis label/.append style={font=\footnotesize}, tick label style={font=\footnotesize}, nodes near coords, nodes near coords style={font=\tiny}]
+ \addplot[fill=softblue, draw=primaryblue] coordinates {(1,3.146)(2,3.732)(3,2.414)(4,4.686)};
+\end{axis}
+\end{tikzpicture}
+\caption{$\sqrt{a+\sqrt b}$ の値。どれも、二重根号をはずした形と一致する。}
+\end{figure}
+
+この公式が使えるのは、$a^2-b$ が完全平方（またはそれに近い形）になるときです。たとえば $\sqrt{2+\sqrt3}$ では $c=1$ で、$\sqrt{\tfrac32}+\sqrt{\tfrac12}$ と書けます。
+
+\section{補充 代数的な数：$\sqrt2+\sqrt3$ は4次方程式の解}
+
+ハーディは第1章で、代数的な数（整数係数の方程式の解）を定義します。$\sqrt2+\sqrt3$ は、整数係数の4次方程式
+\[
+x^4-10x^2+1=0
+\]
+の解です。理由は、$x=\sqrt2+\sqrt3$ とすると $x^2=5+2\sqrt6$、$x^2-5=2\sqrt6$、両辺を2乗して $x^4-10x^2+25=24$、つまり $x^4-10x^2+1=0$。数値でも確かめられます。
+
+\begin{table}[htbp]
+\centering
+\begin{tabular}{lcc}
+\toprule
+$x$ & 値 & $x^4-10x^2+1$\\
+\midrule
+$\sqrt2+\sqrt3$ & 3.146264 & $\approx0$（$1.4\times10^{-14}$）\\
+$\sqrt3-\sqrt2$ & 0.317837 & $\approx0$\\
+$-\sqrt2+\sqrt3\ $の符号違い & $-3.146264,\ -0.317837$ & $\approx0$\\
+\bottomrule
+\end{tabular}
+\caption{この4次方程式の4つの解は、$\pm\sqrt3\pm\sqrt2$。}
+\end{table}
+
+\begin{figure}[htbp]
+\centering
+\begin{tikzpicture}
+\begin{axis}[width=10cm, height=5.4cm, xmin=-4, xmax=4, ymin=-26, ymax=30, xlabel={$x$}, ylabel={$y$}, axis lines=middle,
+  every axis label/.append style={font=\footnotesize}, tick label style={font=\footnotesize}]
+ \addplot[thick, primaryblue, domain=-3.7:3.7, samples=100] {x^4-10*x^2+1};
+ \addplot[mark=*, crimson, only marks] coordinates {(-3.146264,0)(-0.317837,0)(0.317837,0)(3.146264,0)};
+\end{axis}
+\end{tikzpicture}
+\caption{$y=x^4-10x^2+1$ のグラフ。$x$ 軸と交わる4点が、$\pm\sqrt3\pm\sqrt2$。}
+\end{figure}
+
+\begin{pointbox}{補充のまとめ}
+\begin{itemize}[leftmargin=*]
+\item 二重根号は、$c=\sqrt{a^2-b}$ を使って、2つの根号の和・差に直せる（4つの例で確認）。
+\item $\sqrt2+\sqrt3$ は、代数的な数。$x^4-10x^2+1=0$ の解。
+\end{itemize}
+\end{pointbox}
+
 %==========================================================
 \chapter{実変数の関数}
 \markboth{第2章}{実変数の関数}
@@ -673,6 +750,127 @@ $2^x$ & $0.25$ & $0.5$ & $1$ & $2$ & $4$ & $8$\\
 \end{tikzpicture}
 \caption{$2^x$（青）と $\log_2x$（赤）は、$y=x$（点線）を軸に折り返すと重なる。}
 \end{figure}
+
+\section{補充 斜めの漸近線をもつ有理関数}
+
+ハーディは第2章で、有理関数（多項式の商）を扱います。$f(x)=\dfrac{x^2-1}{x-2}$ は、割り算をすると
+\[
+f(x)=x+2+\frac3{x-2}
+\]
+と書けます。$x$ が大きいとき、$f(x)$ は直線 $y=x+2$ に近づきます（斜めの漸近線）。また $x=2$ では分母が $0$ になり、値は限りなく大きく（または小さく）なります（垂直な漸近線）。
+
+\begin{table}[htbp]
+\centering
+\begin{tabular}{c|ccc}
+\toprule
+$x$ & 10 & 100 & 1000\\
+\midrule
+$f(x)$ & 12.375 & 102.0306 & 1002.003\\
+$f(x)-(x+2)$ & 0.375 & 0.0306 & 0.003\\
+$\tfrac3{x-2}$ & 0.375 & 0.0306 & 0.003\\
+\bottomrule
+\end{tabular}
+\caption{$f(x)$ と直線 $y=x+2$ の差は、$\tfrac3{x-2}$ に等しく、$x$ が大きいほど $0$ に近づく。}
+\end{table}
+
+\begin{table}[htbp]
+\centering
+\begin{tabular}{c|ccccc}
+\toprule
+$x$ & 2.1 & 2.01 & 2.001 & 1.99 & 1.999\\
+\midrule
+$f(x)$ & 34.1 & 304.01 & 3004.0 & $-296.0$ & $-2996.0$\\
+\bottomrule
+\end{tabular}
+\caption{$x=2$ の近くの値。右から近づくと $+\infty$、左から近づくと $-\infty$。}
+\end{table}
+
+\begin{figure}[htbp]
+\centering
+\begin{tikzpicture}
+\begin{axis}[width=10cm, height=6cm, xmin=-4, xmax=8, ymin=-20, ymax=25, xlabel={$x$}, ylabel={$y$}, axis lines=middle, samples=200,
+  every axis label/.append style={font=\footnotesize}, tick label style={font=\footnotesize}]
+ \addplot[thick, primaryblue, domain=-4:1.8] {(x^2-1)/(x-2)};
+ \addplot[thick, primaryblue, domain=2.2:8] {(x^2-1)/(x-2)};
+ \addplot[dashed, crimson, domain=-4:8, samples=2] {x+2};
+ \addplot[dashed, darkslate] coordinates {(2,-20)(2,25)};
+ \node[font=\scriptsize, crimson, anchor=west] at (axis cs:4.5,5.5) {$y=x+2$};
+ \node[font=\scriptsize, darkslate, anchor=west] at (axis cs:2.1,-15) {$x=2$};
+\end{axis}
+\end{tikzpicture}
+\caption{$y=\dfrac{x^2-1}{x-2}$ のグラフ。斜めの漸近線 $y=x+2$ と、垂直な漸近線 $x=2$。}
+\end{figure}
+
+\section{補充 逆関数を数値で求める}
+
+関数 $y=x^3+x$ は、$x$ が増えると、必ず $y$ が増える（単調増加）ので、逆関数があります。たとえば $y=10$ になる $x$ は、二分法で求められます。区間 $[0,3]$ から始めて、半分ずつ絞ると、$x=2$ に収束します（確かめると $2^3+2=10$）。
+
+\begin{table}[htbp]
+\centering
+\begin{tabular}{c|ccccc}
+\toprule
+$x$ & 0 & 1 & 2 & 3 & 4\\
+\midrule
+$y=x^3+x$ & 0 & 2 & 10 & 30 & 68\\
+\bottomrule
+\end{tabular}
+\caption{$y=x^3+x$ の値。$y=10$ は $x=2$ に対応。単調に増えるので、各 $y$ に、ただ1つの $x$ が対応する。}
+\end{table}
+
+\begin{figure}[htbp]
+\centering
+\begin{tikzpicture}
+\begin{axis}[width=8cm, height=5.4cm, xmin=0, xmax=3, ymin=0, ymax=32, xlabel={$x$}, ylabel={$y$},
+  every axis label/.append style={font=\footnotesize}, tick label style={font=\footnotesize}]
+ \addplot[thick, primaryblue, domain=0:3, samples=80] {x^3+x};
+ \addplot[dashed, crimson, domain=0:3, samples=2] {10};
+ \addplot[mark=*, black, only marks] coordinates {(2,10)};
+\end{axis}
+\end{tikzpicture}
+\caption{$y=x^3+x$ と、直線 $y=10$ の交点が $x=2$。逆関数の値は、グラフを横にたどって読める。}
+\end{figure}
+
+\section{補充 床関数と小数部分：階段とのこぎり}
+
+ハーディは第2章で、$[x]$（$x$ を超えない最大の整数）のような、ふつうと違う形の関数も扱います。$x$ の小数部分は $x-[x]$ で、$0$ 以上 $1$ 未満です。
+
+\begin{table}[htbp]
+\centering
+\begin{tabular}{c|ccccc}
+\toprule
+$x$ & $-1.5$ & $-0.2$ & $0.7$ & $2.0$ & $3.99$\\
+\midrule
+$[x]$ & $-2$ & $-1$ & $0$ & $2$ & $3$\\
+$x-[x]$ & $0.5$ & $0.8$ & $0.7$ & $0$ & $0.99$\\
+\bottomrule
+\end{tabular}
+\caption{床関数と小数部分の例。負の数では、$[-1.5]=-2$（小さいほうの整数）に注意。}
+\end{table}
+
+\begin{figure}[htbp]
+\centering
+\begin{tikzpicture}
+\begin{axis}[width=10cm, height=5cm, xmin=-2.5, xmax=3.5, ymin=-3, ymax=4, xlabel={$x$}, ylabel={$y$}, axis lines=middle,
+  every axis label/.append style={font=\footnotesize}, tick label style={font=\footnotesize}, legend style={font=\scriptsize, at={(0.03,0.97)}, anchor=north west}]
+ \foreach \k in {-3,...,3}{
+   \addplot[thick, primaryblue, forget plot] coordinates {(\k,\k)(\k+1,\k)};
+   \addplot[thick, crimson, forget plot] coordinates {(\k,0)(\k+0.999,0.999)};
+ }
+ \addplot[thick, primaryblue] coordinates {(10,10)(11,10)};
+ \addplot[thick, crimson] coordinates {(10,10)(11,10)};
+ \legend{$[x]$（階段）, $x-[x]$（のこぎり）}
+\end{axis}
+\end{tikzpicture}
+\caption{$[x]$（青の階段）と、小数部分 $x-[x]$（赤ののこぎり）。どちらも、整数の点で、とびとびに値が変わる（不連続）。}
+\end{figure}
+
+\begin{pointbox}{補充のまとめ}
+\begin{itemize}[leftmargin=*]
+\item 有理関数 $\tfrac{x^2-1}{x-2}=x+2+\tfrac3{x-2}$ は、斜めの漸近線 $y=x+2$ と、垂直な漸近線 $x=2$ をもつ。
+\item 単調な関数には逆関数があり、$x^3+x=10$ の解は $x=2$。
+\item $[x]$ は階段状、$x-[x]$ はのこぎり状で、整数の点で不連続。
+\end{itemize}
+\end{pointbox}
 
 %==========================================================
 \chapter{複素数}
@@ -943,6 +1141,80 @@ $(1+2i)^2=1+4i-4=-3+4i$。$-2(1+2i)=-2-4i$。合計して $5$ を足すと、$-3
 \end{examplebox}
 
 解と係数の関係「解の和 $=2$、積 $=(1+2i)(1-2i)=1+4=5$」も確かめられます。
+
+\section{補充 ド・モアブルの定理と五角形}
+
+ハーディの第3章は、ド・モアブルの定理 $(\cos\theta+i\sin\theta)^n=\cos n\theta+i\sin n\theta$ を扱います。この定理から、$\cos5\theta$ を $\cos\theta$ だけで書けます。
+\[
+\cos5\theta=16\cos^5\theta-20\cos^3\theta+5\cos\theta .
+\]
+$\theta=0.37$ で確かめると、左辺 $\cos1.85=-0.275590$、右辺 $-0.275590$ で一致します。
+
+この式から、正五角形に関係する値が出ます。$\theta=72^\circ$ では、$\cos360^\circ=1$ なので $16c^5-20c^3+5c=1$。この方程式の解の1つが $c=\cos72^\circ=\dfrac{\sqrt5-1}4$ です。
+
+\begin{table}[htbp]
+\centering
+\begin{tabular}{lcc}
+\toprule
+値 & 数値 & 厳密な形\\
+\midrule
+$\cos72^\circ$ & 0.309017 & $\dfrac{\sqrt5-1}4$\\
+$\cos36^\circ$ & 0.809017 & $\dfrac{\sqrt5+1}4$\\
+\bottomrule
+\end{tabular}
+\caption{正五角形の角に関わる値（数値と厳密な形が一致することを確認）。}
+\end{table}
+
+\begin{figure}[htbp]
+\centering
+\begin{tikzpicture}[scale=1.8]
+ \foreach \k in {0,...,4}{\coordinate (P\k) at ({cos(90+72*\k)},{sin(90+72*\k)});}
+ \draw[thick, primaryblue, fill=softblue] (P0)--(P1)--(P2)--(P3)--(P4)--cycle;
+ \draw[crimson] (0,0)--(P0) (0,0)--(P1);
+ \draw[crimson] (0,0.3) arc (90:162:0.3);
+ \node[lbl] at (-0.22,0.4) {$72^\circ$};
+\end{tikzpicture}
+\caption{正五角形。中心から2つの頂点への角は $72^\circ$（$360^\circ\div5$）。$\cos72^\circ=\tfrac{\sqrt5-1}4$。}
+\end{figure}
+
+\section{補充 複素数で、三角形の面積を求める}
+
+複素平面で、3点 $z_1,z_2,z_3$ を頂点とする三角形の面積は、$\dfrac12\left|\mathrm{Im}\bigl((z_2-z_1)\overline{(z_3-z_1)}\bigr)\right|$ で求められます。たとえば $z_1=0$、$z_2=4$、$z_3=1+3i$ では、$z_2-z_1=4$、$z_3-z_1=1+3i$、その共役は $1-3i$。積は $4(1-3i)=4-12i$、虚部は $-12$、面積は $\tfrac12\cdot12=6$ です。底辺4、高さ3の三角形の面積 $\tfrac12\cdot4\cdot3=6$ と一致します。
+
+\begin{table}[htbp]
+\centering
+\begin{tabular}{lc}
+\toprule
+計算 & 結果\\
+\midrule
+$(z_2-z_1)\overline{(z_3-z_1)}$ & $4(1-3i)=4-12i$\\
+虚部の絶対値 $\div2$ & $12\div2=6$\\
+底辺$\times$高さ$\div2$ & $4\times3\div2=6$\\
+\bottomrule
+\end{tabular}
+\caption{複素数による三角形の面積（$z_1=0$、$z_2=4$、$z_3=1+3i$）。}
+\end{table}
+
+\begin{figure}[htbp]
+\centering
+\begin{tikzpicture}[scale=0.9]
+ \draw[->, thick, darkslate] (-0.5,0)--(5.2,0) node[right, lbl] {実部};
+ \draw[->, thick, darkslate] (0,-0.5)--(0,3.8) node[above, lbl] {虚部};
+ \draw[thick, primaryblue, fill=softblue] (0,0)--(4,0)--(1,3)--cycle;
+ \fill[crimson] (0,0) circle (2pt) node[below left, lbl] {$z_1=0$};
+ \fill[crimson] (4,0) circle (2pt) node[below, lbl] {$z_2=4$};
+ \fill[crimson] (1,3) circle (2pt) node[above, lbl] {$z_3=1+3i$};
+ \node[lbl] at (2.2,1.0) {面積 $6$};
+\end{tikzpicture}
+\caption{複素平面の三角形。底辺4、高さ3なので面積6。}
+\end{figure}
+
+\begin{pointbox}{補充のまとめ}
+\begin{itemize}[leftmargin=*]
+\item ド・モアブルから $\cos5\theta=16\cos^5\theta-20\cos^3\theta+5\cos\theta$、$\cos72^\circ=\tfrac{\sqrt5-1}4$。
+\item 複素数で、三角形の面積が、虚部から求められる（例：面積6）。
+\end{itemize}
+\end{pointbox}
 
 %==========================================================
 \chapter{正整数変数の関数の極限}
@@ -1328,6 +1600,91 @@ $\dfrac{n}{2^n}$ & $0$（指数が勝つ）\\
 $n=100$：$\sqrt{101}-\sqrt{100}=10.0499-10=0.0499$。$n=10000$：$100.005-100=0.0050$。確かに $0$ に近づきます（$\frac{1}{2\sqrt n}$ ほど）。
 \end{examplebox}
 
+\section{補充 いろいろな数列の極限}
+
+ハーディの第4章は、$n\to\infty$ のときの数列の極限を、多くの例で調べます。ここでは、有名な3つの極限を、数値で確かめます。
+
+\begin{table}[htbp]
+\centering
+\begin{tabular}{c|ccccc}
+\toprule
+$n$ & 1 & 10 & 100 & 1000 & $10^6$\\
+\midrule
+$n^{1/n}$ & 1 & 1.258925 & 1.047129 & 1.006932 & 1.000014\\
+$\sqrt{n^2+n}-n$ & 0.414214 & 0.488088 & 0.498756 & 0.499875 & 0.500000\\
+\bottomrule
+\end{tabular}
+\caption{$n^{1/n}\to1$、$\sqrt{n^2+n}-n\to\tfrac12$（計算で確認）。}
+\end{table}
+
+$\sqrt{n^2+n}-n=\dfrac{n}{\sqrt{n^2+n}+n}=\dfrac1{\sqrt{1+1/n}+1}\to\dfrac12$ という変形が、極限の理由です。
+
+次に、$\dfrac{n!}{n^n}$ は、$n$ が大きいと急速に $0$ に近づきます。
+
+\begin{table}[htbp]
+\centering
+\begin{tabular}{c|cccc}
+\toprule
+$n$ & 1 & 5 & 10 & 20\\
+\midrule
+$n!/n^n$ & 1 & 0.0384 & $3.6\times10^{-4}$ & $2.3\times10^{-8}$\\
+\bottomrule
+\end{tabular}
+\caption{$n!/n^n\to0$。分子 $n!$ より、分母 $n^n$ のほうが、はるかに速く増える。}
+\end{table}
+
+\begin{figure}[htbp]
+\centering
+\begin{tikzpicture}
+\begin{axis}[width=10cm, height=5cm, xmode=log, xmin=1, xmax=1e6, ymin=0.45, ymax=1.3, xlabel={$n$（対数目盛）}, ylabel={値},
+  every axis label/.append style={font=\footnotesize}, tick label style={font=\footnotesize}, legend style={font=\scriptsize, at={(0.97,0.55)}, anchor=east}]
+ \addplot[mark=*, thick, primaryblue] coordinates {(1,1)(10,1.258925)(100,1.047129)(1000,1.006932)(1e6,1.000014)};
+ \addplot[mark=square*, thick, crimson] coordinates {(1,0.414214)(10,0.488088)(100,0.498756)(1000,0.499875)(1e6,0.5)};
+ \legend{$n^{1/n}$, $\sqrt{n^2+n}-n$}
+\end{axis}
+\end{tikzpicture}
+\caption{2つの数列の、$n$ とともに近づく値（$1$ と $\tfrac12$）。}
+\end{figure}
+
+\section{補充 上極限と下極限：振動する数列}
+
+数列 $a_n=\sin\dfrac{n\pi}4$ は、収束せず、同じ8つの値をくり返します。このような数列でも、ハーディが第4章で導入する上極限・下極限は、きちんと決まります。
+
+\begin{table}[htbp]
+\centering
+\small
+\begin{tabular}{c|cccccccc}
+\toprule
+$n$ & 1 & 2 & 3 & 4 & 5 & 6 & 7 & 8\\
+\midrule
+$a_n$ & $\tfrac{\sqrt2}2$ & 1 & $\tfrac{\sqrt2}2$ & 0 & $-\tfrac{\sqrt2}2$ & $-1$ & $-\tfrac{\sqrt2}2$ & 0\\
+\bottomrule
+\end{tabular}
+\caption{$\sin(n\pi/4)$ の最初の8項（以後は、同じ8つの値のくり返し）。計算で、$n=1\sim16$ で周期8を確認。}
+\end{table}
+
+この数列は、値 $1$ に、いくらでも近い項を、無限にもち、$1$ を超える項はありません。したがって上極限は $\limsup a_n=1$、同様に下極限は $\liminf a_n=-1$ です。上極限と下極限が一致しないので、この数列は収束しません。
+
+\begin{figure}[htbp]
+\centering
+\begin{tikzpicture}
+\begin{axis}[width=10cm, height=5cm, xmin=0, xmax=17, ymin=-1.3, ymax=1.3, xlabel={$n$}, ylabel={$a_n$},
+  every axis label/.append style={font=\footnotesize}, tick label style={font=\footnotesize}]
+ \addplot[mark=*, only marks, primaryblue] coordinates {(1,0.7071)(2,1)(3,0.7071)(4,0)(5,-0.7071)(6,-1)(7,-0.7071)(8,0)(9,0.7071)(10,1)(11,0.7071)(12,0)(13,-0.7071)(14,-1)(15,-0.7071)(16,0)};
+ \addplot[dashed, crimson, domain=0:17, samples=2] {1};
+ \addplot[dashed, crimson, domain=0:17, samples=2] {-1};
+\end{axis}
+\end{tikzpicture}
+\caption{$a_n=\sin(n\pi/4)$。上極限 $1$ と下極限 $-1$（赤の破線）。値は、この2つの間を行き来する。}
+\end{figure}
+
+\begin{pointbox}{補充のまとめ}
+\begin{itemize}[leftmargin=*]
+\item $n^{1/n}\to1$、$\sqrt{n^2+n}-n\to\tfrac12$、$n!/n^n\to0$。
+\item $\sin(n\pi/4)$ は収束しないが、上極限 $1$、下極限 $-1$ が決まる。
+\end{itemize}
+\end{pointbox}
+
 %==========================================================
 \chapter{連続変数の関数の極限・連続関数と不連続関数}
 \markboth{第5章}{関数の極限と連続}
@@ -1588,6 +1945,76 @@ $1000$ & $1.9950$\\
 \end{tikzpicture}
 \caption{$(2x+1)/(x+3)$ は、直線 $y=2$（点線）に限りなく近づく。}
 \end{figure}
+
+\section{補充 振動する関数と、振動を抑える関数}
+
+ハーディの第5章は、$x\to0$ のときの関数の極限を調べます。$\sin\dfrac1x$ は、$x\to0$ で、$-1$ と $1$ の間を無限に振動して、極限をもちません。ところが、$x$ をかけた $x\sin\dfrac1x$ は、$|x\sin(1/x)|\le|x|$ なので、$0$ に収束します（はさみうち）。
+
+\begin{table}[htbp]
+\centering
+\begin{tabular}{c|ccc}
+\toprule
+$x$ & 0.1 & 0.01 & 0.001\\
+\midrule
+$\sin(1/x)$ & $-0.5440$ & $-0.5064$ & $0.8269$\\
+$x\sin(1/x)$ & $-0.0544$ & $-0.00506$ & $0.00083$\\
+$|x|$（上からの枠） & 0.1 & 0.01 & 0.001\\
+\bottomrule
+\end{tabular}
+\caption{$\sin(1/x)$ は値が定まらない。$x\sin(1/x)$ は、$|x|$ で押さえられて、$0$ に近づく（計算で確認）。}
+\end{table}
+
+\begin{figure}[htbp]
+\centering
+\begin{tikzpicture}
+\begin{axis}[width=10cm, height=5.4cm, xmin=-0.3, xmax=0.3, ymin=-0.35, ymax=0.35, xlabel={$x$}, ylabel={$y$}, axis lines=middle, samples=800,
+  every axis label/.append style={font=\footnotesize}, tick label style={font=\footnotesize}]
+ \addplot[thick, primaryblue, domain=0.004:0.3] {x*sin(deg(1/x))};
+ \addplot[thick, primaryblue, domain=-0.3:-0.004] {x*sin(deg(1/x))};
+ \addplot[dashed, crimson, domain=-0.3:0.3, samples=2] {abs(x)};
+ \addplot[dashed, crimson, domain=-0.3:0.3, samples=2] {-abs(x)};
+\end{axis}
+\end{tikzpicture}
+\caption{$y=x\sin(1/x)$（青）は、$y=\pm|x|$（赤の破線）の間で振動しながら、$x\to0$ で $0$ に近づく。}
+\end{figure}
+
+\section{補充 最大値の定理：閉区間でなければ、成り立たない}
+
+ハーディは第5章で、閉区間 $[a,b]$ で連続な関数は、その区間で、最大値と最小値をもつ、という定理を述べます。「閉区間」という条件が、大切です。
+
+\begin{table}[htbp]
+\centering
+\begin{tabular}{lcp{6.2cm}}
+\toprule
+関数と区間 & 上限 & 最大値があるか\\
+\midrule
+$f(x)=x(1-x)$、閉区間 $[0,1]$ & $\tfrac14$ & ある（$x=\tfrac12$ で $\tfrac14$）\\
+$f(x)=x$、閉区間 $[0,1]$ & $1$ & ある（$x=1$）\\
+$f(x)=x$、開区間 $(0,1)$ & $1$ & ない（$1$ にいくらでも近いが、ちょうどは取れない）\\
+\bottomrule
+\end{tabular}
+\caption{最大値の定理と、区間の端の扱い（$x(1-x)$ の最大は、$1000$ 等分で調べても $0.25$）。}
+\end{table}
+
+\begin{figure}[htbp]
+\centering
+\begin{tikzpicture}
+\begin{axis}[width=8cm, height=4.8cm, xmin=-0.1, xmax=1.1, ymin=-0.05, ymax=1.1, xlabel={$x$}, ylabel={$y$},
+  every axis label/.append style={font=\footnotesize}, tick label style={font=\footnotesize}, legend style={font=\scriptsize, at={(0.03,0.97)}, anchor=north west}]
+ \addplot[thick, primaryblue, domain=0:1, samples=2] {x};
+ \addplot[mark=o, mark size=2.5pt, crimson, only marks] coordinates {(0,0)(1,1)};
+ \legend{{$f(x)=x$（開区間 $(0,1)$）}, {端の点は含めない}}
+\end{axis}
+\end{tikzpicture}
+\caption{開区間 $(0,1)$ では、$f(x)=x$ は、いくらでも $1$ に近づくが、最大値をもたない（端の点 $x=1$ が区間に入らないため）。}
+\end{figure}
+
+\begin{pointbox}{補充のまとめ}
+\begin{itemize}[leftmargin=*]
+\item $\sin(1/x)$ は $x\to0$ で極限をもたないが、$x\sin(1/x)$ は $0$ に収束する（はさみうち）。
+\item 最大値の定理は、閉区間が必要。開区間 $(0,1)$ の $f(x)=x$ には最大値がない。
+\end{itemize}
+\end{pointbox}
 
 %==========================================================
 \chapter{導関数と積分}
@@ -1932,6 +2359,49 @@ $y=x$ と $y=x^2$ で囲まれる部分（$0\le x\le1$）の面積は、
 \caption{$y=x^{3/2}$（青）と、両端を結ぶ線分（点線、長さ $\sqrt2\approx1.414$）。曲線の長さは約 $1.440$。}
 \end{figure}
 
+\section{補充 数値微分：前進差分と中心差分}
+
+ハーディの第6章は、導関数を、差分商 $\dfrac{f(x+h)-f(x)}h$ の極限として定義します。$h$ を小さくすると、どれだけ導関数に近づくでしょうか。$f(x)=e^x$、$x=0$（導関数の真の値は $1$）で、前進差分 $\dfrac{f(h)-f(0)}h$ と、中心差分 $\dfrac{f(h)-f(-h)}{2h}$ を比べます。
+
+\begin{table}[htbp]
+\centering
+\begin{tabular}{c|cccc}
+\toprule
+$h$ & 0.1 & 0.01 & 0.001 & 0.0001\\
+\midrule
+前進差分の誤差 & $5.17\times10^{-2}$ & $5.02\times10^{-3}$ & $5.00\times10^{-4}$ & $5.00\times10^{-5}$\\
+中心差分の誤差 & $1.67\times10^{-3}$ & $1.67\times10^{-5}$ & $1.67\times10^{-7}$ & $1.67\times10^{-9}$\\
+\bottomrule
+\end{tabular}
+\caption{$e^x$ の $x=0$ での数値微分の誤差（計算で確認）。$h$ を10分の1にすると、前進差分の誤差は約10分の1、中心差分の誤差は約100分の1。}
+\end{table}
+
+前進差分は、誤差が $h$ に比例し（1次）、中心差分は、$h^2$ に比例します（2次）。$f(x)=\sin x$、$x=1$（真の値 $\cos1=0.540302$）でも、前進差分の誤差は約 $-0.43h$、中心差分の誤差は約 $-0.090h^2$ で、同じ傾向です。
+
+\begin{figure}[htbp]
+\centering
+\begin{tikzpicture}
+\begin{axis}[width=9.5cm, height=5.2cm, xmode=log, ymode=log, xmin=5e-5, xmax=0.2, ymin=1e-10, ymax=0.2, xlabel={$h$}, ylabel={誤差},
+  every axis label/.append style={font=\footnotesize}, tick label style={font=\footnotesize}, legend style={font=\scriptsize, at={(0.03,0.97)}, anchor=north west}]
+ \addplot[mark=*, thick, crimson] coordinates {(0.1,0.0517)(0.01,0.00502)(0.001,0.0005)(0.0001,0.00005)};
+ \addplot[mark=square*, thick, primaryblue] coordinates {(0.1,0.00167)(0.01,0.0000167)(0.001,0.000000167)(0.0001,0.00000000167)};
+ \legend{前進差分（1次）, 中心差分（2次）}
+\end{axis}
+\end{tikzpicture}
+\caption{数値微分の誤差（両対数）。前進差分は傾き1、中心差分は傾き2の直線になる。}
+\end{figure}
+
+\section{補充 小さくしすぎると、かえって悪くなる}
+
+$h$ をいくらでも小さくすればよい、というわけではありません。計算機の有限桁の丸め誤差のため、$h$ が小さすぎると、$f(x+h)-f(x)$ が、ほとんど同じ数の引き算になって、桁が失われます。これは、導関数の定義の「極限」が、数学では成り立つが、数値計算では、有限の大きさで止める必要があることを示します。
+
+\begin{pointbox}{補充のまとめ}
+\begin{itemize}[leftmargin=*]
+\item 前進差分の誤差は $h$ に比例（1次）、中心差分の誤差は $h^2$ に比例（2次）。
+\item $e^x$ の $x=0$ で、$h=0.1$ の中心差分の誤差は $1.67\times10^{-3}$、前進差分は $5.17\times10^{-2}$。
+\end{itemize}
+\end{pointbox}
+
 %==========================================================
 \chapter{微分積分学の補足的な定理}
 \markboth{第7章}{補足的な定理}
@@ -2173,6 +2643,80 @@ $y=x^2$（$0\le x\le1$）を $x$ 軸のまわりに回すと、体積は $\pi\di
 \end{tikzpicture}
 \caption{$y=x^2$ を $x$ 軸のまわりに回してできる立体の断面。体積は $\pi/5$。}
 \end{figure}
+
+\section{補充 平均値の定理：接線と割線が平行になる点}
+
+ハーディの第7章（およびその前提の第6章）に出てくる平均値の定理は、「滑らかな曲線上の2点を結ぶ割線と、傾きが等しい接線が、2点の間のどこかにある」と述べます。$f(x)=x^3$、区間 $[0,2]$ で確かめます。
+
+割線の傾きは $\dfrac{f(2)-f(0)}{2-0}=\dfrac82=4$。接線の傾き $f'(c)=3c^2$ がこれに等しいとすると $3c^2=4$、$c=\dfrac2{\sqrt3}=1.1547$。確かに区間 $(0,2)$ の中にあります。
+
+\begin{table}[htbp]
+\centering
+\begin{tabular}{lc}
+\toprule
+量 & 値\\
+\midrule
+割線の傾き $\tfrac{f(2)-f(0)}{2}$ & $4$\\
+$c=2/\sqrt3$ & 1.1547\\
+$f'(c)=3c^2$ & $4.000$\\
+\bottomrule
+\end{tabular}
+\caption{$f(x)=x^3$ の $[0,2]$ での平均値の定理（計算で確認）。$f'(c)$ が割線の傾き $4$ に一致する。}
+\end{table}
+
+\begin{figure}[htbp]
+\centering
+\begin{tikzpicture}
+\begin{axis}[width=9cm, height=5.5cm, xmin=-0.2, xmax=2.3, ymin=-0.5, ymax=9, xlabel={$x$}, ylabel={$y$},
+  every axis label/.append style={font=\footnotesize}, tick label style={font=\footnotesize}, legend style={font=\scriptsize, at={(0.03,0.97)}, anchor=north west}]
+ \addplot[thick, primaryblue, domain=0:2.2, samples=60] {x^3};
+ \addplot[thick, crimson, domain=0:2.2, samples=2] {4*x};
+ \addplot[thick, accentgreen, dashed, domain=0.2:2.2, samples=2] {1.5396+4*(x-1.1547)};
+ \addplot[mark=*, black, only marks] coordinates {(0,0)(2,8)(1.1547,1.5396)};
+ \legend{$y=x^3$, 割線（傾き4）, $x=c$ の接線（傾き4）}
+\end{axis}
+\end{tikzpicture}
+\caption{割線（赤）と、$x=c=1.1547$ での接線（緑の破線）は、平行（傾き $4$）。}
+\end{figure}
+
+\section{補充 $\sin x$ のテイラー展開：符号が交互に変わる}
+
+テイラーの定理（第7章）で、$\sin x=x-\dfrac{x^3}{3!}+\dfrac{x^5}{5!}-\cdots$ を、$x=1$ で、項を増やしながら見ます。
+
+\begin{table}[htbp]
+\centering
+\begin{tabular}{c|ccccc}
+\toprule
+最後の項の次数 & 1 & 3 & 5 & 7 & 9\\
+\midrule
+部分和 & 1.000000 & 0.833333 & 0.841667 & 0.841468 & 0.841471\\
+$\sin1-$部分和 & $-0.1585$ & $+0.0081$ & $-0.00020$ & $+2.7\times10^{-6}$ & $-2.5\times10^{-8}$\\
+\bottomrule
+\end{tabular}
+\caption{$\sin1=0.8414710$ への近づき方。誤差の符号が交互に入れ替わり、真の値を、上下にはさみながら近づく。}
+\end{table}
+
+\begin{figure}[htbp]
+\centering
+\begin{tikzpicture}
+\begin{axis}[width=10cm, height=5.6cm, xmin=0, xmax=6.3, ymin=-1.6, ymax=1.6, xlabel={$x$}, ylabel={$y$}, axis lines=middle,
+  every axis label/.append style={font=\footnotesize}, tick label style={font=\footnotesize}, legend style={font=\scriptsize, at={(0.97,0.97)}, anchor=north east}]
+ \addplot[thick, black, domain=0:6.3, samples=100] {sin(deg(x))};
+ \addplot[thick, primaryblue, domain=0:3.5, samples=50] {x-x^3/6};
+ \addplot[thick, warmamber, domain=0:5, samples=50] {x-x^3/6+x^5/120};
+ \addplot[thick, accentgreen, domain=0:6.3, samples=60] {x-x^3/6+x^5/120-x^7/5040+x^9/362880};
+ \legend{$\sin x$, 3次, 5次, 9次}
+\end{axis}
+\end{tikzpicture}
+\caption{$\sin x$ と、テイラー多項式。次数を上げるほど、原点から遠くまで、$\sin x$ に重なる。}
+\end{figure}
+
+\begin{pointbox}{補充のまとめ}
+\begin{itemize}[leftmargin=*]
+\item 平均値の定理：$x^3$ の $[0,2]$ で、割線の傾き $4$ と等しい接線が $x=2/\sqrt3\approx1.155$ にある。
+\item $\sin x$ のテイラー展開は、真の値を、上下にはさんで近づく。
+\end{itemize}
+\end{pointbox}
 
 %==========================================================
 \chapter{無限級数と無限積分の収束}
@@ -2426,6 +2970,77 @@ $n\ge2$ の項 $\frac1{n^2}$ は、$\dfrac1{x^2}$ のグラフの下の面積よ
 \end{tikzpicture}
 \caption{青い長方形の面積の合計 $\sum_{n=2}^{6}\frac1{n^2}$ は、曲線 $1/x^2$ の下の面積より小さい。}
 \end{figure}
+
+\section{補充 級数の積（コーシー積）}
+
+ハーディは第8章の終わり（§195〜§196）で、2つの級数の積を扱います。$\sum a_n$ と $\sum b_n$ の積の級数は、$c_n=a_0b_n+a_1b_{n-1}+\cdots+a_nb_0$ を項とする級数 $\sum c_n$ です。両方が絶対収束するなら、積の級数も収束し、その和は、2つの和の積に等しくなります。
+
+等比級数 $\sum_{n\ge0}\dfrac1{2^n}=2$ の、自分自身との積を調べます。$c_n=\sum_{k=0}^{n}\dfrac1{2^k}\cdot\dfrac1{2^{n-k}}=\dfrac{n+1}{2^n}$ なので、積の級数は $\sum\dfrac{n+1}{2^n}$ で、和は $2\times2=4$ になるはずです。
+
+\begin{table}[htbp]
+\centering
+\begin{tabular}{c|cccc}
+\toprule
+$N$ & 5 & 10 & 20 & 60\\
+\midrule
+$\sum_{n\le N}\dfrac{n+1}{2^n}$ & 3.75000 & 3.98730 & 3.99998 & 4.00000\\
+\bottomrule
+\end{tabular}
+\caption{積の級数の部分和（計算で確認）。$4=2\times2$ に近づく。}
+\end{table}
+
+\begin{figure}[htbp]
+\centering
+\begin{tikzpicture}
+\begin{axis}[width=9.5cm, height=5cm, xmin=0, xmax=20, ymin=0, ymax=4.3, xlabel={$N$}, ylabel={部分和},
+  every axis label/.append style={font=\footnotesize}, tick label style={font=\footnotesize}]
+ \addplot[mark=*, mark size=1.4pt, thick, primaryblue, domain=0:20, samples=21] {4-(x+3)/2^x};
+ \addplot[dashed, crimson, domain=0:20, samples=2] {4};
+\end{axis}
+\end{tikzpicture}
+\caption{$\sum\tfrac{n+1}{2^n}$ の部分和（実際は $4-\tfrac{N+3}{2^N}$）。$4=2\times2$（赤の破線）に近づく。}
+\end{figure}
+
+確かめると、部分和は、公式 $4-\dfrac{N+3}{2^N}$ に等しく、$N=5$ で $4-\tfrac8{32}=3.75$、$N=10$ で $4-\tfrac{13}{1024}=3.9873$ です。
+
+\section{補充 べき級数の収束半径：比で調べる}
+
+べき級数 $\sum a_nx^n$ が収束する範囲は、係数の比 $\left|\dfrac{a_{n+1}}{a_n}\right|$ の極限 $L$ で決まり、収束半径は $R=1/L$ です。
+
+\begin{table}[htbp]
+\centering
+\begin{tabular}{lcc}
+\toprule
+級数 & 比 $a_{n+1}/a_n$ & 収束半径 $R$\\
+\midrule
+$\sum x^n$ & $1$ & $1$\\
+$\sum\dfrac{x^n}{n^2}$ & $\dfrac{n^2}{(n+1)^2}\to1$ & $1$\\
+$\sum\dfrac{x^n}{n!}$ & $\dfrac1{n+1}\to0$ & $\infty$（どんな $x$ でも収束）\\
+$\sum n!\,x^n$ & $n+1\to\infty$ & $0$（$x=0$ だけ）\\
+\bottomrule
+\end{tabular}
+\caption{4つのべき級数の収束半径（比の極限から）。$\sum x^n/n!=e^x$ は、全体で収束する。}
+\end{table}
+
+\begin{figure}[htbp]
+\centering
+\begin{tikzpicture}
+\begin{axis}[width=9.5cm, height=5.2cm, xmin=0, xmax=20, ymin=0, ymax=1.1, xlabel={$n$}, ylabel={比 $a_{n+1}/a_n$},
+  every axis label/.append style={font=\footnotesize}, tick label style={font=\footnotesize}, legend style={font=\scriptsize, at={(0.97,0.6)}, anchor=east}]
+ \addplot[mark=*, mark size=1.2pt, thick, primaryblue, domain=1:20, samples=20] {x^2/(x+1)^2};
+ \addplot[mark=square*, mark size=1.2pt, thick, crimson, domain=1:20, samples=20] {1/(x+1)};
+ \legend{{$x^n/n^2$ の係数比}, {$x^n/n!$ の係数比}}
+\end{axis}
+\end{tikzpicture}
+\caption{係数の比。$n^2$ の場合は $1$ に近づき（収束半径1）、$n!$ の場合は $0$ に近づく（収束半径は無限大）。}
+\end{figure}
+
+\begin{pointbox}{補充のまとめ}
+\begin{itemize}[leftmargin=*]
+\item コーシー積：$\sum\tfrac1{2^n}$ の自乗は $\sum\tfrac{n+1}{2^n}=4$（$2\times2$）。
+\item べき級数の収束半径は、係数の比の極限から。$\sum x^n/n!$ は全体で、$\sum n!x^n$ は $x=0$ だけで収束する。
+\end{itemize}
+\end{pointbox}
 
 %==========================================================
 \chapter{実変数の対数関数と指数関数}
@@ -2701,6 +3316,90 @@ $20$ & $2.996$ & $400$ & $4.85\times10^{8}$\\
 
 $\log_{10}2=0.30103$。$2^{100}$ の桁数は、$100\times0.30103=30.103$ より、整数部分に $1$ を足して $31$ 桁。実際の $2^{100}=1.2677\times10^{30}$ で、確かに 31 桁です。
 
+\section{補充 対数は、どんな冪よりも遅く増える}
+
+ハーディの第9章は、$\log x$ が、$x\to\infty$ で増えるときの遅さを、冪関数と比べて論じます。どんな小さな正の数 $\alpha$ についても、$x^\alpha$ は、いつか $\log x$ を追い越します。$\alpha=0.1$ で確かめます。
+
+\begin{table}[htbp]
+\centering
+\begin{tabular}{r|cccc}
+\toprule
+$x$ & 10 & 100 & 1000 & $10^6$\\
+\midrule
+$\ln x$ & 2.3026 & 4.6052 & 6.9078 & 13.8155\\
+$x^{0.1}$ & 1.2589 & 1.5849 & 1.9953 & 3.9811\\
+比 $\ln x\big/x^{0.1}$ & 1.829 & 2.906 & 3.462 & 3.470\\
+\bottomrule
+\end{tabular}
+\caption{$\ln x$ と $x^{0.1}$。$x=10^6$ までは、$\ln x$ のほうがはるかに大きい。}
+\end{table}
+
+では、$x^{0.1}$ は、いつ $\ln x$ を追い越すのでしょうか。$y=\ln x$ とおくと、$e^{0.1y}=y$ の解を求めることになります。解は $y\approx35.77$、つまり、$x\approx3.4\times10^{15}$ です。
+
+\begin{table}[htbp]
+\centering
+\begin{tabular}{c|ccc}
+\toprule
+$x$ & $10^{15}$ & $3.43\times10^{15}$ & $10^{20}$\\
+\midrule
+$\ln x$ & 34.54 & 35.77 & 46.05\\
+$x^{0.1}$ & 31.62 & 35.77 & 100.0\\
+\bottomrule
+\end{tabular}
+\caption{$x^{0.1}$ が $\ln x$ を追い越す境目は、$x\approx3.4\times10^{15}$（計算で確認）。それ以降は、冪関数のほうが大きい。}
+\end{table}
+
+\begin{figure}[htbp]
+\centering
+\begin{tikzpicture}
+\begin{axis}[width=10cm, height=5.3cm, xmode=log, xmin=1, xmax=1e20, ymin=0, ymax=110, xlabel={$x$（対数目盛）}, ylabel={値},
+  every axis label/.append style={font=\footnotesize}, tick label style={font=\footnotesize}, legend style={font=\scriptsize, at={(0.03,0.97)}, anchor=north west}]
+ \addplot[thick, primaryblue, domain=1:1e20, samples=200] {ln(x)};
+ \addplot[thick, crimson, domain=1:1e20, samples=200] {x^0.1};
+ \legend{$\ln x$, $x^{0.1}$}
+\end{axis}
+\end{tikzpicture}
+\caption{$\ln x$（青）と $x^{0.1}$（赤）。長い間、$\ln x$ のほうが大きいが、$x\approx3.4\times10^{15}$ で逆転し、そのあと冪が一気に引き離す。}
+\end{figure}
+
+\section{補充 底の変換：自然対数と常用対数}
+
+ハーディの第9章は、自然対数 $\ln x$ を基本とし、常用対数 $\log_{10}x$ は、底の変換 $\log_{10}x=\dfrac{\ln x}{\ln10}$ で結びつけます。$\ln10=2.302585$ です。
+
+\begin{table}[htbp]
+\centering
+\begin{tabular}{c|cccc}
+\toprule
+$x$ & 2 & 10 & 100 & 1000\\
+\midrule
+$\ln x$ & 0.693147 & 2.302585 & 4.605170 & 6.907755\\
+$\log_{10}x$ & 0.301030 & 1 & 2 & 3\\
+$\ln x\div\ln10$ & 0.301030 & 1 & 2 & 3\\
+\bottomrule
+\end{tabular}
+\caption{自然対数と常用対数の関係（計算で確認）。$10$ の累乗では、常用対数が整数になる。}
+\end{table}
+
+\begin{figure}[htbp]
+\centering
+\begin{tikzpicture}
+\begin{axis}[width=9.5cm, height=5.2cm, xmin=1, xmax=1000, xmode=log, ymin=0, ymax=7.2, xlabel={$x$（対数目盛）}, ylabel={対数の値},
+  every axis label/.append style={font=\footnotesize}, tick label style={font=\footnotesize}, legend style={font=\scriptsize, at={(0.03,0.97)}, anchor=north west}]
+ \addplot[thick, primaryblue, domain=1:1000, samples=100] {ln(x)};
+ \addplot[thick, crimson, domain=1:1000, samples=100] {ln(x)/ln(10)};
+ \legend{$\ln x$, $\log_{10}x$}
+\end{axis}
+\end{tikzpicture}
+\caption{$\ln x$ と $\log_{10}x$。2つのグラフは、定数倍（$\ln10=2.3026$ 倍）だけ違う。}
+\end{figure}
+
+\begin{pointbox}{補充のまとめ}
+\begin{itemize}[leftmargin=*]
+\item $\ln x$ は、どんな冪 $x^\alpha$ よりも遅く増える。$x^{0.1}$ が追い越すのは $x\approx3.4\times10^{15}$。
+\item 底の変換：$\log_{10}x=\ln x/\ln10$（$\ln10=2.302585$）。
+\end{itemize}
+\end{pointbox}
+
 %==========================================================
 \chapter{対数関数・指数関数・円関数の一般理論}
 \markboth{第10章}{一般理論}
@@ -2939,5 +3638,84 @@ $2$ & $3.7622$ & $3.6269\,i$\\
 \end{tikzpicture}
 \caption{$\cos x$ はゆれ続け、$\cosh x$ は爆発的に増える。見かけは違うが、虚数を介して同じ式の別の顔。}
 \end{figure}
+
+\section{補充 オイラーの公式から、加法定理を導く}
+
+ハーディの第10章は、複素数の指数関数 $e^{z}$ の性質、とくに $e^{z_1+z_2}=e^{z_1}e^{z_2}$ から、三角関数の公式を導きます。$e^{i(a+b)}=e^{ia}e^{ib}$ を、オイラーの公式 $e^{i\theta}=\cos\theta+i\sin\theta$ で展開します。
+\[
+\cos(a+b)+i\sin(a+b)=(\cos a+i\sin a)(\cos b+i\sin b).
+\]
+右辺を展開して、実部と虚部を比べると、加法定理が出ます。
+\[
+\cos(a+b)=\cos a\cos b-\sin a\sin b,\qquad\sin(a+b)=\sin a\cos b+\cos a\sin b .
+\]
+数値で確かめます。$a=0.7$、$b=1.1$ とします。
+
+\begin{table}[htbp]
+\centering
+\begin{tabular}{lcc}
+\toprule
+ & 直接の値 & 加法定理の右辺\\
+\midrule
+$\cos(a+b)=\cos1.8$ & $-0.227202$ & $0.764842\times0.453596-0.644218\times0.891207=-0.227202$\\
+$\sin(a+b)=\sin1.8$ & $0.973848$ & $0.644218\times0.453596+0.764842\times0.891207=0.973848$\\
+\bottomrule
+\end{tabular}
+\caption{$a=0.7$、$b=1.1$ での加法定理の確認（計算で確認）。}
+\end{table}
+
+\begin{figure}[htbp]
+\centering
+\begin{tikzpicture}[scale=2.2]
+ \draw[gridgray] (0,0) circle (1);
+ \draw[->, thick, darkslate] (-1.2,0)--(1.3,0) node[right, lbl] {実部};
+ \draw[->, thick, darkslate] (0,-1.2)--(0,1.3) node[above, lbl] {虚部};
+ \draw[primaryblue, thick] (0,0)--({cos(40.1)},{sin(40.1)}) node[right, lbl] {$e^{ia}$};
+ \draw[warmamber, thick] (0,0)--({cos(63.0)},{sin(63.0)});
+ \draw[crimson, thick] (0,0)--({cos(103.1)},{sin(103.1)}) node[above left, lbl] {$e^{i(a+b)}$};
+ \draw[crimson] (0.3,0) arc (0:103.1:0.3);
+\end{tikzpicture}
+\caption{単位円の上の点 $e^{ia}$、$e^{ib}$ と、その積 $e^{i(a+b)}$。偏角が足し算になる。（$a=0.7$ ラジアン $\approx40.1^\circ$、$b=1.1$ ラジアン $\approx63.0^\circ$）}
+\end{figure}
+
+\section{補充 複素数の対数}
+
+複素数の対数は、$\log z=\ln|z|+i\arg z$ です。例を確かめます。
+
+\begin{table}[htbp]
+\centering
+\begin{tabular}{lcc}
+\toprule
+$z$ & $\log z$（計算） & 厳密な値\\
+\midrule
+$1+i$ & $0.34657+0.78540i$ & $\tfrac12\ln2+\tfrac\pi4i$\\
+$i$ & $1.57080i$ & $\tfrac\pi2i$\\
+$-1$ & $3.14159i$ & $\pi i$\\
+\bottomrule
+\end{tabular}
+\caption{複素数の対数の主値（計算で確認）。$e^{\log z}=z$ が成り立つ。}
+\end{table}
+
+$-1$ の対数が $\pi i$ ということは、$e^{\pi i}=-1$ のオイラーの公式と同じです。
+
+\begin{figure}[htbp]
+\centering
+\begin{tikzpicture}[scale=1.5]
+ \draw[->, thick, darkslate] (-1.8,0)--(1.8,0) node[right, lbl] {実部};
+ \draw[->, thick, darkslate] (0,-0.3)--(0,2.2) node[above, lbl] {虚部};
+ \fill[primaryblue] (0.3466,0.7854) circle (1.5pt) node[right, lbl] {$\log(1+i)$};
+ \fill[crimson] (0,1.5708) circle (1.5pt) node[left, lbl] {$\log i=\tfrac\pi2i$};
+ \draw[dashed, gray] (-1.2,0.7854)--(1.2,0.7854);
+ \node[lbl] at (-1.3,0.95) {$\pi/4$};
+\end{tikzpicture}
+\caption{複素平面上の $\log z$ の値。$\log(1+i)$ の虚部は $\pi/4$（偏角）、実部は $\ln|1+i|=\ln\sqrt2=0.3466$。}
+\end{figure}
+
+\begin{pointbox}{補充のまとめ}
+\begin{itemize}[leftmargin=*]
+\item $e^{i(a+b)}=e^{ia}e^{ib}$ から、加法定理が出る（$a=0.7$、$b=1.1$ で確認）。
+\item $\log z=\ln|z|+i\arg z$。$\log(1+i)=\tfrac12\ln2+\tfrac\pi4i$、$\log(-1)=\pi i$。
+\end{itemize}
+\end{pointbox}
 
 \end{document}
