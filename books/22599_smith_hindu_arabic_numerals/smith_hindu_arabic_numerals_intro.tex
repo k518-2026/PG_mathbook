@@ -194,6 +194,58 @@
 \caption{起源調べの3つの手がかり。1つの証拠だけで決めず、突き合わせる。}
 \end{figure}
 
+\section{証人たちの年表：「インドの数字」と呼んだ人々}
+
+翻訳版の第1章は、「この数字はインド由来だ」と書いた中世の著者たちを、順に挙げます。本書でも、人名と年代を翻訳版の記述どおりに表にしました（年代は翻訳版による。一次資料での照合は未了）。
+
+\begin{center}
+\begin{tabular}{p{4.2cm}p{3.4cm}p{5cm}}
+\toprule
+人物・書名 & 年代（翻訳版による） & 翻訳版の記述\\
+\midrule
+アル＝キンディー & 800〜870年 & 算術の本5冊、インド数法の本4冊\\
+アル＝マスーディー & 885?〜956年 & 世界を旅した歴史家。インド人の9つの数字に言及\\
+アル＝ナディーム『フィフリスト』 & 987年 & アラビア文化史の基本文献\\
+アル＝ビールーニー & 973〜1048年 & インドの言語・習慣に通じた学者\\
+ピサのレオナルド & 1202年 & 『算盤の書』で「インドの9つの記号」に言及\\
+『アルゴリズムの歌』の解説 & 1240年ごろ & 算術を「インドの数」と説明\\
+ロバート・レコード & 1542年ごろ & 英国で最初期の算術教本の著者\\
+\bottomrule
+\end{tabular}
+\end{center}
+
+\begin{figure}[htbp]
+\centering
+\begin{tikzpicture}[x=0.0125cm]
+ \draw[ax] (780,0)--(1580,0);
+ \foreach \y in {800,900,1000,1100,1200,1300,1400,1500} {\draw (\y,0.08)--(\y,-0.08); \node[below, font=\scriptsize] at (\y,-0.1) {\y};}
+ \foreach \y/\h/\t in {835/0.8/キンディー, 920/1.6/マスーディー, 987/0.8/{フィフリスト}, 1010/1.6/ビールーニー, 1202/0.8/レオナルド, 1240/1.6/{アルゴリズムの歌}, 1542/0.8/レコード} {
+   \fill[primaryblue] (\y,0) circle (1.6pt);
+   \draw[thin, gray] (\y,0)--(\y,\h-0.2);
+   \node[font=\scriptsize, above] at (\y,\h-0.25) {\t};
+ }
+\end{tikzpicture}
+\caption{翻訳版第1章に登場する証人たち（年代は表のとおり）。800年代から1500年代まで、約700年にわたって、「インドの数字」という呼び名が続いた。}
+\end{figure}
+
+\begin{notebox}{翻訳版の揺れについて}
+翻訳版の人名の読みや綴りには、揺れや読みづらい箇所があります（機械翻訳の影響と考えられます）。たとえば、アデルハルト（バースのアデラード）の活動年を、第1章は「約1130年ごろ」、第6章は「1180年ごろ」と書いています。本書では年を断定せず、「12世紀」にとどめます。
+\end{notebox}
+
+\section{アラビア人は、自分たちが発明したとは言わなかった}
+
+翻訳版は、「アラブ人は自ら発明者であると主張せず、数字の形と位取りの性質についてインド人に感謝していた」と述べます。さらに、アラビア語で「ヒンディー」という言葉が、そのまま「算術」を意味していた、とも書きます。つまり、アラビア語の世界では、「算術＝インドのやり方」でした。
+
+\begin{figure}[htbp]
+\centering
+\begin{tikzpicture}[node distance=8mm]
+ \node[fbox, text width=3cm] (a) {アラビア語\\{\small hindī（インドの）}};
+ \node[gbox, text width=3cm, right=14mm of a] (b) {「算術」を意味する\\{\small ことばにもなった}};
+ \draw[ax] (a)--(b);
+\end{tikzpicture}
+\caption{「インドの」が、そのまま「算術」を指す言葉になった（翻訳版第1章の記述による）。}
+\end{figure}
+
 \begin{pointbox}{この章のポイント}
 \begin{itemize}[leftmargin=1.5em]
 \item 「アラビア数字」の名は、伝わった道すじに由来。発明者は別。
@@ -270,6 +322,84 @@
 \caption{桁ごとに1〜9の記号を別に作る方式（各桁9個と仮定）と、位取り記法の比較。位取りは10個で済む。}
 \end{figure}
 
+\section{初期のインドの数字は、3つの系統に分けて考える}
+
+翻訳版の第2章は、初期のインドの数の表し方を、次の3つに分類します。
+
+\begin{center}
+\begin{tabular}{lp{7.2cm}}
+\toprule
+系統 & 翻訳版の説明\\
+\midrule
+カローシュティー数字 & 西北インド（ガンダーラ地方）の文字。右から左へ書く。数字の記号は、アショーカ王碑文では4種類だけ（1・2・4・5を表す縦の線）\\
+ブラーフミー数字 & インドで最も古い文字の数字。アショーカ王の碑文に見られ、のちの私たちの数字の先祖\\
+言葉と文字による表現 & 物の名前や文字で数を表す方式（第3章で扱う）\\
+\bottomrule
+\end{tabular}
+\end{center}
+
+アショーカ王の碑文は全部で約30基あり、そのうち2基がカローシュティー文字、残りがブラーフミー文字で刻まれている、と翻訳版は書きます。
+
+\begin{figure}[htbp]
+\centering
+\begin{tikzpicture}[node distance=6mm]
+ \node[abox, text width=4cm] (r) {アショーカ王碑文\\{\small 約30基}};
+ \node[fbox, text width=3cm, below left=8mm and 5mm of r] (k) {カローシュティー\\{\small 2基}};
+ \node[gbox, text width=3cm, below right=8mm and 5mm of r] (b) {ブラーフミー\\{\small 残り（約28基）}};
+ \draw[ax] (r)--(k); \draw[ax] (r)--(b);
+\end{tikzpicture}
+\caption{アショーカ王碑文の文字の内訳（翻訳版の記述にもとづく。「残り約28基」は、$30-2$ の計算）。}
+\end{figure}
+
+\section{ゼロがないと、記号がどんどん増える}
+
+翻訳版は、ブラーフミー数字の一覧の表について、「どの例にもゼロは見られない」と指摘します。ゼロがないので、20、30、…、100、200 などは、それぞれ別の記号が必要でした。翻訳版は、古代のインド人が「少なくとも20種類」の記号をもっていた、と述べています。この章の前のほうの表で言えば、$326$ は「100・100・100・20・6」と足し合わせるほかありません。
+
+\begin{table}[htbp]
+\centering
+\begin{tabular}{lcc}
+\toprule
+ & 位取りあり（0〜9） & 位取りなし（翻訳版の説明）\\
+\midrule
+記号の種類 & 10種で、いくらでも大きい数を表せる & 20種以上（数が大きいほど増える）\\
+$326$ の表し方 & 3・2・6 の3つ & 100・100・100・20・6 の5つ\\
+\bottomrule
+\end{tabular}
+\caption{位取りあり／なしの比較。位取りなしの例は、この章の前のほうの考え方による（碑文の実例ではない）。}
+\end{table}
+
+\begin{figure}[htbp]
+\centering
+\begin{tikzpicture}
+\begin{axis}[width=9cm, height=4.6cm, xbar, xmin=0, xmax=12, symbolic y coords={位取りなし,位取りあり}, ytick=data, xlabel={$326$ を表すのに使う記号の個数},
+  nodes near coords, bar width=12pt, enlarge y limits=0.5, every axis label/.append style={font=\footnotesize}, tick label style={font=\footnotesize}]
+ \addplot[fill=softblue, draw=primaryblue] coordinates {(3,位取りあり) (5,位取りなし)};
+\end{axis}
+\end{tikzpicture}
+\caption{$326$ を書く記号の個数。位取りありは3個、位取りなしは5個（上の表のとおり）。桁が増えるほど、差は開く。}
+\end{figure}
+
+\section{数の名前は、すでに大きかった}
+
+翻訳版は、仏教の経典『ラリタヴィスタラ』の話を紹介します。若いころのブッダが、大数学者に、大きな数の名前をたずねられ、$10^{53}$ までの名前の体系を答え、さらに $10^{421}$ まで進めると述べた、という物語です。翻訳版は、これを「歴史とは程遠いが、数の名前の体系をよく伝える」と評します。
+
+\begin{notebox}{事実・推測・未確認}
+物語の内容は伝説で、歴史的な事実とは言えません。ここから読み取れるのは、「インドでは、書く記号とは別に、大きな数の名前の体系が、とても発達していた」ということだけです。$10^{53}$ と $10^{421}$ という数字は、翻訳版の記述によるもので、本書では原典で確かめていません。
+\end{notebox}
+
+\begin{figure}[htbp]
+\centering
+\begin{tikzpicture}
+\begin{axis}[width=9.5cm, height=4cm, xmin=0, xmax=450, ytick=\empty, xlabel={$10$ の何乗まで（指数）}, ymin=0, ymax=3, axis y line=none,
+  every axis label/.append style={font=\footnotesize}, tick label style={font=\footnotesize}]
+ \addplot[only marks, mark=*, primaryblue, mark size=3pt] coordinates {(53,1)(421,1)};
+ \node[font=\footnotesize, above] at (axis cs:53,1.1) {$10^{53}$};
+ \node[font=\footnotesize, above] at (axis cs:421,1.1) {$10^{421}$};
+\end{axis}
+\end{tikzpicture}
+\caption{物語に出てくる数の名前の上限（指数のみを示した）。}
+\end{figure}
+
 \begin{pointbox}{この章のポイント}
 \begin{itemize}[leftmargin=1.5em]
 \item 初期のインド数字（ブラーフミー数字）は位取りなし。
@@ -338,6 +468,96 @@
 \end{notebox}
 
 この方法の面白い点は、数字を置く順序が、現代とは反対（低い位から先に言う）ことが多い、という点です。「月・目・火」なら、$1\to2\to3$ の順に読んで、現代の書き方では「321」となります。
+
+\section{物の名前で書いた年号を読む}
+
+翻訳版は、物の名前の数詞で書かれた年号の例を挙げます。サカ暦867年（西暦945年または946年）は \textit{giri-rasa-vasu}、つまり「山（7）・味（6）・ヴァス神群（8）」と書かれます。数字は低い位から順に言うので、7・6・8 を逆に読んで $867$ です。
+
+\begin{table}[htbp]
+\centering
+\begin{tabular}{c|ccc}
+\toprule
+ & giri（山） & rasa（味） & vasu（ヴァス） \\
+\midrule
+表す数 & 7 & 6 & 8\\
+位 & 一の位 & 十の位 & 百の位\\
+\bottomrule
+\end{tabular}
+\caption{\textit{giri-rasa-vasu} の読み方（翻訳版の例）。低い位から並べ、$8\times100+6\times10+7=867$。}
+\end{table}
+
+サカ暦に $78$ を足すと西暦になります。$867+78=945$ で、翻訳版の「945年または946年」の前半に一致します（補足：この $78$ は、サカ暦の一般に知られた換算で、翻訳版の数字からの検算）。
+
+\begin{figure}[htbp]
+\centering
+\begin{tikzpicture}
+ \foreach \x/\w/\n/\c in {0/giri/7/一の位, 3/rasa/6/十の位, 6/vasu/8/百の位} {
+   \node[wbox, minimum width=2.4cm] at (\x,1.2) {\textit{\w}};
+   \node[fbox, minimum width=2.4cm] at (\x,0) {\n};
+   \node[lbl] at (\x,-0.7) {\c};
+   \draw[ax] (\x,0.85)--(\x,0.4);
+ }
+ \draw[ax, crimson] (7.5,-1.2)--(-1.3,-1.2) node[midway, below, lbl] {現代の書き方では、百の位から読む：$8,6,7\to867$};
+\end{tikzpicture}
+\caption{言葉の列を、低い位から読んで数にする。}
+\end{figure}
+
+\section{大きな数を、言葉でどう読むか}
+
+翻訳版は、$8{,}443{,}682{,}155$ を例に、民族ごとの数の読み方を比べます。英語の読み方は3桁ごとの区切りですが、ギリシャ語（万＝10000を単位とする）やアラビア語の古い読み方は、4桁や3桁の区切りが入りまじります。インドの読み方は、桁ごとに別の名前が付いていて、十進法に忠実です。
+
+\begin{table}[htbp]
+\centering
+\begin{tabular}{lp{7.5cm}}
+\toprule
+読み方 & $8{,}443{,}682{,}155$ の読み\\
+\midrule
+英語（3桁区切り） & 8（10億）・443（100万）・682（千）・155\\
+ギリシャ語（万＝$10^4$ を単位） & 84（万万）・4368（万）・2155\\
+日本語（本書の補足） & 84億・4368万・2155（同じ4桁区切り）\\
+\bottomrule
+\end{tabular}
+\caption{同じ数の読み方の違い。検算：$84\times10^{8}+4368\times10^{4}+2155=8{,}443{,}682{,}155$。}
+\end{table}
+
+\begin{figure}[htbp]
+\centering
+\begin{tikzpicture}
+ \foreach \i/\d in {0/8,1/4,2/4,3/3,4/6,5/8,6/2,7/1,8/5,9/5} {
+   \node[wbox, minimum width=0.7cm, inner sep=3pt] at (\i*0.8,0) {\d};
+ }
+ \draw[primaryblue, thick] (-0.3,0.55)--(0.1,0.55) node[midway, above, lbl] {8};
+ \draw[crimson, thick] (-0.3,-0.55)--(1.2+0.3,-0.55);
+ \node[lbl] at (0.45,-0.85) {84};
+ \draw[crimson, thick] (1.7,-0.55)--(4.4+0.3,-0.55);
+ \node[lbl] at (3.0,-0.85) {4368};
+ \draw[crimson, thick] (4.9,-0.55)--(6.4+0.3,-0.55);
+ \node[lbl] at (5.8,-0.85) {2155};
+\end{tikzpicture}
+\caption{同じ10桁の数を、4桁ずつに区切る（84｜4368｜2155）。日本語の「億・万」の区切りと同じ。}
+\end{figure}
+
+\section{ゼロの前の年代を、碑文でたどる}
+
+翻訳版は、位取り記法の最も古い証拠をめぐって、碑文の研究者たちの意見を紹介します。ただし、銅板の碑文には偽造が多いというコールブックの警告（1807年）も紹介されています。
+
+\begin{table}[htbp]
+\centering
+\begin{tabular}{p{4.6cm}cp{5cm}}
+\toprule
+証拠 & 西暦（翻訳版による） & 翻訳版の注記\\
+\midrule
+ブーラーが挙げるグジャラートの銅板 & 595年 & 位取りの最古の例の候補\\
+カンボジア・バヤンの碑文（言葉の数詞） & 604年・624年 & 言葉による位取りの最初の碑文例\\
+サカ暦715年の石柱 & 798年 & 検算 $715+78=793$ と合わない（翻訳版の誤記の可能性。未確認）\\
+\bottomrule
+\end{tabular}
+\caption{位取りに関する碑文の候補（翻訳版の記述。年代はいずれも一次資料では未確認）。}
+\end{table}
+
+\begin{notebox}{読むときの注意}
+ここの年代は、研究者によって評価が分かれます。翻訳版は、結論として「六世紀前後のインドが起源」という、碑文学者たちの一致した判断を紹介しています。ただし、確実な最古のゼロの碑文は、次の章に出てくる876年のグワーリヤルです。
+\end{notebox}
 
 \begin{pointbox}{この章のポイント}
 \begin{itemize}[leftmargin=1.5em]
@@ -433,6 +653,83 @@
 \caption{ゼロの形の変化（模式図）。空位を示す点が、のちに円で書かれた。}
 \end{figure}
 
+\section{最古のゼロ：グワーリヤルの碑文（876年）}
+
+翻訳版は、インドで最初の確実なゼロの例を、サムヴァト933年（西暦876年）のグワーリヤルの碑文とします。碑文には、花輪の数「50」や、「270」などが書かれ、ゼロは小さな円で表されています。それ以前については、バクシャーリー写本で「点」がゼロの印に使われていた、と翻訳版は書きます（写本の年代は、翻訳版では確定していません）。
+
+\begin{figure}[htbp]
+\centering
+\begin{tikzpicture}
+ \draw[ax] (0,0)--(10.5,0);
+ \foreach \x/\t/\u in {1.2/{バクシャーリー写本}/{点で空位}, 5.2/{738年？}/{翻訳版では信頼性に疑問}, 8.6/{876年}/{グワーリヤル\\円のゼロ}} {
+   \draw (\x,0.1)--(\x,-0.1);
+   \node[above, font=\scriptsize, align=center, text width=2.6cm] at (\x,0.15) {\t};
+   \node[below, font=\scriptsize, align=center, text width=2.6cm] at (\x,-0.15) {\u};
+ }
+\end{tikzpicture}
+\caption{インドのゼロの記録（翻訳版の記述による。位置は年代順の目安）。876年が、翻訳版のいう「最初の確実な例」。}
+\end{figure}
+
+\begin{notebox}{年代の確かさ}
+翻訳版は、ほかに738年の文書や、897年ごろの貨幣にもゼロが見られるという報告を載せますが、報告者の信頼性を疑っています。本書も、確実なものとしては、876年だけを挙げます。
+\end{notebox}
+
+\section{ゼロの名前の旅を、年代順に}
+
+翻訳版は、ゼロの名前が、時代とともに変わっていく様子を、人名と年代で詳しく追っています。
+
+\begin{table}[htbp]
+\centering
+\begin{tabular}{lll}
+\toprule
+年（翻訳版による） & 人物・文献 & 呼び名\\
+\midrule
+（古い時代） & インド & \textit{śūnya}（空）\\
+（のち） & アラビア語 & \textit{as-sifr}（アッ＝シフル）\\
+1202年 & ピサのレオナルド & \textit{zephirum}（ゼフィルム）\\
+1307年 & フィレンツェのヤコポ & \textit{zeuero}（ゼウェロ）\\
+1330年 & マクシモス・プラヌデス（ギリシャ） & \textit{tziphra}（ツィフラ）\\
+1491年 & カランドリの算術 & \textit{zero}（印刷された最初の例）\\
+\bottomrule
+\end{tabular}
+\caption{ゼロの名前の変化（翻訳版第4章。綴りは翻訳版の転記による。綴りの正確さは未確認）。}
+\end{table}
+
+\begin{figure}[htbp]
+\centering
+\begin{tikzpicture}[node distance=6mm]
+ \node[fbox, text width=2cm] (a) {\textit{śūnya}\\{\scriptsize 空}};
+ \node[fbox, text width=2cm, right=of a] (b) {\textit{as-sifr}};
+ \node[fbox, text width=2cm, right=of b] (c) {\textit{zephirum}\\{\scriptsize 1202}};
+ \node[fbox, text width=2cm, right=of c] (d) {\textit{zero}\\{\scriptsize 1491 印刷}};
+ \draw[ax] (a)--(b); \draw[ax] (b)--(c); \draw[ax] (c)--(d);
+ \node[gbox, text width=3cm, below=8mm of b] (e) {\textit{cipher}\\{\scriptsize 英語。「ゼロ」と「数字」の両方を指した}};
+ \draw[ax] (b)--(e);
+\end{tikzpicture}
+\caption{ゼロの言葉の枝分かれ。\textit{as-sifr} から、\textit{zero} と \textit{cipher} の2つの流れが出た。}
+\end{figure}
+
+翻訳版は、英語の \textit{cipher}（暗号、ゼロ）やフランス語の \textit{chiffre}（数字）が、同じ \textit{as-sifr} から来た、と説明します。\textit{cipher} は、「ゼロ」の意味から、「数字一般」の意味にまで広がった、という点も指摘されています。
+
+\section{バビロニアのゼロと、インドのゼロの違い}
+
+翻訳版は、「バビロニア人は、キリスト教以前の数世紀に、ゼロにあたる記号を使っていた」と書きます。ただし、バビロニアの記号は、計算に使われず、位が空いていても必ずしも書かれず、おもに分数（$\tfrac1{60}$、$\tfrac1{3600}$ など）に使われた、と翻訳版は説明します。
+
+\begin{table}[htbp]
+\centering
+\begin{tabular}{lcc}
+\toprule
+ & バビロニアの記号 & インドのゼロ\\
+\midrule
+空位の印として使う & いつも使うとは限らない & 位取りの中で使う\\
+数として計算する & 計算には使わない & 計算に使う（ブラフマグプタなど）\\
+\bottomrule
+\end{tabular}
+\caption{翻訳版による、バビロニアとインドのゼロの違い。}
+\end{table}
+
+翻訳版は、インドの数学者たちが、ゼロを数として扱った例として、7世紀初めのブラフマグプタ、9世紀（830年ごろ）のマハーヴィーラの著作を挙げます。ブラフマグプタが記号について論じたかどうかは、翻訳版では確かめられていません。
+
 \begin{pointbox}{この章のポイント}
 \begin{itemize}[leftmargin=1.5em]
 \item ゼロは「空位の印」と「数」の二役。
@@ -501,6 +798,101 @@
 \caption{計算盤の上のアペクス（模式図）。0の記号がなくても、空の位は「何も置かない」ことで示せる。}
 \end{figure}
 
+\section{ボエティウスの生涯：翻訳版が語る年表}
+
+翻訳版は、ボエティウスの経歴を、次のようにまとめます（年は翻訳版による）。
+
+\begin{table}[htbp]
+\centering
+\begin{tabular}{cp{10cm}}
+\toprule
+年 & できごと\\
+\midrule
+475年ごろ & ローマの名門に生まれる（本書の前の節の「480年ごろ」とは異なり、翻訳版は「475年ごろ」と書く）\\
+幼いころ & 孤児になり、伝承ではアテネで18年間学んだ\\
+（のち） & 元老院議員シンマクスの娘と結婚\\
+524年 & 反逆罪の疑いで処刑される\\
+\bottomrule
+\end{tabular}
+\caption{ボエティウスの生涯（翻訳版第5章。年は文献により異なる）。}
+\end{table}
+
+\begin{notebox}{年のずれ}
+本書は章の冒頭で「480年ごろ〜524年ごろ」と書きました。翻訳版は、生まれを「475年ごろ」とします。生年は文献によって数年のずれがあり、本書では確定できません。没年の524年は、両者で一致しています。
+\end{notebox}
+
+\begin{figure}[htbp]
+\centering
+\begin{tikzpicture}[x=0.12cm]
+ \draw[ax] (470,0)--(530,0);
+ \foreach \y in {475,500,524} {\draw (\y,0.1)--(\y,-0.1); \node[below, font=\scriptsize] at (\y,-0.12) {\y};}
+ \fill[primaryblue] (475,0) circle (2pt) node[above, font=\scriptsize] {生まれ（翻訳版）};
+ \fill[crimson] (524,0) circle (2pt) node[above, font=\scriptsize] {処刑};
+ \draw[<->, thin] (475,0.9)--(524,0.9) node[midway, above, lbl] {約49年};
+\end{tikzpicture}
+\caption{ボエティウスの生涯（翻訳版の年による）。$524-475=49$ 年。}
+\end{figure}
+
+\section{「塵の数字」：ゴバール数字}
+
+翻訳版は、スペインで使われていたアラビア系の数字を「ゴバール数字」（\textit{ghubār}、塵の数字）とよびます。9個の記号があり、ゼロはありません。10倍の位には、記号の上に点を打ちました。点が1つなら10倍、2つなら100倍、3つなら1000倍、という書き方です。
+
+\begin{table}[htbp]
+\centering
+\begin{tabular}{c|ccc}
+\toprule
+記号 & 点なし & 点1つ & 点2つ・3つ\\
+\midrule
+「5」の例 & 5 & 50 & 500・5000\\
+\bottomrule
+\end{tabular}
+\caption{ゴバール数字の点の使い方（翻訳版の記述）。点の数は、$10$ の何乗かを表す。}
+\end{table}
+
+\begin{figure}[htbp]
+\centering
+\begin{tikzpicture}
+ \foreach \x/\k/\v in {0/0/5, 2.4/1/50, 4.8/2/500, 7.2/3/5000} {
+   \node[font=\Huge] at (\x,0) {5};
+   \foreach \i in {1,...,\k} {\fill (\x-0.25+\i*0.2,0.75) circle (1.5pt);}
+   \node[lbl] at (\x,-0.75) {\v};
+ }
+\end{tikzpicture}
+\caption{記号「5」の上の点の数と、表す数。ゼロの記号なしで、位を表せる。}
+\end{figure}
+
+\section{ボエティウスの『幾何学』を疑う理由}
+
+翻訳版は、ボエティウスに帰される『幾何学』の、ゼロを含む記号の部分が偽物だと考える人々の主張を、次のようにまとめます。
+
+\begin{table}[htbp]
+\centering
+\begin{tabular}{cp{9cm}}
+\toprule
+番号 & 疑う理由（翻訳版の要約）\\
+\midrule
+1 & 写本の書き換えは、昔からよく起こる\\
+2 & 本人が知っていたなら、『算術』に書いたはずだが、書いていない\\
+3 & 同時代人や後継者の著作に、この記号への言及がない\\
+4 & 「4」の形が、アラブ人が776年に受け取った形で、ボエティウスの時代にはありえない\\
+\bottomrule
+\end{tabular}
+\caption{ボエティウス説への疑問点（翻訳版第5章の要約）。}
+\end{table}
+
+\begin{figure}[htbp]
+\centering
+\begin{tikzpicture}[node distance=7mm]
+ \node[wbox, text width=3.6cm] (a) {ボエティウスの\\『幾何学』の写本};
+ \node[abox, text width=3.6cm, right=14mm of a] (b) {途中で、数の記号の\\話に突然変わる};
+ \node[rbox, text width=3.6cm, right=14mm of b] (c) {その後はまた\\ローマ数字};
+ \draw[ax] (a)--(b); \draw[ax] (b)--(c);
+\end{tikzpicture}
+\caption{翻訳版が指摘する不自然な点。記号の部分だけが、前後の文脈から浮いている。}
+\end{figure}
+
+翻訳版は、最後に、5つの結論を挙げます。要点は、「商人たちは、ゼロのないこの数字を、早くから知っていた可能性が高い。ただし、記録に残る確かな証拠は、9〜10世紀にならないと出てこない」ということです。本書も、断定はしません。
+
 \begin{pointbox}{この章のポイント}
 \begin{itemize}[leftmargin=1.5em]
 \item ボエティウス説は、多くの写本を比較して慎重に検討される。
@@ -561,6 +953,66 @@
  \draw[ax] (i)--(e); \draw[ax] (i)--(w); \draw[ax] (w)--(eu);
 \end{tikzpicture}
 \caption{東西で字形が分かれ、西の形がヨーロッパへ伝わった（一般的な説明の概念図）。}
+\end{figure}
+
+\section{773年：インドの天文表がバグダッドへ}
+
+翻訳版は、773年に、インドの天文学者が天文表を持ってカリフの宮廷を訪れ、これがヒンドゥー数字がアラブ世界に入った最も古い確実な記録だ、と書きます。表はアラビア語に訳され、のちにアル＝フワーリズミーらが、これにもとづく天文表をつくった、と翻訳版は説明します。
+
+\begin{figure}[htbp]
+\centering
+\begin{tikzpicture}[x=0.012cm]
+ \draw[ax] (600,0)--(1050,0);
+ \foreach \y in {622,773,825,987} {\draw (\y,0.1)--(\y,-0.1); \node[below, font=\scriptsize] at (\y,-0.12) {\y};}
+ \node[above, font=\scriptsize, align=center, text width=2.2cm] at (622,0.15) {ムハンマド\\メッカを出る};
+ \node[above, font=\scriptsize, align=center, text width=2.2cm] at (790,0.15) {インドの天文表\\バグダッドへ};
+ \node[above, font=\scriptsize, align=center, text width=2cm] at (900,0.9) {『インドの数の\\アルゴリズム』};
+ \draw[thin, gray] (825,0)--(825,0.75);
+ \node[above, font=\scriptsize, align=center, text width=2.2cm] at (987,0.15) {『フィフリスト』};
+\end{tikzpicture}
+\caption{第6章の年表（翻訳版の年による）。825年ごろは、翻訳版が「アル＝フワーリズミーの算術の著作の時期」とする目安。}
+\end{figure}
+
+\section{「インドの算術」を書いた人々}
+
+翻訳版は、算術の書物に「インドの」という名を付けたアラビア語の著者たちを、世紀ごとに列挙します。名前の数を、翻訳版の列挙から数えると、次のとおりです。
+
+\begin{table}[htbp]
+\centering
+\begin{tabular}{c|ccccc}
+\toprule
+世紀 & 9世紀 & 10世紀 & 11世紀 & 12世紀 & 13世紀\\
+\midrule
+列挙された著者の数 & 3 & 4 & 2 & 2 & 2\\
+\bottomrule
+\end{tabular}
+\caption{「インドの」を冠した算術書の著者の数（翻訳版第6章の列挙の数え上げ。年代は約年。人名の判読が難しい箇所があり、数は目安）。}
+\end{table}
+
+\begin{figure}[htbp]
+\centering
+\begin{tikzpicture}
+\begin{axis}[width=9cm, height=4.8cm, ybar, bar width=14pt, ymin=0, ymax=5, symbolic x coords={9世紀,10世紀,11世紀,12世紀,13世紀}, xtick=data, ylabel={著者の数},
+  nodes near coords, every axis label/.append style={font=\footnotesize}, tick label style={font=\footnotesize}]
+ \addplot[fill=softblue, draw=primaryblue] coordinates {(9世紀,3) (10世紀,4) (11世紀,2) (12世紀,2) (13世紀,2)};
+\end{axis}
+\end{tikzpicture}
+\caption{世紀ごとの著者の数（上の表）。500年以上、「インドの算術」という呼び名で、書物が書かれ続けた。}
+\end{figure}
+
+\section{アラブはなぜ円のゼロを使わなかったか}
+
+翻訳版は、アラブ人が、インドの円（○）のゼロをすぐには採らなかった理由を、「アラビア文字の数字の体系の中で、5を表す文字に形が似ていたから」と説明します。そのかわりに、点（・）を使い続けた、とのことです。最も古いアラブのゼロは、873年の写本の点だと翻訳版は書きます。
+
+\begin{figure}[htbp]
+\centering
+\begin{tikzpicture}[node distance=10mm]
+ \node[fbox, text width=3cm] (a) {インドの円のゼロ\\{\Large ○}};
+ \node[rbox, text width=3.4cm, right=14mm of a] (b) {アラビア文字の「5」に\\形が似ていた};
+ \node[gbox, text width=3cm, right=14mm of b] (c) {点（・）を\\ゼロに使った};
+ \draw[ax] (a)--(b); \draw[ax] (b)--(c);
+\end{tikzpicture}
+\caption{アラブで円のゼロが採られなかった事情（翻訳版の説明）。}
 \end{figure}
 
 \begin{pointbox}{この章のポイント}
@@ -624,6 +1076,79 @@
 \begin{notebox}{注意}
 この格子算がフィボナッチ時代のヨーロッパで実際に使われたことは、一般に説明されていますが、この本で例に使った $47\times36$ は筆者が作った数値で、歴史資料からの引用ではありません。
 \end{notebox}
+
+\section{ゲルベルト：学者から教皇へ}
+
+翻訳版は、数字をヨーロッパに広めた人物の一人として、ゲルベルト（のちの教皇シルウェステル2世）の経歴を紹介します。ゲルベルトとその弟子たちが、ゴバール数字（ゼロを含まない）を知っていたことは、議論の余地がないとされています。ただし、ゲルベルトは、ゼロの使い方まで理解していなかったと考えられています。
+
+\begin{table}[htbp]
+\centering
+\begin{tabular}{cl}
+\toprule
+年（翻訳版による） & できごと\\
+\midrule
+967年ごろ & スペインへ（ボレル公に伴われ、約3年間学ぶ）\\
+970年ごろ & イタリアへ移り、皇帝オットー1世に紹介される\\
+991年 & ランス大司教（翻訳版は「アリウス」と誤記か。未確認）\\
+998年 & ラヴェンナ大司教\\
+999年 & 教皇に選ばれる（翻訳版は「ラヴェンナ大司教の翌年」）\\
+1003年 & 死去\\
+\bottomrule
+\end{tabular}
+\caption{ゲルベルトの経歴（翻訳版第7章の記述の整理）。一部、翻訳版の読みづらい箇所を、判断を保留して載せた。}
+\end{table}
+
+\begin{figure}[htbp]
+\centering
+\begin{tikzpicture}[x=0.17cm]
+ \draw[ax] (960,0)--(1010,0);
+ \foreach \y in {970,990,1003} {\draw (\y,0.1)--(\y,-0.1); \node[below, font=\scriptsize] at (\y,-0.12) {\y};}
+ \draw[primaryblue, line width=3pt] (967,0.35)--(970,0.35) node[above, font=\scriptsize] {スペイン};
+ \draw[warmamber, line width=3pt] (999,0.35)--(1003,0.35) node[above, font=\scriptsize] {教皇};
+\end{tikzpicture}
+\caption{ゲルベルトの年表の一部。スペイン滞在は約3年（$970-967$）、教皇の在位は約4年（$1003-999$）。}
+\end{figure}
+
+\begin{notebox}{翻訳版の誤りらしい点}
+翻訳版には、ゲルベルトが「1083年にボビオの修道院長になった」とする箇所がありますが、同じ文の前後の年代（970年ごろ〜991年）からみて、983年の誤記と考えられます（未確認）。
+
+本書は、年を断定せず、人物の流れだけを紹介します。
+\end{notebox}
+
+\section{商人たちの道：数字が運ばれた経路}
+
+翻訳版は、学者の記録に残らなくても、数字は商人たちによって運ばれた可能性が高い、と考えます。その根拠として、東西の交通の例を、時代順にいくつも挙げます。
+
+\begin{table}[htbp]
+\centering
+\begin{tabular}{cp{10cm}}
+\toprule
+年（翻訳版による） & 例\\
+\midrule
+850年ごろ & ユダヤ商人が、ヨーロッパから、インド・中国へ陸路・海路で往来する、という記述\\
+652年・827年 & アラブ軍がシチリア島に上陸・攻撃\\
+900年ごろ & アマルフィが地中海の商業中心地\\
+1260〜1269年 & ポーロ兄弟の最初の旅\\
+\bottomrule
+\end{tabular}
+\caption{東西の往来の例（翻訳版第7章の記述の一部。年代順ではなく、翻訳版の叙述の順を整理した）。}
+\end{table}
+
+\begin{figure}[htbp]
+\centering
+\begin{tikzpicture}[x=0.0085cm]
+ \draw[ax] (600,0)--(1320,0);
+ \foreach \y/\t in {652/シチリア上陸, 827/シチリア攻撃, 850/ユダヤ商人, 900/アマルフィ, 1260/ポーロ兄弟} {
+   \fill[primaryblue] (\y,0) circle (1.6pt);
+ }
+ \node[above, font=\scriptsize] at (652,0.15) {652};
+ \node[above, font=\scriptsize] at (790,0.7) {827};
+ \node[above, font=\scriptsize] at (880,0.15) {850};
+ \node[above, font=\scriptsize] at (950,0.7) {900};
+ \node[above, font=\scriptsize] at (1260,0.15) {1260};
+\end{tikzpicture}
+\caption{翻訳版が挙げる、東西往来の年代（数字は西暦）。数字がヨーロッパで書物に現れる10世紀より前から、交通は続いていた。}
+\end{figure}
 
 \begin{pointbox}{この章のポイント}
 \begin{itemize}[leftmargin=1.5em]
@@ -712,6 +1237,100 @@
  }
 \end{tikzpicture}
 \caption{インド・アラビア数字の歩み（年号は一般に引用される目安）。}
+\end{figure}
+
+\section{普及の年表：写本から碑文・貨幣・印刷へ}
+
+翻訳版の第8章は、インド・アラビア数字がヨーロッパで使われた具体的な例を、数多く挙げます。主なものを、年代順に並べます（年は翻訳版による。一次資料での照合は未了）。
+
+\begin{table}[htbp]
+\centering
+\begin{tabular}{cl}
+\toprule
+年 & できごと\\
+\midrule
+1202年 & フィボナッチの『算盤の書』（1228年に改訂）\\
+1215年 & パリ大学の最古の条例（算術の位置づけがわずかだったことを示す、と翻訳版は書く）\\
+1371年 & プフォルツハイムの碑文（確実な最古級の例）\\
+1388年 & ウルムの碑文\\
+1471年 & ケルン版の印刷物で、ページ番号に使われた最初の例（翻訳版の記述）\\
+1539年 & スコットランドの硬貨に使われた\\
+1551年 & イギリスの硬貨に使われた最初の例\\
+\bottomrule
+\end{tabular}
+\caption{ヨーロッパでの数字の使用例（翻訳版第8章）。}
+\end{table}
+
+\begin{figure}[htbp]
+\centering
+\begin{tikzpicture}[x=0.0072cm]
+ \draw[ax] (1180,0)--(1580,0);
+ \foreach \y in {1200,1300,1400,1500} {\draw (\y,0.1)--(\y,-0.1); \node[below, font=\scriptsize] at (\y,-0.12) {\y};}
+ \foreach \y/\h in {1202/0.5, 1215/1.3, 1371/0.5, 1388/1.3, 1471/0.5, 1539/0.5, 1551/1.3} {
+   \fill[primaryblue] (\y,0) circle (1.6pt);
+   \draw[thin, gray] (\y,0)--(\y,\h-0.15);
+   \node[above, font=\scriptsize] at (\y,\h-0.15) {\y};
+ }
+\end{tikzpicture}
+\caption{翻訳版第8章が挙げる年。13世紀の書物から、14世紀の碑文、15世紀の印刷、16世紀の硬貨へと、使われる場が広がった。}
+\end{figure}
+
+\section{混ざって書かれた時期：ローマ数字との併用}
+
+翻訳版は、ローマ数字からアラビア数字へ移るころの、混ざった書き方を紹介します。
+
+\begin{table}[htbp]
+\centering
+\begin{tabular}{lcc}
+\toprule
+書き方（翻訳版の例） & 表す数 & 検算\\
+\midrule
+\textit{1000.300.80 et 4}（14世紀） & 1384 & $1000+300+80+4=1384$\\
+\textit{m.cccc.8II}（15世紀） & 1482 & $1000+400+80+2=1482$（80は「8」と書いてある）\\
+\textit{MCCCCXL6}（15世紀） & 1446 & $1000+400+40+6=1446$\\
+\bottomrule
+\end{tabular}
+\caption{混用の例（翻訳版第8章。表記は翻訳版の転記による）。}
+\end{table}
+
+\begin{figure}[htbp]
+\centering
+\begin{tikzpicture}
+ \node[wbox] (a) {MCCCCXL6};
+ \node[fbox, right=16mm of a] (b) {1446};
+ \draw[ax] (a)--(b) node[midway, above, lbl] {読み替え};
+ \node[lbl, below=3mm of a, text width=4cm, align=center] {M=1000, CCCC=400, XL=40, 6};
+\end{tikzpicture}
+\caption{混用の表記を、現代の数に読み替える。ローマ数字の部分は足し算・引き算、アラビア数字の部分はそのまま。}
+\end{figure}
+
+\section{印刷が字形を決めた：1は「i」、2は「z」}
+
+翻訳版は、初期の印刷本では、活字を節約するために、数字に似た文字が使われたと指摘します。たとえば、1がアルファベットの「i」、2が「z」で、12は「iz」と印刷されることがありました。
+
+\begin{table}[htbp]
+\centering
+\begin{tabular}{c|ccc}
+\toprule
+数 & 1 & 2 & 12\\
+\midrule
+初期の印刷での文字（翻訳版） & i & z & iz\\
+\bottomrule
+\end{tabular}
+\caption{初期の印刷本の数字（翻訳版第8章の記述）。}
+\end{table}
+
+\begin{figure}[htbp]
+\centering
+\begin{tikzpicture}
+ \foreach \x/\n/\c in {0/1/i, 2.5/2/z, 5/12/iz} {
+   \node[fbox, minimum width=1.4cm] at (\x,0) {\n};
+   \node[wbox, minimum width=1.4cm, font=\large] at (\x,-1.2) {\textit{\c}};
+   \draw[ax] (\x,-0.4)--(\x,-0.8);
+ }
+ \node[lbl] at (7.6,-0.6) {数字 → 活字};
+\end{tikzpicture}
+\caption{初期の印刷本での数字の代用。現代のタイプライターで、1と l を同じ文字で打つ習慣に似ている、と翻訳版は書く。}
 \end{figure}
 
 \begin{pointbox}{この章のポイント}
