@@ -555,6 +555,42 @@
 \caption{アルキメデスの螺旋。回転ごとの間隔が一定になるのが特徴。}
 \end{figure}
 
+\section{外接多角形で、上からも挟む}
+
+前の節の表は、内接多角形（下からの評価）でした。上からの評価には、外接する正多角形を使います。半径1の円に外接する正 $n$ 角形の周は $2n\tan(\pi/n)$、直径は $2$ なので、周÷直径は $n\tan(\pi/n)$ です。
+
+\begin{table}[htbp]
+\centering
+\begin{tabular}{rcc}
+\toprule
+$n$ & 内接（下から）$n\sin(\pi/n)$ & 外接（上から）$n\tan(\pi/n)$\\
+\midrule
+6 & 3.00000 & 3.46410\\
+12 & 3.10583 & 3.21539\\
+24 & 3.13263 & 3.15966\\
+48 & 3.13935 & 3.14609\\
+96 & 3.14103 & 3.14271\\
+\bottomrule
+\end{tabular}
+\caption{円周率を、内接・外接の正多角形ではさむ（計算で確認）。96角形で、$3.14103<\pi<3.14271$。}
+\end{table}
+
+アルキメデスの評価 $3\frac{10}{71}=3.14085\ldots$ と $3\frac17=3.14286\ldots$ は、この96角形の値（$3.14103$ と $3.14271$）の、すぐ外側にあります。つまり、$3.14085<3.14103$ かつ $3.14271<3.14286$ で、アルキメデスは、計算の途中で、安全な側に端数を丸めたことが、数値からわかります。
+
+\begin{figure}[htbp]
+\centering
+\begin{tikzpicture}
+\begin{axis}[width=10cm, height=5.6cm, xmode=log, xmin=5, xmax=120, ymin=3.0, ymax=3.5, xlabel={正多角形の辺の数 $n$}, ylabel={周$\div$直径},
+  xtick={6,12,24,48,96}, xticklabels={6,12,24,48,96}, every axis label/.append style={font=\footnotesize}, tick label style={font=\footnotesize}, legend style={font=\scriptsize, at={(0.97,0.97)}, anchor=north east}]
+ \addplot[mark=*, thick, primaryblue] coordinates {(6,3.0)(12,3.10583)(24,3.13263)(48,3.13935)(96,3.14103)};
+ \addplot[mark=square*, thick, crimson] coordinates {(6,3.4641)(12,3.21539)(24,3.15966)(48,3.14609)(96,3.14271)};
+ \addplot[dashed, black, domain=5:120, samples=2] {3.141593};
+ \legend{内接, 外接, $\pi$}
+\end{axis}
+\end{tikzpicture}
+\caption{内接（青）は下から、外接（赤）は上から、$\pi$（破線）に近づく。辺の数を2倍にするごとに、差がおよそ4分の1に縮む（96角形の差は $0.00168$）。}
+\end{figure}
+
 \begin{pointbox}{この章のポイント}
 \begin{itemize}[leftmargin=1.5em]
 \item $3\frac{10}{71}<\pi<3\frac17$（96角形から）。
@@ -721,6 +757,44 @@ A\times a = B\times b \quad\text{のとき、つりあう}.
 \caption{力学的方法の発想。切片をてこの反対側にずらしても、つりあいは崩れない。}
 \end{figure}
 
+\section{地球を動かすのに、どれほど長いてこが要るか}
+
+「私に支点を与えよ」という言葉を、数字で確かめてみましょう（本書の補足の計算で、アルキメデス自身の記述ではありません）。体重 $60$ kg の人が、$60$ kg 分の力で押すとします。地球の質量は約 $5.972\times10^{24}$ kg です。てこの原理から、腕の長さの比は
+
+\[
+\frac{5.972\times10^{24}}{60}\approx9.95\times10^{22}
+\]
+
+でなければなりません。地球を1 cm 持ち上げるには、人が押す側の端を、$9.95\times10^{22}$ cm、つまり $9.95\times10^{20}$ m 動かす必要があります。光が1年で進む距離（約 $9.46\times10^{15}$ m）で割ると、約 $1.05\times10^{5}$ 光年、つまり約10万5千光年です。
+
+\begin{table}[htbp]
+\centering
+\begin{tabular}{lc}
+\toprule
+量 & 値\\
+\midrule
+腕の長さの比 & $9.95\times10^{22}$\\
+1 cm 持ち上げるために押す側が動く距離 & $9.95\times10^{20}$ m\\
+光年に直すと & 約 $1.05\times10^{5}$ 光年\\
+\bottomrule
+\end{tabular}
+\caption{体重60 kgの人が、地球を1 cm 持ち上げるのに必要な、てこの押す側の移動距離（計算で確認。地球の質量は標準的な概数）。}
+\end{table}
+
+\begin{figure}[htbp]
+\centering
+\begin{tikzpicture}
+\begin{axis}[width=9cm, height=5cm, xmode=log, ymode=log, xmin=1, xmax=1e24, ymin=1e-2, ymax=1e22, xlabel={腕の長さの比}, ylabel={押す側の移動距離 [m]（1 cm 動かすとき）},
+  every axis label/.append style={font=\footnotesize}, tick label style={font=\footnotesize}]
+ \addplot[thick, primaryblue, domain=1:1e24, samples=2] {0.01*x};
+ \addplot[only marks, mark=*, crimson, mark size=2.5pt] coordinates {(9.95e22,9.95e20)};
+\end{axis}
+\end{tikzpicture}
+\caption{てこの原理では、持ち上げる量が同じなら、腕の比が大きいほど、押す側は長い距離を動く。赤い点は、体重60 kgの人が地球を1 cm 持ち上げる場合。}
+\end{figure}
+
+力を小さくできても、動かす距離がそのぶん長くなる、というのが、てこの原理の「代償」です。
+
 \begin{pointbox}{この章のポイント}
 \begin{itemize}[leftmargin=1.5em]
 \item てこの原理：重さ×距離がつりあう。
@@ -805,6 +879,36 @@ A\times a = B\times b \quad\text{のとき、つりあう}.
  \node[font=\footnotesize] at (10.9,2.5) {沈む};
 \end{tikzpicture}
 \caption{物体と水の密度の比べ方。物体のほうが軽ければ浮き、重ければ沈む。}
+\end{figure}
+
+\section{氷山の一角：どれくらい沈んでいるか}
+
+浮いている物体は、自分の重さに等しい重さの流体を押しのけています。そのため、物体の体積のうち、水中にある割合は、密度の比 $\rho_{\text{物体}}/\rho_{\text{水}}$ に等しくなります。氷（密度 $0.917\ \mathrm{g/cm^3}$）が、海水（$1.025\ \mathrm{g/cm^3}$）に浮かぶ場合を計算します（密度は一般的な値の目安）。
+
+\begin{table}[htbp]
+\centering
+\begin{tabular}{lcc}
+\toprule
+ & 水中の割合 & 水面上の割合\\
+\midrule
+氷が海水に浮かぶ（$0.917/1.025$） & 89.5\% & 10.5\%\\
+氷が真水に浮かぶ（$0.917/0.998$） & 91.9\% & 8.1\%\\
+\bottomrule
+\end{tabular}
+\caption{氷が浮かぶときの、水中・水面上の体積の割合（計算で確認）。海水のほうが密度が大きいので、氷はやや高く浮く。}
+\end{table}
+
+\begin{figure}[htbp]
+\centering
+\begin{tikzpicture}
+ \draw[thick, fill=softblue] (0,-2) rectangle (4,0);
+ \fill[softblue!60!white] (0,0) rectangle (4,0.0);
+ \draw[thick, primaryblue, fill=white] (1,-1.79) rectangle (3,0.21);
+ \draw[dashed] (0,0)--(4,0) node[right, lbl] {水面};
+ \node[lbl] at (2,0.65) {水面上 10.5\%};
+ \node[lbl] at (2,-0.9) {水中 89.5\%};
+\end{tikzpicture}
+\caption{海に浮かぶ氷の模式図。体積の約9割が水中にある（縮尺は目安）。「氷山の一角」というたとえの背景にある事実。}
 \end{figure}
 
 \begin{pointbox}{この章のポイント}
