@@ -100,18 +100,18 @@
 
 ラプラスの『確率の哲学的試論』（1814年）は、確率論の研究者が、一般の読者にあてて書いた入門的な著作です。式をほとんど使わず、言葉で考え方を説明しているのが特徴です。ただし、扱っている話題は広く、サイコロやくじから、天文学、人口統計、裁判、保険までに及びます。
 
-この入門書は、翻訳版の17の章に1対1で沿っています。各章に、その章の中心の考え方を表す図を、かならず入れました。計算は、中学・高校で学ぶ分数、かけ算、場合の数だけを使います。
+この入門書は、翻訳版の18の章に1対1で沿っています。各章に、その章の中心の考え方を表す図を、かならず入れました。計算は、中学・高校で学ぶ分数、かけ算、場合の数だけを使います。
 
 \begin{figure}[htbp]
 \centering
 \begin{tikzpicture}[node distance=3mm]
  \foreach \xa/\ya/\lab in {0/0/{1 序論},2.2/0/{2 確率},4.4/0/{3 原理},6.6/0/{4 希望値},8.8/0/{5 解析},11/0/{6 遊戯},
    0/-1.1/{7 不平等},2.2/-1.1/{8 極限},4.4/-1.1/{9 自然},6.6/-1.1/{10 道徳},8.8/-1.1/{11 証言},11/-1.1/{12 議会},
-   0/-2.2/{13 裁判},2.2/-2.2/{14 生命表},4.4/-2.2/{15 制度},6.6/-2.2/{16 錯覚},8.8/-2.2/{17 確実性}} {
+   0/-2.2/{13 裁判},2.2/-2.2/{14 生命表},4.4/-2.2/{15 制度},6.6/-2.2/{16 錯覚},8.8/-2.2/{17 確実性},11/-2.2/{18 歴史}} {
    \node[fbox, minimum width=1.9cm] at (\xa,\ya) {\lab};
  }
 \end{tikzpicture}
-\caption{本書の17章。前半は確率計算の道具（第2〜8章）、後半は応用（第9〜17章）。}
+\caption{本書の18章。前半は確率計算の道具（第2〜8章）、後半は応用（第9〜17章）、最後に歴史（第18章）。}
 \end{figure}
 
 \begin{notebox}{事実・推測・未確認の区別}
@@ -1201,6 +1201,212 @@ AがBに、BがCに、と伝えていくうちに、情報が正しく伝わる�
 \caption{確実性に近づく3つの手段と、確率による評価。}
 \end{figure}
 
+%==========================================================
+\chapter{1816年までの確率論の歴史的概観}
+\markboth{第18章}{確率論の歴史}
+%==========================================================
+
+『試論』の最後に、ラプラスは、確率論が、賭けごとの問題から、どのようにして、人間の知識の大切な道具になったかを、人名をたどりながら振り返ります。翻訳版の最終章がこれにあたります。この章では、そこに出てくる主な話題を、小さな計算で確かめます。
+
+\section{パスカルとフェルマー：「点の問題」}
+
+翻訳版は、確率の科学の始まりを、パスカルとフェルマーに帰します。賭けが途中で打ち切られたとき、賭け金を、それぞれが勝つ確率に比例して分ける、という問題です。パスカルは、1ゲームずつ状況をさかのぼる方法（確率の漸化式）、フェルマーは、残りのゲームの結果を数え上げる方法を使いました。
+
+例：先に3点を取る人が賭け金64を取る勝負で、$A$ があと2点、$B$ があと3点という状況で中断したとします。残りは最大4ゲームで、どれも五分五分。$A$ が勝つのは、4ゲームのうち2回以上勝つ場合です。
+
+\[
+P(A)=\frac{\binom42+\binom43+\binom44}{2^4}=\frac{6+4+1}{16}=\frac{11}{16},\qquad P(B)=\frac5{16}.
+\]
+
+\begin{table}[htbp]
+\centering
+\begin{tabular}{c|cccccc}
+\toprule
+$A$ の残り点数 & 1 & 1 & 2 & 2 & 3 & 1\\
+$B$ の残り点数 & 1 & 2 & 2 & 3 & 3 & 3\\
+\midrule
+$A$ が勝つ確率（パスカルの漸化式） & $\tfrac12$ & $\tfrac34$ & $\tfrac12$ & $\tfrac{11}{16}$ & $\tfrac12$ & $\tfrac78$\\
+\bottomrule
+\end{tabular}
+\caption{点の問題の確率（計算で確認）。表の $(2,3)$ の列は、フェルマーの数え上げの結果 $11/16$ と一致。パスカルの方法は、$P(a,b)=\tfrac12\{P(a-1,b)+P(a,b-1)\}$ で求める。}
+\end{table}
+
+賭け金64は、$A$ に $64\times\tfrac{11}{16}=44$、$B$ に $64\times\tfrac5{16}=20$ と分けるのが公平です。
+
+\begin{figure}[htbp]
+\centering
+\begin{tikzpicture}
+\begin{axis}[width=9cm, height=4.8cm, xbar, xmin=0, xmax=70, symbolic y coords={B,A}, ytick=data, xlabel={公平な取り分（賭け金64）},
+  nodes near coords, bar width=14pt, enlarge y limits=0.5, every axis label/.append style={font=\footnotesize}, tick label style={font=\footnotesize}]
+ \addplot[fill=softblue, draw=primaryblue] coordinates {(20,B) (44,A)};
+\end{axis}
+\end{tikzpicture}
+\caption{$A$（あと2点）と $B$（あと3点）の公平な取り分。$44:20=11:5$。}
+\end{figure}
+
+\section{ベルヌーイ：大数の法則の「差が小さくなる」実感}
+
+翻訳版は、ジャック・ベルヌーイの定理を、「観測を無限に重ねると、事象が起こる割合は、確率に近づき、その差は、任意の小さな量より小さくなる」と紹介します。コインで確かめます。表の出る割合が、$0.5$ から $0.05$ 以内に収まる確率は、次のとおりです。
+
+\begin{table}[htbp]
+\centering
+\begin{tabular}{r|ccccc}
+\toprule
+投げる回数 $n$ & 10 & 50 & 100 & 500 & 1000\\
+\midrule
+表の回数の範囲 & 5 & 23〜27 & 45〜55 & 225〜275 & 450〜550\\
+確率（計算） & 0.2461 & 0.5201 & 0.7287 & 0.9775 & 0.9986\\
+\bottomrule
+\end{tabular}
+\caption{表の割合が $0.45$ 以上 $0.55$ 以下に収まる確率（二項分布の正確な計算）。回数を増やすと、確率は1に近づく。}
+\end{table}
+
+\begin{figure}[htbp]
+\centering
+\begin{tikzpicture}
+\begin{axis}[width=9.5cm, height=5cm, xmode=log, xmin=8, xmax=1200, ymin=0, ymax=1.05, xlabel={投げる回数 $n$}, ylabel={確率},
+  every axis label/.append style={font=\footnotesize}, tick label style={font=\footnotesize}]
+ \addplot[mark=*, thick, primaryblue] coordinates {(10,0.2461)(50,0.5201)(100,0.7287)(500,0.9775)(1000,0.9986)};
+\end{axis}
+\end{tikzpicture}
+\caption{割合が $0.5\pm0.05$ に入る確率。回数が増えるほど、ほぼ確実になる。}
+\end{figure}
+
+\section{モアヴルとスターリング：大きな階乗の近似}
+
+翻訳版は、モアヴルが、二項式の展開の最大項を計算するのに、スターリングの定理を使ったと述べます。円周率が、ここに思いがけなく現れる、とも書かれています。現代の形では、$n!\approx\sqrt{2\pi n}\,(n/e)^n$ です。
+
+\begin{table}[htbp]
+\centering
+\begin{tabular}{r|cccc}
+\toprule
+$n$ & 1 & 5 & 10 & 100\\
+\midrule
+$n!\big/\bigl(\sqrt{2\pi n}\,(n/e)^n\bigr)$ & 1.0844 & 1.0168 & 1.0084 & 1.0008\\
+\bottomrule
+\end{tabular}
+\caption{スターリングの近似の精度（計算）。$n$ が大きいほど、比が1に近い。}
+\end{table}
+
+二項式の中央の項 $\binom{2n}{n}/4^n$ は、スターリングの近似から、約 $1/\sqrt{\pi n}$ になります。
+
+\begin{table}[htbp]
+\centering
+\begin{tabular}{r|ccccc}
+\toprule
+$n$ & 1 & 5 & 10 & 50 & 100\\
+\midrule
+$\binom{2n}{n}/4^n$ & 0.5000 & 0.2461 & 0.1762 & 0.0796 & 0.0563\\
+$1/\sqrt{\pi n}$ & 0.5642 & 0.2523 & 0.1784 & 0.0798 & 0.0564\\
+\bottomrule
+\end{tabular}
+\caption{中央の項と近似式（計算）。$n=100$ で、差は0.1\%ほど。}
+\end{table}
+
+\begin{figure}[htbp]
+\centering
+\begin{tikzpicture}
+\begin{axis}[width=9cm, height=5cm, xmin=1, xmax=100, ymode=log, xmode=log, xlabel={$n$}, ylabel={中央の項},
+  every axis label/.append style={font=\footnotesize}, tick label style={font=\footnotesize}, legend style={font=\scriptsize, at={(0.03,0.03)}, anchor=south west}]
+ \addplot[only marks, mark=*, primaryblue] coordinates {(1,0.5)(5,0.2461)(10,0.1762)(50,0.0796)(100,0.0563)};
+ \addplot[thick, crimson, domain=1:100, samples=2] {1/sqrt(pi*x)};
+ \legend{正確な値, $1/\sqrt{\pi n}$}
+\end{axis}
+\end{tikzpicture}
+\caption{中央の項の正確な値（青い点）と近似式（赤）。両対数で傾き $-\tfrac12$ の直線に乗る。}
+\end{figure}
+
+翻訳版は、モアヴルが、この結果に、ウォリスの無限積による円周率の表式が、ふたたび現れるのを見て打たれた、とも述べます。ウォリスの積は
+
+\[
+\frac\pi2=\frac{2\cdot2}{1\cdot3}\cdot\frac{4\cdot4}{3\cdot5}\cdot\frac{6\cdot6}{5\cdot7}\cdots
+\]
+
+で、第 $k$ 項までの積は次のように近づきます。
+
+\begin{table}[htbp]
+\centering
+\begin{tabular}{r|cccccc}
+\toprule
+$k$ & 1 & 2 & 5 & 10 & 100 & 1000\\
+\midrule
+積 & 1.3333 & 1.4222 & 1.5011 & 1.5339 & 1.5669 & 1.5704\\
+\bottomrule
+\end{tabular}
+\caption{ウォリスの積の第 $k$ 項までの値（計算）。$\pi/2=1.5708$ に、ゆっくり近づく。}
+\end{table}
+
+\section{観測の誤差と、二乗の和を最小にする方法}
+
+翻訳版の後半は、観測の誤差の扱いに移ります。ルジャンドルとガウスは、各観測の誤差の二乗の和を最小にする値を採る方法を示した、と述べられています（最小二乗法）。同じものを3回測った値 $10.1$、$9.9$、$10.4$ で試します（本書の補足）。
+
+\begin{table}[htbp]
+\centering
+\begin{tabular}{r|ccccc}
+\toprule
+採る値 $c$ & 10.0 & 10.1 & $10.1333$ & 10.2 & 10.3\\
+\midrule
+誤差の二乗の和 & 0.18 & 0.13 & 0.1267 & 0.14 & 0.21\\
+\bottomrule
+\end{tabular}
+\caption{候補の値と、誤差の二乗の和（計算）。最小になるのは、平均 $10.1333$ のとき。}
+\end{table}
+
+\begin{figure}[htbp]
+\centering
+\begin{tikzpicture}
+\begin{axis}[width=9cm, height=5cm, xmin=9.9, xmax=10.4, ymin=0.1, ymax=0.4, xlabel={採る値 $c$}, ylabel={誤差の二乗の和},
+  every axis label/.append style={font=\footnotesize}, tick label style={font=\footnotesize}]
+ \addplot[thick, primaryblue, domain=9.9:10.4, samples=60] {(10.1-x)^2+(9.9-x)^2+(10.4-x)^2};
+ \addplot[only marks, mark=*, crimson] coordinates {(10.1333,0.1267)};
+\end{axis}
+\end{tikzpicture}
+\caption{二乗の和は放物線になり、平均（赤い点）で最小になる。翻訳版が紹介する「方法の発展」の最も簡単な例。}
+\end{figure}
+
+\section{確率論の歩み：人名と時代}
+
+翻訳版が挙げる主な人名を、おおよその時代順に並べます（年は、翻訳版に年が書かれている1711年・1763年以外は、本書の補足で、一般に知られた年）。
+
+\begin{table}[htbp]
+\centering
+\begin{tabular}{lp{7.5cm}}
+\toprule
+人物（年） & 翻訳版が述べる貢献\\
+\midrule
+パスカル・フェルマー（1654年ごろ） & 確率の科学の始まり。点の問題\\
+ホイヘンス（1657年ごろ） & この主題の最初の短い論文\\
+ハリー & 最初の死亡率表を発表（年は翻訳版に記載なし）\\
+ジャック・ベルヌーイ & 大数の定理。死後に出版（1713年）\\
+モンモール & 賭けごとへの応用の論文（年は翻訳版に記載なし）\\
+モアヴル（1711年） & 二項式、再帰列の理論、ベルヌーイの結果の精密化\\
+ダニエル・ベルヌーイ & 数学的・倫理的な期待値の原理\\
+ベイズ（1763年） & 観察された事象から原因の確率を求める\\
+ラグランジュ・ラプラス & 差分の計算、母関数、観測の誤差の理論\\
+ルジャンドル・ガウス & 誤差の二乗の和を最小にする方法\\
+\bottomrule
+\end{tabular}
+\caption{翻訳版最終章に出てくる人物と貢献。年のうち、1711年と1763年は翻訳版の記述、ほかは補足。}
+\end{table}
+
+\begin{figure}[htbp]
+\centering
+\begin{tikzpicture}[x=0.035cm]
+ \draw[ax] (1640,0)--(1830,0);
+ \foreach \y in {1650,1700,1750,1800} {\draw (\y,0.08)--(\y,-0.08); \node[below, font=\scriptsize] at (\y,-0.1) {\y};}
+ \foreach \y/\h/\t in {1654/0.5/{パスカル\\フェルマー}, 1657/1.5/{ホイヘンス}, 1711/0.5/{モアヴル}, 1713/1.5/{ベルヌーイ\\（出版）}, 1763/0.5/{ベイズ}, 1814/0.5/{ラプラス\\『試論』}} {
+   \fill[primaryblue] (\y,0) circle (1.6pt);
+   \draw[thin, gray] (\y,0)--(\y,\h);
+   \node[above, font=\scriptsize, align=center] at (\y,\h) {\t};
+ }
+\end{tikzpicture}
+\caption{確率論の歩み（年は上の表のとおり）。賭けごとの問題から、200年足らずで、天文学や社会の問題にまで広がった。}
+\end{figure}
+
+\begin{notebox}{事実・推測・未確認}
+翻訳版の人名の綴りには、判読しづらい箇所があります（たとえば「ハーレイ」は、数学者ハレーを指すと思われますが、未確認）。ここでは、翻訳版の記述にある貢献を、小さな計算で確かめることに重点を置きました。数値は、すべて計算で確認しています。
+\end{notebox}
+
 \begin{pointbox}{全体のまとめ}
 \begin{itemize}[leftmargin=1.5em]
 \item 確率は、知識の足りなさを測る道具である（第1〜2章）。
@@ -1208,6 +1414,7 @@ AがBに、BがCに、と伝えていくうちに、情報が正しく伝わる�
 \item 数え上げと極限の法則が理論の柱（第5〜8章）。
 \item 天文・社会・証言・投票・裁判・保険に応用できる（第9〜15章）。
 \item 錯覚を避け、証拠を重ねて確実性に近づく（第16〜17章）。
+\item 確率論は、賭けごとの問題から、パスカル・フェルマー以来、天文学や社会の道具へ育った（第18章）。
 \end{itemize}
 \end{pointbox}
 
